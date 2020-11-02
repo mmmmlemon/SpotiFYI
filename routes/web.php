@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home_page');
 });
+
+
+//тесты
+Route::get('/test_spotify', 'TestController@test_spotify');
+
