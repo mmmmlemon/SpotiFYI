@@ -11,6 +11,12 @@ use SpotifyWebAPI;
 //контроллер для предварительного тестирования различных функций сайта
 class TestController extends Controller
 {
+    //страница Tests
+    public function view_tests()
+    {
+        return view('tests');
+    }
+
     //тест работы PHP-wrapper'а для Spotify Web API
     public function test_spotify()
     {
@@ -50,5 +56,53 @@ class TestController extends Controller
             header('Location: ' . $session->getAuthorizeUrl($options));
             die();
         }
+    }
+
+    //тест работы Authorization Code Flow
+    public function test_auth()
+    {   
+        $session = new SpotifyWebAPI\Session(
+            config('settings')->spotify_client_id,
+            config('settings')->spotify_client_secret,
+            config('settings')->spotify_redirect_uri
+        );
+
+        $options = [
+            'scope' => [
+                'playlist-read-private',
+                'user-read-private',
+            ],
+        ];
+
+        header('Location: ' . $session->getAuthorizeUrl($options));
+        die();
+    }
+
+    //callback для Authorization Code Flow
+    public function test_auth_callback()
+    {
+        $session = new SpotifyWebAPI\Session(
+            config('settings')->spotify_client_id,
+            config('settings')->spotify_client_secret,
+            config('settings')->spotify_redirect_uri
+        );
+        
+        //Запрос на access token используя code из спотифая
+        $session->requestAccessToken($_GET['code']);
+        
+        //получаем access и refresh токены
+        $accessToken = $session->getAccessToken();
+        $refreshToken = $session->getRefreshToken();
+        
+        //сохраняем токены в txt файлах (для теста)
+        $access_txt = fopen("access_token.txt", "w") or die("Unable to open file!");
+        fwrite($access_txt, $accessToken);
+
+        $refresh_txt = fopen("refresh_token.txt", "w") or die("Unable to open file!");
+        fwrite($refresh_txt, $refreshToken);
+
+        //перебрасываем пользователя на главную страницу сайта
+        header('Location: index.php');
+        die();
     }
 }

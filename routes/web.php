@@ -17,7 +17,12 @@ Route::get('/', function () {
     return view('home_page');
 });
 
-
 //тесты
+Route::get('/tests', 'TestController@view_tests');
+
 Route::get('/test_spotify', 'TestController@test_spotify');
+
+Route::get('/test_auth', 'TestController@test_auth');
+
+Route::get('/test_callback', 'TestController@test_auth_callback');
 

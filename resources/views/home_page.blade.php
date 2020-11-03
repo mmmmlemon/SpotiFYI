@@ -14,6 +14,7 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png" width="100px" alt="">
     <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" width="100px" alt="">
     <hr>
+    <a href="/tests">Tests</a>
     <p>blah blah blah some content here</p>
 
 </body>
