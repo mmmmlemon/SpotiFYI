@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use DB;
-
 use SpotifyWebAPI;
+use Illuminate\Http\Response;
+use Cookie;
 
 //контроллер для предварительного тестирования различных функций сайта
 class TestController extends Controller
@@ -101,8 +100,18 @@ class TestController extends Controller
         $refresh_txt = fopen("refresh_token.txt", "w") or die("Unable to open file!");
         fwrite($refresh_txt, $refreshToken);
 
-        //перебрасываем пользователя на главную страницу сайта
-        header('Location: index.php');
-        die();
+        //сохраняем токены в cookies (для теста)
+        Cookie::queue('access_token', $accessToken, 60*24*30);
+        Cookie::queue('refresh_token', $refreshToken, 60*24*30);
+
+        //редирект на главную
+        return redirect('/');
+    }
+
+    //показать cookies
+    public function test_cookies(Request $request)
+    {
+        echo "access_token: " . $request->cookie('access_token') . "<br><br>";
+        echo "refresh token: " . $request->cookie('refresh_token');
     }
 }

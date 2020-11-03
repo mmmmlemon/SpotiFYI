@@ -18,11 +18,9 @@ Route::get('/', function () {
 });
 
 //тесты
-Route::get('/tests', 'TestController@view_tests');
-
-Route::get('/test_spotify', 'TestController@test_spotify');
-
-Route::get('/test_auth', 'TestController@test_auth');
-
-Route::get('/test_callback', 'TestController@test_auth_callback');
+Route::get('/tests', 'TestController@view_tests'); //ссылки на все тесты
+Route::get('/test_spotify', 'TestController@test_spotify'); //тест работы Spotify WEB Api
+Route::get('/test_auth', 'TestController@test_auth'); //тест Авторизации
+Route::get('/test_callback', 'TestController@test_auth_callback'); //callback для авторизации
+Route::get('/test_cookies', 'TestController@test_cookies'); //тест Cookies
 
