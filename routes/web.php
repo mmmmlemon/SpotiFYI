@@ -13,20 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home_page');
-});
-
 //тесты
-Route::get('/tests', 'TestController@view_tests'); //ссылки на все тесты
 Route::get('/test_spotify', 'TestController@test_spotify'); //тест работы Spotify WEB Api
 Route::get('/test_auth', 'TestController@test_auth'); //тест Авторизации
 Route::get('/test_callback', 'TestController@test_auth_callback'); //callback для авторизации
 Route::get('/test_cookies', 'TestController@test_cookies'); //тест Cookies
 
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/{any}', 'HomeController@vueroute')->where('any', '.*');
+//вывод vue router 
+Route::get('/{any}', 'HomeController@vue_router')->where('any', '.*');

@@ -2,19 +2,18 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-
 Vue.use(VueRouter)
 
-import example from './components/ExampleComponent.vue';
-import test from './components/test.vue';
+import tests from './components/tests.vue';
+import home_page from './components/home_page.vue';
 const routes = [
-    {
-        path: '/example',
-        component: example
+    {   //главная страница
+        path:'/',
+        component: home_page
     },
-    {
-        path: '/test',
-        component: test
+    {   //тесты
+        path: '/tests',
+        component: tests
     }
 ]
 
