@@ -24,3 +24,9 @@ Route::get('/test_auth', 'TestController@test_auth'); //тест Авториз�
 Route::get('/test_callback', 'TestController@test_auth_callback'); //callback для авторизации
 Route::get('/test_cookies', 'TestController@test_cookies'); //тест Cookies
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/{any}', 'HomeController@vueroute')->where('any', '.*');
