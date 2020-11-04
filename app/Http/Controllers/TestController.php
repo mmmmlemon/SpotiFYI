@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use SpotifyWebAPI;
-use Illuminate\Http\Response;
 use Cookie;
+use Auth;
 
 //контроллер для предварительного тестирования различных функций сайта
 class TestController extends Controller
@@ -94,15 +94,15 @@ class TestController extends Controller
         $refreshToken = $session->getRefreshToken();
         
         //сохраняем токены в txt файлах (для теста)
-        $access_txt = fopen("access_token.txt", "w") or die("Unable to open file!");
-        fwrite($access_txt, $accessToken);
+        // $access_txt = fopen("access_token.txt", "w") or die("Unable to open file!");
+        // fwrite($access_txt, $accessToken);
 
-        $refresh_txt = fopen("refresh_token.txt", "w") or die("Unable to open file!");
-        fwrite($refresh_txt, $refreshToken);
+        // $refresh_txt = fopen("refresh_token.txt", "w") or die("Unable to open file!");
+        // fwrite($refresh_txt, $refreshToken);
 
         //сохраняем токены в cookies (для теста)
-        Cookie::queue('access_token', $accessToken, 60*24*30);
-        Cookie::queue('refresh_token', $refreshToken, 60*24*30);
+        Cookie::queue('test_spotify_access_token', $accessToken, 60*24*30);
+        Cookie::queue('test_spotify_refresh_token', $refreshToken, 60*24*30);
 
         //редирект на главную
         return redirect('/');
@@ -113,5 +113,12 @@ class TestController extends Controller
     {
         echo "access_token: " . $request->cookie('access_token') . "<br><br>";
         echo "refresh token: " . $request->cookie('refresh_token');
+    }
+
+    //тест laravel api + vue
+    public function test_api()
+    {
+        $settings = config('settings');
+        return response()->json($settings);
     }
 }

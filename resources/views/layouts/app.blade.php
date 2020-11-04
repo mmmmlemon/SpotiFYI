@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('settings')->site_title }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,12 +18,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                
+                <img src="/logo.png" width="50px" style="margin-right: 10px;" alt="">
                 <router-link to="/">
                     <a class="navbar-brand" style="font-size:20pt; color: #0077B9;">
                         {{ config('settings')->site_title }}
@@ -38,41 +39,28 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li style="margin-right: 10px;">
-                            <router-link to="/"><i class="fa fa-dashboard"></i>Home</router-link>
+                            <router-link to="/" class="nav_item"><i class="fa fa-dashboard"></i>Главная</router-link>
+                        </li>
+                        <li style="margin-right: 10px;">
+                            <router-link to="/tests" class="nav_item"><i class="fa fa-dashboard"></i>Dev: Tests</router-link>
                         </li>
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                    <!-- Правая сторона навигации -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        {{-- Авторизация через Spotify --}}
+                        @if($access_check == false)
+                            <li style="margin-right: 10px;">
+                                <a href="/spotify_auth" class="nav_item_login_spotify">Войти в Spotify</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
+                            {{-- юзернейм --}}
+                            <router-link to="/spotify_profile" class="nav_item_username">{{$spotify_profile['display_name']}}</a></router-link>
+                            {{-- юзерпик --}}
+                            <img src="{{$spotify_profile['avatar']}}" alt="Spotify avatar" class="nav_item_spotify_avatar rounded-circle">
+                            {{-- кнопка выхода --}}
+                            <a href="/spotify_logout" class="nav_item_logout">Выйти</a>
+                        @endif
                     </ul>
                 </div>
             </div>

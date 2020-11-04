@@ -1,0 +1,32 @@
+/* стили собственного производсва UwU */
+
+.nav_item{
+    font-size: 13pt;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.nav_item_login_spotify{
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+.nav_item_username{
+    font-size: 13pt;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.nav_item_spotify_avatar{
+    width:10%;
+    margin-left: 10px;
+}
+
+.nav_item_logout{
+    font-size: 13pt;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+}

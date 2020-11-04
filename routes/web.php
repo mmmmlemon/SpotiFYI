@@ -21,5 +21,13 @@ Route::get('/test_cookies', 'TestController@test_cookies'); //тест Cookies
 
 Auth::routes();
 
+//логин через spotify
+Route::get('/spotify_auth', 'SpotifyAuthController@spotify_auth');
+//callback
+Route::get('/spotify_auth_callback', 'SpotifyAuthController@spotify_auth_callback');
+//выход из spotify
+Route::get('/spotify_logout', 'SpotifyAuthController@spotify_logout');
+
 //вывод vue router 
 Route::get('/{any}', 'HomeController@vue_router')->where('any', '.*');
+
