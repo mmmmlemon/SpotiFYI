@@ -111,8 +111,8 @@ class TestController extends Controller
     //показать cookies
     public function test_cookies(Request $request)
     {
-        echo "access_token: " . $request->cookie('access_token') . "<br><br>";
-        echo "refresh token: " . $request->cookie('refresh_token');
+        echo "access_token: " . $request->cookie('spotify_access_token') . "<br><br>";
+        echo "refresh token: " . $request->cookie('spotify_refresh_token');
     }
 
     //тест laravel api + vue
