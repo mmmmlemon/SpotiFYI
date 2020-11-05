@@ -18,6 +18,7 @@ Route::get('/test_spotify', 'TestController@test_spotify'); //тест рабо�
 Route::get('/test_auth', 'TestController@test_auth'); //тест Авторизации
 Route::get('/test_callback', 'TestController@test_auth_callback'); //callback для авторизации
 Route::get('/test_cookies', 'TestController@test_cookies'); //тест Cookies
+Route::get('/test_library', 'TestController@test_library'); //тест библиотеки пользователя
 
 Auth::routes();
 

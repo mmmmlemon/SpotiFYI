@@ -1970,6 +1970,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('\'tests\' component mounted');
@@ -37709,6 +37710,10 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("li", [
         _c("a", { attrs: { href: "/test_cookies" } }, [_vm._v("test cookies")])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "/test_library" } }, [_vm._v("test library")])
       ])
     ])
   },

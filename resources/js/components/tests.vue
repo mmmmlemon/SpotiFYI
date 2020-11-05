@@ -5,6 +5,7 @@
             <li><a href="/test_spotify">test spotify web api</a></li>
             <li><a href="/test_auth">test auth code flow</a></li>
             <li><a href="/test_cookies">test cookies</a></li>
+            <li><a href="/test_library">test library</a></li>
         </ul>
 
         <h4>Settings</h4>

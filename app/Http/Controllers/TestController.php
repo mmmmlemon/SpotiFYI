@@ -121,4 +121,22 @@ class TestController extends Controller
         $settings = config('settings');
         return response()->json($settings);
     }
+
+    //тест библиотеки
+    public function test_library(Request $request)
+    {
+        $api = new SpotifyWebAPI\SpotifyWebAPI();
+        $spotify_access_token = $request->cookie('spotify_access_token');
+        $api->setAccessToken($spotify_access_token);
+        $tracks = $api->getMySavedTracks([
+            'limit' => 10,
+        ]);
+        
+        foreach ($tracks->items as $track) 
+        {
+            $track = $track->track;
+        
+            echo '<a href="' . $track->external_urls->spotify . '">' . $track->name . '</a> <br>';
+        }
+    }
 }
