@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use SpotifyWebAPI;
+use Carbon\Carbon;
+use Cookie;
 
 class HomeController extends Controller
 {
@@ -41,7 +43,34 @@ class HomeController extends Controller
         //получаем информацию о профиле из Spotify
         $spotify_profile = [];
         if($spotify_access_token != null)
-        {
+        {   
+            $session = new SpotifyWebAPI\Session(
+                config('settings')->spotify_client_id,
+                config('settings')->spotify_client_secret,
+                config('settings')->spotify_redirect_uri,
+            );
+            
+            $options = [
+                'auto_refresh' => true,
+                'scope' => [
+                    'playlist-read-private',
+                    'user-read-private',
+                    'user-library-read',
+                ],
+            ];
+            
+            $api = new SpotifyWebAPI\SpotifyWebAPI($options, $session);
+
+            $current_time = Carbon::now();
+            $accessExpire = $request->cookie('spotify_access_expiration');
+            if($current_time > $accessExpire)
+            {
+                $session->refreshAccessToken($request->cookie('spotify_refresh_token'));
+                Cookie::queue('spotify_access_token', $session->getAccessToken(), 60*24*30);
+                $accessExpiration = Carbon::now()->addMinutes(50);
+                Cookie::queue('spotify_access_expiration', $accessExpiration, 60*24*30);
+                Cookie::queue('spotify_refresh_token', $session->getRefreshToken(), 60*24*30);
+            }
             $api = new SpotifyWebAPI\SpotifyWebAPI();
             $api->setAccessToken($spotify_access_token);
             $spotify_profile = ['display_name' => $api->me()->display_name, 'avatar' => $api->me()->images[0]->url];

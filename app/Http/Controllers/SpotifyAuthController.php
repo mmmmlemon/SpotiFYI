@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use SpotifyWebAPI;
 use Cookie;
+use Carbon\Carbon;
 
 //авторизация в Spotify API и выход
 class SpotifyAuthController extends Controller
@@ -48,6 +49,8 @@ class SpotifyAuthController extends Controller
         
         //сохраняем токены в cookies (для теста)
         Cookie::queue('spotify_access_token', $accessToken, 60*24*30);
+        $accessExpiration = Carbon::now()->addMinutes(50);
+        Cookie::queue('spotify_access_expiration', $accessExpiration, 60*24*30);
         Cookie::queue('spotify_refresh_token', $refreshToken, 60*24*30);
 
         //редирект на главную
