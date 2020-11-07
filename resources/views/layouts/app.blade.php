@@ -15,6 +15,7 @@
     <!-- JS Скрипты -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/halfmoon.min.js') }}" defer></script>
+    <script src="{{ asset('js/fontawesome.min.js') }}" defer></script>
 
     <!-- Шрифты -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -65,7 +66,7 @@
                         {{-- юзерпик --}}
                         <img src="{{$spotify_profile['avatar']}}" alt="Spotify avatar" class="nav_item_spotify_avatar rounded-circle">
                         {{-- кнопка выхода --}}
-                        <a class="nav-link" href="/spotify_logout" class="">Выйти</a>
+                        <a class="nav-link" href="/spotify_logout"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
             @endif
             
@@ -93,7 +94,7 @@
                         {{-- юзернейм --}}
                         <router-link to="/spotify_profile" class="">{{$spotify_profile['display_name']}}</a></router-link>
                         {{-- кнопка выхода --}}
-                        <a href="/spotify_logout" class="" style="margin-left:20px;">X</a>
+                        <a href="/spotify_logout" class="" style="margin-left:20px;"><i class="fas fa-sign-out-alt"></i></a>
                     </div>  
                     @endif
                 </div>
