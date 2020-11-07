@@ -7,6 +7,7 @@ use Auth;
 use SpotifyWebAPI;
 use Carbon\Carbon;
 use Cookie;
+use URL;
 
 class HomeController extends Controller
 {
@@ -70,10 +71,14 @@ class HomeController extends Controller
                 $accessExpiration = Carbon::now()->addMinutes(50);
                 Cookie::queue('spotify_access_expiration', $accessExpiration, 60*24*30);
                 Cookie::queue('spotify_refresh_token', $session->getRefreshToken(), 60*24*30);
+                return redirect(URL::current());
             }
-            $api = new SpotifyWebAPI\SpotifyWebAPI();
-            $api->setAccessToken($spotify_access_token);
-            $spotify_profile = ['display_name' => $api->me()->display_name, 'avatar' => $api->me()->images[0]->url];
+            else
+            {
+                $api = new SpotifyWebAPI\SpotifyWebAPI();
+                $api->setAccessToken($spotify_access_token);
+                $spotify_profile = ['display_name' => $api->me()->display_name, 'avatar' => $api->me()->images[0]->url];
+            }
         }
         
         return view('vue_router', compact('access_check', 'spotify_profile'));
