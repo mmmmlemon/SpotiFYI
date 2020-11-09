@@ -1926,9 +1926,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      logged_in: false,
+      spotify_username: "",
+      spotify_track_count: 0
+    };
+  },
   mounted: function mounted() {
     console.log('\'home_page\' component mounted');
+  },
+  created: function created() {
+    var _this = this;
+
+    var uri = '/api/home_page';
+    this.axios.get(uri).then(function (response) {
+      _this.logged_in = response.data.logged_in;
+      _this.spotify_username = response.data.spotify_username;
+      _this.spotify_track_count = response.data.spotify_user_tracks.length;
+    });
   }
 });
 
@@ -37598,55 +37622,92 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("h1", [_vm._v("Site title")]),
-          _vm._v(" "),
-          _c("h4", [_vm._v("A Laravel/Vue.js/Spotify Web API application")]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1024px-Laravel.svg.png",
-              width: "100px",
-              alt: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png",
-              width: "100px",
-              alt: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src:
-                "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg",
-              width: "100px",
-              alt: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("hr")
-        ])
-      ])
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _vm.logged_in == false
+        ? _c("div", { staticClass: "col-md-8" }, [
+            _c("h1", [_vm._v("Site title")]),
+            _vm._v(" "),
+            _c("h4", [_vm._v("A Laravel/Vue.js/Spotify Web API application")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("img", {
+              attrs: {
+                src:
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1024px-Laravel.svg.png",
+                width: "100px",
+                alt: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              attrs: {
+                src:
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png",
+                width: "100px",
+                alt: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              attrs: {
+                src:
+                  "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg",
+                width: "100px",
+                alt: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("br")
+          ])
+        : _c("div", { staticClass: "col-md-8" }, [
+            _c("h1", [
+              _vm._v("Привет, "),
+              _c("b", [_vm._v(_vm._s(_vm.spotify_username))]),
+              _vm._v("!")
+            ]),
+            _vm._v(" "),
+            _c("h5", [
+              _vm._v(
+                "В твою библиотеку Spotify добавлено " +
+                  _vm._s(_vm.spotify_track_count) +
+                  " треков "
+              ),
+              _c("i", { staticClass: "fas fa-heart" })
+            ]),
+            _vm._v(" "),
+            _vm.spotify_track_count > 10
+              ? _c("h4", [_vm._v("Ого! Как много!")])
+              : _c("h3", [_vm._v("Маловато будет!")]),
+            _vm._v(" "),
+            _c(
+              "h5",
+              [
+                _vm._v("Перейди в "),
+                _c("router-link", { attrs: { to: "/spotify_profile" } }, [
+                  _vm._v("Мой Профиль")
+                ]),
+                _vm._v(" чтобы просмотреть свою статистику")
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("img", {
+              staticStyle: { "border-radius": "40px" },
+              attrs: {
+                src:
+                  "https://www.cambridgemaths.org/Images/The-trouble-with-graphs.jpg",
+                alt: ""
+              }
+            })
+          ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -45,23 +45,6 @@ class HomeController extends Controller
         $spotify_profile = [];
         if($spotify_access_token != null)
         {   
-            $session = new SpotifyWebAPI\Session(
-                config('settings')->spotify_client_id,
-                config('settings')->spotify_client_secret,
-                config('settings')->spotify_redirect_uri,
-            );
-            
-            $options = [
-                'auto_refresh' => true,
-                'scope' => [
-                    'playlist-read-private',
-                    'user-read-private',
-                    'user-library-read',
-                ],
-            ];
-            
-            $api = new SpotifyWebAPI\SpotifyWebAPI($options, $session);
-
             $current_time = Carbon::now();
             $accessExpire = $request->cookie('spotify_access_expiration');
             if($current_time > $accessExpire)
@@ -74,13 +57,13 @@ class HomeController extends Controller
                 return redirect(URL::current());
             }
             else
-            {
+            {         
                 $api = new SpotifyWebAPI\SpotifyWebAPI();
                 $api->setAccessToken($spotify_access_token);
                 $spotify_profile = ['display_name' => $api->me()->display_name, 'avatar' => $api->me()->images[0]->url];
             }
         }
-        
+
         return view('vue_router', compact('access_check', 'spotify_profile'));
     }
 }

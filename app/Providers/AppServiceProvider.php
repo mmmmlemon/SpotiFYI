@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use App;
+use Illuminate\Http\Request;
+use SpotifyWebAPI;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,9 +25,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
         $settings = App\Settings::all()[0];
         config(['settings' => $settings]);
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI();
+
+        config(['api' => $api]);
     }
 }
