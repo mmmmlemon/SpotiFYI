@@ -22,13 +22,11 @@ Route::get('/test_library', 'TestController@test_library'); //тест библ�
 
 Auth::routes();
 
-//логин через spotify
-Route::get('/spotify_auth', 'SpotifyAuthController@spotify_auth');
-//callback
-Route::get('/spotify_auth_callback', 'SpotifyAuthController@spotify_auth_callback');
-//выход из spotify
-Route::get('/spotify_logout', 'SpotifyAuthController@spotify_logout');
+
+Route::get('/spotify_auth', 'SpotifyAuthController@spotifyAuth'); //авторизация через spotify
+Route::get('/spotify_auth_callback', 'SpotifyAuthController@spotifyAuthCallback'); //callback для авторизации
+Route::get('/spotify_logout', 'SpotifyAuthController@spotifyLogout'); //выход из spotify
 
 //вывод vue router 
-Route::get('/{any}', 'HomeController@vue_router')->where('any', '.*');
+Route::get('/{any}', 'HomeController@vueRouter')->where('any', '.*');
 

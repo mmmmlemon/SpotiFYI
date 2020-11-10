@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class SpotifyAPIController extends Controller
 {
     //домашняя страница сайта
-    public function home_page(Request $request)
+    public function homePage(Request $request)
     { 
         $checkToken = Globals::checkSpotifyAccessToken($request);
 

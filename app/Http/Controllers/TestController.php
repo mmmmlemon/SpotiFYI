@@ -7,7 +7,7 @@ use SpotifyWebAPI;
 use Cookie;
 use Auth;
 
-//контроллер для предварительного тестирования различных функций сайта
+//контроллер с методами для предварительного тестирования различных функций сайта
 class TestController extends Controller
 {
     //страница Tests

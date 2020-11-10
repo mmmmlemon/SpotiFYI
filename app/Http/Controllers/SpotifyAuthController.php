@@ -11,7 +11,8 @@ use Carbon\Carbon;
 class SpotifyAuthController extends Controller
 {
     //Spotify - авторизация
-    public function spotify_auth()
+    //запрашивает авторизацию у Spotify API
+    public function spotifyAuth()
     {   
         $session = new SpotifyWebAPI\Session(
             config('settings')->spotify_client_id,
@@ -32,7 +33,8 @@ class SpotifyAuthController extends Controller
     }
 
     //Spotify - авторизация, callback
-    public function spotify_auth_callback()
+    //получает acces и refresh токены и записывает их в куки
+    public function spotifyAuthCallback()
     {
         $session = new SpotifyWebAPI\Session(
             config('settings')->spotify_client_id,
@@ -40,16 +42,16 @@ class SpotifyAuthController extends Controller
             config('settings')->spotify_redirect_uri
         );
         
-        //Запрос на access token используя code из спотифая
+        //Запросить access token используя authorization code из url в браузере
         $session->requestAccessToken($_GET['code']);
         
         //получаем access и refresh токены
         $accessToken = $session->getAccessToken();
         $refreshToken = $session->getRefreshToken();
-        
-        //сохраняем токены в cookies (для теста)
-        Cookie::queue('spotify_access_token', $accessToken, 60*24*30);
         $accessExpiration = Carbon::now()->addMinutes(50);
+
+        //сохраняем токены в cookies
+        Cookie::queue('spotify_access_token', $accessToken, 60*24*30);
         Cookie::queue('spotify_access_expiration', $accessExpiration, 60*24*30);
         Cookie::queue('spotify_refresh_token', $refreshToken, 60*24*30);
 
@@ -58,16 +60,17 @@ class SpotifyAuthController extends Controller
     }
 
     //Spotify - выход
-    public function spotify_logout(Request $request)
+    public function spotifyLogout(Request $request)
     {
         //если кука существует, то удаляем её
         if($request->hasCookie('spotify_access_token') == true)
         {
             Cookie::queue(Cookie::forget('spotify_access_token'));
+            
             if($request->hasCookie('spotify_refresh_token') == true)
             {
                 Cookie::queue(Cookie::forget('spotify_refresh_token'));
-
+                Cookie::queue(Cookie::forget('spotify_access_expiration'));
                 return redirect('/');
             }
             else

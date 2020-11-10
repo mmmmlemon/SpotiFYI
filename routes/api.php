@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/home_page', 'SpotifyAPIController@home_page'); //домашняя страница
+Route::get('/home_page', 'SpotifyAPIController@homePage'); //домашняя страница
 
 //тесты
 Route::get('/test_api', 'TestController@test_api'); //проверка работы api laravel

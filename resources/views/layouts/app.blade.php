@@ -62,9 +62,9 @@
             @else
                 <div class="form-inline d-none d-md-flex ml-auto" style="margin-right:3%;"> 
                         {{-- юзернейм --}}
-                        <router-link to="/spotify_profile" class=""><a class="nav-link">{{$spotify_profile['display_name']}}</a></router-link>
+                        <router-link to="/spotify_profile" class=""><a class="nav-link">{{$spotifyProfile['displayName']}}</a></router-link>
                         {{-- юзерпик --}}
-                        <img src="{{$spotify_profile['avatar']}}" alt="Spotify avatar" class="nav_item_spotify_avatar rounded-circle">
+                        <img src="{{$spotifyProfile['avatar']}}" alt="Spotify avatar" class="nav_item_spotify_avatar rounded-circle">
                         {{-- кнопка выхода --}}
                         <a class="nav-link" href="/spotify_logout"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
@@ -92,7 +92,7 @@
                     @else
                     <div class="dropdown-content">
                         {{-- юзернейм --}}
-                        <router-link to="/spotify_profile" class="">{{$spotify_profile['display_name']}}</a></router-link>
+                        <router-link to="/spotify_profile" class="">{{$spotifyProfile['displayName']}}</a></router-link>
                         {{-- кнопка выхода --}}
                         <a href="/spotify_logout" class="" style="margin-left:20px;"><i class="fas fa-sign-out-alt"></i></a>
                     </div>  

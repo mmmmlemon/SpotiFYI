@@ -27,11 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
+        //получение настроек сайта из БД
         $settings = App\Settings::all()[0];
         config(['settings' => $settings]);
-
+        
+        //создание подключения к Spotify API
         $api = new SpotifyWebAPI\SpotifyWebAPI();
-
         config(['spotify_api' => $api]);
     }
 }

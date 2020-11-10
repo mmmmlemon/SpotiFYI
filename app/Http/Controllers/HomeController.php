@@ -27,13 +27,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
-    }
+
 
     //vue router
-    public function vue_router(Request $request)
+    public function vueRouter(Request $request)
     {   
         //проверка токена
         $checkToken = Globals::checkSpotifyAccessToken($request);
@@ -42,8 +39,8 @@ class HomeController extends Controller
         if($checkToken != false)
         {
             $api = config('spotify_api');
-            $spotify_profile = ['display_name' => $api->me()->display_name, 'avatar' => $api->me()->images[0]->url];
-            return view('vue_router', compact('checkToken', 'spotify_profile'));
+            $spotifyProfile = ['displayName' => $api->me()->display_name, 'avatar' => $api->me()->images[0]->url];
+            return view('vue_router', compact('checkToken', 'spotifyProfile'));
         }
         else //если токена нет или он не действительный
         {
