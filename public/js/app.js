@@ -1936,9 +1936,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      logged_in: false,
-      spotify_username: "",
-      spotify_track_count: 0
+      loggedIn: false,
+      spotifyUsername: "",
+      spotifyTrackCount: 0
     };
   },
   mounted: function mounted() {
@@ -1949,9 +1949,9 @@ __webpack_require__.r(__webpack_exports__);
 
     var uri = '/api/home_page';
     this.axios.get(uri).then(function (response) {
-      _this.logged_in = response.data.logged_in;
-      _this.spotify_username = response.data.spotify_username;
-      _this.spotify_track_count = response.data.spotify_user_tracks.length;
+      _this.loggedIn = response.data.loggedIn;
+      _this.spotifyUsername = response.data.spotifyUsername;
+      _this.spotifyTrackCount = response.data.spotifyUserTracks.length;
     });
   }
 });
@@ -37624,7 +37624,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _vm.logged_in == false
+      _vm.loggedIn == false
         ? _c("div", { staticClass: "col-md-8" }, [
             _c("h1", [_vm._v("Site title")]),
             _vm._v(" "),
@@ -37666,20 +37666,23 @@ var render = function() {
         : _c("div", { staticClass: "col-md-8" }, [
             _c("h1", [
               _vm._v("Привет, "),
-              _c("b", [_vm._v(_vm._s(_vm.spotify_username))]),
+              _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
               _vm._v("!")
             ]),
             _vm._v(" "),
             _c("h5", [
               _vm._v(
                 "В твою библиотеку Spotify добавлено " +
-                  _vm._s(_vm.spotify_track_count) +
+                  _vm._s(_vm.spotifyTrackCount) +
                   " треков "
               ),
-              _c("i", { staticClass: "fas fa-heart" })
+              _c("i", {
+                staticClass: "fas fa-heart",
+                staticStyle: { color: "#1b77b9" }
+              })
             ]),
             _vm._v(" "),
-            _vm.spotify_track_count > 10
+            _vm.spotifyTrackCount > 10
               ? _c("h4", [_vm._v("Ого! Как много!")])
               : _c("h3", [_vm._v("Маловато будет!")]),
             _vm._v(" "),
