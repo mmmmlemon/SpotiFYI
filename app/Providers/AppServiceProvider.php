@@ -32,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
 
         $api = new SpotifyWebAPI\SpotifyWebAPI();
 
-        config(['api' => $api]);
+        config(['spotify_api' => $api]);
     }
 }

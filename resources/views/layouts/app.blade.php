@@ -55,7 +55,7 @@
                     <router-link to="/tests"><a class="nav-link">Dev: Tests</a></router-link>
                 </li>
             </ul>
-            @if($access_check == false)
+            @if($checkToken == false)
                 <div class="form-inline d-none d-md-flex ml-auto"> 
                     <a href="/spotify_auth" class="btn btn-primary btn-rounded">Войти в Spotify</a>
                 </div>
@@ -85,7 +85,7 @@
                     <router-link to="/tests"><a class="dropdown-item">Dev:Tests</a></router-link>
                     <div class="dropdown-divider"></div>
                     
-                    @if($access_check == false)
+                    @if($checkToken == false)
                     <div class="dropdown-content">
                         <a href="/spotify_auth" class="btn btn-primary btn-block btn-rounded">Войти в Spotify</a>
                     </div>    
