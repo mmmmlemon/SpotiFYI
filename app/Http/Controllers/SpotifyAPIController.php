@@ -19,8 +19,19 @@ class SpotifyAPIController extends Controller
         {
            $api = config('spotify_api');
            $spotifyUsername = $api->me()->display_name;
-           $spotifyUserTracks = $api->getMySavedTracks();
-           $array = ['loggedIn' => true, 'spotifyUsername' => $spotifyUsername, 'spotifyUserTracks' => $spotifyUserTracks->items];
+
+           $spotifyUserTracksCount = 0;
+           $offset = 0;
+           $spotifyUserTracks = $api->getMySavedTracks(['limit'=> 50, 'offset' => $offset]);
+
+           while(count($spotifyUserTracks->items) != 0)
+           {
+                $spotifyUserTracksCount += count($spotifyUserTracks->items);
+                $offset += 50;
+                $spotifyUserTracks = $api->getMySavedTracks(['limit' => 50, 'offset' => $offset]);
+           }
+
+           $array = ['loggedIn' => true, 'spotifyUsername' => $spotifyUsername, 'spotifyUserTracksCount' => $spotifyUserTracksCount];
            return response()->json($array);
         }
         else

@@ -13,11 +13,22 @@
             </div>
             <div v-else class="col-md-8">
                 <h1>Привет, <b>{{spotifyUsername}}</b>!</h1>
-                <h5>В твою библиотеку Spotify добавлено {{spotifyTrackCount}} треков <i class="fas fa-heart" style="color: 	#1b77b9;"></i></h5>
-                <h4 v-if="spotifyTrackCount > 10">Ого! Как много!</h4>
-                <h3 v-else>Маловато будет!</h3>
-                <h5>Перейди в <router-link to="/spotify_profile">Мой Профиль</router-link> чтобы просмотреть свою статистику</h5>
+                <h5>В твою библиотеку Spotify добавлено {{spotifyUserTracksCount}} треков <i class="fas fa-heart" style="color:#1b77b9;"></i></h5>
+                <h1 v-if="spotifyUserTracksCount >= 9000"> {{spotifyUserTracksCount}}?! Боже мой ಠ_ಠ </h1>
+                <h4 v-else-if="spotifyUserTracksCount > 3000">{{spotifyUserTracksCount}}? Ну ты капец 🤔</h4>
+                <h4 v-else-if="spotifyUserTracksCount >= 1000">Вау! Да ты меломан! 😍</h4>
+                <h4 v-else-if="spotifyUserTracksCount >= 500">Ого! Как много! 😳</h4>
+                <h4 v-else-if="spotifyUserTracksCount >= 200">Неплохо! 😏</h4>
+                <h4 v-else-if="spotifyUserTracksCount >= 50">Нормалёк! 😉</h4>
+                <h4 v-else-if="spotifyUserTracksCount >= 10">Маловато будет! <img src="/img/malovato_budet.png" width="50px"></h4>  
+                <h4 v-else-if="spotifyUserTracksCount < 10 && spotifyUserTracksCount > 0">Ничего не слышу, ничего не вижу</h4>              
+                <h4 v-else-if="spotifyUserTracksCount == 0">bruh... <img src="/img/bruh.png" width="50px"></h4>
+                <h3 v-else></h3>
+
+                <h5 v-if="spotifyUserTracksCount < 10">Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку.</h5>
+                <h5 v-else>Перейди в <router-link to="/spotify_profile">Мой Профиль</router-link> чтобы просмотреть свою статистику</h5>
                 <img src="https://www.cambridgemaths.org/Images/The-trouble-with-graphs.jpg" style="border-radius: 40px;" alt="">
+
             </div>
         </div>
     </div>
@@ -29,7 +40,7 @@
             return{
                 loggedIn: false,
                 spotifyUsername: "",
-                spotifyTrackCount: 0
+                spotifyUserTracksCount: 0
             }
         },
         mounted() {
@@ -41,8 +52,7 @@
            this.axios.get(uri).then((response) => {
                this.loggedIn = response.data.loggedIn;
                this.spotifyUsername = response.data.spotifyUsername;
-               this.spotifyTrackCount = response.data.spotifyUserTracks.length;
-
+               this.spotifyUserTracksCount = response.data.spotifyUserTracksCount;
            });
         }
     }
