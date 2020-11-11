@@ -19,23 +19,21 @@ class SpotifyAPIController extends Controller
         {
            $api = config('spotify_api');
 
-           $spotifyUserTracksCount = 10;
+           $spotifyUserTracksCount = 50;
            $offset = 0;
            $spotifyUserTracks = $api->getMySavedTracks(['limit'=> 50, 'offset' => $offset]);
 
-        //    while(count($spotifyUserTracks->items) != 0)
-        //    {
-        //         $spotifyUserTracksCount += count($spotifyUserTracks->items);
-        //         $offset += 50;
-        //         $spotifyUserTracks = $api->getMySavedTracks(['limit' => 50, 'offset' => $offset]);
-        //    }
+           while($offset <= 100)
+           {
+                $spotifyUserTracksCount += count($spotifyUserTracks->items);
+                $offset += 50;
+                $spotifyUserTracks = $api->getMySavedTracks(['limit' => 50, 'offset' => $offset]);
+           }
 
            return response()->json($spotifyUserTracksCount);
         }
         else
-        {
-            return "No connection to the Spotify API";
-        }
+        { return "No connection to the Spotify API"; }
     }
 
     //профиль пользователя - юзернейм и аватар

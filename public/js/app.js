@@ -1941,17 +1941,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       loggedIn: false,
       spotifyUsername: false,
-      spotifyUserTracksCount: 0
+      spotifyUserTracksCount: -1
     };
   },
   mounted: function mounted() {
@@ -37704,52 +37699,45 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _vm.spotifyUserTracksCount != 0
+          _vm.spotifyUserTracksCount != -1
             ? _c("div", { staticClass: "fade_in_anim" }, [
-                _c("h5", [
-                  _vm._v(
-                    "В твою библиотеку Spotify добавлено " +
-                      _vm._s(_vm.spotifyUserTracksCount) +
-                      " треков "
-                  ),
-                  _c("i", {
-                    staticClass: "fas fa-heart",
-                    staticStyle: { color: "#1b77b9" }
-                  })
-                ]),
-                _vm._v(" "),
-                _vm.spotifyUserTracksCount >= 9000
-                  ? _c("h1", [
+                _vm.spotifyUserTracksCount >= 150
+                  ? _c("h3", [
                       _vm._v(
-                        " " +
-                          _vm._s(_vm.spotifyUserTracksCount) +
-                          "?! Боже мой ಠ_ಠ "
-                      )
+                        "В твоей библиотеке более чем достаточно треков для просмотра статистики "
+                      ),
+                      _c("i", {
+                        staticClass: "fas fa-heart",
+                        staticStyle: { color: "#1b77b9" }
+                      })
                     ])
-                  : _vm.spotifyUserTracksCount > 3000
+                  : _vm.spotifyUserTracksCount >= 50
                   ? _c("h4", [
                       _vm._v(
-                        _vm._s(_vm.spotifyUserTracksCount) + "? Ну ты капец 🤔"
+                        "Нормалёк! 😉 В твоей библиотеке " +
+                          _vm._s(_vm.spotifyUserTracksCount) +
+                          " треков"
                       )
                     ])
-                  : _vm.spotifyUserTracksCount >= 1000
-                  ? _c("h4", [_vm._v("Вау! Да ты меломан! 😍")])
-                  : _vm.spotifyUserTracksCount >= 500
-                  ? _c("h4", [_vm._v("Ого! Как много! 😳")])
-                  : _vm.spotifyUserTracksCount >= 200
-                  ? _c("h4", [_vm._v("Неплохо! 😏")])
-                  : _vm.spotifyUserTracksCount >= 50
-                  ? _c("h4", [_vm._v("Нормалёк! 😉")])
                   : _vm.spotifyUserTracksCount >= 10
                   ? _c("h4", [
-                      _vm._v("Маловато будет! "),
+                      _vm._v(
+                        _vm._s(_vm.spotifyUserTracksCount) +
+                          " треков? Маловато будет! "
+                      ),
                       _c("img", {
                         attrs: { src: "/img/malovato_budet.png", width: "50px" }
                       })
                     ])
                   : _vm.spotifyUserTracksCount < 10 &&
                     _vm.spotifyUserTracksCount > 0
-                  ? _c("h4", [_vm._v("Ничего не слышу, ничего не вижу")])
+                  ? _c("h4", [
+                      _vm._v(
+                        "Что-то тут пусто, всего " +
+                          _vm._s(_vm.spotifyUserTracksCount) +
+                          " треков... 😳"
+                      )
+                    ])
                   : _vm.spotifyUserTracksCount == 0
                   ? _c("h4", [
                       _vm._v("bruh... "),
@@ -37759,10 +37747,10 @@ var render = function() {
                     ])
                   : _c("h3"),
                 _vm._v(" "),
-                _vm.spotifyUserTracksCount < 10
+                _vm.spotifyUserTracksCount < 50
                   ? _c("h5", [
                       _vm._v(
-                        "Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку."
+                        "Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (минимум: 50)"
                       )
                     ])
                   : _c(
