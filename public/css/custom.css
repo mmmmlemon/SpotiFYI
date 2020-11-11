@@ -1,5 +1,9 @@
 /* стили собственного производсва UwU */
 
+.invisible{
+    display: none;
+}
+
 .nav_item{
     font-size: 13pt;
     font-weight: bold;
@@ -29,4 +33,14 @@
     font-weight: bold;
     margin-left: 20px;
     margin-top: 10px;
+}
+
+.fade_in_anim{
+    animation: fade_in 0.8s;
+}
+
+
+@keyframes fade_in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }

@@ -23,5 +23,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/test_api', 'TestController@test_api'); //проверка работы api laravel
 
 
-Route::get('/home_page', 'SpotifyAPIController@homePage'); //домашняя страница
-
+Route::get('/get_spotify_tracks_count', 'SpotifyAPIController@getSpotifyUserTracksCount'); //домашняя страница
+Route::get('/get_spotify_username', 'SpotifyAPIController@getSpotifyUsername');

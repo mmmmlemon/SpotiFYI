@@ -11,32 +11,44 @@ use Carbon\Carbon;
 class SpotifyAPIController extends Controller
 {
     //домашняя страница сайта
-    public function homePage(Request $request)
+    public function getSpotifyUserTracksCount(Request $request)
     { 
         $checkToken = Globals::checkSpotifyAccessToken($request);
 
         if($checkToken != false)
         {
            $api = config('spotify_api');
-           $spotifyUsername = $api->me()->display_name;
 
-           $spotifyUserTracksCount = 0;
+           $spotifyUserTracksCount = 10;
            $offset = 0;
            $spotifyUserTracks = $api->getMySavedTracks(['limit'=> 50, 'offset' => $offset]);
 
-           while(count($spotifyUserTracks->items) != 0)
-           {
-                $spotifyUserTracksCount += count($spotifyUserTracks->items);
-                $offset += 50;
-                $spotifyUserTracks = $api->getMySavedTracks(['limit' => 50, 'offset' => $offset]);
-           }
+        //    while(count($spotifyUserTracks->items) != 0)
+        //    {
+        //         $spotifyUserTracksCount += count($spotifyUserTracks->items);
+        //         $offset += 50;
+        //         $spotifyUserTracks = $api->getMySavedTracks(['limit' => 50, 'offset' => $offset]);
+        //    }
 
-           $array = ['loggedIn' => true, 'spotifyUsername' => $spotifyUsername, 'spotifyUserTracksCount' => $spotifyUserTracksCount];
-           return response()->json($array);
+           return response()->json($spotifyUserTracksCount);
         }
         else
         {
-            return response()->json($array = ['logged_in' => false]);
+            return "No connection to the Spotify API";
         }
+    }
+
+    //профиль пользователя - юзернейм и аватар
+    public function getSpotifyUsername(Request $request)
+    {
+        $checkToken = Globals::checkSpotifyAccessToken($request);
+
+        if($checkToken != false)
+        {
+            $api = config('spotify_api');
+            return response()->json(['loggedIn' => true, 'spotifyUsername' => $api->me()->display_name]);
+        }
+        else
+        {  return response()->json($array = ['logged_in' => false]);  }
     }
 }

@@ -31,7 +31,7 @@
 {{-- BODY --}}
 <body class="dark-mode">
 
-    <div class="container-sm">
+    <div class="">
 
         <div id="app" class="page-wrapper with-navbar">
 
