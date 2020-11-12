@@ -86,6 +86,7 @@
     
                 <div class="dropdown-menu dropdown-menu-right w-200" aria-labelledby="navbar-dropdown-toggle-btn-1">
                     <router-link to="/"><a class="dropdown-item">Главная</a></router-link>
+                    <router-link to="/about"><a class="dropdown-item">О проекте</a></router-link>
                     <router-link to="/tests"><a class="dropdown-item">Dev:Tests</a></router-link>
                     <div class="dropdown-divider"></div>
                     
