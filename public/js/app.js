@@ -37723,7 +37723,7 @@ var render = function() {
         "div",
         {
           staticClass: "col-md-8",
-          class: { invisible: this.$store.state.loggedIn },
+          class: { invisible: this.$store.state.homePage.loggedIn },
           attrs: { width: "20%;" }
         },
         [
@@ -37770,20 +37770,22 @@ var render = function() {
         "div",
         {
           staticClass: "col-md-8",
-          class: { invisible: !this.$store.state.loggedIn }
+          class: { invisible: !this.$store.state.homePage.loggedIn }
         },
         [
-          this.$store.state.spotifyUsername != false
+          this.$store.state.homePage.spotifyUsername != false
             ? _c("h1", { staticClass: "fade_in_anim" }, [
                 _vm._v("Привет, "),
-                _c("b", [_vm._v(_vm._s(this.$store.state.spotifyUsername))]),
+                _c("b", [
+                  _vm._v(_vm._s(this.$store.state.homePage.spotifyUsername))
+                ]),
                 _vm._v("!")
               ])
             : _vm._e(),
           _vm._v(" "),
-          this.$store.state.spotifyUserTracksCount != -1
+          this.$store.state.homePage.spotifyUserTracksCount != -1
             ? _c("div", { staticClass: "fade_in_anim" }, [
-                this.$store.state.spotifyUserTracksCount >= 150
+                this.$store.state.homePage.spotifyUserTracksCount >= 150
                   ? _c("h3", [
                       _vm._v(
                         "В твоей библиотеке более чем достаточно треков для анализа "
@@ -37793,38 +37795,44 @@ var render = function() {
                         staticStyle: { color: "#1b77b9" }
                       })
                     ])
-                  : this.$store.state.spotifyUserTracksCount >= 50
+                  : this.$store.state.homePage.spotifyUserTracksCount >= 50
                   ? _c("h4", [
                       _vm._v(
                         "Нормалёк! 😉 В твоей библиотеке " +
-                          _vm._s(this.$store.state.spotifyUserTracksCount) +
+                          _vm._s(
+                            this.$store.state.homePage.spotifyUserTracksCount
+                          ) +
                           " треков"
                       )
                     ])
-                  : this.$store.state.spotifyUserTracksCount >= 10
+                  : this.$store.state.homePage.spotifyUserTracksCount >= 10
                   ? _c("h4", [
                       _vm._v(
-                        _vm._s(this.$store.state.spotifyUserTracksCount) +
-                          " треков? Маловато будет! "
+                        _vm._s(
+                          this.$store.state.homePage.spotifyUserTracksCount
+                        ) + " треков? Маловато будет! "
                       ),
                       _c("img", {
                         attrs: { src: "/img/malovato_budet.png", width: "50px" }
                       })
                     ])
-                  : this.$store.state.spotifyUserTracksCount < 10 &&
-                    this.$store.state.spotifyUserTracksCount > 0
+                  : this.$store.state.homePage.spotifyUserTracksCount < 10 &&
+                    this.$store.state.homePage.spotifyUserTracksCount > 0
                   ? _c("h4", [
                       _vm._v(
                         "Что-то тут пусто, всего " +
-                          _vm._s(this.$store.state.spotifyUserTracksCount) +
+                          _vm._s(
+                            this.$store.state.homePage.spotifyUserTracksCount
+                          ) +
                           " треков... 😳"
                       )
                     ])
-                  : this.$store.state.spotifyUserTracksCount == 0
+                  : this.$store.state.homePage.spotifyUserTracksCount == 0
                   ? _c("h4", [
                       _vm._v(
-                        _vm._s(this.$store.state.spotifyUserTracksCount) +
-                          " песен? bruh... "
+                        _vm._s(
+                          this.$store.state.homePage.spotifyUserTracksCount
+                        ) + " песен? bruh... "
                       ),
                       _c("img", {
                         attrs: { src: "/img/bruh.png", width: "50px" }
@@ -37832,7 +37840,7 @@ var render = function() {
                     ])
                   : _c("h3"),
                 _vm._v(" "),
-                this.$store.state.spotifyUserTracksCount < 50
+                this.$store.state.homePage.spotifyUserTracksCount < 50
                   ? _c("h5", [
                       _vm._v(
                         "Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (минимум: 50)"
@@ -54897,7 +54905,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
+var HomePageStates = {
   state: {
     loggedIn: false,
     spotifyUsername: false,
@@ -54934,6 +54942,17 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_axios__WEBPACK_IMPORTED_MODUL
     getSpotifyUserTracksCount: function getSpotifyUserTracksCount(context) {
       context.commit('getSpotifyUserTracksCount');
     }
+  }
+};
+var ProfilePageStates = {
+  state: {
+    dummy: false
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
+  modules: {
+    homePage: HomePageStates,
+    profilePage: ProfilePageStates
   }
 }));
 
