@@ -1955,10 +1955,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      site_name: false
+    };
+  },
   created: function created() {
     this.$store.dispatch('getSiteInfo');
+    this.site_name = this.$store.state.homePage.siteTitle;
   },
   mounted: function mounted() {
     console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'About\' component mounted');
@@ -37727,7 +37732,9 @@ var render = function() {
     _vm._v(" "),
     this.$store.state.homePage.siteInfo != false
       ? _c("div", { staticClass: "row justify-content-center" }, [
-          _c("h4", { staticClass: "fade_in_anim" }, [_vm._v("v0.0.1")])
+          _c("h4", { staticClass: "fade_in_anim" }, [
+            _vm._v(_vm._s(this.$store.state.homePage.siteInfo.version))
+          ])
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -37739,7 +37746,9 @@ var render = function() {
       ? _c("div", { staticClass: "row justify-content-center fade_in_anim" }, [
           _c("p", [
             _vm._v(
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta magni veritatis dolorem velit debitis quae nesciunt doloribus dolore temporibus animi. Assumenda vero repudiandae rerum dignissimos quisquam, fugit eligendi consequuntur quidem.\n        Unde ad facilis accusantium beatae at, fugiat voluptatem provident similique! Quidem reiciendis omnis quas vitae natus, animi fugiat, nostrum, dolores officiis dignissimos cum. Repellat voluptatum odio quod praesentium quos consectetur?\n        Itaque maiores eius vel ut, reprehenderit iste cumque minus culpa ratione illo quibusdam omnis aliquid sint animi sit quis? Totam blanditiis minus sint repellat quidem numquam iusto sit a rem?\n        Recusandae officia eveniet rem possimus voluptatum est autem tenetur architecto, ab esse, nulla numquam cumque beatae quasi officiis! Sint, sit. Consequuntur earum illo aut dicta. Porro ex odit nihil odio?"
+              "\n            " +
+                _vm._s(this.$store.state.homePage.siteInfo.aboutText) +
+                "\n        "
             )
           ])
         ])

@@ -52,6 +52,8 @@ class HomeController extends Controller
     public function getSiteInfo()
     {
         $settings = config('settings');
-        return response()->json(['siteTitle' => $settings->site_title]);
+        return response()->json(['siteTitle' => $settings->site_title, 
+                                'version' => $settings->version, 
+                                'aboutText' => $settings->about_text]);
     }
 }
