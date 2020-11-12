@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h6>this is About page</h6>
+        <h6>This is About page</h6>
         <router-view></router-view>
     </div>
 </template>
@@ -8,11 +8,7 @@
 <script>
     export default {
         mounted() {
-            console.log('\'About\' component mounted')
-        },
-
-created(){
-         
+           console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'About\' component mounted')
         }
     }
 </script>

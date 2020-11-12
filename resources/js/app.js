@@ -11,6 +11,7 @@ window.Vue = require('vue');
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import store from './store';
 
 Vue.use(VueAxios, axios);
 
@@ -23,6 +24,7 @@ import router from './router';
  */
 
 const app = new Vue({
+    store,
     el: '#app',
     router,
 });
