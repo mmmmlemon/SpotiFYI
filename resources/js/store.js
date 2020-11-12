@@ -9,9 +9,10 @@ Vue.use(VueAxios, axios);
 
 const HomePageStates = {
     state: {
-        loggedIn: false,
+        loggedIn: -1,
         spotifyUsername: false,
-        spotifyUserTracksCount: -1
+        spotifyUserTracksCount: -1,
+        siteInfo: false,
       },
 
       getters: {
@@ -21,8 +22,8 @@ const HomePageStates = {
       mutations: {
         //получить имя пользователя из API
         getSpotifyUsername(state){
-            let uri_username = '/api/get_spotify_username';
-            axios.get(uri_username).then((response) => {
+            let uri = '/api/get_spotify_username';
+            axios.get(uri).then((response) => {
                 state.loggedIn = response.data.loggedIn;
                 if(response.data.spotifyUsername != undefined)
                 {
@@ -36,6 +37,13 @@ const HomePageStates = {
             axios.get(uri).then((response) => {
                 state.spotifyUserTracksCount = response.data;
             });
+        },
+        //получить информацию о сайте
+        getSiteInfo(state){
+          let uri ='/api/get_site_info';
+          axios.get(uri).then((response) => {
+            state.siteInfo = response.data;
+          });
         }
       },
       
@@ -47,7 +55,11 @@ const HomePageStates = {
         //получить количество треков в библиотеке пользователя
         getSpotifyUserTracksCount(context){
             context.commit('getSpotifyUserTracksCount');
-        }
+        },
+        //получить информацию о сайте
+        getSiteInfo(context){
+          context.commit('getSiteInfo');
+        },
       }
 }
 

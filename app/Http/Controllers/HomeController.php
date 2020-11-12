@@ -47,4 +47,11 @@ class HomeController extends Controller
             return view('vue_router', compact('checkToken'));
         }
     }
+
+    //получить название веб-сайта
+    public function getSiteInfo()
+    {
+        $settings = config('settings');
+        return response()->json(['siteTitle' => $settings->site_title]);
+    }
 }

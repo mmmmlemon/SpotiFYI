@@ -6,8 +6,8 @@ Vue.use(VueRouter)
 
 import tests from './components/tests.vue';
 import HomePage from './components/HomePage.vue';
-import Welcome from './components/Welcome.vue';
-import About from './components/About.vue';
+import Welcome from './components/HomePage/Welcome.vue';
+import About from './components/HomePage/About.vue';
 
 const routes = [
     {   //главная страница

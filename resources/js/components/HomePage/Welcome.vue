@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8" width="20%;" v-bind:class="{ invisible: this.$store.state.homePage.loggedIn }">
+            <div class="col-md-8 fade_in_anim" width="20%;" v-bind:class="{ invisible: this.$store.state.homePage.loggedIn }">
                 <h1>Site title</h1>
                 <h4>A Laravel/Vue.js/Spotify Web API application</h4>
                 <hr>

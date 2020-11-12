@@ -24,6 +24,7 @@
     <!-- CSS Стили -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
     <link href="{{ asset('css/halfmoon-variables.css') }}" rel="stylesheet">
 
 </head>
