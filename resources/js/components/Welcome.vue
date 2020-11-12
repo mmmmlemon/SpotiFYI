@@ -41,27 +41,13 @@
             }
         },
         mounted() {
-            console.log('\'home_page\' component mounted')
+
         },
-
         created(){
-            let uri_username = '/api/get_spotify_username';
-            this.axios.get(uri_username).then((response) => {
-                this.loggedIn = response.data.loggedIn;
-                if(response.data.spotifyUsername != undefined)
-                {
-                    this.spotifyUsername = response.data.spotifyUsername;
-                }
-                else
-                {
-                    this.loggedIn = false;
-                }
-            })
-
-           let uri = '/api/get_spotify_tracks_count';
-           this.axios.get(uri).then((response) => {
-               this.spotifyUserTracksCount = response.data;
-           });
-        }
+             console.log(this.$parent)
+            this.loggedIn = this.$parent.loggedIn;
+            this.spotifyUsername = this.$parent.spotifyUsername;
+            this.spotifyUserTracksCount = this.$parent.spotifyUserTracksCount; 
+        }   
     }
 </script>

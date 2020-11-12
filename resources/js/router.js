@@ -5,11 +5,29 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter)
 
 import tests from './components/tests.vue';
-import home_page from './components/home_page.vue';
+import HomePage from './components/HomePage.vue';
+import Welcome from './components/Welcome.vue';
+import About from './components/About.vue';
+
 const routes = [
     {   //главная страница
         path:'/',
-        component: home_page
+        component: HomePage,
+        children: [
+            {
+                path:'/',
+                component: Welcome
+            },
+            {
+                path:'about',
+                component: About
+            },
+            {
+                path:'tests',
+                component: tests
+            }
+
+        ]
     },
     {   //тесты
         path: '/tests',

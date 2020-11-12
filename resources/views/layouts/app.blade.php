@@ -52,6 +52,9 @@
                     <router-link to="/"><a class="nav-link">Главная</a></router-link>
                 </li>
                 <li class="nav-item active">
+                    <router-link to="/about"><a class="nav-link">О проекте</a></router-link>
+                </li>
+                <li class="nav-item active">
                     <router-link to="/tests"><a class="nav-link">Dev: Tests</a></router-link>
                 </li>
             </ul>
