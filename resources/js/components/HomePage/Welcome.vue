@@ -30,7 +30,6 @@
                     <h5 v-else class="fade_in_anim_500">Перейди в <router-link to="/profile">свой профиль</router-link> чтобы просмотреть статистику</h5>
                     <img class="fade_in_anim" src="https://www.cambridgemaths.org/Images/The-trouble-with-graphs.jpg" width="50%;" style="border-radius: 40px;" alt="">
                 </div>
-
             </div>
         </div>
     </div>

@@ -12,6 +12,8 @@ window.Vue = require('vue');
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store';
+import Error from './components/Misc/Error.vue';
+Vue.component('Error', Error);
 
 Vue.use(VueAxios, axios);
 
@@ -26,5 +28,5 @@ import router from './router';
 const app = new Vue({
     store,
     el: '#app',
-    router,
+    router
 });

@@ -33,10 +33,10 @@ class SpotifyAPIController extends Controller
            return response()->json($spotifyUserTracksCount);
         }
         else
-        { return "No connection to the Spotify API"; }
+        { return false; }
     }
 
-    //профиль пользователя - юзернейм и аватар
+    //профиль пользователя - юзернейм
     public function getSpotifyUsername(Request $request)
     {
         $checkToken = Globals::checkSpotifyAccessToken($request);
@@ -47,7 +47,7 @@ class SpotifyAPIController extends Controller
             return response()->json(['loggedIn' => true, 'spotifyUsername' => $api->me()->display_name]);
         }
         else
-        {  return response()->json($array = ['logged_in' => false]);  }
+        {  return response()->json($array = ['logged_in' => false, 'spotifyUsername' => false]);  }
     }
 
     //получить общую информацию о пользователе

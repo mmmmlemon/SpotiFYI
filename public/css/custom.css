@@ -44,6 +44,26 @@
     color:#1b77b9;
 }
 
+.error_color{
+    color: rgb(175, 55, 55);
+}
+
+.warning_color{
+    color: rgb(184, 164, 53);
+}
+
+.warning_icon{
+    font-size: 60pt;
+    color: rgb(184, 164, 53);
+    margin-top: 5%;
+}
+
+.error{
+    color: rgb(175, 55, 55);
+    font-weight: bold;
+    margin: 0;
+}
+
 .profile_avatar{
     border-radius: 100%;
     border-style: solid;
