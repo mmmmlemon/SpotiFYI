@@ -1,9 +1,7 @@
 <template>
         <div>
         <div class="container bounce_in_anim" v-if="this.$store.state.profilePage.spotifyProfile == -1">
-            <div class="row justify-content-center align-items-center">
-                 <div class="lds-facebook"><div></div><div></div><div></div></div>
-            </div>
+            <Loader/>
         </div>
         <div v-if="this.$store.state.profilePage.spotifyProfile == false">
            <Error errorMessage="Не удалось загрузить профиль пользователя"/>

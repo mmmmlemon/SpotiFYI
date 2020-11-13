@@ -53,6 +53,11 @@
                 <li class="nav-item active">
                     <router-link to="/about"><a class="nav-link">О проекте</a></router-link>
                 </li>
+                @if($checkToken != false)
+                <li class="nav-item active">
+                    <router-link to="/profile"><a class="nav-link">Мой профиль</a></router-link>
+                </li>
+                @endif
                 <li class="nav-item active">
                     <router-link to="/tests"><a class="nav-link">Dev: Tests</a></router-link>
                 </li>
@@ -66,7 +71,9 @@
                         {{-- юзернейм --}}
                         <router-link to="/profile" class=""><a class="nav-link">{{$spotifyProfile['displayName']}}</a></router-link>
                         {{-- юзерпик --}}
-                        <img src="{{$spotifyProfile['avatar']}}" alt="Spotify avatar" class="nav_item_spotify_avatar rounded-circle">
+                        <router-link to="/profile">
+                            <img src="{{$spotifyProfile['avatar']}}" alt="Spotify avatar" class="nav_item_spotify_avatar rounded-circle">
+                        </router-link>
                         {{-- кнопка выхода --}}
                         <a class="nav-link" href="/spotify_logout"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
@@ -85,6 +92,9 @@
                 <div class="dropdown-menu dropdown-menu-right w-200" aria-labelledby="navbar-dropdown-toggle-btn-1">
                     <router-link to="/"><a class="dropdown-item">Главная</a></router-link>
                     <router-link to="/about"><a class="dropdown-item">О проекте</a></router-link>
+                    @if($checkToken != false)
+                        <router-link to="/profile"><a class="dropdown-item">Мой профиль</a></router-link>
+                    @endif
                     <router-link to="/tests"><a class="dropdown-item">Dev:Tests</a></router-link>
                     <div class="dropdown-divider"></div>
                     

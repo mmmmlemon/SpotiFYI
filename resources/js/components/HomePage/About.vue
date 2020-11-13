@@ -1,9 +1,7 @@
 <template>
     <div>
         <div class="container bounce_in_anim loader_div" v-if="this.$store.state.homePage.siteInfo == false">
-            <div class="row justify-content-center align-items-center">
-                 <div class="lds-facebook"><div></div><div></div><div></div></div>
-            </div>
+            <Loader/>
         </div>
         <div class="container">
             <div class="row justify-content-center">

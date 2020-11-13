@@ -29,20 +29,27 @@
   position: absolute;
   left: 8px;
   width: 16px;
-  background:#1b77b9;
+  background:black;
   animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 .lds-facebook div:nth-child(1) {
   left: 8px;
-  animation-delay: -0.24s;
+  animation-delay: -0.36s;
 }
 .lds-facebook div:nth-child(2) {
-  left: 32px;
-  animation-delay: -0.12s;
+  left: 26px;
+  animation-delay: -0.24s;
+  margin-top:5px;
 }
 .lds-facebook div:nth-child(3) {
-  left: 56px;
+  left: 44px;
+  animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(4) {
+  left: 62px;
   animation-delay: 0;
+  margin-top:5px;
 }
 
 @keyframes lds-facebook {

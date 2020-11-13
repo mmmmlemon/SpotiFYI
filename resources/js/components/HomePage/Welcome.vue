@@ -14,9 +14,7 @@
             <div class="col-md-8" v-bind:class="{ invisible: !this.$store.state.homePage.loggedIn }">
                 <h1 v-if="this.$store.state.homePage.spotifyUsername != false" class="fade_in_anim">Привет, <b>{{this.$store.state.homePage.spotifyUsername}}</b>!</h1>
                 <div class="container bounce_in_anim" v-if="this.$store.state.homePage.spotifyUserTracksCount == -1 && this.$store.state.homePage.loggedIn == true">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="lds-facebook"><div></div><div></div><div></div></div>
-                    </div>
+                    <Loader/>
                 </div>
                 <div v-if="this.$store.state.homePage.spotifyUserTracksCount != -1" class="fade_in_anim">
                     <h3 v-if="this.$store.state.homePage.spotifyUserTracksCount >= 150">В твоей библиотеке более чем достаточно треков для анализа <i class="fas fa-heart primary_color heartbeat_anim"></i></h3>
