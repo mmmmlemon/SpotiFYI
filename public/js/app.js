@@ -2047,7 +2047,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  beforeCreate: function beforeCreate() {
+    this.$store.dispatch('getSpotifyProfile');
+  }
+});
 
 /***/ }),
 
@@ -38039,9 +38072,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("this is an profile")])
+  return _c("div", [
+    this.$store.state.profilePage.spotifyProfile == -1
+      ? _c("div", { staticClass: "container bounce_in_anim" }, [_vm._m(0)])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center fade-in" }, [
+        this.$store.state.profilePage.spotifyProfile != -1
+          ? _c("h1", { staticClass: "fade_in_anim" }, [
+              _c("b", [
+                _vm._v(
+                  _vm._s(
+                    this.$store.state.profilePage.spotifyProfile.spotifyUsername
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticStyle: { "font-size": "10pt" },
+                  attrs: {
+                    href: this.$store.state.profilePage.spotifyProfile
+                      .profile_url,
+                    target: "_blank"
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-external-link-alt" })]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      this.$store.state.profilePage.spotifyProfile != -1
+        ? _c("div", { staticClass: "row justify-content-center" }, [
+            _c("img", {
+              staticClass: "profile_avatar bounce_in_av_anim",
+              attrs: {
+                src: this.$store.state.profilePage.spotifyProfile.avatar,
+                alt: "Spotify Avatar"
+              }
+            })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      this.$store.state.profilePage.spotifyProfile != -1
+        ? _c("div", { staticClass: "row justify-content-center fade-in" }, [
+            this.$store.state.profilePage.spotifyProfile.subscription ==
+            "premium"
+              ? _c("h6", { staticStyle: { "margin-bottom": "0" } }, [
+                  _vm._v("Premium "),
+                  _c("i", { staticClass: "fas fa-crown" })
+                ])
+              : _c("h6")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      this.$store.state.profilePage.spotifyProfile != -1
+        ? _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", [_vm._v(" Подписчики: 1")]),
+            _vm._v(" "),
+            _c("div", [_vm._v(" | ")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("img", {
+                staticClass: "fade_in_anim",
+                attrs: {
+                  src: this.$store.state.profilePage.spotifyProfile.country
+                }
+              })
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      this.$store.state.profilePage.spotifyProfile != -1
+        ? _c("hr", { staticClass: "fade_in_anim" })
+        : _vm._e()
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "row justify-content-center align-items-center" },
+      [
+        _c("div", { staticClass: "lds-facebook" }, [
+          _c("div"),
+          _c("div"),
+          _c("div")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -55192,7 +55320,22 @@ var HomePageStates = {
 };
 var ProfilePageStates = {
   state: {
-    dummy: false
+    spotifyProfile: -1
+  },
+  mutations: {
+    //получить профиль
+    getSpotifyProfile: function getSpotifyProfile(state) {
+      var uri = '/api/get_spotify_profile';
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
+        state.spotifyProfile = response.data;
+      });
+    }
+  },
+  actions: {
+    //получить профиль
+    getSpotifyProfile: function getSpotifyProfile(context) {
+      context.commit('getSpotifyProfile');
+    }
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({

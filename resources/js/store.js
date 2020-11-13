@@ -65,8 +65,25 @@ const HomePageStates = {
 
 const ProfilePageStates = {
     state: {
-        dummy: false
+        spotifyProfile: -1,
       },
+
+    mutations: {
+        //получить профиль
+        getSpotifyProfile(state){
+          let uri = '/api/get_spotify_profile';
+          axios.get(uri).then((response) => {
+            state.spotifyProfile = response.data;
+          });
+        }
+    },
+
+    actions: {
+      //получить профиль
+      getSpotifyProfile(context){
+        context.commit('getSpotifyProfile');
+      }
+    }
 }
 
 export default new Vuex.Store({

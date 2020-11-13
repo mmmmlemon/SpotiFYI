@@ -49,4 +49,23 @@ class SpotifyAPIController extends Controller
         else
         {  return response()->json($array = ['logged_in' => false]);  }
     }
+
+    //получить общую информацию о пользователе
+    public function getSpotifyProfile(Request $request)
+    {
+        $checkToken = Globals::checkSpotifyAccessToken($request);
+
+        if($checkToken != false)
+        {
+            $api = config('spotify_api');
+            $profile = $api->me();
+            $array = ['spotifyUsername' => $profile->display_name, 'country' => "https://www.countryflags.io/" . $profile->country . "/flat/32.png", 
+                        'profile_url' => $profile->external_urls->spotify, 'followers' => $profile->followers->total,
+                        'avatar' => $profile->images[0]->url, "subscription" => "$profile->product"];
+           
+            return response()->json($array);
+        }
+        else
+        { return false; }
+    }
 }

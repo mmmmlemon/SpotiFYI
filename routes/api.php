@@ -26,3 +26,8 @@ Route::get('/test_api', 'TestController@test_api'); //проверка рабо�
 Route::get('/get_spotify_tracks_count', 'SpotifyAPIController@getSpotifyUserTracksCount'); //получить кол-во треков в библиотеке
 Route::get('/get_spotify_username', 'SpotifyAPIController@getSpotifyUsername'); //получить имя пользователя
 Route::get('/get_site_info', 'HomeController@getSiteInfo'); //получить информацию о сайте
+
+//Profile
+Route::get('/get_spotify_profile', 'SpotifyAPIController@getSpotifyProfile') //получить профиль пользователя
+
+?>
