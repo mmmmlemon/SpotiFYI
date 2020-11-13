@@ -45,9 +45,7 @@
             <router-link to="/"><a class="navbar-brand">
                 {{config('settings')->site_title}}
             </a></router-link>
-    
-            <span class="navbar-text text-monospace">v0.0</span>
-    
+       
             <ul class="navbar-nav d-none d-md-flex">
                 <li class="nav-item active">
                     <router-link to="/"><a class="nav-link">Главная</a></router-link>
@@ -66,7 +64,7 @@
             @else
                 <div class="form-inline d-none d-md-flex ml-auto" style="margin-right:3%;"> 
                         {{-- юзернейм --}}
-                        <router-link to="/spotify_profile" class=""><a class="nav-link">{{$spotifyProfile['displayName']}}</a></router-link>
+                        <router-link to="/profile" class=""><a class="nav-link">{{$spotifyProfile['displayName']}}</a></router-link>
                         {{-- юзерпик --}}
                         <img src="{{$spotifyProfile['avatar']}}" alt="Spotify avatar" class="nav_item_spotify_avatar rounded-circle">
                         {{-- кнопка выхода --}}
@@ -97,7 +95,7 @@
                     @else
                     <div class="dropdown-content">
                         {{-- юзернейм --}}
-                        <router-link to="/spotify_profile" class="">{{$spotifyProfile['displayName']}}</a></router-link>
+                        <router-link to="/profile" class="">{{$spotifyProfile['displayName']}}</a></router-link>
                         {{-- кнопка выхода --}}
                         <a href="/spotify_logout" class="" style="margin-left:20px;"><i class="fas fa-sign-out-alt"></i></a>
                     </div>  

@@ -35,10 +35,11 @@
     margin-top: 10px;
 }
 
-.fade_in_anim{
-    animation: fade_in 0.2s;
+
+.loader_div{
+    margin-top:20%;
 }
 
-.bounce_in_anim{
-    animation: bounceIn 0.6s;
+.primary_color{
+    color:#1b77b9;
 }

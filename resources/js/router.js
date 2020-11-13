@@ -8,6 +8,7 @@ import tests from './components/tests.vue';
 import HomePage from './components/HomePage.vue';
 import Welcome from './components/HomePage/Welcome.vue';
 import About from './components/HomePage/About.vue';
+import Profile from './components/Profile.vue';
 
 const routes = [
     {   //главная страница
@@ -29,10 +30,11 @@ const routes = [
 
         ]
     },
-    {   //тесты
-        path: '/tests',
-        component: tests
+    {
+        path:'/profile',
+        component: Profile
     }
+
 ]
 
 export default new VueRouter({ mode: 'history', routes: routes })

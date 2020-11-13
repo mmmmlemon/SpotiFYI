@@ -1,19 +1,26 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-                 <h1 v-if="this.$store.state.homePage.siteInfo != false" class="fade_in_anim"><b>{{this.$store.state.homePage.siteInfo.siteTitle}}</b></h1>
+    <div>
+        <div class="container bounce_in_anim loader_div" v-if="this.$store.state.homePage.siteInfo == false">
+            <div class="row justify-content-center align-items-center">
+                 <div class="lds-facebook"><div></div><div></div><div></div></div>
+            </div>
         </div>
-        <div v-if="this.$store.state.homePage.siteInfo != false" class="row justify-content-center">
-                <img src="/logo.png" width="6%" alt="" class="fade_in_anim bounce_in_anim">
-        </div>
-         <div v-if="this.$store.state.homePage.siteInfo != false" class="row justify-content-center">
-                <h4 class="fade_in_anim">{{this.$store.state.homePage.siteInfo.version}}</h4>
-        </div>
-        <hr v-if="this.$store.state.homePage.siteInfo != false" class="fade_in_anim">
-        <div v-if="this.$store.state.homePage.siteInfo != false" class="row justify-content-center fade_in_anim">
-            <p>
-                {{this.$store.state.homePage.siteInfo.aboutText}}
-            </p>
+        <div class="container">
+            <div class="row justify-content-center">
+                    <h1 v-if="this.$store.state.homePage.siteInfo != false" class="fade_in_anim"><b>{{this.$store.state.homePage.siteInfo.siteTitle}}</b></h1>
+            </div>
+            <div v-if="this.$store.state.homePage.siteInfo != false" class="row justify-content-center">
+                    <img src="/logo.png" width="90pt" alt="" class="fade_in_anim bounce_in_anim">
+            </div>
+            <div v-if="this.$store.state.homePage.siteInfo != false" class="row justify-content-center">
+                    <h4 class="fade_in_anim">{{this.$store.state.homePage.siteInfo.version}}</h4>
+            </div>
+            <hr v-if="this.$store.state.homePage.siteInfo != false" class="fade_in_anim">
+            <div v-if="this.$store.state.homePage.siteInfo != false" class="row justify-content-center fade_in_anim">
+                <p>
+                    {{this.$store.state.homePage.siteInfo.aboutText}}
+                </p>
+            </div>
         </div>
     </div>
 </template>
