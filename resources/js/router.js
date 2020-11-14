@@ -9,6 +9,8 @@ import HomePage from './components/HomePage.vue';
 import Welcome from './components/HomePage/Welcome.vue';
 import About from './components/HomePage/About.vue';
 import Profile from './components/Profile.vue';
+import BasicStats from './components/Profile/BasicStats.vue';
+import Top10 from './components/Profile/Top10.vue';
 
 const routes = [
     {   //главная страница
@@ -32,7 +34,18 @@ const routes = [
     },
     {
         path:'/profile',
-        component: Profile
+        component: Profile,
+        children: [
+            {
+                path:'/profile',
+                component: BasicStats
+            },
+            {
+                path:'/profile/top10tracks',
+                component: Top10
+            }
+
+        ]
     }
 
 ]

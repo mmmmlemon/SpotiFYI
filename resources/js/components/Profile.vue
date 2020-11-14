@@ -6,7 +6,8 @@
         <div v-if="this.$store.state.profilePage.spotifyProfile == false">
            <Error errorMessage="Не удалось загрузить профиль пользователя"/>
         </div>
-        <div class="container">
+        <!-- профиль -->
+        <div class="container" v-if="this.$store.state.profilePage.spotifyProfile != false">
             <div class="row justify-content-center fade-in">
                     <h1 v-if="this.$store.state.profilePage.spotifyProfile != -1 && this.$store.state.profilePage.spotifyProfile != false" class="fade_in_anim">
                         <b>{{this.$store.state.profilePage.spotifyProfile.spotifyUsername}}</b>
@@ -28,6 +29,29 @@
                 </div>
             </div>
             <hr v-if="this.$store.state.profilePage.spotifyProfile != -1 && this.$store.state.profilePage.spotifyProfile != false" class="fade_in_anim">
+            <div class="row justify-content-center fade-in" v-if="this.$store.state.profilePage.spotifyProfile != -1">
+                <div class="col-md-8">
+                    <div class="row fade_in_anim">
+                        <div class="col-md-3">
+                            <router-link to="/profile"><button class="btn" type="button">Общее</button></router-link>
+                        </div>
+                        <div class="col-md-3">
+                            <router-link to="/profile/top10tracks"><button class="btn" type="button">Топ-10</button></router-link>
+                        </div>
+                        <div class="col-md-3">
+                            <router-link to="/"><button class="btn" type="button">Что-то</button></router-link>
+                        </div>
+                        <div class="col-md-3">
+                            <router-link to="/"><button class="btn" type="button">Еще</button></router-link>
+                        </div>
+                    </div>
+          
+                </div>
+                <div class="col-md-8">
+                         <Loader/>
+                        <router-view></router-view>
+                </div>
+            </div>
         </div>
 
     </div>
