@@ -2219,6 +2219,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить кол-во треков в библиотеке
@@ -38481,7 +38486,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.spotifyTrackCount == false
+    _vm.spotifyTrackCount === false
       ? _c(
           "div",
           [
@@ -38495,21 +38500,48 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.spotifyTrackCount != false
+    _vm.spotifyTrackCount !== false
       ? _c("div", [
           _vm._m(0),
           _vm._v(" "),
           _vm.spotifyTrackCount == -1
             ? _c("div", [_c("Loader")], 1)
-            : _vm.spotifyTrackCount > 0
+            : _vm.spotifyTrackCount >= 50
             ? _c("div", { staticClass: "fade_in_anim" }, [
                 _c("p", [
-                  _vm._v("В твою библиотеку добавлено "),
-                  _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))]),
-                  _vm._v(" треков. ")
+                  _vm._v("Треков в библиотеке - "),
+                  _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
                 ]),
                 _vm._v(" "),
-                _c("p", [_vm._v("Ого! Неплохо!")])
+                _vm.spotifyTrackCount > 5000
+                  ? _c("p", [
+                      _vm._v(
+                        _vm._s(_vm.spotifyTrackCount) +
+                          "? Такое вообще возможно? Круть! 👍"
+                      )
+                    ])
+                  : _vm.spotifyTrackCount > 1000
+                  ? _c("p", [_vm._v("Ого как много! Да ты меломан! 😏")])
+                  : _vm.spotifyTrackCount >= 500
+                  ? _c("p", [_vm._v("Впечатляет! 😉")])
+                  : _vm.spotifyTrackCount >= 100
+                  ? _c("p", [_vm._v("Неплохо! 😌")])
+                  : _vm.spotifyTrackCount >= 50
+                  ? _c("p", [_vm._v("Нормально! Но лучше больше. 🤨")])
+                  : _vm._e()
+              ])
+            : _vm.spotifyTrackCount < 50
+            ? _c("div", [
+                _c("p", [
+                  _vm._v("Треков в библиотеке - "),
+                  _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Мало треков. Что мне анализировать? Приходи назад когда добавишь чего-нибудь!"
+                  )
+                ])
               ])
             : _c(
                 "div",
