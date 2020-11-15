@@ -66,7 +66,14 @@ const HomePageStates = {
 const ProfilePageStates = {
     state: {
         spotifyProfile: -1,
+        spotifyTrackCount: -1,
       },
+
+    getters:{
+      getSpotifyTrackCount: state => {
+        return state.spotifyTrackCount;
+      }
+    },
 
     mutations: {
         //получить профиль
@@ -75,22 +82,31 @@ const ProfilePageStates = {
           axios.get(uri).then((response) => {
             state.spotifyProfile = response.data;
           });
-        }
+        },
+        //получить кол-во треков в библиотеке
+        getSpotifyTrackCount(state){
+          let uri = '/api/get_spotify_track_count';
+          axios.get(uri).then((response) => {
+            state.spotifyTrackCount = response.data;
+          });
+        },
     },
 
     actions: {
       //получить профиль
       getSpotifyProfile(context){
         context.commit('getSpotifyProfile');
+      },
+      //получить кол-во треков в библиотеке
+      getSpotifyTrackCount(context){
+        context.commit('getSpotifyTrackCount');
       }
     }
 }
 
 export default new Vuex.Store({
- 
   modules: {
       homePage: HomePageStates,
       profilePage: ProfilePageStates
   }
-
 });

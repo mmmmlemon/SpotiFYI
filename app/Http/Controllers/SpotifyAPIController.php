@@ -68,4 +68,29 @@ class SpotifyAPIController extends Controller
         else
         { return false; }
     }
+
+    //посчитать количество треков в библиотеке пользователя
+    public function getSpotifyTrackCount(Request $request)
+    {
+        $checkToken = Globals::checkSpotifyAccessToken($request);
+
+        if($checkToken != false)
+        {
+            $api = config('spotify_api');
+            $options = ['limit' => 50, 'offset' => 0];
+            $spotifyMyTracks = $api->getMySavedTracks($options)->items;
+            $spotifyTrackCount = 0;
+            
+            while(count($spotifyMyTracks) > 0)
+            {
+                $options['offset'] += 50;
+                $spotifyTrackCount += count($spotifyMyTracks);
+                $spotifyMyTracks = $api->getMySavedTracks($options)->items;
+            }
+
+            return response()->json($spotifyTrackCount);
+        }
+        else
+        { return false; }
+    }
 }

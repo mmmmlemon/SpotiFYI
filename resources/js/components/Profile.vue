@@ -48,7 +48,6 @@
           
                 </div>
                 <div class="col-md-8">
-                         <Loader/>
                         <router-view></router-view>
                 </div>
             </div>
@@ -60,7 +59,8 @@
 <script>
 export default {
     beforeCreate(){
-        this.$store.dispatch('getSpotifyProfile')
+        //получить профиль
+        this.$store.dispatch('getSpotifyProfile');
     }
 }
 </script>
