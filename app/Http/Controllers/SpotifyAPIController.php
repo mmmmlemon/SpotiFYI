@@ -93,4 +93,29 @@ class SpotifyAPIController extends Controller
         else
         { return false; }
     }
+
+    //посчитать количество альбомов в библиотеке
+    public function getSpotifyAlbumCount(Request $request)
+    {
+        $checkToken = Globals::checkSpotifyAccessToken($request);
+
+        if($checkToken != false)
+        {
+            $api = config('spotify_api');
+            $options = ['limit' => 50, 'offset' => 0];
+            $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
+            $spotifyAlbumCount = 0;
+
+            while(count($spotifyMyAlbums) > 0)
+            {
+                $options['offset'] += 50;
+                $spotifyAlbumCount += count($spotifyMyAlbums);
+                $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
+            }
+
+            return response()->json($spotifyAlbumCount);
+        }
+        else
+        { return false; }
+    }
 }

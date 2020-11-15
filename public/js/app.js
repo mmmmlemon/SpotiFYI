@@ -2082,9 +2082,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    errorMessage: String
+    errorMessage: String,
+    type: {
+      "default": 'normal',
+      type: String
+    }
   }
 });
 
@@ -2224,15 +2233,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
-    //получить кол-во треков в библиотеке
+    //получить кол-во треков и альбомов в библиотеке
     this.$store.dispatch('getSpotifyTrackCount');
+    this.$store.dispatch('getSpotifyAlbumCount');
   },
   computed: {
     //кол-во треков в библиотеке
     spotifyTrackCount: function spotifyTrackCount() {
-      return this.$store.getters.getSpotifyTrackCount;
+      return this.$store.state.profilePage.spotifyTrackCount;
+    },
+    spotifyAlbumCount: function spotifyAlbumCount() {
+      return this.$store.state.profilePage.spotifyAlbumCount;
     }
   }
 });
@@ -38182,21 +38215,35 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "bounce_in_anim" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("h4", [_vm._v(_vm._s(_vm.errorMessage))])
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("h6", { staticClass: "row justify-content-center" }, [
-        _vm._v("Зайдите попозже или попробуйте еще раз")
-      ])
-    ])
+    _vm.type == "normal"
+      ? _c("div", { staticClass: "bounce_in_anim" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("h4", [_vm._v(_vm._s(_vm.errorMessage))])
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("h6", { staticClass: "row justify-content-center" }, [
+            _vm._v("Зайдите попозже или попробуйте еще раз")
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.type == "small"
+      ? _c("div", { staticClass: "fade_in_anim" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("h6", [_vm._v(_vm._s(_vm.errorMessage))])
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -38216,6 +38263,24 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center" }, [
       _c("h5", { staticClass: "error" }, [_vm._v("Ошибка")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("h6", { staticClass: "warning_icon" }, [
+        _c("i", { staticClass: "fas fa-exclamation-triangle" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("h6", { staticClass: "error" }, [_vm._v("Ошибка")])
     ])
   }
 ]
@@ -38485,73 +38550,115 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.spotifyTrackCount === false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                errorMessage: "Не удалось загрузить данные пользователя"
-              }
-            })
-          ],
-          1
-        )
-      : _vm._e(),
+  return _c("div", { staticClass: "row" }, [
+    _vm._m(0),
     _vm._v(" "),
-    _vm.spotifyTrackCount !== false
-      ? _c("div", [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm.spotifyTrackCount == -1
-            ? _c("div", [_c("Loader")], 1)
-            : _vm.spotifyTrackCount >= 50
-            ? _c("div", { staticClass: "fade_in_anim" }, [
-                _c("p", [
-                  _vm._v("Треков в библиотеке - "),
-                  _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
-                ]),
-                _vm._v(" "),
-                _vm.spotifyTrackCount > 5000
-                  ? _c("p", [
-                      _vm._v(
-                        _vm._s(_vm.spotifyTrackCount) +
-                          "? Такое вообще возможно? Круть! 👍"
-                      )
-                    ])
-                  : _vm.spotifyTrackCount > 1000
-                  ? _c("p", [_vm._v("Ого как много! Да ты меломан! 😏")])
-                  : _vm.spotifyTrackCount >= 500
-                  ? _c("p", [_vm._v("Впечатляет! 😉")])
-                  : _vm.spotifyTrackCount >= 100
-                  ? _c("p", [_vm._v("Неплохо! 😌")])
-                  : _vm.spotifyTrackCount >= 50
-                  ? _c("p", [_vm._v("Нормально! Но лучше больше. 🤨")])
-                  : _vm._e()
-              ])
-            : _vm.spotifyTrackCount < 50
-            ? _c("div", [
-                _c("p", [
-                  _vm._v("Треков в библиотеке - "),
-                  _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "Мало треков. Что мне анализировать? Приходи назад когда добавишь чего-нибудь!"
-                  )
+    _c("div", { staticClass: "col-md-4" }, [
+      _vm.spotifyTrackCount == false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить данные по трекам"
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.spotifyTrackCount != false
+        ? _c("div", [
+            _vm.spotifyTrackCount == -1
+              ? _c("div", [_c("Loader")], 1)
+              : _vm.spotifyTrackCount >= 50
+              ? _c("div", { staticClass: "fade_in_anim" }, [
+                  _c("p", [
+                    _vm._v("Треков в библиотеке - "),
+                    _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
+                  ]),
+                  _vm._v(" "),
+                  _vm.spotifyTrackCount > 5000
+                    ? _c("p", [
+                        _vm._v(
+                          _vm._s(_vm.spotifyTrackCount) +
+                            "? Такое вообще возможно? Круть! 👍"
+                        )
+                      ])
+                    : _vm.spotifyTrackCount > 1000
+                    ? _c("p", [_vm._v("Ого как много! Да ты меломан! 😏")])
+                    : _vm.spotifyTrackCount >= 500
+                    ? _c("p", [_vm._v("Впечатляет! 😉")])
+                    : _vm.spotifyTrackCount >= 100
+                    ? _c("p", [_vm._v("Неплохо! 😌")])
+                    : _vm.spotifyTrackCount >= 50
+                    ? _c("p", [_vm._v("Нормально! Но лучше больше. 🤨")])
+                    : _vm._e()
                 ])
-              ])
-            : _c(
-                "div",
-                [
-                  _c("Error", { attrs: { errorMessage: "Неизвестная ошибка" } })
-                ],
-                1
-              )
-        ])
-      : _vm._e()
+              : _vm.spotifyTrackCount < 50
+              ? _c("div", [
+                  _c("p", [
+                    _vm._v("Треков в библиотеке - "),
+                    _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Мало треков. Что мне анализировать? Приходи назад когда добавишь чего-нибудь!"
+                    )
+                  ])
+                ])
+              : _c(
+                  "div",
+                  [
+                    _c("Error", {
+                      attrs: {
+                        type: "small",
+                        errorMessage: "Неизвестная ошибка"
+                      }
+                    })
+                  ],
+                  1
+                )
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-4" }, [
+      _vm.spotifyAlbumCount == false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить данные по альбомам"
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.spotifyAlbumCount != false
+        ? _c("div", [
+            _vm.spotifyAlbumCount == -1
+              ? _c("div", [_c("Loader")], 1)
+              : _vm.spotifyAlbumCount > 0
+              ? _c("div", { staticClass: "fade_in_anim" }, [
+                  _c("p", [
+                    _vm._v("Альбомов в библиотеке - "),
+                    _c("b", [_vm._v(_vm._s(_vm.spotifyAlbumCount))])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("subtitle")])
+                ])
+              : _vm._e()
+          ])
+        : _vm._e()
+    ])
   ])
 }
 var staticRenderFns = [
@@ -38559,10 +38666,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", [
-      _c("b", [_vm._v("Общая информация")]),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-chart-bar primary_color" })
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("h5", [
+        _c("b", [_vm._v("Общая информация")]),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-chart-bar primary_color" })
+      ])
     ])
   }
 ]
@@ -56053,12 +56162,10 @@ var HomePageStates = {
 var ProfilePageStates = {
   state: {
     spotifyProfile: -1,
-    spotifyTrackCount: -1
+    spotifyTrackCount: -1,
+    spotifyAlbumCount: -1
   },
-  getters: {
-    getSpotifyTrackCount: function getSpotifyTrackCount(state) {
-      return state.spotifyTrackCount;
-    }
+  getters: {//геттеры
   },
   mutations: {
     //получить профиль
@@ -56074,6 +56181,13 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
         state.spotifyTrackCount = response.data;
       });
+    },
+    //получить кол-во альбомов в библиотеке
+    getSpotifyAlbumCount: function getSpotifyAlbumCount(state) {
+      var uri = '/api/get_spotify_album_count';
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
+        state.spotifyAlbumCount = response.data;
+      });
     }
   },
   actions: {
@@ -56084,6 +56198,10 @@ var ProfilePageStates = {
     //получить кол-во треков в библиотеке
     getSpotifyTrackCount: function getSpotifyTrackCount(context) {
       context.commit('getSpotifyTrackCount');
+    },
+    //получить кол-во альбомов в библиотеке
+    getSpotifyAlbumCount: function getSpotifyAlbumCount(context) {
+      context.commit('getSpotifyAlbumCount');
     }
   }
 };

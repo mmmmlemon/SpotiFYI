@@ -67,12 +67,11 @@ const ProfilePageStates = {
     state: {
         spotifyProfile: -1,
         spotifyTrackCount: -1,
+        spotifyAlbumCount: -1,
       },
 
     getters:{
-      getSpotifyTrackCount: state => {
-        return state.spotifyTrackCount;
-      }
+      //геттеры
     },
 
     mutations: {
@@ -90,6 +89,13 @@ const ProfilePageStates = {
             state.spotifyTrackCount = response.data;
           });
         },
+        //получить кол-во альбомов в библиотеке
+        getSpotifyAlbumCount(state){
+          let uri = '/api/get_spotify_album_count';
+          axios.get(uri).then((response) => {
+            state.spotifyAlbumCount = response.data;
+           });
+        },
     },
 
     actions: {
@@ -100,7 +106,11 @@ const ProfilePageStates = {
       //получить кол-во треков в библиотеке
       getSpotifyTrackCount(context){
         context.commit('getSpotifyTrackCount');
-      }
+      },
+       //получить кол-во альбомов в библиотеке
+       getSpotifyAlbumCount(context){
+         context.commit('getSpotifyAlbumCount');
+       }
     }
 }
 
