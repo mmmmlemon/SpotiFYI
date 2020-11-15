@@ -1966,9 +1966,13 @@ __webpack_require__.r(__webpack_exports__);
       site_name: false
     };
   },
+  computed: {
+    siteInfo: function siteInfo() {
+      return this.$store.state.homePage.siteInfo;
+    }
+  },
   created: function created() {
     this.$store.dispatch('getSiteInfo');
-    this.site_name = this.$store.state.homePage.siteTitle;
   },
   mounted: function mounted() {
     console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'About\' component mounted');
@@ -37939,7 +37943,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    this.$store.state.homePage.siteInfo == false
+    _vm.siteInfo == false
       ? _c(
           "div",
           { staticClass: "container bounce_in_anim loader_div" },
@@ -37950,16 +37954,14 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
-        this.$store.state.homePage.siteInfo != false
+        _vm.siteInfo != false
           ? _c("h1", { staticClass: "fade_in_anim" }, [
-              _c("b", [
-                _vm._v(_vm._s(this.$store.state.homePage.siteInfo.siteTitle))
-              ])
+              _c("b", [_vm._v(_vm._s(_vm.siteInfo.siteTitle))])
             ])
           : _vm._e()
       ]),
       _vm._v(" "),
-      this.$store.state.homePage.siteInfo != false
+      _vm.siteInfo != false
         ? _c("div", { staticClass: "row justify-content-center" }, [
             _c("img", {
               staticClass: "fade_in_anim bounce_in_anim",
@@ -37968,19 +37970,19 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      this.$store.state.homePage.siteInfo != false
+      _vm.siteInfo != false
         ? _c("div", { staticClass: "row justify-content-center" }, [
             _c("h4", { staticClass: "fade_in_anim" }, [
-              _vm._v(_vm._s(this.$store.state.homePage.siteInfo.version))
+              _vm._v(_vm._s(_vm.siteInfo.version))
             ])
           ])
         : _vm._e(),
       _vm._v(" "),
-      this.$store.state.homePage.siteInfo != false
+      _vm.siteInfo != false
         ? _c("hr", { staticClass: "fade_in_anim" })
         : _vm._e(),
       _vm._v(" "),
-      this.$store.state.homePage.siteInfo != false
+      _vm.siteInfo != false
         ? _c(
             "div",
             { staticClass: "row justify-content-center fade_in_anim" },
@@ -37988,7 +37990,7 @@ var render = function() {
               _c("p", [
                 _vm._v(
                   "\n                " +
-                    _vm._s(this.$store.state.homePage.siteInfo.aboutText) +
+                    _vm._s(_vm.siteInfo.aboutText) +
                     "\n            "
                 )
               ])
