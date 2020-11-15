@@ -2021,7 +2021,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    loggedIn: function loggedIn() {
+      return this.$store.state.homePage.loggedIn;
+    },
+    spotifyUsername: function spotifyUsername() {
+      return this.$store.state.homePage.spotifyUsername;
+    },
+    spotifyUserTracksCount: function spotifyUserTracksCount() {
+      return this.$store.state.homePage.spotifyUserTracksCount;
+    },
+    trackWord: function trackWord() {
+      return this.spotifyUserTracksCount;
+    }
+  },
   mounted: function mounted() {
     console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'Welcome\' component mounted');
   }
@@ -37998,7 +38026,7 @@ var render = function() {
         "div",
         {
           staticClass: "col-md-8 fade_in_anim",
-          class: { invisible: this.$store.state.homePage.loggedIn },
+          class: { invisible: _vm.loggedIn },
           attrs: { width: "20%;" }
         },
         [
@@ -38008,58 +38036,23 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1024px-Laravel.svg.png",
-              width: "100px",
-              alt: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png",
-              width: "100px",
-              alt: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("img", {
-            attrs: {
-              src:
-                "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg",
-              width: "100px",
-              alt: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
           _c("br")
         ]
       ),
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass: "col-md-8",
-          class: { invisible: !this.$store.state.homePage.loggedIn }
-        },
+        { staticClass: "col-md-8", class: { invisible: !_vm.loggedIn } },
         [
-          this.$store.state.homePage.spotifyUsername != false
+          _vm.spotifyUsername != false
             ? _c("h1", { staticClass: "fade_in_anim" }, [
                 _vm._v("Привет, "),
-                _c("b", [
-                  _vm._v(_vm._s(this.$store.state.homePage.spotifyUsername))
-                ]),
+                _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
                 _vm._v("!")
               ])
             : _vm._e(),
           _vm._v(" "),
-          this.$store.state.homePage.spotifyUserTracksCount == -1 &&
-          this.$store.state.homePage.loggedIn == true
+          _vm.spotifyUserTracksCount == -1 && _vm.loggedIn == true
             ? _c(
                 "div",
                 { staticClass: "container bounce_in_anim" },
@@ -38068,55 +38061,43 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          this.$store.state.homePage.spotifyUserTracksCount != -1
+          _vm.spotifyUserTracksCount != -1
             ? _c("div", { staticClass: "fade_in_anim" }, [
-                this.$store.state.homePage.spotifyUserTracksCount >= 150
+                _vm.spotifyUserTracksCount >= 150
                   ? _c("h3", [
                       _vm._v(
-                        "В твоей библиотеке более чем достаточно треков для анализа "
+                        "\n                    В твоей библиотеке более чем достаточно треков для анализа "
                       ),
                       _c("i", {
                         staticClass: "fas fa-heart primary_color heartbeat_anim"
                       })
                     ])
-                  : this.$store.state.homePage.spotifyUserTracksCount >= 50
+                  : _vm.spotifyUserTracksCount >= 50
                   ? _c("h4", [
                       _vm._v(
-                        "Нормалёк! 😉 В твоей библиотеке " +
-                          _vm._s(
-                            this.$store.state.homePage.spotifyUserTracksCount
-                          ) +
-                          " треков"
+                        "\n                    В твоей библиотеке достаточно треков для анализа! 😉\n                "
                       )
                     ])
-                  : this.$store.state.homePage.spotifyUserTracksCount >= 10
+                  : _vm.spotifyUserTracksCount >= 10
                   ? _c("h4", [
-                      _vm._v(
-                        _vm._s(
-                          this.$store.state.homePage.spotifyUserTracksCount
-                        ) + " треков? Маловато будет! "
-                      ),
+                      _vm._v("\n                    Ай! Маловато будет! "),
                       _c("img", {
                         attrs: { src: "/img/malovato_budet.png", width: "50px" }
                       })
                     ])
-                  : this.$store.state.homePage.spotifyUserTracksCount < 10 &&
-                    this.$store.state.homePage.spotifyUserTracksCount > 0
+                  : _vm.spotifyUserTracksCount < 10 &&
+                    _vm.spotifyUserTracksCount > 0
                   ? _c("h4", [
                       _vm._v(
-                        "Что-то тут пусто, всего " +
-                          _vm._s(
-                            this.$store.state.homePage.spotifyUserTracksCount
-                          ) +
-                          " треков... 😳"
+                        "\n                    Ой, что-то тут пусто... 😳\n                "
                       )
                     ])
-                  : this.$store.state.homePage.spotifyUserTracksCount == 0
+                  : _vm.spotifyUserTracksCount == 0
                   ? _c("h4", [
                       _vm._v(
-                        _vm._s(
-                          this.$store.state.homePage.spotifyUserTracksCount
-                        ) + " песен? bruh... "
+                        "\n                    " +
+                          _vm._s(_vm.spotifyUserTracksCount) +
+                          " песен? bruh... "
                       ),
                       _c("img", {
                         attrs: { src: "/img/bruh.png", width: "50px" }
@@ -38124,21 +38105,32 @@ var render = function() {
                     ])
                   : _c("h3"),
                 _vm._v(" "),
-                this.$store.state.homePage.spotifyUserTracksCount < 50
+                _vm.spotifyUserTracksCount < 50 &&
+                _vm.spotifyUserTracksCount > 0
                   ? _c("h5", [
                       _vm._v(
-                        "Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (минимум: 50)"
+                        "\n                    Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: " +
+                          _vm._s(_vm.spotifyUserTracksCount) +
+                          ", нужно: 50).\n                "
+                      )
+                    ])
+                  : _vm.spotifyUserTracksCount == 0
+                  ? _c("h5", [
+                      _vm._v(
+                        "\n                   Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                "
                       )
                     ])
                   : _c(
                       "h5",
                       { staticClass: "fade_in_anim_500" },
                       [
-                        _vm._v("Перейди в "),
+                        _vm._v("\n                    Перейди в "),
                         _c("router-link", { attrs: { to: "/profile" } }, [
                           _vm._v("свой профиль")
                         ]),
-                        _vm._v(" чтобы просмотреть статистику")
+                        _vm._v(
+                          " чтобы просмотреть статистику\n                "
+                        )
                       ],
                       1
                     ),

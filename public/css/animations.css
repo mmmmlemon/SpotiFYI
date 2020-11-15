@@ -22,6 +22,10 @@
   animation: heartbeat 2s ease-in-out;
 }
 
+.malovato_budet_anim{
+  animation: malovato_budet 2s ease-in-out;
+}
+
 /* спиннер - загрузка */
 .lds-facebook {
   display: inline-block;
