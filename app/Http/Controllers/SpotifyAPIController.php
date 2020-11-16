@@ -94,6 +94,65 @@ class SpotifyAPIController extends Controller
         { return false; }
     }
 
+    //получить последние 5 треков
+    public function getSpotifyLastFive(Request $request, $entity)
+    {
+        $checkToken = Globals::checkSpotifyAccessToken($request);
+
+        if($checkToken != false)
+        {
+            $api = config('spotify_api');
+            $options = ['limit' => 5, 'offset' => 0];
+
+            $spotifyLastFive = [];
+
+            if($entity == "tracks")
+            { $spotifyLastFive = $api->getMySavedTracks($options)->items; }
+            else if($entity == "albums")
+            { $spotifyLastFive = $api->getMySavedAlbums($options)->items; }
+            
+            $lastFive = [];
+
+            foreach($spotifyLastFive as $item)
+            {   
+                $current_item = [];
+
+                if($entity == "tracks")
+                { $current_item = $item->track; }
+                else
+                { $current_item = $item->album; }
+                
+                $artists = "";
+
+                for($i = 1; $i <= count($current_item->artists); $i++)
+                {
+                    if($i != count($current_item->artists) && count($current_item->artists) > 1)
+                    { $artists .= $current_item->artists[$i-1]->name . ", ";}
+                    else
+                    { $artists .= $current_item->artists[$i-1]->name; }
+
+                    $artists .= " - " . $current_item->name;
+                }
+                
+                $cover = "";
+
+                if($entity == "tracks")
+                {  $cover = $current_item->album->images[2]->url; }
+                else if ($entity == "albums")
+                {  $cover = $current_item->images[2]->url; }
+
+                array_push($lastFive, ['cover' => $cover,
+                                        'name' => $artists, 
+                                        'url' => $current_item->external_urls->spotify,
+                                        'id' => $current_item->id]);                       
+            }
+
+            return response()->json($lastFive);
+        }
+        else
+        { return false; }
+    }
+
     //посчитать количество альбомов в библиотеке
     public function getSpotifyAlbumCount(Request $request)
     {

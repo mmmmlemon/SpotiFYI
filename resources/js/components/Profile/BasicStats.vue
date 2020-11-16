@@ -12,13 +12,27 @@
                 <div v-if="spotifyTrackCount == -1">
                     <Loader />
                 </div>
-                <div class="fade_in_anim" v-else-if="spotifyTrackCount >= 50">
-                    <p>Треков в библиотеке - <b>{{spotifyTrackCount}}</b> </p>
-                    <p v-if="spotifyTrackCount > 5000">{{spotifyTrackCount}}? Такое вообще возможно? Круть! 👍</p>
-                    <p v-else-if="spotifyTrackCount > 1000">Ого как много! Да ты меломан! 😏</p>
-                    <p v-else-if="spotifyTrackCount >= 500">Впечатляет! 😉</p>
-                    <p v-else-if="spotifyTrackCount >= 100">Неплохо! 😌</p>
-                    <p v-else-if="spotifyTrackCount >= 50">Нормально! Но лучше больше. 🤨</p>
+                <div v-else-if="spotifyTrackCount >= 50" class="fade_in_anim">
+                    <p>Треков в библиотеке - <b>{{spotifyTrackCount}}</b></p>
+                    <div class="col-md-12">
+                        <p style="font-size: 10pt;">Последние добавленные треки</p>
+                    </div>
+                    <div v-if="spotifyLastFiveTracks == false">
+                        <Error type="x-small" errorMessage="Не удалось загрузить треки"/>
+                    </div>
+                    <div v-else-if="spotifyLastFiveTracks == -1">
+                        <Loader />
+                    </div>
+                    <div v-else-if="spotifyLastFiveTracks.length > 0" class="col-md-12 fade_in_anim">  
+                         <div class="row">
+                            <div data-toggle="tooltip" :data-title="track.name" data-placement="bottom" class="col-md-2" 
+                                v-for="track in spotifyLastFiveTracks" :key="track.id">
+                                <a :href="track.url" target="_blank">
+                                    <img class="rounded-circle album_icon" :src="track.cover" style="width:80%; margin:5px;">
+                                </a>
+                            </div>
+                         </div>
+                    </div>  
                 </div>
                 <div v-else-if="spotifyTrackCount < 50">
                     <p>Треков в библиотеке - <b>{{spotifyTrackCount}}</b> </p>
@@ -39,11 +53,36 @@
                     <Loader />
                 </div>
                 <div class="fade_in_anim" v-else-if="spotifyAlbumCount > 0">
-                     <p>Альбомов в библиотеке - <b>{{spotifyAlbumCount}}</b></p>
-                     <p>subtitle</p>
+                    <p>Альбомов в библиотеке - <b>{{spotifyAlbumCount}}</b></p>
+                    <!-- last 5 albums -->
+                    <div v-if="spotifyLastFiveAlbums == false">
+                        <Error type="x-small" errorMessage="Не удалось загрузить альбомы"/>
+                    </div>
+                    <div v-else-if="spotifyLastFiveAlbums == -1">
+                        <Loader />
+                    </div>
+                    <div v-else-if="spotifyLastFiveAlbums != -1" class="col-md-12 fade_in_anim">
+                        <p style="font-size: 10pt;">Последние добавленные альбомы</p>
+                        <div class="col-md-12">  
+                            <div class="row">
+                                <div data-toggle="tooltip" :data-title="album.name" data-placement="bottom" class="col-md-2" 
+                                    v-for="album in spotifyLastFiveAlbums" :key="album.id">
+                                    <a :href="album.url" target="_blank">
+                                        <img class="rounded-circle album_icon" :src="album.cover" style="width:80%; margin:5px;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    <div v-else-if="spotifyLastFiveAlbums === 0">
+                    <p>Альбомов в библиотеке - <b>{{spotifyAlbumCount}}</b> </p>
+                        <p>Мало альбомов. Добавь чего-нибудь!</p>
+                    </div>
+                    <div v-else>
+                        <Error type="small" errorMessage = "Неизвестная ошибка"/>
+                    </div> 
                 </div>
             </div>
-   
         </div>
     </div>
 </template>
@@ -51,19 +90,30 @@
 <script>
 export default {
     beforeCreate(){
+        //получить последние 5 альбомов и треков
+        this.$store.dispatch('getSpotifyLastFive', "tracks");
+        this.$store.dispatch('getSpotifyLastFive', "albums");
         //получить кол-во треков и альбомов в библиотеке
         this.$store.dispatch('getSpotifyTrackCount');
         this.$store.dispatch('getSpotifyAlbumCount');
-
     },
     computed: {
         //кол-во треков в библиотеке
         spotifyTrackCount: function() {
             return this.$store.state.profilePage.spotifyTrackCount;
         },
+        //последние 5 треков
+        spotifyLastFiveTracks: function(){
+            return this.$store.state.profilePage.spotifyLastFiveTracks;
+        },
+        //кол-во альбомов в библиотеке
         spotifyAlbumCount: function(){
             return this.$store.state.profilePage.spotifyAlbumCount;
-        }
+        },
+        //последние 5 альбомов
+        spotifyLastFiveAlbums: function(){
+            return this.$store.state.profilePage.spotifyLastFiveAlbums;
+        },
     }
 }
 </script>

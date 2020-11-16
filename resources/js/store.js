@@ -68,6 +68,8 @@ const ProfilePageStates = {
         spotifyProfile: -1,
         spotifyTrackCount: -1,
         spotifyAlbumCount: -1,
+        spotifyLastFiveTracks: -1,
+        spotifyLastFiveAlbums: -1,
       },
 
     getters:{
@@ -96,6 +98,23 @@ const ProfilePageStates = {
             state.spotifyAlbumCount = response.data;
            });
         },
+        //последние 5 треков
+        getSpotifyLastFive(state, entity){
+          let uri = '/api/get_spotify_last_five/'+entity;
+          
+            if(entity == "tracks")
+            {
+                axios.get(uri).then((response) => {
+                  state.spotifyLastFiveTracks = response.data;
+              });
+            }
+            else if(entity == "albums")
+            {
+                axios.get(uri).then((response) => {
+                  state.spotifyLastFiveAlbums = response.data;
+              });
+            }
+       },
     },
 
     actions: {
@@ -107,10 +126,14 @@ const ProfilePageStates = {
       getSpotifyTrackCount(context){
         context.commit('getSpotifyTrackCount');
       },
-       //получить кол-во альбомов в библиотеке
-       getSpotifyAlbumCount(context){
-         context.commit('getSpotifyAlbumCount');
-       }
+      //получить кол-во альбомов в библиотеке
+      getSpotifyAlbumCount(context){
+        context.commit('getSpotifyAlbumCount');
+      },
+      //последние 5 треков
+      getSpotifyLastFive(context, entity){
+        context.commit('getSpotifyLastFive', entity);
+      }
     }
 }
 

@@ -74,3 +74,10 @@
     border-color:#1b77b9;
     width: 140pt;
 }
+
+.album_icon:hover{
+    border-style: solid;
+    border-color: #1b77b9;
+    border-width: 2px;
+    transform: scale(1.2);
+}
