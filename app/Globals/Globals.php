@@ -37,6 +37,7 @@
                                 'playlist-read-private',
                                 'user-read-private',
                                 'user-library-read',
+                                'user-follow-read',
                             ],
                         ];
 

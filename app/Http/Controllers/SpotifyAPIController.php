@@ -177,4 +177,65 @@ class SpotifyAPIController extends Controller
         else
         { return false; }
     }
+
+    //получить подписки
+    public function getSpotifyArtists(Request $request)
+    {
+        $checkToken = Globals::checkSpotifyAccessToken($request);
+
+        if($checkToken != null)
+        {
+            $api = config('spotify_api');
+            $spotifyMyArtists = $api->getUserFollowedArtists(['limit' => 50])->artists->items;
+            $spotifyArtistsCount = 0;
+
+            while(count($spotifyMyArtists) > 0)
+            {
+                $options = ['limit' => 50, 'after' => $spotifyMyArtists[count($spotifyMyArtists) - 1]->id];
+                $spotifyArtistsCount += count($spotifyMyArtists);
+                $spotifyMyArtists = $api->getUserFollowedArtists($options)->artists->items;
+            }
+
+            return response()->json($spotifyArtistsCount);
+        }
+        else
+        { return false; }
+    }
+
+    //5 случайных исполнителей из подписок
+    public function getSpotifyFiveArtists(Request $request)
+    {
+        $checkToken = Globals::checkSpotifyAccessToken($request);
+
+        if($checkToken != null)
+        {
+            $api = config('spotify_api');
+            $spotifyMyArtists = $api->getUserFollowedArtists(['limit' => 50])->artists->items;
+            $fiveArtists = [];
+
+            //использованные индексы элемента массива
+            $usedNumbers = [];
+
+            //пока не наберется 5 исполнителей
+            while(count($fiveArtists) <= 4)
+            {   
+                //генерим рандомное числов, это будет индекс исполнителя в массиве с ними
+                $randomNumber = rand(0,count($spotifyMyArtists)-1);
+                //если индекс еще не был использован
+                if(array_search($randomNumber, $usedNumbers) == false)
+                {   
+                    //добавляем индекс в массив и добавляем исполнителя
+                    array_push($usedNumbers, $randomNumber);
+                    array_push($fiveArtists, ['name' => $spotifyMyArtists[$randomNumber]->name,
+                                                'cover' => $spotifyMyArtists[$randomNumber]->images[count($spotifyMyArtists[$randomNumber]->images)-1]->url,
+                                                'url' => $spotifyMyArtists[$randomNumber]->external_urls->spotify,
+                                                'id' => $spotifyMyArtists[$randomNumber]->id]);
+                }
+            }   
+
+            return response()->json($fiveArtists);
+        }
+        else
+        { return false; }
+    }
 }

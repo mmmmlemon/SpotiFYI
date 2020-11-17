@@ -2300,9 +2300,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
-    //получить последние 5 альбомов и треков
+    //получить подписки
+    this.$store.dispatch('getSpotifyArtistsCount');
+    this.$store.dispatch('getSpotifyFiveArtists'); //получить последние 5 альбомов и треков
+
     this.$store.dispatch('getSpotifyLastFive', "tracks");
     this.$store.dispatch('getSpotifyLastFive', "albums"); //получить кол-во треков и альбомов в библиотеке
 
@@ -2323,6 +2360,13 @@ __webpack_require__.r(__webpack_exports__);
     spotifyAlbumCount: function spotifyAlbumCount() {
       // return this.$store.state.profilePage.spotifyAlbumCount;
       return 50;
+    },
+    //кол-во подписок
+    spotifyArtistsCount: function spotifyArtistsCount() {
+      return this.$store.state.profilePage.spotifyArtistsCount;
+    },
+    spotifyFiveArtists: function spotifyFiveArtists() {
+      return this.$store.state.profilePage.spotifyFiveArtists;
     },
     //последние 5 альбомов
     spotifyLastFiveAlbums: function spotifyLastFiveAlbums() {
@@ -38867,6 +38911,99 @@ var render = function() {
                 : _vm._e()
             ])
           : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _vm.spotifyArtistsCount == false
+          ? _c(
+              "div",
+              [
+                _c("Error", {
+                  attrs: {
+                    type: "small",
+                    errorMessage: "Не удалось загрузить подписки"
+                  }
+                })
+              ],
+              1
+            )
+          : _vm.spotifyArtistsCount != false
+          ? _c("div", [
+              _vm.spotifyArtistsCount == -1
+                ? _c("div", [_c("Loader")], 1)
+                : _vm.spotifyArtistsCount > 0
+                ? _c("div", { staticClass: "fade_in_anim" }, [
+                    _c("h5", [
+                      _vm._v("Подписки - "),
+                      _c("b", [_vm._v(_vm._s(_vm.spotifyArtistsCount))])
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.spotifyFiveArtists == false
+                ? _c(
+                    "div",
+                    [
+                      _c("Error", {
+                        attrs: {
+                          type: "x-small",
+                          errorMessage: "Не удалось загрузить подписки"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _vm.spotifyFiveArtists == -1
+                ? _c("div", [_c("Loader")], 1)
+                : _vm.spotifyFiveArtists != -1
+                ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
+                    _c("p", { staticStyle: { "font-size": "10pt" } }, [
+                      _vm._v("Некоторые из твоих подписок")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c(
+                        "div",
+                        { staticClass: "row justify-content-center" },
+                        _vm._l(_vm.spotifyFiveArtists, function(artist) {
+                          return _c(
+                            "div",
+                            {
+                              key: artist.id,
+                              staticClass: "col-2 fade_in_anim",
+                              attrs: {
+                                "data-toggle": "tooltip",
+                                "data-title": artist.name,
+                                "data-placement": "bottom"
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: artist.url, target: "_blank" }
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass: "rounded-circle album_icon",
+                                    staticStyle: {
+                                      width: "80%",
+                                      margin: "5px"
+                                    },
+                                    attrs: { src: artist.cover }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -56386,8 +56523,10 @@ var ProfilePageStates = {
     spotifyProfile: -1,
     spotifyTrackCount: -1,
     spotifyAlbumCount: -1,
+    spotifyArtistsCount: -1,
     spotifyLastFiveTracks: -1,
-    spotifyLastFiveAlbums: -1
+    spotifyLastFiveAlbums: -1,
+    spotifyFiveArtists: -1
   },
   getters: {//геттеры
   },
@@ -56411,6 +56550,20 @@ var ProfilePageStates = {
       var uri = '/api/get_spotify_album_count';
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
         state.spotifyAlbumCount = response.data;
+      });
+    },
+    //кол-во подписок
+    getSpotifyArtistsCount: function getSpotifyArtistsCount(state) {
+      var uri = '/api/get_spotify_artists';
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
+        state.spotifyArtistsCount = response.data;
+      });
+    },
+    //5 случайных исполнителей
+    getSpotifyFiveArtists: function getSpotifyFiveArtists(state) {
+      var uri = '/api/get_spotify_five_artists';
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
+        state.spotifyFiveArtists = response.data;
       });
     },
     //последние 5 треков
@@ -56440,6 +56593,14 @@ var ProfilePageStates = {
     //получить кол-во альбомов в библиотеке
     getSpotifyAlbumCount: function getSpotifyAlbumCount(context) {
       context.commit('getSpotifyAlbumCount');
+    },
+    //кол-во подписок
+    getSpotifyArtistsCount: function getSpotifyArtistsCount(context) {
+      context.commit('getSpotifyArtistsCount');
+    },
+    //5 случайных исполнителей
+    getSpotifyFiveArtists: function getSpotifyFiveArtists(context) {
+      context.commit('getSpotifyFiveArtists');
     },
     //последние 5 треков
     getSpotifyLastFive: function getSpotifyLastFive(context, entity) {

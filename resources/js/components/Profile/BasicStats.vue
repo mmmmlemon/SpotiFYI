@@ -87,6 +87,40 @@
                 </div>
             </div>
         </div>
+        <!-- artists -->
+        <div class="col-md-4">
+            <div v-if="spotifyArtistsCount == false">
+                <Error type="small" errorMessage="Не удалось загрузить подписки"/>
+            </div>
+            <div v-else-if="spotifyArtistsCount != false">
+                <div v-if="spotifyArtistsCount == -1">
+                    <Loader />
+                </div>
+                <div class="fade_in_anim" v-else-if="spotifyArtistsCount > 0">
+                      <h5>Подписки - <b>{{spotifyArtistsCount}}</b></h5>
+                </div>
+                <!--  5 artists -->
+                <div v-if="spotifyFiveArtists == false">
+                    <Error type="x-small" errorMessage="Не удалось загрузить подписки"/>
+                </div>
+                <div v-else-if="spotifyFiveArtists == -1">
+                    <Loader />
+                </div>
+                <div v-else-if="spotifyFiveArtists != -1" class="col-md-12 fade_in_anim">
+                    <p style="font-size: 10pt;">Некоторые из твоих подписок</p>
+                    <div class="col-md-12">  
+                        <div class="row justify-content-center">
+                            <div data-toggle="tooltip" :data-title="artist.name" data-placement="bottom" class="col-2 fade_in_anim" 
+                                v-for="artist in spotifyFiveArtists" :key="artist.id">
+                                <a :href="artist.url" target="_blank">
+                                    <img class="rounded-circle album_icon" :src="artist.cover" style="width:80%; margin:5px;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
     </div>
     <hr>
 </div>
@@ -95,12 +129,17 @@
 <script>
 export default {
     beforeCreate(){
+
+        //получить подписки
+        this.$store.dispatch('getSpotifyArtistsCount');
+        this.$store.dispatch('getSpotifyFiveArtists');
         //получить последние 5 альбомов и треков
         this.$store.dispatch('getSpotifyLastFive', "tracks");
         this.$store.dispatch('getSpotifyLastFive', "albums");
         //получить кол-во треков и альбомов в библиотеке
         this.$store.dispatch('getSpotifyTrackCount');
         this.$store.dispatch('getSpotifyAlbumCount');
+
     },
     computed: {
         //кол-во треков в библиотеке
@@ -116,6 +155,13 @@ export default {
         spotifyAlbumCount: function(){
             // return this.$store.state.profilePage.spotifyAlbumCount;
             return 50;
+        },
+        //кол-во подписок
+        spotifyArtistsCount: function(){
+            return this.$store.state.profilePage.spotifyArtistsCount;
+        },
+        spotifyFiveArtists: function(){
+            return this.$store.state.profilePage.spotifyFiveArtists;
         },
         //последние 5 альбомов
         spotifyLastFiveAlbums: function(){

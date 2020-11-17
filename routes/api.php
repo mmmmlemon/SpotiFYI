@@ -32,4 +32,6 @@ Route::get('/get_spotify_profile', 'SpotifyAPIController@getSpotifyProfile'); //
 Route::get('/get_spotify_track_count', 'SpotifyAPIController@getSpotifyTrackCount'); //получить количество треков в библиотеке
 Route::get('/get_spotify_last_five/{entity}', 'SpotifyAPIController@getSpotifyLastFive'); //получить последние 5 треков
 Route::get('/get_spotify_album_count', 'SpotifyAPIController@getSpotifyAlbumCount'); //получить количество альбомов в библиотеке
+Route::get('/get_spotify_artists', 'SpotifyAPIController@getSpotifyArtists'); //получить подписки на исполнителей
+Route::get('/get_spotify_five_artists', 'SpotifyAPIController@getSpotifyFiveArtists'); //получить 5 случайних исполнителей из подписок
 ?>
