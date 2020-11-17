@@ -144,8 +144,7 @@ export default {
     computed: {
         //кол-во треков в библиотеке
         spotifyTrackCount: function() {
-            // return this.$store.state.profilePage.spotifyTrackCount;
-            return 55;
+            return this.$store.state.profilePage.spotifyTrackCount;
         },
         //последние 5 треков
         spotifyLastFiveTracks: function(){
@@ -153,8 +152,7 @@ export default {
         },
         //кол-во альбомов в библиотеке
         spotifyAlbumCount: function(){
-            // return this.$store.state.profilePage.spotifyAlbumCount;
-            return 50;
+            return this.$store.state.profilePage.spotifyAlbumCount;
         },
         //кол-во подписок
         spotifyArtistsCount: function(){

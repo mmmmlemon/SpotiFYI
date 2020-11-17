@@ -222,7 +222,7 @@ class SpotifyAPIController extends Controller
                 //генерим рандомное числов, это будет индекс исполнителя в массиве с ними
                 $randomNumber = rand(0,count($spotifyMyArtists)-1);
                 //если индекс еще не был использован
-                if(array_search($randomNumber, $usedNumbers) == false)
+                if(array_search($randomNumber, $usedNumbers) === false)
                 {   
                     //добавляем индекс в массив и добавляем исполнителя
                     array_push($usedNumbers, $randomNumber);
