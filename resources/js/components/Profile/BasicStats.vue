@@ -1,4 +1,7 @@
 <template>
+<div>
+
+
     <div class="row">
          <div class="col-md-12">
             <h5><b>Общая информация</b>&nbsp;<i class="fas fa-chart-bar primary_color"></i></h5>
@@ -13,7 +16,7 @@
                     <Loader />
                 </div>
                 <div v-else-if="spotifyTrackCount >= 50" class="fade_in_anim">
-                    <p>Треков в библиотеке - <b>{{spotifyTrackCount}}</b></p>
+                    <h5>Треков в библиотеке - <b>{{spotifyTrackCount}}</b></h5>
                     <div class="col-md-12">
                         <p style="font-size: 10pt;">Последние добавленные треки</p>
                     </div>
@@ -24,8 +27,8 @@
                         <Loader />
                     </div>
                     <div v-else-if="spotifyLastFiveTracks.length > 0" class="col-md-12 fade_in_anim">  
-                         <div class="row">
-                            <div data-toggle="tooltip" :data-title="track.name" data-placement="bottom" class="col-md-2" 
+                         <div class="row justify-content-center">
+                            <div data-toggle="tooltip" :data-title="track.name" data-placement="bottom" class="col-2 fade_in_anim" 
                                 v-for="track in spotifyLastFiveTracks" :key="track.id">
                                 <a :href="track.url" target="_blank">
                                     <img class="rounded-circle album_icon" :src="track.cover" style="width:80%; margin:5px;">
@@ -35,7 +38,7 @@
                     </div>  
                 </div>
                 <div v-else-if="spotifyTrackCount < 50">
-                    <p>Треков в библиотеке - <b>{{spotifyTrackCount}}</b> </p>
+                    <h5>Треков в библиотеке - <b>{{spotifyTrackCount}}</b></h5>
                     <p>Мало треков. Что мне анализировать? Приходи назад когда добавишь чего-нибудь!</p>
                 </div>
                 <div v-else>
@@ -53,7 +56,7 @@
                     <Loader />
                 </div>
                 <div class="fade_in_anim" v-else-if="spotifyAlbumCount > 0">
-                    <p>Альбомов в библиотеке - <b>{{spotifyAlbumCount}}</b></p>
+                    <h5>Альбомов в библиотеке - <b>{{spotifyAlbumCount}}</b></h5>
                     <!-- last 5 albums -->
                     <div v-if="spotifyLastFiveAlbums == false">
                         <Error type="x-small" errorMessage="Не удалось загрузить альбомы"/>
@@ -64,8 +67,8 @@
                     <div v-else-if="spotifyLastFiveAlbums != -1" class="col-md-12 fade_in_anim">
                         <p style="font-size: 10pt;">Последние добавленные альбомы</p>
                         <div class="col-md-12">  
-                            <div class="row">
-                                <div data-toggle="tooltip" :data-title="album.name" data-placement="bottom" class="col-md-2" 
+                            <div class="row justify-content-center">
+                                <div data-toggle="tooltip" :data-title="album.name" data-placement="bottom" class="col-2 fade_in_anim" 
                                     v-for="album in spotifyLastFiveAlbums" :key="album.id">
                                     <a :href="album.url" target="_blank">
                                         <img class="rounded-circle album_icon" :src="album.cover" style="width:80%; margin:5px;">
@@ -75,7 +78,7 @@
                         </div>  
                     </div>
                     <div v-else-if="spotifyLastFiveAlbums === 0">
-                    <p>Альбомов в библиотеке - <b>{{spotifyAlbumCount}}</b> </p>
+                    <h5>Альбомов в библиотеке - <b>{{spotifyAlbumCount}}</b></h5>
                         <p>Мало альбомов. Добавь чего-нибудь!</p>
                     </div>
                     <div v-else>
@@ -85,6 +88,8 @@
             </div>
         </div>
     </div>
+    <hr>
+</div>
 </template>
 
 <script>
@@ -100,7 +105,8 @@ export default {
     computed: {
         //кол-во треков в библиотеке
         spotifyTrackCount: function() {
-            return this.$store.state.profilePage.spotifyTrackCount;
+            // return this.$store.state.profilePage.spotifyTrackCount;
+            return 55;
         },
         //последние 5 треков
         spotifyLastFiveTracks: function(){
@@ -108,7 +114,8 @@ export default {
         },
         //кол-во альбомов в библиотеке
         spotifyAlbumCount: function(){
-            return this.$store.state.profilePage.spotifyAlbumCount;
+            // return this.$store.state.profilePage.spotifyAlbumCount;
+            return 50;
         },
         //последние 5 альбомов
         spotifyLastFiveAlbums: function(){

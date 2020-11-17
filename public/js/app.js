@@ -2295,6 +2295,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить последние 5 альбомов и треков
@@ -2307,7 +2312,8 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     //кол-во треков в библиотеке
     spotifyTrackCount: function spotifyTrackCount() {
-      return this.$store.state.profilePage.spotifyTrackCount;
+      // return this.$store.state.profilePage.spotifyTrackCount;
+      return 55;
     },
     //последние 5 треков
     spotifyLastFiveTracks: function spotifyLastFiveTracks() {
@@ -2315,7 +2321,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     //кол-во альбомов в библиотеке
     spotifyAlbumCount: function spotifyAlbumCount() {
-      return this.$store.state.profilePage.spotifyAlbumCount;
+      // return this.$store.state.profilePage.spotifyAlbumCount;
+      return 50;
     },
     //последние 5 альбомов
     spotifyLastFiveAlbums: function spotifyLastFiveAlbums() {
@@ -38616,185 +38623,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-4" }, [
-      _vm.spotifyTrackCount == false
-        ? _c(
-            "div",
-            [
-              _c("Error", {
-                attrs: {
-                  type: "small",
-                  errorMessage: "Не удалось загрузить данные по трекам"
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e(),
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _vm._m(0),
       _vm._v(" "),
-      _vm.spotifyTrackCount != false
-        ? _c("div", [
-            _vm.spotifyTrackCount == -1
-              ? _c("div", [_c("Loader")], 1)
-              : _vm.spotifyTrackCount >= 50
-              ? _c("div", { staticClass: "fade_in_anim" }, [
-                  _c("p", [
-                    _vm._v("Треков в библиотеке - "),
-                    _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _vm.spotifyLastFiveTracks == false
-                    ? _c(
-                        "div",
-                        [
-                          _c("Error", {
-                            attrs: {
-                              type: "x-small",
-                              errorMessage: "Не удалось загрузить треки"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm.spotifyLastFiveTracks == -1
-                    ? _c("div", [_c("Loader")], 1)
-                    : _vm.spotifyLastFiveTracks.length > 0
-                    ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
-                        _c(
+      _c("div", { staticClass: "col-md-4" }, [
+        _vm.spotifyTrackCount == false
+          ? _c(
+              "div",
+              [
+                _c("Error", {
+                  attrs: {
+                    type: "small",
+                    errorMessage: "Не удалось загрузить данные по трекам"
+                  }
+                })
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.spotifyTrackCount != false
+          ? _c("div", [
+              _vm.spotifyTrackCount == -1
+                ? _c("div", [_c("Loader")], 1)
+                : _vm.spotifyTrackCount >= 50
+                ? _c("div", { staticClass: "fade_in_anim" }, [
+                    _c("h5", [
+                      _vm._v("Треков в библиотеке - "),
+                      _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm.spotifyLastFiveTracks == false
+                      ? _c(
                           "div",
-                          { staticClass: "row" },
-                          _vm._l(_vm.spotifyLastFiveTracks, function(track) {
-                            return _c(
-                              "div",
-                              {
-                                key: track.id,
-                                staticClass: "col-md-2",
-                                attrs: {
-                                  "data-toggle": "tooltip",
-                                  "data-title": track.name,
-                                  "data-placement": "bottom"
-                                }
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: track.url, target: "_blank" }
-                                  },
-                                  [
-                                    _c("img", {
-                                      staticClass: "rounded-circle album_icon",
-                                      staticStyle: {
-                                        width: "80%",
-                                        margin: "5px"
-                                      },
-                                      attrs: { src: track.cover }
-                                    })
-                                  ]
-                                )
-                              ]
-                            )
-                          }),
-                          0
+                          [
+                            _c("Error", {
+                              attrs: {
+                                type: "x-small",
+                                errorMessage: "Не удалось загрузить треки"
+                              }
+                            })
+                          ],
+                          1
                         )
-                      ])
-                    : _vm._e()
-                ])
-              : _vm.spotifyTrackCount < 50
-              ? _c("div", [
-                  _c("p", [
-                    _vm._v("Треков в библиотеке - "),
-                    _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "Мало треков. Что мне анализировать? Приходи назад когда добавишь чего-нибудь!"
-                    )
-                  ])
-                ])
-              : _c(
-                  "div",
-                  [
-                    _c("Error", {
-                      attrs: {
-                        type: "small",
-                        errorMessage: "Неизвестная ошибка"
-                      }
-                    })
-                  ],
-                  1
-                )
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-4" }, [
-      _vm.spotifyAlbumCount == false
-        ? _c(
-            "div",
-            [
-              _c("Error", {
-                attrs: {
-                  type: "small",
-                  errorMessage: "Не удалось загрузить данные по альбомам"
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.spotifyAlbumCount != false
-        ? _c("div", [
-            _vm.spotifyAlbumCount == -1
-              ? _c("div", [_c("Loader")], 1)
-              : _vm.spotifyAlbumCount > 0
-              ? _c("div", { staticClass: "fade_in_anim" }, [
-                  _c("p", [
-                    _vm._v("Альбомов в библиотеке - "),
-                    _c("b", [_vm._v(_vm._s(_vm.spotifyAlbumCount))])
-                  ]),
-                  _vm._v(" "),
-                  _vm.spotifyLastFiveAlbums == false
-                    ? _c(
-                        "div",
-                        [
-                          _c("Error", {
-                            attrs: {
-                              type: "x-small",
-                              errorMessage: "Не удалось загрузить альбомы"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm.spotifyLastFiveAlbums == -1
-                    ? _c("div", [_c("Loader")], 1)
-                    : _vm.spotifyLastFiveAlbums != -1
-                    ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
-                        _c("p", { staticStyle: { "font-size": "10pt" } }, [
-                          _vm._v("Последние добавленные альбомы")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-12" }, [
+                      : _vm.spotifyLastFiveTracks == -1
+                      ? _c("div", [_c("Loader")], 1)
+                      : _vm.spotifyLastFiveTracks.length > 0
+                      ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
                           _c(
                             "div",
-                            { staticClass: "row" },
-                            _vm._l(_vm.spotifyLastFiveAlbums, function(album) {
+                            { staticClass: "row justify-content-center" },
+                            _vm._l(_vm.spotifyLastFiveTracks, function(track) {
                               return _c(
                                 "div",
                                 {
-                                  key: album.id,
-                                  staticClass: "col-md-2",
+                                  key: track.id,
+                                  staticClass: "col-2 fade_in_anim",
                                   attrs: {
                                     "data-toggle": "tooltip",
-                                    "data-title": album.name,
+                                    "data-title": track.name,
                                     "data-placement": "bottom"
                                   }
                                 },
@@ -38803,7 +38693,7 @@ var render = function() {
                                     "a",
                                     {
                                       attrs: {
-                                        href: album.url,
+                                        href: track.url,
                                         target: "_blank"
                                       }
                                     },
@@ -38815,7 +38705,7 @@ var render = function() {
                                           width: "80%",
                                           margin: "5px"
                                         },
-                                        attrs: { src: album.cover }
+                                        attrs: { src: track.cover }
                                       })
                                     ]
                                   )
@@ -38825,33 +38715,162 @@ var render = function() {
                             0
                           )
                         ])
-                      ])
-                    : _vm.spotifyLastFiveAlbums === 0
-                    ? _c("div", [
-                        _c("p", [
-                          _vm._v("Альбомов в библиотеке - "),
-                          _c("b", [_vm._v(_vm._s(_vm.spotifyAlbumCount))])
-                        ]),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Мало альбомов. Добавь чего-нибудь!")])
-                      ])
-                    : _c(
-                        "div",
-                        [
-                          _c("Error", {
-                            attrs: {
-                              type: "small",
-                              errorMessage: "Неизвестная ошибка"
-                            }
-                          })
-                        ],
-                        1
+                      : _vm._e()
+                  ])
+                : _vm.spotifyTrackCount < 50
+                ? _c("div", [
+                    _c("h5", [
+                      _vm._v("Треков в библиотеке - "),
+                      _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "Мало треков. Что мне анализировать? Приходи назад когда добавишь чего-нибудь!"
                       )
-                ])
-              : _vm._e()
-          ])
-        : _vm._e()
-    ])
+                    ])
+                  ])
+                : _c(
+                    "div",
+                    [
+                      _c("Error", {
+                        attrs: {
+                          type: "small",
+                          errorMessage: "Неизвестная ошибка"
+                        }
+                      })
+                    ],
+                    1
+                  )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _vm.spotifyAlbumCount == false
+          ? _c(
+              "div",
+              [
+                _c("Error", {
+                  attrs: {
+                    type: "small",
+                    errorMessage: "Не удалось загрузить данные по альбомам"
+                  }
+                })
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.spotifyAlbumCount != false
+          ? _c("div", [
+              _vm.spotifyAlbumCount == -1
+                ? _c("div", [_c("Loader")], 1)
+                : _vm.spotifyAlbumCount > 0
+                ? _c("div", { staticClass: "fade_in_anim" }, [
+                    _c("h5", [
+                      _vm._v("Альбомов в библиотеке - "),
+                      _c("b", [_vm._v(_vm._s(_vm.spotifyAlbumCount))])
+                    ]),
+                    _vm._v(" "),
+                    _vm.spotifyLastFiveAlbums == false
+                      ? _c(
+                          "div",
+                          [
+                            _c("Error", {
+                              attrs: {
+                                type: "x-small",
+                                errorMessage: "Не удалось загрузить альбомы"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm.spotifyLastFiveAlbums == -1
+                      ? _c("div", [_c("Loader")], 1)
+                      : _vm.spotifyLastFiveAlbums != -1
+                      ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
+                          _c("p", { staticStyle: { "font-size": "10pt" } }, [
+                            _vm._v("Последние добавленные альбомы")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _c(
+                              "div",
+                              { staticClass: "row justify-content-center" },
+                              _vm._l(_vm.spotifyLastFiveAlbums, function(
+                                album
+                              ) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: album.id,
+                                    staticClass: "col-2 fade_in_anim",
+                                    attrs: {
+                                      "data-toggle": "tooltip",
+                                      "data-title": album.name,
+                                      "data-placement": "bottom"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: album.url,
+                                          target: "_blank"
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass:
+                                            "rounded-circle album_icon",
+                                          staticStyle: {
+                                            width: "80%",
+                                            margin: "5px"
+                                          },
+                                          attrs: { src: album.cover }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          ])
+                        ])
+                      : _vm.spotifyLastFiveAlbums === 0
+                      ? _c("div", [
+                          _c("h5", [
+                            _vm._v("Альбомов в библиотеке - "),
+                            _c("b", [_vm._v(_vm._s(_vm.spotifyAlbumCount))])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v("Мало альбомов. Добавь чего-нибудь!")
+                          ])
+                        ])
+                      : _c(
+                          "div",
+                          [
+                            _c("Error", {
+                              attrs: {
+                                type: "small",
+                                errorMessage: "Неизвестная ошибка"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e()
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr")
   ])
 }
 var staticRenderFns = [
