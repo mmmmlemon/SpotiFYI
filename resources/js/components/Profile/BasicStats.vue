@@ -1,20 +1,26 @@
 <template>
 <div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 fade_in_anim">
             <h5>
                 <b>Общая информация</b>&nbsp;
                 <i class="fas fa-chart-bar primary_color"></i>
             </h5>
         </div>
-        <!-- tracks -->
+        <!-- треки -->
         <LastFive :itemCount="spotifyTrackCount" :lastFiveItems="spotifyLastFiveTracks" type="tracks"/>  
-        <!-- albums -->
+        <!-- альбомы -->
         <LastFive :itemCount="spotifyAlbumCount" :lastFiveItems="spotifyLastFiveAlbums" type="albums"/>  
-        <!-- artists -->
+        <!-- исполнители -->
         <LastFive :itemCount="spotifyArtistsCount" :lastFiveItems="spotifyFiveArtists" type="artists"/>  
     </div>
     <hr class="fade_in_anim" v-if="spotifyFiveArtists !== -1 || spotifyLastFiveAlbums != -1 || spotifyLastFiveTracks != -1">
+
+    <!-- часы и время -->
+    <HoursAndMinutes v-if="spotifyFiveArtists !== -1 && spotifyLastFiveAlbums != -1 && spotifyLastFiveTracks != -1" class="fade_in_anim"/>
+    <hr>
+    <!-- что-то еще  -->
+
 </div>
 </template>
 

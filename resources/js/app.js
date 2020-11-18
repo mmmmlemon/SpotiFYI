@@ -20,6 +20,8 @@ Vue.component('Loader', Loader);
 
 import LastFive from './components/Profile/BasicStats/LastFive.vue';
 Vue.component('LastFive', LastFive);
+import HoursAndMinutes from './components/Profile/BasicStats/HoursAndMinutes.vue';
+Vue.component('HoursAndMinutes', HoursAndMinutes);
 
 Vue.use(VueAxios, axios);
 

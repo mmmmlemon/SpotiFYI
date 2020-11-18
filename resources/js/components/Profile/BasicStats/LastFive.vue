@@ -35,7 +35,7 @@
                             <div data-toggle="tooltip" :data-title="item.name" data-placement="bottom" class="col-2 fade_in_anim" 
                                 v-for="item in lastFiveItems" :key="item.id">
                                 <a :href="item.url" target="_blank">
-                                    <img class="rounded-circle album_icon" :src="item.cover" style="width:80%; margin:5px;">
+                                    <img class="rounded-circle album_icon" :src="item.cover" style="">
                                 </a>
                             </div>
                             </div>

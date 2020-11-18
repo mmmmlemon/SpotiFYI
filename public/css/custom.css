@@ -74,6 +74,11 @@
     border-color:#1b77b9;
     width: 140pt;
 }
+
+.album_icon{
+    width:80%; 
+    margin:5px;
+}
                 
 .album_icon:hover{
     border-style: solid;

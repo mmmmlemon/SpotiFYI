@@ -2226,6 +2226,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить подписки
@@ -2264,6 +2270,84 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -38638,58 +38722,214 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "row" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("LastFive", {
-          attrs: {
-            itemCount: _vm.spotifyTrackCount,
-            lastFiveItems: _vm.spotifyLastFiveTracks,
-            type: "tracks"
-          }
-        }),
-        _vm._v(" "),
-        _c("LastFive", {
-          attrs: {
-            itemCount: _vm.spotifyAlbumCount,
-            lastFiveItems: _vm.spotifyLastFiveAlbums,
-            type: "albums"
-          }
-        }),
-        _vm._v(" "),
-        _c("LastFive", {
-          attrs: {
-            itemCount: _vm.spotifyArtistsCount,
-            lastFiveItems: _vm.spotifyFiveArtists,
-            type: "artists"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _vm.spotifyFiveArtists !== -1 ||
-    _vm.spotifyLastFiveAlbums != -1 ||
-    _vm.spotifyLastFiveTracks != -1
-      ? _c("hr", { staticClass: "fade_in_anim" })
-      : _vm._e()
-  ])
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "row" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("LastFive", {
+            attrs: {
+              itemCount: _vm.spotifyTrackCount,
+              lastFiveItems: _vm.spotifyLastFiveTracks,
+              type: "tracks"
+            }
+          }),
+          _vm._v(" "),
+          _c("LastFive", {
+            attrs: {
+              itemCount: _vm.spotifyAlbumCount,
+              lastFiveItems: _vm.spotifyLastFiveAlbums,
+              type: "albums"
+            }
+          }),
+          _vm._v(" "),
+          _c("LastFive", {
+            attrs: {
+              itemCount: _vm.spotifyArtistsCount,
+              lastFiveItems: _vm.spotifyFiveArtists,
+              type: "artists"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.spotifyFiveArtists !== -1 ||
+      _vm.spotifyLastFiveAlbums != -1 ||
+      _vm.spotifyLastFiveTracks != -1
+        ? _c("hr", { staticClass: "fade_in_anim" })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.spotifyFiveArtists !== -1 &&
+      _vm.spotifyLastFiveAlbums != -1 &&
+      _vm.spotifyLastFiveTracks != -1
+        ? _c("HoursAndMinutes", { staticClass: "fade_in_anim" })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("hr")
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
+    return _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
       _c("h5", [
         _c("b", [_vm._v("Общая информация")]),
         _vm._v(" \r\n                "),
         _c("i", { staticClass: "fas fa-chart-bar primary_color" })
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=template&id=77c326ca&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=template&id=77c326ca& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-8" }, [
+        _c("p", [
+          _vm._v("Всего в твою библиотеку добавлено "),
+          _c("b", { staticStyle: { "font-size": "25pt" } }, [
+            _vm._v("100500 минут")
+          ]),
+          _vm._v(" музыки.")
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("В других исчислениях это:")]),
+        _vm._v(" "),
+        _c("p", [_c("b", [_vm._v("Более 1 000 000 ")]), _vm._v(" секунд")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("или "), _c("b", [_vm._v("60 дней")])]),
+        _vm._v(" "),
+        _c("p", [_vm._v("или "), _c("b", [_vm._v("2 месяца")])]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("или "),
+          _c("b", { staticStyle: { "font-size": "18pt" } }, [
+            _vm._v("более 1 года")
+          ]),
+          _vm._v(" музыки")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("p", { staticStyle: { "font-size": "10pt" } }, [
+          _vm._v("Пять твоих саммых длинных песен")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-2" }, [
+            _c("img", {
+              staticClass: "rounded-circle album_icon",
+              attrs: { src: "/black.png", alt: "" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("p", { staticStyle: { "font-size": "10pt" } }, [
+              _vm._v("Band Name - Track Title (15:15)")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-2" }, [
+            _c("img", {
+              staticClass: "rounded-circle album_icon",
+              attrs: { src: "/black.png", alt: "" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("p", { staticStyle: { "font-size": "10pt" } }, [
+              _vm._v("Band Name - Track Title (15:15)")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-2" }, [
+            _c("img", {
+              staticClass: "rounded-circle album_icon",
+              attrs: { src: "/black.png", alt: "" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("p", { staticStyle: { "font-size": "10pt" } }, [
+              _vm._v("Band Name - Track Title (15:15)")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-2" }, [
+            _c("img", {
+              staticClass: "rounded-circle album_icon",
+              attrs: { src: "/black.png", alt: "" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("p", { staticStyle: { "font-size": "10pt" } }, [
+              _vm._v("Band Name - Track Title (15:15)")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-2" }, [
+            _c("img", {
+              staticClass: "rounded-circle album_icon",
+              attrs: { src: "/black.png", alt: "" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("p", { staticStyle: { "font-size": "10pt" } }, [
+              _vm._v("Band Name - Track Title (15:15)")
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-12", staticStyle: { "background-color": "black" } },
+        [_c("h2", [_vm._v("За это время можно было бы *сделать что-нибудь*.")])]
+      )
     ])
   }
 ]
@@ -38882,10 +39122,6 @@ var render = function() {
                                         _c("img", {
                                           staticClass:
                                             "rounded-circle album_icon",
-                                          staticStyle: {
-                                            width: "80%",
-                                            margin: "5px"
-                                          },
                                           attrs: { src: item.cover }
                                         })
                                       ]
@@ -55569,7 +55805,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Misc/Error.vue */ "./resources/js/components/Misc/Error.vue");
 /* harmony import */ var _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Misc/Loader.vue */ "./resources/js/components/Misc/Loader.vue");
 /* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55587,6 +55824,8 @@ Vue.component('Error', _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__["
 Vue.component('Loader', _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 
 Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+Vue.component('HoursAndMinutes', _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -55598,7 +55837,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_6__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_7__["default"]
 });
 
 /***/ }),
@@ -56126,6 +56365,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicStats_vue_vue_type_template_id_21d68382___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicStats_vue_vue_type_template_id_21d68382___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HoursAndMinutes_vue_vue_type_template_id_77c326ca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HoursAndMinutes.vue?vue&type=template&id=77c326ca& */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=template&id=77c326ca&");
+/* harmony import */ var _HoursAndMinutes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HoursAndMinutes.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HoursAndMinutes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _HoursAndMinutes_vue_vue_type_template_id_77c326ca___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HoursAndMinutes_vue_vue_type_template_id_77c326ca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Profile/BasicStats/HoursAndMinutes.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HoursAndMinutes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./HoursAndMinutes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HoursAndMinutes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=template&id=77c326ca&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=template&id=77c326ca& ***!
+  \*******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HoursAndMinutes_vue_vue_type_template_id_77c326ca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./HoursAndMinutes.vue?vue&type=template&id=77c326ca& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue?vue&type=template&id=77c326ca&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HoursAndMinutes_vue_vue_type_template_id_77c326ca___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HoursAndMinutes_vue_vue_type_template_id_77c326ca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
