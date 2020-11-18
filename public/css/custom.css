@@ -81,3 +81,7 @@
     border-width: 2px;
     transform: scale(1.2);
 }
+
+.padding_10{
+    padding:10px;
+}

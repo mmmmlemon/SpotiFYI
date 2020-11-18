@@ -18,6 +18,9 @@ Vue.component('Error', Error);
 import Loader from './components/Misc/Loader.vue';
 Vue.component('Loader', Loader);
 
+import LastFive from './components/Profile/BasicStats/LastFive.vue';
+Vue.component('LastFive', LastFive);
+
 Vue.use(VueAxios, axios);
 
 import router from './router';

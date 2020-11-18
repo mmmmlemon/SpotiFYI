@@ -2226,64 +2226,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  beforeCreate: function beforeCreate() {
+    //получить подписки
+    this.$store.dispatch('getSpotifyArtistsCount');
+    this.$store.dispatch('getSpotifyFiveArtists'); //получить последние 5 альбомов и треков
+
+    this.$store.dispatch('getSpotifyLastFive', "tracks");
+    this.$store.dispatch('getSpotifyLastFive', "albums"); //получить кол-во треков и альбомов в библиотеке
+
+    this.$store.dispatch('getSpotifyTrackCount');
+    this.$store.dispatch('getSpotifyAlbumCount');
+  },
+  computed: {
+    //кол-во треков в библиотеке
+    spotifyTrackCount: function spotifyTrackCount() {
+      return this.$store.state.profilePage.spotifyTrackCount;
+    },
+    //последние 5 треков
+    spotifyLastFiveTracks: function spotifyLastFiveTracks() {
+      return this.$store.state.profilePage.spotifyLastFiveTracks;
+    },
+    //кол-во альбомов в библиотеке
+    spotifyAlbumCount: function spotifyAlbumCount() {
+      return this.$store.state.profilePage.spotifyAlbumCount;
+    },
+    //кол-во подписок
+    spotifyArtistsCount: function spotifyArtistsCount() {
+      return this.$store.state.profilePage.spotifyArtistsCount;
+    },
+    spotifyFiveArtists: function spotifyFiveArtists() {
+      return this.$store.state.profilePage.spotifyFiveArtists;
+    },
+    //последние 5 альбомов
+    spotifyLastFiveAlbums: function spotifyLastFiveAlbums() {
+      return this.$store.state.profilePage.spotifyLastFiveAlbums;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2335,40 +2327,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  beforeCreate: function beforeCreate() {
-    //получить подписки
-    this.$store.dispatch('getSpotifyArtistsCount');
-    this.$store.dispatch('getSpotifyFiveArtists'); //получить последние 5 альбомов и треков
-
-    this.$store.dispatch('getSpotifyLastFive', "tracks");
-    this.$store.dispatch('getSpotifyLastFive', "albums"); //получить кол-во треков и альбомов в библиотеке
-
-    this.$store.dispatch('getSpotifyTrackCount');
-    this.$store.dispatch('getSpotifyAlbumCount');
-  },
-  computed: {
-    //кол-во треков в библиотеке
-    spotifyTrackCount: function spotifyTrackCount() {
-      return this.$store.state.profilePage.spotifyTrackCount;
+  props: {
+    type: {
+      "default": false,
+      string: String
     },
-    //последние 5 треков
-    spotifyLastFiveTracks: function spotifyLastFiveTracks() {
-      return this.$store.state.profilePage.spotifyLastFiveTracks;
+    itemCount: {
+      "default": -1,
+      type: Number
     },
-    //кол-во альбомов в библиотеке
-    spotifyAlbumCount: function spotifyAlbumCount() {
-      return this.$store.state.profilePage.spotifyAlbumCount;
+    lastFiveItems: {
+      "default": -1
     },
-    //кол-во подписок
-    spotifyArtistsCount: function spotifyArtistsCount() {
-      return this.$store.state.profilePage.spotifyArtistsCount;
-    },
-    spotifyFiveArtists: function spotifyFiveArtists() {
-      return this.$store.state.profilePage.spotifyFiveArtists;
-    },
-    //последние 5 альбомов
-    spotifyLastFiveAlbums: function spotifyLastFiveAlbums() {
-      return this.$store.state.profilePage.spotifyLastFiveAlbums;
+    minItemCount: {
+      "default": 10,
+      type: Number
     }
   }
 });
@@ -38666,191 +38639,233 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _vm.spotifyTrackCount == false
-          ? _c(
-              "div",
-              [
-                _c("Error", {
-                  attrs: {
-                    type: "small",
-                    errorMessage: "Не удалось загрузить данные по трекам"
-                  }
-                })
-              ],
-              1
-            )
-          : _vm._e(),
+    _c(
+      "div",
+      { staticClass: "row" },
+      [
+        _vm._m(0),
         _vm._v(" "),
-        _vm.spotifyTrackCount != false
-          ? _c("div", [
-              _vm.spotifyTrackCount == -1
-                ? _c("div", [_c("Loader")], 1)
-                : _vm.spotifyTrackCount >= 50
-                ? _c("div", { staticClass: "fade_in_anim" }, [
-                    _c("h5", [
-                      _vm._v("Треков в библиотеке - "),
-                      _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _vm.spotifyLastFiveTracks == false
-                      ? _c(
-                          "div",
-                          [
-                            _c("Error", {
-                              attrs: {
-                                type: "x-small",
-                                errorMessage: "Не удалось загрузить треки"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : _vm.spotifyLastFiveTracks == -1
-                      ? _c("div", [_c("Loader")], 1)
-                      : _vm.spotifyLastFiveTracks.length > 0
-                      ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
-                          _c(
-                            "div",
-                            { staticClass: "row justify-content-center" },
-                            _vm._l(_vm.spotifyLastFiveTracks, function(track) {
-                              return _c(
-                                "div",
-                                {
-                                  key: track.id,
-                                  staticClass: "col-2 fade_in_anim",
-                                  attrs: {
-                                    "data-toggle": "tooltip",
-                                    "data-title": track.name,
-                                    "data-placement": "bottom"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: {
-                                        href: track.url,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        staticClass:
-                                          "rounded-circle album_icon",
-                                        staticStyle: {
-                                          width: "80%",
-                                          margin: "5px"
-                                        },
-                                        attrs: { src: track.cover }
-                                      })
-                                    ]
-                                  )
-                                ]
-                              )
-                            }),
-                            0
-                          )
-                        ])
-                      : _vm._e()
-                  ])
-                : _vm.spotifyTrackCount < 50
-                ? _c("div", [
-                    _c("h5", [
-                      _vm._v("Треков в библиотеке - "),
-                      _c("b", [_vm._v(_vm._s(_vm.spotifyTrackCount))])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Мало треков. Что мне анализировать? Приходи назад когда добавишь чего-нибудь!"
-                      )
-                    ])
-                  ])
-                : _c(
-                    "div",
-                    [
-                      _c("Error", {
+        _c("LastFive", {
+          attrs: {
+            itemCount: _vm.spotifyTrackCount,
+            lastFiveItems: _vm.spotifyLastFiveTracks,
+            type: "tracks"
+          }
+        }),
+        _vm._v(" "),
+        _c("LastFive", {
+          attrs: {
+            itemCount: _vm.spotifyAlbumCount,
+            lastFiveItems: _vm.spotifyLastFiveAlbums,
+            type: "albums"
+          }
+        }),
+        _vm._v(" "),
+        _c("LastFive", {
+          attrs: {
+            itemCount: _vm.spotifyArtistsCount,
+            lastFiveItems: _vm.spotifyFiveArtists,
+            type: "artists"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm.spotifyFiveArtists !== -1 ||
+    _vm.spotifyLastFiveAlbums != -1 ||
+    _vm.spotifyLastFiveTracks != -1
+      ? _c("hr", { staticClass: "fade_in_anim" })
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("h5", [
+        _c("b", [_vm._v("Общая информация")]),
+        _vm._v(" \r\n                "),
+        _c("i", { staticClass: "fas fa-chart-bar primary_color" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=template&id=a2bdc5b6&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=template&id=a2bdc5b6& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-4 padding_10" }, [
+    _vm.type === false
+      ? _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: { type: "small", errorMessage: "Не указан тип компонента" }
+            })
+          ],
+          1
+        )
+      : _c("div", [
+          _vm.itemCount == false
+            ? _c(
+                "div",
+                [
+                  _vm.type === "tracks"
+                    ? _c("Error", {
                         attrs: {
                           type: "small",
-                          errorMessage: "Неизвестная ошибка"
+                          errorMessage: "Не удалось загрузить данные по трекам"
                         }
                       })
-                    ],
-                    1
-                  )
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _vm.spotifyAlbumCount == false
-          ? _c(
-              "div",
-              [
-                _c("Error", {
-                  attrs: {
-                    type: "small",
-                    errorMessage: "Не удалось загрузить данные по альбомам"
-                  }
-                })
-              ],
-              1
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.spotifyAlbumCount != false
-          ? _c("div", [
-              _vm.spotifyAlbumCount == -1
-                ? _c("div", [_c("Loader")], 1)
-                : _vm.spotifyAlbumCount > 0
-                ? _c("div", { staticClass: "fade_in_anim" }, [
-                    _c("h5", [
-                      _vm._v("Альбомов в библиотеке - "),
-                      _c("b", [_vm._v(_vm._s(_vm.spotifyAlbumCount))])
-                    ]),
-                    _vm._v(" "),
-                    _vm.spotifyLastFiveAlbums == false
-                      ? _c(
-                          "div",
-                          [
-                            _c("Error", {
-                              attrs: {
-                                type: "x-small",
-                                errorMessage: "Не удалось загрузить альбомы"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : _vm.spotifyLastFiveAlbums == -1
-                      ? _c("div", [_c("Loader")], 1)
-                      : _vm.spotifyLastFiveAlbums != -1
-                      ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
-                          _c("p", { staticStyle: { "font-size": "10pt" } }, [
-                            _vm._v("Последние добавленные альбомы")
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-12" }, [
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "albums"
+                    ? _c("Error", {
+                        attrs: {
+                          type: "small",
+                          errorMessage:
+                            "Не удалось загрузить данные по альбомам"
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.type === "artists"
+                    ? _c("Error", {
+                        attrs: {
+                          type: "small",
+                          errorMessage: "Не удалось загрузить подписки"
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.itemCount != false
+            ? _c("div", [
+                _vm.itemCount == -1
+                  ? _c("div", [_c("Loader")], 1)
+                  : _vm.itemCount >= _vm.minItemCount
+                  ? _c("div", { staticClass: "fade_in_anim" }, [
+                      _vm.type === "tracks"
+                        ? _c("h5", [
+                            _vm._v("Треки - "),
+                            _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.type === "albums"
+                        ? _c("h5", [
+                            _vm._v("Альбомы - "),
+                            _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.type === "artists"
+                        ? _c("h5", [
+                            _vm._v("Подписки - "),
+                            _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.lastFiveItems == false
+                        ? _c(
+                            "div",
+                            [
+                              _vm.type === "tracks"
+                                ? _c("Error", {
+                                    attrs: {
+                                      type: "small",
+                                      errorMessage: "Не удалось загрузить треки"
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.type === "albums"
+                                ? _c("Error", {
+                                    attrs: {
+                                      type: "small",
+                                      errorMessage:
+                                        "Не удалось загрузить альбомы"
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.type === "artists"
+                                ? _c("Error", {
+                                    attrs: {
+                                      type: "small",
+                                      errorMessage:
+                                        "Не удалось загрузить подписки"
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        : _vm.lastFiveItems == -1
+                        ? _c("div")
+                        : _vm.lastFiveItems.length > 0
+                        ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _vm.type === "tracks"
+                                ? _c(
+                                    "p",
+                                    { staticStyle: { "font-size": "10pt" } },
+                                    [_vm._v("Последние добавленные треки")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.type === "albums"
+                                ? _c(
+                                    "p",
+                                    { staticStyle: { "font-size": "10pt" } },
+                                    [_vm._v("Последние добавленные альбомы")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.type === "artists"
+                                ? _c(
+                                    "p",
+                                    { staticStyle: { "font-size": "10pt" } },
+                                    [_vm._v("Некоторые из твоих подписок")]
+                                  )
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "div",
                               { staticClass: "row justify-content-center" },
-                              _vm._l(_vm.spotifyLastFiveAlbums, function(
-                                album
-                              ) {
+                              _vm._l(_vm.lastFiveItems, function(item) {
                                 return _c(
                                   "div",
                                   {
-                                    key: album.id,
+                                    key: item.id,
                                     staticClass: "col-2 fade_in_anim",
                                     attrs: {
                                       "data-toggle": "tooltip",
-                                      "data-title": album.name,
+                                      "data-title": item.name,
                                       "data-placement": "bottom"
                                     }
                                   },
@@ -38859,7 +38874,7 @@ var render = function() {
                                       "a",
                                       {
                                         attrs: {
-                                          href: album.url,
+                                          href: item.url,
                                           target: "_blank"
                                         }
                                       },
@@ -38871,7 +38886,7 @@ var render = function() {
                                             width: "80%",
                                             margin: "5px"
                                           },
-                                          attrs: { src: album.cover }
+                                          attrs: { src: item.cover }
                                         })
                                       ]
                                     )
@@ -38881,157 +38896,26 @@ var render = function() {
                               0
                             )
                           ])
-                        ])
-                      : _vm.spotifyLastFiveAlbums === 0
-                      ? _c("div", [
-                          _c("h5", [
-                            _vm._v("Альбомов в библиотеке - "),
-                            _c("b", [_vm._v(_vm._s(_vm.spotifyAlbumCount))])
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v("Мало альбомов. Добавь чего-нибудь!")
-                          ])
-                        ])
-                      : _c(
-                          "div",
-                          [
-                            _c("Error", {
-                              attrs: {
-                                type: "small",
-                                errorMessage: "Неизвестная ошибка"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                  ])
-                : _vm._e()
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _vm.spotifyArtistsCount == false
-          ? _c(
-              "div",
-              [
-                _c("Error", {
-                  attrs: {
-                    type: "small",
-                    errorMessage: "Не удалось загрузить подписки"
-                  }
-                })
-              ],
-              1
-            )
-          : _vm.spotifyArtistsCount != false
-          ? _c("div", [
-              _vm.spotifyArtistsCount == -1
-                ? _c("div", [_c("Loader")], 1)
-                : _vm.spotifyArtistsCount > 0
-                ? _c("div", { staticClass: "fade_in_anim" }, [
-                    _c("h5", [
-                      _vm._v("Подписки - "),
-                      _c("b", [_vm._v(_vm._s(_vm.spotifyArtistsCount))])
+                        : _vm._e()
                     ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.spotifyFiveArtists == false
-                ? _c(
-                    "div",
-                    [
-                      _c("Error", {
-                        attrs: {
-                          type: "x-small",
-                          errorMessage: "Не удалось загрузить подписки"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                : _vm.spotifyFiveArtists == -1
-                ? _c("div", [_c("Loader")], 1)
-                : _vm.spotifyFiveArtists != -1
-                ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
-                    _c("p", { staticStyle: { "font-size": "10pt" } }, [
-                      _vm._v("Некоторые из твоих подписок")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row justify-content-center" },
-                        _vm._l(_vm.spotifyFiveArtists, function(artist) {
-                          return _c(
-                            "div",
-                            {
-                              key: artist.id,
-                              staticClass: "col-2 fade_in_anim",
-                              attrs: {
-                                "data-toggle": "tooltip",
-                                "data-title": artist.name,
-                                "data-placement": "bottom"
-                              }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  attrs: { href: artist.url, target: "_blank" }
-                                },
-                                [
-                                  _c("img", {
-                                    staticClass: "rounded-circle album_icon",
-                                    staticStyle: {
-                                      width: "80%",
-                                      margin: "5px"
-                                    },
-                                    attrs: { src: artist.cover }
-                                  })
-                                ]
-                              )
-                            ]
-                          )
-                        }),
-                        0
-                      )
-                    ])
-                  ])
-                : _vm._e()
-            ])
-          : _vm._e()
-      ])
-    ]),
-    _vm._v(" "),
-    _c("hr")
+                  : _c(
+                      "div",
+                      [
+                        _c("Error", {
+                          attrs: {
+                            type: "small",
+                            errorMessage: "Неизвестная ошибка"
+                          }
+                        })
+                      ],
+                      1
+                    )
+              ])
+            : _vm._e()
+        ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("h5", [
-        _c("b", [_vm._v("Общая информация")]),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-chart-bar primary_color" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("p", { staticStyle: { "font-size": "10pt" } }, [
-        _vm._v("Последние добавленные треки")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -55684,7 +55568,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 /* harmony import */ var _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Misc/Error.vue */ "./resources/js/components/Misc/Error.vue");
 /* harmony import */ var _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Misc/Loader.vue */ "./resources/js/components/Misc/Loader.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55700,6 +55585,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('Error', _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 
 Vue.component('Loader', _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
+
+Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -55711,7 +55598,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_5__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 
 /***/ }),
@@ -56239,6 +56126,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicStats_vue_vue_type_template_id_21d68382___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicStats_vue_vue_type_template_id_21d68382___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/BasicStats/LastFive.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/LastFive.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LastFive_vue_vue_type_template_id_a2bdc5b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LastFive.vue?vue&type=template&id=a2bdc5b6& */ "./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=template&id=a2bdc5b6&");
+/* harmony import */ var _LastFive_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LastFive.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _LastFive_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LastFive_vue_vue_type_template_id_a2bdc5b6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LastFive_vue_vue_type_template_id_a2bdc5b6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Profile/BasicStats/LastFive.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LastFive_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./LastFive.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LastFive_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=template&id=a2bdc5b6&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=template&id=a2bdc5b6& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LastFive_vue_vue_type_template_id_a2bdc5b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./LastFive.vue?vue&type=template&id=a2bdc5b6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/LastFive.vue?vue&type=template&id=a2bdc5b6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LastFive_vue_vue_type_template_id_a2bdc5b6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LastFive_vue_vue_type_template_id_a2bdc5b6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
