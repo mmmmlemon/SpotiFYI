@@ -34,5 +34,9 @@ class AppServiceProvider extends ServiceProvider
         //создание подключения к Spotify API
         $api = new SpotifyWebAPI\SpotifyWebAPI();
         config(['spotify_api' => $api]);
+
+        //переменния для хренения всех треков пользователя
+        //по умолчанию пустая
+        config(['spotify_user_library' => 'pee']);
     }
 }

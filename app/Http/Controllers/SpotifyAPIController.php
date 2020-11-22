@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Globals\Globals;
 use SpotifyWebAPI;
 use Carbon\Carbon;
+use File;
+use Storage;    
+use Illuminate\Contracts\Filesystem\FileNotFoundException; 
 
 //запросы к Spotify API
 class SpotifyAPIController extends Controller
 {
     //домашняя страница сайта
-    public function getSpotifyUserTracksCount(Request $request)
+    public function getHomePageUserTracksCount(Request $request)
     { 
         $checkToken = Globals::checkSpotifyAccessToken($request);
 
@@ -69,8 +72,8 @@ class SpotifyAPIController extends Controller
         { return false; }
     }
 
-    //посчитать количество треков в библиотеке пользователя
-    public function getSpotifyTrackCount(Request $request)
+    //получить библиотеку пользователя целиком
+    public function getSpotifyUserLibrary(Request $request)
     {
         $checkToken = Globals::checkSpotifyAccessToken($request);
 
@@ -78,164 +81,203 @@ class SpotifyAPIController extends Controller
         {
             $api = config('spotify_api');
             $options = ['limit' => 50, 'offset' => 0];
+
+            //получаем все треки
             $spotifyMyTracks = $api->getMySavedTracks($options)->items;
-            $spotifyTrackCount = 0;
-            
+            //получаем все альбомы
+            $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
+            //получаем все подписки
+            $spotifyMyArtists = $api->getUserFollowedArtists($options)->artists->items;
+
+            $spotifyUserTracks = [];
+            $spotifyUserAlbums = [];
+            $spotifyUserArtists = [];
+
+            //треки
             while(count($spotifyMyTracks) > 0)
             {
+                foreach($spotifyMyTracks as $item)
+                { array_push($spotifyUserTracks, $item->track); }
+
                 $options['offset'] += 50;
-                $spotifyTrackCount += count($spotifyMyTracks);
                 $spotifyMyTracks = $api->getMySavedTracks($options)->items;
             }
-
-            return response()->json($spotifyTrackCount);
-        }
-        else
-        { return false; }
-    }
-
-    //посчитать количество альбомов в библиотеке
-    public function getSpotifyAlbumCount(Request $request)
-    {
-        $checkToken = Globals::checkSpotifyAccessToken($request);
-
-        if($checkToken != false)
-        {
-            $api = config('spotify_api');
-            $options = ['limit' => 50, 'offset' => 0];
-            $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
-            $spotifyAlbumCount = 0;
-
+        
+            // альбомы
             while(count($spotifyMyAlbums) > 0)
             {
+                foreach($spotifyMyAlbums as $item)
+                { array_push($spotifyUserAlbums, $item->album); }
+
                 $options['offset'] += 50;
-                $spotifyAlbumCount += count($spotifyMyAlbums);
                 $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
             }
 
-            return response()->json($spotifyAlbumCount);
-        }
-        else
-        { return false; }
-    }
-
-    //получить последние 5 треков
-    public function getSpotifyLastFive(Request $request, $entity)
-    {
-        $checkToken = Globals::checkSpotifyAccessToken($request);
-
-        if($checkToken != false)
-        {
-            $api = config('spotify_api');
-            $options = ['limit' => 5, 'offset' => 0];
-
-            $spotifyLastFive = [];
-
-            if($entity == "tracks")
-            { $spotifyLastFive = $api->getMySavedTracks($options)->items; }
-            else if($entity == "albums")
-            { $spotifyLastFive = $api->getMySavedAlbums($options)->items; }
-            
-            $lastFive = [];
-
-            foreach($spotifyLastFive as $item)
-            {   
-                $current_item = [];
-
-                if($entity == "tracks")
-                { $current_item = $item->track; }
-                else
-                { $current_item = $item->album; }
-                
-                $artists = "";
-
-                for($i = 1; $i <= count($current_item->artists); $i++)
-                {
-                    if($i != count($current_item->artists) && count($current_item->artists) > 1)
-                    { $artists .= $current_item->artists[$i-1]->name . ", ";}
-                    else
-                    { $artists .= $current_item->artists[$i-1]->name; }
-
-                    $artists .= " - " . $current_item->name;
-                }
-                
-                $cover = "";
-
-                if($entity == "tracks")
-                {  $cover = $current_item->album->images[2]->url; }
-                else if ($entity == "albums")
-                {  $cover = $current_item->images[2]->url; }
-
-                array_push($lastFive, ['cover' => $cover,
-                                        'name' => $artists, 
-                                        'url' => $current_item->external_urls->spotify,
-                                        'id' => $current_item->id]);                       
-            }
-
-            return response()->json($lastFive);
-        }
-        else
-        { return false; }
-    }
-
-    //получить подписки
-    public function getSpotifyArtists(Request $request)
-    {
-        $checkToken = Globals::checkSpotifyAccessToken($request);
-
-        if($checkToken != null)
-        {
-            $api = config('spotify_api');
-            $spotifyMyArtists = $api->getUserFollowedArtists(['limit' => 50])->artists->items;
-            $spotifyArtistsCount = 0;
-
+            //подписки
             while(count($spotifyMyArtists) > 0)
             {
-                $options = ['limit' => 50, 'after' => $spotifyMyArtists[count($spotifyMyArtists) - 1]->id];
-                $spotifyArtistsCount += count($spotifyMyArtists);
+                foreach($spotifyMyArtists as $item)
+                { array_push($spotifyUserArtists, $item); }
+
+                $options['after'] = $item->id;
                 $spotifyMyArtists = $api->getUserFollowedArtists($options)->artists->items;
             }
 
-            return response()->json($spotifyArtistsCount);
-        }
-        else
-        { return false; }
-    }
+            //сохраняем библиотку в json файлы
+            //проверяем что папка user_libraries существует
+            $check = File::exists(storage_path("app/public/user_libraries"));
 
-    //5 случайных исполнителей из подписок
-    public function getSpotifyFiveArtists(Request $request)
-    {
-        $checkToken = Globals::checkSpotifyAccessToken($request);
-
-        if($checkToken != null)
-        {
-            $api = config('spotify_api');
-            $spotifyMyArtists = $api->getUserFollowedArtists(['limit' => 50])->artists->items;
-            $fiveArtists = [];
-
-            //использованные индексы элемента массива
-            $usedNumbers = [];
-
-            //пока не наберется 5 исполнителей
-            while(count($fiveArtists) <= 4)
+            //если папки нет, то создаем её
+            if($check != true)
+            { Storage::disk('public')->makeDirectory("user_libraries"); }
+            else
             {   
-                //генерим рандомное числов, это будет индекс исполнителя в массиве с ними
-                $randomNumber = rand(0,count($spotifyMyArtists)-1);
-                //если индекс еще не был использован
-                if(array_search($randomNumber, $usedNumbers) === false)
-                {   
-                    //добавляем индекс в массив и добавляем исполнителя
-                    array_push($usedNumbers, $randomNumber);
-                    array_push($fiveArtists, ['name' => $spotifyMyArtists[$randomNumber]->name,
-                                                'cover' => $spotifyMyArtists[$randomNumber]->images[count($spotifyMyArtists[$randomNumber]->images)-1]->url,
-                                                'url' => $spotifyMyArtists[$randomNumber]->external_urls->spotify,
-                                                'id' => $spotifyMyArtists[$randomNumber]->id]);
-                }
-            }   
+                //имя папки
+                $folderName = $request->cookie('rand_name');
 
-            return response()->json($fiveArtists);
+                if(Storage::disk('public')->makeDirectory("user_libraries/" . $folderName))
+                {   
+                    //сохраняем треки
+                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "tracks.json"), json_encode($spotifyUserTracks));
+                    //сохраняем альбомы
+                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "albums.json"), json_encode($spotifyUserAlbums));
+                    //сохраняем подписки
+                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "artists.json"), json_encode($spotifyUserArtists));
+                }
+                else { return response()->json(false); }
+            }
+
+            return response()->json(true);
         }
         else
         { return false; }
     }
+
+    //посчитать количество треков в библиотеке пользователя и вывести последние пять
+    public function getSpotifyTracks(Request $request)
+    {   
+        //открываем файл треков
+        $file = "";
+        try{
+            $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/tracks.json"));
+        } 
+        catch (FileNotFoundException $e) {
+            //если нет такого файла, то возвращаем false
+            return response()->json(false);
+        }
+
+        //если есть то декодим json 
+        $tracks = json_decode($file); 
+        $lastFive = [];
+        for($i = 0; $i < 5; $i++)
+        {
+            $artists = "";
+
+            for($j = 1; $j <= count($tracks[$i]->artists); $j++)
+            {
+                if($j != count($tracks[$i]->artists) && count($tracks[$i]->artists) > 1)
+                { $artists .= $tracks[$i]->artists[$j-1]->name . ", ";}
+                else
+                { $artists .= $tracks[$i]->artists[$j-1]->name; }
+ 
+            }
+
+            $artists .= " - " . $tracks[$i]->name;
+            array_push($lastFive, ['id' => $tracks[$i]->id,
+                                    'cover' => $tracks[$i]->album->images[count($tracks[$i]->album->images) - 1]->url,
+                                    'name' => $artists,
+                                    'url' => $tracks[$i]->external_urls->spotify]);
+        }
+
+        //получаем кол-во треков и последние 5 треков
+        $array = ['count' => count($tracks), 'last_five' => $lastFive];
+        
+        return response()->json($array);
+    }
+
+    //посчитать кол-во альбомов и получить последние пять
+    public function getSpotifyAlbums(Request $request)
+    {
+        //открываем файл треков
+        $file = "";
+        try{
+            $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/albums.json"));
+        } 
+        catch (FileNotFoundException $e) {
+            //если нет такого файла, то возвращаем false
+            return response()->json(false);
+        }
+
+        //если есть то декодим json 
+        $albums = json_decode($file);
+        $lastFive = [];
+        for($i = 0; $i < 5; $i++)
+        {
+            $artists = "";
+
+            for($j = 1; $j <= count($albums[$i]->artists); $j++)
+            {
+                if($j != count($albums[$i]->artists) && count($albums[$i]->artists) > 1)
+                { $artists .= $albums[$i]->artists[$j-1]->name . ", ";}
+                else
+                { $artists .= $albums[$i]->artists[$j-1]->name; }
+    
+            }
+
+            $artists .= " - " . $albums[$i]->name;
+            array_push($lastFive, ['id' => $albums[$i]->id,
+                                    'cover' => $albums[$i]->images[count($albums[$i]->images) - 1]->url,
+                                    'name' => $artists,
+                                    'url' => $albums[$i]->external_urls->spotify]);
+        }
+
+        //получаем кол-во треков и последние 5 треков
+        $array = ['count' => count($albums), 'last_five' => $lastFive];
+        
+        return response()->json($array);
+    }
+
+    //получить подписки и случайные пять
+    public function getSpotifyArtists(Request $request)
+    {
+        //открываем файл подписок
+        $file = "";
+        try{
+            $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/artists.json"));
+        } 
+        catch (FileNotFoundException $e) {
+            //если нет такого файла, то возвращаем false
+            return response()->json(false);
+        }
+
+        //если есть то декодим json 
+        $artists = json_decode($file);
+        $randomFive = [];
+        
+        //использованные индексы элемента массива
+        $usedNumbers = [];
+
+        //пока не наберется 5 исполнителей
+        while(count($randomFive) <= 4)
+        {   
+            //генерим рандомное числов, это будет индекс исполнителя в массиве с ними
+            $randomNumber = rand(0,count($artists) - 1);
+            //если индекс еще не был использован
+            if(array_search($randomNumber, $usedNumbers) === false)
+            {   
+                //добавляем индекс в массив и добавляем исполнителя
+                array_push($usedNumbers, $randomNumber);
+                array_push($randomFive, ['name' => $artists[$randomNumber]->name,
+                                            'cover' => $artists[$randomNumber]->images[count($artists[$randomNumber]->images)-1]->url,
+                                            'url' => $artists[$randomNumber]->external_urls->spotify,
+                                            'id' => $artists[$randomNumber]->id]);
+            }
+        }   
+
+        //получаем кол-во подписок и случайные пять
+        $array = ['count' => count($artists), 'random_five' => $randomFive];
+        
+        return response()->json($array);
+    }
+
 }

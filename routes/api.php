@@ -23,15 +23,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/test_api', 'TestController@test_api'); //проверка работы api laravel
 
 //HomePage
-Route::get('/get_spotify_tracks_count', 'SpotifyAPIController@getSpotifyUserTracksCount'); //получить кол-во треков в библиотеке
+Route::get('/get_home_tracks_count', 'SpotifyAPIController@getHomePageUserTracksCount'); //получить кол-во треков в библиотеке
 Route::get('/get_spotify_username', 'SpotifyAPIController@getSpotifyUsername'); //получить имя пользователя
 Route::get('/get_site_info', 'HomeController@getSiteInfo'); //получить информацию о сайте
 
 //Profile
 Route::get('/get_spotify_profile', 'SpotifyAPIController@getSpotifyProfile'); //получить профиль пользователя
-Route::get('/get_spotify_track_count', 'SpotifyAPIController@getSpotifyTrackCount'); //получить количество треков в библиотеке
-Route::get('/get_spotify_last_five/{entity}', 'SpotifyAPIController@getSpotifyLastFive'); //получить последние 5 треков
-Route::get('/get_spotify_album_count', 'SpotifyAPIController@getSpotifyAlbumCount'); //получить количество альбомов в библиотеке
-Route::get('/get_spotify_artists', 'SpotifyAPIController@getSpotifyArtists'); //получить подписки на исполнителей
-Route::get('/get_spotify_five_artists', 'SpotifyAPIController@getSpotifyFiveArtists'); //получить 5 случайних исполнителей из подписок
+Route::get('/get_spotify_user_library', 'SpotifyAPIController@getSpotifyUserLibrary'); //получить библиотеку пользователя целиком
+Route::get('/get_spotify_tracks', 'SpotifyAPIController@getSpotifyTracks'); //получить кол-во треков и последние пять
+Route::get('/get_spotify_albums', 'SpotifyAPIController@getSpotifyAlbums'); //получить кол-во альбомов и последние пять
+Route::get('/get_spotify_artists', 'SpotifyAPIController@getSpotifyArtists'); //получить кол-во подписок и случайные пять
 ?>

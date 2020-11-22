@@ -32,17 +32,17 @@
             <div class="row justify-content-center fade-in" v-if="this.$store.state.profilePage.spotifyProfile != -1">
                 <div class="col-md-8">
                     <div class="row fade_in_anim">
-                        <div class="col-md-3">
-                            <router-link to="/profile"><button class="btn" type="button">Общее</button></router-link>
+                        <div class="col-md-3 padding_10">
+                            <router-link to="/profile"><button class="btn btn-block btn-primary" type="button">Общее</button></router-link>
                         </div>
-                        <div class="col-md-3">
-                            <router-link to="/profile/top10tracks"><button class="btn" type="button">Топ-10</button></router-link>
+                        <div class="col-md-3 padding_10">
+                            <router-link to="/profile/top10tracks"><button class="btn btn-block" type="button">Топ-10</button></router-link>
                         </div>
-                        <div class="col-md-3">
-                            <router-link to="/"><button class="btn" type="button">Что-то</button></router-link>
+                        <div class="col-md-3 padding_10">
+                            <router-link to="/"><button class="btn btn-block" type="button">Что-то</button></router-link>
                         </div>
-                        <div class="col-md-3">
-                            <router-link to="/"><button class="btn" type="button">Еще</button></router-link>
+                        <div class="col-md-3 padding_10">
+                            <router-link to="/"><button class="btn btn-block" type="button">Еще</button></router-link>
                         </div>
                     </div>
           

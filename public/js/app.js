@@ -1917,7 +1917,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     this.$store.dispatch('getSpotifyUsername');
-    this.$store.dispatch('getSpotifyUserTracksCount');
+    this.$store.dispatch('getHomePageUserTracksCount');
   },
   mounted: function mounted() {
     console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'HomePage\' component mounted');
@@ -2232,41 +2232,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
-    //получить подписки
-    this.$store.dispatch('getSpotifyArtistsCount');
-    this.$store.dispatch('getSpotifyFiveArtists'); //получить последние 5 альбомов и треков
-
-    this.$store.dispatch('getSpotifyLastFive', "tracks");
-    this.$store.dispatch('getSpotifyLastFive', "albums"); //получить кол-во треков и альбомов в библиотеке
-
-    this.$store.dispatch('getSpotifyTrackCount');
-    this.$store.dispatch('getSpotifyAlbumCount');
+    //получаем библиотеку пользователя и статистику
+    this.$store.dispatch('getSpotifyUserLibrary');
+    this.$store.dispatch('getSpotifyTracks');
+    this.$store.dispatch('getSpotifyAlbums');
+    this.$store.dispatch('getSpotifyArtists');
   },
   computed: {
-    //кол-во треков в библиотеке
-    spotifyTrackCount: function spotifyTrackCount() {
-      return this.$store.state.profilePage.spotifyTrackCount;
+    //библиотека пользователя
+    //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
+    spotifyUserLibrary: function spotifyUserLibrary() {
+      return this.$store.state.profilePage.spotifyUserLibrary;
     },
-    //последние 5 треков
-    spotifyLastFiveTracks: function spotifyLastFiveTracks() {
-      return this.$store.state.profilePage.spotifyLastFiveTracks;
+    //кол-во треков и последние пять
+    spotifyTracks: function spotifyTracks() {
+      return this.$store.state.profilePage.spotifyTracks;
     },
-    //кол-во альбомов в библиотеке
-    spotifyAlbumCount: function spotifyAlbumCount() {
-      return this.$store.state.profilePage.spotifyAlbumCount;
+    //кол-во альбомов и последние пять
+    spotifyAlbums: function spotifyAlbums() {
+      return this.$store.state.profilePage.spotifyAlbums;
     },
-    //кол-во подписок
-    spotifyArtistsCount: function spotifyArtistsCount() {
-      return this.$store.state.profilePage.spotifyArtistsCount;
-    },
-    spotifyFiveArtists: function spotifyFiveArtists() {
-      return this.$store.state.profilePage.spotifyFiveArtists;
-    },
-    //последние 5 альбомов
-    spotifyLastFiveAlbums: function spotifyLastFiveAlbums() {
-      return this.$store.state.profilePage.spotifyLastFiveAlbums;
+    //кол-во подписок и случайные пять
+    spotifyArtists: function spotifyArtists() {
+      return this.$store.state.profilePage.spotifyArtists;
     }
   }
 });
@@ -2282,7 +2282,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -38629,12 +38628,15 @@ var render = function() {
                   _c("div", { staticClass: "row fade_in_anim" }, [
                     _c(
                       "div",
-                      { staticClass: "col-md-3" },
+                      { staticClass: "col-md-3 padding_10" },
                       [
                         _c("router-link", { attrs: { to: "/profile" } }, [
                           _c(
                             "button",
-                            { staticClass: "btn", attrs: { type: "button" } },
+                            {
+                              staticClass: "btn btn-block btn-primary",
+                              attrs: { type: "button" }
+                            },
                             [_vm._v("Общее")]
                           )
                         ])
@@ -38644,7 +38646,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-3" },
+                      { staticClass: "col-md-3 padding_10" },
                       [
                         _c(
                           "router-link",
@@ -38652,7 +38654,10 @@ var render = function() {
                           [
                             _c(
                               "button",
-                              { staticClass: "btn", attrs: { type: "button" } },
+                              {
+                                staticClass: "btn btn-block",
+                                attrs: { type: "button" }
+                              },
                               [_vm._v("Топ-10")]
                             )
                           ]
@@ -38663,12 +38668,15 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-3" },
+                      { staticClass: "col-md-3 padding_10" },
                       [
                         _c("router-link", { attrs: { to: "/" } }, [
                           _c(
                             "button",
-                            { staticClass: "btn", attrs: { type: "button" } },
+                            {
+                              staticClass: "btn btn-block",
+                              attrs: { type: "button" }
+                            },
                             [_vm._v("Что-то")]
                           )
                         ])
@@ -38678,12 +38686,15 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-3" },
+                      { staticClass: "col-md-3 padding_10" },
                       [
                         _c("router-link", { attrs: { to: "/" } }, [
                           _c(
                             "button",
-                            { staticClass: "btn", attrs: { type: "button" } },
+                            {
+                              staticClass: "btn btn-block",
+                              attrs: { type: "button" }
+                            },
                             [_vm._v("Еще")]
                           )
                         ])
@@ -38722,58 +38733,90 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "div",
-        { staticClass: "row" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("LastFive", {
-            attrs: {
-              itemCount: _vm.spotifyTrackCount,
-              lastFiveItems: _vm.spotifyLastFiveTracks,
-              type: "tracks"
-            }
-          }),
-          _vm._v(" "),
-          _c("LastFive", {
-            attrs: {
-              itemCount: _vm.spotifyAlbumCount,
-              lastFiveItems: _vm.spotifyLastFiveAlbums,
-              type: "albums"
-            }
-          }),
-          _vm._v(" "),
-          _c("LastFive", {
-            attrs: {
-              itemCount: _vm.spotifyArtistsCount,
-              lastFiveItems: _vm.spotifyFiveArtists,
-              type: "artists"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm.spotifyFiveArtists !== -1 ||
-      _vm.spotifyLastFiveAlbums != -1 ||
-      _vm.spotifyLastFiveTracks != -1
-        ? _c("hr", { staticClass: "fade_in_anim" })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.spotifyFiveArtists !== -1 &&
-      _vm.spotifyLastFiveAlbums != -1 &&
-      _vm.spotifyLastFiveTracks != -1
-        ? _c("HoursAndMinutes", { staticClass: "fade_in_anim" })
-        : _vm._e(),
-      _vm._v(" "),
-      _c("hr")
-    ],
-    1
-  )
+  return _c("div", [
+    _vm.spotifyUserLibrary === -1
+      ? _c(
+          "div",
+          [
+            _c("Loader"),
+            _vm._v(" "),
+            _c("h6", { staticClass: "text-center" }, [
+              _vm._v("Загружаю библиотку пользователя...")
+            ])
+          ],
+          1
+        )
+      : _vm.spotifyUserLibrary === false
+      ? _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: {
+                errorMessage: "Не удалось загрузить библиотеку пользователя."
+              }
+            })
+          ],
+          1
+        )
+      : _vm.spotifyUserLibrary !== false && _vm.spotifyUserLibrary !== -1
+      ? _c(
+          "div",
+          [
+            _c(
+              "div",
+              { staticClass: "row justify-content-center" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("LastFive", {
+                  attrs: {
+                    itemCount: _vm.spotifyTracks["count"],
+                    lastFiveItems: _vm.spotifyTracks["last_five"],
+                    type: "tracks"
+                  }
+                }),
+                _vm._v(" "),
+                _c("LastFive", {
+                  attrs: {
+                    itemCount: _vm.spotifyAlbums["count"],
+                    lastFiveItems: _vm.spotifyAlbums["last_five"],
+                    type: "albums"
+                  }
+                }),
+                _vm._v(" "),
+                _c("LastFive", {
+                  attrs: {
+                    itemCount: _vm.spotifyArtists["count"],
+                    lastFiveItems: _vm.spotifyArtists["random_five"],
+                    type: "artists"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm.spotifyArtists !== -1 ||
+            _vm.spotifyAlbums != -1 ||
+            _vm.spotifyTracks != -1
+              ? _c("hr", { staticClass: "fade_in_anim" })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.spotifyTracks !== -1 &&
+            _vm.spotifyAlbums != -1 &&
+            _vm.spotifyArtists != -1
+              ? _c("HoursAndMinutes", { staticClass: "fade_in_slow_anim" })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.spotifyTracks !== -1 &&
+            _vm.spotifyAlbums != -1 &&
+            _vm.spotifyArtists != -1
+              ? _c("hr")
+              : _vm._e()
+          ],
+          1
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -38781,9 +38824,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
-      _c("h5", [
+      _c("h5", { staticClass: "text-center" }, [
         _c("b", [_vm._v("Общая информация")]),
-        _vm._v(" \r\n                "),
+        _vm._v(" \r\n                    "),
         _c("i", { staticClass: "fas fa-chart-bar primary_color" })
       ])
     ])
@@ -38817,36 +38860,52 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
+    return _c("div", { staticClass: "row " }, [
       _c("div", { staticClass: "col-sm-8" }, [
         _c("p", [
           _vm._v("Всего в твою библиотеку добавлено "),
-          _c("b", { staticStyle: { "font-size": "25pt" } }, [
-            _vm._v("100500 минут")
-          ]),
+          _c(
+            "b",
+            {
+              staticClass: "border_underline",
+              staticStyle: { "font-size": "25pt" }
+            },
+            [_vm._v("100500 минут")]
+          ),
           _vm._v(" музыки.")
         ]),
         _vm._v(" "),
-        _c("p", [_vm._v("В других исчислениях это:")]),
+        _c("p", [
+          _vm._v("В других исчислениях это "),
+          _c("b", { staticClass: "border_underline" }, [
+            _vm._v("более 1 000 000 секунд")
+          ])
+        ]),
         _vm._v(" "),
-        _c("p", [_c("b", [_vm._v("Более 1 000 000 ")]), _vm._v(" секунд")]),
+        _c("b", { staticClass: "border_underline" }, [_vm._v("60 дней")]),
+        _c("p"),
         _vm._v(" "),
-        _c("p", [_vm._v("или "), _c("b", [_vm._v("60 дней")])]),
-        _vm._v(" "),
-        _c("p", [_vm._v("или "), _c("b", [_vm._v("2 месяца")])]),
+        _c("p", [
+          _c("b", { staticClass: "border_underline" }, [_vm._v("2 месяца")])
+        ]),
         _vm._v(" "),
         _c("p", [
           _vm._v("или "),
-          _c("b", { staticStyle: { "font-size": "18pt" } }, [
-            _vm._v("более 1 года")
-          ]),
+          _c(
+            "b",
+            {
+              staticClass: "border_underline",
+              staticStyle: { "font-size": "18pt" }
+            },
+            [_vm._v("более 1 года")]
+          ),
           _vm._v(" музыки")
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-4" }, [
         _c("p", { staticStyle: { "font-size": "10pt" } }, [
-          _vm._v("Пять твоих саммых длинных песен")
+          _c("b", [_vm._v("Пять твоих самых длинных песен")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
@@ -38925,11 +38984,9 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-12", staticStyle: { "background-color": "black" } },
-        [_c("h2", [_vm._v("За это время можно было бы *сделать что-нибудь*.")])]
-      )
+      _c("div", { staticClass: "col-12 time_fact" }, [
+        _c("h2", [_vm._v("За это время Галилео Галилей загалелеил галереи.")])
+      ])
     ])
   }
 ]
@@ -39007,26 +39064,38 @@ var render = function() {
                 _vm.itemCount == -1
                   ? _c("div", [_c("Loader")], 1)
                   : _vm.itemCount >= _vm.minItemCount
-                  ? _c("div", { staticClass: "fade_in_anim" }, [
+                  ? _c("div", { staticClass: "fade_in_slow_anim" }, [
                       _vm.type === "tracks"
-                        ? _c("h5", [
-                            _vm._v("Треки - "),
-                            _c("b", [_vm._v(_vm._s(_vm.itemCount))])
-                          ])
+                        ? _c(
+                            "h4",
+                            { staticClass: "text-center border_underline" },
+                            [
+                              _vm._v("Треки - "),
+                              _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                            ]
+                          )
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.type === "albums"
-                        ? _c("h5", [
-                            _vm._v("Альбомы - "),
-                            _c("b", [_vm._v(_vm._s(_vm.itemCount))])
-                          ])
+                        ? _c(
+                            "h4",
+                            { staticClass: "text-center border_underline" },
+                            [
+                              _vm._v("Альбомы - "),
+                              _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                            ]
+                          )
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.type === "artists"
-                        ? _c("h5", [
-                            _vm._v("Подписки - "),
-                            _c("b", [_vm._v(_vm._s(_vm.itemCount))])
-                          ])
+                        ? _c(
+                            "h4",
+                            { staticClass: "text-center border_underline" },
+                            [
+                              _vm._v("Подписки - "),
+                              _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                            ]
+                          )
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.lastFiveItems == false
@@ -39067,71 +39136,84 @@ var render = function() {
                         : _vm.lastFiveItems == -1
                         ? _c("div")
                         : _vm.lastFiveItems.length > 0
-                        ? _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
-                            _c("div", { staticClass: "col-md-12" }, [
-                              _vm.type === "tracks"
-                                ? _c(
-                                    "p",
-                                    { staticStyle: { "font-size": "10pt" } },
-                                    [_vm._v("Последние добавленные треки")]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.type === "albums"
-                                ? _c(
-                                    "p",
-                                    { staticStyle: { "font-size": "10pt" } },
-                                    [_vm._v("Последние добавленные альбомы")]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.type === "artists"
-                                ? _c(
-                                    "p",
-                                    { staticStyle: { "font-size": "10pt" } },
-                                    [_vm._v("Некоторые из твоих подписок")]
-                                  )
-                                : _vm._e()
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "row justify-content-center" },
-                              _vm._l(_vm.lastFiveItems, function(item) {
-                                return _c(
-                                  "div",
-                                  {
-                                    key: item.id,
-                                    staticClass: "col-2 fade_in_anim",
-                                    attrs: {
-                                      "data-toggle": "tooltip",
-                                      "data-title": item.name,
-                                      "data-placement": "bottom"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "a",
+                        ? _c(
+                            "div",
+                            { staticClass: "col-md-12 fade_in_slow_anim" },
+                            [
+                              _c("div", { staticClass: "col-md-12" }, [
+                                _vm.type === "tracks"
+                                  ? _c(
+                                      "p",
                                       {
-                                        attrs: {
-                                          href: item.url,
-                                          target: "_blank"
-                                        }
+                                        staticClass: "text-center",
+                                        staticStyle: { "font-size": "10pt" }
                                       },
-                                      [
-                                        _c("img", {
-                                          staticClass:
-                                            "rounded-circle album_icon",
-                                          attrs: { src: item.cover }
-                                        })
-                                      ]
+                                      [_vm._v("Последние добавленные треки")]
                                     )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.type === "albums"
+                                  ? _c(
+                                      "p",
+                                      {
+                                        staticClass: "text-center",
+                                        staticStyle: { "font-size": "10pt" }
+                                      },
+                                      [_vm._v("Последние добавленные альбомы")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.type === "artists"
+                                  ? _c(
+                                      "p",
+                                      {
+                                        staticClass: "text-center",
+                                        staticStyle: { "font-size": "10pt" }
+                                      },
+                                      [_vm._v("Некоторые из твоих подписок")]
+                                    )
+                                  : _vm._e()
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "row justify-content-center" },
+                                _vm._l(_vm.lastFiveItems, function(item) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: item.id,
+                                      staticClass: "col-2 fade_in_slow_anim",
+                                      attrs: {
+                                        "data-toggle": "tooltip",
+                                        "data-title": item.name,
+                                        "data-placement": "bottom"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          attrs: {
+                                            href: item.url,
+                                            target: "_blank"
+                                          }
+                                        },
+                                        [
+                                          _c("img", {
+                                            staticClass:
+                                              "rounded-circle album_icon",
+                                            attrs: { src: item.cover }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ]
+                          )
                         : _vm._e()
                     ])
                   : _c(
@@ -56751,8 +56833,8 @@ var HomePageStates = {
       });
     },
     //получить количество треков в библиотеке пользователя
-    getSpotifyUserTracksCount: function getSpotifyUserTracksCount(state) {
-      var uri = '/api/get_spotify_tracks_count';
+    getHomePageUserTracksCount: function getHomePageUserTracksCount(state) {
+      var uri = '/api/get_home_tracks_count';
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
         state.spotifyUserTracksCount = response.data;
       });
@@ -56771,8 +56853,8 @@ var HomePageStates = {
       context.commit('getSpotifyUsername');
     },
     //получить количество треков в библиотеке пользователя
-    getSpotifyUserTracksCount: function getSpotifyUserTracksCount(context) {
-      context.commit('getSpotifyUserTracksCount');
+    getHomePageUserTracksCount: function getHomePageUserTracksCount(context) {
+      context.commit('getHomePageUserTracksCount');
     },
     //получить информацию о сайте
     getSiteInfo: function getSiteInfo(context) {
@@ -56783,12 +56865,10 @@ var HomePageStates = {
 var ProfilePageStates = {
   state: {
     spotifyProfile: -1,
-    spotifyTrackCount: -1,
-    spotifyAlbumCount: -1,
-    spotifyArtistsCount: -1,
-    spotifyLastFiveTracks: -1,
-    spotifyLastFiveAlbums: -1,
-    spotifyFiveArtists: -1
+    spotifyUserLibrary: -1,
+    spotifyTracks: -1,
+    spotifyAlbums: -1,
+    spotifyArtists: -1
   },
   getters: {//геттеры
   },
@@ -56800,47 +56880,33 @@ var ProfilePageStates = {
         state.spotifyProfile = response.data;
       });
     },
-    //получить кол-во треков в библиотеке
-    getSpotifyTrackCount: function getSpotifyTrackCount(state) {
-      var uri = '/api/get_spotify_track_count';
+    //получить библиотеку пользователя
+    getSpotifyUserLibrary: function getSpotifyUserLibrary(state) {
+      var uri = '/api/get_spotify_user_library';
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyTrackCount = response.data;
+        state.spotifyUserLibrary = response.data;
       });
     },
-    //получить кол-во альбомов в библиотеке
-    getSpotifyAlbumCount: function getSpotifyAlbumCount(state) {
-      var uri = '/api/get_spotify_album_count';
+    //получить кол-во треков в библиотеке и последние пять
+    getSpotifyTracks: function getSpotifyTracks(state) {
+      var uri = '/api/get_spotify_tracks';
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyAlbumCount = response.data;
+        state.spotifyTracks = response.data;
       });
     },
-    //кол-во подписок
-    getSpotifyArtistsCount: function getSpotifyArtistsCount(state) {
+    //получить кол-во альбомов в библиотеке и последние пять
+    getSpotifyAlbums: function getSpotifyAlbums(state) {
+      var uri = '/api/get_spotify_albums';
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
+        state.spotifyAlbums = response.data;
+      });
+    },
+    //получить кол-во подписок в библиотеке и случайные пять
+    getSpotifyArtists: function getSpotifyArtists(state) {
       var uri = '/api/get_spotify_artists';
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyArtistsCount = response.data;
+        state.spotifyArtists = response.data;
       });
-    },
-    //5 случайных исполнителей
-    getSpotifyFiveArtists: function getSpotifyFiveArtists(state) {
-      var uri = '/api/get_spotify_five_artists';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyFiveArtists = response.data;
-      });
-    },
-    //последние 5 треков
-    getSpotifyLastFive: function getSpotifyLastFive(state, entity) {
-      var uri = '/api/get_spotify_last_five/' + entity;
-
-      if (entity == "tracks") {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-          state.spotifyLastFiveTracks = response.data;
-        });
-      } else if (entity == "albums") {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-          state.spotifyLastFiveAlbums = response.data;
-        });
-      }
     }
   },
   actions: {
@@ -56848,25 +56914,21 @@ var ProfilePageStates = {
     getSpotifyProfile: function getSpotifyProfile(context) {
       context.commit('getSpotifyProfile');
     },
-    //получить кол-во треков в библиотеке
-    getSpotifyTrackCount: function getSpotifyTrackCount(context) {
-      context.commit('getSpotifyTrackCount');
+    //получить библиотку пользователя
+    getSpotifyUserLibrary: function getSpotifyUserLibrary(context) {
+      context.commit('getSpotifyUserLibrary');
     },
-    //получить кол-во альбомов в библиотеке
-    getSpotifyAlbumCount: function getSpotifyAlbumCount(context) {
-      context.commit('getSpotifyAlbumCount');
+    //получить кол-во треков в библиотеке и последние пять
+    getSpotifyTracks: function getSpotifyTracks(context) {
+      context.commit('getSpotifyTracks');
     },
-    //кол-во подписок
-    getSpotifyArtistsCount: function getSpotifyArtistsCount(context) {
-      context.commit('getSpotifyArtistsCount');
+    //получить кол-во альбомов в библиотеке и последние пять
+    getSpotifyAlbums: function getSpotifyAlbums(context) {
+      context.commit('getSpotifyAlbums');
     },
-    //5 случайных исполнителей
-    getSpotifyFiveArtists: function getSpotifyFiveArtists(context) {
-      context.commit('getSpotifyFiveArtists');
-    },
-    //последние 5 треков
-    getSpotifyLastFive: function getSpotifyLastFive(context, entity) {
-      context.commit('getSpotifyLastFive', entity);
+    //получить кол-во подписок в библиотеке и случайные пять
+    getSpotifyArtists: function getSpotifyArtists(context) {
+      context.commit('getSpotifyArtists');
     }
   }
 };

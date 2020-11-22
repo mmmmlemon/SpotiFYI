@@ -32,8 +32,8 @@ const HomePageStates = {
             })
         },
         //получить количество треков в библиотеке пользователя
-        getSpotifyUserTracksCount(state){
-            let uri = '/api/get_spotify_tracks_count';
+        getHomePageUserTracksCount(state){
+            let uri = '/api/get_home_tracks_count';
             axios.get(uri).then((response) => {
                 state.spotifyUserTracksCount = response.data;
             });
@@ -53,8 +53,8 @@ const HomePageStates = {
             context.commit('getSpotifyUsername');
         },
         //получить количество треков в библиотеке пользователя
-        getSpotifyUserTracksCount(context){
-            context.commit('getSpotifyUserTracksCount');
+        getHomePageUserTracksCount(context){
+            context.commit('getHomePageUserTracksCount');
         },
         //получить информацию о сайте
         getSiteInfo(context){
@@ -66,12 +66,10 @@ const HomePageStates = {
 const ProfilePageStates = {
     state: {
         spotifyProfile: -1,
-        spotifyTrackCount: -1,
-        spotifyAlbumCount: -1,
-        spotifyArtistsCount: -1,
-        spotifyLastFiveTracks: -1,
-        spotifyLastFiveAlbums: -1,
-        spotifyFiveArtists: -1,
+        spotifyUserLibrary: -1,
+        spotifyTracks: -1,
+        spotifyAlbums: -1,
+        spotifyArtists: -1,
       },
 
     getters:{
@@ -86,51 +84,34 @@ const ProfilePageStates = {
             state.spotifyProfile = response.data;
           });
         },
-        //получить кол-во треков в библиотеке
-        getSpotifyTrackCount(state){
-          let uri = '/api/get_spotify_track_count';
+        //получить библиотеку пользователя
+        getSpotifyUserLibrary(state){
+          let uri = '/api/get_spotify_user_library';
           axios.get(uri).then((response) => {
-            state.spotifyTrackCount = response.data;
+            state.spotifyUserLibrary = response.data;
           });
         },
-        //получить кол-во альбомов в библиотеке
-        getSpotifyAlbumCount(state){
-          let uri = '/api/get_spotify_album_count';
+        //получить кол-во треков в библиотеке и последние пять
+        getSpotifyTracks(state){
+          let uri = '/api/get_spotify_tracks';
           axios.get(uri).then((response) => {
-            state.spotifyAlbumCount = response.data;
-           });
-        },
-        //кол-во подписок
-        getSpotifyArtistsCount(state){
-          let uri = '/api/get_spotify_artists';
-          axios.get(uri).then((response) => {
-            state.spotifyArtistsCount = response.data;
+            state.spotifyTracks = response.data;
           });
         },
-        //5 случайных исполнителей
-        getSpotifyFiveArtists(state){
-          let uri = '/api/get_spotify_five_artists';
+        //получить кол-во альбомов в библиотеке и последние пять
+        getSpotifyAlbums(state){
+          let uri = '/api/get_spotify_albums';
           axios.get(uri).then((response) => {
-            state.spotifyFiveArtists = response.data;
+            state.spotifyAlbums = response.data;
           });
         },
-        //последние 5 треков
-        getSpotifyLastFive(state, entity){
-          let uri = '/api/get_spotify_last_five/'+entity;
-          
-            if(entity == "tracks")
-            {
-                axios.get(uri).then((response) => {
-                  state.spotifyLastFiveTracks = response.data;
-              });
-            }
-            else if(entity == "albums")
-            {
-                axios.get(uri).then((response) => {
-                  state.spotifyLastFiveAlbums = response.data;
-              });
-            }
-       },
+        //получить кол-во подписок в библиотеке и случайные пять
+        getSpotifyArtists(state){
+        let uri = '/api/get_spotify_artists';
+        axios.get(uri).then((response) => {
+          state.spotifyArtists = response.data;
+        });
+      },
     },
 
     actions: {
@@ -138,26 +119,22 @@ const ProfilePageStates = {
       getSpotifyProfile(context){
         context.commit('getSpotifyProfile');
       },
-      //получить кол-во треков в библиотеке
-      getSpotifyTrackCount(context){
-        context.commit('getSpotifyTrackCount');
+      //получить библиотку пользователя
+      getSpotifyUserLibrary(context){
+        context.commit('getSpotifyUserLibrary');
       },
-      //получить кол-во альбомов в библиотеке
-      getSpotifyAlbumCount(context){
-        context.commit('getSpotifyAlbumCount');
+      //получить кол-во треков в библиотеке и последние пять
+      getSpotifyTracks(context){
+        context.commit('getSpotifyTracks');
       },
-      //кол-во подписок
-      getSpotifyArtistsCount(context){
-        context.commit('getSpotifyArtistsCount');
+      //получить кол-во альбомов в библиотеке и последние пять
+      getSpotifyAlbums(context){
+        context.commit('getSpotifyAlbums');
+      }, 
+      //получить кол-во подписок в библиотеке и случайные пять
+      getSpotifyArtists(context){
+        context.commit('getSpotifyArtists');
       },
-      //5 случайных исполнителей
-      getSpotifyFiveArtists(context){
-        context.commit('getSpotifyFiveArtists');
-      },
-      //последние 5 треков
-      getSpotifyLastFive(context, entity){
-        context.commit('getSpotifyLastFive', entity);
-      }
     }
 }
 

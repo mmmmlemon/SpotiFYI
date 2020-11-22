@@ -90,3 +90,25 @@
 .padding_10{
     padding:10px;
 }
+
+.border_underline{
+    border-bottom-style:solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #1b77b9;
+    padding-bottom: 10px;
+    transition: border-color 0.2s ease-in-out;
+}
+
+
+.border_underline:hover{
+    border-color: white;
+    cursor: pointer;
+}
+
+.time_fact{
+    background-color: black; 
+    margin-top:20px; 
+    border-radius: 10px; 
+    padding: 20px;
+    background-image: url('/img/times/galileo.jpg');
+}

@@ -13,10 +13,10 @@
                 <div v-if="itemCount == -1">
                     <Loader />
                 </div>
-                <div v-else-if="itemCount >= minItemCount" class="fade_in_anim">
-                    <h5 v-if="type === 'tracks'">Треки - <b>{{itemCount}}</b></h5>
-                    <h5 v-if="type === 'albums'">Альбомы - <b>{{itemCount}}</b></h5>
-                    <h5 v-if="type === 'artists'">Подписки - <b>{{itemCount}}</b></h5>
+                <div v-else-if="itemCount >= minItemCount" class="fade_in_slow_anim">
+                    <h4 v-if="type === 'tracks'" class="text-center border_underline">Треки - <b>{{itemCount}}</b></h4>
+                    <h4 v-if="type === 'albums'" class="text-center border_underline">Альбомы - <b>{{itemCount}}</b></h4>
+                    <h4 v-if="type === 'artists'" class="text-center border_underline">Подписки - <b>{{itemCount}}</b></h4>
                     <div v-if="lastFiveItems == false">
                         <Error v-if="type === 'tracks'" type="small" errorMessage = "Не удалось загрузить треки"/>
                         <Error v-if="type === 'albums'" type="small" errorMessage = "Не удалось загрузить альбомы"/>
@@ -25,14 +25,14 @@
                     <div v-else-if="lastFiveItems == -1">
                         <!-- <Loader /> -->
                     </div>
-                    <div v-else-if="lastFiveItems.length > 0" class="col-md-12 fade_in_anim">  
+                    <div v-else-if="lastFiveItems.length > 0" class="col-md-12 fade_in_slow_anim">  
                             <div class="col-md-12">
-                                <p v-if="type === 'tracks'" style="font-size: 10pt;">Последние добавленные треки</p>
-                                <p v-if="type === 'albums'" style="font-size: 10pt;">Последние добавленные альбомы</p>
-                                <p v-if="type === 'artists'" style="font-size: 10pt;">Некоторые из твоих подписок</p>
+                                <p v-if="type === 'tracks'" style="font-size: 10pt;" class="text-center">Последние добавленные треки</p>
+                                <p v-if="type === 'albums'" style="font-size: 10pt;" class="text-center">Последние добавленные альбомы</p>
+                                <p v-if="type === 'artists'" style="font-size: 10pt;" class="text-center">Некоторые из твоих подписок</p>
                             </div>
                             <div class="row justify-content-center">
-                            <div data-toggle="tooltip" :data-title="item.name" data-placement="bottom" class="col-2 fade_in_anim" 
+                            <div data-toggle="tooltip" :data-title="item.name" data-placement="bottom" class="col-2 fade_in_slow_anim" 
                                 v-for="item in lastFiveItems" :key="item.id">
                                 <a :href="item.url" target="_blank">
                                     <img class="rounded-circle album_icon" :src="item.cover" style="">

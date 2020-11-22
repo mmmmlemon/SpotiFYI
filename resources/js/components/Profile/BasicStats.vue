@@ -1,68 +1,67 @@
 <template>
 <div>
-    <div class="row">
-        <div class="col-md-12 fade_in_anim">
-            <h5>
-                <b>Общая информация</b>&nbsp;
-                <i class="fas fa-chart-bar primary_color"></i>
-            </h5>
-        </div>
-        <!-- треки -->
-        <LastFive :itemCount="spotifyTrackCount" :lastFiveItems="spotifyLastFiveTracks" type="tracks"/>  
-        <!-- альбомы -->
-        <LastFive :itemCount="spotifyAlbumCount" :lastFiveItems="spotifyLastFiveAlbums" type="albums"/>  
-        <!-- исполнители -->
-        <LastFive :itemCount="spotifyArtistsCount" :lastFiveItems="spotifyFiveArtists" type="artists"/>  
+    <!-- если библиотека пользователя не загружена, то показываем лоадер -->
+    <div v-if="spotifyUserLibrary === -1">
+        <Loader />
+        <h6 class="text-center">Загружаю библиотку пользователя...</h6>
     </div>
-    <hr class="fade_in_anim" v-if="spotifyFiveArtists !== -1 || spotifyLastFiveAlbums != -1 || spotifyLastFiveTracks != -1">
+    <div v-else-if="spotifyUserLibrary === false">
+        <Error errorMessage="Не удалось загрузить библиотеку пользователя." />
+    </div>
+       <!-- если библиотека загрузилась, то  -->
+    <div v-else-if="spotifyUserLibrary !== false && spotifyUserLibrary !== -1">
+        <div class="row justify-content-center">
+            <div class="col-md-12 fade_in_anim">
+                <h5 class="text-center">
+                    <b>Общая информация</b>&nbsp;
+                    <i class="fas fa-chart-bar primary_color"></i>
+                </h5>
+            </div>
+            <!-- треки -->
+            <LastFive :itemCount="spotifyTracks['count']" :lastFiveItems="spotifyTracks['last_five']" type="tracks"/>  
+            <!-- альбомы -->
+            <LastFive :itemCount="spotifyAlbums['count']" :lastFiveItems="spotifyAlbums['last_five']" type="albums"/>  
+            <!-- исполнители -->
+            <LastFive :itemCount="spotifyArtists['count']" :lastFiveItems="spotifyArtists['random_five']" type="artists"/>  
+        </div>
+    <hr class="fade_in_anim" v-if="spotifyArtists !== -1 || spotifyAlbums != -1 || spotifyTracks != -1">
 
     <!-- часы и время -->
-    <HoursAndMinutes v-if="spotifyFiveArtists !== -1 && spotifyLastFiveAlbums != -1 && spotifyLastFiveTracks != -1" class="fade_in_anim"/>
-    <hr>
-    <!-- что-то еще  -->
+    <HoursAndMinutes v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1" class="fade_in_slow_anim"/>
+    <hr v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1">
+    </div>
 
 </div>
 </template>
 
 <script>
 export default {
+ 
     beforeCreate(){
-
-        //получить подписки
-        this.$store.dispatch('getSpotifyArtistsCount');
-        this.$store.dispatch('getSpotifyFiveArtists');
-        //получить последние 5 альбомов и треков
-        this.$store.dispatch('getSpotifyLastFive', "tracks");
-        this.$store.dispatch('getSpotifyLastFive', "albums");
-        //получить кол-во треков и альбомов в библиотеке
-        this.$store.dispatch('getSpotifyTrackCount');
-        this.$store.dispatch('getSpotifyAlbumCount');
-
+        //получаем библиотеку пользователя и статистику
+        this.$store.dispatch('getSpotifyUserLibrary');
+        this.$store.dispatch('getSpotifyTracks');
+        this.$store.dispatch('getSpotifyAlbums');
+        this.$store.dispatch('getSpotifyArtists');
     },
     computed: {
-        //кол-во треков в библиотеке
-        spotifyTrackCount: function() {
-            return this.$store.state.profilePage.spotifyTrackCount;
+        //библиотека пользователя
+        //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
+        spotifyUserLibrary: function() {
+            return this.$store.state.profilePage.spotifyUserLibrary;
         },
-        //последние 5 треков
-        spotifyLastFiveTracks: function(){
-            return this.$store.state.profilePage.spotifyLastFiveTracks;
+        //кол-во треков и последние пять
+        spotifyTracks: function() {
+            return this.$store.state.profilePage.spotifyTracks;
         },
-        //кол-во альбомов в библиотеке
-        spotifyAlbumCount: function(){
-            return this.$store.state.profilePage.spotifyAlbumCount;
+        //кол-во альбомов и последние пять
+        spotifyAlbums: function() {
+            return this.$store.state.profilePage.spotifyAlbums;
         },
-        //кол-во подписок
-        spotifyArtistsCount: function(){
-            return this.$store.state.profilePage.spotifyArtistsCount;
-        },
-        spotifyFiveArtists: function(){
-            return this.$store.state.profilePage.spotifyFiveArtists;
-        },
-        //последние 5 альбомов
-        spotifyLastFiveAlbums: function(){
-            return this.$store.state.profilePage.spotifyLastFiveAlbums;
-        },
+        //кол-во подписок и случайные пять
+        spotifyArtists: function(){
+            return this.$store.state.profilePage.spotifyArtists;
+        }
     }
 }
 </script>

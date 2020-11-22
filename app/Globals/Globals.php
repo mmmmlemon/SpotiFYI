@@ -46,10 +46,14 @@
                         $newAccessToken = $session->getAccessToken();
                         $newRefreshToken = $session->getRefreshToken();
                         $accessExpiration = Carbon::now()->addMinutes(50);
+                        $chars = "ABCDEFG";
+                        $randName = $chars[rand(0, 6)] . rand(0,9) . $chars[rand(0, 6)] . rand(0,9) . $chars[rand(0, 6)] . rand(0,9);
+                        
                         //записывем новые токены в куки
                         Cookie::queue('spotify_access_token',  $newAccessToken, 60*24*30*12);
                         Cookie::queue('spotify_refresh_token', $newRefreshToken, 60*24*30*12);
                         Cookie::queue('spotify_access_expiration', $accessExpiration, 60*24*30*12);
+                        Cookie::queue('rand_name', $randName, 60*24*30);
 
                         //устанавливаем новый токен
                         config('spotify_api')->setAccessToken($newAccessToken);

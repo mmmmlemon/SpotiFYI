@@ -50,11 +50,14 @@ class SpotifyAuthController extends Controller
         $accessToken = $session->getAccessToken();
         $refreshToken = $session->getRefreshToken();
         $accessExpiration = Carbon::now()->addMinutes(50);
+        $chars = "ABCDEFG";
+        $randName = $chars[rand(0, 6)] . rand(0,9) . $chars[rand(0, 6)] . rand(0,9) . $chars[rand(0, 6)] . rand(0,9); //рандомное имя папки в которую будут сохраняться результаты
 
         //сохраняем токены в cookies
         Cookie::queue('spotify_access_token', $accessToken, 60*24*30);
         Cookie::queue('spotify_access_expiration', $accessExpiration, 60*24*30);
         Cookie::queue('spotify_refresh_token', $refreshToken, 60*24*30);
+        Cookie::queue('rand_name', $randName, 60*24*30);
 
         //редирект на главную
         return redirect('/');
