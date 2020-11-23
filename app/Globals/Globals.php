@@ -5,6 +5,7 @@
     use Carbon\Carbon;
     use SpotifyWebAPI;
     use Cookie;
+    use File;
 
     //глобальные функции на разные случаи
     class Globals
@@ -74,6 +75,25 @@
                     return false;
                 }
             }
+
+            //получение файла с библиотекой пользователя
+            public static function getUserLibraryJson($filename, $request)
+            {
+                //открываем файл
+                $file = "";
+                try{
+                    $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/" . $filename . ".json"));
+                } 
+                catch (FileNotFoundException $e) {
+                    //если нет такого файла, то возвращаем false
+                    return response()->json(false);
+                }
+
+                $json = json_decode($file);
+
+                return $json;
+            }
+
 
 
             //выбрать правильно окончание для слова (десять минуТ, две минуТЫ, одна минуТА и т.п)

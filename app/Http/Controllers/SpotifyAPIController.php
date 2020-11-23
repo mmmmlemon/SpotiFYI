@@ -157,169 +157,149 @@ class SpotifyAPIController extends Controller
     public function getSpotifyTracks(Request $request)
     {   
         //открываем файл треков
-        $file = "";
-        try{
-            $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/tracks.json"));
-        } 
-        catch (FileNotFoundException $e) {
-            //если нет такого файла, то возвращаем false
-            return response()->json(false);
-        }
-
-        //если есть то декодим json 
-        $tracks = json_decode($file); 
-        $lastFive = [];
-        for($i = 0; $i < 5; $i++)
+        $tracks = Globals::getUserLibraryJson("tracks", $request);
+        if($tracks != false)
         {
-            $artists = "";
-
-            for($j = 1; $j <= count($tracks[$i]->artists); $j++)
+            $lastFive = [];
+            for($i = 0; $i < 5; $i++)
             {
-                if($j != count($tracks[$i]->artists) && count($tracks[$i]->artists) > 1)
-                { $artists .= $tracks[$i]->artists[$j-1]->name . ", ";}
-                else
-                { $artists .= $tracks[$i]->artists[$j-1]->name; }
- 
+                $artists = "";
+    
+                for($j = 1; $j <= count($tracks[$i]->artists); $j++)
+                {
+                    if($j != count($tracks[$i]->artists) && count($tracks[$i]->artists) > 1)
+                    { $artists .= $tracks[$i]->artists[$j-1]->name . ", ";}
+                    else
+                    { $artists .= $tracks[$i]->artists[$j-1]->name; }
+     
+                }
+    
+                $artists .= " - " . $tracks[$i]->name;
+                array_push($lastFive, ['id' => $tracks[$i]->id,
+                                        'cover' => $tracks[$i]->album->images[count($tracks[$i]->album->images) - 1]->url,
+                                        'name' => $artists,
+                                        'url' => $tracks[$i]->external_urls->spotify]);
             }
-
-            $artists .= " - " . $tracks[$i]->name;
-            array_push($lastFive, ['id' => $tracks[$i]->id,
-                                    'cover' => $tracks[$i]->album->images[count($tracks[$i]->album->images) - 1]->url,
-                                    'name' => $artists,
-                                    'url' => $tracks[$i]->external_urls->spotify]);
+    
+            //получаем кол-во треков и последние 5 треков
+            $array = ['count' => count($tracks), 'last_five' => $lastFive];
+            
+            return response()->json($array);
         }
-
-        //получаем кол-во треков и последние 5 треков
-        $array = ['count' => count($tracks), 'last_five' => $lastFive];
-        
-        return response()->json($array);
     }
 
     //посчитать кол-во альбомов и получить последние пять
     public function getSpotifyAlbums(Request $request)
     {
-        //открываем файл треков
-        $file = "";
-        try{
-            $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/albums.json"));
-        } 
-        catch (FileNotFoundException $e) {
-            //если нет такого файла, то возвращаем false
-            return response()->json(false);
-        }
+        //открываем файл альбомов
+        $albums = Globals::getUserLibraryJson("albums", $request);
 
-        //если есть то декодим json 
-        $albums = json_decode($file);
-        $lastFive = [];
-        for($i = 0; $i < 5; $i++)
+        if($albums != false)
         {
-            $artists = "";
-
-            for($j = 1; $j <= count($albums[$i]->artists); $j++)
+            $lastFive = [];
+            for($i = 0; $i < 5; $i++)
             {
-                if($j != count($albums[$i]->artists) && count($albums[$i]->artists) > 1)
-                { $artists .= $albums[$i]->artists[$j-1]->name . ", ";}
-                else
-                { $artists .= $albums[$i]->artists[$j-1]->name; }
+                $artists = "";
     
-            }
-
-            $artists .= " - " . $albums[$i]->name;
-            array_push($lastFive, ['id' => $albums[$i]->id,
-                                    'cover' => $albums[$i]->images[count($albums[$i]->images) - 1]->url,
-                                    'name' => $artists,
-                                    'url' => $albums[$i]->external_urls->spotify]);
-        }
-
-        //получаем кол-во треков и последние 5 треков
-        $array = ['count' => count($albums), 'last_five' => $lastFive];
+                for($j = 1; $j <= count($albums[$i]->artists); $j++)
+                {
+                    if($j != count($albums[$i]->artists) && count($albums[$i]->artists) > 1)
+                    { $artists .= $albums[$i]->artists[$j-1]->name . ", ";}
+                    else
+                    { $artists .= $albums[$i]->artists[$j-1]->name; }
         
-        return response()->json($array);
+                }
+    
+                $artists .= " - " . $albums[$i]->name;
+                array_push($lastFive, ['id' => $albums[$i]->id,
+                                        'cover' => $albums[$i]->images[count($albums[$i]->images) - 1]->url,
+                                        'name' => $artists,
+                                        'url' => $albums[$i]->external_urls->spotify]);
+            }
+    
+            //получаем кол-во треков и последние 5 треков
+            $array = ['count' => count($albums), 'last_five' => $lastFive];
+            
+            return response()->json($array);
+        }
     }
+
 
     //получить подписки и случайные пять
     public function getSpotifyArtists(Request $request)
     {
         //открываем файл подписок
-        $file = "";
-        try{
-            $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/artists.json"));
-        } 
-        catch (FileNotFoundException $e) {
-            //если нет такого файла, то возвращаем false
-            return response()->json(false);
+        $artists = Globals::getUserLibraryJson("artists", $request);
+
+        if($artists != false)
+        {
+            $randomFive = [];
+        
+            //использованные индексы элемента массива
+            $usedNumbers = [];
+    
+            //пока не наберется 5 исполнителей
+            while(count($randomFive) <= 4)
+            {   
+                //генерим рандомное числов, это будет индекс исполнителя в массиве с ними
+                $randomNumber = rand(0,count($artists) - 1);
+                //если индекс еще не был использован
+                if(array_search($randomNumber, $usedNumbers) === false)
+                {   
+                    //добавляем индекс в массив и добавляем исполнителя
+                    array_push($usedNumbers, $randomNumber);
+                    array_push($randomFive, ['name' => $artists[$randomNumber]->name,
+                                                'cover' => $artists[$randomNumber]->images[count($artists[$randomNumber]->images)-1]->url,
+                                                'url' => $artists[$randomNumber]->external_urls->spotify,
+                                                'id' => $artists[$randomNumber]->id]);
+                }
+            }   
+    
+            //получаем кол-во подписок и случайные пять
+            $array = ['count' => count($artists), 'random_five' => $randomFive];
+            
+            return response()->json($array);
         }
 
-        //если есть то декодим json 
-        $artists = json_decode($file);
-        $randomFive = [];
-        
-        //использованные индексы элемента массива
-        $usedNumbers = [];
-
-        //пока не наберется 5 исполнителей
-        while(count($randomFive) <= 4)
-        {   
-            //генерим рандомное числов, это будет индекс исполнителя в массиве с ними
-            $randomNumber = rand(0,count($artists) - 1);
-            //если индекс еще не был использован
-            if(array_search($randomNumber, $usedNumbers) === false)
-            {   
-                //добавляем индекс в массив и добавляем исполнителя
-                array_push($usedNumbers, $randomNumber);
-                array_push($randomFive, ['name' => $artists[$randomNumber]->name,
-                                            'cover' => $artists[$randomNumber]->images[count($artists[$randomNumber]->images)-1]->url,
-                                            'url' => $artists[$randomNumber]->external_urls->spotify,
-                                            'id' => $artists[$randomNumber]->id]);
-            }
-        }   
-
-        //получаем кол-во подписок и случайные пять
-        $array = ['count' => count($artists), 'random_five' => $randomFive];
-        
-        return response()->json($array);
     }
 
-    //посчитать общее время всех треков
+     //посчитать общее время всех треков
     public function getUserLibraryTime(Request $request)
     {
-        //открываем файл треков
-        $file = "";
-        try{
-            $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/tracks.json"));
-        } 
-        catch (FileNotFoundException $e) {
-            //если нет такого файла, то возвращаем false
-            return response()->json(false);
+        //получаем все треки
+        $tracks = Globals::getUserLibraryJson("tracks", $request);
+
+        if($tracks != false)
+        {    
+            $overallMinutes = 0;
+            $overallSeconds = 0;
+
+            //считаем общее кол-во минут всех треков
+            foreach($tracks as $track)
+            {
+                $overallMinutes += round($track->duration_ms / 60000);
+            }
+
+            $overallHours = floor($overallMinutes / 60); //кол-во часов
+            $overallDays = floor($overallHours / 24); //кол-во дней
+            $overallMonths = floor($overallDays / 30); //кол-во месяцев
+
+            //вычисляем какое слово нужно подставить в конец (1 минуТА, 2 минуТЫ и т.п)
+            $overallMinutes .= Globals::pickTheWord($overallMinutes, "минут", "минута", "минуты");
+
+            if($overallHours > 0)
+            {  $overallHours .= Globals::pickTheWord($overallHours, "часов", "час", "часа"); }
+            
+            if($overallDays > 0)
+            {  $overallDays .= Globals::pickTheWord($overallDays, "дней", "день", "дня"); }
+            
+            if($overallMonths > 0)
+            {  $overallMonths .= Globals::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
+
+            return response()->json(['overallMinutes' => $overallMinutes, 'overallHours' => $overallHours,
+                                    'overallDays' => $overallDays, 'overallMonths' => $overallMonths]);
         }
-
-        $tracks = json_decode($file);
-
-        $overallMinutes = 0;
-        $overallSeconds = 0;
-
-        foreach($tracks as $track)
-        {
-            $overallMinutes += round($track->duration_ms / 60000);
-        }
-
-        $overallHours = floor($overallMinutes / 60);
-        $overallDays = floor($overallHours / 24);
-        $overallMonths = floor($overallDays / 30);
-
-        $overallMinutes .= Globals::pickTheWord($overallMinutes, "минут", "минута", "минуты");
-
-        if($overallHours > 0)
-        {  $overallHours .= Globals::pickTheWord($overallHours, "часов", "час", "часа"); }
-        
-        if($overallDays > 0)
-        {  $overallDays .= Globals::pickTheWord($overallDays, "дней", "день", "дня"); }
-        
-        if($overallMonths > 0)
-        {  $overallMonths .= Globals::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
-
-        return response()->json(['overallMinutes' => $overallMinutes, 'overallHours' => $overallHours,
-                                'overallDays' => $overallDays, 'overallMonths' => $overallMonths]);
     }
+
 
 }
