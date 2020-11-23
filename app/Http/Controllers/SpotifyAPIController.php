@@ -163,27 +163,17 @@ class SpotifyAPIController extends Controller
             $lastFive = [];
             for($i = 0; $i < 5; $i++)
             {
-                $artists = "";
-    
-                for($j = 1; $j <= count($tracks[$i]->artists); $j++)
-                {
-                    if($j != count($tracks[$i]->artists) && count($tracks[$i]->artists) > 1)
-                    { $artists .= $tracks[$i]->artists[$j-1]->name . ", ";}
-                    else
-                    { $artists .= $tracks[$i]->artists[$j-1]->name; }
-     
-                }
-    
-                $artists .= " - " . $tracks[$i]->name;
+                $name = Globals::getFullName($tracks[$i]);
+
                 array_push($lastFive, ['id' => $tracks[$i]->id,
                                         'cover' => $tracks[$i]->album->images[count($tracks[$i]->album->images) - 1]->url,
-                                        'name' => $artists,
+                                        'name' => $name,
                                         'url' => $tracks[$i]->external_urls->spotify]);
             }
     
             //получаем кол-во треков и последние 5 треков
             $array = ['count' => count($tracks), 'last_five' => $lastFive];
-            
+
             return response()->json($array);
         }
     }
@@ -199,21 +189,11 @@ class SpotifyAPIController extends Controller
             $lastFive = [];
             for($i = 0; $i < 5; $i++)
             {
-                $artists = "";
-    
-                for($j = 1; $j <= count($albums[$i]->artists); $j++)
-                {
-                    if($j != count($albums[$i]->artists) && count($albums[$i]->artists) > 1)
-                    { $artists .= $albums[$i]->artists[$j-1]->name . ", ";}
-                    else
-                    { $artists .= $albums[$i]->artists[$j-1]->name; }
-        
-                }
-    
-                $artists .= " - " . $albums[$i]->name;
+      
+                $name = Globals::getFullName($albums[$i]);
                 array_push($lastFive, ['id' => $albums[$i]->id,
                                         'cover' => $albums[$i]->images[count($albums[$i]->images) - 1]->url,
-                                        'name' => $artists,
+                                        'name' => $name,
                                         'url' => $albums[$i]->external_urls->spotify]);
             }
     
@@ -299,6 +279,62 @@ class SpotifyAPIController extends Controller
             return response()->json(['overallMinutes' => $overallMinutes, 'overallHours' => $overallHours,
                                     'overallDays' => $overallDays, 'overallMonths' => $overallMonths]);
         }
+    }
+
+    //пять самых длинных треков
+    public function getFiveLongestTracks(Request $request)
+    {
+          //получаем все треки
+          $tracks = Globals::getUserLibraryJson("tracks", $request);
+
+          if($tracks != false)
+          {  
+
+            //выбираем название трека, длину, id и обложку
+            $tracksClean = [];
+
+            foreach($tracks as $track)
+            {
+                $id = $track->id;
+                $duration = $track->duration_ms;
+                $cover = $track->album->images[count($track->album->images) - 1]->url;
+                $name = Globals::getFullName($track);
+                $url = $track->external_urls->spotify;
+                array_push($tracksClean, ['id' => $id, 'duration' => $duration, 'cover' => $cover, 'name' => $name, 'url' => $url]);
+            }
+
+            //сортировка по убыванию по ключу duration (длительность)
+            usort($tracksClean, function ($a, $b){
+                return strnatcmp( $b['duration'], $a['duration']);
+            });
+
+            //берем верхние пять элементов
+            $topFive = array_slice($tracksClean, 0, 5, true);
+            $newTopFive = [];
+            foreach($topFive as $track)
+            {
+                //вычисляем длину трека в минутах и секундах
+                $durationMs = $track['duration'];
+                $durationS = $durationMs / 1000;
+                $durationMinutes = round($durationS / 60, 3);
+                
+                $durationSeconds = floor(60 * ($durationMinutes - floor($durationMinutes)));
+
+                $minutesStr = strval(floor($durationMinutes));
+                $secondsStr = strval($durationSeconds);
+                
+                if(strlen($secondsStr) == 1)
+                { $secondsStr = "0" . $secondsStr; }
+
+                $durationStr = $minutesStr.":".$secondsStr;
+
+                array_push($newTopFive, ['id' => $track['id'], 'duration' => $durationStr, 
+                                        'cover' => $track['cover'], 'name' => $track['name'], 'url' => $track['url']]);
+            }
+
+            return response()->json($newTopFive);
+
+          }
     }
 
 

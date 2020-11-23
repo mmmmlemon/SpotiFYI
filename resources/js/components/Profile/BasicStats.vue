@@ -28,7 +28,7 @@
 
     <!-- часы и время -->
     <HoursAndMinutes v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1" class="fade_in_slow_anim"
-        :userLibraryTime="userLibraryTime" />
+        :userLibraryTime="userLibraryTime" :fiveLongest="fiveLongest"/>
     <hr v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1">
     </div>
 
@@ -47,6 +47,7 @@ export default {
 
         //время
         this.$store.dispatch('getUserLibraryTime');
+        this.$store.dispatch('getFiveLongest');
     },
     computed: {
         //библиотека пользователя
@@ -69,6 +70,10 @@ export default {
         //время
         userLibraryTime: function(){
             return this.$store.state.profilePage.userLibraryTime;
+        },
+        //пять самых длинных
+        fiveLongest: function(){
+            return this.$store.state.profilePage.fiveLongest;
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="row ">
-        <div class="col-sm-8 padding_10">
+        <div class="col-sm-12 padding_10">
             <!-- минуты -->
             <p>Всего в твою библиотеку добавлено
                 <b style="font-size:25pt;" class="border_underline">
@@ -27,57 +27,20 @@
                 </b> песен.
             </p>
         </div>
-        <div class="col-md-4">
-            <p style="font-size: 10pt;"><b>Пять твоих самых длинных песен</b></p>
-            <div class="row">
+        <hr>
+        <div class="col-md-6">
+            <h4 class="border_underline"><b>Пять твоих самых длинных песен</b></h4>
+            <div class="row fade_in_anim" v-for="item in fiveLongest" :key="item.id">
                     <div class="col-2">
-                        <img src="/black.png" alt="" class="rounded-circle album_icon">
+                        <a :href="item.url" target="_blank">
+                            <img :src="item.cover" class="rounded-circle album_icon">
+                        </a>
                     </div>
                     <div class="col-10">
-                        <p style="font-size:10pt;">Band Name - Track Title (15:15)</p>
+                        <p class="font_10pt"><b>{{item.name}}</b></p>
+                        <p class="font_10pt">{{item.duration}}</p>
                     </div>
-            
             </div>
-            <div class="row">
-                    <div class="col-2">
-                        <img src="/black.png" alt="" class="rounded-circle album_icon">
-                    </div>
-                    <div class="col-10">
-                        <p style="font-size:10pt;">Band Name - Track Title (15:15)</p>
-                    </div>
-            
-            </div>
-               <div class="row">
-                    <div class="col-2">
-                        <img src="/black.png" alt="" class="rounded-circle album_icon">
-                    </div>
-                    <div class="col-10">
-                        <p style="font-size:10pt;">Band Name - Track Title (15:15)</p>
-                    </div>
-            
-            </div>
-               <div class="row">
-                    <div class="col-2">
-                        <img src="/black.png" alt="" class="rounded-circle album_icon">
-                    </div>
-                    <div class="col-10">
-                        <p style="font-size:10pt;">Band Name - Track Title (15:15)</p>
-                    </div>
-            
-            </div>
-               <div class="row">
-                    <div class="col-2">
-                        <img src="/black.png" alt="" class="rounded-circle album_icon">
-                    </div>
-                    <div class="col-10">
-                        <p style="font-size:10pt;">Band Name - Track Title (15:15)</p>
-                    </div>
-            
-            </div>
-          
-        </div>
-        <div class="col-12 time_fact">
-            <h2>За это время Галилео Галилей загалелеил галереи.</h2>
         </div>
     </div>
 </template>
@@ -85,8 +48,8 @@
 <script>
 export default {
        props: {
-        userLibraryTime: { default: false, string: Array},
-
+        userLibraryTime: { default: false },
+        fiveLongest: { default: false }
     }
 }
 </script>

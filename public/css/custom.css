@@ -105,6 +105,18 @@
     cursor: pointer;
 }
 
+.border_underline_text{
+    text-decoration: underline;
+    text-decoration-color: #1b77b9;
+    transition: text-decoration-color 0.2s ease-in-out;
+}
+
+.border_underline_text:hover{
+    text-decoration-color: white;
+    cursor: pointer;
+}
+
+
 .time_fact{
     background-color: black; 
     margin-top:20px; 
@@ -115,4 +127,8 @@
 
 .unbold{
     font-weight: normal;
+}
+
+.font_10pt{
+    font-size:10pt;
 }

@@ -2252,6 +2252,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getSpotifyArtists'); //время
 
     this.$store.dispatch('getUserLibraryTime');
+    this.$store.dispatch('getFiveLongest');
   },
   computed: {
     //библиотека пользователя
@@ -2274,6 +2275,10 @@ __webpack_require__.r(__webpack_exports__);
     //время
     userLibraryTime: function userLibraryTime() {
       return this.$store.state.profilePage.userLibraryTime;
+    },
+    //пять самых длинных
+    fiveLongest: function fiveLongest() {
+      return this.$store.state.profilePage.fiveLongest;
     }
   }
 });
@@ -2336,48 +2341,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     userLibraryTime: {
-      "default": false,
-      string: Array
+      "default": false
+    },
+    fiveLongest: {
+      "default": false
     }
   }
 });
@@ -38840,7 +38810,10 @@ var render = function() {
             _vm.spotifyArtists != -1
               ? _c("HoursAndMinutes", {
                   staticClass: "fade_in_slow_anim",
-                  attrs: { userLibraryTime: _vm.userLibraryTime }
+                  attrs: {
+                    userLibraryTime: _vm.userLibraryTime,
+                    fiveLongest: _vm.fiveLongest
+                  }
                 })
               : _vm._e(),
             _vm._v(" "),
@@ -38891,7 +38864,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row " }, [
-    _c("div", { staticClass: "col-sm-8 padding_10" }, [
+    _c("div", { staticClass: "col-sm-12 padding_10" }, [
       _c("p", [
         _vm._v("Всего в твою библиотеку добавлено\n            "),
         _c(
@@ -38967,9 +38940,39 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("hr"),
     _vm._v(" "),
-    _vm._m(1)
+    _c(
+      "div",
+      { staticClass: "col-md-6" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.fiveLongest, function(item) {
+          return _c("div", { key: item.id, staticClass: "row fade_in_anim" }, [
+            _c("div", { staticClass: "col-2" }, [
+              _c("a", { attrs: { href: item.url, target: "_blank" } }, [
+                _c("img", {
+                  staticClass: "rounded-circle album_icon",
+                  attrs: { src: item.cover }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-10" }, [
+              _c("p", { staticClass: "font_10pt" }, [
+                _c("b", [_vm._v(_vm._s(item.name))])
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "font_10pt" }, [
+                _vm._v(_vm._s(item.duration))
+              ])
+            ])
+          ])
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
@@ -38977,93 +38980,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("p", { staticStyle: { "font-size": "10pt" } }, [
-        _c("b", [_vm._v("Пять твоих самых длинных песен")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-2" }, [
-          _c("img", {
-            staticClass: "rounded-circle album_icon",
-            attrs: { src: "/black.png", alt: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("p", { staticStyle: { "font-size": "10pt" } }, [
-            _vm._v("Band Name - Track Title (15:15)")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-2" }, [
-          _c("img", {
-            staticClass: "rounded-circle album_icon",
-            attrs: { src: "/black.png", alt: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("p", { staticStyle: { "font-size": "10pt" } }, [
-            _vm._v("Band Name - Track Title (15:15)")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-2" }, [
-          _c("img", {
-            staticClass: "rounded-circle album_icon",
-            attrs: { src: "/black.png", alt: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("p", { staticStyle: { "font-size": "10pt" } }, [
-            _vm._v("Band Name - Track Title (15:15)")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-2" }, [
-          _c("img", {
-            staticClass: "rounded-circle album_icon",
-            attrs: { src: "/black.png", alt: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("p", { staticStyle: { "font-size": "10pt" } }, [
-            _vm._v("Band Name - Track Title (15:15)")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-2" }, [
-          _c("img", {
-            staticClass: "rounded-circle album_icon",
-            attrs: { src: "/black.png", alt: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("p", { staticStyle: { "font-size": "10pt" } }, [
-            _vm._v("Band Name - Track Title (15:15)")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 time_fact" }, [
-      _c("h2", [_vm._v("За это время Галилео Галилей загалелеил галереи.")])
+    return _c("h4", { staticClass: "border_underline" }, [
+      _c("b", [_vm._v("Пять твоих самых длинных песен")])
     ])
   }
 ]
@@ -56946,7 +56864,8 @@ var ProfilePageStates = {
     spotifyTracks: -1,
     spotifyAlbums: -1,
     spotifyArtists: -1,
-    userLibraryTime: -1
+    userLibraryTime: -1,
+    fiveLongest: -1
   },
   getters: {//геттеры
   },
@@ -56992,6 +56911,13 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
         state.userLibraryTime = response.data;
       });
+    },
+    //пять самых длинных
+    getFiveLongest: function getFiveLongest(state) {
+      var uri = '/api/get_five_longest';
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
+        state.fiveLongest = response.data;
+      });
     }
   },
   actions: {
@@ -57018,6 +56944,10 @@ var ProfilePageStates = {
     //посчитать кол-во времени
     getUserLibraryTime: function getUserLibraryTime(context) {
       context.commit('getUserLibraryTime');
+    },
+    //пять самых длинных
+    getFiveLongest: function getFiveLongest(context) {
+      context.commit('getFiveLongest');
     }
   }
 };

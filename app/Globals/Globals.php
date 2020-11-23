@@ -94,8 +94,6 @@
                 return $json;
             }
 
-
-
             //выбрать правильно окончание для слова (десять минуТ, две минуТЫ, одна минуТА и т.п)
             //число, первый вариант окончания (5 минуТ, 0 минуТ, 10 минуТ), второй вариант окончания (1 минуТА), третий вариант окончания (2, 3, 4 минуТЫ)
             public static function pickTheWord($number, $firstWord, $secondWord, $thirdWord)
@@ -110,6 +108,22 @@
                 { return " " . $firstWord;}
             }
 
+            //получить название трека или альбома (исполнители через запятую + название)
+            public static function getFullName($item)
+            {
+                $artists = "";
+                
+                for($j = 1; $j <= count($item->artists); $j++)
+                {
+                    if($j != count($item->artists) && count($item->artists) > 1)
+                    { $artists .= $item->artists[$j-1]->name . ", ";}
+                    else
+                    { $artists .= $item->artists[$j-1]->name; }
+        
+                }
+    
+                return $artists . " - " . $item->name;
+            }
     }
 
 ?>
