@@ -1,11 +1,31 @@
 <template>
     <div class="row ">
-        <div class="col-sm-8">
-            <p>Всего в твою библиотеку добавлено <b style="font-size:25pt;" class="border_underline">100500 минут</b> музыки.</p>
-            <p>В других исчислениях это <b class="border_underline">более 1 000 000 секунд</b></p>
-            <b class="border_underline">60 дней</b></p>
-            <p><b class="border_underline">2 месяца</b></p>
-            <p>или <b style="font-size:18pt;" class="border_underline">более 1 года</b> музыки</p>
+        <div class="col-sm-8 padding_10">
+            <!-- минуты -->
+            <p>Всего в твою библиотеку добавлено
+                <b style="font-size:25pt;" class="border_underline">
+                     {{userLibraryTime['overallMinutes']}}
+                </b> музыки.
+            </p>
+            <!-- часы -->
+            <p v-if="userLibraryTime['overallHours'] != 0">
+                <b v-if="userLibraryTime['overallDays'] == 0" class="unbold">Или </b> 
+                <b v-else class="unbold">В других исчислениях это</b> 
+                <b class="border_underline">{{userLibraryTime['overallHours']}}</b>
+                <b v-if="userLibraryTime['overallDays'] == 0" class="unbold"> песен.</b>
+            </p>
+            <!-- дни -->
+            <p v-if="userLibraryTime['overallDays'] != 0">
+                <b v-if="userLibraryTime['overallMonths'] == 0" class="unbold">или </b>
+                <b class="border_underline">{{userLibraryTime['overallDays']}}</b>
+                <b v-if="userLibraryTime['overallMonths'] == 0" class="unbold"> песен.</b>
+            </p>
+            <!-- месяцы -->
+            <p v-if="userLibraryTime['overallMonths'] != 0">или 
+                <b style="font-size:18pt;" class="border_underline">
+                    {{userLibraryTime['overallMonths']}}
+                </b> песен.
+            </p>
         </div>
         <div class="col-md-4">
             <p style="font-size: 10pt;"><b>Пять твоих самых длинных песен</b></p>
@@ -64,6 +84,9 @@
 
 <script>
 export default {
-    
+       props: {
+        userLibraryTime: { default: false, string: Array},
+
+    }
 }
 </script>

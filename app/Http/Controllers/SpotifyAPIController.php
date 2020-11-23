@@ -280,4 +280,46 @@ class SpotifyAPIController extends Controller
         return response()->json($array);
     }
 
+    //посчитать общее время всех треков
+    public function getUserLibraryTime(Request $request)
+    {
+        //открываем файл треков
+        $file = "";
+        try{
+            $file = File::get(storage_path("app/public/user_libraries/" . $request->cookie('rand_name') . "/tracks.json"));
+        } 
+        catch (FileNotFoundException $e) {
+            //если нет такого файла, то возвращаем false
+            return response()->json(false);
+        }
+
+        $tracks = json_decode($file);
+
+        $overallMinutes = 0;
+        $overallSeconds = 0;
+
+        foreach($tracks as $track)
+        {
+            $overallMinutes += round($track->duration_ms / 60000);
+        }
+
+        $overallHours = floor($overallMinutes / 60);
+        $overallDays = floor($overallHours / 24);
+        $overallMonths = floor($overallDays / 30);
+
+        $overallMinutes .= Globals::pickTheWord($overallMinutes, "минут", "минута", "минуты");
+
+        if($overallHours > 0)
+        {  $overallHours .= Globals::pickTheWord($overallHours, "часов", "час", "часа"); }
+        
+        if($overallDays > 0)
+        {  $overallDays .= Globals::pickTheWord($overallDays, "дней", "день", "дня"); }
+        
+        if($overallMonths > 0)
+        {  $overallMonths .= Globals::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
+
+        return response()->json(['overallMinutes' => $overallMinutes, 'overallHours' => $overallHours,
+                                'overallDays' => $overallDays, 'overallMonths' => $overallMonths]);
+    }
+
 }

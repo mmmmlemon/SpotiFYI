@@ -3,7 +3,7 @@
     <!-- если библиотека пользователя не загружена, то показываем лоадер -->
     <div v-if="spotifyUserLibrary === -1">
         <Loader />
-        <h6 class="text-center">Загружаю библиотку пользователя...</h6>
+        <h6 class="text-center">Загружаю библиотеку пользователя...</h6>
     </div>
     <div v-else-if="spotifyUserLibrary === false">
         <Error errorMessage="Не удалось загрузить библиотеку пользователя." />
@@ -27,7 +27,8 @@
     <hr class="fade_in_anim" v-if="spotifyArtists !== -1 || spotifyAlbums != -1 || spotifyTracks != -1">
 
     <!-- часы и время -->
-    <HoursAndMinutes v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1" class="fade_in_slow_anim"/>
+    <HoursAndMinutes v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1" class="fade_in_slow_anim"
+        :userLibraryTime="userLibraryTime" />
     <hr v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1">
     </div>
 
@@ -43,6 +44,9 @@ export default {
         this.$store.dispatch('getSpotifyTracks');
         this.$store.dispatch('getSpotifyAlbums');
         this.$store.dispatch('getSpotifyArtists');
+
+        //время
+        this.$store.dispatch('getUserLibraryTime');
     },
     computed: {
         //библиотека пользователя
@@ -61,6 +65,10 @@ export default {
         //кол-во подписок и случайные пять
         spotifyArtists: function(){
             return this.$store.state.profilePage.spotifyArtists;
+        },
+        //время
+        userLibraryTime: function(){
+            return this.$store.state.profilePage.userLibraryTime;
         }
     }
 }

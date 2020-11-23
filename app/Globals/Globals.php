@@ -74,6 +74,22 @@
                     return false;
                 }
             }
+
+
+            //выбрать правильно окончание для слова (десять минуТ, две минуТЫ, одна минуТА и т.п)
+            //число, первый вариант окончания (5 минуТ, 0 минуТ, 10 минуТ), второй вариант окончания (1 минуТА), третий вариант окончания (2, 3, 4 минуТЫ)
+            public static function pickTheWord($number, $firstWord, $secondWord, $thirdWord)
+            {
+                $lastNumber = strval($number)[strlen(strval($number)) - 1];
+
+                if($lastNumber == "1")
+                { return " " . $secondWord; }
+                elseif($lastNumber == "2" || $lastNumber == "3" || $lastNumber == "4")
+                { return " " . $thirdWord; }
+                else
+                { return " " . $firstWord;}
+            }
+
     }
 
 ?>

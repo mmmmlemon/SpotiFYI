@@ -2242,13 +2242,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получаем библиотеку пользователя и статистику
     this.$store.dispatch('getSpotifyUserLibrary');
     this.$store.dispatch('getSpotifyTracks');
     this.$store.dispatch('getSpotifyAlbums');
-    this.$store.dispatch('getSpotifyArtists');
+    this.$store.dispatch('getSpotifyArtists'); //время
+
+    this.$store.dispatch('getUserLibraryTime');
   },
   computed: {
     //библиотека пользователя
@@ -2267,6 +2270,10 @@ __webpack_require__.r(__webpack_exports__);
     //кол-во подписок и случайные пять
     spotifyArtists: function spotifyArtists() {
       return this.$store.state.profilePage.spotifyArtists;
+    },
+    //время
+    userLibraryTime: function userLibraryTime() {
+      return this.$store.state.profilePage.userLibraryTime;
     }
   }
 });
@@ -2346,7 +2353,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    userLibraryTime: {
+      "default": false,
+      string: Array
+    }
+  }
+});
 
 /***/ }),
 
@@ -38741,7 +38775,7 @@ var render = function() {
             _c("Loader"),
             _vm._v(" "),
             _c("h6", { staticClass: "text-center" }, [
-              _vm._v("Загружаю библиотку пользователя...")
+              _vm._v("Загружаю библиотеку пользователя...")
             ])
           ],
           1
@@ -38804,7 +38838,10 @@ var render = function() {
             _vm.spotifyTracks !== -1 &&
             _vm.spotifyAlbums != -1 &&
             _vm.spotifyArtists != -1
-              ? _c("HoursAndMinutes", { staticClass: "fade_in_slow_anim" })
+              ? _c("HoursAndMinutes", {
+                  staticClass: "fade_in_slow_anim",
+                  attrs: { userLibraryTime: _vm.userLibraryTime }
+                })
               : _vm._e(),
             _vm._v(" "),
             _vm.spotifyTracks !== -1 &&
@@ -38853,140 +38890,180 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row " }, [
+    _c("div", { staticClass: "col-sm-8 padding_10" }, [
+      _c("p", [
+        _vm._v("Всего в твою библиотеку добавлено\n            "),
+        _c(
+          "b",
+          {
+            staticClass: "border_underline",
+            staticStyle: { "font-size": "25pt" }
+          },
+          [
+            _vm._v(
+              "\n                 " +
+                _vm._s(_vm.userLibraryTime["overallMinutes"]) +
+                "\n            "
+            )
+          ]
+        ),
+        _vm._v(" музыки.\n        ")
+      ]),
+      _vm._v(" "),
+      _vm.userLibraryTime["overallHours"] != 0
+        ? _c("p", [
+            _vm.userLibraryTime["overallDays"] == 0
+              ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
+              : _c("b", { staticClass: "unbold" }, [
+                  _vm._v("В других исчислениях это")
+                ]),
+            _vm._v(" "),
+            _c("b", { staticClass: "border_underline" }, [
+              _vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))
+            ]),
+            _vm._v(" "),
+            _vm.userLibraryTime["overallDays"] == 0
+              ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.userLibraryTime["overallDays"] != 0
+        ? _c("p", [
+            _vm.userLibraryTime["overallMonths"] == 0
+              ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("b", { staticClass: "border_underline" }, [
+              _vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))
+            ]),
+            _vm._v(" "),
+            _vm.userLibraryTime["overallMonths"] == 0
+              ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.userLibraryTime["overallMonths"] != 0
+        ? _c("p", [
+            _vm._v("или \n            "),
+            _c(
+              "b",
+              {
+                staticClass: "border_underline",
+                staticStyle: { "font-size": "18pt" }
+              },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.userLibraryTime["overallMonths"]) +
+                    "\n            "
+                )
+              ]
+            ),
+            _vm._v(" песен.\n        ")
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row " }, [
-      _c("div", { staticClass: "col-sm-8" }, [
-        _c("p", [
-          _vm._v("Всего в твою библиотеку добавлено "),
-          _c(
-            "b",
-            {
-              staticClass: "border_underline",
-              staticStyle: { "font-size": "25pt" }
-            },
-            [_vm._v("100500 минут")]
-          ),
-          _vm._v(" музыки.")
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("В других исчислениях это "),
-          _c("b", { staticClass: "border_underline" }, [
-            _vm._v("более 1 000 000 секунд")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("b", { staticClass: "border_underline" }, [_vm._v("60 дней")]),
-        _c("p"),
-        _vm._v(" "),
-        _c("p", [
-          _c("b", { staticClass: "border_underline" }, [_vm._v("2 месяца")])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("или "),
-          _c(
-            "b",
-            {
-              staticClass: "border_underline",
-              staticStyle: { "font-size": "18pt" }
-            },
-            [_vm._v("более 1 года")]
-          ),
-          _vm._v(" музыки")
-        ])
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", { staticStyle: { "font-size": "10pt" } }, [
+        _c("b", [_vm._v("Пять твоих самых длинных песен")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("p", { staticStyle: { "font-size": "10pt" } }, [
-          _c("b", [_vm._v("Пять твоих самых длинных песен")])
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-2" }, [
+          _c("img", {
+            staticClass: "rounded-circle album_icon",
+            attrs: { src: "/black.png", alt: "" }
+          })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-2" }, [
-            _c("img", {
-              staticClass: "rounded-circle album_icon",
-              attrs: { src: "/black.png", alt: "" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
-            _c("p", { staticStyle: { "font-size": "10pt" } }, [
-              _vm._v("Band Name - Track Title (15:15)")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-2" }, [
-            _c("img", {
-              staticClass: "rounded-circle album_icon",
-              attrs: { src: "/black.png", alt: "" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
-            _c("p", { staticStyle: { "font-size": "10pt" } }, [
-              _vm._v("Band Name - Track Title (15:15)")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-2" }, [
-            _c("img", {
-              staticClass: "rounded-circle album_icon",
-              attrs: { src: "/black.png", alt: "" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
-            _c("p", { staticStyle: { "font-size": "10pt" } }, [
-              _vm._v("Band Name - Track Title (15:15)")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-2" }, [
-            _c("img", {
-              staticClass: "rounded-circle album_icon",
-              attrs: { src: "/black.png", alt: "" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
-            _c("p", { staticStyle: { "font-size": "10pt" } }, [
-              _vm._v("Band Name - Track Title (15:15)")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-2" }, [
-            _c("img", {
-              staticClass: "rounded-circle album_icon",
-              attrs: { src: "/black.png", alt: "" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
-            _c("p", { staticStyle: { "font-size": "10pt" } }, [
-              _vm._v("Band Name - Track Title (15:15)")
-            ])
+        _c("div", { staticClass: "col-10" }, [
+          _c("p", { staticStyle: { "font-size": "10pt" } }, [
+            _vm._v("Band Name - Track Title (15:15)")
           ])
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-12 time_fact" }, [
-        _c("h2", [_vm._v("За это время Галилео Галилей загалелеил галереи.")])
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-2" }, [
+          _c("img", {
+            staticClass: "rounded-circle album_icon",
+            attrs: { src: "/black.png", alt: "" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-10" }, [
+          _c("p", { staticStyle: { "font-size": "10pt" } }, [
+            _vm._v("Band Name - Track Title (15:15)")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-2" }, [
+          _c("img", {
+            staticClass: "rounded-circle album_icon",
+            attrs: { src: "/black.png", alt: "" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-10" }, [
+          _c("p", { staticStyle: { "font-size": "10pt" } }, [
+            _vm._v("Band Name - Track Title (15:15)")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-2" }, [
+          _c("img", {
+            staticClass: "rounded-circle album_icon",
+            attrs: { src: "/black.png", alt: "" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-10" }, [
+          _c("p", { staticStyle: { "font-size": "10pt" } }, [
+            _vm._v("Band Name - Track Title (15:15)")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-2" }, [
+          _c("img", {
+            staticClass: "rounded-circle album_icon",
+            attrs: { src: "/black.png", alt: "" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-10" }, [
+          _c("p", { staticStyle: { "font-size": "10pt" } }, [
+            _vm._v("Band Name - Track Title (15:15)")
+          ])
+        ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 time_fact" }, [
+      _c("h2", [_vm._v("За это время Галилео Галилей загалелеил галереи.")])
     ])
   }
 ]
@@ -56868,7 +56945,8 @@ var ProfilePageStates = {
     spotifyUserLibrary: -1,
     spotifyTracks: -1,
     spotifyAlbums: -1,
-    spotifyArtists: -1
+    spotifyArtists: -1,
+    userLibraryTime: -1
   },
   getters: {//геттеры
   },
@@ -56907,6 +56985,13 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
         state.spotifyArtists = response.data;
       });
+    },
+    //посчитать кол-во времени
+    getUserLibraryTime: function getUserLibraryTime(state) {
+      var uri = '/api/get_user_library_time';
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
+        state.userLibraryTime = response.data;
+      });
     }
   },
   actions: {
@@ -56929,6 +57014,10 @@ var ProfilePageStates = {
     //получить кол-во подписок в библиотеке и случайные пять
     getSpotifyArtists: function getSpotifyArtists(context) {
       context.commit('getSpotifyArtists');
+    },
+    //посчитать кол-во времени
+    getUserLibraryTime: function getUserLibraryTime(context) {
+      context.commit('getUserLibraryTime');
     }
   }
 };

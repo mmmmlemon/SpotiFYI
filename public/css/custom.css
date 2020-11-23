@@ -112,3 +112,7 @@
     padding: 20px;
     background-image: url('/img/times/galileo.jpg');
 }
+
+.unbold{
+    font-weight: normal;
+}

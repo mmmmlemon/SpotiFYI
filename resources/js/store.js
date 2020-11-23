@@ -70,6 +70,7 @@ const ProfilePageStates = {
         spotifyTracks: -1,
         spotifyAlbums: -1,
         spotifyArtists: -1,
+        userLibraryTime: -1,
       },
 
     getters:{
@@ -112,6 +113,13 @@ const ProfilePageStates = {
           state.spotifyArtists = response.data;
         });
       },
+      //посчитать кол-во времени
+      getUserLibraryTime(state){
+        let uri = '/api/get_user_library_time';
+        axios.get(uri).then((response) => {
+          state.userLibraryTime = response.data;
+        });
+      },
     },
 
     actions: {
@@ -134,6 +142,10 @@ const ProfilePageStates = {
       //получить кол-во подписок в библиотеке и случайные пять
       getSpotifyArtists(context){
         context.commit('getSpotifyArtists');
+      },
+      //посчитать кол-во времени
+      getUserLibraryTime(context){
+        context.commit('getUserLibraryTime');
       },
     }
 }
