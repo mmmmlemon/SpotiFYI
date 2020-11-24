@@ -119,10 +119,38 @@
                     { $artists .= $item->artists[$j-1]->name . ", ";}
                     else
                     { $artists .= $item->artists[$j-1]->name; }
-        
                 }
     
                 return $artists . " - " . $item->name;
+            }
+
+            //функция сортировки по убыванию и по возрастанию
+            private static function sortFunction($key, $order) 
+            {
+                if($order == "asc") //если порядок - по возрастанию
+                {
+                    return function ($a, $b) use ($key) {
+                        return strnatcmp($a[$key], $b[$key]);
+                    };
+                }
+                else if($order == "desc") //если порядок - по убыванию
+                {
+                    return function ($a, $b) use ($key) {
+                        return strnatcmp($b[$key], $a[$key]);
+                    };
+                }
+                else
+                { return false; } 
+            }
+
+            //сортировка массива по ключу
+            public static function sortArrayByKey($array, $key, $order)
+            {
+                $arrayCopy = $array;
+
+                usort($arrayCopy, Globals::sortFunction($key, $order));
+
+                return $arrayCopy;
             }
     }
 

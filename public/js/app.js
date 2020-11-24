@@ -2243,6 +2243,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получаем библиотеку пользователя и статистику
@@ -2252,7 +2253,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getSpotifyArtists'); //время
 
     this.$store.dispatch('getUserLibraryTime');
-    this.$store.dispatch('getFiveLongest');
+    this.$store.dispatch('getFiveLongestAndShortestTracks');
   },
   computed: {
     //библиотека пользователя
@@ -2277,8 +2278,8 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.profilePage.userLibraryTime;
     },
     //пять самых длинных
-    fiveLongest: function fiveLongest() {
-      return this.$store.state.profilePage.fiveLongest;
+    fiveTracks: function fiveTracks() {
+      return this.$store.state.profilePage.fiveTracks;
     }
   }
 });
@@ -2336,17 +2337,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     userLibraryTime: {
-      "default": false
-    },
-    fiveLongest: {
       "default": false
     }
   }
@@ -2429,6 +2422,82 @@ __webpack_require__.r(__webpack_exports__);
     minItemCount: {
       "default": 10,
       type: Number
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    fiveLongest: {
+      "default": -1
+    },
+    fiveShortest: {
+      "default": -1
     }
   }
 });
@@ -38810,18 +38879,16 @@ var render = function() {
             _vm.spotifyArtists != -1
               ? _c("HoursAndMinutes", {
                   staticClass: "fade_in_slow_anim",
-                  attrs: {
-                    userLibraryTime: _vm.userLibraryTime,
-                    fiveLongest: _vm.fiveLongest
-                  }
+                  attrs: { userLibraryTime: _vm.userLibraryTime }
                 })
               : _vm._e(),
             _vm._v(" "),
-            _vm.spotifyTracks !== -1 &&
-            _vm.spotifyAlbums != -1 &&
-            _vm.spotifyArtists != -1
-              ? _c("hr")
-              : _vm._e()
+            _c("LongestAndShortest", {
+              attrs: {
+                fiveLongest: _vm.fiveTracks["fiveLongest"],
+                fiveShortest: _vm.fiveTracks["fiveShortest"]
+              }
+            })
           ],
           1
         )
@@ -38863,128 +38930,112 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row " }, [
-    _c("div", { staticClass: "col-sm-12 padding_10" }, [
-      _c("p", [
-        _vm._v("Всего в твою библиотеку добавлено\n            "),
-        _c(
-          "b",
-          {
-            staticClass: "border_underline",
-            staticStyle: { "font-size": "25pt" }
-          },
+  return _c("div", [
+    _vm.userLibraryTime === -1
+      ? _c("div", [_c("Loader")], 1)
+      : _vm.userLibraryTime === false
+      ? _c(
+          "div",
           [
-            _vm._v(
-              "\n                 " +
-                _vm._s(_vm.userLibraryTime["overallMinutes"]) +
-                "\n            "
-            )
-          ]
-        ),
-        _vm._v(" музыки.\n        ")
-      ]),
-      _vm._v(" "),
-      _vm.userLibraryTime["overallHours"] != 0
-        ? _c("p", [
-            _vm.userLibraryTime["overallDays"] == 0
-              ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
-              : _c("b", { staticClass: "unbold" }, [
-                  _vm._v("В других исчислениях это")
-                ]),
-            _vm._v(" "),
-            _c("b", { staticClass: "border_underline" }, [
-              _vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))
-            ]),
-            _vm._v(" "),
-            _vm.userLibraryTime["overallDays"] == 0
-              ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.userLibraryTime["overallDays"] != 0
-        ? _c("p", [
-            _vm.userLibraryTime["overallMonths"] == 0
-              ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("b", { staticClass: "border_underline" }, [
-              _vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))
-            ]),
-            _vm._v(" "),
-            _vm.userLibraryTime["overallMonths"] == 0
-              ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.userLibraryTime["overallMonths"] != 0
-        ? _c("p", [
-            _vm._v("или \n            "),
+            _c("Error", {
+              attrs: {
+                type: "small",
+                errorMessage: "Не удалось загрузить треки"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.userLibraryTime != -1 && _vm.userLibraryTime != false
+      ? _c("div", { staticClass: "col-sm-12 text-center" }, [
+          _c("p", [
+            _vm._v("Всего в твою библиотеку добавлено\n            "),
             _c(
               "b",
               {
                 staticClass: "border_underline",
-                staticStyle: { "font-size": "18pt" }
+                staticStyle: { "font-size": "25pt" }
               },
               [
                 _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.userLibraryTime["overallMonths"]) +
+                  "\n                 " +
+                    _vm._s(_vm.userLibraryTime["overallMinutes"]) +
                     "\n            "
                 )
               ]
             ),
-            _vm._v(" песен.\n        ")
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col-md-6" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._l(_vm.fiveLongest, function(item) {
-          return _c("div", { key: item.id, staticClass: "row fade_in_anim" }, [
-            _c("div", { staticClass: "col-2" }, [
-              _c("a", { attrs: { href: item.url, target: "_blank" } }, [
-                _c("img", {
-                  staticClass: "rounded-circle album_icon",
-                  attrs: { src: item.cover }
-                })
+            _vm._v(" музыки.\n        ")
+          ]),
+          _vm._v(" "),
+          _vm.userLibraryTime["overallHours"] != 0
+            ? _c("p", [
+                _vm.userLibraryTime["overallDays"] == 0
+                  ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
+                  : _c("b", { staticClass: "unbold" }, [
+                      _vm._v("В других исчислениях это")
+                    ]),
+                _vm._v(" "),
+                _c("b", { staticClass: "border_underline" }, [
+                  _vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))
+                ]),
+                _vm._v(" "),
+                _vm.userLibraryTime["overallDays"] == 0
+                  ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+                  : _vm._e()
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-10" }, [
-              _c("p", { staticClass: "font_10pt" }, [
-                _c("b", [_vm._v(_vm._s(item.name))])
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "font_10pt" }, [
-                _vm._v(_vm._s(item.duration))
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userLibraryTime["overallDays"] != 0
+            ? _c("p", [
+                _vm.userLibraryTime["overallMonths"] == 0
+                  ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("b", { staticClass: "border_underline" }, [
+                  _vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))
+                ]),
+                _vm._v(" "),
+                _vm.userLibraryTime["overallMonths"] == 0
+                  ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+                  : _vm._e()
               ])
-            ])
-          ])
-        })
-      ],
-      2
-    )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userLibraryTime["overallMonths"] != 0
+            ? _c("p", [
+                _vm._v("или \n            "),
+                _c(
+                  "b",
+                  {
+                    staticClass: "border_underline",
+                    staticStyle: { "font-size": "18pt" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.userLibraryTime["overallMonths"]) +
+                        "\n            "
+                    )
+                  ]
+                ),
+                _vm._v(" песен.\n        ")
+              ])
+            : _vm._e()
+        ])
+      : _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: { type: "small", errorMessage: "Неизвестная ошибка" }
+            })
+          ],
+          1
+        ),
+    _vm._v(" "),
+    _c("hr")
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "border_underline" }, [
-      _c("b", [_vm._v("Пять твоих самых длинных песен")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39229,6 +39280,173 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=template&id=66c24794&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=template&id=66c24794& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _vm.fiveLongest === -1
+      ? _c("div", { staticClass: "col-md-6 padding_10" }, [_c("Loader")], 1)
+      : _vm.fiveLongest === false
+      ? _c(
+          "div",
+          { staticClass: "col-md-6 padding_10" },
+          [
+            _c("Error", {
+              attrs: {
+                type: "small",
+                errorMessage: "Не удалось загрузить треки"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.fiveLongest != -1
+      ? _c(
+          "div",
+          { staticClass: "col-md-6 padding_10" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.fiveLongest, function(item) {
+              return _c(
+                "div",
+                { key: item.id, staticClass: "row fade_in_anim" },
+                [
+                  _c("div", { staticClass: "col-2" }, [
+                    _c("a", { attrs: { href: item.url, target: "_blank" } }, [
+                      _c("img", {
+                        staticClass: "rounded-circle album_icon",
+                        attrs: { src: item.cover }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-10" }, [
+                    _c("p", { staticClass: "font_10pt" }, [
+                      _c("b", [_vm._v(_vm._s(item.name))])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "font_10pt" }, [
+                      _vm._v(_vm._s(item.duration))
+                    ])
+                  ])
+                ]
+              )
+            })
+          ],
+          2
+        )
+      : _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: { type: "small", errorMessage: "Неизвестная ошибка" }
+            })
+          ],
+          1
+        ),
+    _vm._v(" "),
+    _vm.fiveShortest === -1
+      ? _c("div", { staticClass: "col-md-6 padding_10" }, [_c("Loader")], 1)
+      : _vm.fiveShortest === false
+      ? _c(
+          "div",
+          { staticClass: "col-md-6 padding_10" },
+          [
+            _c("Error", {
+              attrs: {
+                type: "small",
+                errorMessage: "Не удалось загрузить треки"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.fiveShortest != -1
+      ? _c(
+          "div",
+          { staticClass: "col-md-6 padding_10" },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._l(_vm.fiveShortest, function(item) {
+              return _c(
+                "div",
+                { key: item.id, staticClass: "row fade_in_anim" },
+                [
+                  _c("div", { staticClass: "col-2" }, [
+                    _c("a", { attrs: { href: item.url, target: "_blank" } }, [
+                      _c("img", {
+                        staticClass: "rounded-circle album_icon",
+                        attrs: { src: item.cover }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-10" }, [
+                    _c("p", { staticClass: "font_10pt" }, [
+                      _c("b", [_vm._v(_vm._s(item.name))])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "font_10pt" }, [
+                      _vm._v(_vm._s(item.duration))
+                    ])
+                  ])
+                ]
+              )
+            })
+          ],
+          2
+        )
+      : _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: { type: "small", errorMessage: "Неизвестная ошибка" }
+            })
+          ],
+          1
+        ),
+    _vm._v(" "),
+    _c("hr")
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "border_underline" }, [
+      _c("b", [_vm._v("Пять самых длинных песен")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "border_underline" }, [
+      _c("b", [_vm._v("Пять самых коротких песен")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -55883,7 +56101,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Misc/Loader.vue */ "./resources/js/components/Misc/Loader.vue");
 /* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
 /* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile/BasicStats/LongestAndShortest.vue */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55903,6 +56122,8 @@ Vue.component('Loader', _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__
 Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
 Vue.component('HoursAndMinutes', _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
+
+Vue.component('LongestAndShortest', _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -55914,7 +56135,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_7__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_8__["default"]
 });
 
 /***/ }),
@@ -56585,6 +56806,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/LongestAndShortest.vue ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LongestAndShortest_vue_vue_type_template_id_66c24794___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LongestAndShortest.vue?vue&type=template&id=66c24794& */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=template&id=66c24794&");
+/* harmony import */ var _LongestAndShortest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LongestAndShortest.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _LongestAndShortest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LongestAndShortest_vue_vue_type_template_id_66c24794___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LongestAndShortest_vue_vue_type_template_id_66c24794___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Profile/BasicStats/LongestAndShortest.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LongestAndShortest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./LongestAndShortest.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LongestAndShortest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=template&id=66c24794&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=template&id=66c24794& ***!
+  \**********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LongestAndShortest_vue_vue_type_template_id_66c24794___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./LongestAndShortest.vue?vue&type=template&id=66c24794& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats/LongestAndShortest.vue?vue&type=template&id=66c24794&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LongestAndShortest_vue_vue_type_template_id_66c24794___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LongestAndShortest_vue_vue_type_template_id_66c24794___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Profile/Top10.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/Profile/Top10.vue ***!
@@ -56865,7 +57155,7 @@ var ProfilePageStates = {
     spotifyAlbums: -1,
     spotifyArtists: -1,
     userLibraryTime: -1,
-    fiveLongest: -1
+    fiveTracks: -1
   },
   getters: {//геттеры
   },
@@ -56913,10 +57203,10 @@ var ProfilePageStates = {
       });
     },
     //пять самых длинных
-    getFiveLongest: function getFiveLongest(state) {
-      var uri = '/api/get_five_longest';
+    getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(state) {
+      var uri = '/api/get_five_tracks';
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.fiveLongest = response.data;
+        state.fiveTracks = response.data;
       });
     }
   },
@@ -56946,8 +57236,8 @@ var ProfilePageStates = {
       context.commit('getUserLibraryTime');
     },
     //пять самых длинных
-    getFiveLongest: function getFiveLongest(context) {
-      context.commit('getFiveLongest');
+    getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(context) {
+      context.commit('getFiveLongestAndShortestTracks');
     }
   }
 };

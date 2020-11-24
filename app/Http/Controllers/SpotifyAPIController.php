@@ -282,37 +282,17 @@ class SpotifyAPIController extends Controller
     }
 
     //пять самых длинных треков
-    public function getFiveLongestTracks(Request $request)
+    public function getFiveLongestAndShortestTracks(Request $request)
     {
-          //получаем все треки
-          $tracks = Globals::getUserLibraryJson("tracks", $request);
 
-          if($tracks != false)
-          {  
+        //ф-ция, подсчет времени длительности треков
+        function countTime($array)
+        {
+            $newArray = [];
 
-            //выбираем название трека, длину, id и обложку
-            $tracksClean = [];
-
-            foreach($tracks as $track)
+            foreach($array as $track)
             {
-                $id = $track->id;
-                $duration = $track->duration_ms;
-                $cover = $track->album->images[count($track->album->images) - 1]->url;
-                $name = Globals::getFullName($track);
-                $url = $track->external_urls->spotify;
-                array_push($tracksClean, ['id' => $id, 'duration' => $duration, 'cover' => $cover, 'name' => $name, 'url' => $url]);
-            }
-
-            //сортировка по убыванию по ключу duration (длительность)
-            usort($tracksClean, function ($a, $b){
-                return strnatcmp( $b['duration'], $a['duration']);
-            });
-
-            //берем верхние пять элементов
-            $topFive = array_slice($tracksClean, 0, 5, true);
-            $newTopFive = [];
-            foreach($topFive as $track)
-            {
+            
                 //вычисляем длину трека в минутах и секундах
                 $durationMs = $track['duration'];
                 $durationS = $durationMs / 1000;
@@ -328,13 +308,45 @@ class SpotifyAPIController extends Controller
 
                 $durationStr = $minutesStr.":".$secondsStr;
 
-                array_push($newTopFive, ['id' => $track['id'], 'duration' => $durationStr, 
+                array_push($newArray, ['id' => $track['id'], 'duration' => $durationStr, 
                                         'cover' => $track['cover'], 'name' => $track['name'], 'url' => $track['url']]);
             }
 
-            return response()->json($newTopFive);
+            return $newArray;
+        }
 
-          }
+        //получаем все треки
+        $tracks = Globals::getUserLibraryJson("tracks", $request);
+
+        if($tracks != false)
+        {  
+            //выбираем название трека, длину, id и обложку
+            $tracksClean = [];
+
+            foreach($tracks as $track)
+            {
+                $id = $track->id;
+                $duration = $track->duration_ms;
+                $cover = $track->album->images[count($track->album->images) - 1]->url;
+                $name = Globals::getFullName($track);
+                $url = $track->external_urls->spotify;
+                array_push($tracksClean, ['id' => $id, 'duration' => $duration, 'cover' => $cover, 'name' => $name, 'url' => $url]);
+            }
+            
+            //треки отсортированние по убыванию и возрастанию
+            $tracksDesc = Globals::sortArrayByKey($tracksClean, 'duration', 'desc');
+            $tracksAsc = Globals::sortArrayByKey($tracksClean, 'duration', 'asc');
+
+            //берем верхние пять элементов
+            $topFiveDesc = array_slice($tracksDesc, 0, 5, true);
+            $topFiveAsc = array_slice($tracksAsc, 0, 5, true);
+
+            //подсчет времени длительности треков
+            $topFiveDesc = countTime($topFiveDesc);
+            $topFiveAsc = countTime($topFiveAsc);
+
+            return response()->json(['fiveLongest' => $topFiveDesc, 'fiveShortest' => $topFiveAsc]);
+        }
     }
 
 

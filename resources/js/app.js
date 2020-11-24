@@ -22,6 +22,8 @@ import LastFive from './components/Profile/BasicStats/LastFive.vue';
 Vue.component('LastFive', LastFive);
 import HoursAndMinutes from './components/Profile/BasicStats/HoursAndMinutes.vue';
 Vue.component('HoursAndMinutes', HoursAndMinutes);
+import LongestAndShortest from './components/Profile/BasicStats/LongestAndShortest.vue';
+Vue.component('LongestAndShortest', LongestAndShortest);
 
 Vue.use(VueAxios, axios);
 

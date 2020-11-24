@@ -1,6 +1,12 @@
 <template>
-    <div class="row ">
-        <div class="col-sm-12 padding_10">
+    <div>
+        <div v-if="userLibraryTime === -1">
+            <Loader />
+        </div>
+        <div v-else-if="userLibraryTime === false">
+            <Error type="small" errorMessage="Не удалось загрузить треки"/>
+        </div>
+        <div v-else-if="userLibraryTime != -1 && userLibraryTime != false" class="col-sm-12 text-center">
             <!-- минуты -->
             <p>Всего в твою библиотеку добавлено
                 <b style="font-size:25pt;" class="border_underline">
@@ -27,29 +33,17 @@
                 </b> песен.
             </p>
         </div>
-        <hr>
-        <div class="col-md-6">
-            <h4 class="border_underline"><b>Пять твоих самых длинных песен</b></h4>
-            <div class="row fade_in_anim" v-for="item in fiveLongest" :key="item.id">
-                    <div class="col-2">
-                        <a :href="item.url" target="_blank">
-                            <img :src="item.cover" class="rounded-circle album_icon">
-                        </a>
-                    </div>
-                    <div class="col-10">
-                        <p class="font_10pt"><b>{{item.name}}</b></p>
-                        <p class="font_10pt">{{item.duration}}</p>
-                    </div>
-            </div>
+        <div v-else>
+            <Error type="small" errorMessage="Неизвестная ошибка" />
         </div>
+        <hr>
     </div>
 </template>
 
 <script>
 export default {
-       props: {
+    props: {
         userLibraryTime: { default: false },
-        fiveLongest: { default: false }
     }
 }
 </script>

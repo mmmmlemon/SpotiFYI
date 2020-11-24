@@ -71,7 +71,7 @@ const ProfilePageStates = {
         spotifyAlbums: -1,
         spotifyArtists: -1,
         userLibraryTime: -1,
-        fiveLongest: -1,
+        fiveTracks: -1,
       },
 
     getters:{
@@ -122,10 +122,10 @@ const ProfilePageStates = {
         });
       },
       //пять самых длинных
-      getFiveLongest(state){
-        let uri = '/api/get_five_longest';
+      getFiveLongestAndShortestTracks(state){
+        let uri = '/api/get_five_tracks';
         axios.get(uri).then((response) => {
-          state.fiveLongest = response.data;
+          state.fiveTracks = response.data;
         })
       },
     },
@@ -156,8 +156,8 @@ const ProfilePageStates = {
         context.commit('getUserLibraryTime');
       },
       //пять самых длинных
-      getFiveLongest(context){
-        context.commit('getFiveLongest');
+      getFiveLongestAndShortestTracks(context){
+        context.commit('getFiveLongestAndShortestTracks');
       },
     }
 }
