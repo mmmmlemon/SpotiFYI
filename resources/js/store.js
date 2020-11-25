@@ -80,96 +80,46 @@ const ProfilePageStates = {
     },
 
     mutations: {
-        //получить профиль
-        getSpotifyProfile(state){
-          let uri = '/api/get_spotify_profile';
-          axios.get(uri).then((response) => {
-            state.spotifyProfile = response.data;
+        //получить ответ от API (универсальная mutation для всех стейтов)
+        getAPIResponse(state, payload){
+          axios.get(payload.uri).then((response) => {
+            state[payload.state] = response.data;
           });
         },
-        //получить библиотеку пользователя
-        getSpotifyUserLibrary(state){
-          let uri = '/api/get_spotify_user_library';
-          axios.get(uri).then((response) => {
-            state.spotifyUserLibrary = response.data;
-          });
-        },
-        //получить кол-во треков в библиотеке и последние пять
-        getSpotifyTracks(state){
-          let uri = '/api/get_spotify_tracks';
-          axios.get(uri).then((response) => {
-            state.spotifyTracks = response.data;
-          });
-        },
-        //получить кол-во альбомов в библиотеке и последние пять
-        getSpotifyAlbums(state){
-          let uri = '/api/get_spotify_albums';
-          axios.get(uri).then((response) => {
-            state.spotifyAlbums = response.data;
-          });
-        },
-        //получить кол-во подписок в библиотеке и случайные пять
-        getSpotifyArtists(state){
-        let uri = '/api/get_spotify_artists';
-        axios.get(uri).then((response) => {
-          state.spotifyArtists = response.data;
-        });
-      },
-      //посчитать кол-во времени
-      getUserLibraryTime(state){
-        let uri = '/api/get_user_library_time';
-        axios.get(uri).then((response) => {
-          state.userLibraryTime = response.data;
-        });
-      },
-      //пять самых длинных
-      getFiveLongestAndShortestTracks(state){
-        let uri = '/api/get_five_tracks';
-        axios.get(uri).then((response) => {
-          state.fiveTracks = response.data;
-        });
-      },
-      //средняя длина трека
-      getAverageLengthOfTrack(state){
-        let uri = '/api/get_average_track_length';
-        axios.get(uri).then((response) => {
-          state.tracksMode = response.data;
-        });
-    },
   },
 
     actions: {
       //получить профиль
       getSpotifyProfile(context){
-        context.commit('getSpotifyProfile');
+        context.commit('getAPIResponse', {state: "spotifyProfile", uri: '/api/get_spotify_profile'});
       },
       //получить библиотку пользователя
       getSpotifyUserLibrary(context){
-        context.commit('getSpotifyUserLibrary');
+        context.commit('getAPIResponse', {state: "spotifyUserLibrary", uri: '/api/get_spotify_user_library'});
       },
       //получить кол-во треков в библиотеке и последние пять
       getSpotifyTracks(context){
-        context.commit('getSpotifyTracks');
+        context.commit('getAPIResponse', {state: "spotifyTracks", uri: '/api/get_spotify_tracks'});
       },
       //получить кол-во альбомов в библиотеке и последние пять
       getSpotifyAlbums(context){
-        context.commit('getSpotifyAlbums');
+        context.commit('getAPIResponse', {state: "spotifyAlbums", uri: '/api/get_spotify_albums'});
       }, 
       //получить кол-во подписок в библиотеке и случайные пять
       getSpotifyArtists(context){
-        context.commit('getSpotifyArtists');
+        context.commit('getAPIResponse', {state: "spotifyArtists", uri: '/api/get_spotify_artists'});
       },
       //посчитать кол-во времени
       getUserLibraryTime(context){
-        context.commit('getUserLibraryTime');
+        context.commit('getAPIResponse', {state: "userLibraryTime", uri: '/api/get_user_library_time'});
       },
       //пять самых длинных
       getFiveLongestAndShortestTracks(context){
-        context.commit('getFiveLongestAndShortestTracks');
+        context.commit('getAPIResponse', {state: "fiveTracks", uri: '/api/get_five_tracks'});
       },
       //средняя длина трека
       getAverageLengthOfTrack(context){
-        context.commit('getAverageLengthOfTrack');
+        context.commit('getAPIResponse', {state: "tracksMode", uri: '/api/get_average_track_length'});
       }
     }
 }

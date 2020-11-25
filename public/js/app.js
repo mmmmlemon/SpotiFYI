@@ -57218,95 +57218,69 @@ var ProfilePageStates = {
   getters: {//геттеры
   },
   mutations: {
-    //получить профиль
-    getSpotifyProfile: function getSpotifyProfile(state) {
-      var uri = '/api/get_spotify_profile';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyProfile = response.data;
-      });
-    },
-    //получить библиотеку пользователя
-    getSpotifyUserLibrary: function getSpotifyUserLibrary(state) {
-      var uri = '/api/get_spotify_user_library';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyUserLibrary = response.data;
-      });
-    },
-    //получить кол-во треков в библиотеке и последние пять
-    getSpotifyTracks: function getSpotifyTracks(state) {
-      var uri = '/api/get_spotify_tracks';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyTracks = response.data;
-      });
-    },
-    //получить кол-во альбомов в библиотеке и последние пять
-    getSpotifyAlbums: function getSpotifyAlbums(state) {
-      var uri = '/api/get_spotify_albums';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyAlbums = response.data;
-      });
-    },
-    //получить кол-во подписок в библиотеке и случайные пять
-    getSpotifyArtists: function getSpotifyArtists(state) {
-      var uri = '/api/get_spotify_artists';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyArtists = response.data;
-      });
-    },
-    //посчитать кол-во времени
-    getUserLibraryTime: function getUserLibraryTime(state) {
-      var uri = '/api/get_user_library_time';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.userLibraryTime = response.data;
-      });
-    },
-    //пять самых длинных
-    getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(state) {
-      var uri = '/api/get_five_tracks';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.fiveTracks = response.data;
-      });
-    },
-    //средняя длина трека
-    getAverageLengthOfTrack: function getAverageLengthOfTrack(state) {
-      var uri = '/api/get_average_track_length';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.tracksMode = response.data;
+    //получить ответ от API (универсальная mutation для всех стейтов)
+    getAPIResponse: function getAPIResponse(state, payload) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(payload.uri).then(function (response) {
+        state[payload.state] = response.data;
       });
     }
   },
   actions: {
     //получить профиль
     getSpotifyProfile: function getSpotifyProfile(context) {
-      context.commit('getSpotifyProfile');
+      context.commit('getAPIResponse', {
+        state: "spotifyProfile",
+        uri: '/api/get_spotify_profile'
+      });
     },
     //получить библиотку пользователя
     getSpotifyUserLibrary: function getSpotifyUserLibrary(context) {
-      context.commit('getSpotifyUserLibrary');
+      context.commit('getAPIResponse', {
+        state: "spotifyUserLibrary",
+        uri: '/api/get_spotify_user_library'
+      });
     },
     //получить кол-во треков в библиотеке и последние пять
     getSpotifyTracks: function getSpotifyTracks(context) {
-      context.commit('getSpotifyTracks');
+      context.commit('getAPIResponse', {
+        state: "spotifyTracks",
+        uri: '/api/get_spotify_tracks'
+      });
     },
     //получить кол-во альбомов в библиотеке и последние пять
     getSpotifyAlbums: function getSpotifyAlbums(context) {
-      context.commit('getSpotifyAlbums');
+      context.commit('getAPIResponse', {
+        state: "spotifyAlbums",
+        uri: '/api/get_spotify_albums'
+      });
     },
     //получить кол-во подписок в библиотеке и случайные пять
     getSpotifyArtists: function getSpotifyArtists(context) {
-      context.commit('getSpotifyArtists');
+      context.commit('getAPIResponse', {
+        state: "spotifyArtists",
+        uri: '/api/get_spotify_artists'
+      });
     },
     //посчитать кол-во времени
     getUserLibraryTime: function getUserLibraryTime(context) {
-      context.commit('getUserLibraryTime');
+      context.commit('getAPIResponse', {
+        state: "userLibraryTime",
+        uri: '/api/get_user_library_time'
+      });
     },
     //пять самых длинных
     getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(context) {
-      context.commit('getFiveLongestAndShortestTracks');
+      context.commit('getAPIResponse', {
+        state: "fiveTracks",
+        uri: '/api/get_five_tracks'
+      });
     },
     //средняя длина трека
     getAverageLengthOfTrack: function getAverageLengthOfTrack(context) {
-      context.commit('getAverageLengthOfTrack');
+      context.commit('getAPIResponse', {
+        state: "tracksMode",
+        uri: '/api/get_average_track_length'
+      });
     }
   }
 };
