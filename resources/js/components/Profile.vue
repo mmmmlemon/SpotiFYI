@@ -1,5 +1,5 @@
 <template>
-        <div>
+    <div>
         <div class="container bounce_in_anim" v-if="this.$store.state.profilePage.spotifyProfile == -1">
             <Loader/>
         </div>

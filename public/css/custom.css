@@ -79,13 +79,30 @@
     width:80%; 
     margin:5px;
 }
-                
+
+.album_icon_big{
+    width:80%; 
+    margin:5px;
+    border-style: solid;
+    border-color: #2c4150;
+    border-width: 2px;
+    transition: all 0.1s ease-in-out;
+}
+
 .album_icon:hover{
     border-style: solid;
     border-color: #1b77b9;
     border-width: 2px;
     transform: scale(1.2);
 }
+
+.album_icon_big:hover{
+    border-style: solid;
+    border-color: #1b77b9;
+    border-width: 3px;
+    transform: scale(1.2);
+}
+
 
 .padding_10{
     padding:10px;
@@ -135,4 +152,29 @@
 
 .font_25pt{
     font-size:25pt;
+}
+
+.grey_bg{
+    background-color: #25282c;
+}
+
+.font_13pt{
+    font-size: 13pt;
+}
+
+.font_white{
+    color: white;
+}
+
+.margin_none{
+    margin: 0;
+}
+
+a{
+    color: rgb(185, 185, 185) !important;
+    transition: color 0.2s ease-in-out;
+}
+a:hover{
+    color: #1b77b9 !important;
+    text-decoration: none !important;
 }

@@ -18,6 +18,9 @@ Vue.component('Error', Error);
 import Loader from './components/Misc/Loader.vue';
 Vue.component('Loader', Loader);
 
+
+import ProfileBackground from './components/Profile/ProfileBackground.vue';
+Vue.component('ProfileBackground', ProfileBackground);
 import LastFive from './components/Profile/BasicStats/LastFive.vue';
 Vue.component('LastFive', LastFive);
 import HoursAndMinutes from './components/Profile/BasicStats/HoursAndMinutes.vue';

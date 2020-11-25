@@ -12,12 +12,12 @@
             <div class="row fade_in_anim" v-for="item in fiveLongest" :key="item.id">
                 <div class="col-2">
                     <a :href="item.url" target="_blank">
-                        <img :src="item.cover" class="rounded-circle album_icon">
+                        <img :src="item.cover" class="rounded-circle album_icon_big">
                     </a>
                 </div>
                 <div class="col-10">
-                    <p class="font_10pt"><b>{{item.name}}</b></p>
-                    <p class="font_10pt">{{item.duration}}</p>
+                    <p class="font_13pt font_white margin_none"><a :href="item.url" target="_blank"><b>{{item.name}}</b></a></p>
+                    <p class="font_13pt margin_none font_white"><b>{{item.duration}}</b></p>
                 </div>
             </div>
         </div>
@@ -37,12 +37,12 @@
             <div class="row fade_in_anim" v-for="item in fiveShortest" :key="item.id">
                 <div class="col-2">
                     <a :href="item.url" target="_blank">
-                        <img :src="item.cover" class="rounded-circle album_icon">
+                        <img :src="item.cover" class="rounded-circle album_icon_big">
                     </a>
                 </div>
                 <div class="col-10">
-                    <p class="font_10pt"><b>{{item.name}}</b></p>
-                    <p class="font_10pt">{{item.duration}}</p>
+                    <p class="font_13pt font_white margin_none"><a :href="item.url" target="_blank"><b>{{item.name}}</b></a></p>
+                    <p class="font_13pt margin_none font_white"><b>{{item.duration}}</b></p>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
         <div v-else-if="tracksMode === false" class="col-md-6 padding_10">
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
-        <div v-else-if="tracksMode != -1" class="col-md-12 text-center fade_in_anim">
+        <div v-else-if="tracksMode != -1" class="col-md-12 text-center fade_in_anim light_grey_bg">
             <hr>
             <p>
                 Средняя продолжительность трека в твоей библиотеке - 
