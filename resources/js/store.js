@@ -8,76 +8,12 @@ Vue.use(Vuex)
 Vue.use(VueAxios, axios);
 
 const HomePageStates = {
+
     state: {
-        loggedIn: -1,
-        spotifyUsername: false,
-        spotifyUserTracksCount: -1,
-        siteInfo: false,
+        spotifyLogInInfo: false, //никнейм пользователя, array
+        spotifyUserTracksCount: -1, //подсчет треков, int
+        siteInfo: false, //информация о сайта для страницы About, array
       },
-
-      getters: {
-        //геттеры
-      },
-      
-      mutations: {
-        //получить имя пользователя из API
-        getSpotifyUsername(state){
-            let uri = '/api/get_spotify_username';
-            axios.get(uri).then((response) => {
-                state.loggedIn = response.data.loggedIn;
-                if(response.data.spotifyUsername != undefined)
-                {
-                    state.spotifyUsername = response.data.spotifyUsername;
-                }
-            })
-        },
-        //получить количество треков в библиотеке пользователя
-        getHomePageUserTracksCount(state){
-            let uri = '/api/get_home_tracks_count';
-            axios.get(uri).then((response) => {
-                state.spotifyUserTracksCount = response.data;
-            });
-        },
-        //получить информацию о сайте
-        getSiteInfo(state){
-          let uri ='/api/get_site_info';
-          axios.get(uri).then((response) => {
-            state.siteInfo = response.data;
-          });
-        }
-      },
-      
-      actions: {
-        //получить имя пользователя из API
-        getSpotifyUsername(context){
-            context.commit('getSpotifyUsername');
-        },
-        //получить количество треков в библиотеке пользователя
-        getHomePageUserTracksCount(context){
-            context.commit('getHomePageUserTracksCount');
-        },
-        //получить информацию о сайте
-        getSiteInfo(context){
-          context.commit('getSiteInfo');
-        },
-      }
-}
-
-const ProfilePageStates = {
-    state: {
-        spotifyProfile: -1,
-        spotifyUserLibrary: -1,
-        spotifyTracks: -1,
-        spotifyAlbums: -1,
-        spotifyArtists: -1,
-        userLibraryTime: -1,
-        fiveTracks: -1,
-        tracksMode: -1,
-      },
-
-    getters:{
-      //геттеры
-    },
 
     mutations: {
         //получить ответ от API (универсальная mutation для всех стейтов)
@@ -86,7 +22,44 @@ const ProfilePageStates = {
             state[payload.state] = response.data;
           });
         },
-  },
+    },
+      
+    actions: {
+        //получить имя пользователя из API
+        getSpotifyUsername(context){
+            context.commit('getAPIResponse', {state: "spotifyLogInInfo", uri: '/api/get_spotify_username'});
+        },
+        //получить количество треков в библиотеке пользователя
+        getHomePageUserTracksCount(context){
+            context.commit('getAPIResponse', {state: "spotifyUserTracksCount", uri: '/api/get_home_tracks_count'});
+        },
+        //получить информацию о сайте
+        getSiteInfo(context){
+          context.commit('getAPIResponse', {state: "siteInfo", uri: '/api/get_site_info'});
+        },
+    }
+}
+
+const ProfilePageStates = {
+    state: {
+        spotifyProfile: -1, //профиль пользователя, array
+        spotifyUserLibrary: -1, //бибилотека пользователя, bool
+        spotifyTracks: -1, //кол-во треков и последние 5, array
+        spotifyAlbums: -1, //кол-во альбомов и последние 5, array
+        spotifyArtists: -1, //кол-во подписок и случайные 5, array
+        userLibraryTime: -1, //общее время всех треков, array
+        fiveTracks: -1, //пять самых длинных и коротких треков, array
+        tracksMode: -1, //средняя длина трека, string
+      },
+
+    mutations: {
+          //получить ответ от API (универсальная mutation для всех стейтов)
+          getAPIResponse(state, payload){
+            axios.get(payload.uri).then((response) => {
+              state[payload.state] = response.data;
+            });
+          },
+    },
 
     actions: {
       //получить профиль

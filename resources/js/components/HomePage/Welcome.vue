@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 fade_in_anim" width="20%;" v-bind:class="{ invisible: loggedIn }">
+            <div class="col-md-8 fade_in_anim" width="20%;" v-bind:class="{ invisible: loggedIn === undefined || loggedIn === true}">
                 <h1>Site title</h1>
                 <h4>A Laravel/Vue.js/Spotify Web API application</h4>
                 <hr>
@@ -51,10 +51,10 @@
     export default {
         computed: {
             loggedIn: function(){
-                return this.$store.state.homePage.loggedIn;
+                return this.$store.state.homePage.spotifyLogInInfo['loggedIn'];
             },
             spotifyUsername: function(){
-                return this.$store.state.homePage.spotifyUsername;
+                return this.$store.state.homePage.spotifyLogInInfo['spotifyUsername'];
             },
             spotifyUserTracksCount: function(){
                 return this.$store.state.homePage.spotifyUserTracksCount;

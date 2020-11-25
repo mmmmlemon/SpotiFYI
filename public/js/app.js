@@ -2042,10 +2042,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     loggedIn: function loggedIn() {
-      return this.$store.state.homePage.loggedIn;
+      return this.$store.state.homePage.spotifyLogInInfo['loggedIn'];
     },
     spotifyUsername: function spotifyUsername() {
-      return this.$store.state.homePage.spotifyUsername;
+      return this.$store.state.homePage.spotifyLogInInfo['spotifyUsername'];
     },
     spotifyUserTracksCount: function spotifyUserTracksCount() {
       return this.$store.state.homePage.spotifyUserTracksCount;
@@ -38322,7 +38322,9 @@ var render = function() {
         "div",
         {
           staticClass: "col-md-8 fade_in_anim",
-          class: { invisible: _vm.loggedIn },
+          class: {
+            invisible: _vm.loggedIn === undefined || _vm.loggedIn === true
+          },
           attrs: { width: "20%;" }
         },
         [
@@ -57155,67 +57157,63 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
 var HomePageStates = {
   state: {
-    loggedIn: -1,
-    spotifyUsername: false,
+    spotifyLogInInfo: false,
+    //никнейм пользователя, array
     spotifyUserTracksCount: -1,
-    siteInfo: false
-  },
-  getters: {//геттеры
+    //подсчет треков, int
+    siteInfo: false //информация о сайта для страницы About, array
+
   },
   mutations: {
-    //получить имя пользователя из API
-    getSpotifyUsername: function getSpotifyUsername(state) {
-      var uri = '/api/get_spotify_username';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.loggedIn = response.data.loggedIn;
-
-        if (response.data.spotifyUsername != undefined) {
-          state.spotifyUsername = response.data.spotifyUsername;
-        }
-      });
-    },
-    //получить количество треков в библиотеке пользователя
-    getHomePageUserTracksCount: function getHomePageUserTracksCount(state) {
-      var uri = '/api/get_home_tracks_count';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.spotifyUserTracksCount = response.data;
-      });
-    },
-    //получить информацию о сайте
-    getSiteInfo: function getSiteInfo(state) {
-      var uri = '/api/get_site_info';
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
-        state.siteInfo = response.data;
+    //получить ответ от API (универсальная mutation для всех стейтов)
+    getAPIResponse: function getAPIResponse(state, payload) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(payload.uri).then(function (response) {
+        state[payload.state] = response.data;
       });
     }
   },
   actions: {
     //получить имя пользователя из API
     getSpotifyUsername: function getSpotifyUsername(context) {
-      context.commit('getSpotifyUsername');
+      context.commit('getAPIResponse', {
+        state: "spotifyLogInInfo",
+        uri: '/api/get_spotify_username'
+      });
     },
     //получить количество треков в библиотеке пользователя
     getHomePageUserTracksCount: function getHomePageUserTracksCount(context) {
-      context.commit('getHomePageUserTracksCount');
+      context.commit('getAPIResponse', {
+        state: "spotifyUserTracksCount",
+        uri: '/api/get_home_tracks_count'
+      });
     },
     //получить информацию о сайте
     getSiteInfo: function getSiteInfo(context) {
-      context.commit('getSiteInfo');
+      context.commit('getAPIResponse', {
+        state: "siteInfo",
+        uri: '/api/get_site_info'
+      });
     }
   }
 };
 var ProfilePageStates = {
   state: {
     spotifyProfile: -1,
+    //профиль пользователя, array
     spotifyUserLibrary: -1,
+    //бибилотека пользователя, bool
     spotifyTracks: -1,
+    //кол-во треков и последние 5, array
     spotifyAlbums: -1,
+    //кол-во альбомов и последние 5, array
     spotifyArtists: -1,
+    //кол-во подписок и случайные 5, array
     userLibraryTime: -1,
+    //общее время всех треков, array
     fiveTracks: -1,
-    tracksMode: -1
-  },
-  getters: {//геттеры
+    //пять самых длинных и коротких треков, array
+    tracksMode: -1 //средняя длина трека, string
+
   },
   mutations: {
     //получить ответ от API (универсальная mutation для всех стейтов)
