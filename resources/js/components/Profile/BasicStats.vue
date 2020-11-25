@@ -30,7 +30,7 @@
     <HoursAndMinutes v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1" 
                      class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
     <!-- самые длинные и короткие треки -->
-    <LongestAndShortest :fiveLongest="fiveTracks['fiveLongest']" :fiveShortest="fiveTracks['fiveShortest']"/>
+    <LongestAndShortest :fiveLongest="fiveTracks['fiveLongest']" :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
     </div>
 
 </div>
@@ -49,6 +49,7 @@ export default {
         //время
         this.$store.dispatch('getUserLibraryTime');
         this.$store.dispatch('getFiveLongestAndShortestTracks');
+        this.$store.dispatch('getAverageLengthOfTrack');
     },
     computed: {
         //библиотека пользователя
@@ -75,6 +76,9 @@ export default {
         //пять самых длинных
         fiveTracks: function(){
             return this.$store.state.profilePage.fiveTracks;
+        },
+        tracksMode: function(){
+            return this.$store.state.profilePage.tracksMode;
         }
     }
 }

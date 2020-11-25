@@ -72,6 +72,7 @@ const ProfilePageStates = {
         spotifyArtists: -1,
         userLibraryTime: -1,
         fiveTracks: -1,
+        tracksMode: -1,
       },
 
     getters:{
@@ -126,9 +127,16 @@ const ProfilePageStates = {
         let uri = '/api/get_five_tracks';
         axios.get(uri).then((response) => {
           state.fiveTracks = response.data;
-        })
+        });
       },
+      //средняя длина трека
+      getAverageLengthOfTrack(state){
+        let uri = '/api/get_average_track_length';
+        axios.get(uri).then((response) => {
+          state.tracksMode = response.data;
+        });
     },
+  },
 
     actions: {
       //получить профиль
@@ -159,6 +167,10 @@ const ProfilePageStates = {
       getFiveLongestAndShortestTracks(context){
         context.commit('getFiveLongestAndShortestTracks');
       },
+      //средняя длина трека
+      getAverageLengthOfTrack(context){
+        context.commit('getAverageLengthOfTrack');
+      }
     }
 }
 

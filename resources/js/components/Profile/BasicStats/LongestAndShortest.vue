@@ -49,14 +49,32 @@
         <div v-else>
             <Error type="small" errorMessage="Неизвестная ошибка" />
         </div>
-        <hr>
+        <!-- средняя длина трека -->
+        <div v-if="tracksMode === -1" class="col-md-6 padding_10">
+            <Loader />
+        </div>
+        <div v-else-if="tracksMode === false" class="col-md-6 padding_10">
+            <Error type="small" errorMessage="Не удалось загрузить треки" />
+        </div>
+        <div v-else-if="tracksMode != -1" class="col-md-12 text-center fade_in_anim">
+            <hr>
+            <p>
+                Средняя продолжительность трека в твоей библиотеке - 
+                <b class="border_underline font_25pt">{{tracksMode}}</b>
+            </p>
+            <hr>
+        </div>
+        <div v-else>
+             <Error type="small" errorMessage="Неизвестная ошибка" />
+        </div>
     </div>
 </template>
 <script>
 export default {
     props: {
         fiveLongest: { default: -1 },
-        fiveShortest: {default: -1 }
+        fiveShortest: {default: -1 },
+        tracksMode: {default: -1 },
     }
 }
 </script>

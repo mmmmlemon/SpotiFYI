@@ -284,7 +284,6 @@ class SpotifyAPIController extends Controller
     //пять самых длинных треков
     public function getFiveLongestAndShortestTracks(Request $request)
     {
-
         //ф-ция, подсчет времени длительности треков
         function countTime($array)
         {
@@ -349,5 +348,33 @@ class SpotifyAPIController extends Controller
         }
     }
 
+    //найти среднюю длину трека
+    public function getAverageLengthOfTrack(Request $request)
+    {
+        $tracks = Globals::getUserLibraryJson("tracks", $request);
+
+        if($tracks != null)
+        {
+            $durationMs = []; //получаем массив с длиной треков в миллисекундах
+            
+            foreach($tracks as $track)
+            { array_push($durationMs, $track->duration_ms); }
+    
+            $durationMn = [];   //получаем массив с длиной треков в минутах (округленной вниз)
+    
+            foreach($durationMs as $item)
+            { array_push($durationMn, intval(floor($item / 60000))); }
+            
+            $countDurations = array_count_values($durationMn);  //считаем моду
+            $mode = array_search(max($countDurations), $countDurations);
+            
+            $response = $mode . Globals::pickTheWord($mode, "минут", "минута", "минуты");
+
+            return response()->json($response);
+        }
+        else
+        { return response()->json(false); }
+ 
+    }
 
 }

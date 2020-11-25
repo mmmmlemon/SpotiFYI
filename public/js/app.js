@@ -2254,6 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$store.dispatch('getUserLibraryTime');
     this.$store.dispatch('getFiveLongestAndShortestTracks');
+    this.$store.dispatch('getAverageLengthOfTrack');
   },
   computed: {
     //библиотека пользователя
@@ -2280,6 +2281,9 @@ __webpack_require__.r(__webpack_exports__);
     //пять самых длинных
     fiveTracks: function fiveTracks() {
       return this.$store.state.profilePage.fiveTracks;
+    },
+    tracksMode: function tracksMode() {
+      return this.$store.state.profilePage.tracksMode;
     }
   }
 });
@@ -2491,12 +2495,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     fiveLongest: {
       "default": -1
     },
     fiveShortest: {
+      "default": -1
+    },
+    tracksMode: {
       "default": -1
     }
   }
@@ -38886,7 +38910,8 @@ var render = function() {
             _c("LongestAndShortest", {
               attrs: {
                 fiveLongest: _vm.fiveTracks["fiveLongest"],
-                fiveShortest: _vm.fiveTracks["fiveShortest"]
+                fiveShortest: _vm.fiveTracks["fiveShortest"],
+                tracksMode: _vm.tracksMode
               }
             })
           ],
@@ -38950,20 +38975,13 @@ var render = function() {
       ? _c("div", { staticClass: "col-sm-12 text-center" }, [
           _c("p", [
             _vm._v("Всего в твою библиотеку добавлено\n            "),
-            _c(
-              "b",
-              {
-                staticClass: "border_underline",
-                staticStyle: { "font-size": "25pt" }
-              },
-              [
-                _vm._v(
-                  "\n                 " +
-                    _vm._s(_vm.userLibraryTime["overallMinutes"]) +
-                    "\n            "
-                )
-              ]
-            ),
+            _c("b", { staticClass: "border_underline font_25pt" }, [
+              _vm._v(
+                "\n                 " +
+                  _vm._s(_vm.userLibraryTime["overallMinutes"]) +
+                  "\n            "
+              )
+            ]),
             _vm._v(" музыки.\n        ")
           ]),
           _vm._v(" "),
@@ -39426,7 +39444,46 @@ var render = function() {
           1
         ),
     _vm._v(" "),
-    _c("hr")
+    _vm.tracksMode === -1
+      ? _c("div", { staticClass: "col-md-6 padding_10" }, [_c("Loader")], 1)
+      : _vm.tracksMode === false
+      ? _c(
+          "div",
+          { staticClass: "col-md-6 padding_10" },
+          [
+            _c("Error", {
+              attrs: {
+                type: "small",
+                errorMessage: "Не удалось загрузить треки"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.tracksMode != -1
+      ? _c("div", { staticClass: "col-md-12 text-center fade_in_anim" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n            Средняя продолжительность трека в твоей библиотеке - \n            "
+            ),
+            _c("b", { staticClass: "border_underline font_25pt" }, [
+              _vm._v(_vm._s(_vm.tracksMode))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("hr")
+        ])
+      : _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: { type: "small", errorMessage: "Неизвестная ошибка" }
+            })
+          ],
+          1
+        )
   ])
 }
 var staticRenderFns = [
@@ -57155,7 +57212,8 @@ var ProfilePageStates = {
     spotifyAlbums: -1,
     spotifyArtists: -1,
     userLibraryTime: -1,
-    fiveTracks: -1
+    fiveTracks: -1,
+    tracksMode: -1
   },
   getters: {//геттеры
   },
@@ -57208,6 +57266,13 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
         state.fiveTracks = response.data;
       });
+    },
+    //средняя длина трека
+    getAverageLengthOfTrack: function getAverageLengthOfTrack(state) {
+      var uri = '/api/get_average_track_length';
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(uri).then(function (response) {
+        state.tracksMode = response.data;
+      });
     }
   },
   actions: {
@@ -57238,6 +57303,10 @@ var ProfilePageStates = {
     //пять самых длинных
     getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(context) {
       context.commit('getFiveLongestAndShortestTracks');
+    },
+    //средняя длина трека
+    getAverageLengthOfTrack: function getAverageLengthOfTrack(context) {
+      context.commit('getAverageLengthOfTrack');
     }
   }
 };

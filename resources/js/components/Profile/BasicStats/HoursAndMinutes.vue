@@ -9,7 +9,7 @@
         <div v-else-if="userLibraryTime != -1 && userLibraryTime != false" class="col-sm-12 text-center">
             <!-- минуты -->
             <p>Всего в твою библиотеку добавлено
-                <b style="font-size:25pt;" class="border_underline">
+                <b class="border_underline font_25pt">
                      {{userLibraryTime['overallMinutes']}}
                 </b> музыки.
             </p>

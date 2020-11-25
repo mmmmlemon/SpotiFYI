@@ -35,5 +35,6 @@ Route::get('/get_spotify_albums', 'SpotifyAPIController@getSpotifyAlbums'); //п
 Route::get('/get_spotify_artists', 'SpotifyAPIController@getSpotifyArtists'); //получить кол-во подписок и случайные пять
 Route::get('/get_user_library_time', 'SpotifyAPIController@getUserLibraryTime'); //посчитать время библиотеки
 Route::get('/get_five_tracks', 'SpotifyAPIController@getFiveLongestAndShortestTracks'); //получить пять самых длинных треков
+Route::get('/get_average_track_length', 'SpotifyAPIController@getAverageLengthOfTrack'); //получить среднюю длину трека
 
 ?>
