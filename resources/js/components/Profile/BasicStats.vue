@@ -41,15 +41,15 @@ export default {
  
     beforeCreate(){
         //получаем библиотеку пользователя и статистику
-        this.$store.dispatch('getSpotifyUserLibrary');
-        this.$store.dispatch('getSpotifyTracks');
-        this.$store.dispatch('getSpotifyAlbums');
-        this.$store.dispatch('getSpotifyArtists');
+        // this.$store.dispatch('getSpotifyUserLibrary');
+        // this.$store.dispatch('getSpotifyTracks');
+        // this.$store.dispatch('getSpotifyAlbums');
+        // this.$store.dispatch('getSpotifyArtists');
 
-        //время
-        this.$store.dispatch('getUserLibraryTime');
-        this.$store.dispatch('getFiveLongestAndShortestTracks');
-        this.$store.dispatch('getAverageLengthOfTrack');
+        // //время
+        // this.$store.dispatch('getUserLibraryTime');
+        // this.$store.dispatch('getFiveLongestAndShortestTracks');
+        // this.$store.dispatch('getAverageLengthOfTrack');
     },
     computed: {
         //библиотека пользователя

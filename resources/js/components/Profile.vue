@@ -10,7 +10,7 @@
         <div class="container" v-if="this.$store.state.profilePage.spotifyProfile != false">
 
             <div class="col-12">
-                <ProfileBackground v-if="this.$store.state.profilePage.spotifyTracks != -1" class="fade_in_slow_anim"/>
+                <ProfileBackground  class="fade_in_slow_anim"/>
                 <!-- юзернейм и ссылка на профиль -->
                 <div class="row justify-content-center fade-in">
                         <h1 v-if="this.$store.state.profilePage.spotifyProfile != -1 && this.$store.state.profilePage.spotifyProfile != false" class="fade_in_anim">

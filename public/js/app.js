@@ -2259,16 +2259,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  beforeCreate: function beforeCreate() {
-    //получаем библиотеку пользователя и статистику
-    this.$store.dispatch('getSpotifyUserLibrary');
-    this.$store.dispatch('getSpotifyTracks');
-    this.$store.dispatch('getSpotifyAlbums');
-    this.$store.dispatch('getSpotifyArtists'); //время
-
-    this.$store.dispatch('getUserLibraryTime');
-    this.$store.dispatch('getFiveLongestAndShortestTracks');
-    this.$store.dispatch('getAverageLengthOfTrack');
+  beforeCreate: function beforeCreate() {//получаем библиотеку пользователя и статистику
+    // this.$store.dispatch('getSpotifyUserLibrary');
+    // this.$store.dispatch('getSpotifyTracks');
+    // this.$store.dispatch('getSpotifyAlbums');
+    // this.$store.dispatch('getSpotifyArtists');
+    // //время
+    // this.$store.dispatch('getUserLibraryTime');
+    // this.$store.dispatch('getFiveLongestAndShortestTracks');
+    // this.$store.dispatch('getAverageLengthOfTrack');
   },
   computed: {
     //библиотека пользователя
@@ -2526,6 +2525,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     fiveLongest: {
@@ -2551,7 +2551,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -38680,9 +38679,7 @@ var render = function() {
             "div",
             { staticClass: "col-12" },
             [
-              this.$store.state.profilePage.spotifyTracks != -1
-                ? _c("ProfileBackground", { staticClass: "fade_in_slow_anim" })
-                : _vm._e(),
+              _c("ProfileBackground", { staticClass: "fade_in_slow_anim" }),
               _vm._v(" "),
               _c("div", { staticClass: "row justify-content-center fade-in" }, [
                 this.$store.state.profilePage.spotifyProfile != -1 &&
@@ -39547,6 +39544,8 @@ var render = function() {
           "div",
           { staticClass: "col-md-12 text-center fade_in_anim light_grey_bg" },
           [
+            _c("ProfileBackground"),
+            _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
             _c("p", [
@@ -39559,7 +39558,8 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("hr")
-          ]
+          ],
+          1
         )
       : _c(
           "div",
@@ -39611,15 +39611,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {
-    staticClass: "container",
-    staticStyle: {
-      "background-color": "#174668",
-      position: "absolute",
-      height: "100%",
-      "z-index": "-999"
-    }
-  })
+  return _c("div", { staticClass: "container profile_bg" })
 }
 var staticRenderFns = []
 render._withStripped = true
