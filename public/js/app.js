@@ -2211,6 +2211,10 @@ __webpack_require__.r(__webpack_exports__);
     //фон профиля
     profileBackgroundUrl: function profileBackgroundUrl() {
       return this.$store.state.profilePage.profileBackgroundUrl;
+    },
+    //профиль
+    spotifyProfile: function spotifyProfile() {
+      return this.$store.state.profilePage.spotifyProfile;
     }
   }
 });
@@ -2283,8 +2287,7 @@ __webpack_require__.r(__webpack_exports__);
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      // return this.$store.state.profilePage.spotifyUserLibrary;
-      return true;
+      return this.$store.state.profilePage.spotifyUserLibrary;
     },
     //кол-во треков и последние пять
     spotifyTracks: function spotifyTracks() {
@@ -38668,7 +38671,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    this.$store.state.profilePage.spotifyProfile == -1
+    _vm.spotifyProfile == -1
       ? _c(
           "div",
           { staticClass: "container bounce_in_anim" },
@@ -38677,7 +38680,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    this.$store.state.profilePage.spotifyProfile == false
+    _vm.spotifyProfile == false
       ? _c(
           "div",
           [
@@ -38691,7 +38694,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    this.$store.state.profilePage.spotifyProfile != false
+    _vm.spotifyProfile != -1 && _vm.spotifyProfile != false
       ? _c("div", { staticClass: "container" }, [
           _c(
             "div",
@@ -38706,176 +38709,138 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "row justify-content-center fade-in" }, [
-                this.$store.state.profilePage.spotifyProfile != -1 &&
-                this.$store.state.profilePage.spotifyProfile != false
-                  ? _c("h1", { staticClass: "fade_in_anim" }, [
-                      _c("b", [
-                        _vm._v(
-                          _vm._s(
-                            this.$store.state.profilePage.spotifyProfile
-                              .spotifyUsername
-                          )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticStyle: { "font-size": "10pt" },
-                          attrs: {
-                            href: this.$store.state.profilePage.spotifyProfile
-                              .profile_url,
-                            target: "_blank"
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-external-link-alt" })]
-                      )
-                    ])
-                  : _vm._e()
+                _c("h1", { staticClass: "fade_in_anim" }, [
+                  _c("b", [_vm._v(_vm._s(_vm.spotifyProfile.spotifyUsername))]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticStyle: { "font-size": "10pt" },
+                      attrs: {
+                        href: _vm.spotifyProfile.profile_url,
+                        target: "_blank"
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-external-link-alt" })]
+                  )
+                ])
               ]),
               _vm._v(" "),
-              this.$store.state.profilePage.spotifyProfile != -1 &&
-              this.$store.state.profilePage.spotifyProfile != false
-                ? _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("img", {
-                      staticClass: "profile_avatar bounce_in_av_anim",
-                      attrs: {
-                        src: this.$store.state.profilePage.spotifyProfile
-                          .avatar,
-                        alt: "Spotify Avatar"
-                      }
-                    })
-                  ])
-                : _vm._e(),
+              _c("div", { staticClass: "row justify-content-center" }, [
+                _c("img", {
+                  staticClass: "profile_avatar bounce_in_av_anim",
+                  attrs: {
+                    src: _vm.spotifyProfile.avatar,
+                    alt: "Spotify Avatar"
+                  }
+                })
+              ]),
               _vm._v(" "),
-              this.$store.state.profilePage.spotifyProfile != -1 &&
-              this.$store.state.profilePage.spotifyProfile != false
-                ? _c(
-                    "div",
-                    { staticClass: "row justify-content-center fade-in" },
-                    [
-                      this.$store.state.profilePage.spotifyProfile
-                        .subscription == "premium"
-                        ? _c("h6", { staticStyle: { "margin-bottom": "0" } }, [
-                            _vm._v("Premium "),
-                            _c("i", { staticClass: "fas fa-crown" })
-                          ])
-                        : _c("h6")
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              this.$store.state.profilePage.spotifyProfile != -1 &&
-              this.$store.state.profilePage.spotifyProfile != false
-                ? _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("div", [_vm._v(" Подписчики: 1")]),
-                    _vm._v(" "),
-                    _c("div", [_vm._v(" | ")]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("img", {
-                        staticClass: "fade_in_anim",
-                        attrs: {
-                          src: this.$store.state.profilePage.spotifyProfile
-                            .country
-                        }
-                      })
+              _c("div", { staticClass: "row justify-content-center fade-in" }, [
+                _vm.spotifyProfile.subscription == "premium"
+                  ? _c("h6", { staticStyle: { "margin-bottom": "0" } }, [
+                      _vm._v("Premium "),
+                      _c("i", { staticClass: "fas fa-crown" })
                     ])
-                  ])
-                : _vm._e(),
+                  : _c("h6")
+              ]),
               _vm._v(" "),
-              this.$store.state.profilePage.spotifyProfile != -1 &&
-              this.$store.state.profilePage.spotifyProfile != false
-                ? _c("hr", { staticClass: "fade_in_anim" })
-                : _vm._e(),
+              _c("div", { staticClass: "row justify-content-center" }, [
+                _c("div", [_vm._v(" Подписчики: 1")]),
+                _vm._v(" "),
+                _c("div", [_vm._v(" | ")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("img", {
+                    staticClass: "fade_in_anim",
+                    attrs: { src: _vm.spotifyProfile.country }
+                  })
+                ])
+              ]),
               _vm._v(" "),
-              this.$store.state.profilePage.spotifyProfile != -1
-                ? _c(
-                    "div",
-                    { staticClass: "row justify-content-center fade-in" },
-                    [
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("div", { staticClass: "row fade_in_anim" }, [
+              _c("hr", { staticClass: "fade_in_anim" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row justify-content-center fade-in" }, [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("div", { staticClass: "row fade_in_anim" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-3 padding_10" },
+                      [
+                        _c("router-link", { attrs: { to: "/profile" } }, [
                           _c(
-                            "div",
-                            { staticClass: "col-md-3 padding_10" },
-                            [
-                              _c("router-link", { attrs: { to: "/profile" } }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-block btn-primary",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_vm._v("Общее")]
-                                )
-                              ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-md-3 padding_10" },
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: "/profile/top10tracks" } },
-                                [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-block",
-                                      attrs: { type: "button" }
-                                    },
-                                    [_vm._v("Топ-10")]
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-md-3 padding_10" },
-                            [
-                              _c("router-link", { attrs: { to: "/" } }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-block",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_vm._v("Что-то")]
-                                )
-                              ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-md-3 padding_10" },
-                            [
-                              _c("router-link", { attrs: { to: "/" } }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-block",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_vm._v("Еще")]
-                                )
-                              ])
-                            ],
-                            1
+                            "button",
+                            {
+                              staticClass: "btn btn-block btn-primary",
+                              attrs: { type: "button" }
+                            },
+                            [_vm._v("Общее")]
                           )
                         ])
-                      ])
-                    ]
-                  )
-                : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-3 padding_10" },
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/profile/top10tracks" } },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-block",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Топ-10")]
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-3 padding_10" },
+                      [
+                        _c("router-link", { attrs: { to: "/" } }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block",
+                              attrs: { type: "button" }
+                            },
+                            [_vm._v("Что-то")]
+                          )
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-3 padding_10" },
+                      [
+                        _c("router-link", { attrs: { to: "/" } }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block",
+                              attrs: { type: "button" }
+                            },
+                            [_vm._v("Еще")]
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ])
             ],
             1
           )
@@ -38884,7 +38849,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center fade-in" }, [
-        this.$store.state.profilePage.spotifyProfile != -1
+        _vm.spotifyProfile != -1
           ? _c("div", { staticClass: "col-md-8" }, [_c("router-view")], 1)
           : _vm._e()
       ])

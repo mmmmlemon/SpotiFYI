@@ -57,8 +57,7 @@ export default {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
         spotifyUserLibrary: function() {
-            // return this.$store.state.profilePage.spotifyUserLibrary;
-            return true;
+            return this.$store.state.profilePage.spotifyUserLibrary;
         },
         //кол-во треков и последние пять
         spotifyTracks: function() {
