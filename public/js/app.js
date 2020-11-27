@@ -2206,6 +2206,12 @@ __webpack_require__.r(__webpack_exports__);
   beforeCreate: function beforeCreate() {
     //получить профиль
     this.$store.dispatch('getSpotifyProfile');
+  },
+  computed: {
+    //фон профиля
+    profileBackgroundUrl: function profileBackgroundUrl() {
+      return this.$store.state.profilePage.profileBackgroundUrl;
+    }
   }
 });
 
@@ -2259,21 +2265,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  beforeCreate: function beforeCreate() {//получаем библиотеку пользователя и статистику
-    // this.$store.dispatch('getSpotifyUserLibrary');
-    // this.$store.dispatch('getSpotifyTracks');
-    // this.$store.dispatch('getSpotifyAlbums');
-    // this.$store.dispatch('getSpotifyArtists');
-    // //время
-    // this.$store.dispatch('getUserLibraryTime');
-    // this.$store.dispatch('getFiveLongestAndShortestTracks');
-    // this.$store.dispatch('getAverageLengthOfTrack');
+  beforeCreate: function beforeCreate() {
+    //фон профиля
+    this.$store.dispatch('generateProfileBackground'); //получаем библиотеку пользователя и статистику
+
+    this.$store.dispatch('getSpotifyUserLibrary'); //треки, альбомы и подписки
+
+    this.$store.dispatch('getSpotifyTracks');
+    this.$store.dispatch('getSpotifyAlbums');
+    this.$store.dispatch('getSpotifyArtists'); //время
+
+    this.$store.dispatch('getUserLibraryTime');
+    this.$store.dispatch('getFiveLongestAndShortestTracks');
+    this.$store.dispatch('getAverageLengthOfTrack');
   },
   computed: {
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      return this.$store.state.profilePage.spotifyUserLibrary;
+      // return this.$store.state.profilePage.spotifyUserLibrary;
+      return true;
     },
     //кол-во треков и последние пять
     spotifyTracks: function spotifyTracks() {
@@ -2295,6 +2306,7 @@ __webpack_require__.r(__webpack_exports__);
     fiveTracks: function fiveTracks() {
       return this.$store.state.profilePage.fiveTracks;
     },
+    //средняя длина трека
     tracksMode: function tracksMode() {
       return this.$store.state.profilePage.tracksMode;
     }
@@ -2556,7 +2568,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    profileBackgroundUrl: {
+      "default": -1
+    }
+  }
+});
 
 /***/ }),
 
@@ -38679,7 +38697,13 @@ var render = function() {
             "div",
             { staticClass: "col-12" },
             [
-              _c("ProfileBackground", { staticClass: "fade_in_slow_anim" }),
+              _vm.profileBackgroundUrl != -1 &&
+              _vm.profileBackgroundUrl != false
+                ? _c("ProfileBackground", {
+                    staticClass: "fade_in_slow_anim",
+                    attrs: { profileBackgroundUrl: _vm.profileBackgroundUrl }
+                  })
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "row justify-content-center fade-in" }, [
                 this.$store.state.profilePage.spotifyProfile != -1 &&
@@ -39611,7 +39635,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container profile_bg" })
+  return _c("div", {
+    staticClass: "container profile_bg",
+    style: { backgroundImage: "url('" + _vm.profileBackgroundUrl + "')" }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -57381,7 +57408,7 @@ var ProfilePageStates = {
     spotifyProfile: -1,
     //профиль пользователя, array
     spotifyUserLibrary: -1,
-    //бибилотека пользователя, bool
+    //библиотека пользователя, bool
     spotifyTracks: -1,
     //кол-во треков и последние 5, array
     spotifyAlbums: -1,
@@ -57392,7 +57419,9 @@ var ProfilePageStates = {
     //общее время всех треков, array
     fiveTracks: -1,
     //пять самых длинных и коротких треков, array
-    tracksMode: -1 //средняя длина трека, string
+    tracksMode: -1,
+    //средняя длина трека, string
+    profileBackgroundUrl: -1 //фон для профиля
 
   },
   mutations: {
@@ -57458,6 +57487,13 @@ var ProfilePageStates = {
       context.commit('getAPIResponse', {
         state: "tracksMode",
         uri: '/api/get_average_track_length'
+      });
+    },
+    //получить фон для профиля
+    generateProfileBackground: function generateProfileBackground(context) {
+      context.commit('getAPIResponse', {
+        state: "profileBackgroundUrl",
+        uri: '/api/generate_bg_image'
       });
     }
   }

@@ -43,13 +43,14 @@ const HomePageStates = {
 const ProfilePageStates = {
     state: {
         spotifyProfile: -1, //профиль пользователя, array
-        spotifyUserLibrary: -1, //бибилотека пользователя, bool
+        spotifyUserLibrary: -1, //библиотека пользователя, bool
         spotifyTracks: -1, //кол-во треков и последние 5, array
         spotifyAlbums: -1, //кол-во альбомов и последние 5, array
         spotifyArtists: -1, //кол-во подписок и случайные 5, array
         userLibraryTime: -1, //общее время всех треков, array
         fiveTracks: -1, //пять самых длинных и коротких треков, array
         tracksMode: -1, //средняя длина трека, string
+        profileBackgroundUrl: -1, //фон для профиля
       },
 
     mutations: {
@@ -93,6 +94,10 @@ const ProfilePageStates = {
       //средняя длина трека
       getAverageLengthOfTrack(context){
         context.commit('getAPIResponse', {state: "tracksMode", uri: '/api/get_average_track_length'});
+      },
+      //получить фон для профиля
+      generateProfileBackground(context){
+        context.commit('getAPIResponse', {state: "profileBackgroundUrl", uri: '/api/generate_bg_image'});
       }
     }
 }

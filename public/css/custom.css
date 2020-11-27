@@ -184,6 +184,6 @@ a:hover{
     position:absolute; 
     height:100%; 
     z-index:-999;
-    background-image: url('https://www.iguides.ru/upload/medialibrary/382/3825f7d27ccacbe09e7f28d66946c3fa.png');
-    filter: blur(5px) brightness(50%);
+    background-position-x: center;
+    filter: blur(5px) brightness(35%);
 }

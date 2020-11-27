@@ -40,22 +40,25 @@
 export default {
  
     beforeCreate(){
+        //фон профиля
+        this.$store.dispatch('generateProfileBackground');
         //получаем библиотеку пользователя и статистику
-        // this.$store.dispatch('getSpotifyUserLibrary');
-        // this.$store.dispatch('getSpotifyTracks');
-        // this.$store.dispatch('getSpotifyAlbums');
-        // this.$store.dispatch('getSpotifyArtists');
-
-        // //время
-        // this.$store.dispatch('getUserLibraryTime');
-        // this.$store.dispatch('getFiveLongestAndShortestTracks');
-        // this.$store.dispatch('getAverageLengthOfTrack');
+        this.$store.dispatch('getSpotifyUserLibrary');
+        //треки, альбомы и подписки
+        this.$store.dispatch('getSpotifyTracks');
+        this.$store.dispatch('getSpotifyAlbums');
+        this.$store.dispatch('getSpotifyArtists');
+        //время
+        this.$store.dispatch('getUserLibraryTime');
+        this.$store.dispatch('getFiveLongestAndShortestTracks');
+        this.$store.dispatch('getAverageLengthOfTrack');
     },
     computed: {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
         spotifyUserLibrary: function() {
-            return this.$store.state.profilePage.spotifyUserLibrary;
+            // return this.$store.state.profilePage.spotifyUserLibrary;
+            return true;
         },
         //кол-во треков и последние пять
         spotifyTracks: function() {
@@ -77,9 +80,10 @@ export default {
         fiveTracks: function(){
             return this.$store.state.profilePage.fiveTracks;
         },
-        tracksMode: function(){
+        //средняя длина трека
+        tracksMode: function() {
             return this.$store.state.profilePage.tracksMode;
-        }
+        },
     }
 }
 </script>
