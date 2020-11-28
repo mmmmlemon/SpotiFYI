@@ -2268,20 +2268,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
-    //фон профиля
-    this.$store.dispatch('generateProfileBackground'); //получаем библиотеку пользователя и статистику
-
+    //получаем библиотеку пользователя и статистику
     this.$store.dispatch('getSpotifyUserLibrary'); //треки, альбомы и подписки
 
     this.$store.dispatch('getSpotifyTracks');
     this.$store.dispatch('getSpotifyAlbums');
-    this.$store.dispatch('getSpotifyArtists'); //время
+    this.$store.dispatch('getSpotifyArtists'); // //время
 
     this.$store.dispatch('getUserLibraryTime');
     this.$store.dispatch('getFiveLongestAndShortestTracks');
-    this.$store.dispatch('getAverageLengthOfTrack');
+    this.$store.dispatch('getAverageLengthOfTrack'); // //фон профиля
+
+    this.$store.dispatch('generateBackgroundImage');
   },
   computed: {
     //библиотека пользователя
@@ -2551,6 +2554,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     tracksMode: {
       "default": -1
+    }
+  },
+  computed: {
+    //фон профиля
+    profileBackgroundUrl: function profileBackgroundUrl() {
+      return this.$store.state.profilePage.profileBackgroundUrl;
     }
   }
 });
@@ -38887,6 +38896,10 @@ var render = function() {
             _vm._v(" "),
             _c("h6", { staticClass: "text-center" }, [
               _vm._v("Загружаю библиотеку пользователя...")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "font_10pt text-center" }, [
+              _vm._v("Это может занять некоторое время")
             ])
           ],
           1
@@ -38921,21 +38934,25 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("LastFive", {
-                  attrs: {
-                    itemCount: _vm.spotifyAlbums["count"],
-                    lastFiveItems: _vm.spotifyAlbums["last_five"],
-                    type: "albums"
-                  }
-                }),
+                _vm.spotifyTracks !== false && _vm.spotifyTracks !== -1
+                  ? _c("LastFive", {
+                      attrs: {
+                        itemCount: _vm.spotifyAlbums["count"],
+                        lastFiveItems: _vm.spotifyAlbums["last_five"],
+                        type: "albums"
+                      }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("LastFive", {
-                  attrs: {
-                    itemCount: _vm.spotifyArtists["count"],
-                    lastFiveItems: _vm.spotifyArtists["random_five"],
-                    type: "artists"
-                  }
-                })
+                _vm.spotifyAlbums !== false && _vm.spotifyAlbums !== -1
+                  ? _c("LastFive", {
+                      attrs: {
+                        itemCount: _vm.spotifyArtists["count"],
+                        lastFiveItems: _vm.spotifyArtists["random_five"],
+                        type: "artists"
+                      }
+                    })
+                  : _vm._e()
               ],
               1
             ),
@@ -38946,22 +38963,24 @@ var render = function() {
               ? _c("hr", { staticClass: "fade_in_anim" })
               : _vm._e(),
             _vm._v(" "),
-            _vm.spotifyTracks !== -1 &&
+            _vm.spotifyArtists !== -1 &&
             _vm.spotifyAlbums != -1 &&
-            _vm.spotifyArtists != -1
+            _vm.spotifyTracks != -1
               ? _c("HoursAndMinutes", {
                   staticClass: "fade_in_slow_anim",
                   attrs: { userLibraryTime: _vm.userLibraryTime }
                 })
               : _vm._e(),
             _vm._v(" "),
-            _c("LongestAndShortest", {
-              attrs: {
-                fiveLongest: _vm.fiveTracks["fiveLongest"],
-                fiveShortest: _vm.fiveTracks["fiveShortest"],
-                tracksMode: _vm.tracksMode
-              }
-            })
+            _vm.userLibraryTime !== -1
+              ? _c("LongestAndShortest", {
+                  attrs: {
+                    fiveLongest: _vm.fiveTracks["fiveLongest"],
+                    fiveShortest: _vm.fiveTracks["fiveShortest"],
+                    tracksMode: _vm.tracksMode
+                  }
+                })
+              : _vm._e()
           ],
           1
         )
@@ -39442,7 +39461,7 @@ var render = function() {
     _vm._v(" "),
     _vm.fiveShortest === -1
       ? _c("div", { staticClass: "col-md-6 padding_10" }, [_c("Loader")], 1)
-      : _vm.fiveShortest === false
+      : _vm.fiveShortest === false && _vm.fiveLongest != -1
       ? _c(
           "div",
           { staticClass: "col-md-6 padding_10" },
@@ -39528,12 +39547,17 @@ var render = function() {
           ],
           1
         )
-      : _vm.tracksMode != -1
+      : _vm.tracksMode != -1 && _vm.fiveShortest != -1
       ? _c(
           "div",
           { staticClass: "col-md-12 text-center fade_in_anim light_grey_bg" },
           [
-            _c("ProfileBackground"),
+            _vm.profileBackgroundUrl != -1 && _vm.profileBackgroundUrl != false
+              ? _c("ProfileBackground", {
+                  staticClass: "fade_in_slow_anim",
+                  attrs: { profileBackgroundUrl: _vm.profileBackgroundUrl }
+                })
+              : _vm._e(),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
@@ -57390,10 +57414,23 @@ var ProfilePageStates = {
 
   },
   mutations: {
-    //получить ответ от API (универсальная mutation для всех стейтов)
+    //"легкие" запросы отправляются через getAPIResponse, "тяжелые" через свои собственные мутации
+    //получить ответ от API (универсальная mutation для (почти) всех стейтов)
     getAPIResponse: function getAPIResponse(state, payload) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(payload.uri).then(function (response) {
         state[payload.state] = response.data;
+      });
+    },
+    //получить библиотеку пользователя
+    getSpotifyUserLibrary: function getSpotifyUserLibrary(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_user_library').then(function (response) {
+        state.spotifyUserLibrary = response.data;
+      });
+    },
+    //сгенерировать фоновое изображение
+    generateBackgroundImage: function generateBackgroundImage(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/generate_bg_image').then(function (response) {
+        state.profileBackgroundUrl = response.data;
       });
     }
   },
@@ -57407,10 +57444,11 @@ var ProfilePageStates = {
     },
     //получить библиотку пользователя
     getSpotifyUserLibrary: function getSpotifyUserLibrary(context) {
-      context.commit('getAPIResponse', {
-        state: "spotifyUserLibrary",
-        uri: '/api/get_spotify_user_library'
-      });
+      context.commit('getSpotifyUserLibrary');
+    },
+    //получить фон для профиля
+    generateBackgroundImage: function generateBackgroundImage(context) {
+      context.commit('generateBackgroundImage');
     },
     //получить кол-во треков в библиотеке и последние пять
     getSpotifyTracks: function getSpotifyTracks(context) {
@@ -57452,13 +57490,6 @@ var ProfilePageStates = {
       context.commit('getAPIResponse', {
         state: "tracksMode",
         uri: '/api/get_average_track_length'
-      });
-    },
-    //получить фон для профиля
-    generateProfileBackground: function generateProfileBackground(context) {
-      context.commit('getAPIResponse', {
-        state: "profileBackgroundUrl",
-        uri: '/api/generate_bg_image'
       });
     }
   }

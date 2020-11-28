@@ -4,6 +4,7 @@
     <div v-if="spotifyUserLibrary === -1">
         <Loader />
         <h6 class="text-center">Загружаю библиотеку пользователя...</h6>
+        <p class="font_10pt text-center">Это может занять некоторое время</p>
     </div>
     <div v-else-if="spotifyUserLibrary === false">
         <Error errorMessage="Не удалось загрузить библиотеку пользователя." />
@@ -20,17 +21,19 @@
             <!-- треки -->
             <LastFive :itemCount="spotifyTracks['count']" :lastFiveItems="spotifyTracks['last_five']" type="tracks"/>  
             <!-- альбомы -->
-            <LastFive :itemCount="spotifyAlbums['count']" :lastFiveItems="spotifyAlbums['last_five']" type="albums"/>  
+            <LastFive v-if="spotifyTracks !== false && spotifyTracks !== -1" 
+                        :itemCount="spotifyAlbums['count']" :lastFiveItems="spotifyAlbums['last_five']" type="albums"/>  
             <!-- исполнители -->
-            <LastFive :itemCount="spotifyArtists['count']" :lastFiveItems="spotifyArtists['random_five']" type="artists"/>  
+            <LastFive v-if="spotifyAlbums !== false && spotifyAlbums !== -1" 
+                        :itemCount="spotifyArtists['count']" :lastFiveItems="spotifyArtists['random_five']" type="artists"/>  
         </div>
-    <hr class="fade_in_anim" v-if="spotifyArtists !== -1 || spotifyAlbums != -1 || spotifyTracks != -1">
-
-    <!-- часы и время -->
-    <HoursAndMinutes v-if="spotifyTracks !== -1 && spotifyAlbums != -1 && spotifyArtists != -1" 
-                     class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
-    <!-- самые длинные и короткие треки -->
-    <LongestAndShortest :fiveLongest="fiveTracks['fiveLongest']" :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
+        <hr class="fade_in_anim" v-if="spotifyArtists !== -1 || spotifyAlbums != -1 || spotifyTracks != -1">
+        <!-- часы и время -->
+        <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 
+                        class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
+        <!-- самые длинные и короткие треки -->
+        <LongestAndShortest v-if="userLibraryTime !== -1"
+                            :fiveLongest="fiveTracks['fiveLongest']" :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
     </div>
 
 </div>
@@ -40,19 +43,20 @@
 export default {
  
     beforeCreate(){
-        //фон профиля
-        this.$store.dispatch('generateProfileBackground');
         //получаем библиотеку пользователя и статистику
         this.$store.dispatch('getSpotifyUserLibrary');
         //треки, альбомы и подписки
         this.$store.dispatch('getSpotifyTracks');
         this.$store.dispatch('getSpotifyAlbums');
         this.$store.dispatch('getSpotifyArtists');
-        //время
+        // //время
         this.$store.dispatch('getUserLibraryTime');
         this.$store.dispatch('getFiveLongestAndShortestTracks');
         this.$store.dispatch('getAverageLengthOfTrack');
+        // //фон профиля
+        this.$store.dispatch('generateBackgroundImage');
     },
+
     computed: {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается

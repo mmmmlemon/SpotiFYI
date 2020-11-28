@@ -54,11 +54,24 @@ const ProfilePageStates = {
       },
 
     mutations: {
-          //получить ответ от API (универсальная mutation для всех стейтов)
+          //"легкие" запросы отправляются через getAPIResponse, "тяжелые" через свои собственные мутации
+          //получить ответ от API (универсальная mutation для (почти) всех стейтов)
           getAPIResponse(state, payload){
             axios.get(payload.uri).then((response) => {
               state[payload.state] = response.data;
             });
+          },
+          //получить библиотеку пользователя
+          getSpotifyUserLibrary(state){
+            axios.get('/api/get_spotify_user_library').then((response) => {
+              state.spotifyUserLibrary = response.data;
+            });
+          },
+          //сгенерировать фоновое изображение
+          generateBackgroundImage(state){
+            axios.get('/api/generate_bg_image').then((response) => {
+              state.profileBackgroundUrl = response.data;
+            })
           },
     },
 
@@ -69,7 +82,11 @@ const ProfilePageStates = {
       },
       //получить библиотку пользователя
       getSpotifyUserLibrary(context){
-        context.commit('getAPIResponse', {state: "spotifyUserLibrary", uri: '/api/get_spotify_user_library'});
+        context.commit('getSpotifyUserLibrary');
+      },
+      //получить фон для профиля
+      generateBackgroundImage(context){
+        context.commit('generateBackgroundImage');
       },
       //получить кол-во треков в библиотеке и последние пять
       getSpotifyTracks(context){
@@ -95,10 +112,7 @@ const ProfilePageStates = {
       getAverageLengthOfTrack(context){
         context.commit('getAPIResponse', {state: "tracksMode", uri: '/api/get_average_track_length'});
       },
-      //получить фон для профиля
-      generateProfileBackground(context){
-        context.commit('getAPIResponse', {state: "profileBackgroundUrl", uri: '/api/generate_bg_image'});
-      }
+   
     }
 }
 
