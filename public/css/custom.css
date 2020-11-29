@@ -1,5 +1,9 @@
 /* стили собственного производсва UwU */
 
+.dark-mode{
+    background-image: linear-gradient(to bottom, #2e3136, #2c2f33, #292c31, #272a2e, #25282c) !important;
+}
+
 .invisible{
     display: none;
 }
@@ -86,7 +90,6 @@
     border-style: solid;
     border-color: #2c4150;
     border-width: 2px;
-    transition: all 0.1s ease-in-out;
 }
 
 .album_icon:hover{
@@ -179,11 +182,9 @@ a:hover{
     text-decoration: none !important;
 }
 
-.profile_bg{
-    background-color: #174668; 
-    position:absolute; 
-    height:100%; 
-    z-index:-999;
-    background-position-x: center;
-    filter: blur(5px) brightness(35%);
+.grey_card{
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
+
+    margin: 15px;
 }

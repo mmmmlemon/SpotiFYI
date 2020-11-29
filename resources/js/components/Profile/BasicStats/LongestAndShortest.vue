@@ -7,7 +7,7 @@
         <div v-else-if="fiveLongest === false" class="col-md-6 padding_10">
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
-        <div class="col-md-6 padding_10" v-else-if="fiveLongest != -1">
+        <div class="col-md-5 padding_10 grey_card" v-else-if="fiveLongest != -1">
             <h4 class="border_underline"><b>Пять самых длинных песен</b></h4>
             <div class="row fade_in_anim" v-for="item in fiveLongest" :key="item.id">
                 <div class="col-2">
@@ -24,7 +24,7 @@
         <div v-else>
             <Error type="small" errorMessage="Неизвестная ошибка" />
         </div>
-
+        
         <!-- пять самых коротких -->
         <div v-if="fiveShortest === -1" class="col-md-6 padding_10">
             <Loader />
@@ -32,7 +32,7 @@
         <div v-else-if="fiveShortest === false && fiveLongest != -1" class="col-md-6 padding_10">
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
-        <div class="col-md-6 padding_10" v-else-if="fiveShortest != -1">
+        <div class="col-md-5 padding_10 grey_card" v-else-if="fiveShortest != -1">
             <h4 class="border_underline"><b>Пять самых коротких песен</b></h4>
             <div class="row fade_in_anim" v-for="item in fiveShortest" :key="item.id">
                 <div class="col-2">

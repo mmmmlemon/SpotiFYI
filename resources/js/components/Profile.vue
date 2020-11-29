@@ -9,7 +9,7 @@
         <!-- профиль -->
         <div class="container" v-if="spotifyProfile != -1 && spotifyProfile != false">
 
-            <div class="col-12">
+            <div class="col-12 grey_card">
                 <!-- юзернейм и ссылка на профиль -->
                 <div class="row justify-content-center fade-in">
                         <h1 class="fade_in_anim">
@@ -19,7 +19,7 @@
                 </div>
                 <!-- аватарка -->
                 <div class="row justify-content-center">
-                        <img :src="spotifyProfile.avatar" alt="Spotify Avatar" class="profile_avatar bounce_in_av_anim">
+                        <img :src="spotifyProfile.avatar" alt="Spotify Avatar" class="profile_avatar bounce_in_av_anim" v-bind:class="{avatar_glow_anim: mounted === true}">
                 </div>
                 <!-- вид подписки -->
                 <div class="row justify-content-center fade-in">
@@ -75,6 +75,9 @@ export default {
         //получить профиль
         this.$store.dispatch('getSpotifyProfile');
     },
+    data: {
+        mounted: false
+    },
     computed: {
         //фон профиля
         profileBackgroundUrl: function() {
@@ -84,6 +87,9 @@ export default {
         spotifyProfile: function() {
             return this.$store.state.profilePage.spotifyProfile;
         }
+    },
+    mounted(){
+        this.mounted = false;
     }
 }
 </script>

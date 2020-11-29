@@ -2206,6 +2206,9 @@ __webpack_require__.r(__webpack_exports__);
     //получить профиль
     this.$store.dispatch('getSpotifyProfile');
   },
+  data: {
+    mounted: false
+  },
   computed: {
     //фон профиля
     profileBackgroundUrl: function profileBackgroundUrl() {
@@ -2215,6 +2218,9 @@ __webpack_require__.r(__webpack_exports__);
     spotifyProfile: function spotifyProfile() {
       return this.$store.state.profilePage.spotifyProfile;
     }
+  },
+  mounted: function mounted() {
+    this.mounted = false;
   }
 });
 
@@ -38677,7 +38683,7 @@ var render = function() {
     _vm._v(" "),
     _vm.spotifyProfile != -1 && _vm.spotifyProfile != false
       ? _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "col-12" }, [
+          _c("div", { staticClass: "col-12 grey_card" }, [
             _c("div", { staticClass: "row justify-content-center fade-in" }, [
               _c("h1", { staticClass: "fade_in_anim" }, [
                 _c("b", [_vm._v(_vm._s(_vm.spotifyProfile.spotifyUsername))]),
@@ -38699,6 +38705,7 @@ var render = function() {
             _c("div", { staticClass: "row justify-content-center" }, [
               _c("img", {
                 staticClass: "profile_avatar bounce_in_av_anim",
+                class: { avatar_glow_anim: _vm.mounted === true },
                 attrs: { src: _vm.spotifyProfile.avatar, alt: "Spotify Avatar" }
               })
             ]),
@@ -38850,7 +38857,7 @@ var render = function() {
           [
             _c("Loader"),
             _vm._v(" "),
-            _c("h6", { staticClass: "text-center" }, [
+            _c("h6", { staticClass: "text-center blinking_anim" }, [
               _vm._v("Загружаю библиотеку пользователя...")
             ]),
             _vm._v(" "),
@@ -38948,7 +38955,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12 fade_in_anim" }, [
+    return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
       _c("h5", { staticClass: "text-center" }, [
         _c("b", [_vm._v("Общая информация")]),
         _vm._v(" \r\n                    "),
@@ -39362,7 +39369,7 @@ var render = function() {
       : _vm.fiveLongest != -1
       ? _c(
           "div",
-          { staticClass: "col-md-6 padding_10" },
+          { staticClass: "col-md-5 padding_10 grey_card" },
           [
             _vm._m(0),
             _vm._v(" "),
@@ -39434,7 +39441,7 @@ var render = function() {
       : _vm.fiveShortest != -1
       ? _c(
           "div",
-          { staticClass: "col-md-6 padding_10" },
+          { staticClass: "col-md-5 padding_10 grey_card" },
           [
             _vm._m(1),
             _vm._v(" "),

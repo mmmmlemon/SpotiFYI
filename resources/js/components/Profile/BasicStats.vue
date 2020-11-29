@@ -3,7 +3,7 @@
     <!-- если библиотека пользователя не загружена, то показываем лоадер -->
     <div v-if="spotifyUserLibrary === -1">
         <Loader />
-        <h6 class="text-center">Загружаю библиотеку пользователя...</h6>
+        <h6 class="text-center blinking_anim">Загружаю библиотеку пользователя...</h6>
         <p class="font_10pt text-center">Это может занять некоторое время</p>
     </div>
     <div v-else-if="spotifyUserLibrary === false">
@@ -12,7 +12,7 @@
        <!-- если библиотека загрузилась, то  -->
     <div v-else-if="spotifyUserLibrary !== false && spotifyUserLibrary !== -1">
         <div class="row justify-content-center">
-            <div class="col-md-12 fade_in_anim">
+            <div class="col-md-12 fade_in_slow_anim">
                 <h5 class="text-center">
                     <b>Общая информация</b>&nbsp;
                     <i class="fas fa-chart-bar primary_color"></i>
