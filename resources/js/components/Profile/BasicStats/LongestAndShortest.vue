@@ -57,7 +57,6 @@
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
         <div v-else-if="tracksMode != -1 && fiveShortest != -1" class="col-md-12 text-center fade_in_anim light_grey_bg">
-            <ProfileBackground class="fade_in_slow_anim" v-if="profileBackgroundUrl != -1 && profileBackgroundUrl != false" :profileBackgroundUrl="profileBackgroundUrl"/>
             <hr>
             <p>
                 Средняя продолжительность трека в твоей библиотеке - 

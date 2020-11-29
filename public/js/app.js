@@ -2201,7 +2201,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить профиль
@@ -2282,9 +2281,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$store.dispatch('getUserLibraryTime');
     this.$store.dispatch('getFiveLongestAndShortestTracks');
-    this.$store.dispatch('getAverageLengthOfTrack'); // //фон профиля
-
-    this.$store.dispatch('generateBackgroundImage');
+    this.$store.dispatch('getAverageLengthOfTrack');
   },
   computed: {
     //библиотека пользователя
@@ -2543,7 +2540,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     fiveLongest: {
@@ -2560,30 +2556,6 @@ __webpack_require__.r(__webpack_exports__);
     //фон профиля
     profileBackgroundUrl: function profileBackgroundUrl() {
       return this.$store.state.profilePage.profileBackgroundUrl;
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/ProfileBackground.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/ProfileBackground.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    profileBackgroundUrl: {
-      "default": -1
     }
   }
 });
@@ -38705,154 +38677,138 @@ var render = function() {
     _vm._v(" "),
     _vm.spotifyProfile != -1 && _vm.spotifyProfile != false
       ? _c("div", { staticClass: "container" }, [
-          _c(
-            "div",
-            { staticClass: "col-12" },
-            [
-              _vm.profileBackgroundUrl != -1 &&
-              _vm.profileBackgroundUrl != false
-                ? _c("ProfileBackground", {
-                    staticClass: "fade_in_slow_anim",
-                    attrs: { profileBackgroundUrl: _vm.profileBackgroundUrl }
-                  })
-                : _vm._e(),
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "row justify-content-center fade-in" }, [
+              _c("h1", { staticClass: "fade_in_anim" }, [
+                _c("b", [_vm._v(_vm._s(_vm.spotifyProfile.spotifyUsername))]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticStyle: { "font-size": "10pt" },
+                    attrs: {
+                      href: _vm.spotifyProfile.profile_url,
+                      target: "_blank"
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-external-link-alt" })]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("img", {
+                staticClass: "profile_avatar bounce_in_av_anim",
+                attrs: { src: _vm.spotifyProfile.avatar, alt: "Spotify Avatar" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row justify-content-center fade-in" }, [
+              _vm.spotifyProfile.subscription == "premium"
+                ? _c("h6", { staticStyle: { "margin-bottom": "0" } }, [
+                    _vm._v("Premium "),
+                    _c("i", { staticClass: "fas fa-crown" })
+                  ])
+                : _c("h6")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", [_vm._v(" Подписчики: 1")]),
               _vm._v(" "),
-              _c("div", { staticClass: "row justify-content-center fade-in" }, [
-                _c("h1", { staticClass: "fade_in_anim" }, [
-                  _c("b", [_vm._v(_vm._s(_vm.spotifyProfile.spotifyUsername))]),
+              _c("div", [_vm._v(" | ")]),
+              _vm._v(" "),
+              _c("div", [
+                _c("img", {
+                  staticClass: "fade_in_anim",
+                  attrs: { src: _vm.spotifyProfile.country }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr", { staticClass: "fade_in_anim" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "row justify-content-center fade-in" }, [
+              _c("div", { staticClass: "col-md-8" }, [
+                _c("div", { staticClass: "row fade_in_anim" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-3 padding_10" },
+                    [
+                      _c("router-link", { attrs: { to: "/profile" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-block btn-primary",
+                            attrs: { type: "button" }
+                          },
+                          [_vm._v("Общее")]
+                        )
+                      ])
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
-                    "a",
-                    {
-                      staticStyle: { "font-size": "10pt" },
-                      attrs: {
-                        href: _vm.spotifyProfile.profile_url,
-                        target: "_blank"
-                      }
-                    },
-                    [_c("i", { staticClass: "fas fa-external-link-alt" })]
+                    "div",
+                    { staticClass: "col-md-3 padding_10" },
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: "/profile/top10tracks" } },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block",
+                              attrs: { type: "button" }
+                            },
+                            [_vm._v("Топ-10")]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-3 padding_10" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-block",
+                            attrs: { type: "button" }
+                          },
+                          [_vm._v("Что-то")]
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-3 padding_10" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-block",
+                            attrs: { type: "button" }
+                          },
+                          [_vm._v("Еще")]
+                        )
+                      ])
+                    ],
+                    1
                   )
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row justify-content-center" }, [
-                _c("img", {
-                  staticClass: "profile_avatar bounce_in_av_anim",
-                  attrs: {
-                    src: _vm.spotifyProfile.avatar,
-                    alt: "Spotify Avatar"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row justify-content-center fade-in" }, [
-                _vm.spotifyProfile.subscription == "premium"
-                  ? _c("h6", { staticStyle: { "margin-bottom": "0" } }, [
-                      _vm._v("Premium "),
-                      _c("i", { staticClass: "fas fa-crown" })
-                    ])
-                  : _c("h6")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row justify-content-center" }, [
-                _c("div", [_vm._v(" Подписчики: 1")]),
-                _vm._v(" "),
-                _c("div", [_vm._v(" | ")]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("img", {
-                    staticClass: "fade_in_anim",
-                    attrs: { src: _vm.spotifyProfile.country }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("hr", { staticClass: "fade_in_anim" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row justify-content-center fade-in" }, [
-                _c("div", { staticClass: "col-md-8" }, [
-                  _c("div", { staticClass: "row fade_in_anim" }, [
-                    _c(
-                      "div",
-                      { staticClass: "col-md-3 padding_10" },
-                      [
-                        _c("router-link", { attrs: { to: "/profile" } }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-block btn-primary",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Общее")]
-                          )
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-3 padding_10" },
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: "/profile/top10tracks" } },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-block",
-                                attrs: { type: "button" }
-                              },
-                              [_vm._v("Топ-10")]
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-3 padding_10" },
-                      [
-                        _c("router-link", { attrs: { to: "/" } }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-block",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Что-то")]
-                          )
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-3 padding_10" },
-                      [
-                        _c("router-link", { attrs: { to: "/" } }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-block",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Еще")]
-                          )
-                        ])
-                      ],
-                      1
-                    )
-                  ])
-                ])
               ])
-            ],
-            1
-          )
+            ])
+          ])
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -39552,13 +39508,6 @@ var render = function() {
           "div",
           { staticClass: "col-md-12 text-center fade_in_anim light_grey_bg" },
           [
-            _vm.profileBackgroundUrl != -1 && _vm.profileBackgroundUrl != false
-              ? _c("ProfileBackground", {
-                  staticClass: "fade_in_slow_anim",
-                  attrs: { profileBackgroundUrl: _vm.profileBackgroundUrl }
-                })
-              : _vm._e(),
-            _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
             _c("p", [
@@ -39571,8 +39520,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("hr")
-          ],
-          1
+          ]
         )
       : _c(
           "div",
@@ -39603,33 +39551,6 @@ var staticRenderFns = [
     ])
   }
 ]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/ProfileBackground.vue?vue&type=template&id=52db4056&":
-/*!****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/ProfileBackground.vue?vue&type=template&id=52db4056& ***!
-  \****************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", {
-    staticClass: "container profile_bg",
-    style: { backgroundImage: "url('" + _vm.profileBackgroundUrl + "')" }
-  })
-}
-var staticRenderFns = []
 render._withStripped = true
 
 
@@ -56282,11 +56203,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 /* harmony import */ var _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Misc/Error.vue */ "./resources/js/components/Misc/Error.vue");
 /* harmony import */ var _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Misc/Loader.vue */ "./resources/js/components/Misc/Loader.vue");
-/* harmony import */ var _components_Profile_ProfileBackground_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profile/ProfileBackground.vue */ "./resources/js/components/Profile/ProfileBackground.vue");
-/* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
-/* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
-/* harmony import */ var _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile/BasicStats/LongestAndShortest.vue */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
+/* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
+/* harmony import */ var _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile/BasicStats/LongestAndShortest.vue */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56303,13 +56223,11 @@ Vue.component('Error', _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__["
 
 Vue.component('Loader', _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 
-Vue.component('ProfileBackground', _components_Profile_ProfileBackground_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
+Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
-Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
+Vue.component('HoursAndMinutes', _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
-Vue.component('HoursAndMinutes', _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
-
-Vue.component('LongestAndShortest', _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
+Vue.component('LongestAndShortest', _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -56321,7 +56239,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_9__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_8__["default"]
 });
 
 /***/ }),
@@ -57061,75 +56979,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Profile/ProfileBackground.vue":
-/*!***************************************************************!*\
-  !*** ./resources/js/components/Profile/ProfileBackground.vue ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ProfileBackground_vue_vue_type_template_id_52db4056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfileBackground.vue?vue&type=template&id=52db4056& */ "./resources/js/components/Profile/ProfileBackground.vue?vue&type=template&id=52db4056&");
-/* harmony import */ var _ProfileBackground_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfileBackground.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile/ProfileBackground.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ProfileBackground_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ProfileBackground_vue_vue_type_template_id_52db4056___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ProfileBackground_vue_vue_type_template_id_52db4056___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Profile/ProfileBackground.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Profile/ProfileBackground.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/Profile/ProfileBackground.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileBackground_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfileBackground.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/ProfileBackground.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileBackground_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Profile/ProfileBackground.vue?vue&type=template&id=52db4056&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/components/Profile/ProfileBackground.vue?vue&type=template&id=52db4056& ***!
-  \**********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileBackground_vue_vue_type_template_id_52db4056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfileBackground.vue?vue&type=template&id=52db4056& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/ProfileBackground.vue?vue&type=template&id=52db4056&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileBackground_vue_vue_type_template_id_52db4056___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileBackground_vue_vue_type_template_id_52db4056___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/Profile/Top10.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/Profile/Top10.vue ***!
@@ -57421,34 +57270,26 @@ var ProfilePageStates = {
         state[payload.state] = response.data;
       });
     },
+    getSpotifyProfile: function getSpotifyProfile(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_profile').then(function (response) {
+        state.spotifyProfile = response.data;
+      });
+    },
     //получить библиотеку пользователя
     getSpotifyUserLibrary: function getSpotifyUserLibrary(state) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_user_library').then(function (response) {
         state.spotifyUserLibrary = response.data;
-      });
-    },
-    //сгенерировать фоновое изображение
-    generateBackgroundImage: function generateBackgroundImage(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/generate_bg_image').then(function (response) {
-        state.profileBackgroundUrl = response.data;
       });
     }
   },
   actions: {
     //получить профиль
     getSpotifyProfile: function getSpotifyProfile(context) {
-      context.commit('getAPIResponse', {
-        state: "spotifyProfile",
-        uri: '/api/get_spotify_profile'
-      });
+      context.commit('getSpotifyProfile');
     },
     //получить библиотку пользователя
     getSpotifyUserLibrary: function getSpotifyUserLibrary(context) {
       context.commit('getSpotifyUserLibrary');
-    },
-    //получить фон для профиля
-    generateBackgroundImage: function generateBackgroundImage(context) {
-      context.commit('generateBackgroundImage');
     },
     //получить кол-во треков в библиотеке и последние пять
     getSpotifyTracks: function getSpotifyTracks(context) {

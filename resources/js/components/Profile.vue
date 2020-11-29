@@ -10,7 +10,6 @@
         <div class="container" v-if="spotifyProfile != -1 && spotifyProfile != false">
 
             <div class="col-12">
-                <ProfileBackground class="fade_in_slow_anim" v-if="profileBackgroundUrl != -1 && profileBackgroundUrl != false" :profileBackgroundUrl="profileBackgroundUrl"/>
                 <!-- юзернейм и ссылка на профиль -->
                 <div class="row justify-content-center fade-in">
                         <h1 class="fade_in_anim">

@@ -61,32 +61,27 @@ const ProfilePageStates = {
               state[payload.state] = response.data;
             });
           },
+          getSpotifyProfile(state){
+            axios.get('/api/get_spotify_profile').then((response) => {
+              state.spotifyProfile = response.data;
+            });
+          },
           //получить библиотеку пользователя
           getSpotifyUserLibrary(state){
             axios.get('/api/get_spotify_user_library').then((response) => {
               state.spotifyUserLibrary = response.data;
             });
           },
-          //сгенерировать фоновое изображение
-          generateBackgroundImage(state){
-            axios.get('/api/generate_bg_image').then((response) => {
-              state.profileBackgroundUrl = response.data;
-            })
-          },
     },
 
     actions: {
       //получить профиль
       getSpotifyProfile(context){
-        context.commit('getAPIResponse', {state: "spotifyProfile", uri: '/api/get_spotify_profile'});
+        context.commit('getSpotifyProfile');
       },
       //получить библиотку пользователя
       getSpotifyUserLibrary(context){
         context.commit('getSpotifyUserLibrary');
-      },
-      //получить фон для профиля
-      generateBackgroundImage(context){
-        context.commit('generateBackgroundImage');
       },
       //получить кол-во треков в библиотеке и последние пять
       getSpotifyTracks(context){

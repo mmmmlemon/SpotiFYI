@@ -53,8 +53,6 @@ export default {
         this.$store.dispatch('getUserLibraryTime');
         this.$store.dispatch('getFiveLongestAndShortestTracks');
         this.$store.dispatch('getAverageLengthOfTrack');
-        // //фон профиля
-        this.$store.dispatch('generateBackgroundImage');
     },
 
     computed: {
