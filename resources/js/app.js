@@ -24,6 +24,8 @@ import HoursAndMinutes from './components/Profile/BasicStats/HoursAndMinutes.vue
 Vue.component('HoursAndMinutes', HoursAndMinutes);
 import LongestAndShortest from './components/Profile/BasicStats/LongestAndShortest.vue';
 Vue.component('LongestAndShortest', LongestAndShortest);
+import FavoriteGenres from './components/Profile/BasicStats/FavoriteGenres.vue';
+Vue.component('FavoriteGenres', FavoriteGenres);
 
 Vue.use(VueAxios, axios);
 

@@ -173,6 +173,11 @@
     margin: 0;
 }
 
+.margin_sides{
+    margin-left: 15px;
+    margin-right:15px;
+}
+
 a{
     color: rgb(185, 185, 185) !important;
     transition: color 0.2s ease-in-out;
@@ -186,5 +191,5 @@ a:hover{
     border-radius: 10px;
     background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
 
-    margin: 15px;
+    margin-top: 15px;
 }

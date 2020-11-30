@@ -51,6 +51,7 @@ const ProfilePageStates = {
         fiveTracks: -1, //пять самых длинных и коротких треков, array
         tracksMode: -1, //средняя длина трека, string
         profileBackgroundUrl: -1, //фон для профиля
+        favoriteGenres: -1,
       },
 
     mutations: {
@@ -71,6 +72,12 @@ const ProfilePageStates = {
             axios.get('/api/get_spotify_user_library').then((response) => {
               state.spotifyUserLibrary = response.data;
             });
+          },
+          //получить любимые жанры
+          getFavoriteGenres(state){
+              axios.get('/api/get_favorite_genres/').then((response) => {
+                state.favoriteGenres = response.data;
+              });
           },
     },
 
@@ -107,7 +114,10 @@ const ProfilePageStates = {
       getAverageLengthOfTrack(context){
         context.commit('getAPIResponse', {state: "tracksMode", uri: '/api/get_average_track_length'});
       },
-   
+      //получить любимые жанры
+      getFavoriteGenres(context){
+        context.commit('getFavoriteGenres');
+      },
     }
 }
 

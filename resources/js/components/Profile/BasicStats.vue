@@ -1,12 +1,13 @@
 <template>
 <div>
     <!-- если библиотека пользователя не загружена, то показываем лоадер -->
-    <div v-if="spotifyUserLibrary === -1">
+    <div v-if="spotifyUserLibrary === -1 || favoriteGenres === -1" >
         <Loader />
-        <h6 class="text-center blinking_anim">Загружаю библиотеку пользователя...</h6>
-        <p class="font_10pt text-center">Это может занять некоторое время</p>
+        <h6 v-if="spotifyUserLibrary === -1 && favoriteGenres === -1" class="text-center blinking_anim">Загружаю библиотеку пользователя...</h6>
+        <h6 v-if="spotifyUserLibrary != -1 && favoriteGenres === -1" class="text-center blinking_anim">Анализирую треки...</h6>
+        <p class="font_10pt text-center">Это может занять около минуты</p>
     </div>
-    <div v-else-if="spotifyUserLibrary === false">
+    <div v-else-if="spotifyUserLibrary === false || favoriteGenres === false">
         <Error errorMessage="Не удалось загрузить библиотеку пользователя." />
     </div>
        <!-- если библиотека загрузилась, то  -->
@@ -34,6 +35,8 @@
         <!-- самые длинные и короткие треки -->
         <LongestAndShortest v-if="userLibraryTime !== -1"
                             :fiveLongest="fiveTracks['fiveLongest']" :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
+        <!-- любимые жанры -->
+        <FavoriteGenres v-if="tracksMode != -1"/>
     </div>
 
 </div>
@@ -49,12 +52,14 @@ export default {
         this.$store.dispatch('getSpotifyTracks');
         this.$store.dispatch('getSpotifyAlbums');
         this.$store.dispatch('getSpotifyArtists');
-        // //время
+        //время
         this.$store.dispatch('getUserLibraryTime');
         this.$store.dispatch('getFiveLongestAndShortestTracks');
         this.$store.dispatch('getAverageLengthOfTrack');
+        //жанры
+        this.$store.dispatch('getFavoriteGenres');
     },
-
+  
     computed: {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
@@ -85,6 +90,10 @@ export default {
         tracksMode: function() {
             return this.$store.state.profilePage.tracksMode;
         },
+        //любимые жанры
+        favoriteGenres: function(){
+            return this.$store.state.profilePage.favoriteGenres;
+        }
     }
 }
 </script>
