@@ -27,6 +27,9 @@ Vue.component('LongestAndShortest', LongestAndShortest);
 import FavoriteGenres from './components/Profile/BasicStats/FavoriteGenres.vue';
 Vue.component('FavoriteGenres', FavoriteGenres);
 
+import FavoriteGenresChart from './components/Profile/BasicStats/FavoriteGenresChart.vue';
+Vue.component('FavoriteGenresChart', FavoriteGenresChart);
+
 Vue.use(VueAxios, axios);
 
 import router from './router';

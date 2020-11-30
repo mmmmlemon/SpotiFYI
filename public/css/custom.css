@@ -190,6 +190,5 @@ a:hover{
 .grey_card{
     border-radius: 10px;
     background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
-
     margin-top: 15px;
 }

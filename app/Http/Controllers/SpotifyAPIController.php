@@ -432,56 +432,61 @@ class SpotifyAPIController extends Controller
             //получаем api
             $api = config('spotify_api');
 
-            //получаем треки
-            $tracks = $api->getMyTop('tracks', ['limit' => 50, 'time_range' => 'short_term'])->items;
+            $offset = 0;
+            //подсчет жанров
+            $genresCount = [];
 
-            if($tracks != null)
-            {   
-                $artistsArray = []; //массив для исполнителей
-                $genresArray = []; //массив для жанров
-                
-                //получаем id всех имеющихся в библиотеке исполнителей через треки
-                foreach($tracks as $track)
-                {
-                    foreach($track->artists as $artist)
-                    {
-                        if(array_search($artist->id, $artistsArray) == false)
-                        { array_push($artistsArray, $artist->id); }
-                    }   
-                }
+            while($offset < 50)
+            {
+                //получаем треки
+                $tracks = $api->getMyTop('tracks', ['limit' => 49, 'time_range' => 'short_term', 'offset' => $offset])->items;
 
-                //читаем массив с исполнителями и записываем жанры
-                for($i = 0; $i < count($artistsArray); $i++)
-                {
-                    $genres = $api->getArtist($artistsArray[$i]);
-
-                    foreach($genres->genres as $genre)
-                    { array_push($genresArray, $genre); }
-                }
-                
-                //подсчет жанров
-                $genresCount = [];
-
-                foreach($genresArray as $item)
+                if($tracks != null)
                 {   
-                    $findItem = array_key_exists($item, $genresCount);
+                    $artistsArray = []; //массив для исполнителей
+                    $genresArray = []; //массив для жанров
                     
-                    if($findItem == false)
-                    { $genresCount[$item] = 1; }
-                    else
-                    { $genresCount[$item] += 1; }
+                    //получаем id всех имеющихся в библиотеке исполнителей через треки
+                    foreach($tracks as $track)
+                    {
+                        foreach($track->artists as $artist)
+                        {
+                            if(array_search($artist->id, $artistsArray) == false)
+                            { array_push($artistsArray, $artist->id); }
+                        }   
+                    }
+
+                    //читаем массив с исполнителями и записываем жанры
+                    for($i = 0; $i < count($artistsArray); $i++)
+                    {
+                        $genres = $api->getArtist($artistsArray[$i]);
+
+                        foreach($genres->genres as $genre)
+                        { array_push($genresArray, $genre); }
+                    }
+                    
+                    foreach($genresArray as $item)
+                    {   
+                        $findItem = array_key_exists($item, $genresCount);
+                        
+                        if($findItem == false)
+                        { $genresCount[$item] = 1; }
+                        else
+                        { $genresCount[$item] += 1; }
+                    }
+                    $offset += 49;
+
                 }
-
-                //сортировка по убыванию
-                arsort($genresCount);
-                //топ 15
-                $topTenGenres = array_slice($genresCount, 0, 15, true);
-
-                return response()->json($topTenGenres);
-
+                else
+                { return response()->json(false); }
             }
-            else
-            { return response()->json(false); }
+
+            //сортировка по убыванию
+            arsort($genresCount);
+            //топ 10
+            $topTenGenres = array_slice($genresCount, 0, 10, true);
+
+            return response()->json($topTenGenres);
         }
         else
         { return response()->json(false); }
