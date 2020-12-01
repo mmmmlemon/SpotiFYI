@@ -282,7 +282,7 @@ class SpotifyAPIController extends Controller
 
             $randNum = rand(0, count($tracks) - 1);
 
-            $randomArtistId = $tracks[$randNum]->artists[0]->id;
+            $randomArtistId = $tracks[$randNum]->id;
 
             $checkToken = Globals::checkSpotifyAccessToken($request);
 
@@ -290,12 +290,12 @@ class SpotifyAPIController extends Controller
             {
                 //получаем api
                 $api = config('spotify_api');
-                $artistImageUrl = $api->getArtist($randomArtistId)->images[0]->url;
+                $coverImageUrl = $api->getTrack($randomArtistId)->album->images[0]->url;
             }   
 
             $response = ['overallMinutes' => $overallMinutes, 'overallHours' => $overallHours,
                         'overallDays' => $overallDays, 'overallMonths' => $overallMonths, 
-                        'artistImageUrl' => $artistImageUrl];
+                        'coverImageUrl' => $coverImageUrl];
 
             return response()->json($response);
         }

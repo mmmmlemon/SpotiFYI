@@ -7,7 +7,7 @@
             <Error type="small" errorMessage="Не удалось загрузить треки"/>
         </div>
         <div v-else-if="userLibraryTime != -1 && userLibraryTime != false" class="col-sm-12 text-center padding_10 margin_vetical">
-            <div class="image_card" :style="{backgroundImage: `url('${userLibraryTime['artistImageUrl']}')`}">
+            <div class="image_card" :style="{backgroundImage: `url('${userLibraryTime['coverImageUrl']}')`}">
             </div>
             <div class="image_card_front"></div>
             <!-- минуты -->

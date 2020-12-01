@@ -2311,8 +2311,7 @@ __webpack_require__.r(__webpack_exports__);
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      // return this.$store.state.profilePage.spotifyUserLibrary;
-      return true;
+      return this.$store.state.profilePage.spotifyUserLibrary;
     },
     //кол-во треков и последние пять
     spotifyTracks: function spotifyTracks() {
@@ -78126,7 +78125,7 @@ var render = function() {
               staticClass: "image_card",
               style: {
                 backgroundImage:
-                  "url('" + _vm.userLibraryTime["artistImageUrl"] + "')"
+                  "url('" + _vm.userLibraryTime["coverImageUrl"] + "')"
               }
             }),
             _vm._v(" "),
