@@ -26,9 +26,11 @@ import LongestAndShortest from './components/Profile/BasicStats/LongestAndShorte
 Vue.component('LongestAndShortest', LongestAndShortest);
 import FavoriteGenres from './components/Profile/BasicStats/FavoriteGenres.vue';
 Vue.component('FavoriteGenres', FavoriteGenres);
-
 import FavoriteGenresChart from './components/Profile/BasicStats/FavoriteGenresChart.vue';
 Vue.component('FavoriteGenresChart', FavoriteGenresChart);
+import ArtistsCount from './components/Profile/BasicStats/ArtistsCount.vue';
+Vue.component('ArtistsCount', ArtistsCount);
+
 
 Vue.use(VueAxios, axios);
 

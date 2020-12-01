@@ -37,6 +37,8 @@
                             :fiveLongest="fiveTracks['fiveLongest']" :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
         <!-- любимые жанры -->
         <FavoriteGenres v-if="tracksMode != -1" :favoriteGenres="favoriteGenres"/>
+        <!-- кол-во исполнителей -->
+        <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
     </div>
 
 </div>
@@ -56,16 +58,19 @@ export default {
         this.$store.dispatch('getUserLibraryTime');
         this.$store.dispatch('getFiveLongestAndShortestTracks');
         this.$store.dispatch('getAverageLengthOfTrack');
-        // //жанры
+        //жанры
         this.$store.dispatch('getFavoriteGenres');
+        //кол-во исполнителей
+        this.$store.dispatch('getUniqueArtists');
+
     },
   
     computed: {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
         spotifyUserLibrary: function() {
-            return this.$store.state.profilePage.spotifyUserLibrary;
-            // return true;
+            // return this.$store.state.profilePage.spotifyUserLibrary;
+            return true;
         },
         //кол-во треков и последние пять
         spotifyTracks: function() {
@@ -94,6 +99,10 @@ export default {
         //любимые жанры
         favoriteGenres: function(){
             return this.$store.state.profilePage.favoriteGenres;
+        },
+        //кол-во исполнителей
+        uniqueArtists: function(){
+            return this.$store.state.profilePage.uniqueArtists;
         }
     }
 }

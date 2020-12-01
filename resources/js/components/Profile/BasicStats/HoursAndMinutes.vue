@@ -6,7 +6,10 @@
         <div v-else-if="userLibraryTime === false">
             <Error type="small" errorMessage="Не удалось загрузить треки"/>
         </div>
-        <div v-else-if="userLibraryTime != -1 && userLibraryTime != false" class="col-sm-12 text-center">
+        <div v-else-if="userLibraryTime != -1 && userLibraryTime != false" class="col-sm-12 text-center padding_10 margin_vetical">
+            <div class="image_card" :style="{backgroundImage: `url('${userLibraryTime['artistImageUrl']}')`}">
+            </div>
+            <div class="image_card_front"></div>
             <!-- минуты -->
             <p>Всего в твою библиотеку добавлено
                 <b class="border_underline font_25pt">
@@ -34,9 +37,8 @@
             </p>
         </div>
         <div v-else>
-            <Error type="small" errorMessage="Неизвестная ошибка" />
+            <Error type="small"/>
         </div>
-        <hr>
     </div>
 </template>
 

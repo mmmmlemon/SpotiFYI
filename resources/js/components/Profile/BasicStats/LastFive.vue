@@ -42,7 +42,7 @@
                     </div>  
                 </div>
                 <div v-else>
-                    <Error type="small" errorMessage = "Неизвестная ошибка"/>
+                    <Error type="small"/>
                 </div>  
             </div>
         </div>

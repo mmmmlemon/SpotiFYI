@@ -38,5 +38,6 @@ Route::get('/get_five_tracks', 'SpotifyAPIController@getFiveLongestAndShortestTr
 Route::get('/get_average_track_length', 'SpotifyAPIController@getAverageLengthOfTrack'); //получить среднюю длину трека
 Route::get('/generate_bg_image', 'SpotifyAPIController@generateBackgroundImage'); //генерация фонового изображения для профиля
 Route::get('/get_favorite_genres', 'SpotifyAPIController@getFavoriteGenres'); //получить любимые жанры пользователя (10 шт.)
+Route::get('/get_unique_artists', 'SpotifyAPIController@getUniqueArtists'); //посчитать исполнителей
 
 ?>

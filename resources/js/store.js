@@ -51,7 +51,8 @@ const ProfilePageStates = {
         fiveTracks: -1, //пять самых длинных и коротких треков, array
         tracksMode: -1, //средняя длина трека, string
         profileBackgroundUrl: -1, //фон для профиля
-        favoriteGenres: -1,
+        favoriteGenres: -1, //любимые жанры
+        uniqueArtists: -1, //кол-во исполнителей
       },
 
     mutations: {
@@ -117,6 +118,10 @@ const ProfilePageStates = {
       //получить любимые жанры
       getFavoriteGenres(context){
         context.commit('getFavoriteGenres');
+      },
+      //кол-во исполнителей
+      getUniqueArtists(context){
+        context.commit('getAPIResponse', {state:"uniqueArtists", uri: '/api/get_unique_artists'});
       },
     }
 }

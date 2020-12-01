@@ -22,7 +22,7 @@
             </div>
         </div>
         <div v-else>
-            <Error type="small" errorMessage="Неизвестная ошибка" />
+            <Error type="small"/>
         </div>
         
         <!-- пять самых коротких -->
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div v-else>
-            <Error type="small" errorMessage="Неизвестная ошибка" />
+            <Error type="small"/>
         </div>
         <!-- средняя длина трека -->
         <div v-if="tracksMode === -1" class="col-md-6 padding_10">
@@ -56,16 +56,16 @@
         <div v-else-if="tracksMode === false" class="col-md-6 padding_10">
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
-        <div v-else-if="tracksMode != -1 && fiveShortest != -1" class="col-md-12 text-center fade_in_anim light_grey_bg">
+        <div v-else-if="tracksMode != -1 && fiveShortest != -1" class="col-md-12 text-center fade_in_anim margin_vertical padding_10">
             <hr>
-            <p>
+            <p class="padding_10">
                 Средняя продолжительность трека в твоей библиотеке - 
                 <b class="border_underline font_25pt">{{tracksMode}}</b>
             </p>
             <hr>
         </div>
         <div v-else>
-             <Error type="small" errorMessage="Неизвестная ошибка" />
+             <Error type="small"/>
         </div>
     </div>
 </template>

@@ -21,7 +21,7 @@
 <script>
 export default {
     props: {
-        errorMessage: String,
+        errorMessage: { default: "Неизвестная ошибка", type: String },
         type: { default: 'normal', type: String },
     }
 }

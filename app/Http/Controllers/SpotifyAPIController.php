@@ -277,9 +277,30 @@ class SpotifyAPIController extends Controller
             if($overallMonths > 0)
             {  $overallMonths .= Globals::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
 
-            return response()->json(['overallMinutes' => $overallMinutes, 'overallHours' => $overallHours,
-                                    'overallDays' => $overallDays, 'overallMonths' => $overallMonths]);
+            //получить случайное изображение с исполнителем
+            $artistImageUrl = "";
+
+            $randNum = rand(0, count($tracks) - 1);
+
+            $randomArtistId = $tracks[$randNum]->artists[0]->id;
+
+            $checkToken = Globals::checkSpotifyAccessToken($request);
+
+            if($checkToken != false)
+            {
+                //получаем api
+                $api = config('spotify_api');
+                $artistImageUrl = $api->getArtist($randomArtistId)->images[0]->url;
+            }   
+
+            $response = ['overallMinutes' => $overallMinutes, 'overallHours' => $overallHours,
+                        'overallDays' => $overallDays, 'overallMonths' => $overallMonths, 
+                        'artistImageUrl' => $artistImageUrl];
+
+            return response()->json($response);
         }
+        else
+        { return response()->json(false); }
     }
 
     //пять самых длинных треков
@@ -491,6 +512,50 @@ class SpotifyAPIController extends Controller
         else
         { return response()->json(false); }
 
+    }
+
+    //посчитать кол-во исполнителей
+    public function getUniqueArtists(Request $request)
+    {
+        $tracks = Globals::getUserLibraryJson("tracks", $request);
+
+        if($tracks != null)
+        {
+            $artistsArray = []; //массив для исполнителей
+
+            foreach($tracks as $track)
+            {
+                foreach($track->artists as $artist)
+                {
+                    if(array_search($artist->id, $artistsArray) == false)
+                    { array_push($artistsArray, $artist->id); }
+                }   
+            }
+
+            $count = count(array_unique($artistsArray));
+
+            $randArtistId = $artistsArray[rand(0, $count - 1)];
+
+            $countArtists = $count . Globals::pickTheWord($count, "различных исполнителей", "исполнитель", "разных исполнителя");
+            
+            //получить случайное изображение с исполнителем 
+            $artistImageUrl = "";
+
+            $checkToken = Globals::checkSpotifyAccessToken($request);
+
+            if($checkToken != false)
+            {   
+                //получаем api
+                $api = config('spotify_api');
+                $artistImageUrl = $api->getArtist($randArtistId)->images[0]->url;
+            }
+
+            $response = ['countArtists' => $countArtists, 'artistImageUrl' => $artistImageUrl];
+
+            return response()->json($response);
+        }
+        else
+        { return response()->json(false); }
     }
 
 }
