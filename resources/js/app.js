@@ -26,10 +26,14 @@ import LongestAndShortest from './components/Profile/BasicStats/LongestAndShorte
 Vue.component('LongestAndShortest', LongestAndShortest);
 import FavoriteGenres from './components/Profile/BasicStats/FavoriteGenres.vue';
 Vue.component('FavoriteGenres', FavoriteGenres);
-import FavoriteGenresChart from './components/Profile/BasicStats/FavoriteGenresChart.vue';
-Vue.component('FavoriteGenresChart', FavoriteGenresChart);
 import ArtistsCount from './components/Profile/BasicStats/ArtistsCount.vue';
 Vue.component('ArtistsCount', ArtistsCount);
+import YearsAndDecades from './components/Profile/BasicStats/YearsAndDecades.vue';
+Vue.component('YearsAndDecades', YearsAndDecades);
+
+//графики
+import BarChart from './components/Charts/BarChart.vue';
+Vue.component('BarChart', BarChart);
 
 
 Vue.use(VueAxios, axios);

@@ -39,6 +39,8 @@
         <FavoriteGenres v-if="tracksMode != -1" :favoriteGenres="favoriteGenres"/>
         <!-- кол-во исполнителей -->
         <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
+        <!-- года и десятилетия -->
+        <YearsAndDecades :yearsAndDecades="yearsAndDecades"/>
     </div>
 
 </div>
@@ -62,7 +64,8 @@ export default {
         this.$store.dispatch('getFavoriteGenres');
         //кол-во исполнителей
         this.$store.dispatch('getUniqueArtists');
-
+        //года и десятилетия
+        this.$store.dispatch('getYearsAndDecades');
     },
   
     computed: {
@@ -102,7 +105,11 @@ export default {
         //кол-во исполнителей
         uniqueArtists: function(){
             return this.$store.state.profilePage.uniqueArtists;
-        }
+        },
+        //года и десятилетия
+        yearsAndDecades: function(){
+            return this.$store.state.profilePage.yearsAndDecades;
+        },
     }
 }
 </script>

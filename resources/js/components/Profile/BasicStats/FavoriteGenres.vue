@@ -9,7 +9,7 @@
         <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="col-12 grey_card padding_10 margin_vertical">
             <h4 class="text-center border_underline">Твои любимые жанры</h4>
             <p class="text-center">На основе того что ты слушаешь последний месяц</p>
-            <FavoriteGenresChart :favoriteGenres="favoriteGenres"/>
+            <BarChart :favoriteGenres="favoriteGenres" :backgroundColor="backgroundColor"/>
         </div>
         <div v-else>
             <Error type="small"/>
@@ -19,6 +19,12 @@
 
 <script>
 export default {
+    data: () => {
+        return {
+            //цвета для графика
+            backgroundColor: ['#1b77b9','#1bb98a','#48b91b','#b9941b','#b91b1b','#b91bb1','#4a1bb9','#223586','#228638','#864f22'],
+        }
+    },
     props: {
         //любимые жанры
         favoriteGenres: { default: -1 },

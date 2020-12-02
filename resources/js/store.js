@@ -52,7 +52,8 @@ const ProfilePageStates = {
         tracksMode: -1, //средняя длина трека, string
         profileBackgroundUrl: -1, //фон для профиля
         favoriteGenres: -1, //любимые жанры
-        uniqueArtists: -1, //кол-во исполнителей
+        uniqueArtists: -1, //кол-во исполнителей,
+        yearsAndDecades: -1, //года и десятилетия
       },
 
     mutations: {
@@ -123,6 +124,10 @@ const ProfilePageStates = {
       getUniqueArtists(context){
         context.commit('getAPIResponse', {state:"uniqueArtists", uri: '/api/get_unique_artists'});
       },
+      //посчитать года и десятилетия
+      getYearsAndDecades(context){
+        context.commit('getAPIResponse', {state:'yearsAndDecades', uri: '/api/get_years_and_decades'});
+      }
     }
 }
 

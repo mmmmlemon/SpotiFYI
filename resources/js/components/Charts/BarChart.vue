@@ -12,6 +12,8 @@ export default {
   }),
   props: {
       favoriteGenres: { default: -1 },
+      backgroundColor: { default: '#1b77b9' },
+      label: { default: "Заголовок" },
   },
 
   async mounted () {
@@ -26,8 +28,8 @@ export default {
       labels: keys,
       datasets: [
         {
-          label: ['Твои любимые жанры'],
-          backgroundColor: ['#1b77b9','#1bb98a','#48b91b','#b9941b','#b91b1b','#b91bb1','#4a1bb9','#223586','#228638','#864f22'],
+          label: this.label,
+          backgroundColor: this.backgroundColor,
           data: values
         }
       ]

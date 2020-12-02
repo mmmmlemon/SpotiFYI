@@ -536,7 +536,7 @@ class SpotifyAPIController extends Controller
 
             $randArtistId = $artistsArray[rand(0, $count - 1)];
 
-            $countArtists = $count . Globals::pickTheWord($count, "различных исполнителей", "исполнитель", "разных исполнителя");
+            $countArtists = $count . Globals::pickTheWord($count, "различных исполнителей", "исполнителя", "разных исполнителей");
             
             //получить случайное изображение с исполнителем 
             $artistImageUrl = "";
@@ -557,5 +557,91 @@ class SpotifyAPIController extends Controller
         else
         { return response()->json(false); }
     }
+
+    //посчитать года и десятилетия
+    public function getYearsAndDecades(Request $request)
+    {
+        $tracks = Globals::getUserLibraryJson("tracks", $request);
+
+        if($tracks != null)
+        {       
+            //все даты
+            $allYears = [];
+
+            //запись всех годов в массив
+            foreach($tracks as $track)
+            {
+                $year = $track->album->release_date;
+
+                if($track->album->release_date_precision == "day" || $track->album->release_date_precision == "month")
+                { $year = substr($track->album->release_date, 0, 4); }
+
+                array_push($allYears, $year); 
+            }
+
+            //подсчет кол-ва всех годов
+            $countYears = [];
+
+            foreach($allYears as $year)
+            {   
+                $findYear = array_key_exists($year, $countYears);
+                if($findYear == false)
+                { $countYears[$year] = 1; }
+                else
+                { $countYears[$year] += 1; }
+            }
+
+            //сортировка годов по возрастанию
+            ksort($countYears);
+
+            //добавление недостающих годов в промежутке между самым старым и самым новым годом для линейного графика
+            $yearMin =  array_keys($countYears)[0];
+            $yearMax = array_keys($countYears)[count($countYears) - 1];
+
+            //если года нет в массиве, то добавляем его со значением - 0
+            for($i = $yearMin; $i <= $yearMax; $i++)
+            {   
+                $findIndex = array_key_exists($i, $countYears);
+                if($findIndex == false)
+                { $countYears[$i] = 0; }
+            }
+
+            //еще раз сортируем массив с годами
+            ksort($countYears);
+
+            //подсчет кол-ва всех годов
+            $countDecades = [];
+
+            foreach($allYears as $year)
+            {   
+                $decade = intval(substr($year, 0, 3) . "0");
+                $findDecade = array_key_exists($decade , $countDecades);
+                if($findDecade == false)
+                { $countDecades[$decade ] = 1; }
+                else
+                { $countDecades[$decade ] += 1; }
+            }
+            
+            //сортируем десятилетия по возрастанию
+            ksort($countDecades);
+
+            $response = ['countYears' => $countYears, 'countDecades' => $countDecades];
+
+            //год и десятилетие с наибольшим кол-вом песен
+            arsort($countYears);
+            $maxYear = key($countYears);
+            arsort($countDecades);
+            $maxDecade = key($countDecades);
+            
+            $response['maxYear'] = $maxYear;
+            $response['maxDecade'] = $maxDecade;
+
+            return response()->json($response);
+
+        }   
+        else
+        { return response()->json(false); }
+    }
+
 
 }
