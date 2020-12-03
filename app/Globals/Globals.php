@@ -152,6 +152,25 @@
 
                 return $arrayCopy;
             }
+            
+
+            //сгенерировать случайный цвет
+            public static function randomHslColor($param)
+            {   
+                $offset = 0;
+                if($param['offset'] != null)
+                {
+                    $offset = $param['offset'];
+                }
+     
+                //генерируем цвет в RGB
+                $randNum = rand(0,360);
+
+                //переводим его в HEX
+                $hslColor = "hsla(".$randNum.",100%,39%,1)";
+
+                return $hslColor;
+            }
     }
 
 ?>

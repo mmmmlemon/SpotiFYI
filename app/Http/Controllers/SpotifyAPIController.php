@@ -627,6 +627,42 @@ class SpotifyAPIController extends Controller
 
             $response = ['countYears' => $countYears, 'countDecades' => $countDecades];
 
+     
+
+
+            //генерируем цвета для графиков
+            //цвета для графика десятилетий
+            $decadeColors = [];
+            $offset = 0;
+            for($i = 0; $i < 10; $i++)
+            {   
+                array_push($decadeColors, Globals::randomHslColor(['offset' => $offset]));
+                $offset+=30;
+            }
+
+            $response['decadeColors'] = $decadeColors;
+
+            //цвета для графика годов
+            //каждый год окрашивается в тот же цвет что и десятилетие в графике десятилетий
+            $yearColors = [];
+            $years = array_keys($countYears);
+            $previousDecade = substr(strval($years[0]), 0, 3);
+            $indexOfColor = 0;
+            foreach($years as $year)
+            {
+                $currentDecade = substr(strval($year), 0, 3);
+                
+                if($currentDecade != $previousDecade)
+                {   
+                    $indexOfColor++;
+                    $previousDecade = $currentDecade;
+                }
+
+                array_push($yearColors, $decadeColors[$indexOfColor]);                
+            }
+
+            $response['yearColors'] = $yearColors;
+
             //год и десятилетие с наибольшим кол-вом песен
             arsort($countYears);
             $maxYear = key($countYears);
@@ -636,8 +672,13 @@ class SpotifyAPIController extends Controller
             $response['maxYear'] = $maxYear;
             $response['maxDecade'] = $maxDecade;
 
-            return response()->json($response);
+            $maxDecadeSongs = $countDecades[key($countDecades)] . Globals::pickTheWord($countDecades[key($countDecades)], "песен", "песня", "песни");
+            $maxYearSongs = $countYears[key($countYears)] . Globals::pickTheWord($countYears[key($countYears)], "песен", "песня", "песни");
 
+            $response['maxDecadeSongs'] = $maxDecadeSongs;
+            $response['maxYearSongs'] = $maxYearSongs;
+
+            return response()->json($response);
         }   
         else
         { return response()->json(false); }

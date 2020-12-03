@@ -40,7 +40,7 @@
         <!-- кол-во исполнителей -->
         <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
         <!-- года и десятилетия -->
-        <YearsAndDecades :yearsAndDecades="yearsAndDecades"/>
+        <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades"/>
     </div>
 
 </div>

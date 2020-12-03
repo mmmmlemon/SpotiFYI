@@ -2796,6 +2796,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     //любимые жанры
@@ -78000,9 +78003,11 @@ var render = function() {
                 })
               : _vm._e(),
             _vm._v(" "),
-            _c("YearsAndDecades", {
-              attrs: { yearsAndDecades: _vm.yearsAndDecades }
-            })
+            _vm.uniqueArtists != -1
+              ? _c("YearsAndDecades", {
+                  attrs: { yearsAndDecades: _vm.yearsAndDecades }
+                })
+              : _vm._e()
           ],
           1
         )
@@ -78137,7 +78142,8 @@ var render = function() {
             _c("BarChart", {
               attrs: {
                 favoriteGenres: _vm.favoriteGenres,
-                backgroundColor: _vm.backgroundColor
+                backgroundColor: _vm.backgroundColor,
+                label: "Любимые жанры"
               }
             })
           ],
@@ -78755,15 +78761,30 @@ var render = function() {
           "div",
           { staticClass: "col-12 grey_card padding_10 margin_vertical" },
           [
-            _c("p", [
-              _vm._v(
-                "Десятилетие - " + _vm._s(_vm.yearsAndDecades["maxDecade"])
-              )
+            _c("p", { staticClass: "text-center" }, [
+              _vm._v("Больше всего тебе нравится музыка "),
+              _c("b", { staticClass: "unbold border_underline font_25pt" }, [
+                _vm._v(_vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых")
+              ]),
+              _vm._v(". \n            В твоей библиотеке "),
+              _c("b", { staticClass: "unbold border_underline font_25pt" }, [
+                _vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))
+              ]),
+              _vm._v(" из этой эпохи.")
             ]),
             _vm._v(" "),
-            _c("p", [
-              _vm._v("Год - " + _vm._s(_vm.yearsAndDecades["maxYear"]))
+            _c("p", { staticClass: "text-center" }, [
+              _c("b", { staticClass: "unbold border_underline font_25pt" }, [
+                _vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")
+              ]),
+              _vm._v(" - твой любимый год. \n            Тебе нравятся "),
+              _c("b", { staticClass: "unbold border_underline font_25pt" }, [
+                _vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))
+              ]),
+              _vm._v(" вышедших в этом году.")
             ]),
+            _vm._v(" "),
+            _c("br"),
             _vm._v(" "),
             _c("h5", { staticClass: "text-center border_underline" }, [
               _vm._v("Песни по десятилетиям")
@@ -78772,7 +78793,8 @@ var render = function() {
             _c("BarChart", {
               attrs: {
                 favoriteGenres: _vm.yearsAndDecades["countDecades"],
-                label: "Песни по десятилетиям"
+                label: "Песни по десятилетиям",
+                backgroundColor: _vm.yearsAndDecades["decadeColors"]
               }
             }),
             _vm._v(" "),
@@ -78783,7 +78805,8 @@ var render = function() {
             _c("BarChart", {
               attrs: {
                 favoriteGenres: _vm.yearsAndDecades["countYears"],
-                label: "Песни по годам"
+                label: "Песни по годам",
+                backgroundColor: _vm.yearsAndDecades["yearColors"]
               }
             })
           ],
