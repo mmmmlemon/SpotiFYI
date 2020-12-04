@@ -31,6 +31,9 @@ Vue.component('ArtistsCount', ArtistsCount);
 import YearsAndDecades from './components/Profile/BasicStats/YearsAndDecades.vue';
 Vue.component('YearsAndDecades', YearsAndDecades);
 
+import Top10Items from './components/Profile/Top10/Top10Items.vue';
+Vue.component('Top10Items', Top10Items);
+
 //графики
 import BarChart from './components/Charts/BarChart.vue';
 Vue.component('BarChart', BarChart);

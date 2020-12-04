@@ -10,7 +10,7 @@
     <div v-else-if="spotifyUserLibrary === false || favoriteGenres === false">
         <Error errorMessage="Не удалось загрузить библиотеку пользователя." />
     </div>
-       <!-- если библиотека загрузилась, то  -->
+    <!-- если библиотека загрузилась, то  -->
     <div v-else-if="spotifyUserLibrary !== false && spotifyUserLibrary !== -1">
         <div class="row justify-content-center">
             <div class="col-md-12 fade_in_slow_anim">
@@ -41,6 +41,11 @@
         <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
         <!-- года и десятилетия -->
         <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades"/>
+        <br>
+        <div class="row justify-content-center fade_in_anim" v-if="yearsAndDecades != -1">
+            <router-link to="/profile/top10"><button class="btn btn-primary">Перейти к "Топ-10"</button></router-link>
+            <br><br>
+        </div>
     </div>
 
 </div>
@@ -48,26 +53,9 @@
 
 <script>
 export default {
- 
-    beforeCreate(){
-        //получаем библиотеку пользователя и статистику
-        this.$store.dispatch('getSpotifyUserLibrary');
-        //треки, альбомы и подписки
-        this.$store.dispatch('getSpotifyTracks');
-        this.$store.dispatch('getSpotifyAlbums');
-        this.$store.dispatch('getSpotifyArtists');
-        //время
-        this.$store.dispatch('getUserLibraryTime');
-        this.$store.dispatch('getFiveLongestAndShortestTracks');
-        this.$store.dispatch('getAverageLengthOfTrack');
-        //жанры
-        this.$store.dispatch('getFavoriteGenres');
-        //кол-во исполнителей
-        this.$store.dispatch('getUniqueArtists');
-        //года и десятилетия
-        this.$store.dispatch('getYearsAndDecades');
+    mounted(){
+        this.$store.dispatch('setCurrentTab', 'basicStats');
     },
-  
     computed: {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается

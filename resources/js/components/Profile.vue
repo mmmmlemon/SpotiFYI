@@ -41,10 +41,10 @@
                     <div class="col-md-8">
                         <div class="row fade_in_anim">
                             <div class="col-md-3 padding_10">
-                                <router-link to="/profile"><button class="btn btn-block btn-primary" type="button">Общее</button></router-link>
+                                <router-link to="/profile"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'basicStats'}" type="button">Общее</button></router-link>
                             </div>
                             <div class="col-md-3 padding_10">
-                                <router-link to="/profile/top10tracks"><button class="btn btn-block" type="button">Топ-10</button></router-link>
+                                <router-link to="/profile/top10"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'top10'}" type="button">Топ-10</button></router-link>
                             </div>
                             <div class="col-md-3 padding_10">
                                 <router-link to="/"><button class="btn btn-block" type="button">Что-то</button></router-link>
@@ -74,8 +74,28 @@ export default {
     beforeCreate(){
         //получить профиль
         this.$store.dispatch('getSpotifyProfile');
+        //получаем библиотеку пользователя и статистику
+        this.$store.dispatch('getSpotifyUserLibrary');
+        //треки, альбомы и подписки
+        this.$store.dispatch('getSpotifyTracks');
+        this.$store.dispatch('getSpotifyAlbums');
+        this.$store.dispatch('getSpotifyArtists');
+        //время
+        this.$store.dispatch('getUserLibraryTime');
+        this.$store.dispatch('getFiveLongestAndShortestTracks');
+        this.$store.dispatch('getAverageLengthOfTrack');
+        //жанры
+        this.$store.dispatch('getFavoriteGenres');
+        //кол-во исполнителей
+        this.$store.dispatch('getUniqueArtists');
+        //года и десятилетия
+        this.$store.dispatch('getYearsAndDecades');
     },
     computed: {
+        //текущая вкладка
+        currentTab: function(){
+            return this.$store.state.profilePage.currentTab;
+        },
         //фон профиля
         profileBackgroundUrl: function() {
             return this.$store.state.profilePage.profileBackgroundUrl;

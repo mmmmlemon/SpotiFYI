@@ -41,7 +41,7 @@ const routes = [
                 component: BasicStats
             },
             {
-                path:'/profile/top10tracks',
+                path:'/profile/top10',
                 component: Top10
             }
 

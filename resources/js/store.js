@@ -42,6 +42,7 @@ const HomePageStates = {
 
 const ProfilePageStates = {
     state: {
+        currentTab: - 1, //текущая вкладка на странице
         spotifyProfile: -1, //профиль пользователя, array
         spotifyUserLibrary: -1, //библиотека пользователя, bool
         spotifyTracks: -1, //кол-во треков и последние 5, array
@@ -57,6 +58,10 @@ const ProfilePageStates = {
       },
 
     mutations: {
+          //установить текущую вкладку
+          setCurrentTab(state, tab){
+            state.currentTab = tab;
+          },
           //"легкие" запросы отправляются через getAPIResponse, "тяжелые" через свои собственные мутации
           //получить ответ от API (универсальная mutation для (почти) всех стейтов)
           getAPIResponse(state, payload){
@@ -84,6 +89,10 @@ const ProfilePageStates = {
     },
 
     actions: {
+      //установить текущую вкладку
+      setCurrentTab(context, tab){
+        context.commit('setCurrentTab', tab);
+      },
       //получить профиль
       getSpotifyProfile(context){
         context.commit('getSpotifyProfile');

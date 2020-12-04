@@ -440,7 +440,6 @@ class SpotifyAPIController extends Controller
 
             return response()->json($urlForImg);
         }
-
     }
 
     //получить любимые жанры пользователя
