@@ -8,7 +8,7 @@ use SpotifyWebAPI;
 use Carbon\Carbon;
 use Cookie;
 use URL;
-use App\Globals\Globals;
+use App\Globals\System;
 
 // HomeController
 //ф-ции главной страницы, а так же ф-ции сайта не связанные с профилем пользователя и статистикой
@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {   
         //проверка токена
-        $checkToken = Globals::checkSpotifyAccessToken($request);
+        $checkToken = System::checkSpotifyAccessToken($request);
 
         //если токен есть и он действительный
         if($checkToken != false)

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Globals\Globals;
+use App\Globals\System;
+use App\Globals\Helpers;
 use SpotifyWebAPI;
 use Carbon\Carbon;
 use File;
@@ -23,7 +24,7 @@ class SpotifyAPIController extends Controller
     public function getHomePageUserTracksCount(Request $request)
     { 
         //проверка токена
-        $checkToken = Globals::checkSpotifyAccessToken($request);
+        $checkToken = System::checkSpotifyAccessToken($request);
 
         if($checkToken != false)
         {
@@ -58,7 +59,7 @@ class SpotifyAPIController extends Controller
     //параметры: реквест
     public function getSpotifyUsername(Request $request)
     {
-        $checkToken = Globals::checkSpotifyAccessToken($request);
+        $checkToken = System::checkSpotifyAccessToken($request);
 
         if($checkToken != false)
         {
@@ -76,7 +77,7 @@ class SpotifyAPIController extends Controller
     public function getSpotifyProfile(Request $request)
     {   
         //проверка токена
-        $checkToken = Globals::checkSpotifyAccessToken($request);
+        $checkToken = System::checkSpotifyAccessToken($request);
 
         if($checkToken != false)
         {
@@ -101,7 +102,7 @@ class SpotifyAPIController extends Controller
     public function getSpotifyUserLibrary(Request $request)
     {
         //проверяем токен
-        $checkToken = Globals::checkSpotifyAccessToken($request);
+        $checkToken = System::checkSpotifyAccessToken($request);
 
         if($checkToken != false)
         {
@@ -189,7 +190,7 @@ class SpotifyAPIController extends Controller
     public function getSpotifyTracks(Request $request)
     {   
         //открываем файл треков из storage
-        $tracks = Globals::getUserLibraryJson("tracks", $request);
+        $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если файл есть
         if($tracks != false)
@@ -199,7 +200,7 @@ class SpotifyAPIController extends Controller
             for($i = 0; $i < 5; $i++)
             {   
                 //получаем полное название трека
-                $name = Globals::getFullNameOfItem($tracks[$i]);
+                $name = Helpers::getFullNameOfItem($tracks[$i]);
 
                 array_push($lastFive, ['id' => $tracks[$i]->id,
                                         'cover' => $tracks[$i]->album->images[count($tracks[$i]->album->images) - 1]->url,
@@ -221,7 +222,7 @@ class SpotifyAPIController extends Controller
     public function getSpotifyAlbums(Request $request)
     {
         //открываем файл альбомов
-        $albums = Globals::getUserLibraryJson("albums", $request);
+        $albums = System::getUserLibraryJson("albums", $request);
 
         //если он есть
         if($albums != false)
@@ -231,7 +232,7 @@ class SpotifyAPIController extends Controller
             for($i = 0; $i < 5; $i++)
             {
                 //получаем полное название альбома
-                $name = Globals::getFullNameOfItem($albums[$i]);
+                $name = Helpers::getFullNameOfItem($albums[$i]);
                 array_push($lastFive, ['id' => $albums[$i]->id,
                                         'cover' => $albums[$i]->images[count($albums[$i]->images) - 1]->url,
                                         'name' => $name,
@@ -253,7 +254,7 @@ class SpotifyAPIController extends Controller
     public function getSpotifyArtists(Request $request)
     {
         //открываем файл подписок
-        $artists = Globals::getUserLibraryJson("artists", $request);
+        $artists = System::getUserLibraryJson("artists", $request);
 
         //если он есть
         if($artists != false)
@@ -297,7 +298,7 @@ class SpotifyAPIController extends Controller
     public function getUserLibraryTime(Request $request)
     {
         //получаем файл треков
-        $tracks = Globals::getUserLibraryJson("tracks", $request);
+        $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
         if($tracks != false)
@@ -315,17 +316,17 @@ class SpotifyAPIController extends Controller
             $overallMonths = floor($overallDays / 30); //общее кол-во месяцев (кол-во дней / 30 дней)
 
             //вычисляем какое слово нужно подставить в конец (1 минуТА, 2 минуТЫ и т.п)
-            $overallMinutes .= Globals::pickTheWord($overallMinutes, "минут", "минута", "минуты");
+            $overallMinutes .= Helpers::pickTheWord($overallMinutes, "минут", "минута", "минуты");
             
             //анадлогично для остальных измерений, если они больше нуля
             if($overallHours > 0)
-            {  $overallHours .= Globals::pickTheWord($overallHours, "часов", "час", "часа"); }
+            {  $overallHours .= Helpers::pickTheWord($overallHours, "часов", "час", "часа"); }
             
             if($overallDays > 0)
-            {  $overallDays .= Globals::pickTheWord($overallDays, "дней", "день", "дня"); }
+            {  $overallDays .= Helpers::pickTheWord($overallDays, "дней", "день", "дня"); }
             
             if($overallMonths > 0)
-            {  $overallMonths .= Globals::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
+            {  $overallMonths .= Helpers::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
 
             //получить случайное изображение с обложкой альбома для фоновой картинки
             //получаем случайный трек из файла
@@ -333,7 +334,7 @@ class SpotifyAPIController extends Controller
             $randomTrackId = $tracks[$randNum]->id;
 
             //проверяем токен
-            $checkToken = Globals::checkSpotifyAccessToken($request);
+            $checkToken = System::checkSpotifyAccessToken($request);
             //если токен действительный
             if($checkToken != false)
             {
@@ -360,7 +361,7 @@ class SpotifyAPIController extends Controller
     public function getFiveLongestAndShortestTracks(Request $request)
     {
         //получаем все треки
-        $tracks = Globals::getUserLibraryJson("tracks", $request);
+        $tracks = System::getUserLibraryJson("tracks", $request);
 
         if($tracks != false)
         {  
@@ -370,16 +371,16 @@ class SpotifyAPIController extends Controller
             foreach($tracks as $track)
             {
                 $id = $track->id;
-                $duration = Globals::trackDurationToMinutes($track->duration_ms);
+                $duration = Helpers::trackDurationToMinutes($track->duration_ms);
                 $cover = $track->album->images[count($track->album->images) - 1]->url;
-                $name = Globals::getFullNameOfItem($track);
+                $name = Helpers::getFullNameOfItem($track);
                 $url = $track->external_urls->spotify;
                 array_push($tracksClean, ['id' => $id, 'duration' => $duration, 'cover' => $cover, 'name' => $name, 'url' => $url]);
             }
             
             //сортируем треки по убыванию и возрастанию по ключу 'duration'
-            $tracksDesc = Globals::sortArrayByKey($tracksClean, 'duration', 'desc');
-            $tracksAsc = Globals::sortArrayByKey($tracksClean, 'duration', 'asc');
+            $tracksDesc = Helpers::sortArrayByKey($tracksClean, 'duration', 'desc');
+            $tracksAsc = Helpers::sortArrayByKey($tracksClean, 'duration', 'asc');
 
             //берем верхние пять элементов у обоих массивов
             //таким образом получаем пять самых длинных и коротких треков
@@ -399,7 +400,7 @@ class SpotifyAPIController extends Controller
     public function getAverageLengthOfTrack(Request $request)
     {
         //получить файл треков
-        $tracks = Globals::getUserLibraryJson("tracks", $request);
+        $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
         if($tracks != null)
@@ -417,7 +418,7 @@ class SpotifyAPIController extends Controller
             $countDurations = array_count_values($durationMn);  //считаем моду
             $mode = array_search(max($countDurations), $countDurations);
             
-            $response = $mode . Globals::pickTheWord($mode, "минут", "минута", "минуты");
+            $response = $mode . Helpers::pickTheWord($mode, "минут", "минута", "минуты");
 
             return response()->json($response);
         }
@@ -429,7 +430,7 @@ class SpotifyAPIController extends Controller
     //сгенерировать изображение для фона профиля (ВЫРЕЗАТЬ И ИСПОЛЬЗОВАТЬ В ДРУГОМ МЕСТЕ)
     public function generateBackgroundImage(Request $request)
     {
-        $tracks = Globals::getUserLibraryJson("tracks", $request);
+        $tracks = System::getUserLibraryJson("tracks", $request);
 
         if($tracks != null)
         {
@@ -476,7 +477,7 @@ class SpotifyAPIController extends Controller
     public function getFavoriteGenres(Request $request)
     {   
         //проверяем токен
-        $checkToken = Globals::checkSpotifyAccessToken($request);
+        $checkToken = System::checkSpotifyAccessToken($request);
 
         if($checkToken != false)
         {
@@ -555,7 +556,7 @@ class SpotifyAPIController extends Controller
     public function getUniqueArtists(Request $request)
     {
         //получаем файл треков
-        $tracks = Globals::getUserLibraryJson("tracks", $request);
+        $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
         if($tracks != null)
@@ -576,13 +577,13 @@ class SpotifyAPIController extends Controller
             $count = count(array_unique($artistsArray));
 
             //подставляем подходящее слово
-            $countArtists = $count . Globals::pickTheWord($count, "различных исполнителей", "исполнителя", "разных исполнителей");
+            $countArtists = $count . Helpers::pickTheWord($count, "различных исполнителей", "исполнителя", "разных исполнителей");
             
             //получаем случайное фото исполнителя для фоновой картинки
             $artistImageUrl = ""; //пустая строка для url картинки
 
             //проверяем токен
-            $checkToken = Globals::checkSpotifyAccessToken($request);
+            $checkToken = System::checkSpotifyAccessToken($request);
 
             if($checkToken != false)
             {   
@@ -609,7 +610,7 @@ class SpotifyAPIController extends Controller
     public function getYearsAndDecades(Request $request)
     {
         //открываем файл с треками
-        $tracks = Globals::getUserLibraryJson("tracks", $request);
+        $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
         if($tracks != null)
@@ -685,8 +686,8 @@ class SpotifyAPIController extends Controller
             $offset = 0;
             for($i = 0; $i < 10; $i++)
             {   
-                array_push($decadeColors, Globals::randomHslColor(['offset' => $offset]));
-                $offset+=30;
+                array_push($decadeColors, Helpers::randomHslColor(['offset' => $offset]));
+                $offset+=60;
             }
 
             $response['decadeColors'] = $decadeColors;
@@ -721,8 +722,8 @@ class SpotifyAPIController extends Controller
             $response['maxYear'] = $maxYear;
             $response['maxDecade'] = $maxDecade;
 
-            $maxDecadeSongs = $countDecades[key($countDecades)] . Globals::pickTheWord($countDecades[key($countDecades)], "песен", "песня", "песни");
-            $maxYearSongs = $countYears[key($countYears)] . Globals::pickTheWord($countYears[key($countYears)], "песен", "песня", "песни");
+            $maxDecadeSongs = $countDecades[key($countDecades)] . Helpers::pickTheWord($countDecades[key($countDecades)], "песен", "песня", "песни");
+            $maxYearSongs = $countYears[key($countYears)] . Helpers::pickTheWord($countYears[key($countYears)], "песен", "песня", "песни");
 
             $response['maxDecadeSongs'] = $maxDecadeSongs;
             $response['maxYearSongs'] = $maxYearSongs;

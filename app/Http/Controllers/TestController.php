@@ -6,7 +6,8 @@ use DB;
 use SpotifyWebAPI;
 use Cookie;
 use Auth;
-use App\Globals\Globals;
+use App\Globals\System;
+use App\Globals\Helpers;
 
 //контроллер с методами для предварительного тестирования различных функций сайта
 class TestController extends Controller
