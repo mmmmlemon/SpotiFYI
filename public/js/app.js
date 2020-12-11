@@ -2131,11 +2131,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
-    loggedIn: function loggedIn() {
-      return this.$store.state.homePage.spotifyLogInInfo['loggedIn'];
-    },
     spotifyUsername: function spotifyUsername() {
-      return this.$store.state.homePage.spotifyLogInInfo['spotifyUsername'];
+      return this.$store.state.homePage.spotifyUsername;
     },
     spotifyUserTracksCount: function spotifyUserTracksCount() {
       return this.$store.state.homePage.spotifyUserTracksCount;
@@ -2866,10 +2863,33 @@ __webpack_require__.r(__webpack_exports__);
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      return this.$store.state.profilePage.spotifyUserLibrary;
+      // return this.$store.state.profilePage.spotifyUserLibrary;
+      return true;
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -2882,6 +2902,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2902,6 +2931,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -77465,7 +77495,8 @@ var render = function() {
         {
           staticClass: "col-md-8 fade_in_anim",
           class: {
-            invisible: _vm.loggedIn === undefined || _vm.loggedIn === true
+            invisible:
+              _vm.spotifyUsername === false || _vm.spotifyUsername != false
           },
           attrs: { width: "20%;" }
         },
@@ -77482,7 +77513,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "col-md-8", class: { invisible: !_vm.loggedIn } },
+        { staticClass: "col-md-8", class: { invisible: !_vm.spotifyUsername } },
         [
           _vm.spotifyUsername != false
             ? _c("h1", { staticClass: "fade_in_anim" }, [
@@ -77492,7 +77523,7 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _vm.spotifyUserTracksCount == -1 && _vm.loggedIn == true
+          _vm.spotifyUserTracksCount == -1 && _vm.spotifyUsername != false
             ? _c(
                 "div",
                 { staticClass: "container bounce_in_anim" },
@@ -78866,7 +78897,7 @@ var render = function() {
               _c("b", { staticClass: "unbold border_underline font_25pt" }, [
                 _vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))
               ]),
-              _vm._v(" вышедших в этом году.")
+              _vm._v(" из этого года.")
             ]),
             _vm._v(" "),
             _c("br"),
@@ -78991,10 +79022,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Items.vue?vue&type=template&id=18469578&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Top10/Top10Items.vue?vue&type=template&id=18469578& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b& ***!
+  \**************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -79013,11 +79044,66 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("h1", { staticClass: "text-center" }, [
-          _vm._v("Тут будет топ 10 чего-нибудь")
-        ])
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12 grey_card" }, [
+        _c("img", {
+          staticClass: "album_icon_top10 rounded-circle",
+          attrs: {
+            src:
+              "https://upload.wikimedia.org/wikipedia/en/e/ec/Song_Machine_S1_Strange_timez.jpg",
+            alt: ""
+          }
+        }),
+        _vm._v(" "),
+        _c("h4", [_vm._v("Artist Name - Track Name")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Items.vue?vue&type=template&id=18469578&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Top10/Top10Items.vue?vue&type=template&id=18469578& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-12 grey_card padding_10" },
+        [_c("Top10Item")],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("h3", { staticClass: "text-center" }, [
+        _c("b", [_vm._v("Топ-10 треков за месяц")]),
+        _vm._v(" \n                    "),
+        _c("i", { staticClass: "fas fa-list-ol primary_color" })
       ])
     ])
   }
@@ -79071,6 +79157,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("ul", [
+      _c("li", [
+        _c("a", { attrs: { href: "/test_custom" } }, [_vm._v("test custom")])
+      ]),
+      _vm._v(" "),
       _c("li", [
         _c("a", { attrs: { href: "/test_spotify" } }, [
           _vm._v("test spotify web api")
@@ -95638,8 +95728,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Profile/BasicStats/ArtistsCount.vue */ "./resources/js/components/Profile/BasicStats/ArtistsCount.vue");
 /* harmony import */ var _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Profile/BasicStats/YearsAndDecades.vue */ "./resources/js/components/Profile/BasicStats/YearsAndDecades.vue");
 /* harmony import */ var _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Items.vue */ "./resources/js/components/Profile/Top10/Top10Items.vue");
-/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Profile_Top10_Top10Item_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Item.vue */ "./resources/js/components/Profile/Top10/Top10Item.vue");
+/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -95668,10 +95759,12 @@ Vue.component('ArtistsCount', _components_Profile_BasicStats_ArtistsCount_vue__W
 
 Vue.component('YearsAndDecades', _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
-Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__["default"]); //графики
+Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
+
+Vue.component('Top10Item', _components_Profile_Top10_Top10Item_vue__WEBPACK_IMPORTED_MODULE_12__["default"]); //графики
 
 
-Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
+Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -95683,7 +95776,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_13__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_14__["default"]
 });
 
 /***/ }),
@@ -96749,6 +96842,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Profile/Top10/Top10Item.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/Profile/Top10/Top10Item.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Top10Item.vue?vue&type=template&id=42baad0b& */ "./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b&");
+/* harmony import */ var _Top10Item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Top10Item.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Top10Item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Profile/Top10/Top10Item.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Top10Item.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Top10Item.vue?vue&type=template&id=42baad0b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Profile/Top10/Top10Items.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/Profile/Top10/Top10Items.vue ***!
@@ -96972,7 +97134,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
 var HomePageStates = {
   state: {
-    spotifyLogInInfo: false,
+    spotifyUsername: false,
     //никнейм пользователя, array
     spotifyUserTracksCount: -1,
     //подсчет треков, int
@@ -96991,7 +97153,7 @@ var HomePageStates = {
     //получить имя пользователя из API
     getSpotifyUsername: function getSpotifyUsername(context) {
       context.commit('getAPIResponse', {
-        state: "spotifyLogInInfo",
+        state: "spotifyUsername",
         uri: '/api/get_spotify_username'
       });
     },

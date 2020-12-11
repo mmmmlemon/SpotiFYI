@@ -1,7 +1,16 @@
 <template>
-    <div>
+    <div class="container">
         <div class="row justify-content-center">
-            <h1 class="text-center">Тут будет топ 10 чего-нибудь</h1>
+            <div class="col-12">
+                 <h3 class="text-center">
+                        <b>Топ-10 треков за месяц</b>&nbsp;
+                        <i class="fas fa-list-ol primary_color"></i>
+                    </h3>
+            </div>
+            <div class="col-md-12 grey_card padding_10">
+                <Top10Item />
+            </div>
+    
         </div>
     </div>
 </template>

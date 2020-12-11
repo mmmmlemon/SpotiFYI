@@ -10,27 +10,19 @@ use Cookie;
 use URL;
 use App\Globals\Globals;
 
+// HomeController
+//ф-ции главной страницы, а так же ф-ции сайта не связанные с профилем пользователя и статистикой
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
+        //
         // $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-
-
-    //vue router
-    public function vueRouter(Request $request)
+    //index
+    //главная страница сайта, отображает меню на верхней панели и vue-router под меню
+    public function index(Request $request)
     {   
         //проверка токена
         $checkToken = Globals::checkSpotifyAccessToken($request);
@@ -38,22 +30,24 @@ class HomeController extends Controller
         //если токен есть и он действительный
         if($checkToken != false)
         {
+            //вызываем api, получаем профиль пользователя
             $api = config('spotify_api');
             $spotifyProfile = ['displayName' => $api->me()->display_name, 'avatar' => $api->me()->images[0]->url];
-            return view('vue_router', compact('checkToken', 'spotifyProfile'));
+            //возвращаем главную страницу с профилем пользователя
+            return view('index', compact('checkToken', 'spotifyProfile'));
         }
         else //если токена нет или он не действительный
-        {
-            return view('vue_router', compact('checkToken'));
-        }
+        { return view('index', compact('checkToken')); }
     }
 
-    //получить название веб-сайта
+    //getSiteInfo
+    //получить информацию о сайте из БД для страницы "О проекте"
     public function getSiteInfo()
     {
         $settings = config('settings');
+
         return response()->json(['siteTitle' => $settings->site_title, 
-                                'version' => $settings->version, 
-                                'aboutText' => $settings->about_text]);
+                                 'version' => $settings->version, 
+                                 'aboutText' => $settings->about_text]);
     }
 }

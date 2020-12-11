@@ -2,6 +2,7 @@
     <div class="container">
         <h4>Test</h4>
         <ul>
+            <li><a href="/test_custom">test custom</a></li>
             <li><a href="/test_spotify">test spotify web api</a></li>
             <li><a href="/test_auth">test auth code flow</a></li>
             <li><a href="/test_cookies">test cookies</a></li>

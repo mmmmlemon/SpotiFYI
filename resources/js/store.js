@@ -10,7 +10,7 @@ Vue.use(VueAxios, axios);
 const HomePageStates = {
 
     state: {
-        spotifyLogInInfo: false, //никнейм пользователя, array
+        spotifyUsername: false, //никнейм пользователя, array
         spotifyUserTracksCount: -1, //подсчет треков, int
         siteInfo: false, //информация о сайта для страницы About, array
       },
@@ -27,7 +27,7 @@ const HomePageStates = {
     actions: {
         //получить имя пользователя из API
         getSpotifyUsername(context){
-            context.commit('getAPIResponse', {state: "spotifyLogInInfo", uri: '/api/get_spotify_username'});
+            context.commit('getAPIResponse', {state: "spotifyUsername", uri: '/api/get_spotify_username'});
         },
         //получить количество треков в библиотеке пользователя
         getHomePageUserTracksCount(context){

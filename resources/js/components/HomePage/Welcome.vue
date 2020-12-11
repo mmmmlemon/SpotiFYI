@@ -1,15 +1,15 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 fade_in_anim" width="20%;" v-bind:class="{ invisible: loggedIn === undefined || loggedIn === true}">
+            <div class="col-md-8 fade_in_anim" width="20%;" v-bind:class="{ invisible: spotifyUsername === false|| spotifyUsername != false}">
                 <h1>Site title</h1>
                 <h4>A Laravel/Vue.js/Spotify Web API application</h4>
                 <hr>
                 <br>
             </div>
-            <div class="col-md-8" v-bind:class="{ invisible: !loggedIn }">
+            <div class="col-md-8" v-bind:class="{ invisible: !spotifyUsername }">
                 <h1 v-if="spotifyUsername != false" class="fade_in_anim">Привет, <b>{{spotifyUsername}}</b>!</h1>
-                <div class="container bounce_in_anim" v-if="spotifyUserTracksCount == -1 && loggedIn == true">
+                <div class="container bounce_in_anim" v-if="spotifyUserTracksCount == -1 && spotifyUsername != false">
                     <Loader/>
                 </div>
                 <div v-if="spotifyUserTracksCount != -1" class="fade_in_anim">
@@ -50,11 +50,8 @@
 <script>
     export default {
         computed: {
-            loggedIn: function(){
-                return this.$store.state.homePage.spotifyLogInInfo['loggedIn'];
-            },
             spotifyUsername: function(){
-                return this.$store.state.homePage.spotifyLogInInfo['spotifyUsername'];
+                return this.$store.state.homePage.spotifyUsername;
             },
             spotifyUserTracksCount: function(){
                 return this.$store.state.homePage.spotifyUserTracksCount;

@@ -10,7 +10,7 @@
             <p class="text-center">Больше всего тебе нравится музыка <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
                 В твоей библиотеке <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.</p>
             <p class="text-center"><b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 
-                Тебе нравятся <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYearSongs']}}</b> вышедших в этом году.</p>
+                Тебе нравятся <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.</p>
                 <br>
             <h5 class="text-center border_underline">Песни по десятилетиям</h5>
             <BarChart :favoriteGenres="yearsAndDecades['countDecades']" label="Песни по десятилетиям" :backgroundColor="yearsAndDecades['decadeColors']"/>

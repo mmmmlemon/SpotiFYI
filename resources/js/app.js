@@ -33,6 +33,9 @@ Vue.component('YearsAndDecades', YearsAndDecades);
 
 import Top10Items from './components/Profile/Top10/Top10Items.vue';
 Vue.component('Top10Items', Top10Items);
+import Top10Item from './components/Profile/Top10/Top10Item.vue';
+Vue.component('Top10Item', Top10Item);
+
 
 //графики
 import BarChart from './components/Charts/BarChart.vue';

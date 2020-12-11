@@ -6,6 +6,7 @@ use DB;
 use SpotifyWebAPI;
 use Cookie;
 use Auth;
+use App\Globals\Globals;
 
 //контроллер с методами для предварительного тестирования различных функций сайта
 class TestController extends Controller
@@ -14,6 +15,12 @@ class TestController extends Controller
     public function view_tests()
     {
         return view('tests');
+    }
+
+    //пустая функция, можно написать что угодно и проверить
+    public function test_custom()
+    {
+      //
     }
 
     //тест работы PHP-wrapper'а для Spotify Web API

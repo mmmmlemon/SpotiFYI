@@ -10,6 +10,7 @@ use Carbon\Carbon;
 //авторизация в Spotify API и выход
 class SpotifyAuthController extends Controller
 {
+    //spotifyAuth
     //Spotify - авторизация
     //запрашивает авторизацию у Spotify API
     public function spotifyAuth()
@@ -34,8 +35,9 @@ class SpotifyAuthController extends Controller
         die();
     }
 
+    //spotifyAuthCallback
     //Spotify - авторизация, callback
-    //получает acces и refresh токены и записывает их в куки
+    //получает access и refresh токены и записывает их в куки
     public function spotifyAuthCallback()
     {
         $session = new SpotifyWebAPI\Session(
@@ -58,12 +60,14 @@ class SpotifyAuthController extends Controller
         Cookie::queue('spotify_access_token', $accessToken, 60*24*30);
         Cookie::queue('spotify_access_expiration', $accessExpiration, 60*24*30);
         Cookie::queue('spotify_refresh_token', $refreshToken, 60*24*30);
-        Cookie::queue('rand_name', $randName, 60*24*30);
+        //случайное имя папки куда будут записываться JSON'ы с библиотекой пользователя
+        Cookie::queue('rand_name', $randName, 60*24*30); 
 
         //редирект на главную
         return redirect('/');
     }
 
+    //spotifyLogout
     //Spotify - выход
     public function spotifyLogout(Request $request)
     {
