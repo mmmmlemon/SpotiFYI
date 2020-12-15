@@ -1,21 +1,62 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                 <h3 class="text-center">
-                        <b>Топ-10 треков за месяц</b>&nbsp;
-                        <i class="fas fa-list-ol primary_color"></i>
-                    </h3>
+        <div class="col-md-5 margin_sides padding_10">
+            <div v-if="items == -1">
+                <Loader />
             </div>
-            <div class="col-md-12 grey_card padding_10">
-                <Top10Item />
+            <div v-else-if="items == false">
+                <Error type="small" errorMessage="Не удалось загрузить треки"/>
             </div>
-    
+            <div v-else-if="items != -1" class="col-md-12 padding_10 grey_card margin_sides fade_in_anim"> 
+                <div>
+                    <h4 class="border_underline text-center"><b>{{cardTitle}}</b></h4>
+                    <p class="font_10pt text-center" v-if="cardDesc != undefined">{{cardDesc}}</p>
+                    <div class="row fade_in_anim">
+                        <div v-if="items != undefined">
+                            <div class="row fade_in_anim" v-for="item in items" :key="item.track_name">
+                                <div class="col-2">
+                                    <div class="number_card">
+                                        <b class="">{{item.count}}</b>
+                                    </div>
+                                    <a :href="item.url" target="_blank">
+                                        <img :src="item.cover" class="rounded-circle album_icon_big">
+                                    </a>
+                                </div>
+                                <div class="col-10">
+                                    <p class="font_13pt font_white margin_none"><a :href="item.url" target="_blank"><b>{{item.track_name}}</b></a></p>
+                                    <p class="font_10pt margin_none font_white" style="margin-bottom:7px;">
+                                        <a :href="item.album_url" target="_blank">
+                                            <b class="unbold">{{item.album}} - {{item.album_year}}</b>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <Error type="x-small" errorMessage="Нечего показывать. Параметр items пустой."/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <Error type="x-small" errorMessage="Неизвестная ошибка"/>
+            </div>
         </div>
-    </div>
 </template>
 <script>
 export default {
-    
+    beforeMount() {
+        //получить топ 10 треков
+        this.$store.dispatch('getTop10Tracks');
+    },
+    props: {
+        cardTitle: { default: 'Топ 10' },
+        cardDesc: { default : undefined },
+        items: { default: -1 },
+    },
+    computed: {
+        top10Tracks: function() {
+            return this.$store.state.profilePage.top10Tracks;
+        }
+    }
 }
 </script>

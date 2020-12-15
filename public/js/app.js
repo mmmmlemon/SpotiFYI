@@ -2855,41 +2855,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'top10');
+    this.$store.dispatch('getTop10Tracks');
   },
   computed: {
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      // return this.$store.state.profilePage.spotifyUserLibrary;
-      return true;
+      return this.$store.state.profilePage.spotifyUserLibrary;
+    },
+    top10Tracks: function top10Tracks() {
+      return this.$store.state.profilePage.top10Tracks;
     }
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -2918,7 +2903,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  beforeMount: function beforeMount() {
+    //получить топ 10 треков
+    this.$store.dispatch('getTop10Tracks');
+  },
+  props: {
+    cardTitle: {
+      "default": 'Топ 10'
+    },
+    cardDesc: {
+      "default": undefined
+    },
+    items: {
+      "default": -1
+    }
+  },
+  computed: {
+    top10Tracks: function top10Tracks() {
+      return this.$store.state.profilePage.top10Tracks;
+    }
+  }
+});
 
 /***/ }),
 
@@ -78978,7 +79012,7 @@ var render = function() {
           ],
           1
         )
-      : _vm.spotifyUserLibrary === false || _vm.favoriteGenres === false
+      : _vm.spotifyUserLibrary === false
       ? _c(
           "div",
           [
@@ -78992,12 +79026,25 @@ var render = function() {
         )
       : _vm.spotifyUserLibrary !== false && _vm.spotifyUserLibrary !== -1
       ? _c("div", [
-          _c(
-            "div",
-            { staticClass: "row justify-content-center" },
-            [_vm._m(0), _vm._v(" "), _c("Top10Items")],
-            1
-          )
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row justify-content-center" },
+              [
+                _c("Top10Items", {
+                  attrs: {
+                    cardTitle: "Топ 10 Треков за все время",
+                    cardDesc:
+                      "Десять твоих самых прослушиваемых треков за все время.",
+                    items: _vm.top10Tracks
+                  }
+                })
+              ],
+              1
+            )
+          ])
         ])
       : _vm._e()
   ])
@@ -79009,53 +79056,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
       _c("h5", { staticClass: "text-center" }, [
-        _c("b", [_vm._v("Топ-10")]),
+        _c("b", [_vm._v("Топ 10")]),
         _vm._v(" \n                     "),
         _c("i", { staticClass: "fas fa-list-ol primary_color" })
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12 grey_card" }, [
-        _c("img", {
-          staticClass: "album_icon_top10 rounded-circle",
-          attrs: {
-            src:
-              "https://upload.wikimedia.org/wikipedia/en/e/ec/Song_Machine_S1_Strange_timez.jpg",
-            alt: ""
-          }
-        }),
-        _vm._v(" "),
-        _c("h4", [_vm._v("Artist Name - Track Name")])
       ])
     ])
   }
@@ -79081,33 +79084,155 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-12 grey_card padding_10" },
-        [_c("Top10Item")],
-        1
-      )
-    ])
+  return _c("div", { staticClass: "col-md-5 margin_sides padding_10" }, [
+    _vm.items == -1
+      ? _c("div", [_c("Loader")], 1)
+      : _vm.items == false
+      ? _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: {
+                type: "small",
+                errorMessage: "Не удалось загрузить треки"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.items != -1
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "col-md-12 padding_10 grey_card margin_sides fade_in_anim"
+          },
+          [
+            _c("div", [
+              _c("h4", { staticClass: "border_underline text-center" }, [
+                _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
+              ]),
+              _vm._v(" "),
+              _vm.cardDesc != undefined
+                ? _c("p", { staticClass: "font_10pt text-center" }, [
+                    _vm._v(_vm._s(_vm.cardDesc))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "row fade_in_anim" }, [
+                _vm.items != undefined
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.items, function(item) {
+                        return _c(
+                          "div",
+                          {
+                            key: item.track_name,
+                            staticClass: "row fade_in_anim"
+                          },
+                          [
+                            _c("div", { staticClass: "col-2" }, [
+                              _c("div", { staticClass: "number_card" }, [
+                                _c("b", {}, [_vm._v(_vm._s(item.count))])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                { attrs: { href: item.url, target: "_blank" } },
+                                [
+                                  _c("img", {
+                                    staticClass:
+                                      "rounded-circle album_icon_big",
+                                    attrs: { src: item.cover }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-10" }, [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "font_13pt font_white margin_none"
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href: item.url,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [_c("b", [_vm._v(_vm._s(item.track_name))])]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "font_10pt margin_none font_white",
+                                  staticStyle: { "margin-bottom": "7px" }
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href: item.album_url,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [
+                                      _c("b", { staticClass: "unbold" }, [
+                                        _vm._v(
+                                          _vm._s(item.album) +
+                                            " - " +
+                                            _vm._s(item.album_year)
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  : _c(
+                      "div",
+                      [
+                        _c("Error", {
+                          attrs: {
+                            type: "x-small",
+                            errorMessage:
+                              "Нечего показывать. Параметр items пустой."
+                          }
+                        })
+                      ],
+                      1
+                    )
+              ])
+            ])
+          ]
+        )
+      : _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: { type: "x-small", errorMessage: "Неизвестная ошибка" }
+            })
+          ],
+          1
+        )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("h3", { staticClass: "text-center" }, [
-        _c("b", [_vm._v("Топ-10 треков за месяц")]),
-        _vm._v(" \n                    "),
-        _c("i", { staticClass: "fas fa-list-ol primary_color" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -95728,9 +95853,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Profile/BasicStats/ArtistsCount.vue */ "./resources/js/components/Profile/BasicStats/ArtistsCount.vue");
 /* harmony import */ var _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Profile/BasicStats/YearsAndDecades.vue */ "./resources/js/components/Profile/BasicStats/YearsAndDecades.vue");
 /* harmony import */ var _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Items.vue */ "./resources/js/components/Profile/Top10/Top10Items.vue");
-/* harmony import */ var _components_Profile_Top10_Top10Item_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Item.vue */ "./resources/js/components/Profile/Top10/Top10Item.vue");
-/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -95759,12 +95883,10 @@ Vue.component('ArtistsCount', _components_Profile_BasicStats_ArtistsCount_vue__W
 
 Vue.component('YearsAndDecades', _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
-Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
-
-Vue.component('Top10Item', _components_Profile_Top10_Top10Item_vue__WEBPACK_IMPORTED_MODULE_12__["default"]); //графики
+Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__["default"]); //графики
 
 
-Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
+Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -95776,7 +95898,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_14__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_13__["default"]
 });
 
 /***/ }),
@@ -96842,75 +96964,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Profile/Top10/Top10Item.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/Profile/Top10/Top10Item.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Top10Item.vue?vue&type=template&id=42baad0b& */ "./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b&");
-/* harmony import */ var _Top10Item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Top10Item.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Top10Item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Profile/Top10/Top10Item.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Top10Item.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b& ***!
-  \********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Top10Item.vue?vue&type=template&id=42baad0b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Top10/Top10Item.vue?vue&type=template&id=42baad0b&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Top10Item_vue_vue_type_template_id_42baad0b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/Profile/Top10/Top10Items.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/Profile/Top10/Top10Items.vue ***!
@@ -97199,7 +97252,9 @@ var ProfilePageStates = {
     //любимые жанры
     uniqueArtists: -1,
     //кол-во исполнителей,
-    yearsAndDecades: -1 //года и десятилетия
+    yearsAndDecades: -1,
+    //года и десятилетия
+    top10Tracks: -1 //топ 10 треков
 
   },
   mutations: {
@@ -97233,6 +97288,7 @@ var ProfilePageStates = {
     }
   },
   actions: {
+    //общее
     //установить текущую вкладку
     setCurrentTab: function setCurrentTab(context, tab) {
       context.commit('setCurrentTab', tab);
@@ -97303,6 +97359,14 @@ var ProfilePageStates = {
       context.commit('getAPIResponse', {
         state: 'yearsAndDecades',
         uri: '/api/get_years_and_decades'
+      });
+    },
+    //топ10
+    //топ10 треков
+    getTop10Tracks: function getTop10Tracks(context) {
+      context.commit('getAPIResponse', {
+        state: 'top10Tracks',
+        uri: '/api/get_top10_tracks'
       });
     }
   }

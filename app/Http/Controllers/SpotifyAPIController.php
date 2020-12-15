@@ -622,11 +622,7 @@ class SpotifyAPIController extends Controller
             foreach($tracks as $track)
             {
                 //получить год из даты выхода трека
-                $year = $track->album->release_date;
-
-                //если дата рализа указана с точностью до дня или до месяца, то вырезаем из даты год
-                if($track->album->release_date_precision == "day" || $track->album->release_date_precision == "month")
-                { $year = substr($track->album->release_date, 0, 4); }
+                $year = Helpers::getItemReleaseDate($track, "track", "short");
 
                 array_push($allYears, $year); 
             }
@@ -687,7 +683,7 @@ class SpotifyAPIController extends Controller
             for($i = 0; $i < 10; $i++)
             {   
                 array_push($decadeColors, Helpers::randomHslColor(['offset' => $offset]));
-                $offset+=60;
+                $offset += 60;
             }
 
             $response['decadeColors'] = $decadeColors;
@@ -734,5 +730,40 @@ class SpotifyAPIController extends Controller
         { return response()->json(false); }
     }
 
+    //getTop10Tracks
+    //получить топ 10 треков за все время
+    //возвращает JSON с 10-тью самыми прослушиваемыми треками за все время
+    //параметры: реквест
+    public function getTop10Tracks(Request $request)
+    {
+        $checkToken = System::checkSpotifyAccessToken($request);
 
+        if($checkToken != false)
+        {
+            $api = config('spotify_api');
+            
+            $top10Tracks = $api->getMyTop('tracks',['limit' => 10]);
+            
+            $response = [];
+            $count = 1;
+            foreach($top10Tracks->items as $track)
+            {
+                $trackInfo = [];
+                $trackInfo['count'] = $count;
+                $trackInfo['track_name'] = Helpers::getFullNameOfItem($track);
+                $trackInfo['cover'] = $track->album->images[count($track->album->images)-1]->url;
+                $trackInfo['url'] = $track->external_urls->spotify;
+                $trackInfo['album'] = $track->album->name;
+                $trackInfo['album_url'] = $track->album->external_urls->spotify;
+                $trackInfo['album_year'] = Helpers::getItemReleaseDate($track, "track", "short");
+
+                array_push($response, $trackInfo);
+                $count++;
+            }
+
+            return response()->json($response);
+        }   
+        else
+        { return response()->json(false); }
+    }
 }

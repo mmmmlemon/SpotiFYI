@@ -55,6 +55,8 @@ const ProfilePageStates = {
         favoriteGenres: -1, //любимые жанры
         uniqueArtists: -1, //кол-во исполнителей,
         yearsAndDecades: -1, //года и десятилетия
+
+        top10Tracks: -1 //топ 10 треков
       },
 
     mutations: {
@@ -89,6 +91,7 @@ const ProfilePageStates = {
     },
 
     actions: {
+      //общее
       //установить текущую вкладку
       setCurrentTab(context, tab){
         context.commit('setCurrentTab', tab);
@@ -136,6 +139,12 @@ const ProfilePageStates = {
       //посчитать года и десятилетия
       getYearsAndDecades(context){
         context.commit('getAPIResponse', {state:'yearsAndDecades', uri: '/api/get_years_and_decades'});
+      },
+
+      //топ10
+      //топ10 треков
+      getTop10Tracks(context){
+        context.commit('getAPIResponse', {state: 'top10Tracks', uri: '/api/get_top10_tracks'});
       }
     }
 }

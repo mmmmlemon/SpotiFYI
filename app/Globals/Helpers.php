@@ -152,6 +152,45 @@
 
             }
 
+            //getItemReleaseDate
+            //получить дату выхода трека или альбома в виде года или полной даты
+            //возвращает строку с датой выхода
+            //параметры: трек или альбом из Spotify API, строка указание на то трек это или альбом, 
+            //строка указание на тип даты: год или полная дата
+            public static function getItemReleaseDate($item, $itemType,  $dateType)
+            {
+                $date = "";
+                $releaseDatePrecision  = "";
+                if($itemType == "track")
+                {
+                    //получить дату из альбома
+                    $date = $item->album->release_date;
+                    $releaseDatePrecision = $item->album->release_date_precision;
+                }
+                else if ($itemType == "album")
+                {
+                    //получить дату
+                    $date = $item->release_date;
+                    $releaseDatePrecision = $item->release_date_precision;
+                }
+                else
+                { return false; }
+               
+                if($dateType == "short")
+                {
+                      //если дата рализа указана с точностью до дня или до месяца, то вырезаем из даты год
+                      if($releaseDatePrecision == "day" || $releaseDatePrecision == "month")
+                      { $date = substr($date, 0, 4); }
+
+                      return $date;
+                }
+                else if ($dateType == "long")
+                {
+                    return $date;
+                }
+                else
+                { return false; }    
+            }
 
     }
         
