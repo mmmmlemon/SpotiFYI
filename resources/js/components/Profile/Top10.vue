@@ -1,17 +1,6 @@
 <template>
    <div>
-        <!-- если библиотека пользователя не загружена, то показываем лоадер -->
-        <div v-if="spotifyUserLibrary === -1">
-            <Loader />
-            <h6 v-if="spotifyUserLibrary === -1" class="text-center blinking_anim">Загружаю библиотеку пользователя...</h6>
-            <h6 v-if="spotifyUserLibrary != -1" class="text-center blinking_anim">Анализирую треки...</h6>
-            <p class="font_10pt text-center">Это может занять около минуты</p>
-        </div>
-        <div v-else-if="spotifyUserLibrary === false">
-            <Error errorMessage="Не удалось загрузить библиотеку пользователя." />
-        </div>
-        <!-- если библиотека загрузилась, то  -->
-        <div v-else-if="spotifyUserLibrary !== false && spotifyUserLibrary !== -1">
+        <div>
             <div class="row justify-content-center">
                 <div class="col-md-12 fade_in_slow_anim">
                     <h5 class="text-center">
@@ -19,11 +8,17 @@
                         <i class="fas fa-list-ol primary_color"></i>
                     </h5>
                 </div>
-
-                <div class="row justify-content-center">
+                <div v-if="top10TracksAllTime == -1 || top10TracksMonth == -1">
+                    <Loader />
+                </div>
+                <div v-else-if="top10TracksAllTime != -1 && top10TracksMonth != -1" class="row justify-content-center">
                     <!-- топ-10 треков -->
-                    <Top10Items cardTitle="Топ 10 Треков за все время" cardDesc="Десять твоих самых прослушиваемых треков за все время." :items="top10Tracks"/>
-                    <!-- <Top10Items cardTitle="Топ 10 Треков за месяц" cardDesc="Десять твоих самых прослушиваемых треков за последний месяц." :items="top10Tracks"/> -->
+                    <Top10Items cardTitle="Топ 10 Треков за все время" 
+                                cardDesc="Десять твоих самых прослушиваемых треков за все время." 
+                                :items="top10TracksAllTime"/>
+                    <Top10Items cardTitle="Топ 10 Треков за месяц" 
+                                cardDesc="Десять твоих самых прослушиваемых треков за последний месяц." 
+                                :items="top10TracksMonth"/>
                 </div>
              
             </div>
@@ -35,7 +30,8 @@
 export default {
     mounted(){
         this.$store.dispatch('setCurrentTab', 'top10');
-        this.$store.dispatch('getTop10Tracks');
+        this.$store.dispatch('getTop10TracksAllTime');
+        this.$store.dispatch('getTop10TracksMonth');
     },
 
     computed: {
@@ -44,8 +40,11 @@ export default {
         spotifyUserLibrary: function() {
             return this.$store.state.profilePage.spotifyUserLibrary;
         },
-        top10Tracks: function() {
-            return this.$store.state.profilePage.top10Tracks;
+        top10TracksAllTime: function() {
+            return this.$store.state.profilePage.top10TracksAllTime;
+        },
+        top10TracksMonth: function() {
+            return this.$store.state.profilePage.top10TracksMonth;
         }
     }
 }

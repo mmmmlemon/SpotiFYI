@@ -56,7 +56,8 @@ const ProfilePageStates = {
         uniqueArtists: -1, //кол-во исполнителей,
         yearsAndDecades: -1, //года и десятилетия
 
-        top10Tracks: -1 //топ 10 треков
+        top10TracksAllTime: -1, //топ 10 треков за все время
+        top10TracksMonth: -1, // топ 10 треков за месяц
       },
 
     mutations: {
@@ -142,11 +143,15 @@ const ProfilePageStates = {
       },
 
       //топ10
-      //топ10 треков
-      getTop10Tracks(context){
-        context.commit('getAPIResponse', {state: 'top10Tracks', uri: '/api/get_top10_tracks'});
+      //топ10 треков за все время
+      getTop10TracksAllTime(context){
+        context.commit('getAPIResponse', {state: 'top10TracksAllTime', uri: '/api/get_top10_tracks/alltime'});
+      },
+      //топ10 треков за все время
+      getTop10TracksMonth(context){
+        context.commit('getAPIResponse', {state: 'top10TracksMonth', uri: '/api/get_top10_tracks/month'});
       }
-    }
+  }
 }
 
 export default new Vuex.Store({

@@ -2295,22 +2295,21 @@ __webpack_require__.r(__webpack_exports__);
   beforeCreate: function beforeCreate() {
     //получить профиль
     this.$store.dispatch('getSpotifyProfile'); //получаем библиотеку пользователя и статистику
-
-    this.$store.dispatch('getSpotifyUserLibrary'); //треки, альбомы и подписки
-
-    this.$store.dispatch('getSpotifyTracks');
-    this.$store.dispatch('getSpotifyAlbums');
-    this.$store.dispatch('getSpotifyArtists'); //время
-
-    this.$store.dispatch('getUserLibraryTime');
-    this.$store.dispatch('getFiveLongestAndShortestTracks');
-    this.$store.dispatch('getAverageLengthOfTrack'); //жанры
-
-    this.$store.dispatch('getFavoriteGenres'); //кол-во исполнителей
-
-    this.$store.dispatch('getUniqueArtists'); //года и десятилетия
-
-    this.$store.dispatch('getYearsAndDecades');
+    // this.$store.dispatch('getSpotifyUserLibrary');
+    // //треки, альбомы и подписки
+    // this.$store.dispatch('getSpotifyTracks');
+    // this.$store.dispatch('getSpotifyAlbums');
+    // this.$store.dispatch('getSpotifyArtists');
+    // //время
+    // this.$store.dispatch('getUserLibraryTime');
+    // this.$store.dispatch('getFiveLongestAndShortestTracks');
+    // this.$store.dispatch('getAverageLengthOfTrack');
+    // //жанры
+    // this.$store.dispatch('getFavoriteGenres');
+    // //кол-во исполнителей
+    // this.$store.dispatch('getUniqueArtists');
+    // //года и десятилетия
+    // this.$store.dispatch('getYearsAndDecades');
   },
   computed: {
     //текущая вкладка
@@ -2854,15 +2853,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'top10');
-    this.$store.dispatch('getTop10Tracks');
+    this.$store.dispatch('getTop10TracksAllTime');
+    this.$store.dispatch('getTop10TracksMonth');
   },
   computed: {
     //библиотека пользователя
@@ -2870,8 +2865,11 @@ __webpack_require__.r(__webpack_exports__);
     spotifyUserLibrary: function spotifyUserLibrary() {
       return this.$store.state.profilePage.spotifyUserLibrary;
     },
-    top10Tracks: function top10Tracks() {
-      return this.$store.state.profilePage.top10Tracks;
+    top10TracksAllTime: function top10TracksAllTime() {
+      return this.$store.state.profilePage.top10TracksAllTime;
+    },
+    top10TracksMonth: function top10TracksMonth() {
+      return this.$store.state.profilePage.top10TracksMonth;
     }
   }
 });
@@ -2932,10 +2930,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  beforeMount: function beforeMount() {
-    //получить топ 10 треков
-    this.$store.dispatch('getTop10Tracks');
-  },
   props: {
     cardTitle: {
       "default": 'Топ 10'
@@ -2945,11 +2939,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     items: {
       "default": -1
-    }
-  },
-  computed: {
-    top10Tracks: function top10Tracks() {
-      return this.$store.state.profilePage.top10Tracks;
     }
   }
 });
@@ -78988,48 +78977,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.spotifyUserLibrary === -1
-      ? _c(
-          "div",
-          [
-            _c("Loader"),
-            _vm._v(" "),
-            _vm.spotifyUserLibrary === -1
-              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
-                  _vm._v("Загружаю библиотеку пользователя...")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.spotifyUserLibrary != -1
-              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
-                  _vm._v("Анализирую треки...")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("p", { staticClass: "font_10pt text-center" }, [
-              _vm._v("Это может занять около минуты")
-            ])
-          ],
-          1
-        )
-      : _vm.spotifyUserLibrary === false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                errorMessage: "Не удалось загрузить библиотеку пользователя."
-              }
-            })
-          ],
-          1
-        )
-      : _vm.spotifyUserLibrary !== false && _vm.spotifyUserLibrary !== -1
-      ? _c("div", [
-          _c("div", { staticClass: "row justify-content-center" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
+    _c("div", [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm.top10TracksAllTime == -1 || _vm.top10TracksMonth == -1
+          ? _c("div", [_c("Loader")], 1)
+          : _vm.top10TracksAllTime != -1 && _vm.top10TracksMonth != -1
+          ? _c(
               "div",
               { staticClass: "row justify-content-center" },
               [
@@ -79038,15 +78993,24 @@ var render = function() {
                     cardTitle: "Топ 10 Треков за все время",
                     cardDesc:
                       "Десять твоих самых прослушиваемых треков за все время.",
-                    items: _vm.top10Tracks
+                    items: _vm.top10TracksAllTime
+                  }
+                }),
+                _vm._v(" "),
+                _c("Top10Items", {
+                  attrs: {
+                    cardTitle: "Топ 10 Треков за месяц",
+                    cardDesc:
+                      "Десять твоих самых прослушиваемых треков за последний месяц.",
+                    items: _vm.top10TracksMonth
                   }
                 })
               ],
               1
             )
-          ])
-        ])
-      : _vm._e()
+          : _vm._e()
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -97254,7 +97218,9 @@ var ProfilePageStates = {
     //кол-во исполнителей,
     yearsAndDecades: -1,
     //года и десятилетия
-    top10Tracks: -1 //топ 10 треков
+    top10TracksAllTime: -1,
+    //топ 10 треков за все время
+    top10TracksMonth: -1 // топ 10 треков за месяц
 
   },
   mutations: {
@@ -97362,11 +97328,18 @@ var ProfilePageStates = {
       });
     },
     //топ10
-    //топ10 треков
-    getTop10Tracks: function getTop10Tracks(context) {
+    //топ10 треков за все время
+    getTop10TracksAllTime: function getTop10TracksAllTime(context) {
       context.commit('getAPIResponse', {
-        state: 'top10Tracks',
-        uri: '/api/get_top10_tracks'
+        state: 'top10TracksAllTime',
+        uri: '/api/get_top10_tracks/alltime'
+      });
+    },
+    //топ10 треков за все время
+    getTop10TracksMonth: function getTop10TracksMonth(context) {
+      context.commit('getAPIResponse', {
+        state: 'top10TracksMonth',
+        uri: '/api/get_top10_tracks/month'
       });
     }
   }

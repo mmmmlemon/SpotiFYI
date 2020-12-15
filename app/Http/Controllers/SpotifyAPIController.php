@@ -733,8 +733,8 @@ class SpotifyAPIController extends Controller
     //getTop10Tracks
     //получить топ 10 треков за все время
     //возвращает JSON с 10-тью самыми прослушиваемыми треками за все время
-    //параметры: реквест
-    public function getTop10Tracks(Request $request)
+    //параметры: реквест, тип запроса: топ за все время или за месяц (alltime и month)
+    public function getTop10Tracks(Request $request, $top10Type)
     {
         $checkToken = System::checkSpotifyAccessToken($request);
 
@@ -742,8 +742,20 @@ class SpotifyAPIController extends Controller
         {
             $api = config('spotify_api');
             
-            $top10Tracks = $api->getMyTop('tracks',['limit' => 10]);
-            
+            $options = ['limit' => 10];
+            if($top10Type == "alltime")
+            {
+                $options['time_range'] = 'long_term';
+            }
+            else if($top10Type == "month")
+            {
+                $options['time_range'] = 'short_term';
+            }
+            else
+            { return response()->json(false); }
+
+            $top10Tracks = $api->getMyTop('tracks', $options);
+
             $response = [];
             $count = 1;
             foreach($top10Tracks->items as $track)

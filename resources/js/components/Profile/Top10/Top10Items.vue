@@ -44,19 +44,10 @@
 </template>
 <script>
 export default {
-    beforeMount() {
-        //получить топ 10 треков
-        this.$store.dispatch('getTop10Tracks');
-    },
     props: {
         cardTitle: { default: 'Топ 10' },
         cardDesc: { default : undefined },
         items: { default: -1 },
     },
-    computed: {
-        top10Tracks: function() {
-            return this.$store.state.profilePage.top10Tracks;
-        }
-    }
 }
 </script>
