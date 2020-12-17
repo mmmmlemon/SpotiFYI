@@ -731,22 +731,28 @@ class SpotifyAPIController extends Controller
     }
 
     //getTop10Tracks
-    //получить топ 10 треков за все время
+    //получить топ 10 треков за все время или за месяц
     //возвращает JSON с 10-тью самыми прослушиваемыми треками за все время
     //параметры: реквест, тип запроса: топ за все время или за месяц (alltime и month)
     public function getTop10Tracks(Request $request, $top10Type)
     {
+        //проверка токена
         $checkToken = System::checkSpotifyAccessToken($request);
 
+        //если токен действительный
         if($checkToken != false)
         {
+            //получаем api
             $api = config('spotify_api');
             
             $options = ['limit' => 10];
+
+            //если тип запроса alltime, то в опциях устанавливаем time_range = long_term
             if($top10Type == "alltime")
             {
                 $options['time_range'] = 'long_term';
             }
+            //если month, то тогда short_term
             else if($top10Type == "month")
             {
                 $options['time_range'] = 'short_term';
@@ -754,14 +760,15 @@ class SpotifyAPIController extends Controller
             else
             { return response()->json(false); }
 
+            //получаем треки и запсиываем необходимую информацию о них
             $top10Tracks = $api->getMyTop('tracks', $options);
-
-            $response = [];
             $count = 1;
+            $tracks = [];
             foreach($top10Tracks->items as $track)
             {
                 $trackInfo = [];
                 $trackInfo['count'] = $count;
+                $trackInfo['id'] = $track->id;
                 $trackInfo['track_name'] = Helpers::getFullNameOfItem($track);
                 $trackInfo['cover'] = $track->album->images[count($track->album->images)-1]->url;
                 $trackInfo['url'] = $track->external_urls->spotify;
@@ -769,12 +776,81 @@ class SpotifyAPIController extends Controller
                 $trackInfo['album_url'] = $track->album->external_urls->spotify;
                 $trackInfo['album_year'] = Helpers::getItemReleaseDate($track, "track", "short");
 
-                array_push($response, $trackInfo);
+                array_push($tracks, $trackInfo);
                 $count++;
             }
 
+            //случайная обложка
+            $randTrackId = $tracks[rand(0, count($tracks) - 1)]['id'];
+
+            $albumCover = $api->getTrack($randTrackId)->album->images[0]->url;
+
+            $response = [];
+            $response['tracks'] = $tracks;
+            $response['backgroundImage'] = $albumCover;
+ 
             return response()->json($response);
         }   
+        else
+        { return response()->json(false); }
+    }
+
+    //getTop10Artists
+    //получить топ 10 исполнителей
+    public function getTop10Artists(Request $request, $top10Type)
+    {
+        //проверка токена
+        $checkToken = System::checkSpotifyAccessToken($request);
+
+        if($checkToken != false)
+        {
+            //получаем api
+            $api = config('spotify_api');
+        
+            $options = ['limit' => 10];
+
+            //если тип запроса alltime, то в опциях устанавливаем time_range = long_term
+            if($top10Type == "alltime")
+            {
+                $options['time_range'] = 'long_term';
+            }
+            //если month, то тогда short_term
+            else if($top10Type == "month")
+            {
+                $options['time_range'] = 'short_term';
+            }
+            else
+            { return response()->json(false); }
+
+            //получаем треки и запсиываем необходимую информацию о них
+            $top10Artists = $api->getMyTop('artists', $options);
+
+            $count = 1;
+            $artists = [];
+            foreach($top10Artists->items as $artist)
+            {
+                $artistInfo = [];
+                $artistInfo['count'] = $count;
+                $artistInfo['id'] = $artist->id;
+                $artistInfo['artist_name'] = $artist->name;
+                $artistInfo['photo'] = $artist->images[count($artist->images)-1]->url;
+                $artistInfo['url'] = $artist->external_urls->spotify;
+                $artistInfo['genres'] = $artist->genres;
+
+                array_push($artists, $artistInfo);
+                $count++;
+            }
+
+            //случайное фото исполнителя
+            $randArtistId = $artists[rand(0, count($artists) - 1)]['id'];
+
+            $artistPhoto = $api->getArtist($randArtistId)->images[0]->url;
+
+            $response['artists'] = $artists;
+            $response['backgroundImage'] = $artistPhoto;
+
+            return response()->json($response);
+        }
         else
         { return response()->json(false); }
     }

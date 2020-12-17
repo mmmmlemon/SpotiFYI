@@ -15,10 +15,20 @@
                     <!-- топ-10 треков -->
                     <Top10Items cardTitle="Топ 10 Треков за все время" 
                                 cardDesc="Десять твоих самых прослушиваемых треков за все время." 
-                                :items="top10TracksAllTime"/>
+                                :items="top10TracksAllTime"
+                                listType="tracks"/>
                     <Top10Items cardTitle="Топ 10 Треков за месяц" 
                                 cardDesc="Десять твоих самых прослушиваемых треков за последний месяц." 
-                                :items="top10TracksMonth"/>
+                                :items="top10TracksMonth"
+                                listType="tracks"/>
+                    <Top10Items cardTitle="Топ 10 артистов за все время" 
+                                cardDesc="Десять твоих самых прослушиваемых артистов за все время." 
+                                :items="top10ArtistsAllTime"
+                                listType="artists"/>
+                    <Top10Items cardTitle="Топ 10 артистов за месяц" 
+                                cardDesc="Десять твоих самых прослушиваемых артистов за последний месяц." 
+                                :items="top10ArtistsMonth"
+                                listType="artists"/>
                 </div>
              
             </div>
@@ -32,6 +42,8 @@ export default {
         this.$store.dispatch('setCurrentTab', 'top10');
         this.$store.dispatch('getTop10TracksAllTime');
         this.$store.dispatch('getTop10TracksMonth');
+        this.$store.dispatch('getTop10ArtistsAllTime');
+         this.$store.dispatch('getTop10ArtistsMonth');
     },
 
     computed: {
@@ -45,6 +57,12 @@ export default {
         },
         top10TracksMonth: function() {
             return this.$store.state.profilePage.top10TracksMonth;
+        },
+        top10ArtistsAllTime: function(){
+            return this.$store.state.profilePage.top10ArtistsAllTime;
+        },
+        top10ArtistsMonth: function(){
+            return this.$store.state.profilePage.top10ArtistsMonth;
         }
     }
 }

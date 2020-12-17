@@ -2853,11 +2853,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'top10');
     this.$store.dispatch('getTop10TracksAllTime');
     this.$store.dispatch('getTop10TracksMonth');
+    this.$store.dispatch('getTop10ArtistsAllTime');
+    this.$store.dispatch('getTop10ArtistsMonth');
   },
   computed: {
     //библиотека пользователя
@@ -2870,6 +2882,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     top10TracksMonth: function top10TracksMonth() {
       return this.$store.state.profilePage.top10TracksMonth;
+    },
+    top10ArtistsAllTime: function top10ArtistsAllTime() {
+      return this.$store.state.profilePage.top10ArtistsAllTime;
+    },
+    top10ArtistsMonth: function top10ArtistsMonth() {
+      return this.$store.state.profilePage.top10ArtistsMonth;
     }
   }
 });
@@ -2929,6 +2947,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     cardTitle: {
@@ -2939,6 +2983,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     items: {
       "default": -1
+    },
+    listType: {
+      "default": "tracks"
     }
   }
 });
@@ -78993,7 +79040,8 @@ var render = function() {
                     cardTitle: "Топ 10 Треков за все время",
                     cardDesc:
                       "Десять твоих самых прослушиваемых треков за все время.",
-                    items: _vm.top10TracksAllTime
+                    items: _vm.top10TracksAllTime,
+                    listType: "tracks"
                   }
                 }),
                 _vm._v(" "),
@@ -79002,7 +79050,28 @@ var render = function() {
                     cardTitle: "Топ 10 Треков за месяц",
                     cardDesc:
                       "Десять твоих самых прослушиваемых треков за последний месяц.",
-                    items: _vm.top10TracksMonth
+                    items: _vm.top10TracksMonth,
+                    listType: "tracks"
+                  }
+                }),
+                _vm._v(" "),
+                _c("Top10Items", {
+                  attrs: {
+                    cardTitle: "Топ 10 артистов за все время",
+                    cardDesc:
+                      "Десять твоих самых прослушиваемых артистов за все время.",
+                    items: _vm.top10ArtistsAllTime,
+                    listType: "artists"
+                  }
+                }),
+                _vm._v(" "),
+                _c("Top10Items", {
+                  attrs: {
+                    cardTitle: "Топ 10 артистов за месяц",
+                    cardDesc:
+                      "Десять твоих самых прослушиваемых артистов за последний месяц.",
+                    items: _vm.top10ArtistsMonth,
+                    listType: "artists"
                   }
                 })
               ],
@@ -79072,6 +79141,13 @@ var render = function() {
               "col-md-12 padding_10 grey_card margin_sides fade_in_anim"
           },
           [
+            _c("div", {
+              staticClass: "top10_image_card",
+              style: {
+                backgroundImage: "url('" + _vm.items["backgroundImage"] + "')"
+              }
+            }),
+            _vm._v(" "),
             _c("div", [
               _c("h4", { staticClass: "border_underline text-center" }, [
                 _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
@@ -79084,16 +79160,13 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "row fade_in_anim" }, [
-                _vm.items != undefined
+                _vm.items != undefined && _vm.listType == "tracks"
                   ? _c(
                       "div",
-                      _vm._l(_vm.items, function(item) {
+                      _vm._l(_vm.items["tracks"], function(item) {
                         return _c(
                           "div",
-                          {
-                            key: item.track_name,
-                            staticClass: "row fade_in_anim"
-                          },
+                          { key: item.id, staticClass: "row fade_in_anim" },
                           [
                             _c("div", { staticClass: "col-2" }, [
                               _c("div", { staticClass: "number_card" }, [
@@ -79168,6 +79241,64 @@ var render = function() {
                       }),
                       0
                     )
+                  : _vm.items != undefined && _vm.listType == "artists"
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.items["artists"], function(item) {
+                        return _c(
+                          "div",
+                          { key: item.id, staticClass: "row fade_in_anim" },
+                          [
+                            _c("div", { staticClass: "col-2" }, [
+                              _c("div", { staticClass: "number_card" }, [
+                                _c("b", {}, [_vm._v(_vm._s(item.count))])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                { attrs: { href: item.url, target: "_blank" } },
+                                [
+                                  _c("img", {
+                                    staticClass:
+                                      "rounded-circle album_icon_big",
+                                    attrs: { src: item.photo }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-10" }, [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "font_13pt font_white margin_none"
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href: item.url,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [
+                                      _c("b", [
+                                        _vm._v(_vm._s(item.artist_name))
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm._m(0, true)
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    )
                   : _c(
                       "div",
                       [
@@ -79196,7 +79327,27 @@ var render = function() {
         )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "p",
+      {
+        staticClass: "font_8pt margin_none font_white",
+        staticStyle: { "margin-bottom": "7px" }
+      },
+      [
+        _c("b", { staticClass: "unbold zero_opacity" }, [
+          _vm._v(
+            "\n                                        нЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕт, ТЫ НЕ МОЖЕШЬ ПРОСТО ТАК ВОТКНУТЬ НЕВИДИМЫЙ ТЕКСТ\n\n                                        хахаа opacity: 0 goes brrr\n                                    "
+          )
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -97220,7 +97371,11 @@ var ProfilePageStates = {
     //года и десятилетия
     top10TracksAllTime: -1,
     //топ 10 треков за все время
-    top10TracksMonth: -1 // топ 10 треков за месяц
+    top10TracksMonth: -1,
+    // топ 10 треков за месяц
+    top10ArtistsAllTime: -1,
+    //топ 10 исполнителей за все время
+    top10ArtistsMonth: -1 //топ 10 исполнителей за месяц
 
   },
   mutations: {
@@ -97340,6 +97495,20 @@ var ProfilePageStates = {
       context.commit('getAPIResponse', {
         state: 'top10TracksMonth',
         uri: '/api/get_top10_tracks/month'
+      });
+    },
+    //топ10 исполнителей за все время
+    getTop10ArtistsAllTime: function getTop10ArtistsAllTime(context) {
+      context.commit('getAPIResponse', {
+        state: 'top10ArtistsAllTime',
+        uri: '/api/get_top10_artists/alltime'
+      });
+    },
+    //топ10 исполнителей за все время
+    getTop10ArtistsMonth: function getTop10ArtistsMonth(context) {
+      context.commit('getAPIResponse', {
+        state: 'top10ArtistsMonth',
+        uri: '/api/get_top10_artists/month'
       });
     }
   }
