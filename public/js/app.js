@@ -2863,6 +2863,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'top10');
@@ -2870,6 +2883,8 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getTop10TracksMonth');
     this.$store.dispatch('getTop10ArtistsAllTime');
     this.$store.dispatch('getTop10ArtistsMonth');
+    this.$store.dispatch('getTop10TracksLong');
+    this.$store.dispatch('getTop10TracksShort');
   },
   computed: {
     //библиотека пользователя
@@ -2888,6 +2903,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     top10ArtistsMonth: function top10ArtistsMonth() {
       return this.$store.state.profilePage.top10ArtistsMonth;
+    },
+    top10TracksLong: function top10TracksLong() {
+      return this.$store.state.profilePage.top10TracksLong;
+    },
+    top10TracksShort: function top10TracksShort() {
+      return this.$store.state.profilePage.top10TracksShort;
     }
   }
 });
@@ -2903,6 +2924,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -79057,6 +79079,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("Top10Items", {
                   attrs: {
+                    cardTitle: "Топ 10 самых длинных",
+                    cardDesc: "Десять твоих самых длинных треков в библиотеке.",
+                    items: _vm.top10TracksLong,
+                    listType: "tracks"
+                  }
+                }),
+                _vm._v(" "),
+                _c("Top10Items", {
+                  attrs: {
+                    cardTitle: "Топ 10 самых коротких",
+                    cardDesc:
+                      "Десять твоих самых коротких треков в библиотеке.",
+                    items: _vm.top10TracksShort,
+                    listType: "tracks"
+                  }
+                }),
+                _vm._v(" "),
+                _c("Top10Items", {
+                  attrs: {
                     cardTitle: "Топ 10 артистов за все время",
                     cardDesc:
                       "Десять твоих самых прослушиваемых артистов за все время.",
@@ -79224,6 +79265,12 @@ var render = function() {
                                       }
                                     },
                                     [
+                                      item.duration
+                                        ? _c("b", [
+                                            _vm._v(_vm._s(item.duration) + "  ")
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
                                       _c("b", { staticClass: "unbold" }, [
                                         _vm._v(
                                           _vm._s(item.album) +
@@ -97375,7 +97422,11 @@ var ProfilePageStates = {
     // топ 10 треков за месяц
     top10ArtistsAllTime: -1,
     //топ 10 исполнителей за все время
-    top10ArtistsMonth: -1 //топ 10 исполнителей за месяц
+    top10ArtistsMonth: -1,
+    //топ 10 исполнителей за месяц
+    top10TracksLong: -1,
+    //топ 10 длинных треков
+    top10TracksShort: -1 //топ 10 коротких треков
 
   },
   mutations: {
@@ -97509,6 +97560,20 @@ var ProfilePageStates = {
       context.commit('getAPIResponse', {
         state: 'top10ArtistsMonth',
         uri: '/api/get_top10_artists/month'
+      });
+    },
+    //топ 10 длинных треков
+    getTop10TracksLong: function getTop10TracksLong(context) {
+      context.commit('getAPIResponse', {
+        state: 'top10TracksLong',
+        uri: '/api/get_top10_tracks_by_length/long'
+      });
+    },
+    //топ 10 коротких треков
+    getTop10TracksShort: function getTop10TracksShort(context) {
+      context.commit('getAPIResponse', {
+        state: 'top10TracksShort',
+        uri: '/api/get_top10_tracks_by_length/short'
       });
     }
   }

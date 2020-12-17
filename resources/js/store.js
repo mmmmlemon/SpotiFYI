@@ -60,6 +60,8 @@ const ProfilePageStates = {
         top10TracksMonth: -1, // топ 10 треков за месяц
         top10ArtistsAllTime: -1, //топ 10 исполнителей за все время
         top10ArtistsMonth: -1, //топ 10 исполнителей за месяц
+        top10TracksLong: -1, //топ 10 длинных треков
+        top10TracksShort: -1, //топ 10 коротких треков
       },
 
     mutations: {
@@ -160,7 +162,15 @@ const ProfilePageStates = {
       //топ10 исполнителей за все время
       getTop10ArtistsMonth(context){
         context.commit('getAPIResponse', {state: 'top10ArtistsMonth', uri: '/api/get_top10_artists/month'});
-      }
+      },
+      //топ 10 длинных треков
+      getTop10TracksLong(context){
+        context.commit('getAPIResponse', {state: 'top10TracksLong', uri: '/api/get_top10_tracks_by_length/long'});
+      },
+      //топ 10 коротких треков
+      getTop10TracksShort(context){
+        context.commit('getAPIResponse', {state: 'top10TracksShort', uri: '/api/get_top10_tracks_by_length/short'});
+      },
   }
 }
 

@@ -42,5 +42,6 @@ Route::get('/get_unique_artists', 'SpotifyAPIController@getUniqueArtists'); //п
 Route::get('/get_years_and_decades', 'SpotifyAPIController@getYearsAndDecades'); //посчитать годы и десятилетия
 Route::get('/get_top10_tracks/{top10Type}', 'SpotifyAPIController@getTop10Tracks'); //получить топ 10 треков
 Route::get('/get_top10_artists/{top10Artists}', 'SpotifyAPIController@getTop10Artists'); //получить топ 10 треков
+Route::get('/get_top10_tracks_by_length/{top10Type}', 'SpotifyAPIController@getTop10TracksByLength'); //получить топ 10 самых длинных сили самых коротких треков
 
 ?>

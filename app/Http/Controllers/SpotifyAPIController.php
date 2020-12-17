@@ -797,6 +797,8 @@ class SpotifyAPIController extends Controller
 
     //getTop10Artists
     //получить топ 10 исполнителей
+    //возвращает JSON с топ 10 исполнителей
+    //параметры: реквест и тип запроса: alltime или month
     public function getTop10Artists(Request $request, $top10Type)
     {
         //проверка токена
@@ -835,7 +837,6 @@ class SpotifyAPIController extends Controller
                 $artistInfo['artist_name'] = $artist->name;
                 $artistInfo['photo'] = $artist->images[count($artist->images)-1]->url;
                 $artistInfo['url'] = $artist->external_urls->spotify;
-                $artistInfo['genres'] = $artist->genres;
 
                 array_push($artists, $artistInfo);
                 $count++;
@@ -853,5 +854,82 @@ class SpotifyAPIController extends Controller
         }
         else
         { return response()->json(false); }
+    }
+
+    //getTop10TracksByLength
+    //получить топ 10 самых длинных или коротких треков
+    //возвращает JSON с топ 10 треков
+    //параметры: реквест, тип запроса: long или short
+    public function getTop10TracksByLength(Request $request, $top10Type)
+    {
+          //открываем файл с треками
+          $tracks = System::getUserLibraryJson("tracks", $request);
+
+          //если он есть
+          if($tracks != null)
+          {  
+            //получаем полный список треков с id трека, длиной, обложкой, названием и url
+
+            $tracksClean = [];
+
+            foreach($tracks as $track)
+            {   
+                $trackInfo = [];
+                $trackInfo['id'] = $track->id;
+                $trackInfo['duration'] = Helpers::trackDurationToMinutes($track->duration_ms);
+                $trackInfo['cover'] = $track->album->images[count($track->album->images) - 1]->url;
+                $trackInfo['track_name'] = Helpers::getFullNameOfItem($track);
+                $trackInfo['url'] = $track->external_urls->spotify;
+                $trackInfo['album'] = $track->album->name;
+                $trackInfo['album_url'] = $track->album->external_urls->spotify;
+                $trackInfo['album_year'] = Helpers::getItemReleaseDate($track, "track", "short");
+                array_push($tracksClean, $trackInfo);
+            }
+
+            //сортируем треки по убыванию и возрастанию по ключу 'duration'
+            $tracksSorted = "";
+
+            if($top10Type == "long")
+            {
+                $tracksSorted = Helpers::sortArrayByKey( $tracksClean, 'duration', 'desc');           
+            }
+            else if ($top10Type == "short")
+            {
+                $tracksSorted = Helpers::sortArrayByKey( $tracksClean, 'duration', 'asc');
+            }
+
+            //берем верхние десять элементов
+            $topTen = array_slice($tracksSorted, 0, 10, true);
+
+            for($i = 1; $i <= 10; $i++)
+            {
+                $topTen[$i-1]['count'] = $i;
+            }
+
+            $response = [];
+            $response['tracks'] = $topTen;
+     
+            //проверка токена
+            $checkToken = System::checkSpotifyAccessToken($request);
+
+            if($checkToken != false)
+            {
+                $api = config('spotify_api');
+
+                //случайная обложка трека
+                $randTrackId = $topTen[rand(0, count($topTen) - 1)]['id'];
+                
+                $albumCover = $api->getTrack($randTrackId )->album->images[0]->url;
+
+                $response['backgroundImage'] = $albumCover;
+
+                return response()->json($response);
+            }
+            else
+            { return response()->json(false); }
+
+          }
+          else
+          { return response()->json(false); }
     }
 }

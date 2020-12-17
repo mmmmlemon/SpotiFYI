@@ -17,14 +17,27 @@
                                 cardDesc="Десять твоих самых прослушиваемых треков за все время." 
                                 :items="top10TracksAllTime"
                                 listType="tracks"/>
+
                     <Top10Items cardTitle="Топ 10 Треков за месяц" 
                                 cardDesc="Десять твоих самых прослушиваемых треков за последний месяц." 
                                 :items="top10TracksMonth"
                                 listType="tracks"/>
+
+                    <Top10Items cardTitle="Топ 10 самых длинных" 
+                                cardDesc="Десять твоих самых длинных треков в библиотеке." 
+                                :items="top10TracksLong"
+                                listType="tracks"/> 
+
+                    <Top10Items cardTitle="Топ 10 самых коротких" 
+                                cardDesc="Десять твоих самых коротких треков в библиотеке." 
+                                :items="top10TracksShort"
+                                listType="tracks"/>
+
                     <Top10Items cardTitle="Топ 10 артистов за все время" 
                                 cardDesc="Десять твоих самых прослушиваемых артистов за все время." 
                                 :items="top10ArtistsAllTime"
                                 listType="artists"/>
+
                     <Top10Items cardTitle="Топ 10 артистов за месяц" 
                                 cardDesc="Десять твоих самых прослушиваемых артистов за последний месяц." 
                                 :items="top10ArtistsMonth"
@@ -39,11 +52,13 @@
 <script>
 export default {
     mounted(){
-        this.$store.dispatch('setCurrentTab', 'top10');
+        this.$store.dispatch('setCurrentTab','top10');
         this.$store.dispatch('getTop10TracksAllTime');
         this.$store.dispatch('getTop10TracksMonth');
         this.$store.dispatch('getTop10ArtistsAllTime');
-         this.$store.dispatch('getTop10ArtistsMonth');
+        this.$store.dispatch('getTop10ArtistsMonth');
+        this.$store.dispatch('getTop10TracksLong');
+        this.$store.dispatch('getTop10TracksShort');
     },
 
     computed: {
@@ -63,6 +78,12 @@ export default {
         },
         top10ArtistsMonth: function(){
             return this.$store.state.profilePage.top10ArtistsMonth;
+        },
+        top10TracksLong: function(){
+            return this.$store.state.profilePage.top10TracksLong;
+        },
+        top10TracksShort: function(){
+            return this.$store.state.profilePage.top10TracksShort;
         }
     }
 }

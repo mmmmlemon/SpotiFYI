@@ -28,6 +28,7 @@
                                     <p class="font_13pt font_white margin_none"><a :href="item.url" target="_blank"><b>{{item.track_name}}</b></a></p>
                                     <p class="font_10pt margin_none font_white" style="margin-bottom:7px;">
                                         <a :href="item.album_url" target="_blank">
+                                            <b v-if="item.duration">{{item.duration}}  </b>
                                             <b class="unbold">{{item.album}} - {{item.album_year}}</b>
                                         </a>
                                     </p>
