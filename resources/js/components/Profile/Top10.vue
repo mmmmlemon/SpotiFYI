@@ -42,6 +42,11 @@
                                 cardDesc="Десять твоих самых прослушиваемых артистов за последний месяц." 
                                 :items="top10ArtistsMonth"
                                 listType="artists"/>
+
+                    <Top10Items cardTitle="Топ 10 артистов по кол-ву треков" 
+                                cardDesc="Десять артистов с наибольшим кол-вом треков в твоей библиотеке." 
+                                :items="top10ArtistsByTracks"
+                                listType="artists"/>
                 </div>
              
             </div>
@@ -59,6 +64,7 @@ export default {
         this.$store.dispatch('getTop10ArtistsMonth');
         this.$store.dispatch('getTop10TracksLong');
         this.$store.dispatch('getTop10TracksShort');
+        this.$store.dispatch('getTop10ArtistsByTracks');
     },
 
     computed: {
@@ -84,7 +90,10 @@ export default {
         },
         top10TracksShort: function(){
             return this.$store.state.profilePage.top10TracksShort;
-        }
+        },
+        top10ArtistsByTracks: function(){
+            return this.$store.state.profilePage.top10ArtistsByTracks;
+        },
     }
 }
 </script>

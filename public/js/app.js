@@ -2295,8 +2295,8 @@ __webpack_require__.r(__webpack_exports__);
   beforeCreate: function beforeCreate() {
     //получить профиль
     this.$store.dispatch('getSpotifyProfile'); //получаем библиотеку пользователя и статистику
-    // this.$store.dispatch('getSpotifyUserLibrary');
-    // //треки, альбомы и подписки
+
+    this.$store.dispatch('getSpotifyUserLibrary'); // //треки, альбомы и подписки
     // this.$store.dispatch('getSpotifyTracks');
     // this.$store.dispatch('getSpotifyAlbums');
     // this.$store.dispatch('getSpotifyArtists');
@@ -2876,6 +2876,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'top10');
@@ -2885,6 +2890,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getTop10ArtistsMonth');
     this.$store.dispatch('getTop10TracksLong');
     this.$store.dispatch('getTop10TracksShort');
+    this.$store.dispatch('getTop10ArtistsByTracks');
   },
   computed: {
     //библиотека пользователя
@@ -2909,6 +2915,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     top10TracksShort: function top10TracksShort() {
       return this.$store.state.profilePage.top10TracksShort;
+    },
+    top10ArtistsByTracks: function top10ArtistsByTracks() {
+      return this.$store.state.profilePage.top10ArtistsByTracks;
     }
   }
 });
@@ -2924,6 +2933,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -79114,6 +79126,16 @@ var render = function() {
                     items: _vm.top10ArtistsMonth,
                     listType: "artists"
                   }
+                }),
+                _vm._v(" "),
+                _c("Top10Items", {
+                  attrs: {
+                    cardTitle: "Топ 10 артистов по кол-ву треков",
+                    cardDesc:
+                      "Десять артистов с наибольшим кол-вом треков в твоей библиотеке.",
+                    items: _vm.top10ArtistsByTracks,
+                    listType: "artists"
+                  }
                 })
               ],
               1
@@ -79339,7 +79361,33 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _vm._m(0, true)
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "font_8pt margin_none font_white",
+                                  staticStyle: { "margin-bottom": "7px" }
+                                },
+                                [
+                                  item.track_count
+                                    ? _c("b", { staticClass: "unbold" }, [
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(item.track_count) +
+                                            "\n                                    "
+                                        )
+                                      ])
+                                    : _c(
+                                        "b",
+                                        { staticClass: "unbold zero_opacity" },
+                                        [
+                                          _vm._v(
+                                            "\n                                        нЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕт, ТЫ НЕ МОЖЕШЬ ПРОСТО ТАК ВОТКНУТЬ НЕВИДИМЫЙ ТЕКСТ\n\n                                        хахаа opacity: 0 goes brrr\n                                    "
+                                          )
+                                        ]
+                                      )
+                                ]
+                              )
                             ])
                           ]
                         )
@@ -79374,27 +79422,7 @@ var render = function() {
         )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "p",
-      {
-        staticClass: "font_8pt margin_none font_white",
-        staticStyle: { "margin-bottom": "7px" }
-      },
-      [
-        _c("b", { staticClass: "unbold zero_opacity" }, [
-          _vm._v(
-            "\n                                        нЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕт, ТЫ НЕ МОЖЕШЬ ПРОСТО ТАК ВОТКНУТЬ НЕВИДИМЫЙ ТЕКСТ\n\n                                        хахаа opacity: 0 goes brrr\n                                    "
-          )
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -97426,7 +97454,9 @@ var ProfilePageStates = {
     //топ 10 исполнителей за месяц
     top10TracksLong: -1,
     //топ 10 длинных треков
-    top10TracksShort: -1 //топ 10 коротких треков
+    top10TracksShort: -1,
+    //топ 10 коротких треков
+    top10ArtistsByTracks: -1 //топ 10 исполнителей по кол-ву треков
 
   },
   mutations: {
@@ -97574,6 +97604,13 @@ var ProfilePageStates = {
       context.commit('getAPIResponse', {
         state: 'top10TracksShort',
         uri: '/api/get_top10_tracks_by_length/short'
+      });
+    },
+    //топ 10 коротких треков
+    getTop10ArtistsByTracks: function getTop10ArtistsByTracks(context) {
+      context.commit('getAPIResponse', {
+        state: 'top10ArtistsByTracks',
+        uri: '/api/get_top10_artists_by_tracks'
       });
     }
   }

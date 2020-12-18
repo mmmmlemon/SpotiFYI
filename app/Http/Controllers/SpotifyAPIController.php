@@ -901,7 +901,7 @@ class SpotifyAPIController extends Controller
             //берем верхние десять элементов
             $topTen = array_slice($tracksSorted, 0, 10, true);
 
-            for($i = 1; $i <= 10; $i++)
+            for($i = 1; $i <= count($topTen); $i++)
             {
                 $topTen[$i-1]['count'] = $i;
             }
@@ -931,5 +931,73 @@ class SpotifyAPIController extends Controller
           }
           else
           { return response()->json(false); }
+    }
+
+    public function getTop10ArtistsByTracks(Request $request)
+    {
+        //открываем файл с треками
+        $tracks = System::getUserLibraryJson("tracks", $request);
+
+        //если он есть
+        if($tracks != null)
+        {  
+
+            $artists = [];
+
+            foreach($tracks as $track)
+            {
+                foreach($track->artists as $artist)
+                {
+                    array_push($artists, $artist->id);
+                }
+            }
+
+            $artistsCount = [];
+
+            foreach($artists as $artist)
+            {
+                if(array_key_exists($artist, $artistsCount) === false)
+                {  
+                    $artistsCount[$artist] = 1;
+                }
+                else
+                {
+                    $artistsCount[$artist] += 1;
+                }
+            }
+
+            arsort($artistsCount);
+
+            $checkToken = System::checkSpotifyAccessToken($request);
+
+            if($checkToken != false)
+            {   
+                $api = config('spotify_api');
+
+                $artistIds = array_keys($artistsCount);
+
+                $artists = [];
+    
+                for($i = 0; $i <= 9; $i++)
+                {
+                    $artistInfo = [];
+                    $artist = $api->getArtist($artistIds[$i]);
+                    $artistInfo['count'] = $i+1;
+                    $artistInfo['id'] = $artist->id;
+                    $artistInfo['artist_name'] = $artist->name;
+                    $artistInfo['photo'] = $artist->images[count($artist->images)-1]->url;
+                    $artistInfo['url'] = $artist->external_urls->spotify;
+                    $artistInfo['track_count'] = $artistsCount[$artistIds[$i]] . Helpers::pickTheWord($artistsCount[$artistIds[$i]], "треков", "трек", "трека");
+    
+                    array_push($artists, $artistInfo);
+                }
+
+                $response['artists'] = $artists;
+
+                return response()->json($response);
+            }
+        }
+        else
+        { return response()->json(false); }
     }
 }

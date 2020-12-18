@@ -75,7 +75,7 @@ export default {
         //получить профиль
         this.$store.dispatch('getSpotifyProfile');
         //получаем библиотеку пользователя и статистику
-        // this.$store.dispatch('getSpotifyUserLibrary');
+        this.$store.dispatch('getSpotifyUserLibrary');
         // //треки, альбомы и подписки
         // this.$store.dispatch('getSpotifyTracks');
         // this.$store.dispatch('getSpotifyAlbums');
