@@ -47,6 +47,10 @@
                                 cardDesc="Десять артистов с наибольшим кол-вом треков в твоей библиотеке." 
                                 :items="top10ArtistsByTracks"
                                 listType="artists"/>
+                    <Top10Items cardTitle="Топ 10 артистов по времени треков" 
+                                cardDesc="Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке." 
+                                :items="top10ArtistsByTime"
+                                listType="artists"/>
                 </div>
              
             </div>
@@ -65,13 +69,15 @@ export default {
         this.$store.dispatch('getTop10TracksLong');
         this.$store.dispatch('getTop10TracksShort');
         this.$store.dispatch('getTop10ArtistsByTracks');
+        this.$store.dispatch('getTop10ArtistsByTime');
     },
 
     computed: {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
         spotifyUserLibrary: function() {
-            return this.$store.state.profilePage.spotifyUserLibrary;
+            // return this.$store.state.profilePage.spotifyUserLibrary;
+            return true;
         },
         top10TracksAllTime: function() {
             return this.$store.state.profilePage.top10TracksAllTime;
@@ -91,9 +97,12 @@ export default {
         top10TracksShort: function(){
             return this.$store.state.profilePage.top10TracksShort;
         },
-        top10ArtistsByTracks: function(){
+        top10ArtistsByTracks: function() {
             return this.$store.state.profilePage.top10ArtistsByTracks;
         },
+        top10ArtistsByTime: function() {
+            return this.$store.state.profilePage.top10ArtistsByTime;
+        }
     }
 }
 </script>

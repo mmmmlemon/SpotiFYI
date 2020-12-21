@@ -2294,23 +2294,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить профиль
-    this.$store.dispatch('getSpotifyProfile'); //получаем библиотеку пользователя и статистику
-
-    this.$store.dispatch('getSpotifyUserLibrary'); //треки, альбомы и подписки
-
-    this.$store.dispatch('getSpotifyTracks');
-    this.$store.dispatch('getSpotifyAlbums');
-    this.$store.dispatch('getSpotifyArtists'); //время
-
-    this.$store.dispatch('getUserLibraryTime');
-    this.$store.dispatch('getFiveLongestAndShortestTracks');
-    this.$store.dispatch('getAverageLengthOfTrack'); //жанры
-
-    this.$store.dispatch('getFavoriteGenres'); //кол-во исполнителей
-
-    this.$store.dispatch('getUniqueArtists'); //года и десятилетия
-
-    this.$store.dispatch('getYearsAndDecades');
+    this.$store.dispatch('getSpotifyProfile'); //     //получаем библиотеку пользователя и статистику
+    //     this.$store.dispatch('getSpotifyUserLibrary');
+    //     //треки, альбомы и подписки
+    //     this.$store.dispatch('getSpotifyTracks');
+    //     this.$store.dispatch('getSpotifyAlbums');
+    //     this.$store.dispatch('getSpotifyArtists');
+    //     //время
+    //     this.$store.dispatch('getUserLibraryTime');
+    //     this.$store.dispatch('getFiveLongestAndShortestTracks');
+    //     this.$store.dispatch('getAverageLengthOfTrack');
+    //     //жанры
+    //     this.$store.dispatch('getFavoriteGenres');
+    //     //кол-во исполнителей
+    //     this.$store.dispatch('getUniqueArtists');
+    //     //года и десятилетия
+    //     this.$store.dispatch('getYearsAndDecades');
   },
   computed: {
     //текущая вкладка
@@ -2882,6 +2881,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'top10');
@@ -2892,12 +2895,14 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getTop10TracksLong');
     this.$store.dispatch('getTop10TracksShort');
     this.$store.dispatch('getTop10ArtistsByTracks');
+    this.$store.dispatch('getTop10ArtistsByTime');
   },
   computed: {
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      return this.$store.state.profilePage.spotifyUserLibrary;
+      // return this.$store.state.profilePage.spotifyUserLibrary;
+      return true;
     },
     top10TracksAllTime: function top10TracksAllTime() {
       return this.$store.state.profilePage.top10TracksAllTime;
@@ -2919,6 +2924,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     top10ArtistsByTracks: function top10ArtistsByTracks() {
       return this.$store.state.profilePage.top10ArtistsByTracks;
+    },
+    top10ArtistsByTime: function top10ArtistsByTime() {
+      return this.$store.state.profilePage.top10ArtistsByTime;
     }
   }
 });
@@ -79137,6 +79145,16 @@ var render = function() {
                     items: _vm.top10ArtistsByTracks,
                     listType: "artists"
                   }
+                }),
+                _vm._v(" "),
+                _c("Top10Items", {
+                  attrs: {
+                    cardTitle: "Топ 10 артистов по времени треков",
+                    cardDesc:
+                      "Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке.",
+                    items: _vm.top10ArtistsByTime,
+                    listType: "artists"
+                  }
                 })
               ],
               1
@@ -97457,7 +97475,9 @@ var ProfilePageStates = {
     //топ 10 длинных треков
     top10TracksShort: -1,
     //топ 10 коротких треков
-    top10ArtistsByTracks: -1 //топ 10 исполнителей по кол-ву треков
+    top10ArtistsByTracks: -1,
+    //топ 10 исполнителей по кол-ву треков
+    top10ArtistsByTime: -1 //топ 10 исполнителей по времени треков
 
   },
   mutations: {
@@ -97607,11 +97627,18 @@ var ProfilePageStates = {
         uri: '/api/get_top10_tracks_by_length/short'
       });
     },
-    //топ 10 коротких треков
+    //топ 10 исполнителей по кол-ву треков
     getTop10ArtistsByTracks: function getTop10ArtistsByTracks(context) {
       context.commit('getAPIResponse', {
         state: 'top10ArtistsByTracks',
         uri: '/api/get_top10_artists_by_tracks'
+      });
+    },
+    //топ 10 исполнителей по времени треков
+    getTop10ArtistsByTime: function getTop10ArtistsByTime(context) {
+      context.commit('getAPIResponse', {
+        state: 'top10ArtistsByTime',
+        uri: '/api/get_top10_artists_by_time'
       });
     }
   }

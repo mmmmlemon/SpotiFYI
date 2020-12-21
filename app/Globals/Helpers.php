@@ -128,23 +128,43 @@
             //перевести длительность трека из миллисекунд в минуты и секунды
             //возвращает строку с длиной трека в минутах и секундах
             //параметры: длина трека в миллисекундах
-            public static function trackDurationToMinutes($durationMs)
+            public static function trackDuration($durationMs)
             {
                 if(is_numeric($durationMs))
-                {
+                {   
                     $durationS = $durationMs / 1000;
                     $durationMinutes = round($durationS / 60, 3);
-                    
+
+                    $durationHours = round($durationMinutes / 60, 3);
+
+                    $durationMinutes = 60 * ($durationHours - floor($durationHours));
+
                     $durationSeconds = floor(60 * ($durationMinutes - floor($durationMinutes)));
-    
+
+                    $hoursStr = "";
+                    $minutesStr = "";
+                    $secondsStr = "";
+                    $durationStr = "";
+
+                    $hoursStr = strval(floor($durationHours));
                     $minutesStr = strval(floor($durationMinutes));
                     $secondsStr = strval($durationSeconds);
-                    
+
+                    if(strlen($hoursStr) == 1 && $durationHours > 0)
+                    { $hoursStr = "0" . $hoursStr . ":"; }
+                    else if (floor($durationHours) == 0)
+                    { $hoursStr = ""; }
+                    else
+                    {  $hoursStr .= ":"; }
+
+                    if(strlen($minutesStr) == 1)
+                    { $minutesStr = "0" . $minutesStr; }
+
                     if(strlen($secondsStr) == 1)
                     { $secondsStr = "0" . $secondsStr; }
-    
-                    $durationStr = $minutesStr.":".$secondsStr;
-    
+
+                    $durationStr = $hoursStr.$minutesStr.":".$secondsStr;
+                 
                     return $durationStr;
                 }
                 else

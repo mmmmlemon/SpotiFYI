@@ -63,6 +63,7 @@ const ProfilePageStates = {
         top10TracksLong: -1, //топ 10 длинных треков
         top10TracksShort: -1, //топ 10 коротких треков
         top10ArtistsByTracks: -1, //топ 10 исполнителей по кол-ву треков
+        top10ArtistsByTime: -1, //топ 10 исполнителей по времени треков
       },
 
     mutations: {
@@ -172,9 +173,13 @@ const ProfilePageStates = {
       getTop10TracksShort(context){
         context.commit('getAPIResponse', {state: 'top10TracksShort', uri: '/api/get_top10_tracks_by_length/short'});
       },
-      //топ 10 коротких треков
+      //топ 10 исполнителей по кол-ву треков
       getTop10ArtistsByTracks(context){
         context.commit('getAPIResponse', {state: 'top10ArtistsByTracks', uri: '/api/get_top10_artists_by_tracks'});
+      },
+      //топ 10 исполнителей по времени треков
+      getTop10ArtistsByTime(context){
+        context.commit('getAPIResponse', {state: 'top10ArtistsByTime', uri: '/api/get_top10_artists_by_time'});
       },
   }
 }
