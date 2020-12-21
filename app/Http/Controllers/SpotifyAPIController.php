@@ -933,6 +933,10 @@ class SpotifyAPIController extends Controller
           { return response()->json(false); }
     }
 
+    //getTop10ArtistsByTracks
+    //получить топ 10 исполнителей по кол-ву треков
+    //возвращает JSON с топ 10 исполнителей пол кол-ву треков
+    //параметры: реквест
     public function getTop10ArtistsByTracks(Request $request)
     {
         //открываем файл с треками
@@ -941,40 +945,40 @@ class SpotifyAPIController extends Controller
         //если он есть
         if($tracks != null)
         {  
-
             $artists = [];
 
+            //получаем все id исполнителей из списка треков
             foreach($tracks as $track)
             {
                 foreach($track->artists as $artist)
-                {
-                    array_push($artists, $artist->id);
-                }
+                { array_push($artists, $artist->id); }
             }
 
             $artistsCount = [];
 
+            //считаем сколько раз встречается каждый id
             foreach($artists as $artist)
             {
                 if(array_key_exists($artist, $artistsCount) === false)
-                {  
-                    $artistsCount[$artist] = 1;
-                }
+                { $artistsCount[$artist] = 1; }
                 else
-                {
-                    $artistsCount[$artist] += 1;
-                }
+                { $artistsCount[$artist] += 1; }
             }
 
+            //сортировка по убыванию
             arsort($artistsCount);
 
+            //проверяем токен
             $checkToken = System::checkSpotifyAccessToken($request);
 
+            //список всех id исполнителей
+            $artistIds = array_keys($artistsCount);
+
+            //если он действительный
             if($checkToken != false)
             {   
+                //получаем информацию об исполнителе из api по id и записываем в список
                 $api = config('spotify_api');
-
-                $artistIds = array_keys($artistsCount);
 
                 $artists = [];
     
@@ -994,10 +998,17 @@ class SpotifyAPIController extends Controller
 
                 $response['artists'] = $artists;
 
+                //получаем случайное фото исполнителя из топ 10
+                $randomArtistId = $artistIds[rand(0, 9)];
+
+                $response['backgroundImage'] = $api->getArtist($randomArtistId)->images[0]->url;
+
                 return response()->json($response);
             }
         }
         else
         { return response()->json(false); }
     }
+
+
 }
