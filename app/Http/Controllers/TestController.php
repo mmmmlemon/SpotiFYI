@@ -21,7 +21,8 @@ class TestController extends Controller
     //пустая функция, можно написать что угодно и проверить
     public function test_custom()
     {
-      //
+      $time = Helpers::trackDuration(223343);
+      dd($time);
     }
 
     //тест работы PHP-wrapper'а для Spotify Web API

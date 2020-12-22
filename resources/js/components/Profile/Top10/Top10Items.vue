@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-10">
                                     <p class="font_13pt font_white margin_none"><a :href="item.url" target="_blank"><b>{{item.artist_name}}</b></a></p>
-                                    <p class="font_8pt margin_none font_white" style="margin-bottom:7px;">
+                                    <p class="font_10pt margin_none font_white" style="margin-bottom:7px;">
                                             <b v-if="item.track_count" class="unbold">
                                                 {{item.track_count}}
                                             </b>

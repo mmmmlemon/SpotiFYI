@@ -2295,22 +2295,21 @@ __webpack_require__.r(__webpack_exports__);
   beforeCreate: function beforeCreate() {
     //получить профиль
     this.$store.dispatch('getSpotifyProfile'); //получаем библиотеку пользователя и статистику
-
-    this.$store.dispatch('getSpotifyUserLibrary'); //треки, альбомы и подписки
-
-    this.$store.dispatch('getSpotifyTracks');
-    this.$store.dispatch('getSpotifyAlbums');
-    this.$store.dispatch('getSpotifyArtists'); //время
-
-    this.$store.dispatch('getUserLibraryTime');
-    this.$store.dispatch('getFiveLongestAndShortestTracks');
-    this.$store.dispatch('getAverageLengthOfTrack'); //жанры
-
-    this.$store.dispatch('getFavoriteGenres'); //кол-во исполнителей
-
-    this.$store.dispatch('getUniqueArtists'); //года и десятилетия
-
-    this.$store.dispatch('getYearsAndDecades');
+    // this.$store.dispatch('getSpotifyUserLibrary');
+    // //треки, альбомы и подписки
+    // this.$store.dispatch('getSpotifyTracks');
+    // this.$store.dispatch('getSpotifyAlbums');
+    // this.$store.dispatch('getSpotifyArtists');
+    // //время
+    // this.$store.dispatch('getUserLibraryTime');
+    // this.$store.dispatch('getFiveLongestAndShortestTracks');
+    // this.$store.dispatch('getAverageLengthOfTrack');
+    // //жанры
+    // this.$store.dispatch('getFavoriteGenres');
+    // //кол-во исполнителей
+    // this.$store.dispatch('getUniqueArtists');
+    // //года и десятилетия
+    // this.$store.dispatch('getYearsAndDecades');
   },
   computed: {
     //текущая вкладка
@@ -2826,6 +2825,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -79079,6 +79094,8 @@ var render = function() {
               "div",
               { staticClass: "row justify-content-center" },
               [
+                _vm._m(1),
+                _vm._v(" "),
                 _c("Top10Items", {
                   attrs: {
                     cardTitle: "Топ 10 Треков за все время",
@@ -79118,6 +79135,8 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
                 _c("Top10Items", {
                   attrs: {
                     cardTitle: "Топ 10 артистов за все время",
@@ -79140,7 +79159,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("Top10Items", {
                   attrs: {
-                    cardTitle: "Топ 10 артистов по кол-ву треков",
+                    cardTitle: "Топ 10 артистов по трекам",
                     cardDesc:
                       "Десять артистов с наибольшим кол-вом треков в твоей библиотеке.",
                     items: _vm.top10ArtistsByTracks,
@@ -79175,6 +79194,30 @@ var staticRenderFns = [
         _c("b", [_vm._v("Топ 10")]),
         _vm._v(" \n                     "),
         _c("i", { staticClass: "fas fa-list-ol primary_color" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 justify-content-center" }, [
+      _c("h2", { staticClass: "text-center" }, [
+        _vm._v("\n                         Треки\n                         "),
+        _c("i", { staticClass: "fas fa-compact-disc primary_color" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 justify-content-center" }, [
+      _c("h2", { staticClass: "text-center" }, [
+        _vm._v(
+          "\n                         Исполнители\n                         "
+        ),
+        _c("i", { staticClass: "fas fa-users primary_color" })
       ])
     ])
   }
@@ -79385,7 +79428,7 @@ var render = function() {
                                 "p",
                                 {
                                   staticClass:
-                                    "font_8pt margin_none font_white",
+                                    "font_10pt margin_none font_white",
                                   staticStyle: { "margin-bottom": "7px" }
                                 },
                                 [

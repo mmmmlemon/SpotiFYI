@@ -12,7 +12,15 @@
                     <Loader />
                 </div>
                 <div v-else-if="top10TracksAllTime != -1 && top10TracksMonth != -1" class="row justify-content-center">
+                    
                     <!-- топ-10 треков -->
+                    <div class="col-12 justify-content-center">
+                        <h2 class="text-center">
+                            Треки
+                            <i class="fas fa-compact-disc primary_color"></i>
+                        </h2>
+                    </div>
+               
                     <Top10Items cardTitle="Топ 10 Треков за все время" 
                                 cardDesc="Десять твоих самых прослушиваемых треков за все время." 
                                 :items="top10TracksAllTime"
@@ -33,6 +41,14 @@
                                 :items="top10TracksShort"
                                 listType="tracks"/>
 
+                    <!-- топ-10 треков -->
+                    <div class="col-12 justify-content-center">
+                        <h2 class="text-center">
+                            Исполнители
+                            <i class="fas fa-users primary_color"></i>
+                        </h2>
+                    </div>
+
                     <Top10Items cardTitle="Топ 10 артистов за все время" 
                                 cardDesc="Десять твоих самых прослушиваемых артистов за все время." 
                                 :items="top10ArtistsAllTime"
@@ -43,7 +59,7 @@
                                 :items="top10ArtistsMonth"
                                 listType="artists"/>
 
-                    <Top10Items cardTitle="Топ 10 артистов по кол-ву треков" 
+                    <Top10Items cardTitle="Топ 10 артистов по трекам" 
                                 cardDesc="Десять артистов с наибольшим кол-вом треков в твоей библиотеке." 
                                 :items="top10ArtistsByTracks"
                                 listType="artists"/>

@@ -149,8 +149,8 @@
                     $hoursStr = strval(floor($durationHours));
                     $minutesStr = strval(floor($durationMinutes));
                     $secondsStr = strval($durationSeconds);
-
-                    if(strlen($hoursStr) == 1 && $durationHours > 0)
+                    
+                    if(strlen($hoursStr) == 1 && floor($durationHours) > 0)
                     { $hoursStr = "0" . $hoursStr . ":"; }
                     else if (floor($durationHours) == 0)
                     { $hoursStr = ""; }
