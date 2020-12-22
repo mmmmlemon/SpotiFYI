@@ -95,7 +95,19 @@ const ProfilePageStates = {
                 state.favoriteGenres = response.data;
               });
           },
-    },
+          //получить топ 10 артистов по кол-ву треков
+          getTop10ArtistsByTracks(state){
+            axios.get('/api/get_top10_artists_by_tracks').then((response) => {
+              state.top10ArtistsByTracks = response.data;
+            })
+          },
+          //получить топ 10 артистов по кол-ву треков
+          getTop10ArtistsByTime(state){
+            axios.get('/api/get_top10_artists_by_time').then((response) => {
+              state.top10ArtistsByTime = response.data;
+            })
+          }
+},
 
     actions: {
       //общее
@@ -175,11 +187,11 @@ const ProfilePageStates = {
       },
       //топ 10 исполнителей по кол-ву треков
       getTop10ArtistsByTracks(context){
-        context.commit('getAPIResponse', {state: 'top10ArtistsByTracks', uri: '/api/get_top10_artists_by_tracks'});
+        context.commit('getTop10ArtistsByTracks');
       },
       //топ 10 исполнителей по времени треков
       getTop10ArtistsByTime(context){
-        context.commit('getAPIResponse', {state: 'top10ArtistsByTime', uri: '/api/get_top10_artists_by_time'});
+        context.commit('getTop10ArtistsByTime');
       },
   }
 }

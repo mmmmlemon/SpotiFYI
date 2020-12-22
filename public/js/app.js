@@ -2294,22 +2294,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить профиль
-    this.$store.dispatch('getSpotifyProfile'); //     //получаем библиотеку пользователя и статистику
-    //     this.$store.dispatch('getSpotifyUserLibrary');
-    //     //треки, альбомы и подписки
-    //     this.$store.dispatch('getSpotifyTracks');
-    //     this.$store.dispatch('getSpotifyAlbums');
-    //     this.$store.dispatch('getSpotifyArtists');
-    //     //время
-    //     this.$store.dispatch('getUserLibraryTime');
-    //     this.$store.dispatch('getFiveLongestAndShortestTracks');
-    //     this.$store.dispatch('getAverageLengthOfTrack');
-    //     //жанры
-    //     this.$store.dispatch('getFavoriteGenres');
-    //     //кол-во исполнителей
-    //     this.$store.dispatch('getUniqueArtists');
-    //     //года и десятилетия
-    //     this.$store.dispatch('getYearsAndDecades');
+    this.$store.dispatch('getSpotifyProfile'); //получаем библиотеку пользователя и статистику
+
+    this.$store.dispatch('getSpotifyUserLibrary'); //треки, альбомы и подписки
+
+    this.$store.dispatch('getSpotifyTracks');
+    this.$store.dispatch('getSpotifyAlbums');
+    this.$store.dispatch('getSpotifyArtists'); //время
+
+    this.$store.dispatch('getUserLibraryTime');
+    this.$store.dispatch('getFiveLongestAndShortestTracks');
+    this.$store.dispatch('getAverageLengthOfTrack'); //жанры
+
+    this.$store.dispatch('getFavoriteGenres'); //кол-во исполнителей
+
+    this.$store.dispatch('getUniqueArtists'); //года и десятилетия
+
+    this.$store.dispatch('getYearsAndDecades');
   },
   computed: {
     //текущая вкладка
@@ -97508,6 +97509,18 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_favorite_genres/').then(function (response) {
         state.favoriteGenres = response.data;
       });
+    },
+    //получить топ 10 артистов по кол-ву треков
+    getTop10ArtistsByTracks: function getTop10ArtistsByTracks(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists_by_tracks').then(function (response) {
+        state.top10ArtistsByTracks = response.data;
+      });
+    },
+    //получить топ 10 артистов по кол-ву треков
+    getTop10ArtistsByTime: function getTop10ArtistsByTime(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists_by_time').then(function (response) {
+        state.top10ArtistsByTime = response.data;
+      });
     }
   },
   actions: {
@@ -97629,17 +97642,11 @@ var ProfilePageStates = {
     },
     //топ 10 исполнителей по кол-ву треков
     getTop10ArtistsByTracks: function getTop10ArtistsByTracks(context) {
-      context.commit('getAPIResponse', {
-        state: 'top10ArtistsByTracks',
-        uri: '/api/get_top10_artists_by_tracks'
-      });
+      context.commit('getTop10ArtistsByTracks');
     },
     //топ 10 исполнителей по времени треков
     getTop10ArtistsByTime: function getTop10ArtistsByTime(context) {
-      context.commit('getAPIResponse', {
-        state: 'top10ArtistsByTime',
-        uri: '/api/get_top10_artists_by_time'
-      });
+      context.commit('getTop10ArtistsByTime');
     }
   }
 };

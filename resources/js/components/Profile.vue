@@ -74,22 +74,22 @@ export default {
     beforeCreate(){
         //получить профиль
         this.$store.dispatch('getSpotifyProfile');
-    //     //получаем библиотеку пользователя и статистику
-    //     this.$store.dispatch('getSpotifyUserLibrary');
-    //     //треки, альбомы и подписки
-    //     this.$store.dispatch('getSpotifyTracks');
-    //     this.$store.dispatch('getSpotifyAlbums');
-    //     this.$store.dispatch('getSpotifyArtists');
-    //     //время
-    //     this.$store.dispatch('getUserLibraryTime');
-    //     this.$store.dispatch('getFiveLongestAndShortestTracks');
-    //     this.$store.dispatch('getAverageLengthOfTrack');
-    //     //жанры
-    //     this.$store.dispatch('getFavoriteGenres');
-    //     //кол-во исполнителей
-    //     this.$store.dispatch('getUniqueArtists');
-    //     //года и десятилетия
-    //     this.$store.dispatch('getYearsAndDecades');
+        //получаем библиотеку пользователя и статистику
+        this.$store.dispatch('getSpotifyUserLibrary');
+        //треки, альбомы и подписки
+        this.$store.dispatch('getSpotifyTracks');
+        this.$store.dispatch('getSpotifyAlbums');
+        this.$store.dispatch('getSpotifyArtists');
+        //время
+        this.$store.dispatch('getUserLibraryTime');
+        this.$store.dispatch('getFiveLongestAndShortestTracks');
+        this.$store.dispatch('getAverageLengthOfTrack');
+        //жанры
+        this.$store.dispatch('getFavoriteGenres');
+        //кол-во исполнителей
+        this.$store.dispatch('getUniqueArtists');
+        //года и десятилетия
+        this.$store.dispatch('getYearsAndDecades');
     },
     computed: {
         //текущая вкладка
