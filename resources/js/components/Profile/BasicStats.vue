@@ -19,24 +19,36 @@
                     <i class="fas fa-chart-bar primary_color"></i>
                 </h5>
             </div>
-            <!-- треки -->
-            <LastFive :itemCount="spotifyTracks['count']" :lastFiveItems="spotifyTracks['last_five']" type="tracks"/>  
-            <!-- альбомы -->
-            <LastFive v-if="spotifyTracks !== false && spotifyTracks !== -1" 
-                        :itemCount="spotifyAlbums['count']" :lastFiveItems="spotifyAlbums['last_five']" type="albums"/>  
-            <!-- исполнители -->
-            <LastFive v-if="spotifyAlbums !== false && spotifyAlbums !== -1" 
-                        :itemCount="spotifyArtists['count']" :lastFiveItems="spotifyArtists['random_five']" type="artists"/>  
+            <!-- навигация -->
+            <div class="row justify-content-center font_10pt fade_in_anim">
+                <nav class="justify-content-center">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
+                        <li class="breadcrumb-item"><a href="#tracks">Самые длинные и короткие треки</a></li>
+                        <li class="breadcrumb-item"><a href="#genres">Жанры и годы</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row">
+                <!-- треки -->
+                <LastFive :itemCount="spotifyTracks['count']" :lastFiveItems="spotifyTracks['last_five']" type="tracks" id="basic"/>  
+                <!-- альбомы -->
+                <LastFive v-if="spotifyTracks !== false && spotifyTracks !== -1" 
+                            :itemCount="spotifyAlbums['count']" :lastFiveItems="spotifyAlbums['last_five']" type="albums"/>  
+                <!-- исполнители -->
+                <LastFive v-if="spotifyAlbums !== false && spotifyAlbums !== -1" 
+                            :itemCount="spotifyArtists['count']" :lastFiveItems="spotifyArtists['random_five']" type="artists"/>  
+            </div>
         </div>
         <hr class="fade_in_anim" v-if="spotifyArtists !== -1 || spotifyAlbums != -1 || spotifyTracks != -1">
         <!-- часы и время -->
         <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 
                         class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
         <!-- самые длинные и короткие треки -->
-        <LongestAndShortest v-if="userLibraryTime !== -1"
+        <LongestAndShortest v-if="userLibraryTime !== -1" id="tracks"
                             :fiveLongest="fiveTracks['fiveLongest']" :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
         <!-- любимые жанры -->
-        <FavoriteGenres v-if="tracksMode != -1" :favoriteGenres="favoriteGenres"/>
+        <FavoriteGenres v-if="tracksMode != -1" :favoriteGenres="favoriteGenres" id="genres"/>
         <!-- кол-во исполнителей -->
         <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
         <!-- года и десятилетия -->

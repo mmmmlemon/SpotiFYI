@@ -2295,21 +2295,22 @@ __webpack_require__.r(__webpack_exports__);
   beforeCreate: function beforeCreate() {
     //получить профиль
     this.$store.dispatch('getSpotifyProfile'); //получаем библиотеку пользователя и статистику
-    // this.$store.dispatch('getSpotifyUserLibrary');
-    // //треки, альбомы и подписки
-    // this.$store.dispatch('getSpotifyTracks');
-    // this.$store.dispatch('getSpotifyAlbums');
-    // this.$store.dispatch('getSpotifyArtists');
-    // //время
-    // this.$store.dispatch('getUserLibraryTime');
-    // this.$store.dispatch('getFiveLongestAndShortestTracks');
-    // this.$store.dispatch('getAverageLengthOfTrack');
-    // //жанры
-    // this.$store.dispatch('getFavoriteGenres');
-    // //кол-во исполнителей
-    // this.$store.dispatch('getUniqueArtists');
-    // //года и десятилетия
-    // this.$store.dispatch('getYearsAndDecades');
+
+    this.$store.dispatch('getSpotifyUserLibrary'); //треки, альбомы и подписки
+
+    this.$store.dispatch('getSpotifyTracks');
+    this.$store.dispatch('getSpotifyAlbums');
+    this.$store.dispatch('getSpotifyArtists'); //время
+
+    this.$store.dispatch('getUserLibraryTime');
+    this.$store.dispatch('getFiveLongestAndShortestTracks');
+    this.$store.dispatch('getAverageLengthOfTrack'); //жанры
+
+    this.$store.dispatch('getFavoriteGenres'); //кол-во исполнителей
+
+    this.$store.dispatch('getUniqueArtists'); //года и десятилетия
+
+    this.$store.dispatch('getYearsAndDecades');
   },
   computed: {
     //текущая вкладка
@@ -2338,6 +2339,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2825,6 +2838,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -78157,42 +78182,47 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c(
-              "div",
-              { staticClass: "row justify-content-center" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("LastFive", {
-                  attrs: {
-                    itemCount: _vm.spotifyTracks["count"],
-                    lastFiveItems: _vm.spotifyTracks["last_five"],
-                    type: "tracks"
-                  }
-                }),
-                _vm._v(" "),
-                _vm.spotifyTracks !== false && _vm.spotifyTracks !== -1
-                  ? _c("LastFive", {
-                      attrs: {
-                        itemCount: _vm.spotifyAlbums["count"],
-                        lastFiveItems: _vm.spotifyAlbums["last_five"],
-                        type: "albums"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.spotifyAlbums !== false && _vm.spotifyAlbums !== -1
-                  ? _c("LastFive", {
-                      attrs: {
-                        itemCount: _vm.spotifyArtists["count"],
-                        lastFiveItems: _vm.spotifyArtists["random_five"],
-                        type: "artists"
-                      }
-                    })
-                  : _vm._e()
-              ],
-              1
-            ),
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "row" },
+                [
+                  _c("LastFive", {
+                    attrs: {
+                      itemCount: _vm.spotifyTracks["count"],
+                      lastFiveItems: _vm.spotifyTracks["last_five"],
+                      type: "tracks",
+                      id: "basic"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.spotifyTracks !== false && _vm.spotifyTracks !== -1
+                    ? _c("LastFive", {
+                        attrs: {
+                          itemCount: _vm.spotifyAlbums["count"],
+                          lastFiveItems: _vm.spotifyAlbums["last_five"],
+                          type: "albums"
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.spotifyAlbums !== false && _vm.spotifyAlbums !== -1
+                    ? _c("LastFive", {
+                        attrs: {
+                          itemCount: _vm.spotifyArtists["count"],
+                          lastFiveItems: _vm.spotifyArtists["random_five"],
+                          type: "artists"
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
             _vm._v(" "),
             _vm.spotifyArtists !== -1 ||
             _vm.spotifyAlbums != -1 ||
@@ -78212,6 +78242,7 @@ var render = function() {
             _vm.userLibraryTime !== -1
               ? _c("LongestAndShortest", {
                   attrs: {
+                    id: "tracks",
                     fiveLongest: _vm.fiveTracks["fiveLongest"],
                     fiveShortest: _vm.fiveTracks["fiveShortest"],
                     tracksMode: _vm.tracksMode
@@ -78221,7 +78252,7 @@ var render = function() {
             _vm._v(" "),
             _vm.tracksMode != -1
               ? _c("FavoriteGenres", {
-                  attrs: { favoriteGenres: _vm.favoriteGenres }
+                  attrs: { favoriteGenres: _vm.favoriteGenres, id: "genres" }
                 })
               : _vm._e(),
             _vm._v(" "),
@@ -78274,6 +78305,34 @@ var staticRenderFns = [
         _c("i", { staticClass: "fas fa-chart-bar primary_color" })
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "row justify-content-center font_10pt fade_in_anim" },
+      [
+        _c("nav", { staticClass: "justify-content-center" }, [
+          _c("ul", { staticClass: "breadcrumb" }, [
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#basic" } }, [_vm._v("Общее")])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#tracks" } }, [
+                _vm._v("Самые длинные и короткие треки")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#genres" } }, [_vm._v("Жанры и годы")])
+            ])
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -79091,13 +79150,30 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _vm.top10TracksAllTime == -1 || _vm.top10TracksMonth == -1
-          ? _c("div", [_c("Loader")], 1)
+          ? _c(
+              "div",
+              { staticClass: "col-12" },
+              [
+                _c("Loader"),
+                _vm._v(" "),
+                _c("h6", { staticClass: "text-center blinking_anim" }, [
+                  _vm._v("Загружаю библиотеку...")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "font_10pt text-center" }, [
+                  _vm._v("Это может занять около минуты")
+                ])
+              ],
+              1
+            )
           : _vm.top10TracksAllTime != -1 && _vm.top10TracksMonth != -1
           ? _c(
               "div",
               { staticClass: "row justify-content-center" },
               [
                 _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("Top10Items", {
                   attrs: {
@@ -79138,7 +79214,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("Top10Items", {
                   attrs: {
@@ -79204,25 +79280,58 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 justify-content-center" }, [
-      _c("h2", { staticClass: "text-center" }, [
-        _vm._v("\n                         Треки\n                         "),
-        _c("i", { staticClass: "fas fa-compact-disc primary_color" })
-      ])
-    ])
+    return _c(
+      "div",
+      { staticClass: "row justify-content-center font_10pt fade_in_anim" },
+      [
+        _c("nav", { staticClass: "justify-content-center" }, [
+          _c("ul", { staticClass: "breadcrumb" }, [
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#tracks" } }, [_vm._v("Треки")])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#artists" } }, [_vm._v("Исполнители")])
+            ])
+          ])
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 justify-content-center" }, [
-      _c("h2", { staticClass: "text-center" }, [
-        _vm._v(
-          "\n                         Исполнители\n                         "
-        ),
-        _c("i", { staticClass: "fas fa-users primary_color" })
-      ])
-    ])
+    return _c(
+      "div",
+      { staticClass: "col-12 justify-content-center", attrs: { id: "tracks" } },
+      [
+        _c("h3", { staticClass: "text-center" }, [
+          _vm._v("\n                         Треки\n                         "),
+          _c("i", { staticClass: "fas fa-compact-disc primary_color" })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "col-12 justify-content-center",
+        attrs: { id: "artists" }
+      },
+      [
+        _c("h3", { staticClass: "text-center" }, [
+          _vm._v(
+            "\n                         Исполнители\n                         "
+          ),
+          _c("i", { staticClass: "fas fa-users primary_color" })
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true

@@ -8,17 +8,29 @@
                         <i class="fas fa-list-ol primary_color"></i>
                     </h5>
                 </div>
-                <div v-if="top10TracksAllTime == -1 || top10TracksMonth == -1">
+        
+                <div class="col-12" v-if="top10TracksAllTime == -1 || top10TracksMonth == -1">
                     <Loader />
+                    <h6 class="text-center blinking_anim">Загружаю библиотеку...</h6>
+                    <p class="font_10pt text-center">Это может занять около минуты</p>
                 </div>
                 <div v-else-if="top10TracksAllTime != -1 && top10TracksMonth != -1" class="row justify-content-center">
-                    
+                    <!-- навигация -->
+                    <div class="row justify-content-center font_10pt fade_in_anim">
+                        <nav class="justify-content-center">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#tracks">Треки</a></li>
+                                <li class="breadcrumb-item"><a href="#artists">Исполнители</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
                     <!-- топ-10 треков -->
-                    <div class="col-12 justify-content-center">
-                        <h2 class="text-center">
+                    <div class="col-12 justify-content-center" id="tracks">
+                        <h3 class="text-center">
                             Треки
                             <i class="fas fa-compact-disc primary_color"></i>
-                        </h2>
+                        </h3>
                     </div>
                
                     <Top10Items cardTitle="Топ 10 Треков за все время" 
@@ -42,11 +54,11 @@
                                 listType="tracks"/>
 
                     <!-- топ-10 треков -->
-                    <div class="col-12 justify-content-center">
-                        <h2 class="text-center">
+                    <div class="col-12 justify-content-center" id="artists">
+                        <h3 class="text-center">
                             Исполнители
                             <i class="fas fa-users primary_color"></i>
-                        </h2>
+                        </h3>
                     </div>
 
                     <Top10Items cardTitle="Топ 10 артистов за все время" 
