@@ -2294,23 +2294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить профиль
-    this.$store.dispatch('getSpotifyProfile'); //получаем библиотеку пользователя и статистику
-
-    this.$store.dispatch('getSpotifyUserLibrary'); //треки, альбомы и подписки
-
-    this.$store.dispatch('getSpotifyTracks');
-    this.$store.dispatch('getSpotifyAlbums');
-    this.$store.dispatch('getSpotifyArtists'); //время
-
-    this.$store.dispatch('getUserLibraryTime');
-    this.$store.dispatch('getFiveLongestAndShortestTracks');
-    this.$store.dispatch('getAverageLengthOfTrack'); //жанры
-
-    this.$store.dispatch('getFavoriteGenres'); //кол-во исполнителей
-
-    this.$store.dispatch('getUniqueArtists'); //года и десятилетия
-
-    this.$store.dispatch('getYearsAndDecades');
+    this.$store.dispatch('getSpotifyProfile');
   },
   computed: {
     //текущая вкладка
@@ -2406,7 +2390,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    this.$store.dispatch('setCurrentTab', 'basicStats');
+    this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя и статистику
+
+    if (this.spotifyUserLibrary == -1) {
+      this.$store.dispatch('getSpotifyUserLibrary');
+    } //треки, альбомы и подписки
+
+
+    if (this.spotifyTracks == -1) {
+      this.$store.dispatch('getSpotifyTracks');
+    }
+
+    if (this.spotifyAlbums == -1) {
+      this.$store.dispatch('getSpotifyAlbums');
+    }
+
+    if (this.spotifyArtists == -1) {
+      this.$store.dispatch('getSpotifyArtists');
+    } //время
+
+
+    if (this.userLibraryTime == -1) {
+      this.$store.dispatch('getUserLibraryTime');
+    }
+
+    if (this.fiveTracks == -1) {
+      this.$store.dispatch('getFiveLongestAndShortestTracks');
+    }
+
+    if (this.tracksMode == -1) {
+      this.$store.dispatch('getAverageLengthOfTrack');
+    } //жанры
+
+
+    if (this.favoriteGenres == -1) {
+      this.$store.dispatch('getFavoriteGenres');
+    } //кол-во исполнителей
+
+
+    if (this.uniqueArtists == -1) {
+      this.$store.dispatch('getUniqueArtists');
+    } //года и десятилетия
+
+
+    if (this.yearsAndDecades == -1) {
+      this.$store.dispatch('getYearsAndDecades');
+    }
   },
   computed: {
     //библиотека пользователя
@@ -2928,22 +2957,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    this.$store.dispatch('setCurrentTab', 'top10');
-    this.$store.dispatch('getTop10TracksAllTime');
-    this.$store.dispatch('getTop10TracksMonth');
-    this.$store.dispatch('getTop10ArtistsAllTime');
-    this.$store.dispatch('getTop10ArtistsMonth');
-    this.$store.dispatch('getTop10TracksLong');
-    this.$store.dispatch('getTop10TracksShort');
-    this.$store.dispatch('getTop10ArtistsByTracks');
-    this.$store.dispatch('getTop10ArtistsByTime');
+    //смена текущего таба
+    this.$store.dispatch('setCurrentTab', 'top10'); //получить библиотеку пользователя, если нужно
+
+    if (this.spotifyUserLibrary == -1) {
+      this.$store.dispatch('getSpotifyUserLibrary');
+    } //топ 10 треков за всё время
+
+
+    if (this.top10TracksAllTime == -1) {
+      this.$store.dispatch('getTop10TracksAllTime');
+    } //топ 10 треков за месяц
+
+
+    if (this.top10TracksMonth == -1) {
+      this.$store.dispatch('getTop10TracksMonth');
+    } //топ 10 артистов за все время
+
+
+    if (this.top10ArtistsAllTime == -1) {
+      this.$store.dispatch('getTop10ArtistsAllTime');
+    } //топ 10 артистов за месяц
+
+
+    if (this.top10ArtistsMonth == -1) {
+      this.$store.dispatch('getTop10ArtistsMonth');
+    } //топ 10 длинных треков
+
+
+    if (this.top10TracksLong == -1) {
+      this.$store.dispatch('getTop10TracksLong');
+    } //топ 10 коротких треков
+
+
+    if (this.top10TracksShort == -1) {
+      this.$store.dispatch('getTop10TracksShort');
+    } //топ 10 артистов по кол-ву треков
+
+
+    if (this.top10ArtistsByTracks == -1) {
+      this.$store.dispatch('getTop10ArtistsByTracks');
+    } //топ 10 артистов по кол-ву времени
+
+
+    if (this.top10ArtistsByTime == -1) {
+      this.$store.dispatch('getTop10ArtistsByTime');
+    }
   },
   computed: {
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      // return this.$store.state.profilePage.spotifyUserLibrary;
-      return true;
+      return this.$store.state.profilePage.spotifyUserLibrary;
     },
     top10TracksAllTime: function top10TracksAllTime() {
       return this.$store.state.profilePage.top10TracksAllTime;

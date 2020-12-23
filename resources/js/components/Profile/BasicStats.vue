@@ -67,6 +67,41 @@
 export default {
     mounted(){
         this.$store.dispatch('setCurrentTab', 'basicStats');
+        //получаем библиотеку пользователя и статистику
+        if(this.spotifyUserLibrary == -1)
+        { this.$store.dispatch('getSpotifyUserLibrary'); }
+
+        //треки, альбомы и подписки
+        if(this.spotifyTracks == -1)
+        { this.$store.dispatch('getSpotifyTracks'); }
+        
+        if(this.spotifyAlbums == -1)
+        { this.$store.dispatch('getSpotifyAlbums'); }
+        
+        if(this.spotifyArtists == -1)
+        { this.$store.dispatch('getSpotifyArtists'); }
+        
+        //время
+        if(this.userLibraryTime == -1)
+        { this.$store.dispatch('getUserLibraryTime'); }
+
+        if(this.fiveTracks == -1)
+        { this.$store.dispatch('getFiveLongestAndShortestTracks'); }
+
+        if(this.tracksMode == -1)
+        { this.$store.dispatch('getAverageLengthOfTrack'); }
+        
+        //жанры
+        if(this.favoriteGenres == -1)
+        { this.$store.dispatch('getFavoriteGenres'); }
+        
+        //кол-во исполнителей
+        if(this.uniqueArtists == -1)
+        { this.$store.dispatch('getUniqueArtists'); }
+        
+        //года и десятилетия
+        if(this.yearsAndDecades == -1)
+        { this.$store.dispatch('getYearsAndDecades'); }   
     },
     computed: {
         //библиотека пользователя
