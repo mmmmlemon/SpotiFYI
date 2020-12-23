@@ -3032,6 +3032,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     cardTitle: {
@@ -79437,7 +79440,19 @@ var render = function() {
                                         _vm._v(
                                           "\n                                        " +
                                             _vm._s(item.track_count) +
-                                            "\n                                    "
+                                            "\n                                        "
+                                        ),
+                                        _c(
+                                          "p",
+                                          {
+                                            staticClass:
+                                              "unbold zero_opacity font_8pt"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            нЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕт, ТЫ НЕ МОЖЕШЬ ПРОСТО ТАК ВОТКНУТЬ НЕВИДИМЫЙ ТЕКСТ\n                                        "
+                                            )
+                                          ]
                                         )
                                       ])
                                     : _c(

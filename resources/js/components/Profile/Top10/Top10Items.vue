@@ -51,6 +51,9 @@
                                     <p class="font_10pt margin_none font_white" style="margin-bottom:7px;">
                                             <b v-if="item.track_count" class="unbold">
                                                 {{item.track_count}}
+                                                <p class="unbold zero_opacity font_8pt">
+                                                    нЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕт, ТЫ НЕ МОЖЕШЬ ПРОСТО ТАК ВОТКНУТЬ НЕВИДИМЫЙ ТЕКСТ
+                                                </p>
                                             </b>
                                             <b v-else class="unbold zero_opacity">
                                                 нЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕт, ТЫ НЕ МОЖЕШЬ ПРОСТО ТАК ВОТКНУТЬ НЕВИДИМЫЙ ТЕКСТ
