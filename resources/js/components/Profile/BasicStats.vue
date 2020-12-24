@@ -20,8 +20,8 @@
                 </h5>
             </div>
             <!-- навигация -->
-            <div class="row justify-content-center font_10pt fade_in_anim">
-                <nav class="justify-content-center">
+            <div class="row justify-content-center font_10pt">
+                <nav class="justify-content-center fade_in_anim">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
                         <li class="breadcrumb-item"><a href="#tracks">Самые длинные и короткие треки</a></li>

@@ -78,11 +78,15 @@ const ProfilePageStates = {
               state[payload.state] = response.data;
             });
           },
+
+          //получить данные о профиле Spotify
           getSpotifyProfile(state){
             axios.get('/api/get_spotify_profile').then((response) => {
               state.spotifyProfile = response.data;
             });
           },
+
+          //базовая статистика
           //получить библиотеку пользователя
           getSpotifyUserLibrary(state){
             axios.get('/api/get_spotify_user_library').then((response) => {
@@ -94,6 +98,44 @@ const ProfilePageStates = {
               axios.get('/api/get_favorite_genres/').then((response) => {
                 state.favoriteGenres = response.data;
               });
+          },
+
+          //топ 10
+          //получить топ 10 треков за всё время
+          getTop10TracksAllTime(state){
+            axios.get('/api/get_top10_tracks/alltime').then((response) => {
+              state.top10TracksAllTime = response.data;
+            });
+          },
+          //получить топ 10 треков за месяц
+          getTop10TracksMonth(state){
+            axios.get('/api/get_top10_tracks/month').then((response) => {
+              state.top10TracksMonth = response.data;
+            });
+          },
+          //получить топ 10 самых длинных треков
+          getTop10TracksLong(state){
+            axios.get('/api/get_top10_tracks_by_length/long').then((response) => {
+              state.top10TracksLong = response.data;
+            });
+          },
+          //получить топ 10 самых коротких треков
+          getTop10TracksShort(state){
+              axios.get('/api/get_top10_tracks_by_length/short').then((response) => {
+                state.top10TracksShort = response.data;
+              });
+          },
+          //получить топ 10 артистов за всё время
+          getTop10ArtistsAllTime(state){
+            axios.get('/api/get_top10_artists/alltime').then((response) => {
+              state.top10ArtistsAllTime = response.data;
+            });
+          },
+          //получить топ 10 артистов за месяц
+          getTop10ArtistsMonth(state){
+            axios.get('/api/get_top10_artists/month').then((response) => {
+              state.top10ArtistsMonth = response.data;
+            });
           },
           //получить топ 10 артистов по кол-ву треков
           getTop10ArtistsByTracks(state){
@@ -163,27 +205,27 @@ const ProfilePageStates = {
       //топ10
       //топ10 треков за все время
       getTop10TracksAllTime(context){
-        context.commit('getAPIResponse', {state: 'top10TracksAllTime', uri: '/api/get_top10_tracks/alltime'});
+        context.commit('getTop10TracksAllTime');
       },
       //топ10 треков за все время
       getTop10TracksMonth(context){
-        context.commit('getAPIResponse', {state: 'top10TracksMonth', uri: '/api/get_top10_tracks/month'});
-      },
-      //топ10 исполнителей за все время
-      getTop10ArtistsAllTime(context){
-        context.commit('getAPIResponse', {state: 'top10ArtistsAllTime', uri: '/api/get_top10_artists/alltime'});
-      },
-      //топ10 исполнителей за все время
-      getTop10ArtistsMonth(context){
-        context.commit('getAPIResponse', {state: 'top10ArtistsMonth', uri: '/api/get_top10_artists/month'});
+        context.commit('getTop10TracksMonth');
       },
       //топ 10 длинных треков
       getTop10TracksLong(context){
-        context.commit('getAPIResponse', {state: 'top10TracksLong', uri: '/api/get_top10_tracks_by_length/long'});
+        context.commit('getTop10TracksLong');
       },
       //топ 10 коротких треков
       getTop10TracksShort(context){
-        context.commit('getAPIResponse', {state: 'top10TracksShort', uri: '/api/get_top10_tracks_by_length/short'});
+        context.commit('getTop10TracksShort');
+      },
+      //топ 10 исполнителей за все время
+      getTop10ArtistsAllTime(context){
+        context.commit('getTop10ArtistsAllTime');
+      },
+      //топ10 исполнителей за все время
+      getTop10ArtistsMonth(context){
+        context.commit('getTop10ArtistsMonth');
       },
       //топ 10 исполнителей по кол-ву треков
       getTop10ArtistsByTracks(context){

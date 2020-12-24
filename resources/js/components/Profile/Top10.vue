@@ -9,12 +9,13 @@
                     </h5>
                 </div>
         
-                <div class="col-12" v-if="top10TracksAllTime == -1 || top10TracksMonth == -1">
+                <div class="col-12" v-if="spotifyUserLibrary == -1">
                     <Loader />
-                    <h6 class="text-center blinking_anim">Загружаю библиотеку...</h6>
+                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку...</h6>
+                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
                     <p class="font_10pt text-center">Это может занять около минуты</p>
                 </div>
-                <div v-else-if="top10TracksAllTime != -1 && top10TracksMonth != -1" class="row justify-content-center">
+                <div v-else-if="spotifyUserLibrary != -1" class="row justify-content-center">
                     <!-- навигация -->
                     <div class="row justify-content-center font_10pt fade_in_anim">
                         <nav class="justify-content-center">
@@ -26,7 +27,7 @@
                     </div>
 
                     <!-- топ-10 треков -->
-                    <div class="col-12 justify-content-center" id="tracks">
+                    <div class="col-12 justify-content-center fade_in_anim" id="tracks">
                         <h3 class="text-center">
                             Треки
                             <i class="fas fa-compact-disc primary_color"></i>
@@ -38,44 +39,52 @@
                                 :items="top10TracksAllTime"
                                 listType="tracks"/>
 
-                    <Top10Items cardTitle="Топ 10 Треков за месяц" 
+                    <Top10Items v-if="top10TracksAllTime != -1"
+                                loaderMessage="Загружаю Топ 10 треков за месяц..."
+                                cardTitle="Топ 10 Треков за месяц" 
                                 cardDesc="Десять твоих самых прослушиваемых треков за последний месяц." 
                                 :items="top10TracksMonth"
                                 listType="tracks"/>
 
-                    <Top10Items cardTitle="Топ 10 самых длинных" 
+                    <Top10Items v-if="top10TracksMonth != -1"
+                                cardTitle="Топ 10 самых длинных" 
                                 cardDesc="Десять твоих самых длинных треков в библиотеке." 
                                 :items="top10TracksLong"
                                 listType="tracks"/> 
 
-                    <Top10Items cardTitle="Топ 10 самых коротких" 
+                    <Top10Items v-if="top10TracksLong != -1"
+                                cardTitle="Топ 10 самых коротких" 
                                 cardDesc="Десять твоих самых коротких треков в библиотеке." 
                                 :items="top10TracksShort"
                                 listType="tracks"/>
 
                     <!-- топ-10 треков -->
-                    <div class="col-12 justify-content-center" id="artists">
+                    <div class="col-12 justify-content-center" id="artists" v-if="top10TracksShort != -1">
                         <h3 class="text-center">
                             Исполнители
                             <i class="fas fa-users primary_color"></i>
                         </h3>
                     </div>
 
-                    <Top10Items cardTitle="Топ 10 артистов за все время" 
+                    <Top10Items v-if="top10TracksShort != -1"
+                                cardTitle="Топ 10 артистов за все время" 
                                 cardDesc="Десять твоих самых прослушиваемых артистов за все время." 
                                 :items="top10ArtistsAllTime"
                                 listType="artists"/>
 
-                    <Top10Items cardTitle="Топ 10 артистов за месяц" 
+                    <Top10Items v-if="top10ArtistsAllTime != -1"
+                                cardTitle="Топ 10 артистов за месяц" 
                                 cardDesc="Десять твоих самых прослушиваемых артистов за последний месяц." 
                                 :items="top10ArtistsMonth"
                                 listType="artists"/>
 
-                    <Top10Items cardTitle="Топ 10 артистов по трекам" 
+                    <Top10Items v-if="top10ArtistsMonth != -1"
+                                cardTitle="Топ 10 артистов по трекам" 
                                 cardDesc="Десять артистов с наибольшим кол-вом треков в твоей библиотеке." 
                                 :items="top10ArtistsByTracks"
                                 listType="artists"/>
-                    <Top10Items cardTitle="Топ 10 артистов по времени треков" 
+                    <Top10Items v-if="top10ArtistsByTracks != -1"
+                                cardTitle="Топ 10 артистов по времени треков" 
                                 cardDesc="Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке." 
                                 :items="top10ArtistsByTime"
                                 listType="artists"/>
@@ -105,14 +114,6 @@ export default {
         if(this.top10TracksMonth == -1)
         { this.$store.dispatch('getTop10TracksMonth'); }
 
-        //топ 10 артистов за все время
-        if(this.top10ArtistsAllTime == -1)
-        { this.$store.dispatch('getTop10ArtistsAllTime'); }
-
-        //топ 10 артистов за месяц
-        if(this.top10ArtistsMonth == -1)
-        { this.$store.dispatch('getTop10ArtistsMonth'); }
-
         //топ 10 длинных треков
         if(this.top10TracksLong == -1)
         { this.$store.dispatch('getTop10TracksLong'); }
@@ -120,6 +121,14 @@ export default {
         //топ 10 коротких треков
         if(this.top10TracksShort == -1)
         { this.$store.dispatch('getTop10TracksShort'); }
+
+        //топ 10 артистов за все время
+        if(this.top10ArtistsAllTime == -1)
+        { this.$store.dispatch('getTop10ArtistsAllTime'); }
+
+        //топ 10 артистов за месяц
+        if(this.top10ArtistsMonth == -1)
+        { this.$store.dispatch('getTop10ArtistsMonth'); }
 
         //топ 10 артистов по кол-ву треков
         if(this.top10ArtistsByTracks == -1)
