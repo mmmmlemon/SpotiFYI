@@ -183,6 +183,8 @@ class SpotifyAPIController extends Controller
         { return false; }
     }
 
+    // ОБЩЕЕ
+
     //getSpotifyTracks
     //посчитать количество треков в библиотеке пользователя и вывести последние пять
     //возвращает JSON с кол-вом треков и последние 5 треков в библиотеке пользователя
@@ -427,6 +429,7 @@ class SpotifyAPIController extends Controller
 
     }
 
+    // НЕ ИСПОЛЬЗУЕТСЯ
     //сгенерировать изображение для фона профиля (ВЫРЕЗАТЬ И ИСПОЛЬЗОВАТЬ В ДРУГОМ МЕСТЕ)
     public function generateBackgroundImage(Request $request)
     {
@@ -729,6 +732,8 @@ class SpotifyAPIController extends Controller
         else
         { return response()->json(false); }
     }
+
+    // ТОП 10
 
     //getTop10Tracks
     //получить топ 10 треков за все время или за месяц

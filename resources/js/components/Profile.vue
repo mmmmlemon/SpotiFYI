@@ -39,7 +39,7 @@
                 <!-- кнопки меню -->
                 <div class="row justify-content-center fade-in">
                     <div class="col-md-8">
-                        <div class="row fade_in_anim">
+                        <div class="row justify-content-center fade_in_anim">
                             <div class="col-md-3 padding_10">
                                 <router-link to="/profile"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'basicStats'}" type="button">Общее</button></router-link>
                             </div>
@@ -47,10 +47,7 @@
                                 <router-link to="/profile/top10"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'top10'}" type="button">Топ-10</button></router-link>
                             </div>
                             <div class="col-md-3 padding_10">
-                                <router-link to="/"><button class="btn btn-block" type="button">Что-то</button></router-link>
-                            </div>
-                            <div class="col-md-3 padding_10">
-                                <router-link to="/"><button class="btn btn-block" type="button">Еще</button></router-link>
+                                <router-link to="/profile/achievements"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'achievements'}" type="button">Особо отличившиеся</button></router-link>
                             </div>
                         </div>
                     </div>

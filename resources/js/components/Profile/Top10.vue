@@ -2,20 +2,19 @@
    <div>
         <div>
             <div class="row justify-content-center">
-                <div class="col-md-12 fade_in_slow_anim">
-                    <h5 class="text-center">
-                        <b>Топ 10</b>&nbsp;
-                        <i class="fas fa-list-ol primary_color"></i>
-                    </h5>
-                </div>
-        
                 <div class="col-12" v-if="spotifyUserLibrary == -1">
                     <Loader />
-                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку...</h6>
+                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
                     <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
                     <p class="font_10pt text-center">Это может занять около минуты</p>
                 </div>
                 <div v-else-if="spotifyUserLibrary != -1" class="row justify-content-center">
+                    <div class="col-md-12 fade_in_slow_anim">
+                        <h5 class="text-center">
+                            <b>Топ 10</b>&nbsp;
+                            <i class="fas fa-list-ol primary_color"></i>
+                        </h5>
+                    </div>
                     <!-- навигация -->
                     <div class="row justify-content-center font_10pt fade_in_anim">
                         <nav class="justify-content-center">
@@ -91,6 +90,11 @@
                 </div>
              
             </div>
+        </div>
+        <br>
+        <div class="row justify-content-center fade_in_anim" v-if="top10ArtistsByTime != -1">
+            <router-link to="/profile/achievements"><button class="btn btn-primary">Перейти к "Особо отличившиеся"</button></router-link>
+            <br><br>
         </div>
    </div>
 </template>

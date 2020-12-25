@@ -2288,9 +2288,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить профиль
@@ -2314,6 +2311,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Achievements.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Achievements.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    //смена текущего таба
+    this.$store.dispatch('setCurrentTab', 'achievements');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/BasicStats.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/BasicStats.vue?vue&type=script&lang=js& ***!
@@ -2323,6 +2344,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2867,6 +2893,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -78103,85 +78133,79 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "row justify-content-center fade-in" }, [
               _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "row fade_in_anim" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-3 padding_10" },
-                    [
-                      _c("router-link", { attrs: { to: "/profile" } }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-block",
-                            class: {
-                              "btn-primary": _vm.currentTab === "basicStats"
+                _c(
+                  "div",
+                  { staticClass: "row justify-content-center fade_in_anim" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-3 padding_10" },
+                      [
+                        _c("router-link", { attrs: { to: "/profile" } }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block",
+                              class: {
+                                "btn-primary": _vm.currentTab === "basicStats"
+                              },
+                              attrs: { type: "button" }
                             },
-                            attrs: { type: "button" }
-                          },
-                          [_vm._v("Общее")]
-                        )
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-3 padding_10" },
-                    [
-                      _c("router-link", { attrs: { to: "/profile/top10" } }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-block",
-                            class: {
-                              "btn-primary": _vm.currentTab === "top10"
+                            [_vm._v("Общее")]
+                          )
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-3 padding_10" },
+                      [
+                        _c("router-link", { attrs: { to: "/profile/top10" } }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block",
+                              class: {
+                                "btn-primary": _vm.currentTab === "top10"
+                              },
+                              attrs: { type: "button" }
                             },
-                            attrs: { type: "button" }
-                          },
-                          [_vm._v("Топ-10")]
-                        )
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-3 padding_10" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
+                            [_vm._v("Топ-10")]
+                          )
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-3 padding_10" },
+                      [
                         _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-block",
-                            attrs: { type: "button" }
-                          },
-                          [_vm._v("Что-то")]
+                          "router-link",
+                          { attrs: { to: "/profile/achievements" } },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-block",
+                                class: {
+                                  "btn-primary":
+                                    _vm.currentTab === "achievements"
+                                },
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Особо отличившиеся")]
+                            )
+                          ]
                         )
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-3 padding_10" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-block",
-                            attrs: { type: "button" }
-                          },
-                          [_vm._v("Еще")]
-                        )
-                      ])
-                    ],
-                    1
-                  )
-                ])
+                      ],
+                      1
+                    )
+                  ]
+                )
               ])
             ])
           ])
@@ -78198,6 +78222,37 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Achievements.vue?vue&type=template&id=ec2f0c56&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Achievements.vue?vue&type=template&id=ec2f0c56& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h4", [_vm._v("achievements")])])
+  }
+]
 render._withStripped = true
 
 
@@ -78265,9 +78320,11 @@ var render = function() {
               _vm._v(" "),
               _vm._m(1),
               _vm._v(" "),
+              _c("div", { staticClass: "col-12" }),
+              _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "row" },
+                { staticClass: "row justify-content-center" },
                 [
                   _c("LastFive", {
                     attrs: {
@@ -79221,8 +79278,6 @@ var render = function() {
   return _c("div", [
     _c("div", [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _vm._m(0),
-        _vm._v(" "),
         _vm.spotifyUserLibrary == -1
           ? _c(
               "div",
@@ -79232,7 +79287,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.spotifyUserLibrary == -1
                   ? _c("h6", { staticClass: "text-center blinking_anim" }, [
-                      _vm._v("Загружаю библиотеку...")
+                      _vm._v("Загружаю библиотеку пользователя...")
                     ])
                   : _vm._e(),
                 _vm._v(" "),
@@ -79253,6 +79308,8 @@ var render = function() {
               "div",
               { staticClass: "row justify-content-center" },
               [
+                _vm._m(0),
+                _vm._v(" "),
                 _vm._m(1),
                 _vm._v(" "),
                 _vm._m(2),
@@ -79367,7 +79424,27 @@ var render = function() {
             )
           : _vm._e()
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _vm.top10ArtistsByTime != -1
+      ? _c(
+          "div",
+          { staticClass: "row justify-content-center fade_in_anim" },
+          [
+            _c("router-link", { attrs: { to: "/profile/achievements" } }, [
+              _c("button", { staticClass: "btn btn-primary" }, [
+                _vm._v('Перейти к "Особо отличившиеся"')
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _c("br")
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -79378,7 +79455,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
       _c("h5", { staticClass: "text-center" }, [
         _c("b", [_vm._v("Топ 10")]),
-        _vm._v(" \n                     "),
+        _vm._v(" \n                         "),
         _c("i", { staticClass: "fas fa-list-ol primary_color" })
       ])
     ])
@@ -96900,6 +96977,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Profile/Achievements.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Profile/Achievements.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Achievements_vue_vue_type_template_id_ec2f0c56___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Achievements.vue?vue&type=template&id=ec2f0c56& */ "./resources/js/components/Profile/Achievements.vue?vue&type=template&id=ec2f0c56&");
+/* harmony import */ var _Achievements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Achievements.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile/Achievements.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Achievements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Achievements_vue_vue_type_template_id_ec2f0c56___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Achievements_vue_vue_type_template_id_ec2f0c56___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Profile/Achievements.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/Achievements.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Profile/Achievements.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Achievements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Achievements.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Achievements.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Achievements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/Achievements.vue?vue&type=template&id=ec2f0c56&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Profile/Achievements.vue?vue&type=template&id=ec2f0c56& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Achievements_vue_vue_type_template_id_ec2f0c56___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Achievements.vue?vue&type=template&id=ec2f0c56& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Achievements.vue?vue&type=template&id=ec2f0c56&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Achievements_vue_vue_type_template_id_ec2f0c56___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Achievements_vue_vue_type_template_id_ec2f0c56___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Profile/BasicStats.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/Profile/BasicStats.vue ***!
@@ -97609,9 +97755,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Profile_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profile.vue */ "./resources/js/components/Profile.vue");
 /* harmony import */ var _components_Profile_BasicStats_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile/BasicStats.vue */ "./resources/js/components/Profile/BasicStats.vue");
 /* harmony import */ var _components_Profile_Top10_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile/Top10.vue */ "./resources/js/components/Profile/Top10.vue");
+/* harmony import */ var _components_Profile_Achievements_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Profile/Achievements.vue */ "./resources/js/components/Profile/Achievements.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 
 
 
@@ -97642,6 +97790,9 @@ var routes = [{
   }, {
     path: '/profile/top10',
     component: _components_Profile_Top10_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }, {
+    path: '/profile/achievements',
+    component: _components_Profile_Achievements_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   }]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({

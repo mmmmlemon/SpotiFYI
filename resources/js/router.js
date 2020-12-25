@@ -11,6 +11,7 @@ import About from './components/HomePage/About.vue';
 import Profile from './components/Profile.vue';
 import BasicStats from './components/Profile/BasicStats.vue';
 import Top10 from './components/Profile/Top10.vue';
+import Achievements from './components/Profile/Achievements.vue';
 
 const routes = [
     {   //главная страница
@@ -43,8 +44,11 @@ const routes = [
             {
                 path:'/profile/top10',
                 component: Top10
-            }
-
+            },
+            {
+                path:'/profile/achievements',
+                component: Achievements
+            },
         ]
     }
 

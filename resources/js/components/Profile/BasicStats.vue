@@ -29,7 +29,12 @@
                     </ul>
                 </nav>
             </div>
-            <div class="row">
+
+            <!-- топ-10 треков -->
+            <div class="col-12">
+            </div>
+            
+            <div class="row justify-content-center">
                 <!-- треки -->
                 <LastFive :itemCount="spotifyTracks['count']" :lastFiveItems="spotifyTracks['last_five']" type="tracks" id="basic"/>  
                 <!-- альбомы -->
