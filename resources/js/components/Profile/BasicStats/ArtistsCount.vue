@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="col-12 justify-content-center fade_in_anim">
         <div v-if="uniqueArtists === -1">
             <Loader />
         </div>

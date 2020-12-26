@@ -78,7 +78,6 @@ const ProfilePageStates = {
               state[payload.state] = response.data;
             });
           },
-
           //получить данные о профиле Spotify
           getSpotifyProfile(state){
             axios.get('/api/get_spotify_profile').then((response) => {
@@ -86,19 +85,69 @@ const ProfilePageStates = {
             });
           },
 
-          //базовая статистика
           //получить библиотеку пользователя
           getSpotifyUserLibrary(state){
             axios.get('/api/get_spotify_user_library').then((response) => {
               state.spotifyUserLibrary = response.data;
             });
           },
+
+          //базовая статистика
+          //получить треки и последние пять треков
+          getSpotifyTracks(state){
+            axios.get('/api/get_spotify_tracks').then((response) => {
+              state.spotifyTracks = response.data;
+            });
+          },
+          //получить альбомы и последние пять альбомов
+          getSpotifyAlbums(state){
+            axios.get('/api/get_spotify_albums').then((response) => {
+              state.spotifyAlbums = response.data;
+            });
+          },
+          //получить подписки на артистов и случайные пять подписок
+          getSpotifyArtists(state){
+            axios.get('/api/get_spotify_artists').then((response) => {
+              state.spotifyArtists = response.data;
+            });
+          },
+          //поcчитать кол-во времени
+          getUserLibraryTime(state){
+            axios.get('/api/get_user_library_time').then((response) => {
+              state.userLibraryTime = response.data;
+            });
+          },
+          //пять самых длинных и коротких треков
+          getFiveLongestAndShortestTracks(state){
+            axios.get('/api/get_five_tracks').then((response) => {
+              state.fiveTracks = response.data;
+            });
+          },
+          //получить среднюю длину трека
+          getAverageLengthOfTrack(state){
+            axios.get('/api/get_average_track_length').then((response) => {
+              state.tracksMode = response.data;
+            });
+          },
           //получить любимые жанры
           getFavoriteGenres(state){
-              axios.get('/api/get_favorite_genres/').then((response) => {
-                state.favoriteGenres = response.data;
-              });
+            axios.get('/api/get_favorite_genres').then((response) => {
+              state.favoriteGenres = response.data;
+            });
           },
+          //получить кол-во артистов
+          getUniqueArtists(state){
+            axios.get('/api/get_unique_artists').then((response) => {
+              state.uniqueArtists = response.data;
+            });
+          },
+          //получить информацию по годам и десятилетиям
+          getYearsAndDecades(state){
+            axios.get('/api/get_years_and_decades').then((response) => {
+              state.yearsAndDecades = response.data;
+            });
+          },
+
 
           //топ 10
           //получить топ 10 треков за всё время
@@ -167,27 +216,27 @@ const ProfilePageStates = {
       },
       //получить кол-во треков в библиотеке и последние пять
       getSpotifyTracks(context){
-        context.commit('getAPIResponse', {state: "spotifyTracks", uri: '/api/get_spotify_tracks'});
+        context.commit('getSpotifyTracks');
       },
       //получить кол-во альбомов в библиотеке и последние пять
       getSpotifyAlbums(context){
-        context.commit('getAPIResponse', {state: "spotifyAlbums", uri: '/api/get_spotify_albums'});
+        context.commit('getSpotifyAlbums');
       }, 
       //получить кол-во подписок в библиотеке и случайные пять
       getSpotifyArtists(context){
-        context.commit('getAPIResponse', {state: "spotifyArtists", uri: '/api/get_spotify_artists'});
+        context.commit('getSpotifyArtists');
       },
       //посчитать кол-во времени
       getUserLibraryTime(context){
-        context.commit('getAPIResponse', {state: "userLibraryTime", uri: '/api/get_user_library_time'});
+        context.commit('getUserLibraryTime');
       },
-      //пять самых длинных
+      //пять самых длинных и коротких треков
       getFiveLongestAndShortestTracks(context){
-        context.commit('getAPIResponse', {state: "fiveTracks", uri: '/api/get_five_tracks'});
+        context.commit('getFiveLongestAndShortestTracks');
       },
       //средняя длина трека
       getAverageLengthOfTrack(context){
-        context.commit('getAPIResponse', {state: "tracksMode", uri: '/api/get_average_track_length'});
+        context.commit('getAverageLengthOfTrack');
       },
       //получить любимые жанры
       getFavoriteGenres(context){
@@ -195,11 +244,11 @@ const ProfilePageStates = {
       },
       //кол-во исполнителей
       getUniqueArtists(context){
-        context.commit('getAPIResponse', {state:"uniqueArtists", uri: '/api/get_unique_artists'});
+        context.commit('getUniqueArtists');
       },
       //посчитать года и десятилетия
       getYearsAndDecades(context){
-        context.commit('getAPIResponse', {state:'yearsAndDecades', uri: '/api/get_years_and_decades'});
+        context.commit('getYearsAndDecades');
       },
 
       //топ10

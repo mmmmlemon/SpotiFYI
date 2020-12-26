@@ -102,7 +102,6 @@
 <script>
 export default {
     mounted(){
-
         //смена текущего таба
         this.$store.dispatch('setCurrentTab','top10');
 

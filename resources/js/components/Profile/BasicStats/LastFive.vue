@@ -54,7 +54,7 @@ export default {
         type: { default: false, string: String},
         itemCount: { default: -1, type: Number },
         lastFiveItems: { default: -1 },
-        minItemCount: { default: 10, type: Number}
+        minItemCount: { default: 10, type: Number},
     }
 }
 </script>

@@ -1,7 +1,9 @@
 <template>
-    <div>
+    <div class="col-12 justify-content-center fade_in_anim">
         <div v-if="favoriteGenres === -1">
             <Loader />
+            <h6 class="text-center blinking_anim">Анализирую треки...</h6>
+            <p class="font_10pt text-center">Это может занять некоторое время</p>
         </div>
         <div v-else-if="favoriteGenres === false">
             <Error type="small" errorMessage="Не удалось произвести анализ треков"/>

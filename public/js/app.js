@@ -2414,6 +2414,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя и статистику
@@ -2438,11 +2440,13 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.userLibraryTime == -1) {
       this.$store.dispatch('getUserLibraryTime');
-    }
+    } //пять самых длинных и коротких треков
+
 
     if (this.fiveTracks == -1) {
       this.$store.dispatch('getFiveLongestAndShortestTracks');
-    }
+    } //средняя длина трека
+
 
     if (this.tracksMode == -1) {
       this.$store.dispatch('getAverageLengthOfTrack');
@@ -2558,6 +2562,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -78275,52 +78281,42 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.spotifyUserLibrary === -1 || _vm.favoriteGenres === -1
-      ? _c(
-          "div",
-          [
-            _c("Loader"),
-            _vm._v(" "),
-            _vm.spotifyUserLibrary === -1 && _vm.favoriteGenres === -1
-              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
-                  _vm._v("Загружаю библиотеку пользователя...")
+    _c("div", [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _vm.spotifyUserLibrary == -1
+          ? _c(
+              "div",
+              { staticClass: "col-12" },
+              [
+                _c("Loader"),
+                _vm._v(" "),
+                _vm.spotifyUserLibrary == -1
+                  ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                      _vm._v("Загружаю библиотеку пользователя...")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.spotifyUserLibrary == true
+                  ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                      _vm._v("Анализирую треки...")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("p", { staticClass: "font_10pt text-center" }, [
+                  _vm._v("Это может занять около минуты")
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.spotifyUserLibrary != -1 && _vm.favoriteGenres === -1
-              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
-                  _vm._v("Анализирую треки...")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("p", { staticClass: "font_10pt text-center" }, [
-              _vm._v("Это может занять около минуты")
-            ])
-          ],
-          1
-        )
-      : _vm.spotifyUserLibrary === false || _vm.favoriteGenres === false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                errorMessage: "Не удалось загрузить библиотеку пользователя."
-              }
-            })
-          ],
-          1
-        )
-      : _vm.spotifyUserLibrary !== false && _vm.spotifyUserLibrary !== -1
-      ? _c(
-          "div",
-          [
-            _c("div", { staticClass: "row justify-content-center" }, [
+              ],
+              1
+            )
+          : _vm.spotifyUserLibrary != -1
+          ? _c("div", { staticClass: "row justify-content-center" }, [
               _vm._m(0),
               _vm._v(" "),
               _vm._m(1),
               _vm._v(" "),
-              _c("div", { staticClass: "col-12" }),
+              _c("div", {
+                staticClass: "col-12 justify-content-center fade_in_anim"
+              }),
               _vm._v(" "),
               _c(
                 "div",
@@ -78353,79 +78349,81 @@ var render = function() {
                           type: "artists"
                         }
                       })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.spotifyArtists !== -1 ||
+                  _vm.spotifyAlbums != -1 ||
+                  _vm.spotifyTracks != -1
+                    ? _c("hr", { staticClass: "fade_in_anim" })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.spotifyArtists !== -1 &&
+                  _vm.spotifyAlbums != -1 &&
+                  _vm.spotifyTracks != -1
+                    ? _c("HoursAndMinutes", {
+                        staticClass: "fade_in_slow_anim",
+                        attrs: { userLibraryTime: _vm.userLibraryTime }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.userLibraryTime !== -1
+                    ? _c("LongestAndShortest", {
+                        attrs: {
+                          id: "tracks",
+                          fiveLongest: _vm.fiveTracks["fiveLongest"],
+                          fiveShortest: _vm.fiveTracks["fiveShortest"],
+                          tracksMode: _vm.tracksMode
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.fiveTracks !== -1
+                    ? _c("FavoriteGenres", {
+                        attrs: {
+                          favoriteGenres: _vm.favoriteGenres,
+                          id: "genres"
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.favoriteGenres != -1
+                    ? _c("ArtistsCount", {
+                        attrs: { uniqueArtists: _vm.uniqueArtists }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.uniqueArtists != -1
+                    ? _c("YearsAndDecades", {
+                        attrs: { yearsAndDecades: _vm.yearsAndDecades }
+                      })
                     : _vm._e()
                 ],
                 1
               )
-            ]),
-            _vm._v(" "),
-            _vm.spotifyArtists !== -1 ||
-            _vm.spotifyAlbums != -1 ||
-            _vm.spotifyTracks != -1
-              ? _c("hr", { staticClass: "fade_in_anim" })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.spotifyArtists !== -1 &&
-            _vm.spotifyAlbums != -1 &&
-            _vm.spotifyTracks != -1
-              ? _c("HoursAndMinutes", {
-                  staticClass: "fade_in_slow_anim",
-                  attrs: { userLibraryTime: _vm.userLibraryTime }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userLibraryTime !== -1
-              ? _c("LongestAndShortest", {
-                  attrs: {
-                    id: "tracks",
-                    fiveLongest: _vm.fiveTracks["fiveLongest"],
-                    fiveShortest: _vm.fiveTracks["fiveShortest"],
-                    tracksMode: _vm.tracksMode
-                  }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.tracksMode != -1
-              ? _c("FavoriteGenres", {
-                  attrs: { favoriteGenres: _vm.favoriteGenres, id: "genres" }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.favoriteGenres != -1
-              ? _c("ArtistsCount", {
-                  attrs: { uniqueArtists: _vm.uniqueArtists }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.uniqueArtists != -1
-              ? _c("YearsAndDecades", {
-                  attrs: { yearsAndDecades: _vm.yearsAndDecades }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _vm.yearsAndDecades != -1
-              ? _c(
-                  "div",
-                  { staticClass: "row justify-content-center fade_in_anim" },
-                  [
-                    _c("router-link", { attrs: { to: "/profile/top10" } }, [
-                      _c("button", { staticClass: "btn btn-primary" }, [
-                        _vm._v('Перейти к "Топ-10"')
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("br"),
-                    _c("br")
-                  ],
-                  1
-                )
-              : _vm._e()
-          ],
-          1
-        )
-      : _vm._e()
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm.yearsAndDecades != -1
+        ? _c(
+            "div",
+            { staticClass: "row justify-content-center fade_in_anim" },
+            [
+              _c("router-link", { attrs: { to: "/profile/top10" } }, [
+                _c("button", { staticClass: "btn btn-primary" }, [
+                  _vm._v('Перейти к "Топ-10"')
+                ])
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _c("br")
+            ],
+            1
+          )
+        : _vm._e()
+    ])
   ])
 }
 var staticRenderFns = [
@@ -78435,8 +78433,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
       _c("h5", { staticClass: "text-center" }, [
-        _c("b", [_vm._v("Общая информация")]),
-        _vm._v(" \r\n                    "),
+        _c("b", [_vm._v("Общая статистика")]),
+        _vm._v(" \n                         "),
         _c("i", { staticClass: "fas fa-chart-bar primary_color" })
       ])
     ])
@@ -78445,25 +78443,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center font_10pt" }, [
-      _c("nav", { staticClass: "justify-content-center fade_in_anim" }, [
-        _c("ul", { staticClass: "breadcrumb" }, [
-          _c("li", { staticClass: "breadcrumb-item" }, [
-            _c("a", { attrs: { href: "#basic" } }, [_vm._v("Общее")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "breadcrumb-item" }, [
-            _c("a", { attrs: { href: "#tracks" } }, [
-              _vm._v("Самые длинные и короткие треки")
+    return _c(
+      "div",
+      { staticClass: "row justify-content-center font_10pt fade_in_anim" },
+      [
+        _c("nav", { staticClass: "justify-content-center" }, [
+          _c("ul", { staticClass: "breadcrumb" }, [
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#basic" } }, [_vm._v("Общее")])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#tracks" } }, [
+                _vm._v("Самые длинные и короткие треки")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#genres" } }, [_vm._v("Жанры и годы")])
             ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "breadcrumb-item" }, [
-            _c("a", { attrs: { href: "#genres" } }, [_vm._v("Жанры и годы")])
           ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -78487,44 +78489,48 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.uniqueArtists === -1
-      ? _c("div", [_c("Loader")], 1)
-      : _vm.uniqueArtists === false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось загрузить треки"
+  return _c(
+    "div",
+    { staticClass: "col-12 justify-content-center fade_in_anim" },
+    [
+      _vm.uniqueArtists === -1
+        ? _c("div", [_c("Loader")], 1)
+        : _vm.uniqueArtists === false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить треки"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.uniqueArtists != -1 && _vm.uniqueArtists != false
+        ? _c("div", { staticClass: "col-12 padding_10 margin_vertical" }, [
+            _c("div", {
+              staticClass: "image_card",
+              style: {
+                backgroundImage:
+                  "url('" + _vm.uniqueArtists["artistImageUrl"] + "')"
               }
-            })
-          ],
-          1
-        )
-      : _vm.uniqueArtists != -1 && _vm.uniqueArtists != false
-      ? _c("div", { staticClass: "col-12 padding_10 margin_vertical" }, [
-          _c("div", {
-            staticClass: "image_card",
-            style: {
-              backgroundImage:
-                "url('" + _vm.uniqueArtists["artistImageUrl"] + "')"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "image_card_front" }),
-          _vm._v(" "),
-          _c("h6", { staticClass: "text-center" }, [
-            _vm._v("В твою библиотеку добавлены треки от")
-          ]),
-          _vm._v(" "),
-          _c("h1", { staticClass: "text-center border_underline" }, [
-            _vm._v(_vm._s(_vm.uniqueArtists["countArtists"]))
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "image_card_front" }),
+            _vm._v(" "),
+            _c("h6", { staticClass: "text-center" }, [
+              _vm._v("В твою библиотеку добавлены треки от")
+            ]),
+            _vm._v(" "),
+            _c("h1", { staticClass: "text-center border_underline" }, [
+              _vm._v(_vm._s(_vm.uniqueArtists["countArtists"]))
+            ])
           ])
-        ])
-      : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-  ])
+        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -78548,47 +78554,65 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.favoriteGenres === -1
-      ? _c("div", [_c("Loader")], 1)
-      : _vm.favoriteGenres === false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось произвести анализ треков"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
-      ? _c(
-          "div",
-          { staticClass: "col-12 grey_card padding_10 margin_vertical" },
-          [
-            _c("h4", { staticClass: "text-center border_underline" }, [
-              _vm._v("Твои любимые жанры")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-center" }, [
-              _vm._v("На основе того что ты слушаешь последний месяц")
-            ]),
-            _vm._v(" "),
-            _c("BarChart", {
-              attrs: {
-                favoriteGenres: _vm.favoriteGenres,
-                backgroundColor: _vm.backgroundColor,
-                label: "Любимые жанры"
-              }
-            })
-          ],
-          1
-        )
-      : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-  ])
+  return _c(
+    "div",
+    { staticClass: "col-12 justify-content-center fade_in_anim" },
+    [
+      _vm.favoriteGenres === -1
+        ? _c(
+            "div",
+            [
+              _c("Loader"),
+              _vm._v(" "),
+              _c("h6", { staticClass: "text-center blinking_anim" }, [
+                _vm._v("Анализирую треки...")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "font_10pt text-center" }, [
+                _vm._v("Это может занять некоторое время")
+              ])
+            ],
+            1
+          )
+        : _vm.favoriteGenres === false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось произвести анализ треков"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
+        ? _c(
+            "div",
+            { staticClass: "col-12 grey_card padding_10 margin_vertical" },
+            [
+              _c("h4", { staticClass: "text-center border_underline" }, [
+                _vm._v("Твои любимые жанры")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-center" }, [
+                _vm._v("На основе того что ты слушаешь последний месяц")
+              ]),
+              _vm._v(" "),
+              _c("BarChart", {
+                attrs: {
+                  favoriteGenres: _vm.favoriteGenres,
+                  backgroundColor: _vm.backgroundColor,
+                  label: "Любимые жанры"
+                }
+              })
+            ],
+            1
+          )
+        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -78612,7 +78636,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "col-12 justify-content-center" }, [
     _vm.userLibraryTime === -1
       ? _c("div", [_c("Loader")], 1)
       : _vm.userLibraryTime === false
@@ -97928,17 +97952,65 @@ var ProfilePageStates = {
         state.spotifyProfile = response.data;
       });
     },
-    //базовая статистика
     //получить библиотеку пользователя
     getSpotifyUserLibrary: function getSpotifyUserLibrary(state) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_user_library').then(function (response) {
         state.spotifyUserLibrary = response.data;
       });
     },
+    //базовая статистика
+    //получить треки и последние пять треков
+    getSpotifyTracks: function getSpotifyTracks(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_tracks').then(function (response) {
+        state.spotifyTracks = response.data;
+      });
+    },
+    //получить альбомы и последние пять альбомов
+    getSpotifyAlbums: function getSpotifyAlbums(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_albums').then(function (response) {
+        state.spotifyAlbums = response.data;
+      });
+    },
+    //получить подписки на артистов и случайные пять подписок
+    getSpotifyArtists: function getSpotifyArtists(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_artists').then(function (response) {
+        state.spotifyArtists = response.data;
+      });
+    },
+    //поcчитать кол-во времени
+    getUserLibraryTime: function getUserLibraryTime(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_user_library_time').then(function (response) {
+        state.userLibraryTime = response.data;
+      });
+    },
+    //пять самых длинных и коротких треков
+    getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_five_tracks').then(function (response) {
+        state.fiveTracks = response.data;
+      });
+    },
+    //получить среднюю длину трека
+    getAverageLengthOfTrack: function getAverageLengthOfTrack(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_average_track_length').then(function (response) {
+        state.tracksMode = response.data;
+      });
+    },
     //получить любимые жанры
     getFavoriteGenres: function getFavoriteGenres(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_favorite_genres/').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_favorite_genres').then(function (response) {
         state.favoriteGenres = response.data;
+      });
+    },
+    //получить кол-во артистов
+    getUniqueArtists: function getUniqueArtists(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_unique_artists').then(function (response) {
+        state.uniqueArtists = response.data;
+      });
+    },
+    //получить информацию по годам и десятилетиям
+    getYearsAndDecades: function getYearsAndDecades(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades').then(function (response) {
+        state.yearsAndDecades = response.data;
       });
     },
     //топ 10
@@ -98007,45 +98079,27 @@ var ProfilePageStates = {
     },
     //получить кол-во треков в библиотеке и последние пять
     getSpotifyTracks: function getSpotifyTracks(context) {
-      context.commit('getAPIResponse', {
-        state: "spotifyTracks",
-        uri: '/api/get_spotify_tracks'
-      });
+      context.commit('getSpotifyTracks');
     },
     //получить кол-во альбомов в библиотеке и последние пять
     getSpotifyAlbums: function getSpotifyAlbums(context) {
-      context.commit('getAPIResponse', {
-        state: "spotifyAlbums",
-        uri: '/api/get_spotify_albums'
-      });
+      context.commit('getSpotifyAlbums');
     },
     //получить кол-во подписок в библиотеке и случайные пять
     getSpotifyArtists: function getSpotifyArtists(context) {
-      context.commit('getAPIResponse', {
-        state: "spotifyArtists",
-        uri: '/api/get_spotify_artists'
-      });
+      context.commit('getSpotifyArtists');
     },
     //посчитать кол-во времени
     getUserLibraryTime: function getUserLibraryTime(context) {
-      context.commit('getAPIResponse', {
-        state: "userLibraryTime",
-        uri: '/api/get_user_library_time'
-      });
+      context.commit('getUserLibraryTime');
     },
-    //пять самых длинных
+    //пять самых длинных и коротких треков
     getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(context) {
-      context.commit('getAPIResponse', {
-        state: "fiveTracks",
-        uri: '/api/get_five_tracks'
-      });
+      context.commit('getFiveLongestAndShortestTracks');
     },
     //средняя длина трека
     getAverageLengthOfTrack: function getAverageLengthOfTrack(context) {
-      context.commit('getAPIResponse', {
-        state: "tracksMode",
-        uri: '/api/get_average_track_length'
-      });
+      context.commit('getAverageLengthOfTrack');
     },
     //получить любимые жанры
     getFavoriteGenres: function getFavoriteGenres(context) {
@@ -98053,17 +98107,11 @@ var ProfilePageStates = {
     },
     //кол-во исполнителей
     getUniqueArtists: function getUniqueArtists(context) {
-      context.commit('getAPIResponse', {
-        state: "uniqueArtists",
-        uri: '/api/get_unique_artists'
-      });
+      context.commit('getUniqueArtists');
     },
     //посчитать года и десятилетия
     getYearsAndDecades: function getYearsAndDecades(context) {
-      context.commit('getAPIResponse', {
-        state: 'yearsAndDecades',
-        uri: '/api/get_years_and_decades'
-      });
+      context.commit('getYearsAndDecades');
     },
     //топ10
     //топ10 треков за все время

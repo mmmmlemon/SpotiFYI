@@ -1,77 +1,80 @@
 <template>
-<div>
-    <!-- если библиотека пользователя не загружена, то показываем лоадер -->
-    <div v-if="spotifyUserLibrary === -1 || favoriteGenres === -1" >
-        <Loader />
-        <h6 v-if="spotifyUserLibrary === -1 && favoriteGenres === -1" class="text-center blinking_anim">Загружаю библиотеку пользователя...</h6>
-        <h6 v-if="spotifyUserLibrary != -1 && favoriteGenres === -1" class="text-center blinking_anim">Анализирую треки...</h6>
-        <p class="font_10pt text-center">Это может занять около минуты</p>
-    </div>
-    <div v-else-if="spotifyUserLibrary === false || favoriteGenres === false">
-        <Error errorMessage="Не удалось загрузить библиотеку пользователя." />
-    </div>
-    <!-- если библиотека загрузилась, то  -->
-    <div v-else-if="spotifyUserLibrary !== false && spotifyUserLibrary !== -1">
-        <div class="row justify-content-center">
-            <div class="col-md-12 fade_in_slow_anim">
-                <h5 class="text-center">
-                    <b>Общая информация</b>&nbsp;
-                    <i class="fas fa-chart-bar primary_color"></i>
-                </h5>
-            </div>
-            <!-- навигация -->
-            <div class="row justify-content-center font_10pt">
-                <nav class="justify-content-center fade_in_anim">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
-                        <li class="breadcrumb-item"><a href="#tracks">Самые длинные и короткие треки</a></li>
-                        <li class="breadcrumb-item"><a href="#genres">Жанры и годы</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <!-- топ-10 треков -->
-            <div class="col-12">
-            </div>
-            
+   <div>
+        <div>
             <div class="row justify-content-center">
-                <!-- треки -->
-                <LastFive :itemCount="spotifyTracks['count']" :lastFiveItems="spotifyTracks['last_five']" type="tracks" id="basic"/>  
-                <!-- альбомы -->
-                <LastFive v-if="spotifyTracks !== false && spotifyTracks !== -1" 
-                            :itemCount="spotifyAlbums['count']" :lastFiveItems="spotifyAlbums['last_five']" type="albums"/>  
-                <!-- исполнители -->
-                <LastFive v-if="spotifyAlbums !== false && spotifyAlbums !== -1" 
-                            :itemCount="spotifyArtists['count']" :lastFiveItems="spotifyArtists['random_five']" type="artists"/>  
+                <div class="col-12" v-if="spotifyUserLibrary == -1">
+                    <Loader />
+                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
+                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
+                    <p class="font_10pt text-center">Это может занять около минуты</p>
+                </div>
+                <div v-else-if="spotifyUserLibrary != -1" class="row justify-content-center">
+                    <div class="col-md-12 fade_in_slow_anim">
+                        <h5 class="text-center">
+                            <b>Общая статистика</b>&nbsp;
+                            <i class="fas fa-chart-bar primary_color"></i>
+                        </h5>
+                    </div>
+                    <!-- навигация -->
+                    <div class="row justify-content-center font_10pt fade_in_anim">
+                        <nav class="justify-content-center">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
+                                <li class="breadcrumb-item"><a href="#tracks">Самые длинные и короткие треки</a></li>
+                                <li class="breadcrumb-item"><a href="#genres">Жанры и годы</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="col-12 justify-content-center fade_in_anim">
+                    </div>
+               
+                    <div class="row justify-content-center">
+                        <!-- треки -->
+                        <LastFive :itemCount="spotifyTracks['count']" :lastFiveItems="spotifyTracks['last_five']" type="tracks" id="basic"/>  
+                        <!-- альбомы -->
+                        <LastFive v-if="spotifyTracks !== false && spotifyTracks !== -1" 
+                                    :itemCount="spotifyAlbums['count']" :lastFiveItems="spotifyAlbums['last_five']" type="albums"/>  
+                        <!-- исполнители -->
+                        <LastFive v-if="spotifyAlbums !== false && spotifyAlbums !== -1" 
+                                    :itemCount="spotifyArtists['count']" :lastFiveItems="spotifyArtists['random_five']" type="artists"/>  
+
+                        <hr class="fade_in_anim" v-if="spotifyArtists !== -1 || spotifyAlbums != -1 || spotifyTracks != -1">
+
+                        <!-- часы и время -->
+                        <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 
+                                        class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
+
+                        <!-- самые длинные и короткие треки -->
+                        <LongestAndShortest v-if="userLibraryTime !== -1" id="tracks"
+                                            :fiveLongest="fiveTracks['fiveLongest']" 
+                                            :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
+                        <!-- любимые жанры -->
+                        <FavoriteGenres v-if="fiveTracks !== -1" :favoriteGenres="favoriteGenres" id="genres"/>
+
+                        <!-- кол-во исполнителей -->
+                        <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
+
+                        <!-- года и десятилетия -->
+                        <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades"/>
+
+                    </div>     
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center fade_in_anim" v-if="yearsAndDecades != -1">
+                <router-link to="/profile/top10"><button class="btn btn-primary">Перейти к "Топ-10"</button></router-link>
+                <br><br>
             </div>
         </div>
-        <hr class="fade_in_anim" v-if="spotifyArtists !== -1 || spotifyAlbums != -1 || spotifyTracks != -1">
-        <!-- часы и время -->
-        <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 
-                        class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
-        <!-- самые длинные и короткие треки -->
-        <LongestAndShortest v-if="userLibraryTime !== -1" id="tracks"
-                            :fiveLongest="fiveTracks['fiveLongest']" :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
-        <!-- любимые жанры -->
-        <FavoriteGenres v-if="tracksMode != -1" :favoriteGenres="favoriteGenres" id="genres"/>
-        <!-- кол-во исполнителей -->
-        <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
-        <!-- года и десятилетия -->
-        <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades"/>
-        <br>
-        <div class="row justify-content-center fade_in_anim" v-if="yearsAndDecades != -1">
-            <router-link to="/profile/top10"><button class="btn btn-primary">Перейти к "Топ-10"</button></router-link>
-            <br><br>
-        </div>
-    </div>
-
-</div>
+   </div>
 </template>
 
 <script>
 export default {
     mounted(){
         this.$store.dispatch('setCurrentTab', 'basicStats');
+
         //получаем библиотеку пользователя и статистику
         if(this.spotifyUserLibrary == -1)
         { this.$store.dispatch('getSpotifyUserLibrary'); }
@@ -80,6 +83,7 @@ export default {
         if(this.spotifyTracks == -1)
         { this.$store.dispatch('getSpotifyTracks'); }
         
+
         if(this.spotifyAlbums == -1)
         { this.$store.dispatch('getSpotifyAlbums'); }
         
@@ -90,12 +94,14 @@ export default {
         if(this.userLibraryTime == -1)
         { this.$store.dispatch('getUserLibraryTime'); }
 
+        //пять самых длинных и коротких треков
         if(this.fiveTracks == -1)
         { this.$store.dispatch('getFiveLongestAndShortestTracks'); }
 
+        //средняя длина трека
         if(this.tracksMode == -1)
         { this.$store.dispatch('getAverageLengthOfTrack'); }
-        
+
         //жанры
         if(this.favoriteGenres == -1)
         { this.$store.dispatch('getFavoriteGenres'); }
@@ -107,6 +113,9 @@ export default {
         //года и десятилетия
         if(this.yearsAndDecades == -1)
         { this.$store.dispatch('getYearsAndDecades'); }   
+
+
+        
     },
     computed: {
         //библиотека пользователя
