@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12 justify-content-center">
+    <div class="col-11 justify-content-center">
         <div v-if="userLibraryTime === -1">
             <Loader />
         </div>

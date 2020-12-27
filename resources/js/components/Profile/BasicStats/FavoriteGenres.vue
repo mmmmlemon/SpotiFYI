@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12 justify-content-center fade_in_anim">
+    <div class="col-11 justify-content-center">
         <div v-if="favoriteGenres === -1">
             <Loader />
             <h6 class="text-center blinking_anim">Анализирую треки...</h6>
@@ -8,7 +8,7 @@
         <div v-else-if="favoriteGenres === false">
             <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
         </div>
-        <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="col-12 grey_card padding_10 margin_vertical">
+        <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="grey_card padding_10 margin_vertical">
             <h4 class="text-center border_underline">Твои любимые жанры</h4>
             <p class="text-center">На основе того что ты слушаешь последний месяц</p>
             <BarChart :favoriteGenres="favoriteGenres" :backgroundColor="backgroundColor" label="Любимые жанры"/>

@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="col-11 justify-content-center">
         <div v-if="yearsAndDecades === -1">
             <Loader />
         </div>
         <div v-else-if="yearsAndDecades === false">
             <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
         </div>
-        <div v-else-if="yearsAndDecades != -1 && yearsAndDecades != false" class="col-12 grey_card padding_10 margin_vertical">
+        <div v-else-if="yearsAndDecades != -1 && yearsAndDecades != false" class="grey_card padding_10 margin_vertical">
             <p class="text-center">Больше всего тебе нравится музыка <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
                 В твоей библиотеке <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.</p>
             <p class="text-center"><b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 

@@ -78491,7 +78491,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-12 justify-content-center fade_in_anim" },
+    { staticClass: "col-11 justify-content-center fade_in_anim" },
     [
       _vm.uniqueArtists === -1
         ? _c("div", [_c("Loader")], 1)
@@ -78554,65 +78554,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col-12 justify-content-center fade_in_anim" },
-    [
-      _vm.favoriteGenres === -1
-        ? _c(
-            "div",
-            [
-              _c("Loader"),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-center blinking_anim" }, [
-                _vm._v("Анализирую треки...")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "font_10pt text-center" }, [
-                _vm._v("Это может занять некоторое время")
-              ])
-            ],
-            1
-          )
-        : _vm.favoriteGenres === false
-        ? _c(
-            "div",
-            [
-              _c("Error", {
-                attrs: {
-                  type: "small",
-                  errorMessage: "Не удалось произвести анализ треков"
-                }
-              })
-            ],
-            1
-          )
-        : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
-        ? _c(
-            "div",
-            { staticClass: "col-12 grey_card padding_10 margin_vertical" },
-            [
-              _c("h4", { staticClass: "text-center border_underline" }, [
-                _vm._v("Твои любимые жанры")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-center" }, [
-                _vm._v("На основе того что ты слушаешь последний месяц")
-              ]),
-              _vm._v(" "),
-              _c("BarChart", {
-                attrs: {
-                  favoriteGenres: _vm.favoriteGenres,
-                  backgroundColor: _vm.backgroundColor,
-                  label: "Любимые жанры"
-                }
-              })
-            ],
-            1
-          )
-        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-    ]
-  )
+  return _c("div", { staticClass: "col-11 justify-content-center" }, [
+    _vm.favoriteGenres === -1
+      ? _c(
+          "div",
+          [
+            _c("Loader"),
+            _vm._v(" "),
+            _c("h6", { staticClass: "text-center blinking_anim" }, [
+              _vm._v("Анализирую треки...")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "font_10pt text-center" }, [
+              _vm._v("Это может занять некоторое время")
+            ])
+          ],
+          1
+        )
+      : _vm.favoriteGenres === false
+      ? _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: {
+                type: "small",
+                errorMessage: "Не удалось произвести анализ треков"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
+      ? _c(
+          "div",
+          { staticClass: "grey_card padding_10 margin_vertical" },
+          [
+            _c("h4", { staticClass: "text-center border_underline" }, [
+              _vm._v("Твои любимые жанры")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-center" }, [
+              _vm._v("На основе того что ты слушаешь последний месяц")
+            ]),
+            _vm._v(" "),
+            _c("BarChart", {
+              attrs: {
+                favoriteGenres: _vm.favoriteGenres,
+                backgroundColor: _vm.backgroundColor,
+                label: "Любимые жанры"
+              }
+            })
+          ],
+          1
+        )
+      : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -78636,7 +78632,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-12 justify-content-center" }, [
+  return _c("div", { staticClass: "col-11 justify-content-center" }, [
     _vm.userLibraryTime === -1
       ? _c("div", [_c("Loader")], 1)
       : _vm.userLibraryTime === false
@@ -79202,7 +79198,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "col-11 justify-content-center" }, [
     _vm.yearsAndDecades === -1
       ? _c("div", [_c("Loader")], 1)
       : _vm.yearsAndDecades === false
@@ -79221,7 +79217,7 @@ var render = function() {
       : _vm.yearsAndDecades != -1 && _vm.yearsAndDecades != false
       ? _c(
           "div",
-          { staticClass: "col-12 grey_card padding_10 margin_vertical" },
+          { staticClass: "grey_card padding_10 margin_vertical" },
           [
             _c("p", { staticClass: "text-center" }, [
               _vm._v("Больше всего тебе нравится музыка "),
