@@ -288,3 +288,10 @@ a:hover{
 }
 
 
+.hr_imitation{
+    border-color: grey;
+    border-width: 1px;
+    opacity: 0.5;
+    border-style: solid;
+    margin-bottom: 15px;
+}

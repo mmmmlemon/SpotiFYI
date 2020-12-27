@@ -2416,6 +2416,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя и статистику
@@ -2609,6 +2612,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -78351,12 +78358,6 @@ var render = function() {
                       })
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.spotifyArtists !== -1 ||
-                  _vm.spotifyAlbums != -1 ||
-                  _vm.spotifyTracks != -1
-                    ? _c("hr", { staticClass: "fade_in_anim" })
-                    : _vm._e(),
-                  _vm._v(" "),
                   _vm.spotifyArtists !== -1 &&
                   _vm.spotifyAlbums != -1 &&
                   _vm.spotifyTracks != -1
@@ -78649,88 +78650,92 @@ var render = function() {
           1
         )
       : _vm.userLibraryTime != -1 && _vm.userLibraryTime != false
-      ? _c(
-          "div",
-          { staticClass: "col-sm-12 text-center padding_10 margin_vetical" },
-          [
-            _c("div", {
-              staticClass: "image_card",
-              style: {
-                backgroundImage:
-                  "url('" + _vm.userLibraryTime["coverImageUrl"] + "')"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "image_card_front" }),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v("Всего в твою библиотеку добавлено\n            "),
-              _c("b", { staticClass: "border_underline font_25pt" }, [
-                _vm._v(
-                  "\n                 " +
-                    _vm._s(_vm.userLibraryTime["overallMinutes"]) +
-                    "\n            "
-                )
+      ? _c("div", [
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-sm-12 text-center padding_10 margin_vetical" },
+            [
+              _c("div", {
+                staticClass: "image_card",
+                style: {
+                  backgroundImage:
+                    "url('" + _vm.userLibraryTime["coverImageUrl"] + "')"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "image_card_front" }),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("Всего в твою библиотеку добавлено\n                "),
+                _c("b", { staticClass: "border_underline font_25pt" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.userLibraryTime["overallMinutes"]) +
+                      "\n                "
+                  )
+                ]),
+                _vm._v(" музыки.\n            ")
               ]),
-              _vm._v(" музыки.\n        ")
-            ]),
-            _vm._v(" "),
-            _vm.userLibraryTime["overallHours"] != 0
-              ? _c("p", [
-                  _vm.userLibraryTime["overallDays"] == 0
-                    ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
-                    : _c("b", { staticClass: "unbold" }, [
-                        _vm._v("В других исчислениях это")
-                      ]),
-                  _vm._v(" "),
-                  _c("b", { staticClass: "border_underline" }, [
-                    _vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))
-                  ]),
-                  _vm._v(" "),
-                  _vm.userLibraryTime["overallDays"] == 0
-                    ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
-                    : _vm._e()
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userLibraryTime["overallDays"] != 0
-              ? _c("p", [
-                  _vm.userLibraryTime["overallMonths"] == 0
-                    ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("b", { staticClass: "border_underline" }, [
-                    _vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))
-                  ]),
-                  _vm._v(" "),
-                  _vm.userLibraryTime["overallMonths"] == 0
-                    ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
-                    : _vm._e()
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userLibraryTime["overallMonths"] != 0
-              ? _c("p", [
-                  _vm._v("или \n            "),
-                  _c(
-                    "b",
-                    {
-                      staticClass: "border_underline",
-                      staticStyle: { "font-size": "18pt" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(_vm.userLibraryTime["overallMonths"]) +
-                          "\n            "
-                      )
-                    ]
-                  ),
-                  _vm._v(" песен.\n        ")
-                ])
-              : _vm._e()
-          ]
-        )
+              _vm._v(" "),
+              _vm.userLibraryTime["overallHours"] != 0
+                ? _c("p", [
+                    _vm.userLibraryTime["overallDays"] == 0
+                      ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
+                      : _c("b", { staticClass: "unbold" }, [
+                          _vm._v("В других исчислениях это")
+                        ]),
+                    _vm._v(" "),
+                    _c("b", { staticClass: "border_underline" }, [
+                      _vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))
+                    ]),
+                    _vm._v(" "),
+                    _vm.userLibraryTime["overallDays"] == 0
+                      ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.userLibraryTime["overallDays"] != 0
+                ? _c("p", [
+                    _vm.userLibraryTime["overallMonths"] == 0
+                      ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("b", { staticClass: "border_underline" }, [
+                      _vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))
+                    ]),
+                    _vm._v(" "),
+                    _vm.userLibraryTime["overallMonths"] == 0
+                      ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.userLibraryTime["overallMonths"] != 0
+                ? _c("p", [
+                    _vm._v("или \n                "),
+                    _c(
+                      "b",
+                      {
+                        staticClass: "border_underline",
+                        staticStyle: { "font-size": "18pt" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.userLibraryTime["overallMonths"]) +
+                            "\n                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" песен.\n            ")
+                  ])
+                : _vm._e()
+            ]
+          )
+        ])
       : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
   ])
 }
