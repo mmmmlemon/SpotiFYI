@@ -19,7 +19,7 @@
                             <div class="row fade_in_anim" v-for="item in items['tracks']" :key="item.id">
                                 <div class="col-2">
                                     <div class="number_card">
-                                        <b class="">{{item.count}}</b>
+                                        <b>{{item.count}}</b>
                                     </div>
                                     <a :href="item.url" target="_blank">
                                         <img :src="item.cover" class="rounded-circle album_icon_big">

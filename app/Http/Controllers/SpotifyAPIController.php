@@ -389,6 +389,15 @@ class SpotifyAPIController extends Controller
             $topFiveDesc = array_slice($tracksDesc, 0, 5, true);
             $topFiveAsc = array_slice($tracksAsc, 0, 5, true);
 
+            $count = 1;
+
+            for($i = 0; $i <= 4; $i++)
+            {
+                $topFiveDesc[$i]['count'] = $count;
+                $topFiveAsc[$i]['count'] = $count;
+                $count++;
+            }
+
             $response = ['fiveLongest' => $topFiveDesc, 'fiveShortest' => $topFiveAsc];
 
             return response()->json($response);

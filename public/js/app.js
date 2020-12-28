@@ -2831,6 +2831,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     fiveLongest: {
@@ -79024,6 +79030,10 @@ var render = function() {
                 { key: item.id, staticClass: "row fade_in_anim" },
                 [
                   _c("div", { staticClass: "col-2" }, [
+                    _c("div", { staticClass: "number_card" }, [
+                      _c("b", [_vm._v(_vm._s(item.count))])
+                    ]),
+                    _vm._v(" "),
                     _c("a", { attrs: { href: item.url, target: "_blank" } }, [
                       _c("img", {
                         staticClass: "rounded-circle album_icon_big",
@@ -79088,6 +79098,10 @@ var render = function() {
                 { key: item.id, staticClass: "row fade_in_anim" },
                 [
                   _c("div", { staticClass: "col-2" }, [
+                    _c("div", { staticClass: "number_card" }, [
+                      _c("b", [_vm._v(_vm._s(item.count))])
+                    ]),
+                    _vm._v(" "),
                     _c("a", { attrs: { href: item.url, target: "_blank" } }, [
                       _c("img", {
                         staticClass: "rounded-circle album_icon_big",
@@ -79621,7 +79635,7 @@ var render = function() {
                           [
                             _c("div", { staticClass: "col-2" }, [
                               _c("div", { staticClass: "number_card" }, [
-                                _c("b", {}, [_vm._v(_vm._s(item.count))])
+                                _c("b", [_vm._v(_vm._s(item.count))])
                               ]),
                               _vm._v(" "),
                               _c(

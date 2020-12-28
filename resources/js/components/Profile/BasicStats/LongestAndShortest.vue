@@ -11,6 +11,9 @@
             <h4 class="border_underline text-center"><b>Пять самых длинных песен</b></h4>
             <div class="row fade_in_anim" v-for="item in fiveLongest" :key="item.id">
                 <div class="col-2">
+                    <div class="number_card">
+                        <b>{{item.count}}</b>
+                    </div>
                     <a :href="item.url" target="_blank">
                         <img :src="item.cover" class="rounded-circle album_icon_big">
                     </a>
@@ -36,6 +39,9 @@
             <h4 class="border_underline text-center"><b>Пять самых коротких песен</b></h4>
             <div class="row fade_in_anim" v-for="item in fiveShortest" :key="item.id">
                 <div class="col-2">
+                    <div class="number_card">
+                        <b>{{item.count}}</b>
+                    </div>
                     <a :href="item.url" target="_blank">
                         <img :src="item.cover" class="rounded-circle album_icon_big">
                     </a>
