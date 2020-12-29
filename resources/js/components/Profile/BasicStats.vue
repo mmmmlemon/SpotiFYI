@@ -39,11 +39,6 @@
                         <LastFive v-if="spotifyAlbums !== false && spotifyAlbums !== -1" 
                                     :itemCount="spotifyArtists['count']" :lastFiveItems="spotifyArtists['random_five']" type="artists"/>  
 
-                        <!-- типа hr -->
-                        <!-- <div class="col-11 hr_imitation">
-
-                        </div> -->
-
                         <!-- часы и время -->
                         <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 
                                         class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>

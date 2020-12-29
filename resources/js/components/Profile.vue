@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="col-12">
         <div class="container bounce_in_anim" v-if="spotifyProfile == -1">
             <Loader/>
         </div>

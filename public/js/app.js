@@ -2326,10 +2326,110 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //смена текущего таба
-    this.$store.dispatch('setCurrentTab', 'achievements');
+    this.$store.dispatch('setCurrentTab', 'achievements'); //получить библиотеку пользователя, если нужно
+
+    if (this.spotifyUserLibrary == -1) {
+      this.$store.dispatch('getSpotifyUserLibrary');
+    }
+  },
+  computed: {
+    spotifyUserLibrary: function spotifyUserLibrary() {
+      // return this.$store.state.profilePage.spotifyUserLibrary;
+      return true;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    items: {
+      "default": -1
+    }
   }
 });
 
@@ -2344,11 +2444,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3013,6 +3108,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //смена текущего таба
@@ -3183,12 +3283,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    loaderMessage: {
-      "default": ''
-    },
     cardTitle: {
       "default": 'Топ 10'
     },
@@ -78074,7 +78170,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "col-12" }, [
     _vm.spotifyProfile == -1
       ? _c(
           "div",
@@ -78262,14 +78358,220 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _vm.spotifyUserLibrary == -1
+      ? _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("Loader"),
+            _vm._v(" "),
+            _vm.spotifyUserLibrary == -1
+              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                  _vm._v("Загружаю библиотеку пользователя...")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.spotifyUserLibrary == true
+              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                  _vm._v("Анализирую треки...")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("p", { staticClass: "font_10pt text-center" }, [
+              _vm._v("Это может занять около минуты")
+            ])
+          ],
+          1
+        )
+      : _vm.spotifyUserLibrary != -1
+      ? _c("div", { staticClass: "col-12" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "row justify-content-center" },
+            [_c("AchievementItem", { attrs: { items: true } })],
+            1
+          )
+        ])
+      : _vm.spotifyUserLibrary == false
+      ? _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: {
+                errorMessage: "Не удалось загрузить библиотеку пользователя"
+              }
+            })
+          ],
+          1
+        )
+      : _c(
+          "div",
+          [_c("Error", { attrs: { errorMessage: "Неизвестная ошибка" } })],
+          1
+        )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h4", [_vm._v("achievements")])])
+    return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
+      _c("h5", { staticClass: "text-center" }, [
+        _c("b", [_vm._v("Особо отличившиеся")]),
+        _vm._v(" \n                "),
+        _c("i", { staticClass: "fas fa-award primary_color" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "row justify-content-center font_10pt fade_in_anim" },
+      [
+        _c("nav", { staticClass: "justify-content-center" }, [
+          _c("ul", { staticClass: "breadcrumb" }, [
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#tracks" } }, [_vm._v("Треки")])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#artists" } }, [_vm._v("Исполнители")])
+            ])
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "col-12 justify-content-center fade_in_anim",
+        attrs: { id: "tracks" }
+      },
+      [
+        _c("h3", { staticClass: "text-center" }, [
+          _vm._v("\n                Треки\n                "),
+          _c("i", { staticClass: "fas fa-compact-disc primary_color" })
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=template&id=37fc9108&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=template&id=37fc9108& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.items == -1
+      ? _c("div", [_c("Loader")], 1)
+      : _vm.items == false
+      ? _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: {
+                type: "small",
+                errorMessage: "Не удалось загрузить данные"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.items != -1 || _vm.items != false
+      ? _c("div", { staticClass: "col-md-5 grey_card margin_sides" }, [
+          _c("div", {
+            staticClass: "top10_image_card",
+            staticStyle: {
+              "background-image":
+                "url('https://www.opinion-internationale.com/wp-content/uploads/2019/09/abbeyroad5_uk.jpg')"
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+      : _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: {
+                type: "x-small",
+                errorMessage: "Нечего показывать. Параметр items пустой."
+              }
+            })
+          ],
+          1
+        )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "row justify-content-center margin_sides" },
+      [
+        _c("div", { staticClass: "col-12" }, [
+          _c("h4", { staticClass: "text-center border_underline" }, [
+            _vm._v("Самый самый что-то там")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "album_icon_achievement rounded-circle",
+          attrs: {
+            src:
+              "https://www.opinion-internationale.com/wp-content/uploads/2019/09/abbeyroad5_uk.jpg",
+            alt: ""
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12" }, [
+          _c("h5", { staticClass: "text-center" }, [
+            _c("a", { attrs: { href: "" } }, [
+              _vm._v("Исполнитель - Название трека")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-center" }, [
+            _vm._v("Дополнительная информация")
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -79330,19 +79632,13 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.spotifyUserLibrary == true
-                  ? _c("h6", { staticClass: "text-center blinking_anim" }, [
-                      _vm._v("Анализирую треки...")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
                 _c("p", { staticClass: "font_10pt text-center" }, [
                   _vm._v("Это может занять около минуты")
                 ])
               ],
               1
             )
-          : _vm.spotifyUserLibrary != -1
+          : _vm.spotifyUserLibrary == true
           ? _c(
               "div",
               { staticClass: "row justify-content-center" },
@@ -79461,7 +79757,23 @@ var render = function() {
               ],
               1
             )
-          : _vm._e()
+          : _vm.spotifyUserLibrary == false
+          ? _c(
+              "div",
+              [
+                _c("Error", {
+                  attrs: {
+                    errorMessage: "Не удалось загрузить библиотеку пользователя"
+                  }
+                })
+              ],
+              1
+            )
+          : _c(
+              "div",
+              [_c("Error", { attrs: { errorMessage: "Неизвестная ошибка" } })],
+              1
+            )
       ])
     ]),
     _vm._v(" "),
@@ -79574,17 +79886,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-md-5 margin_sides padding_10" }, [
     _vm.items == -1
-      ? _c(
-          "div",
-          [
-            _c("Loader"),
-            _vm._v(" "),
-            _c("h6", { staticClass: "font_10pt text-center blinking_anim" }, [
-              _vm._v(_vm._s(_vm.loaderMessage))
-            ])
-          ],
-          1
-        )
+      ? _c("div", [_c("Loader")], 1)
       : _vm.items == false
       ? _c(
           "div",
@@ -79598,7 +79900,7 @@ var render = function() {
           ],
           1
         )
-      : _vm.items != -1
+      : _vm.items != -1 || _vm.items != false
       ? _c(
           "div",
           {
@@ -96457,8 +96759,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Profile/BasicStats/ArtistsCount.vue */ "./resources/js/components/Profile/BasicStats/ArtistsCount.vue");
 /* harmony import */ var _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Profile/BasicStats/YearsAndDecades.vue */ "./resources/js/components/Profile/BasicStats/YearsAndDecades.vue");
 /* harmony import */ var _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Items.vue */ "./resources/js/components/Profile/Top10/Top10Items.vue");
-/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Profile/Achievements/AchievementItem.vue */ "./resources/js/components/Profile/Achievements/AchievementItem.vue");
+/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -96487,10 +96790,12 @@ Vue.component('ArtistsCount', _components_Profile_BasicStats_ArtistsCount_vue__W
 
 Vue.component('YearsAndDecades', _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
-Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__["default"]); //графики
+Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
+
+Vue.component('AchievementItem', _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_12__["default"]); //графики
 
 
-Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
+Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -96502,7 +96807,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_13__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_14__["default"]
 });
 
 /***/ }),
@@ -97080,6 +97385,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Achievements_vue_vue_type_template_id_ec2f0c56___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Achievements_vue_vue_type_template_id_ec2f0c56___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/Achievements/AchievementItem.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Profile/Achievements/AchievementItem.vue ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AchievementItem_vue_vue_type_template_id_37fc9108___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AchievementItem.vue?vue&type=template&id=37fc9108& */ "./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=template&id=37fc9108&");
+/* harmony import */ var _AchievementItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AchievementItem.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AchievementItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AchievementItem_vue_vue_type_template_id_37fc9108___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AchievementItem_vue_vue_type_template_id_37fc9108___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Profile/Achievements/AchievementItem.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AchievementItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AchievementItem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AchievementItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=template&id=37fc9108&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=template&id=37fc9108& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AchievementItem_vue_vue_type_template_id_37fc9108___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AchievementItem.vue?vue&type=template&id=37fc9108& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile/Achievements/AchievementItem.vue?vue&type=template&id=37fc9108&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AchievementItem_vue_vue_type_template_id_37fc9108___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AchievementItem_vue_vue_type_template_id_37fc9108___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

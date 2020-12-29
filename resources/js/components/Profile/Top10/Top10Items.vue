@@ -2,12 +2,11 @@
         <div class="col-md-5 margin_sides padding_10">
             <div v-if="items == -1">
                 <Loader />
-                <h6 class="font_10pt text-center blinking_anim">{{loaderMessage}}</h6>
             </div>
             <div v-else-if="items == false">
                 <Error type="small" errorMessage="Не удалось загрузить треки"/>
             </div>
-            <div v-else-if="items != -1" class="col-md-12 padding_10 grey_card margin_sides fade_in_anim"> 
+            <div v-else-if="items != -1 || items != false" class="col-md-12 padding_10 grey_card margin_sides fade_in_anim"> 
                 <div class="top10_image_card" :style="{backgroundImage: `url('${items['backgroundImage']}')`}">
                 </div>
                 <div>
@@ -79,7 +78,6 @@
 <script>
 export default {
     props: {
-        loaderMessage: { default: '' },
         cardTitle: { default: 'Топ 10' },
         cardDesc: { default : undefined },
         items: { default: -1 },

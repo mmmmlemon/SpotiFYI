@@ -5,10 +5,9 @@
                 <div class="col-12" v-if="spotifyUserLibrary == -1">
                     <Loader />
                     <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
-                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
                     <p class="font_10pt text-center">Это может занять около минуты</p>
                 </div>
-                <div v-else-if="spotifyUserLibrary != -1" class="row justify-content-center">
+                <div v-else-if="spotifyUserLibrary == true" class="row justify-content-center">
                     <div class="col-md-12 fade_in_slow_anim">
                         <h5 class="text-center">
                             <b>Топ 10</b>&nbsp;
@@ -25,7 +24,7 @@
                         </nav>
                     </div>
 
-                    <!-- топ-10 треков -->
+                    <!-- топ 10 треки -->
                     <div class="col-12 justify-content-center fade_in_anim" id="tracks">
                         <h3 class="text-center">
                             Треки
@@ -57,7 +56,7 @@
                                 :items="top10TracksShort"
                                 listType="tracks"/>
 
-                    <!-- топ-10 треков -->
+                    <!-- топ 10 исполнители -->
                     <div class="col-12 justify-content-center" id="artists" v-if="top10TracksShort != -1">
                         <h3 class="text-center">
                             Исполнители
@@ -87,6 +86,12 @@
                                 cardDesc="Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке." 
                                 :items="top10ArtistsByTime"
                                 listType="artists"/>
+                </div>
+                <div v-else-if="spotifyUserLibrary == false">
+                    <Error errorMessage="Не удалось загрузить библиотеку пользователя"/>
+                </div>
+                <div v-else>
+                    <Error errorMessage="Неизвестная ошибка"/>
                 </div>
              
             </div>
