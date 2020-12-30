@@ -54,7 +54,10 @@
                         <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
 
                         <!-- года и десятилетия -->
-                        <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades"/>
+                        <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades" type="alltime"/>
+
+                        <!-- года и десятилетия за месяц-->
+                        <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="yearsAndDecadesMonth" type="month"/>
 
                     </div>     
                 </div>
@@ -112,6 +115,10 @@ export default {
         if(this.yearsAndDecades == -1)
         { this.$store.dispatch('getYearsAndDecades'); }   
 
+        //года и десятилетия за месяц
+        if(this.yearsAndDecadesMonth == -1)
+        { this.$store.dispatch('getYearsAndDecadesMonth'); }   
+
 
         
     },
@@ -156,6 +163,10 @@ export default {
         //года и десятилетия
         yearsAndDecades: function(){
             return this.$store.state.profilePage.yearsAndDecades;
+        },
+        //года и десятилетия
+        yearsAndDecadesMonth: function(){
+            return this.$store.state.profilePage.yearsAndDecadesMonth;
         },
     }
 }

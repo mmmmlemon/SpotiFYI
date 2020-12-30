@@ -616,14 +616,53 @@ class SpotifyAPIController extends Controller
     }
 
     //getYearsAndDecades
-    //посчитать любимые года и десятилетия
+    //посчитать любимые года и десятилетия по всем трекам или по трекам за последний месяц
     //возращает JSON с годами и десятилетиями для графика
-    //параметры: реквест
-    public function getYearsAndDecades(Request $request)
+    //параметры: реквест, type - "alltime" и "month"
+    public function getYearsAndDecades(Request $request, $type)
     {
-        //открываем файл с треками
-        $tracks = System::getUserLibraryJson("tracks", $request);
+        $tracks = [];
+        
+        if($type == "alltime")
+        {
+            //открываем файл с треками
+            $tracks = System::getUserLibraryJson("tracks", $request);
+        }
+        if($type == "month") 
+        {
+            //проверяем токен
+            $checkToken = System::checkSpotifyAccessToken($request);
 
+            if($checkToken != false)
+            {
+                //получаем api
+                $api = config('spotify_api');
+
+                //смещение для получения треков
+                $offset = 0;
+                //пока смещение меньше 50, т.е мы получим только 98 последних треков (больше не позволяет Spotify API)
+                while($offset < 50)
+                {
+                    //получаем треки
+                    $tracksApi = $api->getMyTop('tracks', ['limit' => 49, 'time_range' => 'short_term', 'offset' => $offset])->items;
+
+                    //если треки есть
+                    if($tracksApi != null)
+                    {   
+                        foreach($tracksApi as $track)
+                        {
+                            array_push($tracks, $track);
+                        }
+                    }
+
+                    $offset += 49;
+                    
+                }
+            }
+            else
+            { return response()->json(false); }
+        }
+ 
         //если он есть
         if($tracks != null)
         {       

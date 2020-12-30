@@ -55,6 +55,7 @@ const ProfilePageStates = {
         favoriteGenres: -1, //любимые жанры
         uniqueArtists: -1, //кол-во исполнителей,
         yearsAndDecades: -1, //года и десятилетия
+        yearsAndDecadesMonth: -1, //года и десятилетия за месяц
 
         top10TracksAllTime: -1, //топ 10 треков за все время
         top10TracksMonth: -1, // топ 10 треков за месяц
@@ -149,8 +150,14 @@ const ProfilePageStates = {
           },
           //получить информацию по годам и десятилетиям
           getYearsAndDecades(state){
-            axios.get('/api/get_years_and_decades').then((response) => {
+            axios.get('/api/get_years_and_decades/alltime').then((response) => {
               state.yearsAndDecades = response.data;
+            });
+          },
+          //получить информацию по годам и десятилетиям за месяц
+          getYearsAndDecadesMonth(state){
+            axios.get('/api/get_years_and_decades/month').then((response) => {
+              state.yearsAndDecadesMonth = response.data;
             });
           },
 
@@ -294,6 +301,10 @@ const ProfilePageStates = {
       //посчитать года и десятилетия
       getYearsAndDecades(context){
         context.commit('getYearsAndDecades');
+      },
+      //посчитать года и десятилетия за месяц
+      getYearsAndDecadesMonth(context){
+        context.commit('getYearsAndDecadesMonth');
       },
 
       //топ10

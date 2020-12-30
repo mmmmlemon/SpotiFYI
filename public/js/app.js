@@ -2558,6 +2558,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя и статистику
@@ -2607,6 +2610,11 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.yearsAndDecades == -1) {
       this.$store.dispatch('getYearsAndDecades');
+    } //года и десятилетия за месяц
+
+
+    if (this.yearsAndDecadesMonth == -1) {
+      this.$store.dispatch('getYearsAndDecadesMonth');
     }
   },
   computed: {
@@ -2650,6 +2658,10 @@ __webpack_require__.r(__webpack_exports__);
     //года и десятилетия
     yearsAndDecades: function yearsAndDecades() {
       return this.$store.state.profilePage.yearsAndDecades;
+    },
+    //года и десятилетия
+    yearsAndDecadesMonth: function yearsAndDecadesMonth() {
+      return this.$store.state.profilePage.yearsAndDecadesMonth;
     }
   }
 });
@@ -3031,11 +3043,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     //любимые жанры
     yearsAndDecades: {
       "default": -1
+    },
+    type: {
+      "default": 'alltime'
     }
   }
 });
@@ -78805,7 +78830,19 @@ var render = function() {
                   _vm._v(" "),
                   _vm.uniqueArtists != -1
                     ? _c("YearsAndDecades", {
-                        attrs: { yearsAndDecades: _vm.yearsAndDecades }
+                        attrs: {
+                          yearsAndDecades: _vm.yearsAndDecades,
+                          type: "alltime"
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.yearsAndDecades != -1
+                    ? _c("YearsAndDecades", {
+                        attrs: {
+                          yearsAndDecades: _vm.yearsAndDecadesMonth,
+                          type: "month"
+                        }
                       })
                     : _vm._e()
                 ],
@@ -79642,28 +79679,104 @@ var render = function() {
           "div",
           { staticClass: "grey_card padding_10 margin_vertical" },
           [
-            _c("p", { staticClass: "text-center" }, [
-              _vm._v("Больше всего тебе нравится музыка "),
-              _c("b", { staticClass: "unbold border_underline font_25pt" }, [
-                _vm._v(_vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых")
-              ]),
-              _vm._v(". \n            В твоей библиотеке "),
-              _c("b", { staticClass: "unbold border_underline font_25pt" }, [
-                _vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))
-              ]),
-              _vm._v(" из этой эпохи.")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-center" }, [
-              _c("b", { staticClass: "unbold border_underline font_25pt" }, [
-                _vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")
-              ]),
-              _vm._v(" - твой любимый год. \n            Тебе нравятся "),
-              _c("b", { staticClass: "unbold border_underline font_25pt" }, [
-                _vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))
-              ]),
-              _vm._v(" из этого года.")
-            ]),
+            _vm.type == "alltime"
+              ? _c("div", [
+                  _c("p", { staticClass: "text-center" }, [
+                    _vm._v("Больше всего тебе нравится музыка "),
+                    _c(
+                      "b",
+                      { staticClass: "unbold border_underline font_25pt" },
+                      [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых")]
+                    ),
+                    _vm._v(". \n                В твоей библиотеке "),
+                    _c(
+                      "b",
+                      { staticClass: "unbold border_underline font_25pt" },
+                      [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))]
+                    ),
+                    _vm._v(" из этой эпохи.")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass: "text-center",
+                      attrs: { "v-if": _vm.type == "alltime" }
+                    },
+                    [
+                      _c(
+                        "b",
+                        { staticClass: "unbold border_underline font_25pt" },
+                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")]
+                      ),
+                      _vm._v(
+                        " - твой любимый год. \n                Тебе нравятся "
+                      ),
+                      _c(
+                        "b",
+                        { staticClass: "unbold border_underline font_25pt" },
+                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
+                      ),
+                      _vm._v(" из этого года.")
+                    ]
+                  )
+                ])
+              : _c("div", [
+                  _c(
+                    "p",
+                    {
+                      staticClass: "text-center",
+                      attrs: { "v-else-if": _vm.type == "month" }
+                    },
+                    [
+                      _vm._v(
+                        "В последнее время ты больше всего слушаешь музыку "
+                      ),
+                      _c(
+                        "b",
+                        { staticClass: "unbold border_underline font_25pt" },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых"
+                          )
+                        ]
+                      ),
+                      _vm._v(
+                        ". \n                За последний месяц ты послушал "
+                      ),
+                      _c(
+                        "b",
+                        { staticClass: "unbold border_underline font_25pt" },
+                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))]
+                      ),
+                      _vm._v(" из этой эпохи.")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass: "text-center",
+                      attrs: { "v-else-if": _vm.type == "month" }
+                    },
+                    [
+                      _c(
+                        "b",
+                        { staticClass: "unbold border_underline font_25pt" },
+                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")]
+                      ),
+                      _vm._v(
+                        " - твой любимый год. \n                Ты слушал "
+                      ),
+                      _c(
+                        "b",
+                        { staticClass: "unbold border_underline font_25pt" },
+                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
+                      ),
+                      _vm._v(" из этого года.")
+                    ]
+                  )
+                ]),
             _vm._v(" "),
             _c("br"),
             _vm._v(" "),
@@ -98432,6 +98545,8 @@ var ProfilePageStates = {
     //кол-во исполнителей,
     yearsAndDecades: -1,
     //года и десятилетия
+    yearsAndDecadesMonth: -1,
+    //года и десятилетия за месяц
     top10TracksAllTime: -1,
     //топ 10 треков за все время
     top10TracksMonth: -1,
@@ -98536,8 +98651,14 @@ var ProfilePageStates = {
     },
     //получить информацию по годам и десятилетиям
     getYearsAndDecades: function getYearsAndDecades(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades/alltime').then(function (response) {
         state.yearsAndDecades = response.data;
+      });
+    },
+    //получить информацию по годам и десятилетиям за месяц
+    getYearsAndDecadesMonth: function getYearsAndDecadesMonth(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades/month').then(function (response) {
+        state.yearsAndDecadesMonth = response.data;
       });
     },
     //топ 10
@@ -98676,6 +98797,10 @@ var ProfilePageStates = {
     //посчитать года и десятилетия
     getYearsAndDecades: function getYearsAndDecades(context) {
       context.commit('getYearsAndDecades');
+    },
+    //посчитать года и десятилетия за месяц
+    getYearsAndDecadesMonth: function getYearsAndDecadesMonth(context) {
+      context.commit('getYearsAndDecadesMonth');
     },
     //топ10
     //топ10 треков за все время
