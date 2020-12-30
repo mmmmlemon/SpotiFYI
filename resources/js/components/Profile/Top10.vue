@@ -55,6 +55,16 @@
                                 cardDesc="Десять твоих самых коротких треков в библиотеке." 
                                 :items="top10TracksShort"
                                 listType="tracks"/>
+                    <Top10Items v-if="top10TracksShort != -1"
+                                cardTitle="Топ 10 самых популярных" 
+                                cardDesc="Десять самых популярных треков которые тебе нравятся." 
+                                :items="top10PopularTracks"
+                                listType="tracks"/>
+                    <Top10Items v-if="top10PopularTracks != -1"
+                                cardTitle="Топ 10 самых непопулярных" 
+                                cardDesc="Десять самых непопулярных треков которые тебе нравятся." 
+                                :items="top10UnpopularTracks"
+                                listType="tracks"/>
 
                     <!-- топ 10 исполнители -->
                     <div class="col-12 justify-content-center" id="artists" v-if="top10TracksShort != -1">
@@ -130,6 +140,14 @@ export default {
         if(this.top10TracksShort == -1)
         { this.$store.dispatch('getTop10TracksShort'); }
 
+        //топ 10 популярных треков
+        if(this.top10PopularTracks == -1)
+        { this.$store.dispatch('getTop10PopularTracks'); }
+
+        //топ 10 непопулярных треков
+        if(this.top10UnpopularTracks == -1)
+        { this.$store.dispatch('getTop10UnpopularTracks'); }
+
         //топ 10 артистов за все время
         if(this.top10ArtistsAllTime == -1)
         { this.$store.dispatch('getTop10ArtistsAllTime'); }
@@ -170,6 +188,12 @@ export default {
         },
         top10TracksShort: function(){
             return this.$store.state.profilePage.top10TracksShort;
+        },
+        top10PopularTracks: function(){
+            return this.$store.state.profilePage.top10PopularTracks;
+        },
+        top10UnpopularTracks: function(){
+            return this.$store.state.profilePage.top10UnpopularTracks;
         },
         top10ArtistsByTracks: function() {
             return this.$store.state.profilePage.top10ArtistsByTracks;

@@ -3157,6 +3157,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //смена текущего таба
@@ -3184,6 +3194,16 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.top10TracksShort == -1) {
       this.$store.dispatch('getTop10TracksShort');
+    } //топ 10 популярных треков
+
+
+    if (this.top10PopularTracks == -1) {
+      this.$store.dispatch('getTop10PopularTracks');
+    } //топ 10 непопулярных треков
+
+
+    if (this.top10UnpopularTracks == -1) {
+      this.$store.dispatch('getTop10UnpopularTracks');
     } //топ 10 артистов за все время
 
 
@@ -3229,6 +3249,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     top10TracksShort: function top10TracksShort() {
       return this.$store.state.profilePage.top10TracksShort;
+    },
+    top10PopularTracks: function top10PopularTracks() {
+      return this.$store.state.profilePage.top10PopularTracks;
+    },
+    top10UnpopularTracks: function top10UnpopularTracks() {
+      return this.$store.state.profilePage.top10UnpopularTracks;
     },
     top10ArtistsByTracks: function top10ArtistsByTracks() {
       return this.$store.state.profilePage.top10ArtistsByTracks;
@@ -79773,6 +79799,30 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.top10TracksShort != -1
+                  ? _c("Top10Items", {
+                      attrs: {
+                        cardTitle: "Топ 10 самых популярных",
+                        cardDesc:
+                          "Десять самых популярных треков которые тебе нравятся.",
+                        items: _vm.top10PopularTracks,
+                        listType: "tracks"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.top10PopularTracks != -1
+                  ? _c("Top10Items", {
+                      attrs: {
+                        cardTitle: "Топ 10 самых непопулярных",
+                        cardDesc:
+                          "Десять самых непопулярных треков которые тебе нравятся.",
+                        items: _vm.top10UnpopularTracks,
+                        listType: "tracks"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.top10TracksShort != -1
                   ? _c(
                       "div",
                       {
@@ -98394,6 +98444,10 @@ var ProfilePageStates = {
     //топ 10 длинных треков
     top10TracksShort: -1,
     //топ 10 коротких треков
+    top10PopularTracks: -1,
+    //топ 10 популярных треков
+    top10UnpopularTracks: -1,
+    //топ 10 непопулярных треков
     top10ArtistsByTracks: -1,
     //топ 10 исполнителей по кол-ву треков
     top10ArtistsByTime: -1,
@@ -98509,6 +98563,18 @@ var ProfilePageStates = {
     getTop10TracksShort: function getTop10TracksShort(state) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_length/short').then(function (response) {
         state.top10TracksShort = response.data;
+      });
+    },
+    //получить топ 10 самых популярных треков
+    getTop10PopularTracks: function getTop10PopularTracks(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_popularity/popular').then(function (response) {
+        state.top10PopularTracks = response.data;
+      });
+    },
+    //получить топ 10 самых популярных треков
+    getTop10UnpopularTracks: function getTop10UnpopularTracks(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_popularity/unpopular').then(function (response) {
+        state.top10UnpopularTracks = response.data;
       });
     },
     //получить топ 10 артистов за всё время
@@ -98627,6 +98693,14 @@ var ProfilePageStates = {
     //топ 10 коротких треков
     getTop10TracksShort: function getTop10TracksShort(context) {
       context.commit('getTop10TracksShort');
+    },
+    //топ 10 коротких треков
+    getTop10PopularTracks: function getTop10PopularTracks(context) {
+      context.commit('getTop10PopularTracks');
+    },
+    //топ 10 коротких треков
+    getTop10UnpopularTracks: function getTop10UnpopularTracks(context) {
+      context.commit('getTop10UnpopularTracks');
     },
     //топ 10 исполнителей за все время
     getTop10ArtistsAllTime: function getTop10ArtistsAllTime(context) {

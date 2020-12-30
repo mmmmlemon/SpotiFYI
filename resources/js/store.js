@@ -62,6 +62,8 @@ const ProfilePageStates = {
         top10ArtistsMonth: -1, //топ 10 исполнителей за месяц
         top10TracksLong: -1, //топ 10 длинных треков
         top10TracksShort: -1, //топ 10 коротких треков
+        top10PopularTracks: -1, //топ 10 популярных треков
+        top10UnpopularTracks: -1, //топ 10 непопулярных треков
         top10ArtistsByTracks: -1, //топ 10 исполнителей по кол-ву треков
         top10ArtistsByTime: -1, //топ 10 исполнителей по времени треков
         mostListenedTrack: -1, //самый прослушиваемый трек за все время
@@ -178,6 +180,18 @@ const ProfilePageStates = {
                 state.top10TracksShort = response.data;
               });
           },
+          //получить топ 10 самых популярных треков
+          getTop10PopularTracks(state){
+            axios.get('/api/get_top10_tracks_by_popularity/popular').then((response) => {
+              state.top10PopularTracks = response.data;
+              });
+          },
+          //получить топ 10 самых популярных треков
+          getTop10UnpopularTracks(state){
+            axios.get('/api/get_top10_tracks_by_popularity/unpopular').then((response) => {
+              state.top10UnpopularTracks = response.data;
+              });
+          },
           //получить топ 10 артистов за всё время
           getTop10ArtistsAllTime(state){
             axios.get('/api/get_top10_artists/alltime').then((response) => {
@@ -228,6 +242,7 @@ const ProfilePageStates = {
               state.leastPopularTrack = response.data;
             })
           },
+          
 },
 
     actions: {
@@ -297,6 +312,14 @@ const ProfilePageStates = {
       //топ 10 коротких треков
       getTop10TracksShort(context){
         context.commit('getTop10TracksShort');
+      },
+      //топ 10 коротких треков
+      getTop10PopularTracks(context){
+        context.commit('getTop10PopularTracks');
+      },
+      //топ 10 коротких треков
+      getTop10UnpopularTracks(context){
+        context.commit('getTop10UnpopularTracks');
       },
       //топ 10 исполнителей за все время
       getTop10ArtistsAllTime(context){

@@ -947,6 +947,81 @@ class SpotifyAPIController extends Controller
           { return response()->json(false); }
     }
 
+    //getTop10TracksByPopularity
+    //получить топ 10 треков по популярности
+    //возвращает JSON с топ 10 самых популярных или не популярных треков
+    //параметры: реквест, type - "popular" или "unpopular"
+    public function getTop10TracksByPopularity(Request $request, $type)
+    {
+        //открываем файл с треками
+        $tracks = System::getUserLibraryJson("tracks", $request);
+
+        //если он есть
+        if($tracks != null)
+        {  
+           //получаем все id треков вместе с процентом популярности
+           $tracksClean = [];
+
+           foreach($tracks as $track)
+           {    
+               $trackInfo = [];
+               $trackInfo['id'] =  $track->id;
+               $trackInfo['popularity'] = $track->popularity;
+               $trackInfo['cover'] = $track->album->images[count($track->album->images) - 1]->url;
+               $trackInfo['track_name'] = Helpers::getFullNameOfItem($track);
+               $trackInfo['url'] = $track->external_urls->spotify;
+               $trackInfo['album'] = $track->album->name;
+               $trackInfo['album_url'] = $track->album->external_urls->spotify;
+               $trackInfo['album_year'] = Helpers::getItemReleaseDate($track, "track", "short");
+
+               array_push($tracksClean, $trackInfo);
+           }
+
+           //сортировка по ключу popularity
+           $tracksSorted = "";
+           $topTrackId = "";
+
+           if($type == "popular")
+           { 
+               $tracksSorted = Helpers::sortArrayByKey($tracksClean, 'popularity', 'desc'); 
+           }
+           
+           if($type == "unpopular")
+           { 
+               $tracksSorted = Helpers::sortArrayByKey($tracksClean, 'popularity', 'asc'); 
+           }
+
+           //получаем первые 10 элементов из списка
+           $topTenTracks = array_slice($tracksSorted, 0, 10, true);
+
+           for($i = 1; $i <= count($topTenTracks); $i++)
+           {
+             $topTenTracks[$i-1]['count'] = $i;
+           }
+
+           $checkToken = System::checkSpotifyAccessToken($request);
+
+           if($checkToken != false)
+           {
+                $api = config('spotify_api');
+
+                //случайная обложка
+                $randTrackId = $topTenTracks[rand(0, count($topTenTracks) - 1)]['id'];
+                $albumCover = $api->getTrack($randTrackId)->album->images[0]->url;
+
+                $response = [];
+                $response['tracks'] = $topTenTracks;
+                $response['backgroundImage'] = $albumCover;
+
+               return response()->json($response);
+           }
+           else
+           { return response()->json(false); }
+        }
+        else
+        { return response()->json(false); } 
+    }
+
     //getTop10ArtistsByTracks
     //получить топ 10 исполнителей по кол-ву треков
     //возвращает JSON с топ 10 исполнителей пол кол-ву треков
