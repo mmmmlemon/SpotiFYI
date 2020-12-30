@@ -33,6 +33,9 @@
             <div class="row justify-content-center">
                 <AchievementItem cardTitle="Самый прослушиваемый трек" cardSubtitle="За всё время" :items="mostListenedTrack"/>
                 <AchievementItem cardTitle="Самый прослушиваемый трек" cardSubtitle="За месяц" :items="mostListenedTrackMonth"/>
+                <AchievementItem cardTitle="Самый популярный трек"  cardSubtitle="Который тебе нравится" :items="mostPopularTrack"/>
+                <AchievementItem cardTitle="Самый непопулярный трек"  cardSubtitle="Который тебе нравится" :items="leastPopularTrack"/>
+
 
             </div>
 
@@ -65,6 +68,14 @@ export default {
         if(this.mostListenedTrackMonth == -1)
         { this.$store.dispatch('getMostListenedTrackMonth') };
 
+        //самый популярный трек
+        if(this.mostPopularTrack == -1)
+        { this.$store.dispatch('getMostPopularTrack'); }
+
+        //самый непопулярный трек
+        if(this.leastPopularTrack == -1)
+        { this.$store.dispatch('getLeastPopularTrack'); }
+
     },
     computed: {
         spotifyUserLibrary: function(){
@@ -76,6 +87,12 @@ export default {
         },
         mostListenedTrackMonth: function(){
             return this.$store.state.profilePage.mostListenedTrackMonth;
+        },
+        mostPopularTrack: function(){
+            return this.$store.state.profilePage.mostPopularTrack;
+        },
+        leastPopularTrack: function(){
+            return this.$store.state.profilePage.leastPopularTrack;
         }
     }
 }

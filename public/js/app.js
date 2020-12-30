@@ -2369,6 +2369,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //смена текущего таба
@@ -2389,7 +2392,16 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('getMostListenedTrackMonth');
     }
 
-    ;
+    ; //самый популярный трек
+
+    if (this.mostPopularTrack == -1) {
+      this.$store.dispatch('getMostPopularTrack');
+    } //самый непопулярный трек
+
+
+    if (this.leastPopularTrack == -1) {
+      this.$store.dispatch('getLeastPopularTrack');
+    }
   },
   computed: {
     spotifyUserLibrary: function spotifyUserLibrary() {
@@ -2400,6 +2412,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostListenedTrackMonth: function mostListenedTrackMonth() {
       return this.$store.state.profilePage.mostListenedTrackMonth;
+    },
+    mostPopularTrack: function mostPopularTrack() {
+      return this.$store.state.profilePage.mostPopularTrack;
+    },
+    leastPopularTrack: function leastPopularTrack() {
+      return this.$store.state.profilePage.leastPopularTrack;
     }
   }
 });
@@ -78436,6 +78454,22 @@ var render = function() {
                   cardSubtitle: "За месяц",
                   items: _vm.mostListenedTrackMonth
                 }
+              }),
+              _vm._v(" "),
+              _c("AchievementItem", {
+                attrs: {
+                  cardTitle: "Самый популярный трек",
+                  cardSubtitle: "Который тебе нравится",
+                  items: _vm.mostPopularTrack
+                }
+              }),
+              _vm._v(" "),
+              _c("AchievementItem", {
+                attrs: {
+                  cardTitle: "Самый непопулярный трек",
+                  cardSubtitle: "Который тебе нравится",
+                  items: _vm.leastPopularTrack
+                }
               })
             ],
             1
@@ -78535,79 +78569,85 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-5 margin_sides padding_10" }, [
-    _vm.items == -1
-      ? _c("div", [_c("Loader")], 1)
-      : _vm.items == false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось загрузить данные"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.items != -1 || _vm.items != false
-      ? _c("div", {}, [
-          _c("div", {
-            staticClass: "top10_image_card",
-            style: { backgroundImage: "url('" + _vm.items["image"] + "')" }
-          }),
-          _vm._v(" "),
-          _c(
+  return _c(
+    "div",
+    { staticClass: "col-md-5 margin_sides margin_vertical padding_10" },
+    [
+      _vm.items == -1
+        ? _c("div", [_c("Loader")], 1)
+        : _vm.items == false
+        ? _c(
             "div",
-            { staticClass: "row justify-content-center margin_sides" },
             [
-              _c("div", { staticClass: "col-12" }, [
-                _c("h4", { staticClass: "text-center border_underline" }, [
-                  _vm._v(_vm._s(_vm.cardTitle))
-                ]),
-                _vm._v(" "),
-                _c("h6", { staticClass: "text-center" }, [
-                  _vm._v(_vm._s(_vm.cardSubtitle))
-                ])
-              ]),
-              _vm._v(" "),
-              _c("img", {
-                staticClass: "album_icon_achievement rounded-circle",
-                attrs: { src: _vm.items["image"], alt: "" }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-12" }, [
-                _c("h5", { staticClass: "text-center" }, [
-                  _c(
-                    "a",
-                    { attrs: { target: "_blank", href: _vm.items["url"] } },
-                    [_vm._v(_vm._s(_vm.items["title"]))]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.items["additionalInfo"]
-                  ? _c("p", { staticClass: "text-center" }, [
-                      _vm._v("Дополнительная информация")
-                    ])
-                  : _vm._e()
-              ])
-            ]
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить данные"
+                }
+              })
+            ],
+            1
           )
-        ])
-      : _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "x-small",
-                errorMessage: "Нечего показывать. Параметр items пустой."
-              }
-            })
-          ],
-          1
-        )
-  ])
+        : _vm.items != -1 || _vm.items != false
+        ? _c("div", {}, [
+            _c("div", {
+              staticClass: "top10_image_card",
+              style: { backgroundImage: "url('" + _vm.items["image"] + "')" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row justify-content-center margin_sides" },
+              [
+                _c("div", { staticClass: "col-12" }, [
+                  _c("h4", { staticClass: "text-center border_underline" }, [
+                    _vm._v(_vm._s(_vm.cardTitle))
+                  ]),
+                  _vm._v(" "),
+                  _vm.cardSubtitle != ""
+                    ? _c("h6", { staticClass: "text-center" }, [
+                        _vm._v(_vm._s(_vm.cardSubtitle))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("img", {
+                  staticClass: "album_icon_achievement rounded-circle",
+                  attrs: { src: _vm.items["image"], alt: "" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12" }, [
+                  _c("h5", { staticClass: "text-center" }, [
+                    _c(
+                      "a",
+                      { attrs: { target: "_blank", href: _vm.items["url"] } },
+                      [_vm._v(_vm._s(_vm.items["title"]))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.items["additionalInfo"]
+                    ? _c("p", { staticClass: "text-center" }, [
+                        _vm._v("Дополнительная информация")
+                      ])
+                    : _vm._e()
+                ])
+              ]
+            )
+          ])
+        : _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "x-small",
+                  errorMessage: "Нечего показывать. Параметр items пустой."
+                }
+              })
+            ],
+            1
+          )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -98360,7 +98400,11 @@ var ProfilePageStates = {
     //топ 10 исполнителей по времени треков
     mostListenedTrack: -1,
     //самый прослушиваемый трек за все время
-    mostListenedTrackMonth: -1 //самый прослушиваемый трек за месяц
+    mostListenedTrackMonth: -1,
+    //самый прослушиваемый трек за месяц
+    mostPopularTrack: -1,
+    //самый популярный трек в библиотеке
+    leastPopularTrack: -1 //самый непопулярный трек в библиотеке
 
   },
   mutations: {
@@ -98503,6 +98547,18 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_track/month').then(function (response) {
         state.mostListenedTrackMonth = response.data;
       });
+    },
+    //самый популярный трек
+    getMostPopularTrack: function getMostPopularTrack(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_track_by_popularity/popular').then(function (response) {
+        state.mostPopularTrack = response.data;
+      });
+    },
+    //самый непопулярный трек
+    getLeastPopularTrack: function getLeastPopularTrack(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_track_by_popularity/unpopular').then(function (response) {
+        state.leastPopularTrack = response.data;
+      });
     }
   },
   actions: {
@@ -98596,6 +98652,14 @@ var ProfilePageStates = {
     //самый прослушиваемый трек
     getMostListenedTrackMonth: function getMostListenedTrackMonth(context) {
       context.commit('getMostListenedTrackMonth');
+    },
+    //самый популярный трек
+    getMostPopularTrack: function getMostPopularTrack(context) {
+      context.commit('getMostPopularTrack');
+    },
+    //самый популярный трек
+    getLeastPopularTrack: function getLeastPopularTrack(context) {
+      context.commit('getLeastPopularTrack');
     }
   }
 };

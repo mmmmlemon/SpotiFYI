@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-5 margin_sides padding_10">
+    <div class="col-md-5 margin_sides margin_vertical padding_10">
         <div v-if="items == -1">
             <Loader />
         </div>
@@ -12,7 +12,7 @@
             <div class="row justify-content-center margin_sides">
                 <div class="col-12">
                     <h4 class="text-center border_underline">{{cardTitle}}</h4>
-                    <h6 class="text-center">{{cardSubtitle}}</h6>
+                    <h6 class="text-center" v-if="cardSubtitle != ''">{{cardSubtitle}}</h6>
                 </div>
                 <img :src="items['image']" 
                     class="album_icon_achievement rounded-circle" alt="">

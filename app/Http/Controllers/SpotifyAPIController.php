@@ -1104,6 +1104,7 @@ class SpotifyAPIController extends Controller
 
     //getMostListenedTrack
     //получить самый прослушиваемый трек за всё время или за месяц
+    //возвращает JSON с самым прослушиваемым треком за все время или за месяц
     //параметры: реквест
     public function getMostListenedTrack(Request $request, $type)
     {
@@ -1131,6 +1132,66 @@ class SpotifyAPIController extends Controller
 
             return response()->json($response);
         }
+    }
+
+    //getMostPopularTrack
+    //получить самый популярный или непопулярный трек из твоей библиотеки
+    //возвращает JSON с самым популярным треком
+    //параметры: реквест, type - "popular" или "unpopular"
+    public function getTrackByPopularity(Request $request, $type)
+    {
+         //открываем файл с треками
+         $tracks = System::getUserLibraryJson("tracks", $request);
+
+         //если он есть
+         if($tracks != null)
+         {  
+            //получаем все id треков вместе с процентом популярности
+            $trackIds = [];
+
+            foreach($tracks as $track)
+            {
+                array_push($trackIds, ['id' => $track->id, 'popularity' => $track->popularity]);
+            }
+
+            //сортировка по ключу popularity
+            $tracksSorted = "";
+            $topTrackId = "";
+
+            if($type == "popular")
+            { 
+                $tracksSorted = Helpers::sortArrayByKey($trackIds, 'popularity', 'desc'); 
+              
+            }
+            
+            if($type == "unpopular")
+            { 
+                $tracksSorted = Helpers::sortArrayByKey($trackIds, 'popularity', 'asc'); 
+            }
+
+            $topTrackId = $tracksSorted[0]['id'];
+
+            $checkToken = System::checkSpotifyAccessToken($request);
+
+            if($checkToken != false)
+            {
+                $api = config('spotify_api');
+
+                $track = $api->getTrack($topTrackId);
+
+                $response = [
+                    'title' => Helpers::getFullNameOfItem($track),
+                    'url' => $track->external_urls->spotify,
+                    'image' => $track->album->images[0]->url,
+                ];
+
+                return response()->json($response);
+            }
+            else
+            { return response()->json(false); }
+         }
+         else
+         { return response()->json(false); }
     }
 
 }
