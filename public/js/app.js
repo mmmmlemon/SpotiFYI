@@ -2368,6 +2368,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //смена текущего таба
@@ -2375,12 +2376,30 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.spotifyUserLibrary == -1) {
       this.$store.dispatch('getSpotifyUserLibrary');
+    } //самый прослушиваемый трек
+
+
+    if (this.mostListenedTrack == -1) {
+      this.$store.dispatch('getMostListenedTrack');
     }
+
+    ; //самый прослушиваемый трек за месяц
+
+    if (this.mostListenedTrackMonth == -1) {
+      this.$store.dispatch('getMostListenedTrackMonth');
+    }
+
+    ;
   },
   computed: {
     spotifyUserLibrary: function spotifyUserLibrary() {
-      // return this.$store.state.profilePage.spotifyUserLibrary;
-      return true;
+      return this.$store.state.profilePage.spotifyUserLibrary; // return true;
+    },
+    mostListenedTrack: function mostListenedTrack() {
+      return this.$store.state.profilePage.mostListenedTrack;
+    },
+    mostListenedTrackMonth: function mostListenedTrackMonth() {
+      return this.$store.state.profilePage.mostListenedTrackMonth;
     }
   }
 });
@@ -2425,8 +2444,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    cardTitle: {
+      "default": ''
+    },
+    cardSubtitle: {
+      "default": ''
+    },
     items: {
       "default": -1
     }
@@ -78395,7 +78421,23 @@ var render = function() {
           _c(
             "div",
             { staticClass: "row justify-content-center" },
-            [_c("AchievementItem", { attrs: { items: true } })],
+            [
+              _c("AchievementItem", {
+                attrs: {
+                  cardTitle: "Самый прослушиваемый трек",
+                  cardSubtitle: "За всё время",
+                  items: _vm.mostListenedTrack
+                }
+              }),
+              _vm._v(" "),
+              _c("AchievementItem", {
+                attrs: {
+                  cardTitle: "Самый прослушиваемый трек",
+                  cardSubtitle: "За месяц",
+                  items: _vm.mostListenedTrackMonth
+                }
+              })
+            ],
             1
           )
         ])
@@ -78493,7 +78535,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "col-md-5 margin_sides padding_10" }, [
     _vm.items == -1
       ? _c("div", [_c("Loader")], 1)
       : _vm.items == false
@@ -78510,16 +78552,48 @@ var render = function() {
           1
         )
       : _vm.items != -1 || _vm.items != false
-      ? _c("div", { staticClass: "col-md-5 grey_card margin_sides" }, [
+      ? _c("div", {}, [
           _c("div", {
             staticClass: "top10_image_card",
-            staticStyle: {
-              "background-image":
-                "url('https://www.opinion-internationale.com/wp-content/uploads/2019/09/abbeyroad5_uk.jpg')"
-            }
+            style: { backgroundImage: "url('" + _vm.items["image"] + "')" }
           }),
           _vm._v(" "),
-          _vm._m(0)
+          _c(
+            "div",
+            { staticClass: "row justify-content-center margin_sides" },
+            [
+              _c("div", { staticClass: "col-12" }, [
+                _c("h4", { staticClass: "text-center border_underline" }, [
+                  _vm._v(_vm._s(_vm.cardTitle))
+                ]),
+                _vm._v(" "),
+                _c("h6", { staticClass: "text-center" }, [
+                  _vm._v(_vm._s(_vm.cardSubtitle))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "album_icon_achievement rounded-circle",
+                attrs: { src: _vm.items["image"], alt: "" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12" }, [
+                _c("h5", { staticClass: "text-center" }, [
+                  _c(
+                    "a",
+                    { attrs: { target: "_blank", href: _vm.items["url"] } },
+                    [_vm._v(_vm._s(_vm.items["title"]))]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.items["additionalInfo"]
+                  ? _c("p", { staticClass: "text-center" }, [
+                      _vm._v("Дополнительная информация")
+                    ])
+                  : _vm._e()
+              ])
+            ]
+          )
         ])
       : _c(
           "div",
@@ -78535,45 +78609,7 @@ var render = function() {
         )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "row justify-content-center margin_sides" },
-      [
-        _c("div", { staticClass: "col-12" }, [
-          _c("h4", { staticClass: "text-center border_underline" }, [
-            _vm._v("Самый самый что-то там")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "album_icon_achievement rounded-circle",
-          attrs: {
-            src:
-              "https://www.opinion-internationale.com/wp-content/uploads/2019/09/abbeyroad5_uk.jpg",
-            alt: ""
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12" }, [
-          _c("h5", { staticClass: "text-center" }, [
-            _c("a", { attrs: { href: "" } }, [
-              _vm._v("Исполнитель - Название трека")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-center" }, [
-            _vm._v("Дополнительная информация")
-          ])
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -98320,7 +98356,11 @@ var ProfilePageStates = {
     //топ 10 коротких треков
     top10ArtistsByTracks: -1,
     //топ 10 исполнителей по кол-ву треков
-    top10ArtistsByTime: -1 //топ 10 исполнителей по времени треков
+    top10ArtistsByTime: -1,
+    //топ 10 исполнителей по времени треков
+    mostListenedTrack: -1,
+    //самый прослушиваемый трек за все время
+    mostListenedTrackMonth: -1 //самый прослушиваемый трек за месяц
 
   },
   mutations: {
@@ -98450,6 +98490,19 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists_by_time').then(function (response) {
         state.top10ArtistsByTime = response.data;
       });
+    },
+    //ачивки
+    //самый прослушиваемый трек
+    getMostListenedTrack: function getMostListenedTrack(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_track/alltime').then(function (response) {
+        state.mostListenedTrack = response.data;
+      });
+    },
+    //самый прослушиваемый трек за месяц
+    getMostListenedTrackMonth: function getMostListenedTrackMonth(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_track/month').then(function (response) {
+        state.mostListenedTrackMonth = response.data;
+      });
     }
   },
   actions: {
@@ -98534,6 +98587,15 @@ var ProfilePageStates = {
     //топ 10 исполнителей по времени треков
     getTop10ArtistsByTime: function getTop10ArtistsByTime(context) {
       context.commit('getTop10ArtistsByTime');
+    },
+    //ачивки
+    //самый прослушиваемый трек за все время
+    getMostListenedTrack: function getMostListenedTrack(context) {
+      context.commit('getMostListenedTrack');
+    },
+    //самый прослушиваемый трек
+    getMostListenedTrackMonth: function getMostListenedTrackMonth(context) {
+      context.commit('getMostListenedTrackMonth');
     }
   }
 };

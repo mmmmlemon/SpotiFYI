@@ -45,4 +45,5 @@ Route::get('/get_top10_artists/{top10Artists}', 'SpotifyAPIController@getTop10Ar
 Route::get('/get_top10_tracks_by_length/{top10Type}', 'SpotifyAPIController@getTop10TracksByLength'); //получить топ 10 самых длинных сили самых коротких треков
 Route::get('/get_top10_artists_by_tracks', 'SpotifyAPIController@getTop10ArtistsByTracks'); //получить топ 10 артистов по кол-ву треков в библиотеке
 Route::get('/get_top10_artists_by_time', 'SpotifyAPIController@getTop10ArtistsByTime'); //получить топ 10 артистов по кол-ву времени треков
+Route::get('/get_most_listened_track/{type}', 'SpotifyAPIController@getMostListenedTrack'); //получить самый прослушиваемый трек за все время или за месяц
 ?>

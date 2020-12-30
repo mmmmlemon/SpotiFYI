@@ -64,6 +64,8 @@ const ProfilePageStates = {
         top10TracksShort: -1, //топ 10 коротких треков
         top10ArtistsByTracks: -1, //топ 10 исполнителей по кол-ву треков
         top10ArtistsByTime: -1, //топ 10 исполнителей по времени треков
+        mostListenedTrack: -1, //самый прослушиваемый трек за все время
+        mostListenedTrackMonth: -1, //самый прослушиваемый трек за месяц
       },
 
     mutations: {
@@ -197,6 +199,20 @@ const ProfilePageStates = {
             axios.get('/api/get_top10_artists_by_time').then((response) => {
               state.top10ArtistsByTime = response.data;
             })
+          },
+
+          //ачивки
+          //самый прослушиваемый трек
+          getMostListenedTrack(state){
+            axios.get('/api/get_most_listened_track/alltime').then((response) => {
+              state.mostListenedTrack = response.data;
+            })
+          },
+          //самый прослушиваемый трек за месяц
+          getMostListenedTrackMonth(state){
+            axios.get('/api/get_most_listened_track/month').then((response) => {
+              state.mostListenedTrackMonth = response.data;
+            })
           }
 },
 
@@ -284,6 +300,17 @@ const ProfilePageStates = {
       getTop10ArtistsByTime(context){
         context.commit('getTop10ArtistsByTime');
       },
+
+      //ачивки
+      //самый прослушиваемый трек за все время
+      getMostListenedTrack(context){
+        context.commit('getMostListenedTrack');
+      },
+      //самый прослушиваемый трек
+      getMostListenedTrackMonth(context){
+        context.commit('getMostListenedTrackMonth');
+      }
+
   }
 }
 

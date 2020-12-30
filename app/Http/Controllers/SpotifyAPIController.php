@@ -1102,4 +1102,35 @@ class SpotifyAPIController extends Controller
         { return response()->json(false); }
     }
 
+    //getMostListenedTrack
+    //получить самый прослушиваемый трек за всё время или за месяц
+    //параметры: реквест
+    public function getMostListenedTrack(Request $request, $type)
+    {
+        //проверка токена
+        $checkToken = System::checkSpotifyAccessToken($request);
+
+        //если токен рабочий
+        if($checkToken != false)
+        {
+            //получаем cамый прослушиваемый трек
+            $api = config('spotify_api');
+
+            $topTrack = "";
+
+            if($type == "alltime")
+            { $topTrack =  $api->getMyTop('tracks', ['limit' => 1, 'time_range' => 'long_term'])->items[0]; }
+            elseif($type == "month")
+            { $topTrack = $api->getMyTop('tracks', ['limit' => 1, 'time_range' => 'short_term'])->items[0]; }
+
+            $response = [
+                'title' => Helpers::getFullNameOfItem($topTrack),
+                'url' => $topTrack->external_urls->spotify,
+                'image' => $topTrack->album->images[0]->url,
+            ];
+
+            return response()->json($response);
+        }
+    }
+
 }
