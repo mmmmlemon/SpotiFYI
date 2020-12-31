@@ -67,14 +67,14 @@
                                 listType="tracks"/>
 
                     <!-- топ 10 исполнители -->
-                    <div class="col-12 justify-content-center" id="artists" v-if="top10TracksShort != -1">
+                    <div class="col-12 justify-content-center" id="artists" v-if="top10UnpopularTracks != -1">
                         <h3 class="text-center">
                             Исполнители
                             <i class="fas fa-users primary_color"></i>
                         </h3>
                     </div>
 
-                    <Top10Items v-if="top10TracksShort != -1"
+                    <Top10Items v-if="top10UnpopularTracks != -1"
                                 cardTitle="Топ 10 артистов за все время" 
                                 cardDesc="Десять твоих самых прослушиваемых артистов за все время." 
                                 :items="top10ArtistsAllTime"

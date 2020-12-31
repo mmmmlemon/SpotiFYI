@@ -78545,73 +78545,98 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("AchievementItem", {
-                attrs: {
-                  cardTitle: "Самый прослушиваемый трек",
-                  cardSubtitle: "За месяц",
-                  items: _vm.mostListenedTrackMonth
-                }
-              }),
+              _vm.mostListenedTrack != -1
+                ? _c("AchievementItem", {
+                    attrs: {
+                      cardTitle: "Самый прослушиваемый трек",
+                      cardSubtitle: "За месяц",
+                      items: _vm.mostListenedTrackMonth
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
-              _c("AchievementItem", {
-                attrs: {
-                  cardTitle: "Самый популярный трек",
-                  cardSubtitle: "Который тебе нравится",
-                  items: _vm.mostPopularTrack
-                }
-              }),
+              _vm.mostListenedTrackMonth != -1
+                ? _c("AchievementItem", {
+                    attrs: {
+                      cardTitle: "Самый популярный трек",
+                      cardSubtitle: "Который тебе нравится",
+                      items: _vm.mostPopularTrack
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
-              _c("AchievementItem", {
-                attrs: {
-                  cardTitle: "Самый непопулярный трек",
-                  cardSubtitle: "Который тебе нравится",
-                  items: _vm.leastPopularTrack
-                }
-              }),
+              _vm.mostPopularTrack != -1
+                ? _c("AchievementItem", {
+                    attrs: {
+                      cardTitle: "Самый непопулярный трек",
+                      cardSubtitle: "Который тебе нравится",
+                      items: _vm.leastPopularTrack
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
-              _c("AchievementItem", {
-                attrs: {
-                  cardTitle: "Самый длинный трек",
-                  cardSubtitle: "Который тебе нравится",
-                  items: _vm.longestTrack
-                }
-              }),
+              _vm.leastPopularTrack != -1
+                ? _c("AchievementItem", {
+                    attrs: {
+                      cardTitle: "Самый длинный трек",
+                      cardSubtitle: "Который тебе нравится",
+                      items: _vm.longestTrack
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
-              _c("AchievementItem", {
-                attrs: {
-                  cardTitle: "Самый короткий трек",
-                  cardSubtitle: "Который тебе нравится",
-                  items: _vm.shortestTrack
-                }
-              })
+              _vm.longestTrack != -1
+                ? _c("AchievementItem", {
+                    attrs: {
+                      cardTitle: "Самый короткий трек",
+                      cardSubtitle: "Который тебе нравится",
+                      items: _vm.shortestTrack
+                    }
+                  })
+                : _vm._e()
             ],
             1
           ),
           _vm._v(" "),
-          _vm._m(3),
+          _vm.shortestTrack != -1
+            ? _c(
+                "div",
+                {
+                  staticClass: "col-12 justify-content-center fade_in_anim",
+                  attrs: { id: "tracks" }
+                },
+                [_vm._m(3)]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row justify-content-center" },
-            [
-              _c("AchievementItem", {
-                attrs: {
-                  cardTitle: "Самый слушаемый исполнитель",
-                  cardSubtitle: "За всё время",
-                  items: _vm.mostListenedArtist
-                }
-              }),
-              _vm._v(" "),
-              _c("AchievementItem", {
-                attrs: {
-                  cardTitle: "Самый слушаемый исполнитель",
-                  cardSubtitle: "За месяц",
-                  items: _vm.mostListenedArtistMonth
-                }
-              })
-            ],
-            1
-          )
+          _vm.shortestTrack != -1
+            ? _c(
+                "div",
+                { staticClass: "row justify-content-center" },
+                [
+                  _vm.shortestTrack != -1
+                    ? _c("AchievementItem", {
+                        attrs: {
+                          cardTitle: "Самый слушаемый исполнитель",
+                          cardSubtitle: "За всё время",
+                          items: _vm.mostListenedArtist
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostListenedArtist != -1
+                    ? _c("AchievementItem", {
+                        attrs: {
+                          cardTitle: "Самый слушаемый исполнитель",
+                          cardSubtitle: "За месяц",
+                          items: _vm.mostListenedArtistMonth
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            : _vm._e()
         ])
       : _vm.spotifyUserLibrary == false
       ? _c(
@@ -78689,19 +78714,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "col-12 justify-content-center fade_in_anim",
-        attrs: { id: "tracks" }
-      },
-      [
-        _c("h3", { staticClass: "text-center" }, [
-          _vm._v("\n                Исполнители\n                "),
-          _c("i", { staticClass: "fas fa-users primary_color" })
-        ])
-      ]
-    )
+    return _c("h3", { staticClass: "text-center" }, [
+      _vm._v("\n                Исполнители\n                "),
+      _c("i", { staticClass: "fas fa-users primary_color" })
+    ])
   }
 ]
 render._withStripped = true
@@ -80055,7 +80071,7 @@ var render = function() {
                     })
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.top10TracksShort != -1
+                _vm.top10UnpopularTracks != -1
                   ? _c(
                       "div",
                       {
@@ -80066,7 +80082,7 @@ var render = function() {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.top10TracksShort != -1
+                _vm.top10UnpopularTracks != -1
                   ? _c("Top10Items", {
                       attrs: {
                         cardTitle: "Топ 10 артистов за все время",

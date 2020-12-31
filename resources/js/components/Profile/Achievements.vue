@@ -32,24 +32,24 @@
 
             <div class="row justify-content-center">
                 <AchievementItem cardTitle="Самый прослушиваемый трек" cardSubtitle="За всё время" :items="mostListenedTrack"/>
-                <AchievementItem cardTitle="Самый прослушиваемый трек" cardSubtitle="За месяц" :items="mostListenedTrackMonth"/>
-                <AchievementItem cardTitle="Самый популярный трек"  cardSubtitle="Который тебе нравится" :items="mostPopularTrack"/>
-                <AchievementItem cardTitle="Самый непопулярный трек"  cardSubtitle="Который тебе нравится" :items="leastPopularTrack"/>
-                <AchievementItem cardTitle="Самый длинный трек"  cardSubtitle="Который тебе нравится" :items="longestTrack"/>
-                <AchievementItem cardTitle="Самый короткий трек"  cardSubtitle="Который тебе нравится" :items="shortestTrack"/>
+                <AchievementItem v-if="mostListenedTrack != -1" cardTitle="Самый прослушиваемый трек" cardSubtitle="За месяц" :items="mostListenedTrackMonth"/>
+                <AchievementItem v-if="mostListenedTrackMonth != -1" cardTitle="Самый популярный трек"  cardSubtitle="Который тебе нравится" :items="mostPopularTrack"/>
+                <AchievementItem v-if="mostPopularTrack != -1" cardTitle="Самый непопулярный трек"  cardSubtitle="Который тебе нравится" :items="leastPopularTrack"/>
+                <AchievementItem v-if="leastPopularTrack != -1" cardTitle="Самый длинный трек"  cardSubtitle="Который тебе нравится" :items="longestTrack"/>
+                <AchievementItem v-if="longestTrack != -1" cardTitle="Самый короткий трек"  cardSubtitle="Который тебе нравится" :items="shortestTrack"/>
             </div>
 
             <!-- исполнители -->
-            <div class="col-12 justify-content-center fade_in_anim" id="tracks">
+            <div v-if="shortestTrack != -1" class="col-12 justify-content-center fade_in_anim" id="tracks">
                 <h3 class="text-center">
                     Исполнители
                     <i class="fas fa-users primary_color"></i>
                 </h3>
             </div>
 
-            <div class="row justify-content-center">
-                <AchievementItem cardTitle="Самый слушаемый исполнитель" cardSubtitle="За всё время" :items="mostListenedArtist"/>
-                <AchievementItem cardTitle="Самый слушаемый исполнитель" cardSubtitle="За месяц" :items="mostListenedArtistMonth"/>
+            <div class="row justify-content-center" v-if="shortestTrack != -1">
+                <AchievementItem v-if="shortestTrack != -1" cardTitle="Самый слушаемый исполнитель" cardSubtitle="За всё время" :items="mostListenedArtist"/>
+                <AchievementItem v-if="mostListenedArtist != -1" cardTitle="Самый слушаемый исполнитель" cardSubtitle="За месяц" :items="mostListenedArtistMonth"/>
             </div>
 
 
