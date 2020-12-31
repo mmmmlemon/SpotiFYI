@@ -1240,6 +1240,7 @@ class SpotifyAPIController extends Controller
 
             $response = [
                 'title' => Helpers::getFullNameOfItem($topTrack),
+                'album' => $topTrack->album->name . " (". Helpers::getItemReleaseDate($topTrack, "track", "short") .")",
                 'url' => $topTrack->external_urls->spotify,
                 'image' => $topTrack->album->images[0]->url,
             ];
@@ -1295,6 +1296,7 @@ class SpotifyAPIController extends Controller
 
                 $response = [
                     'title' => Helpers::getFullNameOfItem($track),
+                    'album' => $track->album->name . " (". Helpers::getItemReleaseDate($track, "track", "short") .")",
                     'url' => $track->external_urls->spotify,
                     'image' => $track->album->images[0]->url,
                 ];

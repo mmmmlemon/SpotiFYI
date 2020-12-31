@@ -2463,6 +2463,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     cardTitle: {
@@ -78648,7 +78649,10 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "row justify-content-center margin_sides" },
+              {
+                staticClass:
+                  "row justify-content-center margin_sides fade_in_anim"
+              },
               [
                 _c("div", { staticClass: "col-12" }, [
                   _c("h4", { staticClass: "text-center border_underline" }, [
@@ -78674,6 +78678,18 @@ var render = function() {
                       { attrs: { target: "_blank", href: _vm.items["url"] } },
                       [_vm._v(_vm._s(_vm.items["title"]))]
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "text-center" }, [
+                    _vm.items["album"]
+                      ? _c(
+                          "a",
+                          {
+                            attrs: { target: "_blank", href: _vm.items["url"] }
+                          },
+                          [_vm._v(_vm._s(_vm.items["album"]))]
+                        )
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _vm.items["additionalInfo"]
