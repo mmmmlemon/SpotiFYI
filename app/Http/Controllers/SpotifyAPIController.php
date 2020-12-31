@@ -1310,4 +1310,88 @@ class SpotifyAPIController extends Controller
          { return response()->json(false); }
     }
 
+    //getTrackByDuration
+    //получить самый длинный или короткий трек
+    //возвращает JSON с самым длинным или коротким треком
+    //параметры: реквест, type - "long" или "short"
+    public function getTrackByDuration(Request $request, $type)
+    {
+        //открываем файл с треками
+        $tracks = System::getUserLibraryJson("tracks", $request);
+
+        //если он есть
+        if($tracks != null)
+        {  
+            //получаем id треков и их длину, сортируем
+            $trackIds = [];
+
+            foreach($tracks as $track)
+            { array_push($trackIds, ['id' => $track->id, 'duration' => $track->duration_ms]); }
+
+            $sortType = "desc";
+
+            if($type == "long")
+            { $sortType = "desc"; }
+
+            if($type == "short")
+            { $sortType = "asc"; }
+
+            $trackIdsSorted = Helpers::sortArrayBYKey($trackIds, 'duration', $sortType);
+
+            //проверяем токен
+            $checkToken = System::checkSpotifyAccessToken($request);
+
+            if($checkToken != false)
+            {
+                $api = config('spotify_api');
+
+                $track = $api->getTrack($trackIdsSorted[0]['id']);
+
+                $response = [
+                    'title' => Helpers::getFullNameOfItem($track),
+                    'album' => $track->album->name . " (". Helpers::getItemReleaseDate($track, "track", "short") .")",
+                    'url' => $track->external_urls->spotify,
+                    'image' => $track->album->images[0]->url,
+                    'additionalInfo' => "Длина - " . Helpers::trackDuration($track->duration_ms),
+                ];
+
+                return response()->json($response);
+            }
+        }
+    }
+
+    //getMostListenedArtist
+    //получить самого слушаемого исполнителя за все время или за месяц
+    //возвращает JSON с самым слушаемым исполнителем
+    //параметры: реквест, type - "alltime" или "month"
+    public function getMostListenedArtist(Request $request, $type)
+    {
+        //проверка токена
+        $checkToken = System::checkSpotifyAccessToken($request);
+
+        //если токен действительный
+        if($checkToken != false)
+        {   
+            //получаем api и самого слушаемого исполнителя
+            $api = config('spotify_api');
+
+            $timeRange = "long_term";
+
+            if($type == "alltime")
+            { $timeRange = "long_term"; }
+            if($type == "month")
+            { $timeRange = "short_term"; }
+
+            $topArtist = $api->getMyTop('artists', ['limit' => 1, 'time_range' => $timeRange])->items[0];
+
+            $response = [
+                'title' => $topArtist->name,
+                'url' => $topArtist->external_urls->spotify,
+                'image' => $topArtist->images[0]->url,
+            ];
+
+            return response()->json($response);
+        }
+    }
+
 }

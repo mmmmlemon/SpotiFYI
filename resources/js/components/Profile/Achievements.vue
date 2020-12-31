@@ -35,8 +35,21 @@
                 <AchievementItem cardTitle="Самый прослушиваемый трек" cardSubtitle="За месяц" :items="mostListenedTrackMonth"/>
                 <AchievementItem cardTitle="Самый популярный трек"  cardSubtitle="Который тебе нравится" :items="mostPopularTrack"/>
                 <AchievementItem cardTitle="Самый непопулярный трек"  cardSubtitle="Который тебе нравится" :items="leastPopularTrack"/>
+                <AchievementItem cardTitle="Самый длинный трек"  cardSubtitle="Который тебе нравится" :items="longestTrack"/>
+                <AchievementItem cardTitle="Самый короткий трек"  cardSubtitle="Который тебе нравится" :items="shortestTrack"/>
+            </div>
 
+            <!-- исполнители -->
+            <div class="col-12 justify-content-center fade_in_anim" id="tracks">
+                <h3 class="text-center">
+                    Исполнители
+                    <i class="fas fa-users primary_color"></i>
+                </h3>
+            </div>
 
+            <div class="row justify-content-center">
+                <AchievementItem cardTitle="Самый слушаемый исполнитель" cardSubtitle="За всё время" :items="mostListenedArtist"/>
+                <AchievementItem cardTitle="Самый слушаемый исполнитель" cardSubtitle="За месяц" :items="mostListenedArtistMonth"/>
             </div>
 
 
@@ -76,6 +89,22 @@ export default {
         if(this.leastPopularTrack == -1)
         { this.$store.dispatch('getLeastPopularTrack'); }
 
+        //самый длинный трек
+        if(this.longestTrack == -1)
+        { this.$store.dispatch('getLongestTrack'); }
+
+        //самый короткий трек
+        if(this.shortestTrack == -1)
+        { this.$store.dispatch('getShortestTrack'); }
+
+        //самый слушаемый артист
+        if(this.mostListenedArtist == -1)
+        { this.$store.dispatch('getMostListenedArtist'); }
+
+        //самый слушаемый артист за месяц
+        if(this.mostListenedArtistMonth == -1)
+        { this.$store.dispatch('getMostListenedArtistMonth'); }
+
     },
     computed: {
         spotifyUserLibrary: function(){
@@ -93,6 +122,18 @@ export default {
         },
         leastPopularTrack: function(){
             return this.$store.state.profilePage.leastPopularTrack;
+        },
+        longestTrack: function(){
+            return this.$store.state.profilePage.longestTrack;
+        },
+        shortestTrack: function(){
+            return this.$store.state.profilePage.shortestTrack;
+        },
+        mostListenedArtist: function(){
+            return this.$store.state.profilePage.mostListenedArtist;
+        },
+        mostListenedArtistMonth: function(){
+            return this.$store.state.profilePage.mostListenedArtistMonth;
         }
     }
 }

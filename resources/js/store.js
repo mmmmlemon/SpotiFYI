@@ -67,10 +67,15 @@ const ProfilePageStates = {
         top10UnpopularTracks: -1, //топ 10 непопулярных треков
         top10ArtistsByTracks: -1, //топ 10 исполнителей по кол-ву треков
         top10ArtistsByTime: -1, //топ 10 исполнителей по времени треков
+
         mostListenedTrack: -1, //самый прослушиваемый трек за все время
         mostListenedTrackMonth: -1, //самый прослушиваемый трек за месяц
         mostPopularTrack: -1, //самый популярный трек в библиотеке
         leastPopularTrack: -1, //самый непопулярный трек в библиотеке
+        longestTrack: -1, //самый длинный трек
+        shortestTrack: -1, //самый короткий трек
+        mostListenedArtist: -1, //самый слушаемый артист
+        mostListenedArtistMonth: -1, //самый слушаемый артист за месяц
       },
 
     mutations: {
@@ -249,7 +254,31 @@ const ProfilePageStates = {
               state.leastPopularTrack = response.data;
             })
           },
-          
+          //самый длинный трек
+          getLongestTrack(state){
+            axios.get('/api/get_track_by_duration/long').then((response) => {
+              state.longestTrack = response.data;
+            })
+          },
+          //самый короткий трек
+          getShortestTrack(state){
+            axios.get('/api/get_track_by_duration/short').then((response) => {
+              state.shortestTrack = response.data;
+            })
+          },
+          //самый слушаемый артист
+          getMostListenedArtist(state){
+            axios.get('/api/get_most_listened_artist/alltime').then((response) => {
+              state.mostListenedArtist = response.data;
+            })
+          },
+          //самый короткий трек
+          getMostListenedArtistMonth(state){
+            axios.get('/api/get_most_listened_artist/month').then((response) => {
+              state.mostListenedArtistMonth = response.data;
+            })
+          },
+      
 },
 
     actions: {
@@ -365,7 +394,24 @@ const ProfilePageStates = {
       //самый популярный трек
       getLeastPopularTrack(context){
         context.commit('getLeastPopularTrack');
-      }
+      },
+      //самый длинный трек
+      getLongestTrack(context){
+        context.commit('getLongestTrack');
+      },
+      //самый короткий трек
+      getShortestTrack(context){
+        context.commit('getShortestTrack');
+      },
+      //самый слушаемый артист
+      getMostListenedArtist(context){
+        context.commit('getMostListenedArtist');
+      },
+      //самый слушаемый артист за месяц
+      getMostListenedArtistMonth(context){
+        context.commit('getMostListenedArtistMonth');
+      },
+
 
   }
 }
