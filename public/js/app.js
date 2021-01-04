@@ -2385,6 +2385,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //смена текущего таба
@@ -2434,6 +2436,16 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.mostListenedArtistMonth == -1) {
       this.$store.dispatch('getMostListenedArtistMonth');
+    } //артист с наибольшим кол-вом треков
+
+
+    if (this.topArtistByTracks == -1) {
+      this.$store.dispatch('getArtistByTracks');
+    } //артист с наибольшим кол-вом времени треков
+
+
+    if (this.topArtistByTime == -1) {
+      this.$store.dispatch('getArtistByTime');
     }
   },
   computed: {
@@ -2463,6 +2475,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostListenedArtistMonth: function mostListenedArtistMonth() {
       return this.$store.state.profilePage.mostListenedArtistMonth;
+    },
+    topArtistByTracks: function topArtistByTracks() {
+      return this.$store.state.profilePage.topArtistByTracks;
+    },
+    topArtistByTime: function topArtistByTime() {
+      return this.$store.state.profilePage.topArtistByTime;
     }
   }
 });
@@ -78632,6 +78650,26 @@ var render = function() {
                           items: _vm.mostListenedArtistMonth
                         }
                       })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostListenedArtistMonth != -1
+                    ? _c("AchievementItem", {
+                        attrs: {
+                          cardTitle: "Исполнитель",
+                          cardSubtitle: "С наибольшим кол-вом треков",
+                          items: _vm.topArtistByTracks
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.topArtistByTracks != -1
+                    ? _c("AchievementItem", {
+                        attrs: {
+                          cardTitle: "Исполнитель",
+                          cardSubtitle: "С наибольшим кол-вом времени треков",
+                          items: _vm.topArtistByTime
+                        }
+                      })
                     : _vm._e()
                 ],
                 1
@@ -98717,7 +98755,11 @@ var ProfilePageStates = {
     //самый короткий трек
     mostListenedArtist: -1,
     //самый слушаемый артист
-    mostListenedArtistMonth: -1 //самый слушаемый артист за месяц
+    mostListenedArtistMonth: -1,
+    //самый слушаемый артист за месяц
+    topArtistByTracks: -1,
+    //артист с наибольшим кол-вом треков
+    topArtistByTime: -1 //артист с наибольшим кол-вом временем треков
 
   },
   mutations: {
@@ -98914,6 +98956,18 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_artist/month').then(function (response) {
         state.mostListenedArtistMonth = response.data;
       });
+    },
+    //артист с наибольшим кол-вом треков
+    getArtistByTracks: function getArtistByTracks(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_tracks').then(function (response) {
+        state.topArtistByTracks = response.data;
+      });
+    },
+    //артист с наибольшим кол-вом треков
+    getArtistByTime: function getArtistByTime(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_time').then(function (response) {
+        state.topArtistByTime = response.data;
+      });
     }
   },
   actions: {
@@ -99043,6 +99097,14 @@ var ProfilePageStates = {
     //самый слушаемый артист за месяц
     getMostListenedArtistMonth: function getMostListenedArtistMonth(context) {
       context.commit('getMostListenedArtistMonth');
+    },
+    //артист с наибольшим кол-вом треков
+    getArtistByTracks: function getArtistByTracks(context) {
+      context.commit('getArtistByTracks');
+    },
+    //артист с наибольшим кол-вом времени треков
+    getArtistByTime: function getArtistByTime(context) {
+      context.commit('getArtistByTime');
     }
   }
 };

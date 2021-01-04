@@ -50,6 +50,8 @@
             <div class="row justify-content-center" v-if="shortestTrack != -1">
                 <AchievementItem v-if="shortestTrack != -1" cardTitle="Самый слушаемый исполнитель" cardSubtitle="За всё время" :items="mostListenedArtist"/>
                 <AchievementItem v-if="mostListenedArtist != -1" cardTitle="Самый слушаемый исполнитель" cardSubtitle="За месяц" :items="mostListenedArtistMonth"/>
+                <AchievementItem v-if="mostListenedArtistMonth != -1" cardTitle="Исполнитель" cardSubtitle="С наибольшим кол-вом треков" :items="topArtistByTracks"/>
+                <AchievementItem v-if="topArtistByTracks != -1" cardTitle="Исполнитель" cardSubtitle="С наибольшим кол-вом времени треков" :items="topArtistByTime"/>
             </div>
 
 
@@ -105,6 +107,14 @@ export default {
         if(this.mostListenedArtistMonth == -1)
         { this.$store.dispatch('getMostListenedArtistMonth'); }
 
+        //артист с наибольшим кол-вом треков
+        if(this.topArtistByTracks == -1)
+        { this.$store.dispatch('getArtistByTracks'); }
+
+        //артист с наибольшим кол-вом времени треков
+        if(this.topArtistByTime == -1)
+        { this.$store.dispatch('getArtistByTime'); }
+
     },
     computed: {
         spotifyUserLibrary: function(){
@@ -134,7 +144,13 @@ export default {
         },
         mostListenedArtistMonth: function(){
             return this.$store.state.profilePage.mostListenedArtistMonth;
-        }
+        },
+        topArtistByTracks: function(){
+            return this.$store.state.profilePage.topArtistByTracks;
+        },
+        topArtistByTime: function(){
+            return this.$store.state.profilePage.topArtistByTime;
+        },
     }
 }
 </script>

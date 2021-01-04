@@ -414,7 +414,7 @@ class SpotifyAPIController extends Controller
         $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
-        if($tracks != null)
+        if($tracks != false)
         {   
             $durationMs = []; //записываем массив с длиной треков в миллисекундах
             
@@ -444,7 +444,7 @@ class SpotifyAPIController extends Controller
     {
         $tracks = System::getUserLibraryJson("tracks", $request);
 
-        if($tracks != null)
+        if($tracks != false)
         {
             $lenOfTracks = count($tracks); //длина массива tracks
 
@@ -507,7 +507,7 @@ class SpotifyAPIController extends Controller
                 $tracks = $api->getMyTop('tracks', ['limit' => 49, 'time_range' => 'short_term', 'offset' => $offset])->items;
 
                 //если треки есть
-                if($tracks != null)
+                if($tracks != false)
                 {   
                     $artistsArray = []; //массив для исполнителей
                     $genresArray = []; //массив для жанров
@@ -571,7 +571,7 @@ class SpotifyAPIController extends Controller
         $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
-        if($tracks != null)
+        if($tracks != false)
         {
             $artistsArray = []; //массив для исполнителей
 
@@ -664,7 +664,7 @@ class SpotifyAPIController extends Controller
         }
  
         //если он есть
-        if($tracks != null)
+        if($tracks != false)
         {       
             //массив для всех годов
             $allYears = [];
@@ -919,7 +919,7 @@ class SpotifyAPIController extends Controller
           $tracks = System::getUserLibraryJson("tracks", $request);
 
           //если он есть
-          if($tracks != null)
+          if($tracks != false)
           {  
             //получаем полный список треков с id трека, длиной, обложкой, названием и url
 
@@ -996,7 +996,7 @@ class SpotifyAPIController extends Controller
         $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
-        if($tracks != null)
+        if($tracks != false)
         {  
            //получаем все id треков вместе с процентом популярности
            $tracksClean = [];
@@ -1071,7 +1071,7 @@ class SpotifyAPIController extends Controller
         $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
-        if($tracks != null)
+        if($tracks != false)
         {  
             $artists = [];
 
@@ -1149,7 +1149,7 @@ class SpotifyAPIController extends Controller
         $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
-        if($tracks != null)
+        if($tracks != false)
         {  
             $artists = [];
 
@@ -1259,7 +1259,7 @@ class SpotifyAPIController extends Controller
          $tracks = System::getUserLibraryJson("tracks", $request);
 
          //если он есть
-         if($tracks != null)
+         if($tracks != false)
          {  
             //получаем все id треков вместе с процентом популярности
             $trackIds = [];
@@ -1320,7 +1320,7 @@ class SpotifyAPIController extends Controller
         $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если он есть
-        if($tracks != null)
+        if($tracks != false)
         {  
             //получаем id треков и их длину, сортируем
             $trackIds = [];
@@ -1402,6 +1402,114 @@ class SpotifyAPIController extends Controller
 
             return response()->json($response);
         }
+    }
+
+    //getArtistByTracks 
+    //получить исполнителя по кол-ву треков в библиотеке
+    //возвращает JSON с исполнителем с наибольшим кол-вом треков в библиотеке
+    //параметры: реквест
+    public function getArtistByTracks(Request $request)
+    {   
+        //получаем файл с треками
+        $tracks = System::getUserLibraryJson("tracks", $request);
+
+        //если файл существует
+        if($tracks != false)
+        {   
+            //получаем все id артистов из треков и считаем сколько раз встречается каждый из них
+            $artistIds = ['3Mcii5XWf6E0lrY3Uky4cA' => 1];
+
+            foreach($tracks as $track)
+            {   
+                if(array_key_exists($track->artists[0]->id, $artistIds) == false)
+                { $artistIds[$track->artists[0]->id] = 1; }
+                else
+                { $artistIds[$track->artists[0]->id] += 1; }
+            }
+
+            //сортируем массив по убыванию и получаем id артиста
+            arsort($artistIds);
+
+            $topArtistId = array_keys($artistIds)[0];
+
+            //провнеряем токен и получаем информацию об артисте
+            $checkToken = System::checkSpotifyAccessToken($request);
+
+            if($checkToken != false)
+            {
+                $api = config('spotify_api');
+
+                $topArtist = $api->getArtist($topArtistId);
+
+                $trackCount = $artistIds[array_keys($artistIds)[0]];
+
+                $response = [
+                    'title' => $topArtist->name,
+                    'url' => $topArtist->external_urls->spotify,
+                    'image' => $topArtist->images[0]->url,
+                    'additionalInfo' => $trackCount . Helpers::pickTheWord($trackCount, "треков", "трек", "трека") . " в библиотеке", 
+                ];
+
+                return response()->json($response);
+            }
+            else
+            { return response()->json(false); }
+        }
+        else
+        { return response()->json(false); }
+    }
+
+    //getArtistByTime
+    //получить артиста с наибольшим кол-вом времени треков в библиотеке
+    //возвращает JSON с артистом с наибольшим кол-вом времени
+    //параметры: реквест
+    public function getArtistByTime(Request $request)
+    {
+        //получаем файл треков
+        $tracks = System::getUserLibraryJson("tracks", $request);
+
+        //если файл существует
+        if($tracks != false)
+        {
+            //получаем id исполнителей вместе с общей длительностью
+            $artistIds = [];
+
+            foreach($tracks as $track)
+            {
+                if(array_key_exists($track->artists[0]->id, $artistIds) == false)
+                { $artistIds[$track->artists[0]->id] = $track->duration_ms; }
+                else
+                { $artistIds[$track->artists[0]->id] += $track->duration_ms; }
+            }
+
+            //сортируем массив и получаем id исполнителя и время
+            arsort($artistIds);
+
+            $topArtistId = array_keys($artistIds)[0];
+
+            $time = Helpers::trackDuration($artistIds[$topArtistId]);
+
+            //проверяем токен и получаем инфомацию об исполнителей
+            $checkToken = System::checkSpotifyAccessToken($request);
+
+            if($checkToken != false)
+            {
+                $api = config('spotify_api');
+
+                $topArtist = $api->getArtist($topArtistId);
+
+                $response = [
+                    'title' => $topArtist->name,
+                    'url' => $topArtist->external_urls->spotify,
+                    'image' => $topArtist->images[0]->url,
+                    'additionalInfo' => $time, 
+                ];
+
+                return response()->json($response);
+            }
+        }
+        else
+        { return response()->json(false); }
     }
 
 }
