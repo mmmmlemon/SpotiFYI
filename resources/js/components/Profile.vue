@@ -47,7 +47,10 @@
                                 <router-link to="/profile/top10"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'top10'}" type="button">Топ-10</button></router-link>
                             </div>
                             <div class="col-md-3 padding_10">
-                                <router-link to="/profile/achievements"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'achievements'}" type="button">Особо отличившиеся</button></router-link>
+                                <router-link to="/profile/achievements"><button class="btn" v-bind:class="{ 'btn-primary': currentTab === 'achievements'}" type="button">Особо отличившиеся</button></router-link>
+                            </div>
+                            <div class="col-md-3 padding_10">
+                                <router-link to="/profile/latest"><button class="btn" v-bind:class="{ 'btn-primary': currentTab === 'latest'}" type="button">Последние прослушанные</button></router-link>
                             </div>
                         </div>
                     </div>
