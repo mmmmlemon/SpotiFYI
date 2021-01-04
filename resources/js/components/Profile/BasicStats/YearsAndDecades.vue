@@ -18,7 +18,7 @@
                 <p :v-else-if="type == 'month'" class="text-center">В последнее время ты больше всего слушаешь музыку <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
                     За последний месяц ты послушал <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.</p>
                  <p :v-else-if="type == 'month'" class="text-center"><b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 
-                    Ты слушал <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.</p>
+                    Были прослушаны <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.</p>
             </div>
 
             <br>

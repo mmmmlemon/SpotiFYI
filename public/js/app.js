@@ -79902,7 +79902,7 @@ var render = function() {
                         [_vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")]
                       ),
                       _vm._v(
-                        " - твой любимый год. \n                Ты слушал "
+                        " - твой любимый год. \n                Были прослушаны "
                       ),
                       _c(
                         "b",

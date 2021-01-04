@@ -1325,8 +1325,18 @@ class SpotifyAPIController extends Controller
             //получаем id треков и их длину, сортируем
             $trackIds = [];
 
+            // foreach($tracks as $track)
+            // { array_push($trackIds, ['id' => $track->id, 'duration' => $track->duration_ms]); }
+
             foreach($tracks as $track)
-            { array_push($trackIds, ['id' => $track->id, 'duration' => $track->duration_ms]); }
+            {
+                $id = $track->id;
+                $duration = Helpers::trackDuration($track->duration_ms);
+                $cover = $track->album->images[count($track->album->images) - 1]->url;
+                $name = Helpers::getFullNameOfItem($track);
+                $url = $track->external_urls->spotify;
+                array_push($trackIds, ['id' => $id, 'duration' => $duration, 'cover' => $cover, 'name' => $name, 'url' => $url]);
+            }
 
             $sortType = "desc";
 
