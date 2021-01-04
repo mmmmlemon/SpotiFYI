@@ -2387,6 +2387,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //смена текущего таба
@@ -2446,6 +2448,16 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.topArtistByTime == -1) {
       this.$store.dispatch('getArtistByTime');
+    } //cамый популярный артист, из подписок
+
+
+    if (this.mostPopularArtist == -1) {
+      this.$store.dispatch('getMostPopularArtist');
+    } //cамый непопулярный артист, из подписок
+
+
+    if (this.leastPopularArtist == -1) {
+      this.$store.dispatch('getLeastPopularArtist');
     }
   },
   computed: {
@@ -2481,6 +2493,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     topArtistByTime: function topArtistByTime() {
       return this.$store.state.profilePage.topArtistByTime;
+    },
+    mostPopularArtist: function mostPopularArtist() {
+      return this.$store.state.profilePage.mostPopularArtist;
+    },
+    leastPopularArtist: function leastPopularArtist() {
+      return this.$store.state.profilePage.leastPopularArtist;
     }
   }
 });
@@ -78670,6 +78688,26 @@ var render = function() {
                           items: _vm.topArtistByTime
                         }
                       })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.topArtistByTime != -1
+                    ? _c("AchievementItem", {
+                        attrs: {
+                          cardTitle: "Самый популярный исполнитель",
+                          cardSubtitle: "На которого ты подписан",
+                          items: _vm.mostPopularArtist
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mostPopularArtist != -1
+                    ? _c("AchievementItem", {
+                        attrs: {
+                          cardTitle: "Самый непопулярный исполнитель",
+                          cardSubtitle: "На которого ты подписан",
+                          items: _vm.leastPopularArtist
+                        }
+                      })
                     : _vm._e()
                 ],
                 1
@@ -98759,7 +98797,11 @@ var ProfilePageStates = {
     //самый слушаемый артист за месяц
     topArtistByTracks: -1,
     //артист с наибольшим кол-вом треков
-    topArtistByTime: -1 //артист с наибольшим кол-вом временем треков
+    topArtistByTime: -1,
+    //артист с наибольшим кол-вом временем треков
+    mostPopularArtist: -1,
+    //самый популярный артист, из подписок
+    leastPopularArtist: -1 //самый непопулярный артист, из подписок
 
   },
   mutations: {
@@ -98968,6 +99010,18 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_time').then(function (response) {
         state.topArtistByTime = response.data;
       });
+    },
+    //самый популярный артист, из подписок
+    getMostPopularArtist: function getMostPopularArtist(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_popularity/popular').then(function (response) {
+        state.mostPopularArtist = response.data;
+      });
+    },
+    //самый непопулярный артист, из подписок
+    getLeastPopularArtist: function getLeastPopularArtist(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_popularity/unpopular').then(function (response) {
+        state.leastPopularArtist = response.data;
+      });
     }
   },
   actions: {
@@ -99105,6 +99159,14 @@ var ProfilePageStates = {
     //артист с наибольшим кол-вом времени треков
     getArtistByTime: function getArtistByTime(context) {
       context.commit('getArtistByTime');
+    },
+    //самый популярный артист, из подписок
+    getMostPopularArtist: function getMostPopularArtist(context) {
+      context.commit('getMostPopularArtist');
+    },
+    //самый непопулярный артист, из подписок
+    getLeastPopularArtist: function getLeastPopularArtist(context) {
+      context.commit('getLeastPopularArtist');
     }
   }
 };

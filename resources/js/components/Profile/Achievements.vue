@@ -52,6 +52,8 @@
                 <AchievementItem v-if="mostListenedArtist != -1" cardTitle="Самый слушаемый исполнитель" cardSubtitle="За месяц" :items="mostListenedArtistMonth"/>
                 <AchievementItem v-if="mostListenedArtistMonth != -1" cardTitle="Исполнитель" cardSubtitle="С наибольшим кол-вом треков" :items="topArtistByTracks"/>
                 <AchievementItem v-if="topArtistByTracks != -1" cardTitle="Исполнитель" cardSubtitle="С наибольшим кол-вом времени треков" :items="topArtistByTime"/>
+                <AchievementItem v-if="topArtistByTime != -1" cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" :items="mostPopularArtist"/>
+                <AchievementItem v-if="mostPopularArtist != -1" cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" :items="leastPopularArtist"/>
             </div>
 
 
@@ -115,6 +117,15 @@ export default {
         if(this.topArtistByTime == -1)
         { this.$store.dispatch('getArtistByTime'); }
 
+        //cамый популярный артист, из подписок
+        if(this.mostPopularArtist == -1)
+        { this.$store.dispatch('getMostPopularArtist'); }
+
+        //cамый непопулярный артист, из подписок
+        if(this.leastPopularArtist == -1)
+        { this.$store.dispatch('getLeastPopularArtist'); }
+
+
     },
     computed: {
         spotifyUserLibrary: function(){
@@ -150,6 +161,12 @@ export default {
         },
         topArtistByTime: function(){
             return this.$store.state.profilePage.topArtistByTime;
+        },
+        mostPopularArtist: function(){
+            return this.$store.state.profilePage.mostPopularArtist;
+        },
+        leastPopularArtist: function(){
+            return this.$store.state.profilePage.leastPopularArtist;
         },
     }
 }

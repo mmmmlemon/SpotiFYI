@@ -1512,4 +1512,55 @@ class SpotifyAPIController extends Controller
         { return response()->json(false); }
     }
 
+    //getArtistByPopularity
+    //получить самого популярного или непопулярного артиста из библиотеки
+    //возвращает JSON с самым популярным или непопулярным артистом
+    //параметры: реквест, type - "popular" или "unpopular"
+    public function getArtistByPopularity(Request $request, $type)
+    {
+        //получаем файл треков
+        $artists = System::getUserLibraryJson("artists", $request);
+
+        if($artists != false)
+        {      
+            //получаем список артистов с нужной иформацией
+            $artistsClean = [];
+
+            foreach($artists as $artist)
+            {
+                $artistInfo = [];
+
+                $artistInfo['name'] = $artist->name;
+                $artistInfo['url'] = $artist->external_urls->spotify;
+                $artistInfo['image'] = $artist->images[0]->url;
+                $artistInfo['popularity'] = $artist->popularity;
+
+                array_push($artistsClean, $artistInfo);
+            }
+
+            //сортируем в нужном порядке
+            $artistsSorted = "";
+
+            if($type == "popular")
+            { $artistsSorted = Helpers::sortArrayByKey($artistsClean, "popularity", "desc"); }
+            else if($type == "unpopular")
+            { $artistsSorted = Helpers::sortArrayByKey($artistsClean, "popularity", "asc"); }
+            else
+            { return response()->json(false); }
+
+            $topArtist = $artistsSorted[0];
+
+            $response = [
+                'title' => $topArtist['name'],
+                'url' => $topArtist['url'],
+                'image' => $topArtist['image'],
+            ];
+
+            return response()->json($response);
+        }
+        else 
+        { return response()->json(false); }
+
+    }
+
 }
