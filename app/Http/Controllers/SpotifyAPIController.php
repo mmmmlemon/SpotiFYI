@@ -202,7 +202,7 @@ class SpotifyAPIController extends Controller
             for($i = 0; $i < 5; $i++)
             {   
                 //получаем полное название трека
-                $name = Helpers::getFullNameOfItem($tracks[$i]);
+                $name = Helpers::getFullNameOfItem($tracks[$i], "fullname");
 
                 array_push($lastFive, ['id' => $tracks[$i]->id,
                                         'cover' => $tracks[$i]->album->images[count($tracks[$i]->album->images) - 1]->url,
@@ -234,7 +234,7 @@ class SpotifyAPIController extends Controller
             for($i = 0; $i < 5; $i++)
             {
                 //получаем полное название альбома
-                $name = Helpers::getFullNameOfItem($albums[$i]);
+                $name = Helpers::getFullNameOfItem($albums[$i], "fullname");
                 array_push($lastFive, ['id' => $albums[$i]->id,
                                         'cover' => $albums[$i]->images[count($albums[$i]->images) - 1]->url,
                                         'name' => $name,
