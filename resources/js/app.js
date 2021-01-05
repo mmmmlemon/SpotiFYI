@@ -37,9 +37,11 @@ Vue.component('Top10Items', Top10Items);
 import AchievementItem from './components/Profile/Achievements/AchievementItem.vue';
 Vue.component('AchievementItem', AchievementItem);
 
-import ListItems from './components/Profile/Latest/ListItems.vue';
-Vue.component('ListItems', ListItems);
+import List from './components/Profile/Latest/List.vue';
+Vue.component('List', List);
 
+import ListItem from './components/Profile/Latest/ListItem.vue';
+Vue.component('ListItem', ListItem);
 
 //графики
 import BarChart from './components/Charts/BarChart.vue';
