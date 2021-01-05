@@ -80,6 +80,8 @@ const ProfilePageStates = {
         topArtistByTime: -1, //артист с наибольшим кол-вом временем треков
         mostPopularArtist: -1, //самый популярный артист, из подписок
         leastPopularArtist: -1, //самый непопулярный артист, из подписок
+
+        latestTracks: -1, //последние прослушанные треки
       },
 
     mutations: {
@@ -305,6 +307,13 @@ const ProfilePageStates = {
               state.leastPopularArtist = response.data;
             })
           },
+
+          //последние прослушанные треки
+          getLatestTracks(state){
+            axios.get('/api/get_latest_tracks').then((response) => {
+              state.latestTracks = response.data;
+            })
+          },
       
 },
 
@@ -453,6 +462,11 @@ const ProfilePageStates = {
       //самый непопулярный артист, из подписок
       getLeastPopularArtist(context){
         context.commit('getLeastPopularArtist');
+      },
+
+      //последние прослушанные треки
+      getLatestTracks(context){
+        context.commit('getLatestTracks');
       },
   }
 }

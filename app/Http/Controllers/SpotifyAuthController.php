@@ -28,6 +28,7 @@ class SpotifyAuthController extends Controller
                 'user-library-read',
                 'user-follow-read',
                 'user-top-read',
+                'user-read-recently-played',
             ],
         ];
 

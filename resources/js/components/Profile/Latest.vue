@@ -8,7 +8,7 @@
         </div>
         <div class="col-12">
             <div>
-                <List />
+                <List :items="latestTracks"/>
             </div>
         </div>
     </div>
@@ -18,6 +18,15 @@
 export default {
     mounted(){
         this.$store.dispatch('setCurrentTab', 'latest');
+
+        if(this.latestTracks == -1)
+        { this.$store.dispatch('getLatestTracks'); }
     },
+
+    computed: {
+        latestTracks: function(){
+            return this.$store.state.profilePage.latestTracks;
+        }
+    }
 }
 </script>

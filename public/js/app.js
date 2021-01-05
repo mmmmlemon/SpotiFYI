@@ -3180,6 +3180,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('setCurrentTab', 'latest');
+
+    if (this.latestTracks == -1) {
+      this.$store.dispatch('getLatestTracks');
+    }
+  },
+  computed: {
+    latestTracks: function latestTracks() {
+      return this.$store.state.profilePage.latestTracks;
+    }
   }
 });
 
@@ -3208,7 +3217,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    items: {
+      "default": -1
+    }
+  }
+});
 
 /***/ }),
 
@@ -3249,7 +3271,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    item: {
+      "default": -1
+    }
+  }
+});
 
 /***/ }),
 
@@ -80175,7 +80204,9 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [_c("div", [_c("List")], 1)])
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", [_c("List", { attrs: { items: _vm.latestTracks } })], 1)
+    ])
   ])
 }
 var staticRenderFns = [
@@ -80213,34 +80244,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row padding_10 margin_vertical fade_in_anim" },
-    [
-      _c("div", {
-        staticClass: "top10_image_card",
-        style: {
-          backgroundImage:
-            "url('https://i.scdn.co/image/ab6775700000ee8521d96db877be6002aa469c65')"
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-12 padding_10 justify-content-center" },
-        [
-          _c("ListItem"),
-          _vm._v(" "),
-          _c("ListItem"),
-          _vm._v(" "),
-          _c("ListItem"),
-          _vm._v(" "),
-          _c("ListItem")
-        ],
-        1
-      )
-    ]
-  )
+  return _c("div", { staticClass: "justify-content-center" }, [
+    _vm.items == -1
+      ? _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("Loader"),
+            _vm._v(" "),
+            _vm.items == -1
+              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                  _vm._v("Загружаю последние треки...")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("p", { staticClass: "font_10pt text-center" }, [
+              _vm._v("Это может занять некоторое время")
+            ])
+          ],
+          1
+        )
+      : _vm.items != -1 && _vm.items != false
+      ? _c(
+          "div",
+          { staticClass: "сol-12 padding_10 margin_vertical fade_in_anim" },
+          _vm._l(_vm.items["tracks"], function(item) {
+            return _c(
+              "div",
+              {
+                key: item.id,
+                staticClass:
+                  "col-12 padding_10 justify-content-center margin_vertical"
+              },
+              [_c("ListItem", { attrs: { item: item } })],
+              1
+            )
+          }),
+          0
+        )
+      : _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: { errorMessage: "Не удалось загрузить треки" }
+            })
+          ],
+          1
+        )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80264,89 +80315,58 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "row fade_in_anim" }, [
-        _c("div", { staticClass: "col-2" }, [
-          _c("a", { attrs: { href: "item.url", target: "_blank" } }, [
-            _c("img", {
-              staticClass: "rounded-circle album_icon_big",
-              attrs: {
-                src:
-                  "https://i.scdn.co/image/ab6775700000ee8521d96db877be6002aa469c65"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("h5", { staticClass: "font_white margin_none" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href:
-                    "https://i.scdn.co/image/ab6775700000ee8521d96db877be6002aa469c65",
-                  target: "_blank"
-                }
-              },
-              [_c("b", [_vm._v("Artist Name")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: " font_white margin_none" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href:
-                    "https://i.scdn.co/image/ab6775700000ee8521d96db877be6002aa469c65",
-                  target: "_blank"
-                }
-              },
-              [_c("b", [_vm._v("Track Name")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "p",
-            {
-              staticClass: " margin_none font_white",
-              staticStyle: { "margin-bottom": "7px" }
-            },
-            [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href:
-                      "https://i.scdn.co/image/ab6775700000ee8521d96db877be6002aa469c65",
-                    target: "_blank"
-                  }
-                },
-                [
-                  _c("b", { staticClass: "unbold" }, [
-                    _vm._v("Album Name - 2099")
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("b", [_vm._v("55555:00  ")])
+  return _c("div", [
+    _c("div", {
+      staticClass: "top10_image_card",
+      style: { backgroundImage: "url('" + _vm.item["cover"] + "')" }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "row fade_in_anim" }, [
+      _c("div", { staticClass: "col-2" }, [
+        _c("a", { attrs: { href: "item.url", target: "_blank" } }, [
+          _c("img", {
+            staticClass: "rounded-circle album_icon_big",
+            attrs: { src: _vm.item["cover"] }
+          })
         ])
       ]),
       _vm._v(" "),
-      _c("hr")
+      _c("div", { staticClass: "col-10" }, [
+        _c("h5", { staticClass: "font_white margin_none" }, [
+          _c("b", [_vm._v(_vm._s(_vm.item["artists"]))])
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: " font_white margin_none" }, [
+          _c("a", { attrs: { href: _vm.item["trackUrl"], target: "_blank" } }, [
+            _c("b", [_vm._v(_vm._s(_vm.item["trackName"]))])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            staticClass: "margin_none font_white",
+            staticStyle: { "margin-bottom": "7px" }
+          },
+          [
+            _c(
+              "a",
+              { attrs: { href: _vm.item["albumUrl"], target: "_blank" } },
+              [
+                _c("b", { staticClass: "unbold" }, [
+                  _vm._v(_vm._s(_vm.item["albumName"]))
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("b", [_vm._v(_vm._s(_vm.item["duration"]))])
+      ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -99344,7 +99364,9 @@ var ProfilePageStates = {
     //артист с наибольшим кол-вом временем треков
     mostPopularArtist: -1,
     //самый популярный артист, из подписок
-    leastPopularArtist: -1 //самый непопулярный артист, из подписок
+    leastPopularArtist: -1,
+    //самый непопулярный артист, из подписок
+    latestTracks: -1 //последние прослушанные треки
 
   },
   mutations: {
@@ -99565,6 +99587,12 @@ var ProfilePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_popularity/unpopular').then(function (response) {
         state.leastPopularArtist = response.data;
       });
+    },
+    //последние прослушанные треки
+    getLatestTracks: function getLatestTracks(state) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_latest_tracks').then(function (response) {
+        state.latestTracks = response.data;
+      });
     }
   },
   actions: {
@@ -99710,6 +99738,10 @@ var ProfilePageStates = {
     //самый непопулярный артист, из подписок
     getLeastPopularArtist: function getLeastPopularArtist(context) {
       context.commit('getLeastPopularArtist');
+    },
+    //последние прослушанные треки
+    getLatestTracks: function getLatestTracks(context) {
+      context.commit('getLatestTracks');
     }
   }
 };

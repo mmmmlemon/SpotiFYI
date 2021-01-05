@@ -53,4 +53,6 @@ Route::get('/get_most_listened_artist/{type}', 'SpotifyAPIController@getMostList
 Route::get('/get_artist_by_tracks', 'SpotifyAPIController@getArtistByTracks'); //получить исполнителя с наибольшим кол-во треков
 Route::get('/get_artist_by_time', 'SpotifyAPIController@getArtistByTime'); //получить исполнителя с наибольшим кол-вом времени треков
 Route::get('/get_artist_by_popularity/{type}', 'SpotifyAPIController@getArtistByPopularity'); //получать самого популярного или непопулярного артиста из подписок
+
+Route::get('/get_latest_tracks', 'SpotifyAPIController@getLatestTracks'); //получить последние полученные треки
 ?>

@@ -48,7 +48,7 @@
             //исполнители через запятую + название, например "Queen, David Bowie - Under Pressure"
             //в параметре трек или альбом из JSON'а Spotify API
             //возвращает строку с полным названием, либо false
-            public static function getFullNameOfItem($item)
+            public static function getFullNameOfItem($item, $type)
             {   
                 if(count($item->artists) > 0)
                 {
@@ -61,8 +61,15 @@
                         else
                         { $artists .= $item->artists[$j-1]->name; }
                     }
-        
-                    return $artists . " - " . $item->name;
+                    if($type == "artist")
+                    {
+                        return $artists;
+                    }
+                    else if($type == "fullname")
+                    { return $artists . " - " . $item->name; }
+                    else
+                    { return $artists . " - " . $item->name;  }
+                 
                 }
                 else
                 { return response()->json(false); } 
