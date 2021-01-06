@@ -80323,7 +80323,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row fade_in_anim" }, [
       _c("div", { staticClass: "col-2" }, [
-        _c("a", { attrs: { href: "item.url", target: "_blank" } }, [
+        _c("a", { attrs: { href: _vm.item["trackUrl"], target: "_blank" } }, [
           _c("img", {
             staticClass: "rounded-circle album_icon_big",
             attrs: { src: _vm.item["cover"] }

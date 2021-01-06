@@ -1239,7 +1239,7 @@ class SpotifyAPIController extends Controller
             { $topTrack = $api->getMyTop('tracks', ['limit' => 1, 'time_range' => 'short_term'])->items[0]; }
 
             $response = [
-                'title' => Helpers::getFullNameOfItem($topTrack),
+                'title' => Helpers::getFullNameOfItem($topTrack, "fullname"),
                 'album' => $topTrack->album->name . " (". Helpers::getItemReleaseDate($topTrack, "track", "short") .")",
                 'url' => $topTrack->external_urls->spotify,
                 'image' => $topTrack->album->images[0]->url,
