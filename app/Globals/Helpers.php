@@ -219,5 +219,27 @@
                 { return false; }    
             }
 
+            //getArtistsGenres
+            //получает список жанров артиста
+            //возвращает строку со списком жанров артиста
+            //параметры: артист и кол-во жанров которые нужно вывести
+            public static function getArtistsGenres($artist, $count)
+            {
+                $genres = "";
+                $genresMax = count($artist->genres);
+                $iMax = $count;
+                if($genresMax < $count)
+                {  $iMax = $genresMax; }
+
+                for($i = 0; $i < $iMax; $i++)
+                {
+                    $genres .= $artist->genres[$i];
+                    if($i != $iMax - 1)
+                    { $genres .=", "; }
+                }
+
+                return $genres;
+            }
+
     }
         

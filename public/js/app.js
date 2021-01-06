@@ -3615,6 +3615,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     cardTitle: {
@@ -80643,7 +80644,7 @@ var staticRenderFns = [
       { staticClass: "row justify-content-center font_10pt fade_in_anim" },
       [
         _c("nav", { staticClass: "justify-content-center" }, [
-          _c("ul", { staticClass: "breadcrumb" }, [
+          _c("ul", { staticClass: "breadcrumb text-center" }, [
             _c("li", { staticClass: "breadcrumb-item" }, [
               _c("a", { attrs: { href: "#tracks" } }, [_vm._v("Треки")])
             ]),
@@ -80726,10 +80727,7 @@ var render = function() {
       : _vm.items != -1 || _vm.items != false
       ? _c(
           "div",
-          {
-            staticClass:
-              "col-md-12 padding_10 grey_card margin_sides fade_in_anim"
-          },
+          { staticClass: "col-md-12 padding_10 grey_card fade_in_anim" },
           [
             _c("div", {
               staticClass: "top10_image_card",
@@ -80750,10 +80748,10 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "row fade_in_anim" }, [
-                _vm.items != undefined && _vm.listType == "tracks"
+                _vm.items != undefined
                   ? _c(
                       "div",
-                      _vm._l(_vm.items["tracks"], function(item) {
+                      _vm._l(_vm.items["items"], function(item) {
                         return _c(
                           "div",
                           { key: item.id, staticClass: "row fade_in_anim" },
@@ -80769,8 +80767,8 @@ var render = function() {
                                 [
                                   _c("img", {
                                     staticClass:
-                                      "rounded-circle album_icon_big",
-                                    attrs: { src: item.cover }
+                                      "rounded-circle album_icon_top10",
+                                    attrs: { src: item.image }
                                   })
                                 ]
                               )
@@ -80792,141 +80790,81 @@ var render = function() {
                                         target: "_blank"
                                       }
                                     },
-                                    [_c("b", [_vm._v(_vm._s(item.track_name))])]
+                                    [_c("b", [_vm._v(_vm._s(item.name))])]
                                   )
                                 ]
                               ),
                               _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "font_10pt margin_none font_white",
-                                  staticStyle: { "margin-bottom": "7px" }
-                                },
-                                [
-                                  _c(
-                                    "a",
+                              item.album
+                                ? _c(
+                                    "p",
                                     {
-                                      attrs: {
-                                        href: item.album_url,
-                                        target: "_blank"
-                                      }
+                                      staticClass:
+                                        "font_10pt margin_none font_white",
+                                      staticStyle: { "margin-bottom": "7px" }
                                     },
                                     [
-                                      item.duration
-                                        ? _c("b", [
-                                            _vm._v(_vm._s(item.duration) + "  ")
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _c("b", { staticClass: "unbold" }, [
-                                        _vm._v(
-                                          _vm._s(item.album) +
-                                            " - " +
-                                            _vm._s(item.album_year)
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  : _vm.items != undefined && _vm.listType == "artists"
-                  ? _c(
-                      "div",
-                      _vm._l(_vm.items["artists"], function(item) {
-                        return _c(
-                          "div",
-                          { key: item.id, staticClass: "row fade_in_anim" },
-                          [
-                            _c("div", { staticClass: "col-2" }, [
-                              _c("div", { staticClass: "number_card" }, [
-                                _c("b", {}, [_vm._v(_vm._s(item.count))])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                { attrs: { href: item.url, target: "_blank" } },
-                                [
-                                  _c("img", {
-                                    staticClass:
-                                      "rounded-circle album_icon_big",
-                                    attrs: { src: item.photo }
-                                  })
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-10" }, [
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "font_13pt font_white margin_none"
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: {
-                                        href: item.url,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _c("b", [
-                                        _vm._v(_vm._s(item.artist_name))
-                                      ])
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "font_10pt margin_none font_white",
-                                  staticStyle: { "margin-bottom": "7px" }
-                                },
-                                [
-                                  item.track_count
-                                    ? _c("b", { staticClass: "unbold" }, [
-                                        _vm._v(
-                                          "\n                                        " +
-                                            _vm._s(item.track_count) +
-                                            "\n                                        "
-                                        ),
-                                        _c(
-                                          "p",
-                                          {
-                                            staticClass:
-                                              "unbold zero_opacity font_8pt"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                            нЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕт, ТЫ НЕ МОЖЕШЬ ПРОСТО ТАК ВОТКНУТЬ НЕВИДИМЫЙ ТЕКСТ\n                                        "
-                                            )
-                                          ]
-                                        )
-                                      ])
-                                    : _c(
-                                        "b",
-                                        { staticClass: "unbold zero_opacity" },
+                                      _c(
+                                        "a",
+                                        {
+                                          attrs: {
+                                            href: item.album_url,
+                                            target: "_blank"
+                                          }
+                                        },
                                         [
-                                          _vm._v(
-                                            "\n                                        нЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕт, ТЫ НЕ МОЖЕШЬ ПРОСТО ТАК ВОТКНУТЬ НЕВИДИМЫЙ ТЕКСТ\n\n                                        хахаа opacity: 0 goes brrr\n                                    "
-                                          )
+                                          item.duration
+                                            ? _c("b", [
+                                                _vm._v(
+                                                  _vm._s(item.duration) + "  "
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c("b", { staticClass: "unbold" }, [
+                                            _vm._v(
+                                              _vm._s(item.album) +
+                                                " - " +
+                                                _vm._s(item.album_year)
+                                            )
+                                          ])
                                         ]
                                       )
-                                ]
-                              )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              item.genres
+                                ? _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "font_10pt margin_none font_white",
+                                      staticStyle: { "margin-bottom": "7px" }
+                                    },
+                                    [
+                                      _c("b", { staticClass: "unbold" }, [
+                                        _vm._v(_vm._s(item.genres))
+                                      ])
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              item.track_count
+                                ? _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "font_10pt margin_none font_white",
+                                      staticStyle: { "margin-bottom": "7px" }
+                                    },
+                                    [
+                                      _c("b", { staticClass: "unbold" }, [
+                                        _vm._v(_vm._s(item.track_count))
+                                      ])
+                                    ]
+                                  )
+                                : _vm._e()
                             ])
                           ]
                         )

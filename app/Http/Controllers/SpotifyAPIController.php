@@ -822,8 +822,8 @@ class SpotifyAPIController extends Controller
                 $trackInfo = [];
                 $trackInfo['count'] = $count;
                 $trackInfo['id'] = $track->id;
-                $trackInfo['track_name'] = Helpers::getFullNameOfItem($track, "fullname");
-                $trackInfo['cover'] = $track->album->images[count($track->album->images)-1]->url;
+                $trackInfo['name'] = Helpers::getFullNameOfItem($track, "fullname");
+                $trackInfo['image'] = $track->album->images[count($track->album->images)-1]->url;
                 $trackInfo['url'] = $track->external_urls->spotify;
                 $trackInfo['album'] = $track->album->name;
                 $trackInfo['album_url'] = $track->album->external_urls->spotify;
@@ -839,7 +839,7 @@ class SpotifyAPIController extends Controller
             $albumCover = $api->getTrack($randTrackId)->album->images[0]->url;
 
             $response = [];
-            $response['tracks'] = $tracks;
+            $response['items'] = $tracks;
             $response['backgroundImage'] = $albumCover;
  
             return response()->json($response);
@@ -887,8 +887,9 @@ class SpotifyAPIController extends Controller
                 $artistInfo = [];
                 $artistInfo['count'] = $count;
                 $artistInfo['id'] = $artist->id;
-                $artistInfo['artist_name'] = $artist->name;
-                $artistInfo['photo'] = $artist->images[count($artist->images)-1]->url;
+                $artistInfo['name'] = $artist->name;
+                $artistInfo['image'] = $artist->images[count($artist->images)-1]->url;
+                $artistInfo['genres'] = Helpers::getArtistsGenres($artist, 5);
                 $artistInfo['url'] = $artist->external_urls->spotify;
 
                 array_push($artists, $artistInfo);
@@ -900,7 +901,8 @@ class SpotifyAPIController extends Controller
 
             $artistPhoto = $api->getArtist($randArtistId)->images[0]->url;
 
-            $response['artists'] = $artists;
+            $response['items'] = $artists;
+
             $response['backgroundImage'] = $artistPhoto;
 
             return response()->json($response);
@@ -930,8 +932,8 @@ class SpotifyAPIController extends Controller
                 $trackInfo = [];
                 $trackInfo['id'] = $track->id;
                 $trackInfo['duration'] = Helpers::trackDuration($track->duration_ms);
-                $trackInfo['cover'] = $track->album->images[count($track->album->images) - 1]->url;
-                $trackInfo['track_name'] = Helpers::getFullNameOfItem($track, "fullname");
+                $trackInfo['image'] = $track->album->images[count($track->album->images) - 1]->url;
+                $trackInfo['name'] = Helpers::getFullNameOfItem($track, "fullname");
                 $trackInfo['url'] = $track->external_urls->spotify;
                 $trackInfo['album'] = $track->album->name;
                 $trackInfo['album_url'] = $track->album->external_urls->spotify;
@@ -960,7 +962,7 @@ class SpotifyAPIController extends Controller
             }
 
             $response = [];
-            $response['tracks'] = $topTen;
+            $response['items'] = $topTen;
      
             //проверка токена
             $checkToken = System::checkSpotifyAccessToken($request);
@@ -1006,8 +1008,8 @@ class SpotifyAPIController extends Controller
                $trackInfo = [];
                $trackInfo['id'] =  $track->id;
                $trackInfo['popularity'] = $track->popularity;
-               $trackInfo['cover'] = $track->album->images[count($track->album->images) - 1]->url;
-               $trackInfo['track_name'] = Helpers::getFullNameOfItem($track, "fullname");
+               $trackInfo['image'] = $track->album->images[count($track->album->images) - 1]->url;
+               $trackInfo['name'] = Helpers::getFullNameOfItem($track, "fullname");
                $trackInfo['url'] = $track->external_urls->spotify;
                $trackInfo['album'] = $track->album->name;
                $trackInfo['album_url'] = $track->album->external_urls->spotify;
@@ -1049,7 +1051,7 @@ class SpotifyAPIController extends Controller
                 $albumCover = $api->getTrack($randTrackId)->album->images[0]->url;
 
                 $response = [];
-                $response['tracks'] = $topTenTracks;
+                $response['items'] = $topTenTracks;
                 $response['backgroundImage'] = $albumCover;
 
                return response()->json($response);
@@ -1116,15 +1118,15 @@ class SpotifyAPIController extends Controller
                     $artist = $api->getArtist($artistIds[$i]);
                     $artistInfo['count'] = $i+1;
                     $artistInfo['id'] = $artist->id;
-                    $artistInfo['artist_name'] = $artist->name;
-                    $artistInfo['photo'] = $artist->images[count($artist->images)-1]->url;
+                    $artistInfo['name'] = $artist->name;
+                    $artistInfo['image'] = $artist->images[count($artist->images)-1]->url;
                     $artistInfo['url'] = $artist->external_urls->spotify;
                     $artistInfo['track_count'] = $artistsCount[$artistIds[$i]] . Helpers::pickTheWord($artistsCount[$artistIds[$i]], "треков", "трек", "трека");
     
                     array_push($artists, $artistInfo);
                 }
 
-                $response['artists'] = $artists;
+                $response['items'] = $artists;
 
                 //получаем случайное фото исполнителя из топ 10
                 $randomArtistId = $artistIds[rand(0, 9)];
@@ -1194,15 +1196,15 @@ class SpotifyAPIController extends Controller
                     $artist = $api->getArtist($artistIds[$i]);
                     $artistInfo['count'] = $i+1;
                     $artistInfo['id'] = $artist->id;
-                    $artistInfo['artist_name'] = $artist->name;
-                    $artistInfo['photo'] = $artist->images[count($artist->images)-1]->url;
+                    $artistInfo['name'] = $artist->name;
+                    $artistInfo['image'] = $artist->images[count($artist->images)-1]->url;
                     $artistInfo['url'] = $artist->external_urls->spotify;
                     $artistInfo['track_count'] = Helpers::trackDuration($artistsCount[$artistIds[$i]]);
     
                     array_push($artists, $artistInfo);
                 }
 
-                $response['artists'] = $artists;
+                $response['items'] = $artists;
 
                 //получаем случайное фото исполнителя из топ 10
                 $randomArtistId = $artistIds[rand(0, 9)];

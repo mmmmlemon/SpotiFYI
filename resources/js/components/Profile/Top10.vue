@@ -17,7 +17,7 @@
                     <!-- навигация -->
                     <div class="row justify-content-center font_10pt fade_in_anim">
                         <nav class="justify-content-center">
-                            <ul class="breadcrumb">
+                            <ul class="breadcrumb text-center">
                                 <li class="breadcrumb-item"><a href="#tracks">Треки</a></li>
                                 <li class="breadcrumb-item"><a href="#artists">Исполнители</a></li>
                             </ul>

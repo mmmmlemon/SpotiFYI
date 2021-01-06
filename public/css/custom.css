@@ -117,7 +117,7 @@
 .album_icon_top10:hover{
     border-style: solid;
     border-color: #1b77b9;
-    border-width: 3px;
+    border-width: 2px;
     transform: scale(1.2);
 }
 
@@ -339,4 +339,8 @@ a:hover{
     opacity: 0.5;
     border-style: solid;
     margin-bottom: 15px;
+}
+
+h3.text-center {
+    margin-bottom: 0;
 }
