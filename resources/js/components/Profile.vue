@@ -38,21 +38,30 @@
                 <hr class="fade_in_anim">
                 <!-- кнопки меню -->
                 <div class="row justify-content-center fade-in">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="row justify-content-center fade_in_anim">
-                            <div class="col-md-3 padding_10">
-                                <router-link to="/profile"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'basicStats'}" type="button">Общее</button></router-link>
+                            <div class="col-md-4 padding_10">
+                                <router-link to="/profile">
+                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'basicStats'}" type="button">
+                                        Общее
+                                    </button>
+                                </router-link>
                             </div>
-                            <div class="col-md-3 padding_10">
-                                <router-link to="/profile/top10"><button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'top10'}" type="button">Топ-10</button></router-link>
+                            <div class="col-md-4 padding_10">
+                                <router-link to="/profile/top10">
+                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'top10'}" type="button">
+                                        Топ-10
+                                    </button>
+                                </router-link>
                             </div>
-                            <div class="col-md-3 padding_10">
-                                <router-link to="/profile/achievements"><button class="btn" v-bind:class="{ 'btn-primary': currentTab === 'achievements'}" type="button">Особо отличившиеся</button></router-link>
+                            <div class="col-md-4 padding_10">
+                                <router-link to="/profile/achievements">
+                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'achievements'}" type="button">
+                                        Особо отличившиеся
+                                    </button>
+                                </router-link>
                             </div>
-                            <div class="col-md-3 padding_10">
-                                <router-link to="/profile/latest"><button class="btn" v-bind:class="{ 'btn-primary': currentTab === 'latest'}" type="button">Последние прослушанные</button></router-link>
-                            </div>
-                        </div>
+                           </div>
                     </div>
                 </div>
             </div>

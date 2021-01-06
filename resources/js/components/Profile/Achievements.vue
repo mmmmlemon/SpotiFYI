@@ -40,7 +40,7 @@
             </div>
 
             <!-- исполнители -->
-            <div v-if="shortestTrack != -1" class="col-12 justify-content-center fade_in_anim" id="tracks">
+            <div v-if="shortestTrack != -1" class="col-12 justify-content-center fade_in_anim" id="artists">
                 <h3 class="text-center">
                     Исполнители
                     <i class="fas fa-users primary_color"></i>

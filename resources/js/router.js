@@ -50,12 +50,12 @@ const routes = [
                 path:'/profile/achievements',
                 component: Achievements
             },
-            {
-                path:'/profile/latest',
-                component: Latest
-            },
         ]
-    }
+    },
+    {
+        path:'/recentTracks',
+        component: Latest
+    },
 
 ]
 

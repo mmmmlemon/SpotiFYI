@@ -2291,6 +2291,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeCreate: function beforeCreate() {
     //получить профиль
@@ -2573,6 +2582,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3138,6 +3154,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     //любимые жанры
@@ -3291,6 +3308,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -78557,14 +78579,14 @@ var render = function() {
             _c("hr", { staticClass: "fade_in_anim" }),
             _vm._v(" "),
             _c("div", { staticClass: "row justify-content-center fade-in" }, [
-              _c("div", { staticClass: "col-md-8" }, [
+              _c("div", { staticClass: "col-md-9" }, [
                 _c(
                   "div",
                   { staticClass: "row justify-content-center fade_in_anim" },
                   [
                     _c(
                       "div",
-                      { staticClass: "col-md-3 padding_10" },
+                      { staticClass: "col-md-4 padding_10" },
                       [
                         _c("router-link", { attrs: { to: "/profile" } }, [
                           _c(
@@ -78576,7 +78598,11 @@ var render = function() {
                               },
                               attrs: { type: "button" }
                             },
-                            [_vm._v("Общее")]
+                            [
+                              _vm._v(
+                                "\n                                    Общее\n                                "
+                              )
+                            ]
                           )
                         ])
                       ],
@@ -78585,7 +78611,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-3 padding_10" },
+                      { staticClass: "col-md-4 padding_10" },
                       [
                         _c("router-link", { attrs: { to: "/profile/top10" } }, [
                           _c(
@@ -78597,7 +78623,11 @@ var render = function() {
                               },
                               attrs: { type: "button" }
                             },
-                            [_vm._v("Топ-10")]
+                            [
+                              _vm._v(
+                                "\n                                    Топ-10\n                                "
+                              )
+                            ]
                           )
                         ])
                       ],
@@ -78606,7 +78636,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-3 padding_10" },
+                      { staticClass: "col-md-4 padding_10" },
                       [
                         _c(
                           "router-link",
@@ -78615,39 +78645,18 @@ var render = function() {
                             _c(
                               "button",
                               {
-                                staticClass: "btn",
+                                staticClass: "btn btn-block",
                                 class: {
                                   "btn-primary":
                                     _vm.currentTab === "achievements"
                                 },
                                 attrs: { type: "button" }
                               },
-                              [_vm._v("Особо отличившиеся")]
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-3 padding_10" },
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: "/profile/latest" } },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                class: {
-                                  "btn-primary": _vm.currentTab === "latest"
-                                },
-                                attrs: { type: "button" }
-                              },
-                              [_vm._v("Последние прослушанные")]
+                              [
+                                _vm._v(
+                                  "\n                                    Особо отличившиеся\n                                "
+                                )
+                              ]
                             )
                           ]
                         )
@@ -78797,7 +78806,7 @@ var render = function() {
                 "div",
                 {
                   staticClass: "col-12 justify-content-center fade_in_anim",
-                  attrs: { id: "tracks" }
+                  attrs: { id: "artists" }
                 },
                 [_vm._m(3)]
               )
@@ -79231,7 +79240,10 @@ var render = function() {
             [
               _c("router-link", { attrs: { to: "/profile/top10" } }, [
                 _c("button", { staticClass: "btn btn-primary" }, [
-                  _vm._v('Перейти к "Топ-10"')
+                  _vm._v(
+                    '\n                     Перейти к "Топ-10"\n                     '
+                  ),
+                  _c("i", { staticClass: "fas fa-list-ol" })
                 ])
               ]),
               _vm._v(" "),
@@ -79266,7 +79278,7 @@ var staticRenderFns = [
       { staticClass: "row justify-content-center font_10pt fade_in_anim" },
       [
         _c("nav", { staticClass: "justify-content-center" }, [
-          _c("ul", { staticClass: "breadcrumb" }, [
+          _c("ul", { staticClass: "breadcrumb text-center" }, [
             _c("li", { staticClass: "breadcrumb-item" }, [
               _c("a", { attrs: { href: "#basic" } }, [_vm._v("Общее")])
             ]),
@@ -79631,158 +79643,170 @@ var render = function() {
                 _vm.itemCount == -1
                   ? _c("div", [_c("Loader")], 1)
                   : _vm.itemCount >= _vm.minItemCount
-                  ? _c("div", { staticClass: "fade_in_slow_anim" }, [
-                      _vm.type === "tracks"
-                        ? _c(
-                            "h4",
-                            { staticClass: "text-center border_underline" },
-                            [
-                              _vm._v("Треки - "),
-                              _c("b", [_vm._v(_vm._s(_vm.itemCount))])
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.type === "albums"
-                        ? _c(
-                            "h4",
-                            { staticClass: "text-center border_underline" },
-                            [
-                              _vm._v("Альбомы - "),
-                              _c("b", [_vm._v(_vm._s(_vm.itemCount))])
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.type === "artists"
-                        ? _c(
-                            "h4",
-                            { staticClass: "text-center border_underline" },
-                            [
-                              _vm._v("Подписки - "),
-                              _c("b", [_vm._v(_vm._s(_vm.itemCount))])
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.lastFiveItems == false
-                        ? _c(
-                            "div",
-                            [
-                              _vm.type === "tracks"
-                                ? _c("Error", {
-                                    attrs: {
-                                      type: "small",
-                                      errorMessage: "Не удалось загрузить треки"
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.type === "albums"
-                                ? _c("Error", {
-                                    attrs: {
-                                      type: "small",
-                                      errorMessage:
-                                        "Не удалось загрузить альбомы"
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.type === "artists"
-                                ? _c("Error", {
-                                    attrs: {
-                                      type: "small",
-                                      errorMessage:
-                                        "Не удалось загрузить подписки"
-                                    }
-                                  })
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        : _vm.lastFiveItems == -1
-                        ? _c("div")
-                        : _vm.lastFiveItems.length > 0
-                        ? _c(
-                            "div",
-                            { staticClass: "col-md-12 fade_in_slow_anim" },
-                            [
-                              _c("div", { staticClass: "col-md-12" }, [
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "grey_card_trans padding_10 fade_in_slow_anim"
+                      },
+                      [
+                        _vm.type === "tracks"
+                          ? _c(
+                              "h4",
+                              { staticClass: "text-center border_underline" },
+                              [
+                                _vm._v("Треки - "),
+                                _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.type === "albums"
+                          ? _c(
+                              "h4",
+                              { staticClass: "text-center border_underline" },
+                              [
+                                _vm._v("Альбомы - "),
+                                _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.type === "artists"
+                          ? _c(
+                              "h4",
+                              { staticClass: "text-center border_underline" },
+                              [
+                                _vm._v("Подписки - "),
+                                _c("b", [_vm._v(_vm._s(_vm.itemCount))])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.lastFiveItems == false
+                          ? _c(
+                              "div",
+                              [
                                 _vm.type === "tracks"
-                                  ? _c(
-                                      "p",
-                                      {
-                                        staticClass: "text-center",
-                                        staticStyle: { "font-size": "10pt" }
-                                      },
-                                      [_vm._v("Последние добавленные треки")]
-                                    )
+                                  ? _c("Error", {
+                                      attrs: {
+                                        type: "small",
+                                        errorMessage:
+                                          "Не удалось загрузить треки"
+                                      }
+                                    })
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _vm.type === "albums"
-                                  ? _c(
-                                      "p",
-                                      {
-                                        staticClass: "text-center",
-                                        staticStyle: { "font-size": "10pt" }
-                                      },
-                                      [_vm._v("Последние добавленные альбомы")]
-                                    )
+                                  ? _c("Error", {
+                                      attrs: {
+                                        type: "small",
+                                        errorMessage:
+                                          "Не удалось загрузить альбомы"
+                                      }
+                                    })
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _vm.type === "artists"
-                                  ? _c(
-                                      "p",
-                                      {
-                                        staticClass: "text-center",
-                                        staticStyle: { "font-size": "10pt" }
-                                      },
-                                      [_vm._v("Некоторые из твоих подписок")]
-                                    )
-                                  : _vm._e()
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "row justify-content-center" },
-                                _vm._l(_vm.lastFiveItems, function(item) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      key: item.id,
-                                      staticClass: "col-2 fade_in_slow_anim",
+                                  ? _c("Error", {
                                       attrs: {
-                                        "data-toggle": "tooltip",
-                                        "data-title": item.name,
-                                        "data-placement": "bottom"
+                                        type: "small",
+                                        errorMessage:
+                                          "Не удалось загрузить подписки"
                                       }
-                                    },
-                                    [
-                                      _c(
-                                        "a",
+                                    })
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          : _vm.lastFiveItems == -1
+                          ? _c("div")
+                          : _vm.lastFiveItems.length > 0
+                          ? _c(
+                              "div",
+                              { staticClass: "col-md-12 fade_in_slow_anim" },
+                              [
+                                _c("div", { staticClass: "col-md-12" }, [
+                                  _vm.type === "tracks"
+                                    ? _c(
+                                        "p",
                                         {
-                                          attrs: {
-                                            href: item.url,
-                                            target: "_blank"
-                                          }
+                                          staticClass: "text-center",
+                                          staticStyle: { "font-size": "10pt" }
+                                        },
+                                        [_vm._v("Последние добавленные треки")]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.type === "albums"
+                                    ? _c(
+                                        "p",
+                                        {
+                                          staticClass: "text-center",
+                                          staticStyle: { "font-size": "10pt" }
                                         },
                                         [
-                                          _c("img", {
-                                            staticClass:
-                                              "rounded-circle album_icon",
-                                            attrs: { src: item.cover }
-                                          })
+                                          _vm._v(
+                                            "Последние добавленные альбомы"
+                                          )
                                         ]
                                       )
-                                    ]
-                                  )
-                                }),
-                                0
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.type === "artists"
+                                    ? _c(
+                                        "p",
+                                        {
+                                          staticClass: "text-center",
+                                          staticStyle: { "font-size": "10pt" }
+                                        },
+                                        [_vm._v("Некоторые из твоих подписок")]
+                                      )
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "row justify-content-center" },
+                                  _vm._l(_vm.lastFiveItems, function(item) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key: item.id,
+                                        staticClass: "col-2 fade_in_slow_anim",
+                                        attrs: {
+                                          "data-toggle": "tooltip",
+                                          "data-title": item.name,
+                                          "data-placement": "bottom"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: {
+                                              href: item.url,
+                                              target: "_blank"
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              staticClass:
+                                                "rounded-circle album_icon",
+                                              attrs: { src: item.cover }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    )
                   : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
               ])
             : _vm._e()
@@ -80055,13 +80079,13 @@ var render = function() {
                     _vm._v("Больше всего тебе нравится музыка "),
                     _c(
                       "b",
-                      { staticClass: "unbold border_underline font_25pt" },
+                      { staticClass: "unbold border_underline font_16pt" },
                       [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых")]
                     ),
                     _vm._v(". \n                В твоей библиотеке "),
                     _c(
                       "b",
-                      { staticClass: "unbold border_underline font_25pt" },
+                      { staticClass: "unbold border_underline font_16pt" },
                       [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))]
                     ),
                     _vm._v(" из этой эпохи.")
@@ -80076,7 +80100,7 @@ var render = function() {
                     [
                       _c(
                         "b",
-                        { staticClass: "unbold border_underline font_25pt" },
+                        { staticClass: "unbold border_underline font_16pt" },
                         [_vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")]
                       ),
                       _vm._v(
@@ -80084,7 +80108,7 @@ var render = function() {
                       ),
                       _c(
                         "b",
-                        { staticClass: "unbold border_underline font_25pt" },
+                        { staticClass: "unbold border_underline font_16pt" },
                         [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
                       ),
                       _vm._v(" из этого года.")
@@ -80104,7 +80128,7 @@ var render = function() {
                       ),
                       _c(
                         "b",
-                        { staticClass: "unbold border_underline font_25pt" },
+                        { staticClass: "unbold border_underline font_16pt" },
                         [
                           _vm._v(
                             _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых"
@@ -80116,7 +80140,7 @@ var render = function() {
                       ),
                       _c(
                         "b",
-                        { staticClass: "unbold border_underline font_25pt" },
+                        { staticClass: "unbold border_underline font_16pt" },
                         [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))]
                       ),
                       _vm._v(" из этой эпохи.")
@@ -80132,7 +80156,7 @@ var render = function() {
                     [
                       _c(
                         "b",
-                        { staticClass: "unbold border_underline font_25pt" },
+                        { staticClass: "unbold border_underline font_16pt" },
                         [_vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")]
                       ),
                       _vm._v(
@@ -80140,7 +80164,7 @@ var render = function() {
                       ),
                       _c(
                         "b",
-                        { staticClass: "unbold border_underline font_25pt" },
+                        { staticClass: "unbold border_underline font_16pt" },
                         [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
                       ),
                       _vm._v(" из этого года.")
@@ -80582,7 +80606,10 @@ var render = function() {
           [
             _c("router-link", { attrs: { to: "/profile/achievements" } }, [
               _c("button", { staticClass: "btn btn-primary" }, [
-                _vm._v('Перейти к "Особо отличившиеся"')
+                _vm._v(
+                  '\n                 Перейти к "Особо отличившиеся"\n                 '
+                ),
+                _c("i", { staticClass: "fas fa-award" })
               ])
             ]),
             _vm._v(" "),
@@ -99217,10 +99244,10 @@ var routes = [{
   }, {
     path: '/profile/achievements',
     component: _components_Profile_Achievements_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
-  }, {
-    path: '/profile/latest',
-    component: _components_Profile_Latest_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   }]
+}, {
+  path: '/recentTracks',
+  component: _components_Profile_Latest_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',

@@ -57,6 +57,9 @@
                 <li class="nav-item active">
                     <router-link to="/profile"><a class="nav-link">Мой профиль</a></router-link>
                 </li>
+                <li class="nav-item active">
+                    <router-link to="/recentTracks"><a class="nav-link">Последние треки</a></router-link>
+                </li>
                 @endif
                 <li class="nav-item active">
                     <router-link to="/tests"><a class="nav-link">Dev: Tests</a></router-link>
@@ -94,6 +97,7 @@
                     <router-link to="/about"><a class="dropdown-item">О проекте</a></router-link>
                     @if($checkToken != false)
                         <router-link to="/profile"><a class="dropdown-item">Мой профиль</a></router-link>
+                        <router-link to="/recentTracks"><a class="dropdown-item">Последние треки</a></router-link>
                     @endif
                     <router-link to="/tests"><a class="dropdown-item">Dev:Tests</a></router-link>
                     <div class="dropdown-divider"></div>

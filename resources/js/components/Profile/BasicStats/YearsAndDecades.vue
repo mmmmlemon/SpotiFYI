@@ -7,18 +7,19 @@
             <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
         </div>
         <div v-else-if="yearsAndDecades != -1 && yearsAndDecades != false" class="grey_card padding_10 margin_vertical">
+
             <div v-if="type == 'alltime'">
-                <p class="text-center">Больше всего тебе нравится музыка <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
-                    В твоей библиотеке <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.</p>
-                 <p :v-if="type == 'alltime'" class="text-center"><b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 
-                    Тебе нравятся <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.</p>   
+                <p class="text-center">Больше всего тебе нравится музыка <b class="unbold border_underline font_16pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
+                    В твоей библиотеке <b class="unbold border_underline font_16pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.</p>
+                 <p :v-if="type == 'alltime'" class="text-center"><b class="unbold border_underline font_16pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 
+                    Тебе нравятся <b class="unbold border_underline font_16pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.</p>   
             </div>
 
             <div v-else>
-                <p :v-else-if="type == 'month'" class="text-center">В последнее время ты больше всего слушаешь музыку <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
-                    За последний месяц ты послушал <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.</p>
-                 <p :v-else-if="type == 'month'" class="text-center"><b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 
-                    Были прослушаны <b class="unbold border_underline font_25pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.</p>
+                <p :v-else-if="type == 'month'" class="text-center">В последнее время ты больше всего слушаешь музыку <b class="unbold border_underline font_16pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
+                    За последний месяц ты послушал <b class="unbold border_underline font_16pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.</p>
+                 <p :v-else-if="type == 'month'" class="text-center"><b class="unbold border_underline font_16pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 
+                    Были прослушаны <b class="unbold border_underline font_16pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.</p>
             </div>
 
             <br>

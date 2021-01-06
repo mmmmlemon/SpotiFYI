@@ -130,8 +130,6 @@
     border-width: 2px;
 }
 
-
-
 .padding_10{
     padding:10px;
 }
@@ -140,7 +138,7 @@
     border-bottom-style:solid;
     border-bottom-width: 2px;
     border-bottom-color: #1b77b9;
-    padding-bottom: 10px;
+    padding-bottom: 3px;
     transition: border-color 0.2s ease-in-out;
 }
 
@@ -190,10 +188,14 @@
     font-size:2.5em;
 }
 
+.font_16pt{
+    font-size: 16pt;
+}
 
 .grey_bg{
     background-color: #25282c;
 }
+
 
 .font_13pt{
     font-size: 13pt;
@@ -239,6 +241,18 @@ a:hover{
 .grey_card{
     border-radius: 10px;
     background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
+    margin-top: 15px;
+}
+
+.grey_card_light{
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #41454a98, #42454abe, #42454abb, #43464ab7, #43464aa9);
+    margin-top: 15px;
+}
+
+.grey_card_trans{
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #25282c00, #2325290e, #20232634, #1e20245e, #1c1e2154);
     margin-top: 15px;
 }
 

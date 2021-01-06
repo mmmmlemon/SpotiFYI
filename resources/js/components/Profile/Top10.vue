@@ -108,7 +108,12 @@
         </div>
         <br>
         <div class="row justify-content-center fade_in_anim" v-if="top10ArtistsByTime != -1">
-            <router-link to="/profile/achievements"><button class="btn btn-primary">Перейти к "Особо отличившиеся"</button></router-link>
+            <router-link to="/profile/achievements">
+                <button class="btn btn-primary">
+                    Перейти к "Особо отличившиеся"
+                    <i class="fas fa-award"></i>
+                </button>
+            </router-link>
             <br><br>
         </div>
    </div>

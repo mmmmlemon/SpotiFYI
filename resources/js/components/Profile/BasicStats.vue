@@ -18,7 +18,7 @@
                     <!-- навигация -->
                     <div class="row justify-content-center font_10pt fade_in_anim">
                         <nav class="justify-content-center">
-                            <ul class="breadcrumb">
+                            <ul class="breadcrumb text-center">
                                 <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
                                 <li class="breadcrumb-item"><a href="#tracks">Самые длинные и короткие треки</a></li>
                                 <li class="breadcrumb-item"><a href="#genres">Жанры и годы</a></li>
@@ -64,8 +64,15 @@
             </div>
             <br>
             <div class="row justify-content-center fade_in_anim" v-if="yearsAndDecades != -1">
-                <router-link to="/profile/top10"><button class="btn btn-primary">Перейти к "Топ-10"</button></router-link>
+                
+                <router-link to="/profile/top10">
+                    <button class="btn btn-primary">
+                        Перейти к "Топ-10"
+                        <i class="fas fa-list-ol"></i>
+                    </button>
+                </router-link>
                 <br><br>
+                
             </div>
         </div>
    </div>

@@ -13,7 +13,7 @@
                 <div v-if="itemCount == -1">
                     <Loader />
                 </div>
-                <div v-else-if="itemCount >= minItemCount" class="fade_in_slow_anim">
+                <div v-else-if="itemCount >= minItemCount" class="grey_card_trans padding_10 fade_in_slow_anim">
                     <h4 v-if="type === 'tracks'" class="text-center border_underline">Треки - <b>{{itemCount}}</b></h4>
                     <h4 v-if="type === 'albums'" class="text-center border_underline">Альбомы - <b>{{itemCount}}</b></h4>
                     <h4 v-if="type === 'artists'" class="text-center border_underline">Подписки - <b>{{itemCount}}</b></h4>
