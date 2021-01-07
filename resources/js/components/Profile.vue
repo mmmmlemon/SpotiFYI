@@ -7,7 +7,7 @@
            <Error errorMessage="Не удалось загрузить профиль пользователя"/>
         </div>
         <!-- профиль -->
-        <div class="container" v-if="spotifyProfile != -1 && spotifyProfile != false">
+        <div class="container" v-if="spotifyProfile != -1 && spotifyProfile != false" id="top">
 
             <div class="col-12 grey_card">
                 <!-- юзернейм и ссылка на профиль -->

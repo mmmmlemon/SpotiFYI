@@ -1242,7 +1242,7 @@ class SpotifyAPIController extends Controller
 
             $response = [
                 'title' => Helpers::getFullNameOfItem($topTrack, "fullname"),
-                'album' => $topTrack->album->name . " (". Helpers::getItemReleaseDate($topTrack, "track", "short") .")",
+                'album' => $topTrack->album->name . " - ". Helpers::getItemReleaseDate($topTrack, "track", "short"),
                 'url' => $topTrack->external_urls->spotify,
                 'image' => $topTrack->album->images[0]->url,
             ];
@@ -1298,7 +1298,7 @@ class SpotifyAPIController extends Controller
 
                 $response = [
                     'title' => Helpers::getFullNameOfItem($track, "fullname"),
-                    'album' => $track->album->name . " (". Helpers::getItemReleaseDate($track, "track", "short") .")",
+                    'album' => $track->album->name . " - ". Helpers::getItemReleaseDate($track, "track", "short"),
                     'url' => $track->external_urls->spotify,
                     'image' => $track->album->images[0]->url,
                 ];
@@ -1361,7 +1361,7 @@ class SpotifyAPIController extends Controller
 
                 $response = [
                     'title' => Helpers::getFullNameOfItem($track, "fullname"),
-                    'album' => $track->album->name . " (". Helpers::getItemReleaseDate($track, "track", "short") .")",
+                    'album' => $track->album->name . " - ". Helpers::getItemReleaseDate($track, "track", "short"),
                     'url' => $track->external_urls->spotify,
                     'image' => $track->album->images[0]->url,
                     'additionalInfo' => "Длина - " . Helpers::trackDuration($track->duration_ms),
@@ -1400,6 +1400,7 @@ class SpotifyAPIController extends Controller
                 'title' => $topArtist->name,
                 'url' => $topArtist->external_urls->spotify,
                 'image' => $topArtist->images[0]->url,
+                'additionalInfo' => Helpers::getArtistsGenres($topArtist, 5),
             ];
 
             return response()->json($response);
@@ -1536,6 +1537,7 @@ class SpotifyAPIController extends Controller
                 $artistInfo['url'] = $artist->external_urls->spotify;
                 $artistInfo['image'] = $artist->images[0]->url;
                 $artistInfo['popularity'] = $artist->popularity;
+                $artistInfo['genres'] = Helpers::getArtistsGenres($artist, 5);
 
                 array_push($artistsClean, $artistInfo);
             }
@@ -1556,6 +1558,7 @@ class SpotifyAPIController extends Controller
                 'title' => $topArtist['name'],
                 'url' => $topArtist['url'],
                 'image' => $topArtist['image'],
+                'additionalInfo' => $topArtist['genres']
             ];
 
             return response()->json($response);
@@ -1589,7 +1592,7 @@ class SpotifyAPIController extends Controller
                 $trackInfo['id'] = rand(0,999).rand(0,9999);
                 $trackInfo['artists'] = Helpers::getFullNameOfItem($track, "artist");
                 $trackInfo['trackName'] = $track->name;
-                $trackInfo['albumName'] = $track->album->name . " (" . Helpers::getItemReleaseDate($track->album, "album", "short") . ")";
+                $trackInfo['albumName'] = $track->album->name . " - " . Helpers::getItemReleaseDate($track->album, "album", "short");
                 $trackInfo['trackUrl'] = $track->external_urls->spotify;
                 $trackInfo['albumUrl'] = $track->album->external_urls->spotify;
                 $trackInfo['duration'] = Helpers::trackDuration($track->duration_ms);

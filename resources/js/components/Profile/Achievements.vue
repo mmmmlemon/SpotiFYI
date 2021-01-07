@@ -55,7 +55,18 @@
                 <AchievementItem v-if="topArtistByTime != -1" cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" :items="mostPopularArtist"/>
                 <AchievementItem v-if="mostPopularArtist != -1" cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" :items="leastPopularArtist"/>
             </div>
-
+                       <br>
+            <div class="row justify-content-center fade_in_anim" v-if="leastPopularArtist != -1">
+                
+                <router-link to="/profile#top">
+                    <button class="btn btn-primary">
+                        Перейти к "Общее"
+                        <i class="fas fas fa-chart-bar"></i>
+                    </button>
+                </router-link>
+                <br><br>
+                
+            </div>
 
         </div>
         <div v-else-if="spotifyUserLibrary == false">
@@ -70,6 +81,12 @@
 <script>
 export default {
     mounted(){
+
+        var anchor=this.$router.currentRoute.hash.replace("#", "");
+
+        if(anchor)
+        { this.$nextTick(()=> window.document.getElementById(anchor).scrollIntoView()); }
+
         //смена текущего таба
         this.$store.dispatch('setCurrentTab','achievements');
 

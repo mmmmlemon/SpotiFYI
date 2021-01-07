@@ -25,9 +25,7 @@ class TestController extends Controller
 
         $api = config('spotify_api');
 
-        $tracc = $api->getTrack('1uZoMjEdvVFarkSXmkYBn5');
-
-        dd($tracc);
+        dd($api->getArtist('2nAUHbKI7TZShUwFpk6G08'));
     }
 
     //тест работы PHP-wrapper'а для Spotify Web API

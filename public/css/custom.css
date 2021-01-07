@@ -42,7 +42,6 @@
     margin-top: 10px;
 }
 
-
 .loader_div{
     margin-top:20%;
 }
@@ -126,8 +125,8 @@
     width:50%; 
     margin:5px;
     border-style: solid;
-    border-color: #2c4150;
-    border-width: 2px;
+    border-color: #376485;
+    border-width: 5px;
 }
 
 .padding_10{
@@ -141,7 +140,6 @@
     padding-bottom: 3px;
     transition: border-color 0.2s ease-in-out;
 }
-
 
 .border_underline:hover{
     border-color: white;
@@ -158,7 +156,6 @@
     text-decoration-color: white;
     cursor: pointer;
 }
-
 
 .time_fact{
     background-color: black; 
@@ -196,7 +193,6 @@
     background-color: #25282c;
 }
 
-
 .font_13pt{
     font-size: 13pt;
 }
@@ -227,7 +223,6 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
 
 a{
     color: rgb(185, 185, 185) !important;
@@ -332,7 +327,6 @@ a:hover{
     cursor: default;
 }
 
-
 .hr_imitation{
     border-color: grey;
     border-width: 1px;
@@ -343,4 +337,20 @@ a:hover{
 
 h3.text-center {
     margin-bottom: 0;
+}
+
+.achievement_title{
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.achievement_subtitle{
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 14pt;
+}
+
+.achievement_additional{
+    margin-top:10px;
+    font-size: 14pt;
 }

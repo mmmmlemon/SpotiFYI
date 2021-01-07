@@ -2401,9 +2401,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    //смена текущего таба
+    var anchor = this.$router.currentRoute.hash.replace("#", "");
+
+    if (anchor) {
+      this.$nextTick(function () {
+        return window.document.getElementById(anchor).scrollIntoView();
+      });
+    } //смена текущего таба
+
+
     this.$store.dispatch('setCurrentTab', 'achievements'); //получить библиотеку пользователя, если нужно
 
     if (this.spotifyUserLibrary == -1) {
@@ -2664,6 +2683,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    var anchor = this.$router.currentRoute.hash.replace("#", "");
+
+    if (anchor) {
+      this.$nextTick(function () {
+        return window.document.getElementById(anchor).scrollIntoView();
+      });
+    }
+
     this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя и статистику
 
     if (this.spotifyUserLibrary == -1) {
@@ -3431,7 +3458,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    //смена текущего таба
+    var anchor = this.$router.currentRoute.hash.replace("#", "");
+
+    if (anchor) {
+      this.$nextTick(function () {
+        return window.document.getElementById(anchor).scrollIntoView();
+      });
+    } //смена текущего таба
+
+
     this.$store.dispatch('setCurrentTab', 'top10'); //получить библиотеку пользователя, если нужно
 
     if (this.spotifyUserLibrary == -1) {
@@ -3486,6 +3521,11 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.top10ArtistsByTime == -1) {
       this.$store.dispatch('getTop10ArtistsByTime');
+    }
+  },
+  methods: {
+    scrollFix: function scrollFix(hashbang) {
+      location.hash = hashbang;
     }
   },
   computed: {
@@ -78528,7 +78568,7 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.spotifyProfile != -1 && _vm.spotifyProfile != false
-      ? _c("div", { staticClass: "container" }, [
+      ? _c("div", { staticClass: "container", attrs: { id: "top" } }, [
           _c("div", { staticClass: "col-12 grey_card" }, [
             _c("div", { staticClass: "row justify-content-center fade-in" }, [
               _c("h1", { staticClass: "fade_in_anim" }, [
@@ -78880,6 +78920,29 @@ var render = function() {
                 ],
                 1
               )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _vm.leastPopularArtist != -1
+            ? _c(
+                "div",
+                { staticClass: "row justify-content-center fade_in_anim" },
+                [
+                  _c("router-link", { attrs: { to: "/profile#top" } }, [
+                    _c("button", { staticClass: "btn btn-primary" }, [
+                      _vm._v(
+                        '\n                    Перейти к "Общее"\n                    '
+                      ),
+                      _c("i", { staticClass: "fas fas fa-chart-bar" })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _c("br")
+                ],
+                1
+              )
             : _vm._e()
         ])
       : _vm.spotifyUserLibrary == false
@@ -79036,7 +79099,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12" }, [
-                  _c("h5", { staticClass: "text-center" }, [
+                  _c("h5", { staticClass: "text-center achievement_title" }, [
                     _c(
                       "a",
                       { attrs: { target: "_blank", href: _vm.items["url"] } },
@@ -79044,22 +79107,31 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("h6", { staticClass: "text-center" }, [
-                    _vm.items["album"]
-                      ? _c(
-                          "a",
-                          {
-                            attrs: { target: "_blank", href: _vm.items["url"] }
-                          },
-                          [_vm._v(_vm._s(_vm.items["album"]))]
-                        )
-                      : _vm._e()
-                  ]),
+                  _c(
+                    "h6",
+                    { staticClass: "text-center achievement_subtitle" },
+                    [
+                      _vm.items["album"]
+                        ? _c(
+                            "a",
+                            {
+                              attrs: {
+                                target: "_blank",
+                                href: _vm.items["url"]
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.items["album"]))]
+                          )
+                        : _vm._e()
+                    ]
+                  ),
                   _vm._v(" "),
                   _vm.items["additionalInfo"]
-                    ? _c("p", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(_vm.items["additionalInfo"]))
-                      ])
+                    ? _c(
+                        "p",
+                        { staticClass: "text-center achievement_additional" },
+                        [_vm._v(_vm._s(_vm.items["additionalInfo"]))]
+                      )
                     : _vm._e()
                 ])
               ]
@@ -79239,7 +79311,7 @@ var render = function() {
             "div",
             { staticClass: "row justify-content-center fade_in_anim" },
             [
-              _c("router-link", { attrs: { to: "/profile/top10" } }, [
+              _c("router-link", { attrs: { to: "/profile/top10#top" } }, [
                 _c("button", { staticClass: "btn btn-primary" }, [
                   _vm._v(
                     '\n                     Перейти к "Топ-10"\n                     '
@@ -80413,7 +80485,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { attrs: { id: "top10" } }, [
     _c("div", [
       _c("div", { staticClass: "row justify-content-center" }, [
         _vm.spotifyUserLibrary == -1
@@ -80605,7 +80677,7 @@ var render = function() {
           "div",
           { staticClass: "row justify-content-center fade_in_anim" },
           [
-            _c("router-link", { attrs: { to: "/profile/achievements" } }, [
+            _c("router-link", { attrs: { to: "/profile/achievements#top" } }, [
               _c("button", { staticClass: "btn btn-primary" }, [
                 _vm._v(
                   '\n                 Перейти к "Особо отличившиеся"\n                 '

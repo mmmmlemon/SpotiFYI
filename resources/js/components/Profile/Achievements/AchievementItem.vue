@@ -17,9 +17,9 @@
                 <img :src="items['image']" 
                     class="album_icon_achievement rounded-circle" alt="">
                 <div class="col-12">
-                    <h5 class="text-center"><a target="_blank" :href="items['url']">{{items['title']}}</a></h5>
-                    <h6 class="text-center"><a target="_blank" :href="items['url']" v-if="items['album']">{{items['album']}}</a></h6>
-                    <p class="text-center" v-if="items['additionalInfo']">{{items['additionalInfo']}}</p>
+                    <h5 class="text-center achievement_title"><a target="_blank" :href="items['url']">{{items['title']}}</a></h5>
+                    <h6 class="text-center achievement_subtitle"><a target="_blank" :href="items['url']" v-if="items['album']">{{items['album']}}</a></h6>
+                    <p class="text-center achievement_additional" v-if="items['additionalInfo']">{{items['additionalInfo']}}</p>
                 </div>
             </div>
         </div>

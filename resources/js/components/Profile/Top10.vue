@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div id="top10">
         <div>
             <div class="row justify-content-center">
                 <div class="col-12" v-if="spotifyUserLibrary == -1">
@@ -108,7 +108,7 @@
         </div>
         <br>
         <div class="row justify-content-center fade_in_anim" v-if="top10ArtistsByTime != -1">
-            <router-link to="/profile/achievements">
+            <router-link to="/profile/achievements#top">
                 <button class="btn btn-primary">
                     Перейти к "Особо отличившиеся"
                     <i class="fas fa-award"></i>
@@ -122,6 +122,12 @@
 <script>
 export default {
     mounted(){
+
+        var anchor=this.$router.currentRoute.hash.replace("#", "");
+
+        if(anchor)
+        { this.$nextTick(()=> window.document.getElementById(anchor).scrollIntoView()); }
+
         //смена текущего таба
         this.$store.dispatch('setCurrentTab','top10');
 
@@ -168,6 +174,13 @@ export default {
         //топ 10 артистов по кол-ву времени
         if(this.top10ArtistsByTime == -1)
         { this.$store.dispatch('getTop10ArtistsByTime'); }   
+    },
+
+    methods: {
+        scrollFix: function(hashbang)
+        {
+            location.hash = hashbang;
+        }
     },
 
     computed: {

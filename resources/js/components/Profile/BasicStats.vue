@@ -65,7 +65,7 @@
             <br>
             <div class="row justify-content-center fade_in_anim" v-if="yearsAndDecades != -1">
                 
-                <router-link to="/profile/top10">
+                <router-link to="/profile/top10#top">
                     <button class="btn btn-primary">
                         Перейти к "Топ-10"
                         <i class="fas fa-list-ol"></i>
@@ -81,6 +81,12 @@
 <script>
 export default {
     mounted(){
+
+        var anchor=this.$router.currentRoute.hash.replace("#", "");
+
+        if(anchor)
+        { this.$nextTick(()=> window.document.getElementById(anchor).scrollIntoView()); }
+
         this.$store.dispatch('setCurrentTab', 'basicStats');
 
         //получаем библиотеку пользователя и статистику
