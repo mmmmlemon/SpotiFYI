@@ -83,9 +83,16 @@ class SpotifyAPIController extends Controller
         {
             $api = config('spotify_api');
             $profile = $api->me();
+            $avatarUrl = "";
+            
+            if(count($profile->images) > 0)
+            { $avatarUrl = $profile->images[0]->url; }
+            else
+            { $avatarUrl = "https://sun9-54.userapi.com/c10308/u34585912/d_4e793f07.jpg?ava=1"; }
+
             $response = ['spotifyUsername' => $profile->display_name, 'country' => "https://www.countryflags.io/" . $profile->country . "/flat/32.png", 
                         'profile_url' => $profile->external_urls->spotify, 'followers' => $profile->followers->total,
-                        'avatar' => $profile->images[0]->url, "subscription" => "$profile->product"];
+                        'avatar' => $avatarUrl, "subscription" => "$profile->product"];
            
             return response()->json($response);
         }
@@ -100,7 +107,7 @@ class SpotifyAPIController extends Controller
     //возвращает true, если все файлы успешно были записаны, или false если нет
     //параметры: реквест
     public function getSpotifyUserLibrary(Request $request)
-    {
+    {   
         //проверяем токен
         $checkToken = System::checkSpotifyAccessToken($request);
 
@@ -131,56 +138,67 @@ class SpotifyAPIController extends Controller
                 $options['offset'] += 50;
                 $spotifyMyTracks = $api->getMySavedTracks($options)->items;
             }
-        
-            //получаем все альбомы
-            while(count($spotifyMyAlbums) > 0)
-            {
-                foreach($spotifyMyAlbums as $item)
-                { array_push($spotifyUserAlbums, $item->album); }
 
-                $options['offset'] += 50;
-                $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
+            //считаем треки
+            $countTracks = count($spotifyUserTracks);
+
+            if($countTracks < 50)
+            { 
+                return response()->json(['result'=> 'libraryError', 
+                                        'errorMsg' => 'Слишком мало треков в библиотеке (треков: '.$countTracks.", нужно: 50). Добавь еще!"]);
             }
-
-            //получаем все подписки
-            while(count($spotifyMyArtists) > 0)
-            {
-                foreach($spotifyMyArtists as $item)
-                { array_push($spotifyUserArtists, $item); }
-
-                $options['after'] = $item->id;
-                $spotifyMyArtists = $api->getUserFollowedArtists($options)->artists->items;
-            }
-
-            //сохраняем библиотку в JSON файлы
-            //проверяем что папка user_libraries существует
-            $check = File::exists(storage_path("app/public/user_libraries"));
-
-            //если папки нет, то создаем её
-            if($check != true)
-            { Storage::disk('public')->makeDirectory("user_libraries"); }
             else
-            {   
-                //получаем из Cookies имя папки в которую будут сохраняться JSON'ы
-                $folderName = $request->cookie('rand_name');
+            { 
+                //получаем все альбомы
+                while(count($spotifyMyAlbums) > 0)
+                {
+                    foreach($spotifyMyAlbums as $item)
+                    { array_push($spotifyUserAlbums, $item->album); }
 
-                //создаем эту папку, и если он создалась то записываем содержимое массивов в файлы
-                if(Storage::disk('public')->makeDirectory("user_libraries/" . $folderName))
-                {   
-                    //сохраняем треки
-                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "tracks.json"), json_encode($spotifyUserTracks));
-                    //сохраняем альбомы
-                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "albums.json"), json_encode($spotifyUserAlbums));
-                    //сохраняем подписки
-                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "artists.json"), json_encode($spotifyUserArtists));
+                    $options['offset'] += 50;
+                    $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
                 }
-                else { return response()->json(false); }
-            }
 
-            return response()->json(true);
+                //получаем все подписки
+                while(count($spotifyMyArtists) > 0)
+                {
+                    foreach($spotifyMyArtists as $item)
+                    { array_push($spotifyUserArtists, $item); }
+
+                    $options['after'] = $item->id;
+                    $spotifyMyArtists = $api->getUserFollowedArtists($options)->artists->items;
+                }
+
+                //сохраняем библиотку в JSON файлы
+                //проверяем что папка user_libraries существует
+                $check = File::exists(storage_path("app/public/user_libraries"));
+
+                //если папки нет, то создаем её
+                if($check != true)
+                { Storage::disk('public')->makeDirectory("user_libraries"); }
+                else
+                {   
+                    //получаем из Cookies имя папки в которую будут сохраняться JSON'ы
+                    $folderName = $request->cookie('rand_name');
+
+                    //создаем эту папку, и если он создалась то записываем содержимое массивов в файлы
+                    if(Storage::disk('public')->makeDirectory("user_libraries/" . $folderName))
+                    {   
+                        //сохраняем треки
+                        File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "tracks.json"), json_encode($spotifyUserTracks));
+                        //сохраняем альбомы
+                        File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "albums.json"), json_encode($spotifyUserAlbums));
+                        //сохраняем подписки
+                        File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "artists.json"), json_encode($spotifyUserArtists));
+                    }
+                    else { return response()->json(false); }
+                }
+
+                return response()->json(['result' => true]);
+            } 
         }
         else
-        { return false; }
+        { return response()->json(['result' => false]); }
     }
 
     // ОБЩЕЕ
@@ -211,10 +229,12 @@ class SpotifyAPIController extends Controller
             }
     
             //записываем в массив кол-во треков и последние 5 треков
-            $response = ['count' => count($tracks), 'last_five' => $lastFive];
+            $response = ['count' => count($tracks), 'lastFive' => $lastFive];
 
             return response()->json($response);
         }
+        else
+        { return response()->json(false); }
     }
 
     //getSpotifyAlbums
@@ -225,13 +245,13 @@ class SpotifyAPIController extends Controller
     {
         //открываем файл альбомов
         $albums = System::getUserLibraryJson("albums", $request);
-
+        
         //если он есть
         if($albums != false)
         {   
             //записываем в массив последние пять альбомов
             $lastFive = [];
-            for($i = 0; $i < 5; $i++)
+            for($i = 0; $i < count($albums); $i++)
             {
                 //получаем полное название альбома
                 $name = Helpers::getFullNameOfItem($albums[$i], "fullname");
@@ -242,9 +262,21 @@ class SpotifyAPIController extends Controller
             }
     
             //записыаем кол-во альбомов и последние 5 альбомов
-            $response = ['count' => count($albums), 'last_five' => $lastFive];
+            $response = ['count' => count($albums), 'lastFive' => $lastFive];
             
             return response()->json($response);
+        }
+        else
+        { 
+            if(count($albums) == 0)
+            {
+                $response = ['count' => 0, 'lastFive' => false];
+                return response()->json($response);
+            }
+            else
+            {
+                return response()->json(false);  
+            }
         }
     }
 

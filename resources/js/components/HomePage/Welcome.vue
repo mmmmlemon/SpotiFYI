@@ -24,7 +24,7 @@
                         Ай! Маловато будет! <img src="/img/malovato_budet.png" width="50px">
                     </h4>  
                     <h4 v-else-if="spotifyUserTracksCount < 10 && spotifyUserTracksCount > 0">
-                        Ой, что-то тут пусто... 😳
+                        Ой, что-то у тебя пусто... 😳
                     </h4>              
                     <h4 v-else-if="spotifyUserTracksCount == 0">
                         {{spotifyUserTracksCount}} песен? bruh... <img src="/img/bruh.png" width="50px">

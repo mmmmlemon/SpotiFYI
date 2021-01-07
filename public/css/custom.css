@@ -64,6 +64,14 @@
     margin-top: 5%;
 }
 
+.info_icon{
+    font-size: 60pt;
+    color: rgb(53, 136, 184);
+    margin-top: 5%;
+}
+
+
+
 .error{
     color: rgb(175, 55, 55);
     font-weight: bold;

@@ -17,13 +17,14 @@
 <script>
 export default {
     mounted(){
-        this.$store.dispatch('setCurrentTab', 'latest');
 
+        //загружаем последние треки
         if(this.latestTracks == -1)
         { this.$store.dispatch('getLatestTracks'); }
     },
 
     computed: {
+        //последние треки
         latestTracks: function(){
             return this.$store.state.profilePage.latestTracks;
         }

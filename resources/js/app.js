@@ -17,6 +17,8 @@ import Error from './components/Misc/Error.vue';
 Vue.component('Error', Error);
 import Loader from './components/Misc/Loader.vue';
 Vue.component('Loader', Loader);
+import Info from './components/Misc/Info.vue';
+Vue.component('Info', Info);
 
 import LastFive from './components/Profile/BasicStats/LastFive.vue';
 Vue.component('LastFive', LastFive);

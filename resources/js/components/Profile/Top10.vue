@@ -7,7 +7,7 @@
                     <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
                     <p class="font_10pt text-center">Это может занять около минуты</p>
                 </div>
-                <div v-else-if="spotifyUserLibrary == true" class="row justify-content-center">
+                <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false" class="row justify-content-center">
                     <div class="col-md-12 fade_in_slow_anim">
                         <h5 class="text-center">
                             <b>Топ 10</b>&nbsp;
@@ -101,7 +101,7 @@
                     <Error errorMessage="Не удалось загрузить библиотеку пользователя"/>
                 </div>
                 <div v-else>
-                    <Error errorMessage="Неизвестная ошибка"/>
+                    <Info :infoMessage="spotifyUserLibrary['errorMsg']"/>
                 </div>
              
             </div>

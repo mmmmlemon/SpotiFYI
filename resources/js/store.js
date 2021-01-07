@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import { reject } from 'lodash'
 
 Vue.use(Vuex)
 Vue.use(VueAxios, axios);
@@ -96,33 +97,7 @@ const ProfilePageStates = {
               state[payload.state] = response.data;
             });
           },
-          //получить данные о профиле Spotify
-          getSpotifyProfile(state){
-            axios.get('/api/get_spotify_profile').then((response) => {
-              state.spotifyProfile = response.data;
-            });
-          },
 
-          //получить библиотеку пользователя
-          getSpotifyUserLibrary(state){
-            axios.get('/api/get_spotify_user_library').then((response) => {
-              state.spotifyUserLibrary = response.data;
-            });
-          },
-
-          //базовая статистика
-          //получить треки и последние пять треков
-          getSpotifyTracks(state){
-            axios.get('/api/get_spotify_tracks').then((response) => {
-              state.spotifyTracks = response.data;
-            });
-          },
-          //получить альбомы и последние пять альбомов
-          getSpotifyAlbums(state){
-            axios.get('/api/get_spotify_albums').then((response) => {
-              state.spotifyAlbums = response.data;
-            });
-          },
           //получить подписки на артистов и случайные пять подписок
           getSpotifyArtists(state){
             axios.get('/api/get_spotify_artists').then((response) => {
@@ -314,30 +289,62 @@ const ProfilePageStates = {
               state.latestTracks = response.data;
             })
           },
-      
+
+          //установить стейт
+          setState(state, payload){
+            state[payload.state] = payload.value;
+          }
 },
 
     actions: {
+
       //общее
       //установить текущую вкладку
       setCurrentTab(context, tab){
         context.commit('setCurrentTab', tab);
       },
+
       //получить профиль
       getSpotifyProfile(context){
-        context.commit('getSpotifyProfile');
+          axios.get("/api/get_spotify_profile").then(response => {
+              context.commit('setState', {state: "spotifyProfile", value: response.data});
+          }, error => {
+            context.commit('setState', {state: "spotifyProfile", value: false});
+            reject(error);
+          });
       },
+
       //получить библиотку пользователя
       getSpotifyUserLibrary(context){
-        context.commit('getSpotifyUserLibrary');
+          return new Promise((resolve, reject) => {
+              axios.get('/api/get_spotify_user_library').then(response => {
+                  context.commit('setState', {state: 'spotifyUserLibrary', value: response.data});
+                  resolve(response);  
+              }, error => {
+                  context.commit('setState', {state: 'spotifyUserLibrary', value: false});
+                  reject(error);
+              });
+          });
       },
+      
       //получить кол-во треков в библиотеке и последние пять
       getSpotifyTracks(context){
-        context.commit('getSpotifyTracks');
+          axios.get('/api/get_spotify_tracks').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'spotifyTracks', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'spotifyTracks', value: false}); }    
+          });    
       },
+
       //получить кол-во альбомов в библиотеке и последние пять
       getSpotifyAlbums(context){
-        context.commit('getSpotifyAlbums');
+          axios.get('/api/get_spotify_albums').then(response => {
+              if(response.daya != false)
+              { context.commit('setState', {state: 'spotifyAlbums', value: response.data}); }
+              else
+              { context.commit('setState', {state: 'spotifyAlbums', value: false}); }
+          })
       }, 
       //получить кол-во подписок в библиотеке и случайные пять
       getSpotifyArtists(context){

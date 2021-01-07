@@ -28,7 +28,7 @@
                 </div>
                 <!-- кол-во подписчиков и страна -->
                 <div class="row justify-content-center">
-                    <div> Подписчики: 1</div>
+                    <div> Подписчики: {{spotifyProfile.followers}}</div>
                     <div>&nbsp;|&nbsp;</div>
                     <div>
                         <img class="fade_in_anim" :src="spotifyProfile.country">
@@ -68,7 +68,7 @@
          
         </div>
         <!-- контент -->
-        <div class="container">
+        <div class="container" v-if="spotifyProfile != -1 && spotifyProfile != false">
             <div class="row justify-content-center fade-in">
                 <div class="col-md-8" v-if="spotifyProfile != -1">
                     <router-view></router-view>
@@ -80,9 +80,11 @@
 
 <script>
 export default {
-    beforeCreate(){
+    mounted(){
         //получить профиль
-        this.$store.dispatch('getSpotifyProfile');
+        if(this.spotifyProfile == -1)
+        { this.$store.dispatch('getSpotifyProfile'); }
+       
     },
     computed: {
         //текущая вкладка
