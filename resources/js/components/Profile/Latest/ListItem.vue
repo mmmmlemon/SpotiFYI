@@ -17,12 +17,14 @@
                             <b>{{item['trackName']}}</b>
                         </a>
                     </p>
-                    <p class="margin_none font_white" style="margin-bottom:7px;">
+                    <hr>
+                    
+                    <p class="margin_none font_white font_13pt" style="margin-bottom:7px;">
                         <a :href="item['albumUrl']" target="_blank">
                             <b class="unbold">{{item['albumName']}}</b>
                         </a>
                     </p>
-                    <b>{{item['duration']}}</b>
+                    <b class="font_13pt">{{item['duration']}}</b>
                 </div>
             </div>
     </div>

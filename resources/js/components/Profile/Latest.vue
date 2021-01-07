@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <div class="col-md-12 fade_in_slow_anim">
-            <h5 class="text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8 fade_in_slow_anim" v-if="latestTracks != -1 && latestTracks != false">
+            <h4 class="text-center">
                 <b>Последние прослушанные треки</b>&nbsp;
                 <i class="fas fa-compact-disc primary_color"></i>
-            </h5>
+            </h4>
         </div>
-        <div class="col-12">
+        <div class="col-md-6 col-10">
             <div>
                 <List :items="latestTracks"/>
             </div>

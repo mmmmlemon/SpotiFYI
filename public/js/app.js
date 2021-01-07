@@ -3316,6 +3316,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -80298,10 +80300,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _vm.latestTracks != -1 && _vm.latestTracks != false
+      ? _c("div", { staticClass: "col-md-8 fade_in_slow_anim" }, [_vm._m(0)])
+      : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [
+    _c("div", { staticClass: "col-md-6 col-10" }, [
       _c("div", [_c("List", { attrs: { items: _vm.latestTracks } })], 1)
     ])
   ])
@@ -80311,12 +80315,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
-      _c("h5", { staticClass: "text-center" }, [
-        _c("b", [_vm._v("Последние прослушанные треки")]),
-        _vm._v(" \n            "),
-        _c("i", { staticClass: "fas fa-compact-disc primary_color" })
-      ])
+    return _c("h4", { staticClass: "text-center" }, [
+      _c("b", [_vm._v("Последние прослушанные треки")]),
+      _vm._v(" \n            "),
+      _c("i", { staticClass: "fas fa-compact-disc primary_color" })
     ])
   }
 ]
@@ -80439,10 +80441,12 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
         _c(
           "p",
           {
-            staticClass: "margin_none font_white",
+            staticClass: "margin_none font_white font_13pt",
             staticStyle: { "margin-bottom": "7px" }
           },
           [
@@ -80458,7 +80462,9 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("b", [_vm._v(_vm._s(_vm.item["duration"]))])
+        _c("b", { staticClass: "font_13pt" }, [
+          _vm._v(_vm._s(_vm.item["duration"]))
+        ])
       ])
     ])
   ])
