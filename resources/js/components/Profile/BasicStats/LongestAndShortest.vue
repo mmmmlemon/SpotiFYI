@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-5 padding_10 grey_card margin_sides" v-else-if="fiveLongest != -1">
             <h4 class="border_underline text-center"><b>Пять самых длинных песен</b></h4>
-            <div class="row fade_in_anim" v-for="item in fiveLongest" :key="item.id">
+            <div class="row margin_top_8 fade_in_anim" v-for="item in fiveLongest" :key="item.id">
                 <div class="col-2">
                     <div class="number_card">
                         <b>{{item.count}}</b>
@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-5 padding_10 grey_card margin_sides" v-else-if="fiveShortest != -1">
             <h4 class="border_underline text-center"><b>Пять самых коротких песен</b></h4>
-            <div class="row fade_in_anim" v-for="item in fiveShortest" :key="item.id">
+            <div class="row margin_top_8 fade_in_anim" v-for="item in fiveShortest" :key="item.id">
                 <div class="col-2">
                     <div class="number_card">
                         <b>{{item.count}}</b>

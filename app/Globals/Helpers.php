@@ -13,7 +13,7 @@
     {
             //pickTheWord
             //выбрать правильное окончание для словосочетания (десять минуТ, две минуТЫ, одна минуТА и т.п)
-            //в параметрах: число, первый вариант окончания (5 минуТ, 0 минуТ, 10 минуТ), второй вариант окончания (1 минуТА), третий вариант окончания (2, 3, 4 минуТЫ)
+            //в параметрах: число, первый вариант окончания (5 минуТ, 0 минуТ, 10 минуТ, 11-19 минуТ), второй вариант окончания (1 минуТА), третий вариант окончания (2, 3, 4 минуТЫ)
             //возвращает строку со словосочетанием, либо false если в параметре $number не было указано целое число
             public static function pickTheWord($number, $firstWord, $secondWord, $thirdWord)
             {
@@ -28,18 +28,35 @@
                     //получаем последнюю цифру в числе
                     $lastNumber = strval($number)[strlen(strval($number)) - 1];
 
-                    if($lastNumber == "1")
-                    { 
-                        return " " . $secondWord; 
+                    //если число двузначное или больше
+                    //получаем последние два числа на случай если там будет число от 11 до 19
+                    $lastTwoNumbers = "";
+                    if(strlen(strval($number)) >= 2)
+                    {
+                        $lastTwoNumbers = strval($number)[strlen(strval($number)) - 2] . strval($number)[strlen(strval($number)) - 1];
                     }
-                    elseif($lastNumber == "2" || $lastNumber == "3" || $lastNumber == "4")
-                    { 
-                        return " " . $thirdWord; 
-                    }
-                    else
-                    { 
+
+                    if(intval($lastTwoNumbers) >= 10 && intval($lastTwoNumbers) <= 19)
+                    {
                         return " " . $firstWord;
                     }
+                    else
+                    {
+                        if($lastNumber == "1")
+                        { 
+                            return " " . $secondWord; 
+                        }
+                        elseif($lastNumber == "2" || $lastNumber == "3" || $lastNumber == "4")
+                        { 
+                            return " " . $thirdWord; 
+                        }
+                        else
+                        { 
+                            return " " . $firstWord;
+                        }
+                    }
+
+                 
                 }
             }
 

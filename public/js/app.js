@@ -2731,7 +2731,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -2749,53 +2748,64 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя и статистику
 
     if (this.spotifyUserLibrary == -1) {
+      //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
       this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
         if (_this.spotifyUserLibrary['result'] == true) {
+          //получить треки
           if (_this.spotifyTracks == -1) {
             _this.$store.dispatch('getSpotifyTracks');
-          }
+          } //получить альбомы
+
 
           if (_this.spotifyAlbums == -1) {
             _this.$store.dispatch('getSpotifyAlbums');
+          } //получить артистов
+
+
+          if (_this.spotifyArtists == -1) {
+            _this.$store.dispatch('getSpotifyArtists');
+          } //получить общее кол-во часов\минут\дней музыки в библиотеке
+
+
+          if (_this.userLibraryTime == -1) {
+            _this.$store.dispatch('getUserLibraryTime');
+          } //пять самых длинных и коротких треков
+
+
+          if (_this.fiveTracks == -1) {
+            _this.$store.dispatch('getFiveLongestAndShortestTracks');
+          } //средняя длина трека
+
+
+          if (_this.tracksMode == -1) {
+            _this.$store.dispatch('getAverageLengthOfTrack');
+          } //любимые жанры
+
+
+          if (_this.favoriteGenres == -1) {
+            _this.$store.dispatch('getFavoriteGenres');
+          }
+
+          ; //кол-во исполнителей
+
+          if (_this.uniqueArtists == -1) {
+            _this.$store.dispatch('getUniqueArtists');
+          } //года и десятилетия
+
+
+          if (_this.yearsAndDecades == -1) {
+            _this.$store.dispatch('getYearsAndDecades', 'alltime');
+          } //года и десятилетия - месяц
+
+
+          if (_this.yearsAndDecadesMonth == -1) {
+            _this.$store.dispatch('getYearsAndDecades', 'month');
           }
         }
       }, function (error) {
         console.log("Error: Couldn't load user's Spotify library.");
       });
-    } // this.$store.dispatch('getSpotifyUserLibrary').then(response => {
-    //     if(this.spotifyUserLibrary == true)
-    //     {
-    //         this.$store.dispatch('getSpotifyTracks');
-    //     }
-    // }, error => {
-    //     console.log("poo")
-    // });
-    // if(this.spotifyAlbums == -1)
-    // { this.$store.dispatch('getSpotifyAlbums'); }
-    // if(this.spotifyArtists == -1)
-    // { this.$store.dispatch('getSpotifyArtists'); }
-    // //время
-    // if(this.userLibraryTime == -1)
-    // { this.$store.dispatch('getUserLibraryTime'); }
-    // //пять самых длинных и коротких треков
-    // if(this.fiveTracks == -1)
-    // { this.$store.dispatch('getFiveLongestAndShortestTracks'); }
-    // //средняя длина трека
-    // if(this.tracksMode == -1)
-    // { this.$store.dispatch('getAverageLengthOfTrack'); }
-    // //жанры
-    // if(this.favoriteGenres == -1)
-    // { this.$store.dispatch('getFavoriteGenres'); }
-    // //кол-во исполнителей
-    // if(this.uniqueArtists == -1)
-    // { this.$store.dispatch('getUniqueArtists'); }
-    // //года и десятилетия
-    // if(this.yearsAndDecades == -1)
-    // { this.$store.dispatch('getYearsAndDecades'); }   
-    // //года и десятилетия за месяц
-    // if(this.yearsAndDecadesMonth == -1)
-    // { this.$store.dispatch('getYearsAndDecadesMonth'); }   
-
+    }
   },
   computed: {
     //библиотека пользователя
@@ -2896,6 +2906,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -78592,7 +78605,7 @@ var render = function() {
           _c("div", { staticClass: "row" }, [
             _c(
               "p",
-              { staticClass: "error", staticStyle: { "font-size": "12pt" } },
+              { staticClass: "warning", staticStyle: { "font-size": "12pt" } },
               [_vm._v("Предупреждение: " + _vm._s(_vm.infoMessage))]
             )
           ])
@@ -78634,7 +78647,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("h6", { staticClass: "error" }, [_vm._v("Предупреждение")])
+      _c("h6", { staticClass: "warning" }, [_vm._v("Предупреждение")])
     ])
   }
 ]
@@ -79396,15 +79409,9 @@ var render = function() {
                     attrs: { items: _vm.spotifyAlbums, type: "albums" }
                   }),
                   _vm._v(" "),
-                  _vm.spotifyAlbums !== false && _vm.spotifyAlbums !== -1
-                    ? _c("LastFive", {
-                        attrs: {
-                          itemCount: _vm.spotifyArtists["count"],
-                          lastFiveItems: _vm.spotifyArtists["random_five"],
-                          type: "artists"
-                        }
-                      })
-                    : _vm._e(),
+                  _c("LastFive", {
+                    attrs: { items: _vm.spotifyArtists, type: "artists" }
+                  }),
                   _vm._v(" "),
                   _vm.spotifyArtists !== -1 &&
                   _vm.spotifyAlbums != -1 &&
@@ -79450,7 +79457,7 @@ var render = function() {
                       })
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.yearsAndDecades != -1
+                  _vm.yearsAndDecades != -1 && _vm.yearsAndDecadesMonth != false
                     ? _c("YearsAndDecades", {
                         attrs: {
                           yearsAndDecades: _vm.yearsAndDecadesMonth,
@@ -79489,7 +79496,7 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _vm.yearsAndDecades != -1
+      _vm.yearsAndDecadesMonth != -1
         ? _c(
             "div",
             { staticClass: "row justify-content-center fade_in_anim" },
@@ -79657,7 +79664,7 @@ var render = function() {
           ],
           1
         )
-      : _vm.favoriteGenres === false
+      : _vm.favoriteGenres["result"] === false
       ? _c(
           "div",
           [
@@ -79665,6 +79672,21 @@ var render = function() {
               attrs: {
                 type: "small",
                 errorMessage: "Не удалось произвести анализ треков"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.favoriteGenres["result"] === "noTracks"
+      ? _c(
+          "div",
+          { staticClass: "grey_card padding_10" },
+          [
+            _c("Info", {
+              attrs: {
+                type: "small",
+                infoMessage:
+                  "Пока не достаточно данных для проведения анализа жанров."
               }
             })
           ],
@@ -80167,7 +80189,7 @@ var render = function() {
             _vm._l(_vm.fiveLongest, function(item) {
               return _c(
                 "div",
-                { key: item.id, staticClass: "row fade_in_anim" },
+                { key: item.id, staticClass: "row margin_top_8 fade_in_anim" },
                 [
                   _c("div", { staticClass: "col-2" }, [
                     _c("div", { staticClass: "number_card" }, [
@@ -80235,7 +80257,7 @@ var render = function() {
             _vm._l(_vm.fiveShortest, function(item) {
               return _c(
                 "div",
-                { key: item.id, staticClass: "row fade_in_anim" },
+                { key: item.id, staticClass: "row margin_top_8 fade_in_anim" },
                 [
                   _c("div", { staticClass: "col-2" }, [
                     _c("div", { staticClass: "number_card" }, [
@@ -97826,7 +97848,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 /* harmony import */ var _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Misc/Error.vue */ "./resources/js/components/Misc/Error.vue");
 /* harmony import */ var _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Misc/Loader.vue */ "./resources/js/components/Misc/Loader.vue");
-/* harmony import */ var _components_Misc_Info_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Misc/Info.vue */ "./resources/js/components/Misc/Info.vue");
+/* harmony import */ var _components_Misc_Info_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Misc/Info.vue */ "./resources/js/components/Misc/Info.vue");
 /* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
 /* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
 /* harmony import */ var _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile/BasicStats/LongestAndShortest.vue */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue");
@@ -97855,7 +97877,7 @@ Vue.component('Error', _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__["
 
 Vue.component('Loader', _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 
-Vue.component('Info', _components_Misc_Info_vue__WEBPACK_IMPORTED_MODULE_18__["default"]);
+Vue.component('Info', _components_Misc_Info_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
 Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
@@ -99734,48 +99756,6 @@ var ProfilePageStates = {
         state[payload.state] = response.data;
       });
     },
-    //получить подписки на артистов и случайные пять подписок
-    getSpotifyArtists: function getSpotifyArtists(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_artists').then(function (response) {
-        state.spotifyArtists = response.data;
-      });
-    },
-    //поcчитать кол-во времени
-    getUserLibraryTime: function getUserLibraryTime(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_user_library_time').then(function (response) {
-        state.userLibraryTime = response.data;
-      });
-    },
-    //пять самых длинных и коротких треков
-    getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_five_tracks').then(function (response) {
-        state.fiveTracks = response.data;
-      });
-    },
-    //получить среднюю длину трека
-    getAverageLengthOfTrack: function getAverageLengthOfTrack(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_average_track_length').then(function (response) {
-        state.tracksMode = response.data;
-      });
-    },
-    //получить любимые жанры
-    getFavoriteGenres: function getFavoriteGenres(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_favorite_genres').then(function (response) {
-        state.favoriteGenres = response.data;
-      });
-    },
-    //получить кол-во артистов
-    getUniqueArtists: function getUniqueArtists(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_unique_artists').then(function (response) {
-        state.uniqueArtists = response.data;
-      });
-    },
-    //получить информацию по годам и десятилетиям
-    getYearsAndDecades: function getYearsAndDecades(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades/alltime').then(function (response) {
-        state.yearsAndDecades = response.data;
-      });
-    },
     //получить информацию по годам и десятилетиям за месяц
     getYearsAndDecadesMonth: function getYearsAndDecadesMonth(state) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades/month').then(function (response) {
@@ -99985,7 +99965,7 @@ var ProfilePageStates = {
     //получить кол-во альбомов в библиотеке и последние пять
     getSpotifyAlbums: function getSpotifyAlbums(context) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_albums').then(function (response) {
-        if (response.daya != false) {
+        if (response.data != false) {
           context.commit('setState', {
             state: 'spotifyAlbums',
             value: response.data
@@ -100000,31 +99980,122 @@ var ProfilePageStates = {
     },
     //получить кол-во подписок в библиотеке и случайные пять
     getSpotifyArtists: function getSpotifyArtists(context) {
-      context.commit('getSpotifyArtists');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_artists').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'spotifyArtists',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'spotifyArtists',
+            value: false
+          });
+        }
+      });
     },
     //посчитать кол-во времени
     getUserLibraryTime: function getUserLibraryTime(context) {
-      context.commit('getUserLibraryTime');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_user_library_time').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'userLibraryTime',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'userLibraryTime',
+            value: false
+          });
+        }
+      });
     },
     //пять самых длинных и коротких треков
     getFiveLongestAndShortestTracks: function getFiveLongestAndShortestTracks(context) {
-      context.commit('getFiveLongestAndShortestTracks');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_five_tracks').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'fiveTracks',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'fiveTracks',
+            value: false
+          });
+        }
+      });
     },
     //средняя длина трека
     getAverageLengthOfTrack: function getAverageLengthOfTrack(context) {
-      context.commit('getAverageLengthOfTrack');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_average_track_length').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'tracksMode',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'tracksMode',
+            value: false
+          });
+        }
+      });
     },
     //получить любимые жанры
     getFavoriteGenres: function getFavoriteGenres(context) {
-      context.commit('getFavoriteGenres');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_favorite_genres').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'favoriteGenres',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'favoriteGenres',
+            value: false
+          });
+        }
+      });
     },
     //кол-во исполнителей
     getUniqueArtists: function getUniqueArtists(context) {
-      context.commit('getUniqueArtists');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_unique_artists').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'uniqueArtists',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'uniqueArtists',
+            value: false
+          });
+        }
+      });
     },
     //посчитать года и десятилетия
-    getYearsAndDecades: function getYearsAndDecades(context) {
-      context.commit('getYearsAndDecades');
+    getYearsAndDecades: function getYearsAndDecades(context, type) {
+      var stateName = "yearsAndDecades";
+
+      if (type === "month") {
+        stateName = "yearsAndDecadesMonth";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //посчитать года и десятилетия за месяц
     getYearsAndDecadesMonth: function getYearsAndDecadesMonth(context) {

@@ -298,9 +298,14 @@ class SpotifyAPIController extends Controller
         
             //использованные индексы элементов массива с подписками
             $usedNumbers = [];
-    
+            
+            $maxNumber = 4;
+
+            if(count($artists) < 4)
+            { $maxNumber = count($artists); }
+
             //пока не наберется 5 исполнителей
-            while(count($randomFive) <= 4)
+            while(count($randomFive) <= $maxNumber-1)
             {   
                 //генерим рандомное число, это будет индекс исполнителя в массиве с ними
                 $randomNumber = rand(0,count($artists) - 1);
@@ -317,9 +322,21 @@ class SpotifyAPIController extends Controller
             }   
     
             //записываем кол-во подписок и случайные пять
-            $response = ['count' => count($artists), 'random_five' => $randomFive];
+            $response = ['count' => count($artists), 'lastFive' => $randomFive];
             
             return response()->json($response);
+        }
+        else
+        {    
+            if(count($artists) == 0)
+            {
+                $response = ['count' => 0, 'lastFive' => false];
+                return response()->json($response);
+            }
+            else
+            {
+                return response()->json(false);  
+            } 
         }
 
     }
@@ -434,6 +451,8 @@ class SpotifyAPIController extends Controller
 
             return response()->json($response);
         }
+        else
+        { return response()->json(false); }
     }
 
     //getAverageLengthOfTrack
@@ -459,6 +478,7 @@ class SpotifyAPIController extends Controller
             { array_push($durationMn, intval(floor($item / 60000))); }
             
             $countDurations = array_count_values($durationMn);  //считаем моду
+   
             $mode = array_search(max($countDurations), $countDurations);
             
             $response = $mode . Helpers::pickTheWord($mode, "минут", "минута", "минуты");
@@ -512,6 +532,8 @@ class SpotifyAPIController extends Controller
 
             return response()->json($urlForImg);
         }
+        else
+        { return response()->json(false); }
     }
 
     //getFavoriteGenres
@@ -522,7 +544,7 @@ class SpotifyAPIController extends Controller
     {   
         //проверяем токен
         $checkToken = System::checkSpotifyAccessToken($request);
-
+        
         if($checkToken != false)
         {
             //получаем api
@@ -578,7 +600,7 @@ class SpotifyAPIController extends Controller
 
                 }
                 else
-                { return response()->json(false); }
+                { return response()->json(['result' => 'noTracks']); }
             }
 
             //сортируем массив с подсчитанными жанрами по убыванию
@@ -589,7 +611,7 @@ class SpotifyAPIController extends Controller
             return response()->json($topTenGenres);
         }
         else
-        { return response()->json(false); }
+        { return response()->json(['result' => false]); }
 
     }
 

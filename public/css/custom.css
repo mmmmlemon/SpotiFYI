@@ -78,6 +78,13 @@
     margin: 0;
 }
 
+.warning{
+    color: rgb(193, 216, 230);
+    font-weight: bold;
+    margin: 0;
+}
+
+
 .profile_avatar{
     border-radius: 100%;
     border-style: solid;
@@ -225,6 +232,10 @@
 .margin_vertical{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.margin_top_8{
+    margin-top: 8px;
 }
 
 .padding_vertical{

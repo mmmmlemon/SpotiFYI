@@ -98,48 +98,6 @@ const ProfilePageStates = {
             });
           },
 
-          //получить подписки на артистов и случайные пять подписок
-          getSpotifyArtists(state){
-            axios.get('/api/get_spotify_artists').then((response) => {
-              state.spotifyArtists = response.data;
-            });
-          },
-          //поcчитать кол-во времени
-          getUserLibraryTime(state){
-            axios.get('/api/get_user_library_time').then((response) => {
-              state.userLibraryTime = response.data;
-            });
-          },
-          //пять самых длинных и коротких треков
-          getFiveLongestAndShortestTracks(state){
-            axios.get('/api/get_five_tracks').then((response) => {
-              state.fiveTracks = response.data;
-            });
-          },
-          //получить среднюю длину трека
-          getAverageLengthOfTrack(state){
-            axios.get('/api/get_average_track_length').then((response) => {
-              state.tracksMode = response.data;
-            });
-          },
-          //получить любимые жанры
-          getFavoriteGenres(state){
-            axios.get('/api/get_favorite_genres').then((response) => {
-              state.favoriteGenres = response.data;
-            });
-          },
-          //получить кол-во артистов
-          getUniqueArtists(state){
-            axios.get('/api/get_unique_artists').then((response) => {
-              state.uniqueArtists = response.data;
-            });
-          },
-          //получить информацию по годам и десятилетиям
-          getYearsAndDecades(state){
-            axios.get('/api/get_years_and_decades/alltime').then((response) => {
-              state.yearsAndDecades = response.data;
-            });
-          },
           //получить информацию по годам и десятилетиям за месяц
           getYearsAndDecadesMonth(state){
             axios.get('/api/get_years_and_decades/month').then((response) => {
@@ -339,41 +297,89 @@ const ProfilePageStates = {
 
       //получить кол-во альбомов в библиотеке и последние пять
       getSpotifyAlbums(context){
-          axios.get('/api/get_spotify_albums').then(response => {
-              if(response.daya != false)
-              { context.commit('setState', {state: 'spotifyAlbums', value: response.data}); }
-              else
-              { context.commit('setState', {state: 'spotifyAlbums', value: false}); }
-          })
+        axios.get('/api/get_spotify_albums').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'spotifyAlbums', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'spotifyAlbums', value: false}); }
+        });
       }, 
+
       //получить кол-во подписок в библиотеке и случайные пять
       getSpotifyArtists(context){
-        context.commit('getSpotifyArtists');
+        axios.get('/api/get_spotify_artists').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'spotifyArtists', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'spotifyArtists', value: false}); }
+        });
       },
+
       //посчитать кол-во времени
       getUserLibraryTime(context){
-        context.commit('getUserLibraryTime');
+        axios.get('/api/get_user_library_time').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'userLibraryTime', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'userLibraryTime', value: false}); }
+        });
       },
+
       //пять самых длинных и коротких треков
       getFiveLongestAndShortestTracks(context){
-        context.commit('getFiveLongestAndShortestTracks');
+        axios.get('/api/get_five_tracks').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'fiveTracks', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'fiveTracks', value: false}); }
+        });
       },
+
       //средняя длина трека
       getAverageLengthOfTrack(context){
-        context.commit('getAverageLengthOfTrack');
+        axios.get('/api/get_average_track_length').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'tracksMode', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'tracksMode', value: false}); }
+        });
       },
+
       //получить любимые жанры
       getFavoriteGenres(context){
-        context.commit('getFavoriteGenres');
+        axios.get('/api/get_favorite_genres').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'favoriteGenres', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'favoriteGenres', value: false}); }
+        });
       },
+
       //кол-во исполнителей
       getUniqueArtists(context){
-        context.commit('getUniqueArtists');
+        axios.get('/api/get_unique_artists').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'uniqueArtists', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'uniqueArtists', value: false}); }
+        });
       },
+
       //посчитать года и десятилетия
-      getYearsAndDecades(context){
-        context.commit('getYearsAndDecades');
+      getYearsAndDecades(context, type){
+
+        var stateName = "yearsAndDecades";
+        if(type === "month")
+        { stateName = "yearsAndDecadesMonth" };
+
+        axios.get('/api/get_years_and_decades/'+ type).then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: stateName, value: response.data}); }
+          else
+          { context.commit('setState', {state: stateName, value: false}); }
+        });
       },
+
       //посчитать года и десятилетия за месяц
       getYearsAndDecadesMonth(context){
         context.commit('getYearsAndDecadesMonth');

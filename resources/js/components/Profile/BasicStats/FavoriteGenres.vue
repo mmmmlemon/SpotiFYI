@@ -5,8 +5,11 @@
             <h6 class="text-center blinking_anim">Анализирую треки...</h6>
             <p class="font_10pt text-center">Это может занять некоторое время</p>
         </div>
-        <div v-else-if="favoriteGenres === false">
+        <div v-else-if="favoriteGenres['result'] === false">
             <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
+        </div>
+        <div v-else-if="favoriteGenres['result'] === 'noTracks'" class="grey_card padding_10">
+            <Info type="small" infoMessage="Пока не достаточно данных для проведения анализа жанров."/>
         </div>
         <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="grey_card padding_10 margin_vertical">
             <h4 class="text-center border_underline">Твои любимые жанры</h4>

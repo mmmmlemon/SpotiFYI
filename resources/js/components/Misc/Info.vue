@@ -8,11 +8,11 @@
             </div>
             <div class="fade_in_anim" v-if="type=='small'">
                 <div class="row justify-content-center"><h6 class="info_icon"><i class="fas fa-exclamation-circle"></i></h6></div>
-                <div class="row justify-content-center"><h6 class="error">Предупреждение</h6></div>
+                <div class="row justify-content-center"><h6 class="warning">Предупреждение</h6></div>
                 <div class="row justify-content-center"><h6>{{infoMessage}}</h6></div>
             </div>
             <div class="fade_in_anim" v-if="type=='x-small'">
-                <div class="row"><p style="font-size:12pt;" class="error">Предупреждение: {{infoMessage}}</p></div>
+                <div class="row"><p style="font-size:12pt;" class="warning">Предупреждение: {{infoMessage}}</p></div>
             </div>
     </div>
 </template>
