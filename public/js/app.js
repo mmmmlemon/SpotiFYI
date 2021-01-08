@@ -2745,66 +2745,75 @@ __webpack_require__.r(__webpack_exports__);
     } //устанавливаем текущий таб, для подсветки навигации
 
 
-    this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя и статистику
+    this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя, если она еще не загружена
 
     if (this.spotifyUserLibrary == -1) {
-      //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
+      //если запрос выполнился, то выполняем загружаем остальные данные, если нет, то не делаем ничего
       this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
         if (_this.spotifyUserLibrary['result'] == true) {
-          //получить треки
-          if (_this.spotifyTracks == -1) {
-            _this.$store.dispatch('getSpotifyTracks');
-          } //получить альбомы
-
-
-          if (_this.spotifyAlbums == -1) {
-            _this.$store.dispatch('getSpotifyAlbums');
-          } //получить артистов
-
-
-          if (_this.spotifyArtists == -1) {
-            _this.$store.dispatch('getSpotifyArtists');
-          } //получить общее кол-во часов\минут\дней музыки в библиотеке
-
-
-          if (_this.userLibraryTime == -1) {
-            _this.$store.dispatch('getUserLibraryTime');
-          } //пять самых длинных и коротких треков
-
-
-          if (_this.fiveTracks == -1) {
-            _this.$store.dispatch('getFiveLongestAndShortestTracks');
-          } //средняя длина трека
-
-
-          if (_this.tracksMode == -1) {
-            _this.$store.dispatch('getAverageLengthOfTrack');
-          } //любимые жанры
-
-
-          if (_this.favoriteGenres == -1) {
-            _this.$store.dispatch('getFavoriteGenres');
-          }
-
-          ; //кол-во исполнителей
-
-          if (_this.uniqueArtists == -1) {
-            _this.$store.dispatch('getUniqueArtists');
-          } //года и десятилетия
-
-
-          if (_this.yearsAndDecades == -1) {
-            _this.$store.dispatch('getYearsAndDecades', 'alltime');
-          } //года и десятилетия - месяц
-
-
-          if (_this.yearsAndDecadesMonth == -1) {
-            _this.$store.dispatch('getYearsAndDecades', 'month');
-          }
+          _this.getAllData();
         }
       }, function (error) {
         console.log("Error: Couldn't load user's Spotify library.");
       });
+    } //загружаем остальные данные
+    else {
+        this.getAllData();
+      }
+  },
+  methods: {
+    //получить все необходимые данные для этой страницы
+    getAllData: function getAllData() {
+      //получить треки
+      if (this.spotifyTracks == -1) {
+        this.$store.dispatch('getSpotifyTracks');
+      } //получить альбомы
+
+
+      if (this.spotifyAlbums == -1) {
+        this.$store.dispatch('getSpotifyAlbums');
+      } //получить артистов
+
+
+      if (this.spotifyArtists == -1) {
+        this.$store.dispatch('getSpotifyArtists');
+      } //получить общее кол-во часов\минут\дней музыки в библиотеке
+
+
+      if (this.userLibraryTime == -1) {
+        this.$store.dispatch('getUserLibraryTime');
+      } //пять самых длинных и коротких треков
+
+
+      if (this.fiveTracks == -1) {
+        this.$store.dispatch('getFiveLongestAndShortestTracks');
+      } //средняя длина трека
+
+
+      if (this.tracksMode == -1) {
+        this.$store.dispatch('getAverageLengthOfTrack');
+      } //любимые жанры
+
+
+      if (this.favoriteGenres == -1) {
+        this.$store.dispatch('getFavoriteGenres');
+      }
+
+      ; //кол-во исполнителей
+
+      if (this.uniqueArtists == -1) {
+        this.$store.dispatch('getUniqueArtists');
+      } //года и десятилетия
+
+
+      if (this.yearsAndDecades == -1) {
+        this.$store.dispatch('getYearsAndDecades', 'alltime');
+      } //года и десятилетия - месяц
+
+
+      if (this.yearsAndDecadesMonth == -1) {
+        this.$store.dispatch('getYearsAndDecades', 'month');
+      }
     }
   },
   computed: {
@@ -3528,8 +3537,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    var _this = this;
+
+    //прокручиваем страницу к якорю, если в url есть якорь
     var anchor = this.$router.currentRoute.hash.replace("#", "");
 
     if (anchor) {
@@ -3539,65 +3552,72 @@ __webpack_require__.r(__webpack_exports__);
     } //смена текущего таба
 
 
-    this.$store.dispatch('setCurrentTab', 'top10'); //получить библиотеку пользователя, если нужно
+    this.$store.dispatch('setCurrentTab', 'top10'); //получаем библиотеку пользователя и статистику
 
     if (this.spotifyUserLibrary == -1) {
-      this.$store.dispatch('getSpotifyUserLibrary');
-    } //топ 10 треков за всё время
-
-
-    if (this.top10TracksAllTime == -1) {
-      this.$store.dispatch('getTop10TracksAllTime');
-    } //топ 10 треков за месяц
-
-
-    if (this.top10TracksMonth == -1) {
-      this.$store.dispatch('getTop10TracksMonth');
-    } //топ 10 длинных треков
-
-
-    if (this.top10TracksLong == -1) {
-      this.$store.dispatch('getTop10TracksLong');
-    } //топ 10 коротких треков
-
-
-    if (this.top10TracksShort == -1) {
-      this.$store.dispatch('getTop10TracksShort');
-    } //топ 10 популярных треков
-
-
-    if (this.top10PopularTracks == -1) {
-      this.$store.dispatch('getTop10PopularTracks');
-    } //топ 10 непопулярных треков
-
-
-    if (this.top10UnpopularTracks == -1) {
-      this.$store.dispatch('getTop10UnpopularTracks');
-    } //топ 10 артистов за все время
-
-
-    if (this.top10ArtistsAllTime == -1) {
-      this.$store.dispatch('getTop10ArtistsAllTime');
-    } //топ 10 артистов за месяц
-
-
-    if (this.top10ArtistsMonth == -1) {
-      this.$store.dispatch('getTop10ArtistsMonth');
-    } //топ 10 артистов по кол-ву треков
-
-
-    if (this.top10ArtistsByTracks == -1) {
-      this.$store.dispatch('getTop10ArtistsByTracks');
-    } //топ 10 артистов по кол-ву времени
-
-
-    if (this.top10ArtistsByTime == -1) {
-      this.$store.dispatch('getTop10ArtistsByTime');
+      //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
+      this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
+        if (_this.spotifyUserLibrary['result'] == true) {
+          _this.getAllData();
+        }
+      }, function (error) {
+        console.log("Error: Couldn't load user's Spotify library.");
+      });
+    } else {
+      this.getAllData();
     }
   },
   methods: {
-    scrollFix: function scrollFix(hashbang) {
-      location.hash = hashbang;
+    getAllData: function getAllData() {
+      //топ 10 треков за всё время
+      if (this.top10TracksAllTime == -1) {
+        this.$store.dispatch('getTop10Tracks', 'alltime');
+      } //топ 10 треков за месяц
+
+
+      if (this.top10TracksAllTime == -1) {
+        this.$store.dispatch('getTop10Tracks', 'month');
+      } //топ 10 длинных треков
+
+
+      if (this.top10TracksLong == -1) {
+        this.$store.dispatch('getTop10TracksByLength', 'long');
+      } //топ 10 коротких треков
+
+
+      if (this.top10TracksShort == -1) {
+        this.$store.dispatch('getTop10TracksByLength', 'short');
+      } //топ 10 популярных треков
+
+
+      if (this.top10PopularTracks == -1) {
+        this.$store.dispatch('getTop10TracksByPopularity', 'popular');
+      } //топ 10 непопулярных треков
+
+
+      if (this.top10UnpopularTracks == -1) {
+        this.$store.dispatch('getTop10TracksByPopularity', 'unpopular');
+      } //топ 10 артистов за все время
+
+
+      if (this.top10ArtistsAllTime == -1) {
+        this.$store.dispatch('getTop10Artists', 'alltime');
+      } //топ 10 артистов за месяц
+
+
+      if (this.top10ArtistsMonth == -1) {
+        this.$store.dispatch('getTop10Artists', 'month');
+      } //топ 10 артистов по кол-ву треков
+
+
+      if (this.top10ArtistsByTracks == -1) {
+        this.$store.dispatch('getTop10ArtistsByTracks');
+      } //топ 10 артистов по кол-ву времени
+
+
+      if (this.top10ArtistsByTime == -1) {
+        this.$store.dispatch('getTop10ArtistsByTime');
+      }
     }
   },
   computed: {
@@ -3650,26 +3670,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -79648,7 +79648,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-11 justify-content-center" }, [
-    _vm.favoriteGenres === -1
+    _vm.favoriteGenres == -1
       ? _c(
           "div",
           [
@@ -79664,7 +79664,7 @@ var render = function() {
           ],
           1
         )
-      : _vm.favoriteGenres["result"] === false
+      : _vm.favoriteGenres == false
       ? _c(
           "div",
           [
@@ -79677,7 +79677,7 @@ var render = function() {
           ],
           1
         )
-      : _vm.favoriteGenres["result"] === "noTracks"
+      : _vm.favoriteGenres == "noTracks"
       ? _c(
           "div",
           { staticClass: "grey_card padding_10" },
@@ -80777,17 +80777,20 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(2),
                 _vm._v(" "),
-                _c("Top10Items", {
-                  attrs: {
-                    cardTitle: "Топ 10 Треков за все время",
-                    cardDesc:
-                      "Десять твоих самых прослушиваемых треков за все время.",
-                    items: _vm.top10TracksAllTime,
-                    listType: "tracks"
-                  }
-                }),
+                _vm.top10TracksAllTime != "noTracks"
+                  ? _c("Top10Items", {
+                      attrs: {
+                        cardTitle: "Топ 10 Треков за все время",
+                        cardDesc:
+                          "Десять твоих самых прослушиваемых треков за все время.",
+                        items: _vm.top10TracksAllTime,
+                        listType: "tracks"
+                      }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
-                _vm.top10TracksAllTime != -1
+                _vm.top10TracksAllTime != -1 &&
+                _vm.top10TracksMonth != "noTracks"
                   ? _c("Top10Items", {
                       attrs: {
                         loaderMessage: "Загружаю Топ 10 треков за месяц...",
@@ -80859,7 +80862,8 @@ var render = function() {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.top10UnpopularTracks != -1
+                _vm.top10UnpopularTracks != -1 &&
+                _vm.top10ArtistsAllTime != "noArtists"
                   ? _c("Top10Items", {
                       attrs: {
                         cardTitle: "Топ 10 артистов за все время",
@@ -80871,7 +80875,8 @@ var render = function() {
                     })
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.top10ArtistsAllTime != -1
+                _vm.top10ArtistsAllTime != -1 &&
+                _vm.top10ArtistsMonth != "noArtists"
                   ? _c("Top10Items", {
                       attrs: {
                         cardTitle: "Топ 10 артистов за месяц",
@@ -81059,6 +81064,19 @@ var render = function() {
           ],
           1
         )
+      : _vm.items == "noTracks"
+      ? _c(
+          "div",
+          [
+            _c("Info", {
+              attrs: {
+                type: "small",
+                infoMessage: "Пока что мало данных для Топ-10"
+              }
+            })
+          ],
+          1
+        )
       : _vm.items != -1 || _vm.items != false
       ? _c(
           "div",
@@ -81185,7 +81203,7 @@ var render = function() {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              item.track_count
+                              item.info
                                 ? _c(
                                     "p",
                                     {
@@ -81195,7 +81213,7 @@ var render = function() {
                                     },
                                     [
                                       _c("b", { staticClass: "unbold" }, [
-                                        _vm._v(_vm._s(item.track_count))
+                                        _vm._v(_vm._s(item.info))
                                       ])
                                     ]
                                   )
@@ -99701,10 +99719,6 @@ var ProfilePageStates = {
     //топ 10 треков за все время
     top10TracksMonth: -1,
     // топ 10 треков за месяц
-    top10ArtistsAllTime: -1,
-    //топ 10 исполнителей за все время
-    top10ArtistsMonth: -1,
-    //топ 10 исполнителей за месяц
     top10TracksLong: -1,
     //топ 10 длинных треков
     top10TracksShort: -1,
@@ -99713,6 +99727,10 @@ var ProfilePageStates = {
     //топ 10 популярных треков
     top10UnpopularTracks: -1,
     //топ 10 непопулярных треков
+    top10ArtistsAllTime: -1,
+    //топ 10 исполнителей за все время
+    top10ArtistsMonth: -1,
+    //топ 10 исполнителей за месяц
     top10ArtistsByTracks: -1,
     //топ 10 исполнителей по кол-ву треков
     top10ArtistsByTime: -1,
@@ -99754,55 +99772,6 @@ var ProfilePageStates = {
     getAPIResponse: function getAPIResponse(state, payload) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(payload.uri).then(function (response) {
         state[payload.state] = response.data;
-      });
-    },
-    //получить информацию по годам и десятилетиям за месяц
-    getYearsAndDecadesMonth: function getYearsAndDecadesMonth(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades/month').then(function (response) {
-        state.yearsAndDecadesMonth = response.data;
-      });
-    },
-    //топ 10
-    //получить топ 10 треков за всё время
-    getTop10TracksAllTime: function getTop10TracksAllTime(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks/alltime').then(function (response) {
-        state.top10TracksAllTime = response.data;
-      });
-    },
-    //получить топ 10 треков за месяц
-    getTop10TracksMonth: function getTop10TracksMonth(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks/month').then(function (response) {
-        state.top10TracksMonth = response.data;
-      });
-    },
-    //получить топ 10 самых длинных треков
-    getTop10TracksLong: function getTop10TracksLong(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_length/long').then(function (response) {
-        state.top10TracksLong = response.data;
-      });
-    },
-    //получить топ 10 самых коротких треков
-    getTop10TracksShort: function getTop10TracksShort(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_length/short').then(function (response) {
-        state.top10TracksShort = response.data;
-      });
-    },
-    //получить топ 10 самых популярных треков
-    getTop10PopularTracks: function getTop10PopularTracks(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_popularity/popular').then(function (response) {
-        state.top10PopularTracks = response.data;
-      });
-    },
-    //получить топ 10 самых популярных треков
-    getTop10UnpopularTracks: function getTop10UnpopularTracks(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_popularity/unpopular').then(function (response) {
-        state.top10UnpopularTracks = response.data;
-      });
-    },
-    //получить топ 10 артистов за всё время
-    getTop10ArtistsAllTime: function getTop10ArtistsAllTime(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists/alltime').then(function (response) {
-        state.top10ArtistsAllTime = response.data;
       });
     },
     //получить топ 10 артистов за месяц
@@ -100074,7 +100043,7 @@ var ProfilePageStates = {
         }
       });
     },
-    //посчитать года и десятилетия
+    //посчитать года и десятилетия за все время или месяц
     getYearsAndDecades: function getYearsAndDecades(context, type) {
       var stateName = "yearsAndDecades";
 
@@ -100097,50 +100066,130 @@ var ProfilePageStates = {
         }
       });
     },
-    //посчитать года и десятилетия за месяц
-    getYearsAndDecadesMonth: function getYearsAndDecadesMonth(context) {
-      context.commit('getYearsAndDecadesMonth');
-    },
     //топ10
-    //топ10 треков за все время
-    getTop10TracksAllTime: function getTop10TracksAllTime(context) {
-      context.commit('getTop10TracksAllTime');
-    },
-    //топ10 треков за все время
-    getTop10TracksMonth: function getTop10TracksMonth(context) {
-      context.commit('getTop10TracksMonth');
+    //топ10 треков за все время или за месяц
+    getTop10Tracks: function getTop10Tracks(context, type) {
+      var stateName = "top10TracksAllTime";
+
+      if (type === "month") {
+        stateName = "top10TracksMonth";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //топ 10 длинных треков
-    getTop10TracksLong: function getTop10TracksLong(context) {
-      context.commit('getTop10TracksLong');
+    getTop10TracksByLength: function getTop10TracksByLength(context, type) {
+      var stateName = "top10TracksLong";
+
+      if (type === "short") {
+        stateName = "top10TracksShort";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_length/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //топ 10 коротких треков
-    getTop10TracksShort: function getTop10TracksShort(context) {
-      context.commit('getTop10TracksShort');
+    getTop10TracksByPopularity: function getTop10TracksByPopularity(context, type) {
+      var stateName = "top10PopularTracks";
+
+      if (type === "unpopular") {
+        stateName = "top10UnpopularTracks";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_tracks_by_popularity/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
-    //топ 10 коротких треков
-    getTop10PopularTracks: function getTop10PopularTracks(context) {
-      context.commit('getTop10PopularTracks');
-    },
-    //топ 10 коротких треков
-    getTop10UnpopularTracks: function getTop10UnpopularTracks(context) {
-      context.commit('getTop10UnpopularTracks');
-    },
-    //топ 10 исполнителей за все время
-    getTop10ArtistsAllTime: function getTop10ArtistsAllTime(context) {
-      context.commit('getTop10ArtistsAllTime');
-    },
-    //топ10 исполнителей за все время
-    getTop10ArtistsMonth: function getTop10ArtistsMonth(context) {
-      context.commit('getTop10ArtistsMonth');
+    //топ 10 исполнителей за все время или за месяц
+    getTop10Artists: function getTop10Artists(context, type) {
+      var stateName = "top10ArtistsAllTime";
+
+      if (type === "month") {
+        stateName = "top10ArtistsMonth";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //топ 10 исполнителей по кол-ву треков
     getTop10ArtistsByTracks: function getTop10ArtistsByTracks(context) {
-      context.commit('getTop10ArtistsByTracks');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists_by_tracks').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'top10ArtistsByTracks',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'top10ArtistsByTracks',
+            value: false
+          });
+        }
+      });
     },
     //топ 10 исполнителей по времени треков
     getTop10ArtistsByTime: function getTop10ArtistsByTime(context) {
-      context.commit('getTop10ArtistsByTime');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists_by_time').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'top10ArtistsByTime',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'top10ArtistsByTime',
+            value: false
+          });
+        }
+      });
     },
     //ачивки
     //самый прослушиваемый трек за все время

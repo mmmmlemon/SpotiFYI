@@ -32,12 +32,13 @@
                         </h3>
                     </div>
                
-                    <Top10Items cardTitle="Топ 10 Треков за все время" 
+                    <Top10Items v-if="top10TracksAllTime != 'noTracks'" 
+                                cardTitle="Топ 10 Треков за все время" 
                                 cardDesc="Десять твоих самых прослушиваемых треков за все время." 
                                 :items="top10TracksAllTime"
                                 listType="tracks"/>
 
-                    <Top10Items v-if="top10TracksAllTime != -1"
+                    <Top10Items v-if="top10TracksAllTime != -1 && top10TracksMonth != 'noTracks'"
                                 loaderMessage="Загружаю Топ 10 треков за месяц..."
                                 cardTitle="Топ 10 Треков за месяц" 
                                 cardDesc="Десять твоих самых прослушиваемых треков за последний месяц." 
@@ -74,13 +75,13 @@
                         </h3>
                     </div>
 
-                    <Top10Items v-if="top10UnpopularTracks != -1"
+                    <Top10Items v-if="top10UnpopularTracks != -1 && top10ArtistsAllTime != 'noArtists'"
                                 cardTitle="Топ 10 артистов за все время" 
                                 cardDesc="Десять твоих самых прослушиваемых артистов за все время." 
                                 :items="top10ArtistsAllTime"
                                 listType="artists"/>
 
-                    <Top10Items v-if="top10ArtistsAllTime != -1"
+                    <Top10Items v-if="top10ArtistsAllTime != -1 && top10ArtistsMonth != 'noArtists'"
                                 cardTitle="Топ 10 артистов за месяц" 
                                 cardDesc="Десять твоих самых прослушиваемых артистов за последний месяц." 
                                 :items="top10ArtistsMonth"
@@ -121,8 +122,10 @@
 
 <script>
 export default {
+
     mounted(){
 
+        //прокручиваем страницу к якорю, если в url есть якорь
         var anchor=this.$router.currentRoute.hash.replace("#", "");
 
         if(anchor)
@@ -131,56 +134,66 @@ export default {
         //смена текущего таба
         this.$store.dispatch('setCurrentTab','top10');
 
-        //получить библиотеку пользователя, если нужно
+         //получаем библиотеку пользователя и статистику
         if(this.spotifyUserLibrary == -1)
-        { this.$store.dispatch('getSpotifyUserLibrary'); }
-    
-        //топ 10 треков за всё время
-        if(this.top10TracksAllTime == -1)
-        { this.$store.dispatch('getTop10TracksAllTime'); }
-
-        //топ 10 треков за месяц
-        if(this.top10TracksMonth == -1)
-        { this.$store.dispatch('getTop10TracksMonth'); }
-
-        //топ 10 длинных треков
-        if(this.top10TracksLong == -1)
-        { this.$store.dispatch('getTop10TracksLong'); }
-
-        //топ 10 коротких треков
-        if(this.top10TracksShort == -1)
-        { this.$store.dispatch('getTop10TracksShort'); }
-
-        //топ 10 популярных треков
-        if(this.top10PopularTracks == -1)
-        { this.$store.dispatch('getTop10PopularTracks'); }
-
-        //топ 10 непопулярных треков
-        if(this.top10UnpopularTracks == -1)
-        { this.$store.dispatch('getTop10UnpopularTracks'); }
-
-        //топ 10 артистов за все время
-        if(this.top10ArtistsAllTime == -1)
-        { this.$store.dispatch('getTop10ArtistsAllTime'); }
-
-        //топ 10 артистов за месяц
-        if(this.top10ArtistsMonth == -1)
-        { this.$store.dispatch('getTop10ArtistsMonth'); }
-
-        //топ 10 артистов по кол-ву треков
-        if(this.top10ArtistsByTracks == -1)
-        { this.$store.dispatch('getTop10ArtistsByTracks'); }
-
-        //топ 10 артистов по кол-ву времени
-        if(this.top10ArtistsByTime == -1)
-        { this.$store.dispatch('getTop10ArtistsByTime'); }   
+        {
+            //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
+            this.$store.dispatch('getSpotifyUserLibrary').then(response => {
+                if(this.spotifyUserLibrary['result'] == true)
+                {
+                    this.getAllData();
+                }
+            }, error => {
+                console.log("Error: Couldn't load user's Spotify library.");
+            });
+        }
+        else
+        { this.getAllData(); }
+  
     },
 
     methods: {
-        scrollFix: function(hashbang)
-        {
-            location.hash = hashbang;
-        }
+        getAllData: function(){
+            //топ 10 треков за всё время
+            if(this.top10TracksAllTime == -1)
+            { this.$store.dispatch('getTop10Tracks', 'alltime'); }
+
+            //топ 10 треков за месяц
+            if(this.top10TracksAllTime == -1)
+            { this.$store.dispatch('getTop10Tracks', 'month'); }
+
+            //топ 10 длинных треков
+            if(this.top10TracksLong == -1)
+            { this.$store.dispatch('getTop10TracksByLength', 'long'); }
+
+            //топ 10 коротких треков
+            if(this.top10TracksShort == -1)
+            { this.$store.dispatch('getTop10TracksByLength', 'short'); }
+
+            //топ 10 популярных треков
+            if(this.top10PopularTracks == -1)
+            { this.$store.dispatch('getTop10TracksByPopularity', 'popular'); }
+
+            //топ 10 непопулярных треков
+            if(this.top10UnpopularTracks == -1)
+            { this.$store.dispatch('getTop10TracksByPopularity', 'unpopular'); }
+
+            //топ 10 артистов за все время
+            if(this.top10ArtistsAllTime == -1)
+            { this.$store.dispatch('getTop10Artists', 'alltime'); }
+
+            //топ 10 артистов за месяц
+            if(this.top10ArtistsMonth == -1)
+            { this.$store.dispatch('getTop10Artists', 'month'); }
+
+            //топ 10 артистов по кол-ву треков
+            if(this.top10ArtistsByTracks == -1)
+            { this.$store.dispatch('getTop10ArtistsByTracks'); }
+
+            //топ 10 артистов по кол-ву времени
+            if(this.top10ArtistsByTime == -1)
+            { this.$store.dispatch('getTop10ArtistsByTime'); }     
+        },
     },
 
     computed: {

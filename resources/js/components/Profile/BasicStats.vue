@@ -85,7 +85,9 @@
 
 <script>
 export default {
-    mounted(){
+   
+    mounted()
+    {
         //прокручиваем страницу к якорю, если в url есть якорь
         var anchor=this.$router.currentRoute.hash.replace("#", "");
 
@@ -95,59 +97,70 @@ export default {
         //устанавливаем текущий таб, для подсветки навигации
         this.$store.dispatch('setCurrentTab', 'basicStats');
 
-        //получаем библиотеку пользователя и статистику
+        //получаем библиотеку пользователя, если она еще не загружена
         if(this.spotifyUserLibrary == -1)
         {
-            //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
+            //если запрос выполнился, то выполняем загружаем остальные данные, если нет, то не делаем ничего
             this.$store.dispatch('getSpotifyUserLibrary').then(response => {
                 if(this.spotifyUserLibrary['result'] == true)
                 {
-                    //получить треки
-                    if(this.spotifyTracks == -1)
-                    { this.$store.dispatch('getSpotifyTracks'); }
-
-                    //получить альбомы
-                    if(this.spotifyAlbums == -1)
-                    { this.$store.dispatch('getSpotifyAlbums'); }
-
-                    //получить артистов
-                    if(this.spotifyArtists == -1)
-                    { this.$store.dispatch('getSpotifyArtists'); }
-
-                    //получить общее кол-во часов\минут\дней музыки в библиотеке
-                    if(this.userLibraryTime == -1)
-                    { this.$store.dispatch('getUserLibraryTime'); }
-
-                    //пять самых длинных и коротких треков
-                    if(this.fiveTracks == -1)
-                    { this.$store.dispatch('getFiveLongestAndShortestTracks'); }
-
-                    //средняя длина трека
-                    if(this.tracksMode == -1)
-                    { this.$store.dispatch('getAverageLengthOfTrack'); }
-
-                    //любимые жанры
-                    if(this.favoriteGenres == -1)
-                    { this.$store.dispatch('getFavoriteGenres') };
-
-                    //кол-во исполнителей
-                    if(this.uniqueArtists == -1)
-                    { this.$store.dispatch('getUniqueArtists'); }
-
-                    //года и десятилетия
-                    if(this.yearsAndDecades == -1)
-                    { this.$store.dispatch('getYearsAndDecades', 'alltime'); }
-
-                    //года и десятилетия - месяц
-                    if(this.yearsAndDecadesMonth == -1)
-                    { this.$store.dispatch('getYearsAndDecades', 'month'); }
+                    this.getAllData();
                 }
             }, error => {
                 console.log("Error: Couldn't load user's Spotify library.");
             })
         }
-  
-  },
+        //загружаем остальные данные
+        else
+        { this.getAllData(); }
+    },
+
+    methods: {
+        //получить все необходимые данные для этой страницы
+        getAllData: function()
+        {
+            //получить треки
+            if(this.spotifyTracks == -1)
+            { this.$store.dispatch('getSpotifyTracks'); }
+
+            //получить альбомы
+            if(this.spotifyAlbums == -1)
+            { this.$store.dispatch('getSpotifyAlbums'); }
+
+            //получить артистов
+            if(this.spotifyArtists == -1)
+            { this.$store.dispatch('getSpotifyArtists'); }
+
+            //получить общее кол-во часов\минут\дней музыки в библиотеке
+            if(this.userLibraryTime == -1)
+            { this.$store.dispatch('getUserLibraryTime'); }
+
+            //пять самых длинных и коротких треков
+            if(this.fiveTracks == -1)
+            { this.$store.dispatch('getFiveLongestAndShortestTracks'); }
+
+            //средняя длина трека
+            if(this.tracksMode == -1)
+            { this.$store.dispatch('getAverageLengthOfTrack'); }
+
+            //любимые жанры
+            if(this.favoriteGenres == -1)
+            { this.$store.dispatch('getFavoriteGenres') };
+
+            //кол-во исполнителей
+            if(this.uniqueArtists == -1)
+            { this.$store.dispatch('getUniqueArtists'); }
+
+            //года и десятилетия
+            if(this.yearsAndDecades == -1)
+            { this.$store.dispatch('getYearsAndDecades', 'alltime'); }
+
+            //года и десятилетия - месяц
+            if(this.yearsAndDecadesMonth == -1)
+            { this.$store.dispatch('getYearsAndDecades', 'month'); }
+        },
+    },
+    
     computed: {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
