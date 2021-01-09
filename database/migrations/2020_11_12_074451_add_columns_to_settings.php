@@ -15,7 +15,7 @@ class AddColumnsToSettings extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->string('version',5)->default('v1.0');
-            $table->string('about_text', 10000)->default('About this web-site');
+            $table->string('poweredBy', 10000)->default('About this web-site');
         });
     }
 
@@ -28,7 +28,7 @@ class AddColumnsToSettings extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('version');
-            $table->dropColumn('about_text');
+            $table->dropColumn('poweredBy');
         });
     }
 }

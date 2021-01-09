@@ -61,6 +61,6 @@ class HomeController extends Controller
 
         return response()->json(['siteTitle' => $settings->site_title, 
                                  'version' => $settings->version, 
-                                 'aboutText' => $settings->about_text]);
+                                 'poweredBy' => $settings->powered_by]);
     }
 }

@@ -13,7 +13,7 @@ const HomePageStates = {
     state: {
         spotifyUsername: -1, //никнейм пользователя, array
         spotifyUserTracksCount: -1, //подсчет треков, int
-        siteInfo: false, //информация о сайта для страницы About, array
+        siteInfo: -1, //информация о сайта для страницы About, array
       },
 
     mutations: {

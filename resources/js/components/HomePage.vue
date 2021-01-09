@@ -8,7 +8,6 @@
 <script>
     export default {
         mounted(){
-
             //получить юзернейм пользователя
             this.$store.dispatch('getSpotifyUsername')
 

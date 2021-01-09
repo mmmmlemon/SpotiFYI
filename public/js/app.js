@@ -2050,22 +2050,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      site_name: false
-    };
+  mounted: function mounted() {
+    //получить информацию о сайте
+    this.$store.dispatch('getSiteInfo');
   },
   computed: {
+    //информация о сайте
     siteInfo: function siteInfo() {
       return this.$store.state.homePage.siteInfo;
     }
-  },
-  created: function created() {
-    this.$store.dispatch('getSiteInfo');
-  },
-  mounted: function mounted() {
-    console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'About\' component mounted');
   }
 });
 
@@ -2165,16 +2175,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
+    //юзернейм пользователя
     spotifyUsername: function spotifyUsername() {
       return this.$store.state.homePage.spotifyUsername;
     },
+    //кол-во треков в библиотеке
     spotifyUserTracksCount: function spotifyUserTracksCount() {
       return this.$store.state.homePage.spotifyUserTracksCount;
-    },
-    trackWord: function trackWord() {
-      return this.spotifyUserTracksCount;
     }
   }
 });
@@ -78322,7 +78338,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.siteInfo == false
+    _vm.siteInfo == -1
       ? _c(
           "div",
           { staticClass: "container bounce_in_anim loader_div" },
@@ -78331,55 +78347,99 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _vm.siteInfo != false
-          ? _c("h1", { staticClass: "fade_in_anim" }, [
-              _c("b", [_vm._v(_vm._s(_vm.siteInfo.siteTitle))])
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _vm.siteInfo != false
-        ? _c("div", { staticClass: "row justify-content-center" }, [
-            _c("img", {
-              staticClass: "fade_in_anim bounce_in_anim",
-              attrs: { src: "/logo.png", width: "90pt", alt: "" }
+    _vm.siteInfo != false && _vm.siteInfo != -1
+      ? _c("div", { staticClass: "container fade_in_anim" }, [
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "grey_card col-12 padding_10" }, [
+              _c("div", { staticClass: "row justify-content-center" }, [
+                _vm.siteInfo != false
+                  ? _c("h1", { staticClass: "fade_in_anim" }, [
+                      _c("b", [_vm._v(_vm._s(_vm.siteInfo.siteTitle))])
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _vm.siteInfo != false
+                ? _c("div", { staticClass: "row justify-content-center" }, [
+                    _c("img", {
+                      staticClass: "fade_in_anim bounce_in_anim",
+                      attrs: { src: "/logo.png", width: "90pt", alt: "" }
+                    })
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.siteInfo != false
+                ? _c("div", { staticClass: "row justify-content-center" }, [
+                    _c("h5", { staticClass: "fade_in_anim" }, [
+                      _vm._v(_vm._s(_vm.siteInfo.version))
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.siteInfo != false
+                ? _c("hr", { staticClass: "fade_in_anim" })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.siteInfo != false
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "row justify-content-center fade_in_anim text-center"
+                    },
+                    [
+                      _c("p", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.siteInfo.poweredBy) +
+                            "\n                    "
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ])
+      : _vm.siteInfo == false
+      ? _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: {
+                errorMessage: "Не удалось загрузить информацию о сайте."
+              }
             })
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.siteInfo != false
-        ? _c("div", { staticClass: "row justify-content-center" }, [
-            _c("h4", { staticClass: "fade_in_anim" }, [
-              _vm._v(_vm._s(_vm.siteInfo.version))
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.siteInfo != false
-        ? _c("hr", { staticClass: "fade_in_anim" })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.siteInfo != false
-        ? _c(
-            "div",
-            { staticClass: "row justify-content-center fade_in_anim" },
-            [
-              _c("p", [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.siteInfo.aboutText) +
-                    "\n            "
-                )
-              ])
-            ]
-          )
-        : _vm._e()
-    ])
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-md-8 padding_10" }, [
+      _c("p", [
+        _vm._v(
+          "Много текста про сайт. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores natus veniam voluptas cum provident voluptate possimus est itaque, laudantium eos quae tempora nobis optio eveniet, pariatur facilis dolor rem architecto."
+        )
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "Еще много текста про сайт. Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore ducimus iure vitae, dolores soluta corrupti sit accusamus natus deleniti maiores reprehenderit numquam? Harum enim impedit neque natus sed molestias perferendis.Laudantium commodi dolorem accusamus eligendi aliquid adipisci illum possimus iusto vitae, ipsa libero. Saepe, nisi dolor facere eius tempore facilis illum voluptatibus labore, explicabo expedita et magnam cumque aut debitis?"
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -78401,16 +78461,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container fade_in_slow_anim" }, [
     _c("div", {
       staticClass: "top10_image_card",
       style: {
         backgroundImage:
-          "url('https://www.study.ru/uploads/server/4yTwWERsmPY6NnAO.jpg')"
+          "url('https://cdn.pixabay.com/photo/2013/07/12/18/17/equalizer-153212_960_720.png')"
       }
     }),
     _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-center fade_in_anim_500" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
       _vm.spotifyUsername == false
         ? _c(
             "div",
@@ -78467,7 +78527,7 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.spotifyUserTracksCount != -1
-                  ? _c("div", { staticClass: " col-8 fade_in_anim" }, [
+                  ? _c("div", { staticClass: " col-10 fade_in_anim" }, [
                       _vm.spotifyUserTracksCount >= 150
                         ? _c("h3", [
                             _vm._v(
@@ -78528,7 +78588,7 @@ var render = function() {
                         : _vm.spotifyUserTracksCount == 0
                         ? _c("h5", [
                             _vm._v(
-                              "\n                    Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                    "
+                              "\n                        Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                    "
                             )
                           ])
                         : _c(
@@ -99834,7 +99894,7 @@ var HomePageStates = {
     //никнейм пользователя, array
     spotifyUserTracksCount: -1,
     //подсчет треков, int
-    siteInfo: false //информация о сайта для страницы About, array
+    siteInfo: -1 //информация о сайта для страницы About, array
 
   },
   mutations: {
