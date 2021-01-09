@@ -98,107 +98,6 @@ const ProfilePageStates = {
             });
           },
 
-
-          //получить топ 10 артистов за месяц
-          getTop10ArtistsMonth(state){
-            axios.get('/api/get_top10_artists/month').then((response) => {
-              state.top10ArtistsMonth = response.data;
-            });
-          },
-          //получить топ 10 артистов по кол-ву треков
-          getTop10ArtistsByTracks(state){
-            axios.get('/api/get_top10_artists_by_tracks').then((response) => {
-              state.top10ArtistsByTracks = response.data;
-            })
-          },
-          //получить топ 10 артистов по кол-ву треков
-          getTop10ArtistsByTime(state){
-            axios.get('/api/get_top10_artists_by_time').then((response) => {
-              state.top10ArtistsByTime = response.data;
-            })
-          },
-
-          //ачивки
-          //самый прослушиваемый трек
-          getMostListenedTrack(state){
-            axios.get('/api/get_most_listened_track/alltime').then((response) => {
-              state.mostListenedTrack = response.data;
-            })
-          },
-          //самый прослушиваемый трек за месяц
-          getMostListenedTrackMonth(state){
-            axios.get('/api/get_most_listened_track/month').then((response) => {
-              state.mostListenedTrackMonth = response.data;
-            })
-          },
-          //самый популярный трек
-          getMostPopularTrack(state){
-            axios.get('/api/get_track_by_popularity/popular').then((response) => {
-              state.mostPopularTrack = response.data;
-            })
-          },
-          //самый непопулярный трек
-          getLeastPopularTrack(state){
-            axios.get('/api/get_track_by_popularity/unpopular').then((response) => {
-              state.leastPopularTrack = response.data;
-            })
-          },
-          //самый длинный трек
-          getLongestTrack(state){
-            axios.get('/api/get_track_by_duration/long').then((response) => {
-              state.longestTrack = response.data;
-            })
-          },
-          //самый короткий трек
-          getShortestTrack(state){
-            axios.get('/api/get_track_by_duration/short').then((response) => {
-              state.shortestTrack = response.data;
-            })
-          },
-          //самый слушаемый артист
-          getMostListenedArtist(state){
-            axios.get('/api/get_most_listened_artist/alltime').then((response) => {
-              state.mostListenedArtist = response.data;
-            })
-          },
-          //самый короткий трек
-          getMostListenedArtistMonth(state){
-            axios.get('/api/get_most_listened_artist/month').then((response) => {
-              state.mostListenedArtistMonth = response.data;
-            })
-          },
-          //артист с наибольшим кол-вом треков
-          getArtistByTracks(state){
-            axios.get('/api/get_artist_by_tracks').then((response) => {
-              state.topArtistByTracks = response.data;
-            })
-          },
-          //артист с наибольшим кол-вом треков
-          getArtistByTime(state){
-            axios.get('/api/get_artist_by_time').then((response) => {
-              state.topArtistByTime = response.data;
-            })
-          },
-          //самый популярный артист, из подписок
-          getMostPopularArtist(state){
-            axios.get('/api/get_artist_by_popularity/popular').then((response) => {
-              state.mostPopularArtist = response.data;
-            })
-          },
-          //самый непопулярный артист, из подписок
-          getLeastPopularArtist(state){
-            axios.get('/api/get_artist_by_popularity/unpopular').then((response) => {
-              state.leastPopularArtist = response.data;
-            })
-          },
-
-          //последние прослушанные треки
-          getLatestTracks(state){
-            axios.get('/api/get_latest_tracks').then((response) => {
-              state.latestTracks = response.data;
-            })
-          },
-
           //установить стейт
           setState(state, payload){
             state[payload.state] = payload.value;
@@ -410,57 +309,107 @@ const ProfilePageStates = {
 
       //ачивки
       //самый прослушиваемый трек за все время
-      getMostListenedTrack(context){
-        context.commit('getMostListenedTrack');
+      getMostListenedTrack(context, type){
+        var stateName = "mostListenedTrack";
+        if(type === "month")
+        { stateName = "mostListenedTrackMonth" };
+
+        axios.get('/api/get_most_listened_track/'+ type).then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: stateName, value: response.data}); }
+          else
+          { context.commit('setState', {state: stateName, value: false}); }
+        });
       },
-      //самый прослушиваемый трек
-      getMostListenedTrackMonth(context){
-        context.commit('getMostListenedTrackMonth');
-      },
+
+
       //самый популярный трек
-      getMostPopularTrack(context){
-        context.commit('getMostPopularTrack');
+      getTrackByPopularity(context, type){
+        var stateName = "mostPopularTrack";
+        if(type === "unpopular")
+        { stateName = "leastPopularTrack" };
+
+        axios.get('/api/get_track_by_popularity/'+ type).then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: stateName, value: response.data}); }
+          else
+          { context.commit('setState', {state: stateName, value: false}); }
+        });
       },
-      //самый популярный трек
-      getLeastPopularTrack(context){
-        context.commit('getLeastPopularTrack');
-      },
+
+ 
       //самый длинный трек
-      getLongestTrack(context){
-        context.commit('getLongestTrack');
+      getTrackByDuration(context, type){
+        var stateName = "longestTrack";
+        if(type === "short")
+        { stateName = "shortestTrack" };
+
+        axios.get('/api/get_track_by_duration/'+ type).then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: stateName, value: response.data}); }
+          else
+          { context.commit('setState', {state: stateName, value: false}); }
+        });
       },
-      //самый короткий трек
-      getShortestTrack(context){
-        context.commit('getShortestTrack');
-      },
+
+
       //самый слушаемый артист
-      getMostListenedArtist(context){
-        context.commit('getMostListenedArtist');
+      getMostListenedArtist(context, type){
+        var stateName = "mostListenedArtist";
+        if(type === "month")
+        { stateName = "mostListenedArtistMonth" };
+
+        axios.get('/api/get_most_listened_artist/'+ type).then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: stateName, value: response.data}); }
+          else
+          { context.commit('setState', {state: stateName, value: false}); }
+        });
       },
-      //самый слушаемый артист за месяц
-      getMostListenedArtistMonth(context){
-        context.commit('getMostListenedArtistMonth');
-      },
+
+
       //артист с наибольшим кол-вом треков
       getArtistByTracks(context){
-        context.commit('getArtistByTracks');
+        axios.get('/api/get_artist_by_tracks').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'topArtistByTracks', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'topArtistByTracks', value: false}); }
+        });
       },
+
       //артист с наибольшим кол-вом времени треков
       getArtistByTime(context){
-        context.commit('getArtistByTime');
+        axios.get('/api/get_artist_by_time').then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'topArtistByTime', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'topArtistByTime', value: false}); }
+        });
       },
+
       //самый популярный артист, из подписок
-      getMostPopularArtist(context){
-        context.commit('getMostPopularArtist');
-      },
-      //самый непопулярный артист, из подписок
-      getLeastPopularArtist(context){
-        context.commit('getLeastPopularArtist');
+      getArtistByPopularity(context, type){
+        var stateName = "mostPopularArtist";
+        if(type === "unpopular")
+        { stateName = "leastPopularArtist" };
+
+        axios.get('/api/get_artist_by_popularity/'+ type).then(response => {
+          if(response.data != false)
+          { context.commit('setState', {state: stateName, value: response.data}); }
+          else
+          { context.commit('setState', {state: stateName, value: false}); }
+        });
       },
 
       //последние прослушанные треки
       getLatestTracks(context){
-        context.commit('getLatestTracks');
+        axios.get('/api/get_latest_tracks').then((response) => {
+          if(response.data != false)
+          { context.commit('setState', {state: 'latestTracks', value: response.data}); }
+          else
+          { context.commit('setState', {state: 'latestTracks', value: false}); }
+        })
       },
   }
 }

@@ -2457,8 +2457,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    var _this = this;
+
     var anchor = this.$router.currentRoute.hash.replace("#", "");
 
     if (anchor) {
@@ -2471,69 +2515,80 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('setCurrentTab', 'achievements'); //получить библиотеку пользователя, если нужно
 
     if (this.spotifyUserLibrary == -1) {
-      this.$store.dispatch('getSpotifyUserLibrary');
-    } //самый прослушиваемый трек
-
-
-    if (this.mostListenedTrack == -1) {
-      this.$store.dispatch('getMostListenedTrack');
+      this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
+        if (_this.spotifyUserLibrary['result'] == true) {
+          _this.getAllData();
+        }
+      }, function (error) {
+        console.log("Error: Couldn't load user's Spotify library.");
+      });
+    } else {
+      this.getAllData();
     }
+  },
+  methods: {
+    getAllData: function getAllData() {
+      //самый прослушиваемый трек
+      if (this.mostListenedTrack == -1) {
+        this.$store.dispatch('getMostListenedTrack', 'alltime');
+      }
 
-    ; //самый прослушиваемый трек за месяц
+      ; //самый прослушиваемый трек за месяц
 
-    if (this.mostListenedTrackMonth == -1) {
-      this.$store.dispatch('getMostListenedTrackMonth');
-    }
+      if (this.mostListenedTrack == -1) {
+        this.$store.dispatch('getMostListenedTrack', 'month');
+      }
 
-    ; //самый популярный трек
+      ; //самый популярный трек
 
-    if (this.mostPopularTrack == -1) {
-      this.$store.dispatch('getMostPopularTrack');
-    } //самый непопулярный трек
-
-
-    if (this.leastPopularTrack == -1) {
-      this.$store.dispatch('getLeastPopularTrack');
-    } //самый длинный трек
-
-
-    if (this.longestTrack == -1) {
-      this.$store.dispatch('getLongestTrack');
-    } //самый короткий трек
+      if (this.mostPopularTrack == -1) {
+        this.$store.dispatch('getTrackByPopularity', 'popular');
+      } //самый непопулярный трек
 
 
-    if (this.shortestTrack == -1) {
-      this.$store.dispatch('getShortestTrack');
-    } //самый слушаемый артист
+      if (this.leastPopularTrack == -1) {
+        this.$store.dispatch('getTrackByPopularity', 'unpopular');
+      } //самый длинный трек
 
 
-    if (this.mostListenedArtist == -1) {
-      this.$store.dispatch('getMostListenedArtist');
-    } //самый слушаемый артист за месяц
+      if (this.longestTrack == -1) {
+        this.$store.dispatch('getTrackByDuration', 'long');
+      } //самый короткий трек
 
 
-    if (this.mostListenedArtistMonth == -1) {
-      this.$store.dispatch('getMostListenedArtistMonth');
-    } //артист с наибольшим кол-вом треков
+      if (this.shortestTrack == -1) {
+        this.$store.dispatch('getTrackByDuration', 'short');
+      } //самый слушаемый артист
 
 
-    if (this.topArtistByTracks == -1) {
-      this.$store.dispatch('getArtistByTracks');
-    } //артист с наибольшим кол-вом времени треков
+      if (this.mostListenedArtist == -1) {
+        this.$store.dispatch('getMostListenedArtist', 'alltime');
+      } //самый слушаемый артист за месяц
 
 
-    if (this.topArtistByTime == -1) {
-      this.$store.dispatch('getArtistByTime');
-    } //cамый популярный артист, из подписок
+      if (this.mostListenedArtistMonth == -1) {
+        this.$store.dispatch('getMostListenedArtist', 'month');
+      } //артист с наибольшим кол-вом треков
 
 
-    if (this.mostPopularArtist == -1) {
-      this.$store.dispatch('getMostPopularArtist');
-    } //cамый непопулярный артист, из подписок
+      if (this.topArtistByTracks == -1) {
+        this.$store.dispatch('getArtistByTracks');
+      } //артист с наибольшим кол-вом времени треков
 
 
-    if (this.leastPopularArtist == -1) {
-      this.$store.dispatch('getLeastPopularArtist');
+      if (this.topArtistByTime == -1) {
+        this.$store.dispatch('getArtistByTime');
+      } //cамый популярный артист, из подписок
+
+
+      if (this.mostPopularArtist == -1) {
+        this.$store.dispatch('getArtistByPopularity', 'popular');
+      } //cамый непопулярный артист, из подписок
+
+
+      if (this.mostPopularArtist == -1) {
+        this.$store.dispatch('getArtistByPopularity', 'unpopular');
+      }
     }
   },
   computed: {
@@ -78957,15 +79012,18 @@ var render = function() {
             "div",
             { staticClass: "row justify-content-center" },
             [
-              _c("AchievementItem", {
-                attrs: {
-                  cardTitle: "Самый прослушиваемый трек",
-                  cardSubtitle: "За всё время",
-                  items: _vm.mostListenedTrack
-                }
-              }),
+              _vm.mostListenedTrack != "noTracks"
+                ? _c("AchievementItem", {
+                    attrs: {
+                      cardTitle: "Самый прослушиваемый трек",
+                      cardSubtitle: "За всё время",
+                      items: _vm.mostListenedTrack
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
-              _vm.mostListenedTrack != -1
+              _vm.mostListenedTrack != -1 &&
+              _vm.mostListenedTrackMonth != "noTracks"
                 ? _c("AchievementItem", {
                     attrs: {
                       cardTitle: "Самый прослушиваемый трек",
@@ -79034,7 +79092,8 @@ var render = function() {
                 "div",
                 { staticClass: "row justify-content-center" },
                 [
-                  _vm.shortestTrack != -1
+                  _vm.shortestTrack != -1 &&
+                  _vm.mostListenedArtist != "noArtists"
                     ? _c("AchievementItem", {
                         attrs: {
                           cardTitle: "Самый слушаемый исполнитель",
@@ -79044,7 +79103,8 @@ var render = function() {
                       })
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.mostListenedArtist != -1
+                  _vm.mostListenedArtist != -1 &&
+                  _vm.mostListenedArtistMonth != "noArtists"
                     ? _c("AchievementItem", {
                         attrs: {
                           cardTitle: "Самый слушаемый исполнитель",
@@ -79074,7 +79134,8 @@ var render = function() {
                       })
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.topArtistByTime != -1
+                  _vm.topArtistByTime != -1 &&
+                  _vm.mostPopularArtist == "noArtists"
                     ? _c("AchievementItem", {
                         attrs: {
                           cardTitle: "Самый популярный исполнитель",
@@ -79084,7 +79145,8 @@ var render = function() {
                       })
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.mostPopularArtist != -1
+                  _vm.mostPopularArtist != -1 &&
+                  _vm.leastPopularArtist == "noArtists"
                     ? _c("AchievementItem", {
                         attrs: {
                           cardTitle: "Самый непопулярный исполнитель",
@@ -99774,103 +99836,6 @@ var ProfilePageStates = {
         state[payload.state] = response.data;
       });
     },
-    //получить топ 10 артистов за месяц
-    getTop10ArtistsMonth: function getTop10ArtistsMonth(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists/month').then(function (response) {
-        state.top10ArtistsMonth = response.data;
-      });
-    },
-    //получить топ 10 артистов по кол-ву треков
-    getTop10ArtistsByTracks: function getTop10ArtistsByTracks(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists_by_tracks').then(function (response) {
-        state.top10ArtistsByTracks = response.data;
-      });
-    },
-    //получить топ 10 артистов по кол-ву треков
-    getTop10ArtistsByTime: function getTop10ArtistsByTime(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_top10_artists_by_time').then(function (response) {
-        state.top10ArtistsByTime = response.data;
-      });
-    },
-    //ачивки
-    //самый прослушиваемый трек
-    getMostListenedTrack: function getMostListenedTrack(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_track/alltime').then(function (response) {
-        state.mostListenedTrack = response.data;
-      });
-    },
-    //самый прослушиваемый трек за месяц
-    getMostListenedTrackMonth: function getMostListenedTrackMonth(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_track/month').then(function (response) {
-        state.mostListenedTrackMonth = response.data;
-      });
-    },
-    //самый популярный трек
-    getMostPopularTrack: function getMostPopularTrack(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_track_by_popularity/popular').then(function (response) {
-        state.mostPopularTrack = response.data;
-      });
-    },
-    //самый непопулярный трек
-    getLeastPopularTrack: function getLeastPopularTrack(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_track_by_popularity/unpopular').then(function (response) {
-        state.leastPopularTrack = response.data;
-      });
-    },
-    //самый длинный трек
-    getLongestTrack: function getLongestTrack(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_track_by_duration/long').then(function (response) {
-        state.longestTrack = response.data;
-      });
-    },
-    //самый короткий трек
-    getShortestTrack: function getShortestTrack(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_track_by_duration/short').then(function (response) {
-        state.shortestTrack = response.data;
-      });
-    },
-    //самый слушаемый артист
-    getMostListenedArtist: function getMostListenedArtist(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_artist/alltime').then(function (response) {
-        state.mostListenedArtist = response.data;
-      });
-    },
-    //самый короткий трек
-    getMostListenedArtistMonth: function getMostListenedArtistMonth(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_artist/month').then(function (response) {
-        state.mostListenedArtistMonth = response.data;
-      });
-    },
-    //артист с наибольшим кол-вом треков
-    getArtistByTracks: function getArtistByTracks(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_tracks').then(function (response) {
-        state.topArtistByTracks = response.data;
-      });
-    },
-    //артист с наибольшим кол-вом треков
-    getArtistByTime: function getArtistByTime(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_time').then(function (response) {
-        state.topArtistByTime = response.data;
-      });
-    },
-    //самый популярный артист, из подписок
-    getMostPopularArtist: function getMostPopularArtist(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_popularity/popular').then(function (response) {
-        state.mostPopularArtist = response.data;
-      });
-    },
-    //самый непопулярный артист, из подписок
-    getLeastPopularArtist: function getLeastPopularArtist(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_popularity/unpopular').then(function (response) {
-        state.leastPopularArtist = response.data;
-      });
-    },
-    //последние прослушанные треки
-    getLatestTracks: function getLatestTracks(state) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_latest_tracks').then(function (response) {
-        state.latestTracks = response.data;
-      });
-    },
     //установить стейт
     setState: function setState(state, payload) {
       state[payload.state] = payload.value;
@@ -100193,56 +100158,167 @@ var ProfilePageStates = {
     },
     //ачивки
     //самый прослушиваемый трек за все время
-    getMostListenedTrack: function getMostListenedTrack(context) {
-      context.commit('getMostListenedTrack');
-    },
-    //самый прослушиваемый трек
-    getMostListenedTrackMonth: function getMostListenedTrackMonth(context) {
-      context.commit('getMostListenedTrackMonth');
+    getMostListenedTrack: function getMostListenedTrack(context, type) {
+      var stateName = "mostListenedTrack";
+
+      if (type === "month") {
+        stateName = "mostListenedTrackMonth";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_track/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //самый популярный трек
-    getMostPopularTrack: function getMostPopularTrack(context) {
-      context.commit('getMostPopularTrack');
-    },
-    //самый популярный трек
-    getLeastPopularTrack: function getLeastPopularTrack(context) {
-      context.commit('getLeastPopularTrack');
+    getTrackByPopularity: function getTrackByPopularity(context, type) {
+      var stateName = "mostPopularTrack";
+
+      if (type === "unpopular") {
+        stateName = "leastPopularTrack";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_track_by_popularity/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //самый длинный трек
-    getLongestTrack: function getLongestTrack(context) {
-      context.commit('getLongestTrack');
-    },
-    //самый короткий трек
-    getShortestTrack: function getShortestTrack(context) {
-      context.commit('getShortestTrack');
+    getTrackByDuration: function getTrackByDuration(context, type) {
+      var stateName = "longestTrack";
+
+      if (type === "short") {
+        stateName = "shortestTrack";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_track_by_duration/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //самый слушаемый артист
-    getMostListenedArtist: function getMostListenedArtist(context) {
-      context.commit('getMostListenedArtist');
-    },
-    //самый слушаемый артист за месяц
-    getMostListenedArtistMonth: function getMostListenedArtistMonth(context) {
-      context.commit('getMostListenedArtistMonth');
+    getMostListenedArtist: function getMostListenedArtist(context, type) {
+      var stateName = "mostListenedArtist";
+
+      if (type === "month") {
+        stateName = "mostListenedArtistMonth";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_most_listened_artist/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //артист с наибольшим кол-вом треков
     getArtistByTracks: function getArtistByTracks(context) {
-      context.commit('getArtistByTracks');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_tracks').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'topArtistByTracks',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'topArtistByTracks',
+            value: false
+          });
+        }
+      });
     },
     //артист с наибольшим кол-вом времени треков
     getArtistByTime: function getArtistByTime(context) {
-      context.commit('getArtistByTime');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_time').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'topArtistByTime',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'topArtistByTime',
+            value: false
+          });
+        }
+      });
     },
     //самый популярный артист, из подписок
-    getMostPopularArtist: function getMostPopularArtist(context) {
-      context.commit('getMostPopularArtist');
-    },
-    //самый непопулярный артист, из подписок
-    getLeastPopularArtist: function getLeastPopularArtist(context) {
-      context.commit('getLeastPopularArtist');
+    getArtistByPopularity: function getArtistByPopularity(context, type) {
+      var stateName = "mostPopularArtist";
+
+      if (type === "unpopular") {
+        stateName = "leastPopularArtist";
+      }
+
+      ;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_artist_by_popularity/' + type).then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: stateName,
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: stateName,
+            value: false
+          });
+        }
+      });
     },
     //последние прослушанные треки
     getLatestTracks: function getLatestTracks(context) {
-      context.commit('getLatestTracks');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_latest_tracks').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'latestTracks',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'latestTracks',
+            value: false
+          });
+        }
+      });
     }
   }
 };

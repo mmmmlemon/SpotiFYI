@@ -31,12 +31,35 @@
             </div>
 
             <div class="row justify-content-center">
-                <AchievementItem cardTitle="Самый прослушиваемый трек" cardSubtitle="За всё время" :items="mostListenedTrack"/>
-                <AchievementItem v-if="mostListenedTrack != -1" cardTitle="Самый прослушиваемый трек" cardSubtitle="За месяц" :items="mostListenedTrackMonth"/>
-                <AchievementItem v-if="mostListenedTrackMonth != -1" cardTitle="Самый популярный трек"  cardSubtitle="Который тебе нравится" :items="mostPopularTrack"/>
-                <AchievementItem v-if="mostPopularTrack != -1" cardTitle="Самый непопулярный трек"  cardSubtitle="Который тебе нравится" :items="leastPopularTrack"/>
-                <AchievementItem v-if="leastPopularTrack != -1" cardTitle="Самый длинный трек"  cardSubtitle="Который тебе нравится" :items="longestTrack"/>
-                <AchievementItem v-if="longestTrack != -1" cardTitle="Самый короткий трек"  cardSubtitle="Который тебе нравится" :items="shortestTrack"/>
+                <AchievementItem v-if="mostListenedTrack != 'noTracks'" 
+                                cardTitle="Самый прослушиваемый трек" 
+                                cardSubtitle="За всё время" 
+                                :items="mostListenedTrack"/>
+
+                <AchievementItem v-if="mostListenedTrack != -1 && mostListenedTrackMonth != 'noTracks'" 
+                                cardTitle="Самый прослушиваемый трек" cardSubtitle="За месяц" 
+                                :items="mostListenedTrackMonth"/>
+
+                <AchievementItem v-if="mostListenedTrackMonth != -1" 
+                                cardTitle="Самый популярный трек"  
+                                cardSubtitle="Который тебе нравится" 
+                                :items="mostPopularTrack"/>
+
+                <AchievementItem v-if="mostPopularTrack != -1" 
+                                cardTitle="Самый непопулярный трек"  
+                                cardSubtitle="Который тебе нравится" 
+                                :items="leastPopularTrack"/>
+
+
+                <AchievementItem v-if="leastPopularTrack != -1" 
+                                cardTitle="Самый длинный трек"  
+                                cardSubtitle="Который тебе нравится" 
+                                :items="longestTrack"/>
+
+                <AchievementItem v-if="longestTrack != -1" 
+                                cardTitle="Самый короткий трек"  
+                                cardSubtitle="Который тебе нравится" 
+                                :items="shortestTrack"/>
             </div>
 
             <!-- исполнители -->
@@ -48,12 +71,31 @@
             </div>
 
             <div class="row justify-content-center" v-if="shortestTrack != -1">
-                <AchievementItem v-if="shortestTrack != -1" cardTitle="Самый слушаемый исполнитель" cardSubtitle="За всё время" :items="mostListenedArtist"/>
-                <AchievementItem v-if="mostListenedArtist != -1" cardTitle="Самый слушаемый исполнитель" cardSubtitle="За месяц" :items="mostListenedArtistMonth"/>
-                <AchievementItem v-if="mostListenedArtistMonth != -1" cardTitle="Исполнитель" cardSubtitle="С наибольшим кол-вом треков" :items="topArtistByTracks"/>
-                <AchievementItem v-if="topArtistByTracks != -1" cardTitle="Исполнитель" cardSubtitle="С наибольшим кол-вом времени треков" :items="topArtistByTime"/>
-                <AchievementItem v-if="topArtistByTime != -1" cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" :items="mostPopularArtist"/>
-                <AchievementItem v-if="mostPopularArtist != -1" cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" :items="leastPopularArtist"/>
+                <AchievementItem v-if="shortestTrack != -1 && mostListenedArtist != 'noArtists'" 
+                                cardTitle="Самый слушаемый исполнитель" cardSubtitle="За всё время" 
+                                :items="mostListenedArtist"/>
+
+                <AchievementItem v-if="mostListenedArtist != -1 && mostListenedArtistMonth != 'noArtists'" 
+                                cardTitle="Самый слушаемый исполнитель" cardSubtitle="За месяц" 
+                                :items="mostListenedArtistMonth"/>
+
+                <AchievementItem v-if="mostListenedArtistMonth != -1" 
+                                cardTitle="Исполнитель" 
+                                cardSubtitle="С наибольшим кол-вом треков" 
+                                :items="topArtistByTracks"/>
+
+                <AchievementItem v-if="topArtistByTracks != -1" 
+                                cardTitle="Исполнитель" 
+                                cardSubtitle="С наибольшим кол-вом времени треков" 
+                                :items="topArtistByTime"/>
+
+                <AchievementItem v-if="topArtistByTime != -1 && mostPopularArtist == 'noArtists'" 
+                                cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" 
+                                :items="mostPopularArtist"/>
+
+                <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist == 'noArtists'" 
+                                cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" 
+                                :items="leastPopularArtist"/>
             </div>
                        <br>
             <div class="row justify-content-center fade_in_anim" v-if="leastPopularArtist != -1">
@@ -81,7 +123,6 @@
 <script>
 export default {
     mounted(){
-
         var anchor=this.$router.currentRoute.hash.replace("#", "");
 
         if(anchor)
@@ -92,57 +133,73 @@ export default {
 
         //получить библиотеку пользователя, если нужно
         if(this.spotifyUserLibrary == -1)
-        { this.$store.dispatch('getSpotifyUserLibrary'); }
+        { 
+            this.$store.dispatch('getSpotifyUserLibrary').then(response => {
+                if(this.spotifyUserLibrary['result'] == true)
+                {
+                    this.getAllData();
+                }
+            }, error => {
+                console.log("Error: Couldn't load user's Spotify library.");
+            }); 
+        }
+        else
+        { this.getAllData(); }
+ 
+    },
+    methods: {
+        getAllData: function(){
+            
+            //самый прослушиваемый трек
+            if(this.mostListenedTrack == -1)
+            { this.$store.dispatch('getMostListenedTrack', 'alltime') };
 
-        //самый прослушиваемый трек
-        if(this.mostListenedTrack == -1)
-        { this.$store.dispatch('getMostListenedTrack') };
+            //самый прослушиваемый трек за месяц
+            if(this.mostListenedTrack == -1)
+            { this.$store.dispatch('getMostListenedTrack', 'month') };
 
-        //самый прослушиваемый трек за месяц
-        if(this.mostListenedTrackMonth == -1)
-        { this.$store.dispatch('getMostListenedTrackMonth') };
+            //самый популярный трек
+            if(this.mostPopularTrack == -1)
+            { this.$store.dispatch('getTrackByPopularity', 'popular'); }
 
-        //самый популярный трек
-        if(this.mostPopularTrack == -1)
-        { this.$store.dispatch('getMostPopularTrack'); }
+            //самый непопулярный трек
+            if(this.leastPopularTrack == -1)
+            { this.$store.dispatch('getTrackByPopularity', 'unpopular'); }
+            
+            //самый длинный трек
+            if(this.longestTrack == -1)
+            { this.$store.dispatch('getTrackByDuration', 'long'); }
 
-        //самый непопулярный трек
-        if(this.leastPopularTrack == -1)
-        { this.$store.dispatch('getLeastPopularTrack'); }
+            //самый короткий трек
+            if(this.shortestTrack == -1)
+            { this.$store.dispatch('getTrackByDuration', 'short'); }
 
-        //самый длинный трек
-        if(this.longestTrack == -1)
-        { this.$store.dispatch('getLongestTrack'); }
+            //самый слушаемый артист
+            if(this.mostListenedArtist == -1)
+            { this.$store.dispatch('getMostListenedArtist', 'alltime'); }
 
-        //самый короткий трек
-        if(this.shortestTrack == -1)
-        { this.$store.dispatch('getShortestTrack'); }
+            //самый слушаемый артист за месяц
+            if(this.mostListenedArtistMonth == -1)
+            { this.$store.dispatch('getMostListenedArtist', 'month'); }
 
-        //самый слушаемый артист
-        if(this.mostListenedArtist == -1)
-        { this.$store.dispatch('getMostListenedArtist'); }
+            //артист с наибольшим кол-вом треков
+            if(this.topArtistByTracks == -1)
+            { this.$store.dispatch('getArtistByTracks'); }
 
-        //самый слушаемый артист за месяц
-        if(this.mostListenedArtistMonth == -1)
-        { this.$store.dispatch('getMostListenedArtistMonth'); }
+            //артист с наибольшим кол-вом времени треков
+            if(this.topArtistByTime == -1)
+            { this.$store.dispatch('getArtistByTime'); }
 
-        //артист с наибольшим кол-вом треков
-        if(this.topArtistByTracks == -1)
-        { this.$store.dispatch('getArtistByTracks'); }
+            //cамый популярный артист, из подписок
+            if(this.mostPopularArtist == -1)
+            { this.$store.dispatch('getArtistByPopularity', 'popular'); }
 
-        //артист с наибольшим кол-вом времени треков
-        if(this.topArtistByTime == -1)
-        { this.$store.dispatch('getArtistByTime'); }
-
-        //cамый популярный артист, из подписок
-        if(this.mostPopularArtist == -1)
-        { this.$store.dispatch('getMostPopularArtist'); }
-
-        //cамый непопулярный артист, из подписок
-        if(this.leastPopularArtist == -1)
-        { this.$store.dispatch('getLeastPopularArtist'); }
+            //cамый непопулярный артист, из подписок
+            if(this.mostPopularArtist == -1)
+            { this.$store.dispatch('getArtistByPopularity', 'unpopular'); }
 
 
+        },
     },
     computed: {
         spotifyUserLibrary: function(){

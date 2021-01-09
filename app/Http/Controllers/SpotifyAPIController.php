@@ -1309,20 +1309,40 @@ class SpotifyAPIController extends Controller
 
             $topTrack = "";
 
-            if($type == "alltime")
-            { $topTrack =  $api->getMyTop('tracks', ['limit' => 1, 'time_range' => 'long_term'])->items[0]; }
-            elseif($type == "month")
-            { $topTrack = $api->getMyTop('tracks', ['limit' => 1, 'time_range' => 'short_term'])->items[0]; }
+            $timeRange = "";
 
-            $response = [
-                'title' => Helpers::getFullNameOfItem($topTrack, "fullname"),
-                'album' => $topTrack->album->name . " - ". Helpers::getItemReleaseDate($topTrack, "track", "short"),
-                'url' => $topTrack->external_urls->spotify,
-                'image' => $topTrack->album->images[0]->url,
-            ];
+            switch($type){
+                case "alltime":
+                    $timeRange = "long_term";
+                    break;
+                case "month":
+                    $timeRange = "short_term";
+                    break;
+                default:
+                    $timeRange = "long_term";
+            }
 
-            return response()->json($response);
+            // $tracks = $api->getMyTop('tracks', ['limit' => 1, 'time_range' => $timeRange]);
+            $tracks = [];
+
+            if(count($tracks) > 0)
+            { 
+                $topTrack =   $tracks->items[0]; 
+                
+                $response = [
+                    'title' => Helpers::getFullNameOfItem($topTrack, "fullname"),
+                    'album' => $topTrack->album->name . " - ". Helpers::getItemReleaseDate($topTrack, "track", "short"),
+                    'url' => $topTrack->external_urls->spotify,
+                    'image' => $topTrack->album->images[0]->url,
+                ];
+
+                return response()->json($response);
+            }
+            else
+            { return response()->json('noTracks'); }
         }
+        else
+        { return response()->json(false); }
     }
 
     //getMostPopularTrack
@@ -1444,6 +1464,8 @@ class SpotifyAPIController extends Controller
                 return response()->json($response);
             }
         }
+        else
+        { return response()->json(false); }
     }
 
     //getMostListenedArtist
@@ -1468,16 +1490,27 @@ class SpotifyAPIController extends Controller
             if($type == "month")
             { $timeRange = "short_term"; }
 
-            $topArtist = $api->getMyTop('artists', ['limit' => 1, 'time_range' => $timeRange])->items[0];
+            $artists = $api->getMyTop('artists', ['limit' => 1, 'time_range' => $timeRange]);
 
-            $response = [
-                'title' => $topArtist->name,
-                'url' => $topArtist->external_urls->spotify,
-                'image' => $topArtist->images[0]->url,
-                'additionalInfo' => Helpers::getArtistsGenres($topArtist, 5),
-            ];
+            $topArtist = "";
 
-            return response()->json($response);
+            if(count($artists->items) > 0)
+            {
+                $topArtist = $artists->items[0];
+
+                $response = [
+                    'title' => $topArtist->name,
+                    'url' => $topArtist->external_urls->spotify,
+                    'image' => $topArtist->images[0]->url,
+                    'additionalInfo' => Helpers::getArtistsGenres($topArtist, 5),
+                ];
+    
+                return response()->json($response);
+            }
+            else
+            {
+                return response()->json('noArtists');
+            }
         }
     }
 
