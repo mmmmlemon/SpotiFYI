@@ -4,6 +4,10 @@
     background-image: linear-gradient(to bottom, #2e3136, #2c2f33, #292c31, #272a2e, #25282c) !important;
 }
 
+.spotify_green_bg{
+    background-color: #1DB954 !important;
+}
+
 .invisible{
     display: none;
 }
@@ -184,6 +188,14 @@
     font-weight: normal;
 }
 
+.font_4vw{
+    font-size:4.2vw;
+}
+
+.font_6vw{
+    font-size:6.2vw;
+}
+
 .font_8pt{
     font-size:8pt;
 }
@@ -244,9 +256,10 @@
 }
 
 a{
-    color: rgb(185, 185, 185) !important;
+    color: rgb(233, 232, 232) !important;
     transition: color 0.2s ease-in-out;
 }
+
 a:hover{
     color: #1b77b9 !important;
     text-decoration: none !important;

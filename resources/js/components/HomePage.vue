@@ -1,3 +1,4 @@
+//HomePage
 <template>
     <div class="container">
         <router-view></router-view>
@@ -6,12 +7,13 @@
 
 <script>
     export default {
-        beforeCreate(){
-            this.$store.dispatch('getSpotifyUsername')
-            this.$store.dispatch('getHomePageUserTracksCount');
-        },
         mounted(){
-            console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'HomePage\' component mounted')
+
+            //получить юзернейм пользователя
+            this.$store.dispatch('getSpotifyUsername')
+
+            //получить кол-во треков в библиотеке для сообщения на главной странице
+            this.$store.dispatch('getHomePageUserTracksCount');
         }
     }
 </script>

@@ -67,7 +67,7 @@
             </ul>
             @if($checkToken == false)
                 <div class="form-inline d-none d-md-flex ml-auto"> 
-                    <a href="/spotify_auth" class="btn btn-primary btn-rounded">Войти в Spotify</a>
+                    <a href="/login" class="btn btn-primary btn-rounded">Войти в Spotify</a>
                 </div>
             @else
                 <div class="form-inline d-none d-md-flex ml-auto" style="margin-right:3%;"> 
@@ -78,7 +78,7 @@
                             <img src="{{$spotifyProfile['avatar']}}" alt="Spotify avatar" class="nav_item_spotify_avatar rounded-circle">
                         </router-link>
                         {{-- кнопка выхода --}}
-                        <a class="nav-link" href="/spotify_logout"><i class="fas fa-sign-out-alt"></i></a>
+                        <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
             @endif
             
@@ -104,14 +104,14 @@
                     
                     @if($checkToken == false)
                     <div class="dropdown-content">
-                        <a href="/spotify_auth" class="btn btn-primary btn-block btn-rounded">Войти в Spotify</a>
+                        <a href="/login" class="btn btn-primary btn-block btn-rounded">Войти в Spotify</a>
                     </div>    
                     @else
                     <div class="dropdown-content">
                         {{-- юзернейм --}}
                         <router-link to="/profile" class="">{{$spotifyProfile['displayName']}}</a></router-link>
                         {{-- кнопка выхода --}}
-                        <a href="/spotify_logout" class="" style="margin-left:20px;"><i class="fas fa-sign-out-alt"></i></a>
+                        <a href="/logout" class="" style="margin-left:20px;"><i class="fas fa-sign-out-alt"></i></a>
                     </div>  
                     @endif
                 </div>

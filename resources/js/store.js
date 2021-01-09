@@ -11,7 +11,7 @@ Vue.use(VueAxios, axios);
 const HomePageStates = {
 
     state: {
-        spotifyUsername: false, //никнейм пользователя, array
+        spotifyUsername: -1, //никнейм пользователя, array
         spotifyUserTracksCount: -1, //подсчет треков, int
         siteInfo: false, //информация о сайта для страницы About, array
       },

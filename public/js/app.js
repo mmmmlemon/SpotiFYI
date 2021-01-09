@@ -2004,13 +2004,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  beforeCreate: function beforeCreate() {
-    this.$store.dispatch('getSpotifyUsername');
-    this.$store.dispatch('getHomePageUserTracksCount');
-  },
   mounted: function mounted() {
-    console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'HomePage\' component mounted');
+    //получить юзернейм пользователя
+    this.$store.dispatch('getSpotifyUsername'); //получить кол-во треков в библиотеке для сообщения на главной странице
+
+    this.$store.dispatch('getHomePageUserTracksCount');
   }
 });
 
@@ -2129,6 +2129,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     spotifyUsername: function spotifyUsername() {
@@ -2140,9 +2176,6 @@ __webpack_require__.r(__webpack_exports__);
     trackWord: function trackWord() {
       return this.spotifyUserTracksCount;
     }
-  },
-  mounted: function mounted() {
-    console.log('%c%s', 'background-color: #34eb7d; font-weight: bold;', '\'Welcome\' component mounted');
   }
 });
 
@@ -78369,141 +78402,230 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "div",
-        {
-          staticClass: "col-md-8 fade_in_anim",
-          class: {
-            invisible:
-              _vm.spotifyUsername === false || _vm.spotifyUsername != false
-          },
-          attrs: { width: "20%;" }
-        },
-        [
-          _c("h1", [_vm._v("Site title")]),
-          _vm._v(" "),
-          _c("h4", [_vm._v("A Laravel/Vue.js/Spotify Web API application")]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("br")
-        ]
-      ),
+    _c("div", {
+      staticClass: "top10_image_card",
+      style: {
+        backgroundImage:
+          "url('https://www.study.ru/uploads/server/4yTwWERsmPY6NnAO.jpg')"
+      }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center fade_in_anim_500" }, [
+      _vm.spotifyUsername == false
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "col-12 col-sm-12 col-md-10 col-lg-10 padding_10 margin_vertical",
+              attrs: { width: "20%;" }
+            },
+            [_vm._m(0)]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-8", class: { invisible: !_vm.spotifyUsername } },
-        [
-          _vm.spotifyUsername != false
-            ? _c("h1", { staticClass: "fade_in_anim" }, [
-                _vm._v("Привет, "),
-                _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
-                _vm._v("!")
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.spotifyUserTracksCount == -1 && _vm.spotifyUsername != false
-            ? _c(
-                "div",
-                { staticClass: "container bounce_in_anim" },
-                [_c("Loader")],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.spotifyUserTracksCount != -1
-            ? _c("div", { staticClass: "fade_in_anim" }, [
-                _vm.spotifyUserTracksCount >= 150
-                  ? _c("h3", [
-                      _vm._v(
-                        "\n                    В твоей библиотеке более чем достаточно треков для анализа "
-                      ),
-                      _c("i", {
-                        staticClass: "fas fa-heart primary_color heartbeat_anim"
-                      })
-                    ])
-                  : _vm.spotifyUserTracksCount >= 50
-                  ? _c("h4", [
-                      _vm._v(
-                        "\n                    В твоей библиотеке достаточно треков для анализа! 😉\n                "
-                      )
-                    ])
-                  : _vm.spotifyUserTracksCount >= 10
-                  ? _c("h4", [
-                      _vm._v("\n                    Ай! Маловато будет! "),
-                      _c("img", {
-                        attrs: { src: "/img/malovato_budet.png", width: "50px" }
-                      })
-                    ])
-                  : _vm.spotifyUserTracksCount < 10 &&
-                    _vm.spotifyUserTracksCount > 0
-                  ? _c("h4", [
-                      _vm._v(
-                        "\n                    Ой, что-то у тебя пусто... 😳\n                "
-                      )
-                    ])
-                  : _vm.spotifyUserTracksCount == 0
-                  ? _c("h4", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.spotifyUserTracksCount) +
-                          " песен? bruh... "
-                      ),
-                      _c("img", {
-                        attrs: { src: "/img/bruh.png", width: "50px" }
-                      })
-                    ])
-                  : _c("h3"),
+      _vm.spotifyUsername != -1 && _vm.spotifyUsername != false
+        ? _c("div", { staticClass: "col-12 col-sm-12 col-md-10 col-lg-10" }, [
+            _c(
+              "div",
+              { staticClass: "row justify-content-center text-center" },
+              [
+                _c(
+                  "div",
+                  { staticClass: "col-11 text-center d-none d-md-block" },
+                  [
+                    _vm.spotifyUsername != false
+                      ? _c("h2", { staticClass: "fade_in_anim font_4vw" }, [
+                          _vm._v("Привет, "),
+                          _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
+                          _vm._v("!")
+                        ])
+                      : _vm._e()
+                  ]
+                ),
                 _vm._v(" "),
-                _vm.spotifyUserTracksCount < 50 &&
-                _vm.spotifyUserTracksCount > 0
-                  ? _c("h5", [
-                      _vm._v(
-                        "\n                    Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: " +
-                          _vm._s(_vm.spotifyUserTracksCount) +
-                          ", нужно: 50).\n                "
-                      )
-                    ])
-                  : _vm.spotifyUserTracksCount == 0
-                  ? _c("h5", [
-                      _vm._v(
-                        "\n                   Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                "
-                      )
-                    ])
-                  : _c(
-                      "h5",
-                      { staticClass: "fade_in_anim_500" },
-                      [
-                        _vm._v("\n                    Перейди в "),
-                        _c("router-link", { attrs: { to: "/profile" } }, [
-                          _vm._v("свой профиль")
-                        ]),
-                        _vm._v(
-                          " чтобы просмотреть статистику\n                "
-                        )
-                      ],
+                _c(
+                  "div",
+                  { staticClass: "col-11 text-center d-sm-block d-md-none" },
+                  [
+                    _vm.spotifyUsername != false
+                      ? _c("h2", { staticClass: "fade_in_anim font_6vw" }, [
+                          _vm._v("Привет, "),
+                          _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
+                          _vm._v("!")
+                        ])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.spotifyUserTracksCount == -1 && _vm.spotifyUsername != false
+                  ? _c(
+                      "div",
+                      { staticClass: "container bounce_in_anim" },
+                      [_c("Loader")],
                       1
-                    ),
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("img", {
-                  staticClass: "fade_in_anim",
-                  staticStyle: { "border-radius": "40px" },
-                  attrs: {
-                    src:
-                      "https://www.cambridgemaths.org/Images/The-trouble-with-graphs.jpg",
-                    width: "50%;",
-                    alt: ""
-                  }
-                })
-              ])
-            : _vm._e()
-        ]
-      )
+                _vm.spotifyUserTracksCount != -1
+                  ? _c("div", { staticClass: " col-8 fade_in_anim" }, [
+                      _vm.spotifyUserTracksCount >= 150
+                        ? _c("h3", [
+                            _vm._v(
+                              "\n                        В твоей библиотеке более чем достаточно треков для анализа "
+                            ),
+                            _c("i", {
+                              staticClass:
+                                "fas fa-heart primary_color heartbeat_anim"
+                            })
+                          ])
+                        : _vm.spotifyUserTracksCount >= 50
+                        ? _c("h4", [
+                            _vm._v(
+                              "\n                        В твоей библиотеке достаточно треков для анализа! 😉\n                    "
+                            )
+                          ])
+                        : _vm.spotifyUserTracksCount >= 10
+                        ? _c("h4", [
+                            _vm._v(
+                              "\n                        Ай! Маловато будет! "
+                            ),
+                            _c("img", {
+                              attrs: {
+                                src: "/img/malovato_budet.png",
+                                width: "50px"
+                              }
+                            })
+                          ])
+                        : _vm.spotifyUserTracksCount < 10 &&
+                          _vm.spotifyUserTracksCount > 0
+                        ? _c("h4", [
+                            _vm._v(
+                              "\n                        Ой, что-то у тебя пусто... 😳\n                    "
+                            )
+                          ])
+                        : _vm.spotifyUserTracksCount == 0
+                        ? _c("h4", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(_vm.spotifyUserTracksCount) +
+                                " песен? bruh... "
+                            ),
+                            _c("img", {
+                              attrs: { src: "/img/bruh.png", width: "50px" }
+                            })
+                          ])
+                        : _c("h3"),
+                      _vm._v(" "),
+                      _vm.spotifyUserTracksCount < 50 &&
+                      _vm.spotifyUserTracksCount > 0
+                        ? _c("h5", [
+                            _vm._v(
+                              "\n                        Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: " +
+                                _vm._s(_vm.spotifyUserTracksCount) +
+                                ", нужно: 50).\n                    "
+                            )
+                          ])
+                        : _vm.spotifyUserTracksCount == 0
+                        ? _c("h5", [
+                            _vm._v(
+                              "\n                    Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                    "
+                            )
+                          ])
+                        : _c(
+                            "h5",
+                            { staticClass: "fade_in_anim_500" },
+                            [
+                              _vm._v("\n                        Перейди в "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "border_underline",
+                                  attrs: { to: "/profile" }
+                                },
+                                [_vm._v("свой профиль")]
+                              ),
+                              _vm._v(
+                                " чтобы просмотреть статистику\n                    "
+                              )
+                            ],
+                            1
+                          ),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ])
+                  : _vm._e()
+              ]
+            )
+          ])
+        : _vm._e()
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("h2", { staticClass: "text-center" }, [_c("b", [_vm._v("SpotiFYI")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center" }, [
+        _c("img", { attrs: { src: "/logo.png", width: "10%", alt: "" } })
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-center border_underline" }, [
+        _vm._v("Какой-нибудь крутой слоган")
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "Какое-нибудь крутое описание сайта. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis tenetur cum quaerat eveniet suscipit minus ipsum natus totam porro vero officiis odit est, rem alias minima sed, officia delectus quisquam.Sit nihil, dignissimos est aperiam molestias voluptatum perferendis ad quaerat laudantium odio sequi, vero eius. Doloribus quibusdam unde, enim voluptas assumenda, maxime id distinctio vero quo ullam neque necessitatibus aspernatur!"
+        )
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-md-4 col-10 margin_vertical justify-content-center"
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary btn-rounded btn-block",
+                attrs: { href: "/login" }
+              },
+              [_vm._v("Войти в Spotify")]
+            )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-8" }, [
+        _c("img", {
+          staticClass: "fade_in_anim",
+          staticStyle: { "border-radius": "40px" },
+          attrs: {
+            src:
+              "https://www.cambridgemaths.org/Images/The-trouble-with-graphs.jpg",
+            width: "90%",
+            alt: ""
+          }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -99708,7 +99830,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
 var HomePageStates = {
   state: {
-    spotifyUsername: false,
+    spotifyUsername: -1,
     //никнейм пользователя, array
     spotifyUserTracksCount: -1,
     //подсчет треков, int
