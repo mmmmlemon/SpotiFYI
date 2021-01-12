@@ -2,8 +2,7 @@
 <template>
     <div class="container fade_in_slow_anim">
         <!-- фоновая картинка -->
-        <div class="top10_image_card" :style="{backgroundImage: `url('${homePageImageUrl}')`}">
-        </div>
+        <BackgroundImage :backgroundImageUrl="homePageImageUrl"/>
         <div class="row justify-content-center">
             <!-- если пользователь не залогинен -->
             <div class="col-12 col-sm-12 col-md-10 col-lg-10 padding_10 margin_vertical" width="20%;" v-if="spotifyUsername == false">
@@ -77,9 +76,9 @@
                             Перейди в <router-link to="/profile" class="border_underline">свой профиль</router-link> чтобы просмотреть статистику
                         </h5>
                         <!-- картинка с графиком -->
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center" v-bind:class="{ invisible: !welcomeImgLoaded, fade_in_anim: welcomeImgLoaded }">
                             <div class="col-8">
-                                <img class="fade_in_anim" src="https://www.cambridgemaths.org/Images/The-trouble-with-graphs.jpg" width="90%" style="border-radius: 40px;" alt="">
+                                <img :src="welcomeImageUrl" width="90%" style="border-radius: 40px;" @load="onWelcomeImgLoad">
                             </div>
                         </div> 
                     </div>
@@ -94,21 +93,40 @@
     export default {
         beforeMount(){
             //получить фоновое изображение
-            this.$store.dispatch('getHomePageImageUrl');
+            if(this.homePageImageUrl == -1)
+            { this.$store.dispatch('getHomePageImageUrl'); }
 
             //получить логотип сайта
-            this.$store.dispatch('getSiteLogoUrl');
-          
+            if(this.siteLogoUrl == -1)
+            { this.$store.dispatch('getSiteLogoUrl'); }
+
+            //получить изображение для приветствия
+            if(this.welcomeImageUrl == -1)
+            { this.$store.dispatch('getWelcomeImageUrl'); } 
         },
+
         mounted(){
             //получить юзернейм пользователя
-            this.$store.dispatch('getSpotifyUsername')
-
+            if(this.spotifyUsername == -1)
+            { this.$store.dispatch('getSpotifyUsername'); }
+          
             //получить кол-во треков в библиотеке для сообщения на главной странице
-            this.$store.dispatch('getHomePageUserTracksCount');
-
+            if(this.spotifyUserTracksCount == -1)
+            { this.$store.dispatch('getHomePageUserTracksCount'); }    
 
         },
+        
+        data(){
+            return {
+                welcomeImgLoaded: false,
+            }
+        },
+        methods: {
+            onWelcomeImgLoad(){
+                this.welcomeImgLoaded = true;
+            }
+        },
+
         computed: {
             //юзернейм пользователя
             spotifyUsername: function(){
@@ -125,6 +143,10 @@
             //фоновое изображение
             homePageImageUrl: function(){
                 return this.$store.state.homePage.homePageImageUrl;
+            },
+            //изображение для приветствия
+            welcomeImageUrl: function(){
+                return this.$store.state.homePage.welcomeImageUrl;
             }
         },
     }

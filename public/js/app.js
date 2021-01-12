@@ -2180,19 +2180,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeMount: function beforeMount() {
     //получить фоновое изображение
-    this.$store.dispatch('getHomePageImageUrl'); //получить логотип сайта
+    if (this.homePageImageUrl == -1) {
+      this.$store.dispatch('getHomePageImageUrl');
+    } //получить логотип сайта
 
-    this.$store.dispatch('getSiteLogoUrl');
+
+    if (this.siteLogoUrl == -1) {
+      this.$store.dispatch('getSiteLogoUrl');
+    } //получить изображение для приветствия
+
+
+    if (this.welcomeImageUrl == -1) {
+      this.$store.dispatch('getWelcomeImageUrl');
+    }
   },
   mounted: function mounted() {
     //получить юзернейм пользователя
-    this.$store.dispatch('getSpotifyUsername'); //получить кол-во треков в библиотеке для сообщения на главной странице
+    if (this.spotifyUsername == -1) {
+      this.$store.dispatch('getSpotifyUsername');
+    } //получить кол-во треков в библиотеке для сообщения на главной странице
 
-    this.$store.dispatch('getHomePageUserTracksCount');
+
+    if (this.spotifyUserTracksCount == -1) {
+      this.$store.dispatch('getHomePageUserTracksCount');
+    }
+  },
+  data: function data() {
+    return {
+      welcomeImgLoaded: false
+    };
+  },
+  methods: {
+    onWelcomeImgLoad: function onWelcomeImgLoad() {
+      this.welcomeImgLoaded = true;
+    }
   },
   computed: {
     //юзернейм пользователя
@@ -2210,6 +2234,34 @@ __webpack_require__.r(__webpack_exports__);
     //фоновое изображение
     homePageImageUrl: function homePageImageUrl() {
       return this.$store.state.homePage.homePageImageUrl;
+    },
+    //изображение для приветствия
+    welcomeImageUrl: function welcomeImageUrl() {
+      return this.$store.state.homePage.welcomeImageUrl;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/BackgroundImage.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Misc/BackgroundImage.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    backgroundImageUrl: {
+      "default": -1
     }
   }
 });
@@ -78480,187 +78532,213 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container fade_in_slow_anim" }, [
-    _c("div", {
-      staticClass: "top10_image_card",
-      style: { backgroundImage: "url('" + _vm.homePageImageUrl + "')" }
-    }),
-    _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _vm.spotifyUsername == false
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "col-12 col-sm-12 col-md-10 col-lg-10 padding_10 margin_vertical",
-              attrs: { width: "20%;" }
-            },
-            [
-              _c("div", { staticClass: "col-12" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("div", { staticClass: "text-center " }, [
-                  _c("img", {
-                    staticClass: "fade_in_slow_anim",
-                    attrs: { src: _vm.siteLogoUrl, width: "10%", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("h5", { staticClass: "text-center border_underline" }, [
-                  _vm._v("Какой-нибудь крутой слоган")
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "Какое-нибудь крутое описание сайта. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis tenetur cum quaerat eveniet suscipit minus ipsum natus totam porro vero officiis odit est, rem alias minima sed, officia delectus quisquam.Sit nihil, dignissimos est aperiam molestias voluptatum perferendis ad quaerat laudantium odio sequi, vero eius. Doloribus quibusdam unde, enim voluptas assumenda, maxime id distinctio vero quo ullam neque necessitatibus aspernatur!"
-                  )
-                ]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _vm._m(1)
-              ])
-            ]
-          )
-        : _vm._e(),
+  return _c(
+    "div",
+    { staticClass: "container fade_in_slow_anim" },
+    [
+      _c("BackgroundImage", {
+        attrs: { backgroundImageUrl: _vm.homePageImageUrl }
+      }),
       _vm._v(" "),
-      _vm.spotifyUsername != -1 && _vm.spotifyUsername != false
-        ? _c("div", { staticClass: "col-12 col-sm-12 col-md-10 col-lg-10" }, [
-            _c(
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _vm.spotifyUsername == false
+          ? _c(
               "div",
-              { staticClass: "row justify-content-center text-center" },
+              {
+                staticClass:
+                  "col-12 col-sm-12 col-md-10 col-lg-10 padding_10 margin_vertical",
+                attrs: { width: "20%;" }
+              },
               [
-                _c(
-                  "div",
-                  { staticClass: "col-11 text-center d-none d-md-block" },
-                  [
-                    _vm.spotifyUsername != false
-                      ? _c("h2", { staticClass: "fade_in_anim font_4vw" }, [
-                          _vm._v("Привет, "),
-                          _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
-                          _vm._v("!")
-                        ])
-                      : _vm._e()
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-11 text-center d-sm-block d-md-none" },
-                  [
-                    _vm.spotifyUsername != false
-                      ? _c("h2", { staticClass: "fade_in_anim font_6vw" }, [
-                          _vm._v("Привет, "),
-                          _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
-                          _vm._v("!")
-                        ])
-                      : _vm._e()
-                  ]
-                ),
-                _vm._v(" "),
-                _vm.spotifyUserTracksCount == -1 && _vm.spotifyUsername != false
-                  ? _c(
-                      "div",
-                      { staticClass: "container bounce_in_anim" },
-                      [_c("Loader")],
-                      1
+                _c("div", { staticClass: "col-12" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-center " }, [
+                    _c("img", {
+                      staticClass: "fade_in_slow_anim",
+                      attrs: { src: _vm.siteLogoUrl, width: "10%", alt: "" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "text-center border_underline" }, [
+                    _vm._v("Какой-нибудь крутой слоган")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Какое-нибудь крутое описание сайта. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis tenetur cum quaerat eveniet suscipit minus ipsum natus totam porro vero officiis odit est, rem alias minima sed, officia delectus quisquam.Sit nihil, dignissimos est aperiam molestias voluptatum perferendis ad quaerat laudantium odio sequi, vero eius. Doloribus quibusdam unde, enim voluptas assumenda, maxime id distinctio vero quo ullam neque necessitatibus aspernatur!"
                     )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.spotifyUserTracksCount != -1
-                  ? _c("div", { staticClass: " col-10 fade_in_anim" }, [
-                      _vm.spotifyUserTracksCount >= 150
-                        ? _c("h3", [
-                            _vm._v(
-                              "\n                        В твоей библиотеке более чем достаточно треков для анализа "
-                            ),
-                            _c("i", {
-                              staticClass:
-                                "fas fa-heart primary_color heartbeat_anim"
-                            })
-                          ])
-                        : _vm.spotifyUserTracksCount >= 50
-                        ? _c("h4", [
-                            _vm._v(
-                              "\n                        В твоей библиотеке достаточно треков для анализа! 😉\n                    "
-                            )
-                          ])
-                        : _vm.spotifyUserTracksCount >= 10
-                        ? _c("h4", [
-                            _vm._v(
-                              "\n                        Ай! Маловато будет! "
-                            ),
-                            _c("img", {
-                              attrs: {
-                                src: "/img/malovato_budet.png",
-                                width: "50px"
-                              }
-                            })
-                          ])
-                        : _vm.spotifyUserTracksCount < 10 &&
-                          _vm.spotifyUserTracksCount > 0
-                        ? _c("h4", [
-                            _vm._v(
-                              "\n                        Ой, что-то у тебя пусто... 😳\n                    "
-                            )
-                          ])
-                        : _vm.spotifyUserTracksCount == 0
-                        ? _c("h4", [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(_vm.spotifyUserTracksCount) +
-                                " песен? bruh... "
-                            ),
-                            _c("img", {
-                              attrs: { src: "/img/bruh.png", width: "50px" }
-                            })
-                          ])
-                        : _c("h3"),
-                      _vm._v(" "),
-                      _vm.spotifyUserTracksCount < 50 &&
-                      _vm.spotifyUserTracksCount > 0
-                        ? _c("h5", [
-                            _vm._v(
-                              "\n                        Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: " +
-                                _vm._s(_vm.spotifyUserTracksCount) +
-                                ", нужно: 50).\n                    "
-                            )
-                          ])
-                        : _vm.spotifyUserTracksCount == 0
-                        ? _c("h5", [
-                            _vm._v(
-                              "\n                        Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                    "
-                            )
-                          ])
-                        : _c(
-                            "h5",
-                            { staticClass: "fade_in_anim_500" },
-                            [
-                              _vm._v("\n                        Перейди в "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass: "border_underline",
-                                  attrs: { to: "/profile" }
-                                },
-                                [_vm._v("свой профиль")]
-                              ),
-                              _vm._v(
-                                " чтобы просмотреть статистику\n                    "
-                              )
-                            ],
-                            1
-                          ),
-                      _vm._v(" "),
-                      _vm._m(2)
-                    ])
-                  : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ])
               ]
             )
-          ])
-        : _vm._e()
-    ])
-  ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.spotifyUsername != -1 && _vm.spotifyUsername != false
+          ? _c("div", { staticClass: "col-12 col-sm-12 col-md-10 col-lg-10" }, [
+              _c(
+                "div",
+                { staticClass: "row justify-content-center text-center" },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "col-11 text-center d-none d-md-block" },
+                    [
+                      _vm.spotifyUsername != false
+                        ? _c("h2", { staticClass: "fade_in_anim font_4vw" }, [
+                            _vm._v("Привет, "),
+                            _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
+                            _vm._v("!")
+                          ])
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-11 text-center d-sm-block d-md-none" },
+                    [
+                      _vm.spotifyUsername != false
+                        ? _c("h2", { staticClass: "fade_in_anim font_6vw" }, [
+                            _vm._v("Привет, "),
+                            _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
+                            _vm._v("!")
+                          ])
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.spotifyUserTracksCount == -1 &&
+                  _vm.spotifyUsername != false
+                    ? _c(
+                        "div",
+                        { staticClass: "container bounce_in_anim" },
+                        [_c("Loader")],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.spotifyUserTracksCount != -1
+                    ? _c("div", { staticClass: " col-10 fade_in_anim" }, [
+                        _vm.spotifyUserTracksCount >= 150
+                          ? _c("h3", [
+                              _vm._v(
+                                "\n                        В твоей библиотеке более чем достаточно треков для анализа "
+                              ),
+                              _c("i", {
+                                staticClass:
+                                  "fas fa-heart primary_color heartbeat_anim"
+                              })
+                            ])
+                          : _vm.spotifyUserTracksCount >= 50
+                          ? _c("h4", [
+                              _vm._v(
+                                "\n                        В твоей библиотеке достаточно треков для анализа! 😉\n                    "
+                              )
+                            ])
+                          : _vm.spotifyUserTracksCount >= 10
+                          ? _c("h4", [
+                              _vm._v(
+                                "\n                        Ай! Маловато будет! "
+                              ),
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/malovato_budet.png",
+                                  width: "50px"
+                                }
+                              })
+                            ])
+                          : _vm.spotifyUserTracksCount < 10 &&
+                            _vm.spotifyUserTracksCount > 0
+                          ? _c("h4", [
+                              _vm._v(
+                                "\n                        Ой, что-то у тебя пусто... 😳\n                    "
+                              )
+                            ])
+                          : _vm.spotifyUserTracksCount == 0
+                          ? _c("h4", [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(_vm.spotifyUserTracksCount) +
+                                  " песен? bruh... "
+                              ),
+                              _c("img", {
+                                attrs: { src: "/img/bruh.png", width: "50px" }
+                              })
+                            ])
+                          : _c("h3"),
+                        _vm._v(" "),
+                        _vm.spotifyUserTracksCount < 50 &&
+                        _vm.spotifyUserTracksCount > 0
+                          ? _c("h5", [
+                              _vm._v(
+                                "\n                        Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: " +
+                                  _vm._s(_vm.spotifyUserTracksCount) +
+                                  ", нужно: 50).\n                    "
+                              )
+                            ])
+                          : _vm.spotifyUserTracksCount == 0
+                          ? _c("h5", [
+                              _vm._v(
+                                "\n                        Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                    "
+                              )
+                            ])
+                          : _c(
+                              "h5",
+                              { staticClass: "fade_in_anim_500" },
+                              [
+                                _vm._v("\n                        Перейди в "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "border_underline",
+                                    attrs: { to: "/profile" }
+                                  },
+                                  [_vm._v("свой профиль")]
+                                ),
+                                _vm._v(
+                                  " чтобы просмотреть статистику\n                    "
+                                )
+                              ],
+                              1
+                            ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "row justify-content-center",
+                            class: {
+                              invisible: !_vm.welcomeImgLoaded,
+                              fade_in_anim: _vm.welcomeImgLoaded
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "col-8" }, [
+                              _c("img", {
+                                staticStyle: { "border-radius": "40px" },
+                                attrs: {
+                                  src: _vm.welcomeImageUrl,
+                                  width: "90%"
+                                },
+                                on: { load: _vm.onWelcomeImgLoad }
+                              })
+                            ])
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ])
+          : _vm._e()
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -78693,27 +78771,35 @@ var staticRenderFns = [
         ]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-8" }, [
-        _c("img", {
-          staticClass: "fade_in_anim",
-          staticStyle: { "border-radius": "40px" },
-          attrs: {
-            src:
-              "https://www.cambridgemaths.org/Images/The-trouble-with-graphs.jpg",
-            width: "90%",
-            alt: ""
-          }
-        })
-      ])
-    ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/BackgroundImage.vue?vue&type=template&id=57944d75&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Misc/BackgroundImage.vue?vue&type=template&id=57944d75& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {
+    staticClass: "background_image",
+    style: { backgroundImage: "url('" + _vm.backgroundImageUrl + "')" }
+  })
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -98139,18 +98225,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Misc_Error_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Misc/Error.vue */ "./resources/js/components/Misc/Error.vue");
 /* harmony import */ var _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Misc/Loader.vue */ "./resources/js/components/Misc/Loader.vue");
 /* harmony import */ var _components_Misc_Info_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Misc/Info.vue */ "./resources/js/components/Misc/Info.vue");
-/* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
-/* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
-/* harmony import */ var _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile/BasicStats/LongestAndShortest.vue */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue");
-/* harmony import */ var _components_Profile_BasicStats_FavoriteGenres_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Profile/BasicStats/FavoriteGenres.vue */ "./resources/js/components/Profile/BasicStats/FavoriteGenres.vue");
-/* harmony import */ var _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Profile/BasicStats/ArtistsCount.vue */ "./resources/js/components/Profile/BasicStats/ArtistsCount.vue");
-/* harmony import */ var _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Profile/BasicStats/YearsAndDecades.vue */ "./resources/js/components/Profile/BasicStats/YearsAndDecades.vue");
-/* harmony import */ var _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Items.vue */ "./resources/js/components/Profile/Top10/Top10Items.vue");
-/* harmony import */ var _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Profile/Achievements/AchievementItem.vue */ "./resources/js/components/Profile/Achievements/AchievementItem.vue");
-/* harmony import */ var _components_Profile_Latest_List_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Profile/Latest/List.vue */ "./resources/js/components/Profile/Latest/List.vue");
-/* harmony import */ var _components_Profile_Latest_ListItem_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Profile/Latest/ListItem.vue */ "./resources/js/components/Profile/Latest/ListItem.vue");
-/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Misc_BackgroundImage_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Misc/BackgroundImage.vue */ "./resources/js/components/Misc/BackgroundImage.vue");
+/* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
+/* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
+/* harmony import */ var _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Profile/BasicStats/LongestAndShortest.vue */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue");
+/* harmony import */ var _components_Profile_BasicStats_FavoriteGenres_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Profile/BasicStats/FavoriteGenres.vue */ "./resources/js/components/Profile/BasicStats/FavoriteGenres.vue");
+/* harmony import */ var _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Profile/BasicStats/ArtistsCount.vue */ "./resources/js/components/Profile/BasicStats/ArtistsCount.vue");
+/* harmony import */ var _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Profile/BasicStats/YearsAndDecades.vue */ "./resources/js/components/Profile/BasicStats/YearsAndDecades.vue");
+/* harmony import */ var _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Items.vue */ "./resources/js/components/Profile/Top10/Top10Items.vue");
+/* harmony import */ var _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Profile/Achievements/AchievementItem.vue */ "./resources/js/components/Profile/Achievements/AchievementItem.vue");
+/* harmony import */ var _components_Profile_Latest_List_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Profile/Latest/List.vue */ "./resources/js/components/Profile/Latest/List.vue");
+/* harmony import */ var _components_Profile_Latest_ListItem_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Profile/Latest/ListItem.vue */ "./resources/js/components/Profile/Latest/ListItem.vue");
+/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -98169,28 +98256,30 @@ Vue.component('Loader', _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__
 
 Vue.component('Info', _components_Misc_Info_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
-Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
+Vue.component('BackgroundImage', _components_Misc_BackgroundImage_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
-Vue.component('HoursAndMinutes', _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
+Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 
-Vue.component('LongestAndShortest', _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
+Vue.component('HoursAndMinutes', _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 
-Vue.component('FavoriteGenres', _components_Profile_BasicStats_FavoriteGenres_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
+Vue.component('LongestAndShortest', _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
-Vue.component('ArtistsCount', _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
+Vue.component('FavoriteGenres', _components_Profile_BasicStats_FavoriteGenres_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
-Vue.component('YearsAndDecades', _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
+Vue.component('ArtistsCount', _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
 
-Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
+Vue.component('YearsAndDecades', _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
 
-Vue.component('AchievementItem', _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
+Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
 
-Vue.component('List', _components_Profile_Latest_List_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
+Vue.component('AchievementItem', _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
 
-Vue.component('ListItem', _components_Profile_Latest_ListItem_vue__WEBPACK_IMPORTED_MODULE_15__["default"]); //графики
+Vue.component('List', _components_Profile_Latest_List_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
+
+Vue.component('ListItem', _components_Profile_Latest_ListItem_vue__WEBPACK_IMPORTED_MODULE_16__["default"]); //графики
 
 
-Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
+Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_17__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -98202,7 +98291,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_17__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_18__["default"]
 });
 
 /***/ }),
@@ -98504,6 +98593,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_5d4a502c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_5d4a502c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Misc/BackgroundImage.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Misc/BackgroundImage.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BackgroundImage_vue_vue_type_template_id_57944d75___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BackgroundImage.vue?vue&type=template&id=57944d75& */ "./resources/js/components/Misc/BackgroundImage.vue?vue&type=template&id=57944d75&");
+/* harmony import */ var _BackgroundImage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BackgroundImage.vue?vue&type=script&lang=js& */ "./resources/js/components/Misc/BackgroundImage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BackgroundImage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BackgroundImage_vue_vue_type_template_id_57944d75___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BackgroundImage_vue_vue_type_template_id_57944d75___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Misc/BackgroundImage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Misc/BackgroundImage.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Misc/BackgroundImage.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BackgroundImage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/BackgroundImage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Misc/BackgroundImage.vue?vue&type=template&id=57944d75&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Misc/BackgroundImage.vue?vue&type=template&id=57944d75& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImage_vue_vue_type_template_id_57944d75___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BackgroundImage.vue?vue&type=template&id=57944d75& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/BackgroundImage.vue?vue&type=template&id=57944d75&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImage_vue_vue_type_template_id_57944d75___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImage_vue_vue_type_template_id_57944d75___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -99926,7 +100084,9 @@ var HomePageStates = {
     //информация о сайта для страницы About, array
     siteLogoUrl: -1,
     //ссылка на логотип сайта
-    homePageImageUrl: -1 //ссылка на фоновую картинку для домашней страницы
+    homePageImageUrl: -1,
+    //ссылка на фоновую картинку для домашней страницы
+    welcomeImageUrl: -1 //ссылка на картинку для приветствия
 
   },
   mutations: {
@@ -99935,41 +100095,107 @@ var HomePageStates = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(payload.uri).then(function (response) {
         state[payload.state] = response.data;
       });
+    },
+    //установить стейт
+    setState: function setState(state, payload) {
+      state[payload.state] = payload.value;
     }
   },
   actions: {
     //получить имя пользователя из API
     getSpotifyUsername: function getSpotifyUsername(context) {
-      context.commit('getAPIResponse', {
-        state: "spotifyUsername",
-        uri: '/api/get_spotify_username'
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_spotify_username').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'spotifyUsername',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'spotifyUsername',
+            value: false
+          });
+        }
       });
     },
     //получить количество треков в библиотеке пользователя
     getHomePageUserTracksCount: function getHomePageUserTracksCount(context) {
-      context.commit('getAPIResponse', {
-        state: "spotifyUserTracksCount",
-        uri: '/api/get_home_tracks_count'
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_home_tracks_count').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'spotifyUserTracksCount',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'spotifyUserTracksCount',
+            value: false
+          });
+        }
       });
     },
     //получить информацию о сайте
     getSiteInfo: function getSiteInfo(context) {
-      context.commit('getAPIResponse', {
-        state: "siteInfo",
-        uri: '/api/get_site_info'
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_site_info').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'siteInfo',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'siteInfo',
+            value: false
+          });
+        }
       });
     },
     //получить лого
     getSiteLogoUrl: function getSiteLogoUrl(context) {
-      context.commit('getAPIResponse', {
-        state: 'siteLogoUrl',
-        uri: '/api/get_logo_img'
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_logo_img').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'siteLogoUrl',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'siteLogoUrl',
+            value: false
+          });
+        }
       });
     },
+    //получить картинку для приветствия
     getHomePageImageUrl: function getHomePageImageUrl(context) {
-      context.commit('getAPIResponse', {
-        state: 'homePageImageUrl',
-        uri: '/api/get_home_page_img'
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_home_page_img').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'homePageImageUrl',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'homePageImageUrl',
+            value: false
+          });
+        }
+      });
+    },
+    //получить картинку приветствия
+    getWelcomeImageUrl: function getWelcomeImageUrl(context) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_welcome_img').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'welcomeImageUrl',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'welcomeImageUrl',
+            value: false
+          });
+        }
       });
     }
   }

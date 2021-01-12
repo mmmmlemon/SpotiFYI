@@ -88,5 +88,13 @@ class HomeController extends Controller
         return response()->json(asset($settings->home_img));
     }
 
+    //getWelcomeImageUrl
+    //получить изображение для приветствия
+    public function getWelcomeImageUrl(){
+
+        $settings = config('settings');
+
+        return response()->json(asset($settings->welcome_img));
+    }
 
 }

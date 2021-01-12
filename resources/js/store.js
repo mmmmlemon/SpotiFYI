@@ -16,6 +16,7 @@ const HomePageStates = {
         siteInfo: -1, //информация о сайта для страницы About, array
         siteLogoUrl: -1, //ссылка на логотип сайта
         homePageImageUrl: -1, //ссылка на фоновую картинку для домашней страницы
+        welcomeImageUrl: -1, //ссылка на картинку для приветствия
       },
 
     mutations: {
@@ -25,29 +26,74 @@ const HomePageStates = {
             state[payload.state] = response.data;
           });
         },
+
+        //установить стейт
+        setState(state, payload){
+          state[payload.state] = payload.value;
+        }
     },
       
     actions: {
+
         //получить имя пользователя из API
         getSpotifyUsername(context){
-            context.commit('getAPIResponse', {state: "spotifyUsername", uri: '/api/get_spotify_username'});
+          axios.get('/api/get_spotify_username').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'spotifyUsername', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'spotifyUsername', value: false}); }
+          });
         },
+
         //получить количество треков в библиотеке пользователя
         getHomePageUserTracksCount(context){
-            context.commit('getAPIResponse', {state: "spotifyUserTracksCount", uri: '/api/get_home_tracks_count'});
+          axios.get('/api/get_home_tracks_count').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'spotifyUserTracksCount', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'spotifyUserTracksCount', value: false}); }
+          });
         },
+        
         //получить информацию о сайте
         getSiteInfo(context){
-          context.commit('getAPIResponse', {state: "siteInfo", uri: '/api/get_site_info'});
+          axios.get('/api/get_site_info').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'siteInfo', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'siteInfo', value: false}); }
+          });
         },
+
         //получить лого
         getSiteLogoUrl(context){
-          context.commit('getAPIResponse', {state: 'siteLogoUrl', uri: '/api/get_logo_img'});
+          axios.get('/api/get_logo_img').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'siteLogoUrl', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'siteLogoUrl', value: false}); }
+          });
         },
+
+        //получить картинку для приветствия
         getHomePageImageUrl(context){
-          context.commit('getAPIResponse', {state: 'homePageImageUrl', uri: '/api/get_home_page_img'});
+          axios.get('/api/get_home_page_img').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'homePageImageUrl', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'homePageImageUrl', value: false}); }
+          });
+        },
+
+        //получить картинку приветствия
+        getWelcomeImageUrl(context){
+          axios.get('/api/get_welcome_img').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'welcomeImageUrl', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'welcomeImageUrl', value: false}); }
+          });
         }
-      
     }
 }
 

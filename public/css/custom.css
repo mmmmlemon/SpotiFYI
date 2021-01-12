@@ -296,6 +296,19 @@ a:hover{
     background-position: center;
 }
 
+.background_image{
+    position: absolute;
+    opacity: 0.08;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 .top10_image_card_front{
     position: absolute;
     top: 0;

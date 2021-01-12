@@ -28,6 +28,7 @@ Route::get('/get_spotify_username', 'SpotifyAPIController@getSpotifyUsername'); 
 Route::get('/get_site_info', 'HomeController@getSiteInfo'); //получить информацию о сайте
 Route::get('/get_logo_img', 'HomeController@getSiteLogoUrl'); //получить логотип сайта
 Route::get('/get_home_page_img', 'HomeController@getHomePageImageUrl'); //получить фоновое изображение для дом. страницы
+Route::get('/get_welcome_img', 'HomeController@getWelcomeImageUrl'); //получить картинку для приветствия
 
 //Profile
 Route::get('/get_spotify_profile', 'SpotifyAPIController@getSpotifyProfile'); //получить профиль пользователя

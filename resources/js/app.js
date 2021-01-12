@@ -19,6 +19,8 @@ import Loader from './components/Misc/Loader.vue';
 Vue.component('Loader', Loader);
 import Info from './components/Misc/Info.vue';
 Vue.component('Info', Info);
+import BackgroundImage from './components/Misc/BackgroundImage.vue';
+Vue.component('BackgroundImage', BackgroundImage);
 
 import LastFive from './components/Profile/BasicStats/LastFive.vue';
 Vue.component('LastFive', LastFive);
