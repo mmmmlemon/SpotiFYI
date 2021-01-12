@@ -13,7 +13,7 @@
                         <h1 v-if="siteInfo != false" class="fade_in_anim"><b>{{siteInfo.siteTitle}}</b></h1>
                     </div>
                     <div v-if="siteInfo != false" class="row justify-content-center">
-                            <img src="/logo.png" width="90pt" alt="" class="fade_in_anim bounce_in_anim">
+                            <img :src="siteLogoUrl" width="90pt" alt="" class="fade_in_anim bounce_in_anim">
                     </div>
                     <div v-if="siteInfo != false" class="row justify-content-center">
                             <h5 class="fade_in_anim">{{siteInfo.version}}</h5>
@@ -42,6 +42,9 @@
 <script>
     export default {
         mounted() {
+            //получить логотип сайта
+            this.$store.dispatch('getSiteLogoUrl');
+
             //получить информацию о сайте
             this.$store.dispatch('getSiteInfo');
         },
@@ -50,6 +53,10 @@
             siteInfo: function(){
                 return this.$store.state.homePage.siteInfo;
             },
+            //ссылка на логотип сайта
+            siteLogoUrl: function(){
+                return this.$store.state.homePage.siteLogoUrl;
+            }
         },
     }
 </script>

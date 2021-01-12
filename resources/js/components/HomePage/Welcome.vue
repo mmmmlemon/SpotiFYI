@@ -2,15 +2,15 @@
 <template>
     <div class="container fade_in_slow_anim">
         <!-- фоновая картинка -->
-        <div class="top10_image_card" :style="{backgroundImage: `url('https://cdn.pixabay.com/photo/2013/07/12/18/17/equalizer-153212_960_720.png')`}">
+        <div class="top10_image_card" :style="{backgroundImage: `url('${homePageImageUrl}')`}">
         </div>
         <div class="row justify-content-center">
             <!-- если пользователь не залогинен -->
             <div class="col-12 col-sm-12 col-md-10 col-lg-10 padding_10 margin_vertical" width="20%;" v-if="spotifyUsername == false">
                 <div class="col-12">
                     <h2 class="text-center"><b>SpotiFYI</b></h2>
-                    <div class="text-center">
-                        <img src="/logo.png" width="10%" alt="">
+                    <div class="text-center ">
+                        <img :src="siteLogoUrl" class="fade_in_slow_anim" width="10%" alt="">
                     </div>
                     <h5 class="text-center border_underline">Какой-нибудь крутой слоган</h5>
                     <p>Какое-нибудь крутое описание сайта. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis tenetur cum quaerat eveniet suscipit minus ipsum natus totam porro vero officiis odit est, rem alias minima sed, officia delectus quisquam.Sit nihil, dignissimos est aperiam molestias voluptatum perferendis ad quaerat laudantium odio sequi, vero eius. Doloribus quibusdam unde, enim voluptas assumenda, maxime id distinctio vero quo ullam neque necessitatibus aspernatur!</p>
@@ -92,6 +92,23 @@
 
 <script>
     export default {
+        beforeMount(){
+            //получить фоновое изображение
+            this.$store.dispatch('getHomePageImageUrl');
+
+            //получить логотип сайта
+            this.$store.dispatch('getSiteLogoUrl');
+          
+        },
+        mounted(){
+            //получить юзернейм пользователя
+            this.$store.dispatch('getSpotifyUsername')
+
+            //получить кол-во треков в библиотеке для сообщения на главной странице
+            this.$store.dispatch('getHomePageUserTracksCount');
+
+
+        },
         computed: {
             //юзернейм пользователя
             spotifyUsername: function(){
@@ -101,6 +118,14 @@
             spotifyUserTracksCount: function(){
                 return this.$store.state.homePage.spotifyUserTracksCount;
             },
+            //ссылка на логотип сайта
+            siteLogoUrl: function(){
+                return this.$store.state.homePage.siteLogoUrl;
+            },
+            //фоновое изображение
+            homePageImageUrl: function(){
+                return this.$store.state.homePage.homePageImageUrl;
+            }
         },
     }
 </script>

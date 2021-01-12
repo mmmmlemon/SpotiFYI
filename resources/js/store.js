@@ -14,6 +14,8 @@ const HomePageStates = {
         spotifyUsername: -1, //никнейм пользователя, array
         spotifyUserTracksCount: -1, //подсчет треков, int
         siteInfo: -1, //информация о сайта для страницы About, array
+        siteLogoUrl: -1, //ссылка на логотип сайта
+        homePageImageUrl: -1, //ссылка на фоновую картинку для домашней страницы
       },
 
     mutations: {
@@ -38,6 +40,14 @@ const HomePageStates = {
         getSiteInfo(context){
           context.commit('getAPIResponse', {state: "siteInfo", uri: '/api/get_site_info'});
         },
+        //получить лого
+        getSiteLogoUrl(context){
+          context.commit('getAPIResponse', {state: 'siteLogoUrl', uri: '/api/get_logo_img'});
+        },
+        getHomePageImageUrl(context){
+          context.commit('getAPIResponse', {state: 'homePageImageUrl', uri: '/api/get_home_page_img'});
+        }
+      
     }
 }
 

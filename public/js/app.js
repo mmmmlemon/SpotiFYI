@@ -2005,14 +2005,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    //получить юзернейм пользователя
-    this.$store.dispatch('getSpotifyUsername'); //получить кол-во треков в библиотеке для сообщения на главной странице
-
-    this.$store.dispatch('getHomePageUserTracksCount');
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -2068,13 +2061,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    //получить информацию о сайте
+    //получить логотип сайта
+    this.$store.dispatch('getSiteLogoUrl'); //получить информацию о сайте
+
     this.$store.dispatch('getSiteInfo');
   },
   computed: {
     //информация о сайте
     siteInfo: function siteInfo() {
       return this.$store.state.homePage.siteInfo;
+    },
+    //ссылка на логотип сайта
+    siteLogoUrl: function siteLogoUrl() {
+      return this.$store.state.homePage.siteLogoUrl;
     }
   }
 });
@@ -2183,6 +2182,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  beforeMount: function beforeMount() {
+    //получить фоновое изображение
+    this.$store.dispatch('getHomePageImageUrl'); //получить логотип сайта
+
+    this.$store.dispatch('getSiteLogoUrl');
+  },
+  mounted: function mounted() {
+    //получить юзернейм пользователя
+    this.$store.dispatch('getSpotifyUsername'); //получить кол-во треков в библиотеке для сообщения на главной странице
+
+    this.$store.dispatch('getHomePageUserTracksCount');
+  },
   computed: {
     //юзернейм пользователя
     spotifyUsername: function spotifyUsername() {
@@ -2191,6 +2202,14 @@ __webpack_require__.r(__webpack_exports__);
     //кол-во треков в библиотеке
     spotifyUserTracksCount: function spotifyUserTracksCount() {
       return this.$store.state.homePage.spotifyUserTracksCount;
+    },
+    //ссылка на логотип сайта
+    siteLogoUrl: function siteLogoUrl() {
+      return this.$store.state.homePage.siteLogoUrl;
+    },
+    //фоновое изображение
+    homePageImageUrl: function homePageImageUrl() {
+      return this.$store.state.homePage.homePageImageUrl;
     }
   }
 });
@@ -78363,7 +78382,7 @@ var render = function() {
                 ? _c("div", { staticClass: "row justify-content-center" }, [
                     _c("img", {
                       staticClass: "fade_in_anim bounce_in_anim",
-                      attrs: { src: "/logo.png", width: "90pt", alt: "" }
+                      attrs: { src: _vm.siteLogoUrl, width: "90pt", alt: "" }
                     })
                   ])
                 : _vm._e(),
@@ -78464,10 +78483,7 @@ var render = function() {
   return _c("div", { staticClass: "container fade_in_slow_anim" }, [
     _c("div", {
       staticClass: "top10_image_card",
-      style: {
-        backgroundImage:
-          "url('https://cdn.pixabay.com/photo/2013/07/12/18/17/equalizer-153212_960_720.png')"
-      }
+      style: { backgroundImage: "url('" + _vm.homePageImageUrl + "')" }
     }),
     _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
@@ -78479,7 +78495,32 @@ var render = function() {
                 "col-12 col-sm-12 col-md-10 col-lg-10 padding_10 margin_vertical",
               attrs: { width: "20%;" }
             },
-            [_vm._m(0)]
+            [
+              _c("div", { staticClass: "col-12" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-center " }, [
+                  _c("img", {
+                    staticClass: "fade_in_slow_anim",
+                    attrs: { src: _vm.siteLogoUrl, width: "10%", alt: "" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("h5", { staticClass: "text-center border_underline" }, [
+                  _vm._v("Какой-нибудь крутой слоган")
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Какое-нибудь крутое описание сайта. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis tenetur cum quaerat eveniet suscipit minus ipsum natus totam porro vero officiis odit est, rem alias minima sed, officia delectus quisquam.Sit nihil, dignissimos est aperiam molestias voluptatum perferendis ad quaerat laudantium odio sequi, vero eius. Doloribus quibusdam unde, enim voluptas assumenda, maxime id distinctio vero quo ullam neque necessitatibus aspernatur!"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ]
           )
         : _vm._e(),
       _vm._v(" "),
@@ -78611,7 +78652,7 @@ var render = function() {
                             1
                           ),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _vm._m(2)
                     ])
                   : _vm._e()
               ]
@@ -78626,44 +78667,31 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("h2", { staticClass: "text-center" }, [_c("b", [_vm._v("SpotiFYI")])]),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-center" }, [
-        _c("img", { attrs: { src: "/logo.png", width: "10%", alt: "" } })
-      ]),
-      _vm._v(" "),
-      _c("h5", { staticClass: "text-center border_underline" }, [
-        _vm._v("Какой-нибудь крутой слоган")
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "Какое-нибудь крутое описание сайта. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis tenetur cum quaerat eveniet suscipit minus ipsum natus totam porro vero officiis odit est, rem alias minima sed, officia delectus quisquam.Sit nihil, dignissimos est aperiam molestias voluptatum perferendis ad quaerat laudantium odio sequi, vero eius. Doloribus quibusdam unde, enim voluptas assumenda, maxime id distinctio vero quo ullam neque necessitatibus aspernatur!"
-        )
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "col-md-4 col-10 margin_vertical justify-content-center"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-primary btn-rounded btn-block",
-                attrs: { href: "/login" }
-              },
-              [_vm._v("Войти в Spotify")]
-            )
-          ]
-        )
-      ])
+    return _c("h2", { staticClass: "text-center" }, [
+      _c("b", [_vm._v("SpotiFYI")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c(
+        "div",
+        {
+          staticClass: "col-md-4 col-10 margin_vertical justify-content-center"
+        },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-rounded btn-block",
+              attrs: { href: "/login" }
+            },
+            [_vm._v("Войти в Spotify")]
+          )
+        ]
+      )
     ])
   },
   function() {
@@ -99894,7 +99922,11 @@ var HomePageStates = {
     //никнейм пользователя, array
     spotifyUserTracksCount: -1,
     //подсчет треков, int
-    siteInfo: -1 //информация о сайта для страницы About, array
+    siteInfo: -1,
+    //информация о сайта для страницы About, array
+    siteLogoUrl: -1,
+    //ссылка на логотип сайта
+    homePageImageUrl: -1 //ссылка на фоновую картинку для домашней страницы
 
   },
   mutations: {
@@ -99925,6 +99957,19 @@ var HomePageStates = {
       context.commit('getAPIResponse', {
         state: "siteInfo",
         uri: '/api/get_site_info'
+      });
+    },
+    //получить лого
+    getSiteLogoUrl: function getSiteLogoUrl(context) {
+      context.commit('getAPIResponse', {
+        state: 'siteLogoUrl',
+        uri: '/api/get_logo_img'
+      });
+    },
+    getHomePageImageUrl: function getHomePageImageUrl(context) {
+      context.commit('getAPIResponse', {
+        state: 'homePageImageUrl',
+        uri: '/api/get_home_page_img'
       });
     }
   }

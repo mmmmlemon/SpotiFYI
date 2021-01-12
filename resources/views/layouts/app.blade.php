@@ -36,12 +36,12 @@
             <nav class="navbar">
                 {{-- логотип --}}
                 <div class="navbar-content">
-                    <img src="/logo.png" width="50px" style="margin-right:10px; padding:5px;" alt="">
+                    <img src="{{asset($siteInfo['siteLogo'])}}" width="50px" style="margin-right:10px; padding:5px;" alt="">
                 </div>
 
                 {{-- название сайта --}}
                 <router-link to="/"><a class="navbar-brand">
-                    {{config('settings')->site_title}}
+                    {{$siteInfo['siteTitle']}}
                 </a></router-link>
 
                 {{-- навигация для больших экранов --}}
