@@ -93,13 +93,7 @@
 }
 
 
-.profile_avatar{
-    border-radius: 100%;
-    border-style: solid;
-    border-width:9px;
-    border-color:#1b77b9;
-    width: 140pt;
-}
+
 
 .album_icon{
     width:80%; 
@@ -176,6 +170,10 @@
 .marginNone{
     margin: 0;
 }
+
+.marginBottomNone{
+    margin-bottom: 0;
+}
 /*  */
 
 /* design */
@@ -196,6 +194,19 @@
     border-radius: 40px;
 }
 
+.greyCard{
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
+    margin-top: 15px;
+}
+
+.profileAvatar{
+    border-radius: 100%;
+    border-style: solid;
+    border-width:9px;
+    border-color:#1b77b9;
+    width: 140pt;
+}
 /*  */
 
 .border_underline_text{
@@ -239,6 +250,10 @@
 
 .font25pt{
     font-size:25pt;
+}
+
+.font3vw{
+    font-size:3.2vw;
 }
 
 .font4vw{
@@ -304,11 +319,6 @@ a:hover{
     text-decoration: none !important;
 }
 
-.grey_card{
-    border-radius: 10px;
-    background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
-    margin-top: 15px;
-}
 
 .grey_card_light{
     border-radius: 10px;

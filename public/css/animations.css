@@ -34,9 +34,33 @@
 /*  */
 
 /* bounce in avatar */
-.bounce_in_av_anim{
+.bounceInAvatarAnim{
   animation: bounceInAvatar 0.6s ease-in-out;
 }
+
+/* bounce in */
+@keyframes bounceInAvatar {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+    border-width: 90px;
+    border-color: #fff;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+    border-width: 15px;
+  }
+  80% {
+    transform: scale(0.95);
+    border-width: 5px;
+  }
+  100% {
+    transform: scale(1);
+    border-width: 9px;
+  }
+}
+/*  */
 
 /* heartbeat */
 .heartbeatAnim{
@@ -147,27 +171,4 @@
 }
 
 
-
-/* bounce in */
-@keyframes bounceInAvatar {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
-    border-width: 90px;
-    border-color: #fff;
-  }
-  60% {
-    transform: scale(1.2);
-    opacity: 1;
-    border-width: 15px;
-  }
-  80% {
-    transform: scale(0.95);
-    border-width: 5px;
-  }
-  100% {
-    transform: scale(1);
-    border-width: 9px;
-  }
-}
 

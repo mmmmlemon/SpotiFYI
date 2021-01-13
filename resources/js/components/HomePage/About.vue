@@ -8,7 +8,7 @@
         <!-- если информация загрузилась -->
         <div class="container fadeInAnim" v-if="siteInfo != false && siteInfo != -1">
             <div class="row justify-content-center">
-                <div class="grey_card col-12 padding_10">
+                <div class="greyCard col-12 padding_10">
                     <!-- название сайта -->
                     <div class="row justify-content-center fadeInAnimSlow">
                         <h1 v-if="siteInfo != false"><b>{{siteInfo.siteTitle}}</b></h1>

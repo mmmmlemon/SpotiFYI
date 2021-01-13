@@ -46,11 +46,9 @@ class HomeController extends Controller
             {   
                 //временная заглушка на случай если нет аватарки
                 //to do: добавить свою дефолтную аватарку
-                $avatarUrl = "https://res.cloudinary.com/techsnips/image/fetch/w_2000,f_auto,q_auto,c_fit/https://adamtheautomator.com/content/images/size/w2000/2019/07/get-ad-users-from-text-file---user-2517433_960_720.png";
+                $avatarUrl = config('settings')->user_img;
             }
             
-
-
             $spotifyProfile = ['displayName' => $api->me()->display_name, 'avatar' => $avatarUrl];
             //возвращаем главную страницу с профилем пользователя
             return view('index', compact('checkToken', 'spotifyProfile', 'siteInfo'));

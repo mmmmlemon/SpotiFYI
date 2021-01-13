@@ -2467,14 +2467,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  beforeMount: function beforeMount() {
+    //получить фоновое изображение профиля
+    if (this.profileImageUrl == -1) {
+      this.$store.dispatch('getHomePageImageUrl');
+    }
+  },
   mounted: function mounted() {
     //получить профиль
     if (this.spotifyProfile == -1) {
       this.$store.dispatch('getSpotifyProfile');
     }
   },
+  data: function data() {
+    return {
+      avatarLoaded: false
+    };
+  },
+  methods: {
+    onAvatarLoad: function onAvatarLoad() {
+      this.avatarLoaded = true;
+    }
+  },
   computed: {
+    //фоновое изображение для профиля
+    profileImageUrl: function profileImageUrl() {
+      return this.$store.state.homePage.homePageImageUrl;
+    },
     //текущая вкладка
     currentTab: function currentTab() {
       return this.$store.state.profilePage.currentTab;
@@ -2825,7 +2853,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -78433,7 +78460,7 @@ var render = function() {
     _vm.siteInfo != false && _vm.siteInfo != -1
       ? _c("div", { staticClass: "container fadeInAnim" }, [
           _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "grey_card col-12 padding_10" }, [
+            _c("div", { staticClass: "greyCard col-12 padding_10" }, [
               _c(
                 "div",
                 { staticClass: "row justify-content-center fadeInAnimSlow" },
@@ -79085,7 +79112,7 @@ var render = function() {
     _vm.spotifyProfile == -1
       ? _c(
           "div",
-          { staticClass: "container bounce_in_anim" },
+          { staticClass: "container bounceInAnim marginTopBig" },
           [_c("Loader")],
           1
         )
@@ -79107,67 +79134,108 @@ var render = function() {
     _vm._v(" "),
     _vm.spotifyProfile != -1 && _vm.spotifyProfile != false
       ? _c("div", { staticClass: "container", attrs: { id: "top" } }, [
-          _c("div", { staticClass: "col-12 grey_card" }, [
-            _c("div", { staticClass: "row justify-content-center fade-in" }, [
-              _c("h1", { staticClass: "fade_in_anim" }, [
-                _c("b", [_vm._v(_vm._s(_vm.spotifyProfile.spotifyUsername))]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticStyle: { "font-size": "10pt" },
-                    attrs: {
-                      href: _vm.spotifyProfile.profile_url,
-                      target: "_blank"
-                    }
-                  },
-                  [_c("i", { staticClass: "fas fa-external-link-alt" })]
-                )
-              ])
-            ]),
+          _c("div", { staticClass: "col-12 greyCard" }, [
+            _c(
+              "div",
+              { staticClass: "row justify-content-center fadeInAnim" },
+              [
+                _c("div", { staticClass: "col-12 col-md-8" }, [
+                  _c(
+                    "h1",
+                    { staticClass: "text-center fadeInAnimSlow paddingSides" },
+                    [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: _vm.spotifyProfile.profile_url,
+                            target: "_blank"
+                          }
+                        },
+                        [
+                          _c(
+                            "b",
+                            {
+                              staticClass:
+                                "font3vw d-none d-md-block borderUnderline"
+                            },
+                            [_vm._v(_vm._s(_vm.spotifyProfile.spotifyUsername))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b",
+                            {
+                              staticClass:
+                                "font6vw d-sm-block d-md-none borderUnderline"
+                            },
+                            [_vm._v(_vm._s(_vm.spotifyProfile.spotifyUsername))]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "row justify-content-center" }, [
               _c("img", {
-                staticClass: "profile_avatar bounce_in_av_anim",
-                attrs: { src: _vm.spotifyProfile.avatar, alt: "Spotify Avatar" }
+                staticClass: "profileAvatar",
+                class: {
+                  invisible: !_vm.avatarLoaded,
+                  bounceInAvatarAnim: _vm.avatarLoaded
+                },
+                attrs: {
+                  src: _vm.spotifyProfile.avatar,
+                  alt: "Spotify Avatar"
+                },
+                on: { load: _vm.onAvatarLoad }
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "row justify-content-center fade-in" }, [
-              _vm.spotifyProfile.subscription == "premium"
-                ? _c("h6", { staticStyle: { "margin-bottom": "0" } }, [
-                    _vm._v("Premium "),
-                    _c("i", { staticClass: "fas fa-crown" })
-                  ])
-                : _c("h6")
-            ]),
+            _c(
+              "div",
+              { staticClass: "row justify-content-center fadeInAnimSlow" },
+              [
+                _vm.spotifyProfile.subscription == "premium"
+                  ? _c("h6", { staticClass: "marginBottomNone" }, [
+                      _vm._v("Premium "),
+                      _c("i", { staticClass: "fas fa-crown" })
+                    ])
+                  : _vm._e()
+              ]
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "row justify-content-center" }, [
-              _c("div", [
-                _vm._v(" Подписчики: " + _vm._s(_vm.spotifyProfile.followers))
-              ]),
-              _vm._v(" "),
-              _c("div", [_vm._v(" | ")]),
-              _vm._v(" "),
-              _c("div", [
-                _c("img", {
-                  staticClass: "fade_in_anim",
-                  attrs: { src: _vm.spotifyProfile.country }
-                })
-              ])
-            ]),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "row justify-content-center fadeInAnimSlow marginVertical "
+              },
+              [
+                _c("div", [
+                  _vm._v(" Подписчики: " + _vm._s(_vm.spotifyProfile.followers))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "primaryColor" }, [_vm._v(" | ")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("img", { attrs: { src: _vm.spotifyProfile.country } })
+                ])
+              ]
+            ),
             _vm._v(" "),
-            _c("hr", { staticClass: "fade_in_anim" }),
+            _c("hr", { staticClass: "fadeInAnimSlow" }),
             _vm._v(" "),
-            _c("div", { staticClass: "row justify-content-center fade-in" }, [
-              _c("div", { staticClass: "col-md-9" }, [
-                _c(
-                  "div",
-                  { staticClass: "row justify-content-center fade_in_anim" },
-                  [
+            _c(
+              "div",
+              { staticClass: "row justify-content-center fadeInAnim" },
+              [
+                _c("div", { staticClass: "col-12 col-md-9" }, [
+                  _c("div", { staticClass: "row justify-content-center" }, [
                     _c(
                       "div",
-                      { staticClass: "col-md-4 padding_10" },
+                      { staticClass: "col-md-4 paddingSides" },
                       [
                         _c("router-link", { attrs: { to: "/profile" } }, [
                           _c(
@@ -79192,7 +79260,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-4 padding_10" },
+                      { staticClass: "col-md-4 paddingSides" },
                       [
                         _c("router-link", { attrs: { to: "/profile/top10" } }, [
                           _c(
@@ -79217,7 +79285,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-4 padding_10" },
+                      { staticClass: "col-md-4 paddingSides" },
                       [
                         _c(
                           "router-link",
@@ -79244,19 +79312,24 @@ var render = function() {
                       ],
                       1
                     )
-                  ]
-                )
-              ])
-            ])
+                  ])
+                ])
+              ]
+            )
           ])
         ])
       : _vm._e(),
     _vm._v(" "),
     _vm.spotifyProfile != -1 && _vm.spotifyProfile != false
       ? _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row justify-content-center fade-in" }, [
+          _c("div", { staticClass: "row justify-content-center fadeInSlow" }, [
             _vm.spotifyProfile != -1
-              ? _c("div", { staticClass: "col-md-8" }, [_c("router-view")], 1)
+              ? _c(
+                  "div",
+                  { staticClass: "col-12 col-md-8" },
+                  [_c("router-view")],
+                  1
+                )
               : _vm._e()
           ])
         ])
@@ -79729,168 +79802,166 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _vm.spotifyUserLibrary == -1
-          ? _c(
-              "div",
-              { staticClass: "col-12" },
-              [
-                _c("Loader"),
-                _vm._v(" "),
-                _vm.spotifyUserLibrary == -1
-                  ? _c("h6", { staticClass: "text-center blinking_anim" }, [
-                      _vm._v("Загружаю библиотеку пользователя...")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.spotifyUserLibrary == true
-                  ? _c("h6", { staticClass: "text-center blinking_anim" }, [
-                      _vm._v("Анализирую треки...")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("p", { staticClass: "font_10pt text-center" }, [
-                  _vm._v("Это может занять около минуты")
-                ])
-              ],
-              1
-            )
-          : _vm.spotifyUserLibrary != -1 &&
-            _vm.spotifyUserLibrary["result"] != false &&
-            _vm.spotifyUserLibrary["result"] != "libraryError"
-          ? _c("div", { staticClass: "row justify-content-center" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "col-12 justify-content-center fade_in_anim"
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "row justify-content-center",
-                  attrs: { id: "basic" }
-                },
-                [
-                  _c("LastFive", {
-                    attrs: { items: _vm.spotifyTracks, type: "tracks" }
-                  }),
-                  _vm._v(" "),
-                  _c("LastFive", {
-                    attrs: { items: _vm.spotifyAlbums, type: "albums" }
-                  }),
-                  _vm._v(" "),
-                  _c("LastFive", {
-                    attrs: { items: _vm.spotifyArtists, type: "artists" }
-                  }),
-                  _vm._v(" "),
-                  _vm.spotifyArtists !== -1 &&
-                  _vm.spotifyAlbums != -1 &&
-                  _vm.spotifyTracks != -1
-                    ? _c("HoursAndMinutes", {
-                        staticClass: "fade_in_slow_anim",
-                        attrs: { userLibraryTime: _vm.userLibraryTime }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.userLibraryTime !== -1
-                    ? _c("LongestAndShortest", {
-                        attrs: {
-                          id: "tracks",
-                          fiveLongest: _vm.fiveTracks["fiveLongest"],
-                          fiveShortest: _vm.fiveTracks["fiveShortest"],
-                          tracksMode: _vm.tracksMode
-                        }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.fiveTracks !== -1
-                    ? _c("FavoriteGenres", {
-                        attrs: {
-                          favoriteGenres: _vm.favoriteGenres,
-                          id: "genres"
-                        }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.favoriteGenres != -1
-                    ? _c("ArtistsCount", {
-                        attrs: { uniqueArtists: _vm.uniqueArtists }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.uniqueArtists != -1
-                    ? _c("YearsAndDecades", {
-                        attrs: {
-                          yearsAndDecades: _vm.yearsAndDecades,
-                          type: "alltime"
-                        }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.yearsAndDecades != -1 && _vm.yearsAndDecadesMonth != false
-                    ? _c("YearsAndDecades", {
-                        attrs: {
-                          yearsAndDecades: _vm.yearsAndDecadesMonth,
-                          type: "month"
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ])
-          : _vm.spotifyUserLibrary["result"] == false
-          ? _c(
-              "div",
-              [
-                _c("Error", {
-                  attrs: {
-                    errorMessage: "Не удалось загрузить библиотеку пользователя"
-                  }
-                })
-              ],
-              1
-            )
-          : _vm.spotifyUserLibrary["result"] == "libraryError"
-          ? _c(
-              "div",
-              [
-                _c("Info", {
-                  attrs: { infoMessage: _vm.spotifyUserLibrary["errorMsg"] }
-                })
-              ],
-              1
-            )
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _vm.yearsAndDecadesMonth != -1
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _vm.spotifyUserLibrary == -1
         ? _c(
             "div",
-            { staticClass: "row justify-content-center fade_in_anim" },
+            { staticClass: "col-12" },
             [
-              _c("router-link", { attrs: { to: "/profile/top10#top" } }, [
-                _c("button", { staticClass: "btn btn-primary" }, [
-                  _vm._v(
-                    '\n                     Перейти к "Топ-10"\n                     '
-                  ),
-                  _c("i", { staticClass: "fas fa-list-ol" })
-                ])
-              ]),
+              _c("Loader"),
               _vm._v(" "),
-              _c("br"),
-              _c("br")
+              _vm.spotifyUserLibrary == -1
+                ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                    _vm._v("Загружаю библиотеку пользователя...")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.spotifyUserLibrary == true
+                ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                    _vm._v("Анализирую треки...")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", { staticClass: "font_10pt text-center" }, [
+                _vm._v("Это может занять около минуты")
+              ])
+            ],
+            1
+          )
+        : _vm.spotifyUserLibrary != -1 &&
+          _vm.spotifyUserLibrary["result"] != false &&
+          _vm.spotifyUserLibrary["result"] != "libraryError"
+        ? _c("div", { staticClass: "row justify-content-center" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "col-12 justify-content-center fade_in_anim"
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "row justify-content-center",
+                attrs: { id: "basic" }
+              },
+              [
+                _c("LastFive", {
+                  attrs: { items: _vm.spotifyTracks, type: "tracks" }
+                }),
+                _vm._v(" "),
+                _c("LastFive", {
+                  attrs: { items: _vm.spotifyAlbums, type: "albums" }
+                }),
+                _vm._v(" "),
+                _c("LastFive", {
+                  attrs: { items: _vm.spotifyArtists, type: "artists" }
+                }),
+                _vm._v(" "),
+                _vm.spotifyArtists !== -1 &&
+                _vm.spotifyAlbums != -1 &&
+                _vm.spotifyTracks != -1
+                  ? _c("HoursAndMinutes", {
+                      staticClass: "fade_in_slow_anim",
+                      attrs: { userLibraryTime: _vm.userLibraryTime }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.userLibraryTime !== -1
+                  ? _c("LongestAndShortest", {
+                      attrs: {
+                        id: "tracks",
+                        fiveLongest: _vm.fiveTracks["fiveLongest"],
+                        fiveShortest: _vm.fiveTracks["fiveShortest"],
+                        tracksMode: _vm.tracksMode
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.fiveTracks !== -1
+                  ? _c("FavoriteGenres", {
+                      attrs: {
+                        favoriteGenres: _vm.favoriteGenres,
+                        id: "genres"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.favoriteGenres != -1
+                  ? _c("ArtistsCount", {
+                      attrs: { uniqueArtists: _vm.uniqueArtists }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.uniqueArtists != -1
+                  ? _c("YearsAndDecades", {
+                      attrs: {
+                        yearsAndDecades: _vm.yearsAndDecades,
+                        type: "alltime"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.yearsAndDecades != -1 && _vm.yearsAndDecadesMonth != false
+                  ? _c("YearsAndDecades", {
+                      attrs: {
+                        yearsAndDecades: _vm.yearsAndDecadesMonth,
+                        type: "month"
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
+        : _vm.spotifyUserLibrary["result"] == false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  errorMessage: "Не удалось загрузить библиотеку пользователя"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.spotifyUserLibrary["result"] == "libraryError"
+        ? _c(
+            "div",
+            [
+              _c("Info", {
+                attrs: { infoMessage: _vm.spotifyUserLibrary["errorMsg"] }
+              })
             ],
             1
           )
         : _vm._e()
-    ])
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _vm.yearsAndDecadesMonth != -1
+      ? _c(
+          "div",
+          { staticClass: "row justify-content-center fade_in_anim" },
+          [
+            _c("router-link", { attrs: { to: "/profile/top10#top" } }, [
+              _c("button", { staticClass: "btn btn-primary" }, [
+                _vm._v(
+                  '\n                Перейти к "Топ-10"\n                '
+                ),
+                _c("i", { staticClass: "fas fa-list-ol" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _c("br")
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -79901,7 +79972,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
       _c("h5", { staticClass: "text-center" }, [
         _c("b", [_vm._v("Общая статистика")]),
-        _vm._v(" \n                         "),
+        _vm._v(" \n                    "),
         _c("i", { staticClass: "fas fa-chart-bar primary_color" })
       ])
     ])

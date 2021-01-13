@@ -1,86 +1,85 @@
 <template>
-   <div>
-        <div>
-            <div class="row justify-content-center">
-                <div class="col-12" v-if="spotifyUserLibrary == -1">
-                    <Loader />
-                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
-                    <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
-                    <p class="font_10pt text-center">Это может занять около минуты</p>
-                </div>
-                <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false 
-                    && spotifyUserLibrary['result'] != 'libraryError'" class="row justify-content-center">
-                    <div class="col-md-12 fade_in_slow_anim">
-                        <h5 class="text-center">
-                            <b>Общая статистика</b>&nbsp;
-                            <i class="fas fa-chart-bar primary_color"></i>
-                        </h5>
-                    </div>
-                    <!-- навигация -->
-                    <div class="row justify-content-center font_10pt fade_in_anim">
-                        <nav class="justify-content-center">
-                            <ul class="breadcrumb text-center">
-                                <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
-                                <li class="breadcrumb-item"><a href="#tracks">Самые длинные и короткие треки</a></li>
-                                <li class="breadcrumb-item"><a href="#genres">Жанры и годы</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-
-                    <div class="col-12 justify-content-center fade_in_anim">
-                    </div>
-               
-                    <div class="row justify-content-center" id="basic">
-                        <!-- треки -->
-                        <LastFive :items="spotifyTracks" type="tracks"/>  
-                        <!-- альбомы -->
-                        <LastFive :items="spotifyAlbums" type="albums"/>  
-                        <!-- исполнители -->
-                        <LastFive :items="spotifyArtists" type="artists"/>  
-
-                        <!-- часы и время -->
-                        <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 
-                                        class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
-
-                        <!-- самые длинные и короткие треки -->
-                        <LongestAndShortest v-if="userLibraryTime !== -1" id="tracks"
-                                            :fiveLongest="fiveTracks['fiveLongest']" 
-                                            :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
-                        <!-- любимые жанры -->
-                        <FavoriteGenres v-if="fiveTracks !== -1" :favoriteGenres="favoriteGenres" id="genres"/>
-
-                        <!-- кол-во исполнителей -->
-                        <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
-
-                        <!-- года и десятилетия -->
-                        <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades" type="alltime"/>
-
-                        <!-- года и десятилетия за месяц-->
-                        <YearsAndDecades v-if="yearsAndDecades != -1 && yearsAndDecadesMonth != false" :yearsAndDecades="yearsAndDecadesMonth" type="month"/>
-
-                    </div>     
-                </div>
-                <div v-else-if="spotifyUserLibrary['result'] == false">
-                    <Error errorMessage="Не удалось загрузить библиотеку пользователя"/>
-                </div>
-                <div v-else-if="spotifyUserLibrary['result'] == 'libraryError'">
-                    <Info :infoMessage="spotifyUserLibrary['errorMsg']"/>
-                </div>
+    <div>
+        <div class="row justify-content-center">
+            <div class="col-12" v-if="spotifyUserLibrary == -1">
+                <Loader />
+                <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
+                <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
+                <p class="font_10pt text-center">Это может занять около минуты</p>
             </div>
-            <br>
-            <div class="row justify-content-center fade_in_anim" v-if="yearsAndDecadesMonth != -1">
-                
-                <router-link to="/profile/top10#top">
-                    <button class="btn btn-primary">
-                        Перейти к "Топ-10"
-                        <i class="fas fa-list-ol"></i>
-                    </button>
-                </router-link>
-                <br><br>
-                
+            <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false 
+                && spotifyUserLibrary['result'] != 'libraryError'" class="row justify-content-center">
+                <div class="col-md-12 fade_in_slow_anim">
+                    <h5 class="text-center">
+                        <b>Общая статистика</b>&nbsp;
+                        <i class="fas fa-chart-bar primary_color"></i>
+                    </h5>
+                </div>
+                <!-- навигация -->
+                <div class="row justify-content-center font_10pt fade_in_anim">
+                    <nav class="justify-content-center">
+                        <ul class="breadcrumb text-center">
+                            <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
+                            <li class="breadcrumb-item"><a href="#tracks">Самые длинные и короткие треки</a></li>
+                            <li class="breadcrumb-item"><a href="#genres">Жанры и годы</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-12 justify-content-center fade_in_anim">
+                </div>
+            
+                <div class="row justify-content-center" id="basic">
+                    <!-- треки -->
+                    <LastFive :items="spotifyTracks" type="tracks"/>  
+                    <!-- альбомы -->
+                    <LastFive :items="spotifyAlbums" type="albums"/>  
+                    <!-- исполнители -->
+                    <LastFive :items="spotifyArtists" type="artists"/>  
+
+                    <!-- часы и время -->
+                    <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 
+                                    class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
+
+                    <!-- самые длинные и короткие треки -->
+                    <LongestAndShortest v-if="userLibraryTime !== -1" id="tracks"
+                                        :fiveLongest="fiveTracks['fiveLongest']" 
+                                        :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
+                    <!-- любимые жанры -->
+                    <FavoriteGenres v-if="fiveTracks !== -1" :favoriteGenres="favoriteGenres" id="genres"/>
+
+                    <!-- кол-во исполнителей -->
+                    <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
+
+                    <!-- года и десятилетия -->
+                    <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades" type="alltime"/>
+
+                    <!-- года и десятилетия за месяц-->
+                    <YearsAndDecades v-if="yearsAndDecades != -1 && yearsAndDecadesMonth != false" :yearsAndDecades="yearsAndDecadesMonth" type="month"/>
+
+                </div>     
+            </div>
+            <div v-else-if="spotifyUserLibrary['result'] == false">
+                <Error errorMessage="Не удалось загрузить библиотеку пользователя"/>
+            </div>
+            <div v-else-if="spotifyUserLibrary['result'] == 'libraryError'">
+                <Info :infoMessage="spotifyUserLibrary['errorMsg']"/>
             </div>
         </div>
-   </div>
+        <br>
+        <div class="row justify-content-center fade_in_anim" v-if="yearsAndDecadesMonth != -1">
+            
+            <router-link to="/profile/top10#top">
+                <button class="btn btn-primary">
+                    Перейти к "Топ-10"
+                    <i class="fas fa-list-ol"></i>
+                </button>
+            </router-link>
+            <br><br>
+            
+        </div>
+    </div>
+
 </template>
 
 <script>
