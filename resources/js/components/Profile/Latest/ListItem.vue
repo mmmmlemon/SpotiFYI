@@ -1,32 +1,37 @@
+//ListItem
 <template>
     <div>
-            <div class="top10_image_card" :style="{backgroundImage: `url('${item['cover']}')`}">
+        <!-- фоновое изображение -->
+        <BackgroundImage :backgroundImageUrl="item['cover']"/>
+        <div class="row fade_in_anim">
+            <!-- обложка альбома -->
+            <div class="col-2">
+                <a :href="item['trackUrl']" target="_blank">
+                    <img :src="item['cover']" class="rounded-circle album_icon_big">
+                </a>
             </div>
-            <div class="row fade_in_anim">
-                <div class="col-2">
+            <div class="col-10">
+                <!-- артист(ы) -->
+                <h5 class="font_white margin_none">
+                    <b>{{item['artists']}}</b>
+                </h5>
+                <!-- название трека -->
+                <p class=" font_white margin_none">
                     <a :href="item['trackUrl']" target="_blank">
-                        <img :src="item['cover']" class="rounded-circle album_icon_big">
+                        <b>{{item['trackName']}}</b>
                     </a>
-                </div>
-                <div class="col-10">
-                    <h5 class="font_white margin_none">
-                        <b>{{item['artists']}}</b>
-                    </h5>
-                    <p class=" font_white margin_none">
-                        <a :href="item['trackUrl']" target="_blank">
-                            <b>{{item['trackName']}}</b>
-                        </a>
-                    </p>
-                    <hr>
-                    
-                    <p class="margin_none font_white font_13pt" style="margin-bottom:7px;">
-                        <a :href="item['albumUrl']" target="_blank">
-                            <b class="unbold">{{item['albumName']}}</b>
-                        </a>
-                    </p>
-                    <b class="font_13pt">{{item['duration']}}</b>
-                </div>
+                </p>
+                <hr>
+                <!-- название альбома -->
+                <p class="margin_none font_white" style="margin-bottom:7px;">
+                    <a :href="item['albumUrl']" target="_blank">
+                        <b class="unbold">{{item['albumName']}}</b>
+                    </a>
+                </p>
+                <!-- длительность -->
+                <b class="font_13pt">{{item['duration']}}</b>
             </div>
+        </div>
     </div>
 </template>
 <script>

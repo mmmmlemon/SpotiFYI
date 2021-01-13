@@ -17,6 +17,7 @@ const HomePageStates = {
         siteLogoUrl: -1, //ссылка на логотип сайта
         homePageImageUrl: -1, //ссылка на фоновую картинку для домашней страницы
         welcomeImageUrl: -1, //ссылка на картинку для приветствия
+        recentTracks: -1, //последние прослушанные треки
       },
 
     mutations: {
@@ -93,7 +94,17 @@ const HomePageStates = {
             else
             { context.commit('setState', {state: 'welcomeImageUrl', value: false}); }
           });
-        }
+        },
+
+        //последние прослушанные треки
+        getLatestTracks(context){
+          axios.get('/api/get_latest_tracks').then((response) => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'recentTracks', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'recentTracks', value: false}); }
+          })
+        },
     }
 }
 
@@ -137,8 +148,6 @@ const ProfilePageStates = {
         topArtistByTime: -1, //артист с наибольшим кол-вом временем треков
         mostPopularArtist: -1, //самый популярный артист, из подписок
         leastPopularArtist: -1, //самый непопулярный артист, из подписок
-
-        latestTracks: -1, //последние прослушанные треки
       },
 
     mutations: {
@@ -458,15 +467,7 @@ const ProfilePageStates = {
         });
       },
 
-      //последние прослушанные треки
-      getLatestTracks(context){
-        axios.get('/api/get_latest_tracks').then((response) => {
-          if(response.data != false)
-          { context.commit('setState', {state: 'latestTracks', value: response.data}); }
-          else
-          { context.commit('setState', {state: 'latestTracks', value: false}); }
-        })
-      },
+
   }
 }
 

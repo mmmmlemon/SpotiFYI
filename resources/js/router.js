@@ -12,7 +12,7 @@ import Profile from './components/Profile.vue';
 import BasicStats from './components/Profile/BasicStats.vue';
 import Top10 from './components/Profile/Top10.vue';
 import Achievements from './components/Profile/Achievements.vue';
-import Latest from './components/Profile/Latest.vue';
+import RecentTracks from './components/RecentTracks.vue';
 
 const routes = [
     {   //главная страница
@@ -54,7 +54,7 @@ const routes = [
     },
     {
         path:'/recentTracks',
-        component: Latest
+        component: RecentTracks
     },
 
 ]

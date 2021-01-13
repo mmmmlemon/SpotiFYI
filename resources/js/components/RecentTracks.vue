@@ -1,14 +1,17 @@
+//RecentTracks
 <template>
     <div class="row justify-content-center">
-        <div class="col-md-8 fade_in_slow_anim" v-if="latestTracks != -1 && latestTracks != false">
+        <div class="col-12 fade_in_slow_anim" v-if="recentTracks != -1 && recentTracks != false">
+            <!-- заголовок -->
             <h4 class="text-center">
                 <b>Последние прослушанные треки</b>&nbsp;
                 <i class="fas fa-compact-disc primary_color"></i>
             </h4>
         </div>
-        <div class="col-md-6 col-10">
+        <!-- вывод списка треков -->
+        <div class="col-12 col-md-10 col-lg-6">
             <div>
-                <List :items="latestTracks"/>
+                <List :items="recentTracks"/>
             </div>
         </div>
     </div>
@@ -17,16 +20,15 @@
 <script>
 export default {
     mounted(){
-
         //загружаем последние треки
-        if(this.latestTracks == -1)
+        if(this.recentTracks == -1)
         { this.$store.dispatch('getLatestTracks'); }
     },
 
     computed: {
         //последние треки
-        latestTracks: function(){
-            return this.$store.state.profilePage.latestTracks;
+        recentTracks: function(){
+            return this.$store.state.homePage.recentTracks;
         }
     }
 }
