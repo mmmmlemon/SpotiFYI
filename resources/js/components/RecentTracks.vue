@@ -1,11 +1,11 @@
 //RecentTracks
 <template>
     <div class="row justify-content-center">
-        <div class="col-12 fade_in_slow_anim" v-if="recentTracks != -1 && recentTracks != false">
+        <div class="col-12 fadeInAnimSlow" v-if="recentTracks != -1 && recentTracks != false">
             <!-- заголовок -->
             <h4 class="text-center">
                 <b>Последние прослушанные треки</b>&nbsp;
-                <i class="fas fa-compact-disc primary_color"></i>
+                <i class="fas fa-compact-disc primaryColor"></i>
             </h4>
         </div>
         <!-- вывод списка треков -->

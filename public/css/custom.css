@@ -1,5 +1,6 @@
 /* стили собственного производсва UwU */
 
+/* перезаписить стиля dark-mode из halfmoon css */
 .dark-mode{
     background-image: linear-gradient(to bottom, #2e3136, #2c2f33, #292c31, #272a2e, #25282c) !important;
 }
@@ -46,13 +47,16 @@
     margin-top: 10px;
 }
 
-.loader_div{
-    margin-top:20%;
-}
 
-.primary_color{
+/* colors */
+.primaryColor{
     color:#1b77b9;
 }
+
+.whiteColor{
+    color: white;
+}
+/*  */
 
 .error_color{
     color: rgb(175, 55, 55);
@@ -102,13 +106,24 @@
     margin:5px;
 }
 
-.album_icon_big{
+/* album icons */
+.albumIconBig{
     width:80%; 
     margin:5px;
     border-style: solid;
-    border-color: #2c4150;
+    border-color: #31556e;
     border-width: 2px;
 }
+
+.albumIconBig:hover{
+    border-style: solid;
+    border-color: #1b77b9;
+    border-width: 3px;
+    transform: scale(1.2);
+}
+/*  */
+
+
 
 .album_icon:hover{
     border-style: solid;
@@ -117,12 +132,7 @@
     transform: scale(1.2);
 }
 
-.album_icon_big:hover{
-    border-style: solid;
-    border-color: #1b77b9;
-    border-width: 3px;
-    transform: scale(1.2);
-}
+
 
 .album_icon_top10{
     width:80%; 
@@ -148,11 +158,28 @@
     border-width: 5px;
 }
 
-.padding_10{
+
+/* padding, margin etc. */
+.paddingSides{
     padding:10px;
 }
 
-.border_underline{
+.marginVertical{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.marginTopBig{
+    margin-top: 20%;
+}
+
+.marginNone{
+    margin: 0;
+}
+/*  */
+
+/* design */
+.borderUnderline{
     border-bottom-style:solid;
     border-bottom-width: 2px;
     border-bottom-color: #1b77b9;
@@ -160,10 +187,16 @@
     transition: border-color 0.2s ease-in-out;
 }
 
-.border_underline:hover{
+.borderUnderline:hover{
     border-color: white;
     cursor: pointer;
 }
+
+.borderRadius40{
+    border-radius: 40px;
+}
+
+/*  */
 
 .border_underline_text{
     text-decoration: underline;
@@ -188,15 +221,31 @@
     font-weight: normal;
 }
 
-.font_2vw{
-    font-size:2vw;
+
+
+
+/* fonts */
+.font10pt{
+    font-size:10pt;
 }
 
-.font_4vw{
+.font13pt{
+    font-size: 13pt;
+}
+
+.font22pt{
+    font-size:22pt;
+}
+
+.font25pt{
+    font-size:25pt;
+}
+
+.font4vw{
     font-size:4.2vw;
 }
 
-.font_6vw{
+.font6vw{
     font-size:6.2vw;
 }
 
@@ -204,13 +253,9 @@
     font-size:8pt;
 }
 
-.font_10pt{
-    font-size:10pt;
-}
 
-.font_25pt{
-    font-size:25pt;
-}
+
+
 
 .font_35{
     font-size:2.5em;
@@ -220,21 +265,14 @@
     font-size: 16pt;
 }
 
+/*  */
+
 .grey_bg{
     background-color: #25282c;
 }
 
-.font_13pt{
-    font-size: 13pt;
-}
 
-.font_white{
-    color: white;
-}
 
-.margin_none{
-    margin: 0;
-}
 
 .margin_sides{
     margin-left: 15px;
@@ -245,10 +283,7 @@
     margin-right:5px;
 }
 
-.margin_vertical{
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
+
 
 .margin_top_8{
     margin-top: 8px;

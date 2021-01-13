@@ -2059,6 +2059,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //получить логотип сайта
@@ -2089,7 +2094,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -78420,43 +78424,56 @@ var render = function() {
     _vm.siteInfo == -1
       ? _c(
           "div",
-          { staticClass: "container bounce_in_anim loader_div" },
+          { staticClass: "container bounceInAnim marginTopBig" },
           [_c("Loader")],
           1
         )
       : _vm._e(),
     _vm._v(" "),
     _vm.siteInfo != false && _vm.siteInfo != -1
-      ? _c("div", { staticClass: "container fade_in_anim" }, [
+      ? _c("div", { staticClass: "container fadeInAnim" }, [
           _c("div", { staticClass: "row justify-content-center" }, [
             _c("div", { staticClass: "grey_card col-12 padding_10" }, [
-              _c("div", { staticClass: "row justify-content-center" }, [
-                _vm.siteInfo != false
-                  ? _c("h1", { staticClass: "fade_in_anim" }, [
-                      _c("b", [_vm._v(_vm._s(_vm.siteInfo.siteTitle))])
-                    ])
-                  : _vm._e()
-              ]),
+              _c(
+                "div",
+                { staticClass: "row justify-content-center fadeInAnimSlow" },
+                [
+                  _vm.siteInfo != false
+                    ? _c("h1", [
+                        _c("b", [_vm._v(_vm._s(_vm.siteInfo.siteTitle))])
+                      ])
+                    : _vm._e()
+                ]
+              ),
               _vm._v(" "),
               _vm.siteInfo != false
-                ? _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("img", {
-                      staticClass: "fade_in_anim bounce_in_anim",
-                      attrs: { src: _vm.siteLogoUrl, width: "90pt", alt: "" }
-                    })
-                  ])
+                ? _c(
+                    "div",
+                    { staticClass: "row justify-content-center bounceInAnim" },
+                    [
+                      _c("img", {
+                        attrs: {
+                          src: _vm.siteLogoUrl,
+                          width: "90pt",
+                          alt: "Site logo"
+                        }
+                      })
+                    ]
+                  )
                 : _vm._e(),
               _vm._v(" "),
               _vm.siteInfo != false
-                ? _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("h5", { staticClass: "fade_in_anim" }, [
-                      _vm._v(_vm._s(_vm.siteInfo.version))
-                    ])
-                  ])
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "row justify-content-center fadeInAnimSlow"
+                    },
+                    [_c("h5", [_vm._v(_vm._s(_vm.siteInfo.version))])]
+                  )
                 : _vm._e(),
               _vm._v(" "),
               _vm.siteInfo != false
-                ? _c("hr", { staticClass: "fade_in_anim" })
+                ? _c("hr", { staticClass: "fadeInAnim" })
                 : _vm._e(),
               _vm._v(" "),
               _vm.siteInfo != false
@@ -78464,15 +78481,13 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "row justify-content-center fade_in_anim text-center"
+                        "row justify-content-center text-center fadeInAnimSlow"
                     },
                     [
                       _c("p", [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm.siteInfo.poweredBy) +
-                            "\n                    "
-                        )
+                        _c("b", [_vm._v("Powered by")]),
+                        _c("br"),
+                        _vm._v(_vm._s(_vm.siteInfo.poweredBy))
                       ])
                     ]
                   )
@@ -78502,21 +78517,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-md-8 padding_10" }, [
-      _c("p", [
-        _vm._v(
-          "Много текста про сайт. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores natus veniam voluptas cum provident voluptate possimus est itaque, laudantium eos quae tempora nobis optio eveniet, pariatur facilis dolor rem architecto."
-        )
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "Еще много текста про сайт. Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore ducimus iure vitae, dolores soluta corrupti sit accusamus natus deleniti maiores reprehenderit numquam? Harum enim impedit neque natus sed molestias perferendis.Laudantium commodi dolorem accusamus eligendi aliquid adipisci illum possimus iusto vitae, ipsa libero. Saepe, nisi dolor facere eius tempore facilis illum voluptatibus labore, explicabo expedita et magnam cumque aut debitis?"
-        )
-      ])
-    ])
+    return _c(
+      "div",
+      { staticClass: "col-12 col-md-8 paddingSides fadeInAnim" },
+      [
+        _c("p", [
+          _vm._v(
+            "Много текста про сайт. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores natus veniam voluptas cum provident voluptate possimus est itaque, laudantium eos quae tempora nobis optio eveniet, pariatur facilis dolor rem architecto."
+          )
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "Еще много текста про сайт. Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore ducimus iure vitae, dolores soluta corrupti sit accusamus natus deleniti maiores reprehenderit numquam? Harum enim impedit neque natus sed molestias perferendis.Laudantium commodi dolorem accusamus eligendi aliquid adipisci illum possimus iusto vitae, ipsa libero. Saepe, nisi dolor facere eius tempore facilis illum voluptatibus labore, explicabo expedita et magnam cumque aut debitis?"
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -78542,7 +78561,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container fade_in_slow_anim" },
+    { staticClass: "container fadeInAnim" },
     [
       _c("BackgroundImage", {
         attrs: { backgroundImageUrl: _vm.homePageImageUrl }
@@ -78554,7 +78573,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "col-12 col-sm-12 col-md-10 col-lg-10 padding_10 margin_vertical",
+                  "col-12 col-sm-12 col-md-10 col-lg-10 paddingSides marginVertical",
                 attrs: { width: "20%;" }
               },
               [
@@ -78563,12 +78582,12 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "text-center " }, [
                     _c("img", {
-                      staticClass: "fade_in_slow_anim",
+                      staticClass: "fadeInAnim",
                       attrs: { src: _vm.siteLogoUrl, width: "10%", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
-                  _c("h5", { staticClass: "text-center border_underline" }, [
+                  _c("h5", { staticClass: "text-center borderUnderline" }, [
                     _vm._v("Какой-нибудь крутой слоган")
                   ]),
                   _vm._v(" "),
@@ -78588,159 +78607,148 @@ var render = function() {
         _vm._v(" "),
         _vm.spotifyUsername != -1 && _vm.spotifyUsername != false
           ? _c("div", { staticClass: "col-12 col-sm-12 col-md-10 col-lg-10" }, [
-              _c(
-                "div",
-                { staticClass: "row justify-content-center text-center" },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "col-11 text-center d-none d-md-block" },
-                    [
-                      _vm.spotifyUsername != false
-                        ? _c("h2", { staticClass: "fade_in_anim font_4vw" }, [
-                            _vm._v("Привет, "),
-                            _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
-                            _vm._v("!")
-                          ])
-                        : _vm._e()
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-11 text-center d-sm-block d-md-none" },
-                    [
-                      _vm.spotifyUsername != false
-                        ? _c("h2", { staticClass: "fade_in_anim font_6vw" }, [
-                            _vm._v("Привет, "),
-                            _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
-                            _vm._v("!")
-                          ])
-                        : _vm._e()
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.spotifyUserTracksCount == -1 &&
-                  _vm.spotifyUsername != false
-                    ? _c(
-                        "div",
-                        { staticClass: "container bounce_in_anim" },
-                        [_c("Loader")],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.spotifyUserTracksCount != -1
-                    ? _c("div", { staticClass: " col-10 fade_in_anim" }, [
-                        _vm.spotifyUserTracksCount >= 150
-                          ? _c("h3", [
-                              _vm._v(
-                                "\n                        В твоей библиотеке более чем достаточно треков для анализа "
-                              ),
-                              _c("i", {
-                                staticClass:
-                                  "fas fa-heart primary_color heartbeat_anim"
-                              })
-                            ])
-                          : _vm.spotifyUserTracksCount >= 50
-                          ? _c("h4", [
-                              _vm._v(
-                                "\n                        В твоей библиотеке достаточно треков для анализа! 😉\n                    "
-                              )
-                            ])
-                          : _vm.spotifyUserTracksCount >= 10
-                          ? _c("h4", [
-                              _vm._v(
-                                "\n                        Ай! Маловато будет! "
-                              ),
-                              _c("img", {
-                                attrs: {
-                                  src: "/img/malovato_budet.png",
-                                  width: "50px"
-                                }
-                              })
-                            ])
-                          : _vm.spotifyUserTracksCount < 10 &&
-                            _vm.spotifyUserTracksCount > 0
-                          ? _c("h4", [
-                              _vm._v(
-                                "\n                        Ой, что-то у тебя пусто... 😳\n                    "
-                              )
-                            ])
-                          : _vm.spotifyUserTracksCount == 0
-                          ? _c("h4", [
-                              _vm._v(
-                                "\n                        " +
-                                  _vm._s(_vm.spotifyUserTracksCount) +
-                                  " песен? bruh... "
-                              ),
-                              _c("img", {
-                                attrs: { src: "/img/bruh.png", width: "50px" }
-                              })
-                            ])
-                          : _c("h3"),
-                        _vm._v(" "),
-                        _vm.spotifyUserTracksCount < 50 &&
-                        _vm.spotifyUserTracksCount > 0
-                          ? _c("h5", [
-                              _vm._v(
-                                "\n                        Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: " +
-                                  _vm._s(_vm.spotifyUserTracksCount) +
-                                  ", нужно: 50).\n                    "
-                              )
-                            ])
-                          : _vm.spotifyUserTracksCount == 0
-                          ? _c("h5", [
-                              _vm._v(
-                                "\n                        Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                    "
-                              )
-                            ])
-                          : _c(
-                              "h5",
-                              { staticClass: "fade_in_anim_500" },
-                              [
-                                _vm._v("\n                        Перейди в "),
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "border_underline",
-                                    attrs: { to: "/profile" }
-                                  },
-                                  [_vm._v("свой профиль")]
-                                ),
-                                _vm._v(
-                                  " чтобы просмотреть статистику\n                    "
-                                )
-                              ],
-                              1
+              _c("div", { staticClass: "row justify-content-center" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-11 text-center d-none d-md-block fadeInAnim"
+                  },
+                  [
+                    _vm.spotifyUsername != false
+                      ? _c("h2", { staticClass: "font4vw" }, [
+                          _vm._v("Привет, "),
+                          _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
+                          _vm._v("!")
+                        ])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-11 text-center d-sm-block d-md-none fadeInAnim"
+                  },
+                  [
+                    _vm.spotifyUsername != false
+                      ? _c("h2", { staticClass: "font6vw" }, [
+                          _vm._v("Привет, "),
+                          _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
+                          _vm._v("!")
+                        ])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.spotifyUserTracksCount == -1 && _vm.spotifyUsername != false
+                  ? _c(
+                      "div",
+                      { staticClass: "container bounceInAnim" },
+                      [_c("Loader")],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.spotifyUserTracksCount != -1
+                  ? _c("div", { staticClass: "col-10 fadeInAnim" }, [
+                      _vm.spotifyUserTracksCount >= 150
+                        ? _c("h3", [
+                            _vm._v(
+                              "\n                        В твоей библиотеке более чем достаточно треков для анализа "
                             ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "row justify-content-center",
-                            class: {
-                              invisible: !_vm.welcomeImgLoaded,
-                              fade_in_anim: _vm.welcomeImgLoaded
-                            }
-                          },
-                          [
-                            _c("div", { staticClass: "col-8" }, [
-                              _c("img", {
-                                staticStyle: { "border-radius": "40px" },
-                                attrs: {
-                                  src: _vm.welcomeImageUrl,
-                                  width: "90%"
+                            _c("i", {
+                              staticClass:
+                                "fas fa-heart primaryColor heartbeatAnim"
+                            })
+                          ])
+                        : _vm.spotifyUserTracksCount >= 50
+                        ? _c("h4", [
+                            _vm._v(
+                              "\n                        В твоей библиотеке достаточно треков для анализа! 😉\n                    "
+                            )
+                          ])
+                        : _vm.spotifyUserTracksCount >= 10
+                        ? _c("h4", [
+                            _vm._v(
+                              "\n                        Ай! Маловато будет! 🤔\n                    "
+                            )
+                          ])
+                        : _vm.spotifyUserTracksCount < 10 &&
+                          _vm.spotifyUserTracksCount > 0
+                        ? _c("h4", [
+                            _vm._v(
+                              "\n                        Ой, что-то у тебя пусто...😳\n                    "
+                            )
+                          ])
+                        : _vm.spotifyUserTracksCount == 0
+                        ? _c("h4", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(_vm.spotifyUserTracksCount) +
+                                " песен? bruh... 💩\n                    "
+                            )
+                          ])
+                        : _c("h3"),
+                      _vm._v(" "),
+                      _vm.spotifyUserTracksCount < 50 &&
+                      _vm.spotifyUserTracksCount > 0
+                        ? _c("h5", [
+                            _vm._v(
+                              "\n                        Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: " +
+                                _vm._s(_vm.spotifyUserTracksCount) +
+                                ", нужно: 50).\n                    "
+                            )
+                          ])
+                        : _vm.spotifyUserTracksCount == 0
+                        ? _c("h5", [
+                            _vm._v(
+                              "\n                        Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).\n                    "
+                            )
+                          ])
+                        : _c(
+                            "h5",
+                            { staticClass: "fadeInAnimSlow" },
+                            [
+                              _vm._v("\n                        Перейди в "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "borderUnderline",
+                                  attrs: { to: "/profile" }
                                 },
-                                on: { load: _vm.onWelcomeImgLoad }
-                              })
-                            ])
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ]
-              )
+                                [_vm._v("свой профиль")]
+                              ),
+                              _vm._v(
+                                " чтобы просмотреть статистику\n                    "
+                              )
+                            ],
+                            1
+                          ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "row justify-content-center",
+                          class: {
+                            invisible: !_vm.welcomeImgLoaded,
+                            fadeInAnim: _vm.welcomeImgLoaded
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c("img", {
+                              staticClass: "borderRadius40",
+                              attrs: { src: _vm.welcomeImageUrl, width: "90%" },
+                              on: { load: _vm.onWelcomeImgLoad }
+                            })
+                          ])
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
             ])
           : _vm._e()
       ])
@@ -78765,7 +78773,7 @@ var staticRenderFns = [
       _c(
         "div",
         {
-          staticClass: "col-md-4 col-10 margin_vertical justify-content-center"
+          staticClass: "col-md-4 col-10 justify-content-center marginVertical"
         },
         [
           _c(
@@ -80927,12 +80935,12 @@ var render = function() {
             _c("Loader"),
             _vm._v(" "),
             _vm.items == -1
-              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+              ? _c("h6", { staticClass: "text-center blinkingAnim" }, [
                   _vm._v("Загружаю последние треки...")
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("p", { staticClass: "font_10pt text-center" }, [
+            _c("p", { staticClass: "text-center font10pt " }, [
               _vm._v("Это может занять некоторое время")
             ])
           ],
@@ -80941,14 +80949,14 @@ var render = function() {
       : _vm.items != -1 && _vm.items != false
       ? _c(
           "div",
-          { staticClass: "сol-12 margin_vertical fade_in_anim" },
+          { staticClass: "сol-12 fadeInAnim marginVertical" },
           _vm._l(_vm.items["tracks"], function(item) {
             return _c(
               "div",
               {
                 key: item.id,
                 staticClass:
-                  "col-12 justify-content-center padding_10 margin_vertical"
+                  "col-12 justify-content-center paddingSides marginVertical"
               },
               [_c("ListItem", { attrs: { item: item } })],
               1
@@ -80996,22 +81004,22 @@ var render = function() {
         attrs: { backgroundImageUrl: _vm.item["cover"] }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "row fade_in_anim" }, [
+      _c("div", { staticClass: "row fadeInAnim" }, [
         _c("div", { staticClass: "col-2" }, [
           _c("a", { attrs: { href: _vm.item["trackUrl"], target: "_blank" } }, [
             _c("img", {
-              staticClass: "rounded-circle album_icon_big",
+              staticClass: "rounded-circle albumIconBig",
               attrs: { src: _vm.item["cover"] }
             })
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-10" }, [
-          _c("h5", { staticClass: "font_white margin_none" }, [
+          _c("h5", { staticClass: "whiteColor marginNone" }, [
             _c("b", [_vm._v(_vm._s(_vm.item["artists"]))])
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: " font_white margin_none" }, [
+          _c("p", { staticClass: "whiteColor marginNone" }, [
             _c(
               "a",
               { attrs: { href: _vm.item["trackUrl"], target: "_blank" } },
@@ -81021,26 +81029,19 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c(
-            "p",
-            {
-              staticClass: "margin_none font_white",
-              staticStyle: { "margin-bottom": "7px" }
-            },
-            [
-              _c(
-                "a",
-                { attrs: { href: _vm.item["albumUrl"], target: "_blank" } },
-                [
-                  _c("b", { staticClass: "unbold" }, [
-                    _vm._v(_vm._s(_vm.item["albumName"]))
-                  ])
-                ]
-              )
-            ]
-          ),
+          _c("p", { staticClass: "whiteColor marginNone" }, [
+            _c(
+              "a",
+              { attrs: { href: _vm.item["albumUrl"], target: "_blank" } },
+              [
+                _c("b", { staticClass: "unbold" }, [
+                  _vm._v(_vm._s(_vm.item["albumName"]))
+                ])
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _c("b", { staticClass: "font_13pt" }, [
+          _c("b", { staticClass: "font13pt" }, [
             _vm._v(_vm._s(_vm.item["duration"]))
           ])
         ])
@@ -81604,7 +81605,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row justify-content-center" }, [
     _vm.recentTracks != -1 && _vm.recentTracks != false
-      ? _c("div", { staticClass: "col-12 fade_in_slow_anim" }, [_vm._m(0)])
+      ? _c("div", { staticClass: "col-12 fadeInAnimSlow" }, [_vm._m(0)])
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "col-12 col-md-10 col-lg-6" }, [
@@ -81620,7 +81621,7 @@ var staticRenderFns = [
     return _c("h4", { staticClass: "text-center" }, [
       _c("b", [_vm._v("Последние прослушанные треки")]),
       _vm._v(" \n            "),
-      _c("i", { staticClass: "fas fa-compact-disc primary_color" })
+      _c("i", { staticClass: "fas fa-compact-disc primaryColor" })
     ])
   }
 ]
