@@ -1,26 +1,33 @@
+//LongestAndShortest
 <template>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center fadeInAnim">
         <!-- пять самых длинных -->
-        <div v-if="fiveLongest === -1" class="col-md-6 padding_10">
+        <div v-if="fiveLongest === -1" class="col-12 col-md-5 paddingSides fadeInAnim">
             <Loader />
         </div>
-        <div v-else-if="fiveLongest === false" class="col-md-6 padding_10">
+        <div v-else-if="fiveLongest === false" class="col-12 col-md-5 paddingSides">
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
-        <div class="col-md-5 padding_10 grey_card margin_sides" v-else-if="fiveLongest != -1">
-            <h4 class="border_underline text-center"><b>Пять самых длинных песен</b></h4>
-            <div class="row margin_top_8 fade_in_anim" v-for="item in fiveLongest" :key="item.id">
+        <div class="col-12 col-md-5 paddingSides marginSides greyCard fadeInAnim" v-else-if="fiveLongest != -1">
+            <h4 class="text-center borderUnderline"><b>Пять самых длинных песен</b></h4>
+            <div class="row marginTopSmall" v-for="item in fiveLongest" :key="item.id">
                 <div class="col-2">
-                    <div class="number_card">
+                    <div class="numberCircle">
                         <b>{{item.count}}</b>
                     </div>
                     <a :href="item.url" target="_blank">
-                        <img :src="item.cover" class="rounded-circle album_icon_big">
+                        <img :src="item.cover" class="rounded-circle albumIconBig">
                     </a>
                 </div>
                 <div class="col-10">
-                    <p class="font_13pt font_white margin_none"><a :href="item.url" target="_blank"><b>{{item.name}}</b></a></p>
-                    <p class="font_13pt margin_none font_white"><b>{{item.duration}}</b></p>
+                    <p class="font13pt whiteColor marginNone">
+                        <a :href="item.url" target="_blank">
+                            <b>{{item.name}}</b>
+                        </a>
+                    </p>
+                    <p class="font13pt greyColor marginNone">
+                        <b>{{item.duration}}</b>
+                    </p>
                 </div>
             </div>
         </div>
@@ -29,26 +36,32 @@
         </div>
         
         <!-- пять самых коротких -->
-        <div v-if="fiveShortest === -1" class="col-md-6 padding_10">
+        <div v-if="fiveShortest === -1" class="col-12 col-md-5 paddingSides fadeInAnim">
             <Loader />
         </div>
-        <div v-else-if="fiveShortest === false && fiveLongest != -1" class="col-md-6 padding_10">
+        <div v-else-if="fiveShortest === false && fiveLongest != -1" class="col-12 col-md-5 paddingSides">
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
-        <div class="col-md-5 padding_10 grey_card margin_sides" v-else-if="fiveShortest != -1">
-            <h4 class="border_underline text-center"><b>Пять самых коротких песен</b></h4>
-            <div class="row margin_top_8 fade_in_anim" v-for="item in fiveShortest" :key="item.id">
+        <div class="col-12 col-md-5 paddingSides marginSides greyCard fadeInAnim" v-else-if="fiveShortest != -1">
+            <h4 class="text-center borderUnderline"><b>Пять самых коротких песен</b></h4>
+            <div class="row marginTopSmall" v-for="item in fiveShortest" :key="item.id">
                 <div class="col-2">
-                    <div class="number_card">
+                    <div class="numberCircle">
                         <b>{{item.count}}</b>
                     </div>
                     <a :href="item.url" target="_blank">
-                        <img :src="item.cover" class="rounded-circle album_icon_big">
+                        <img :src="item.cover" class="rounded-circle albumIconBig">
                     </a>
                 </div>
                 <div class="col-10">
-                    <p class="font_13pt font_white margin_none"><a :href="item.url" target="_blank"><b>{{item.name}}</b></a></p>
-                    <p class="font_13pt margin_none font_white"><b>{{item.duration}}</b></p>
+                    <p class="font13pt whiteColor marginNone">
+                        <a :href="item.url" target="_blank">
+                            <b>{{item.name}}</b>
+                        </a>
+                    </p>
+                    <p class="font13pt greyColor marginNone">
+                        <b>{{item.duration}}</b>
+                    </p>
                 </div>
             </div>
         </div>
@@ -56,17 +69,17 @@
             <Error type="small"/>
         </div>
         <!-- средняя длина трека -->
-        <div v-if="tracksMode === -1" class="col-md-6 padding_10">
+        <div v-if="tracksMode === -1" class="col-12 col-md-6 paddingSides">
             <Loader />
         </div>
-        <div v-else-if="tracksMode === false" class="col-md-6 padding_10">
+        <div v-else-if="tracksMode === false" class="col-12 col-md-6 paddingSides">
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
-        <div v-else-if="tracksMode != -1 && fiveShortest != -1" class="col-md-12 text-center fade_in_anim margin_vertical padding_10">
+        <div v-else-if="tracksMode != -1 && fiveShortest != -1" class="col-12 text-center fadeInAnim marginVertical paddingSides">
             <hr>
-            <p class="padding_10">
+            <p class="paddingSides">
                 Средняя продолжительность трека в твоей библиотеке - 
-                <b class="border_underline font_25pt">{{tracksMode}}</b>
+                <b class="font25pt borderUnderline">{{tracksMode}}</b>
             </p>
             <hr>
         </div>

@@ -2272,6 +2272,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/Error.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Misc/Error.vue?vue&type=script&lang=js& ***!
@@ -2937,6 +2953,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -3101,7 +3118,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     uniqueArtists: {
@@ -3217,8 +3233,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     userLibraryTime: {
@@ -3238,6 +3252,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3401,6 +3421,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     fiveLongest: {
@@ -3432,6 +3465,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -78838,9 +78880,33 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {
-    staticClass: "background_image",
+    staticClass: "backgroundImage",
     style: { backgroundImage: "url('" + _vm.backgroundImageUrl + "')" }
   })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=template&id=dddfc938&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=template&id=dddfc938& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "backgroundImageFront" })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -79811,18 +79877,18 @@ var render = function() {
               _c("Loader"),
               _vm._v(" "),
               _vm.spotifyUserLibrary == -1
-                ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                ? _c("h6", { staticClass: "text-center blinkingAnim" }, [
                     _vm._v("Загружаю библиотеку пользователя...")
                   ])
                 : _vm._e(),
               _vm._v(" "),
               _vm.spotifyUserLibrary == true
-                ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                ? _c("h6", { staticClass: "text-center blinkingAnim" }, [
                     _vm._v("Анализирую треки...")
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _c("p", { staticClass: "font_10pt text-center" }, [
+              _c("p", { staticClass: "text-center font10pt" }, [
                 _vm._v("Это может занять около минуты")
               ])
             ],
@@ -79837,7 +79903,7 @@ var render = function() {
             _vm._m(1),
             _vm._v(" "),
             _c("div", {
-              staticClass: "col-12 justify-content-center fade_in_anim"
+              staticClass: "col-12 justify-content-center fadeInAnim"
             }),
             _vm._v(" "),
             _c(
@@ -79863,7 +79929,6 @@ var render = function() {
                 _vm.spotifyAlbums != -1 &&
                 _vm.spotifyTracks != -1
                   ? _c("HoursAndMinutes", {
-                      staticClass: "fade_in_slow_anim",
                       attrs: { userLibraryTime: _vm.userLibraryTime }
                     })
                   : _vm._e(),
@@ -79945,7 +80010,7 @@ var render = function() {
     _vm.yearsAndDecadesMonth != -1
       ? _c(
           "div",
-          { staticClass: "row justify-content-center fade_in_anim" },
+          { staticClass: "row justify-content-center fadeInAnim" },
           [
             _c("router-link", { attrs: { to: "/profile/top10#top" } }, [
               _c("button", { staticClass: "btn btn-primary" }, [
@@ -79969,11 +80034,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
+    return _c("div", { staticClass: "col-12 fadeInAnimSlow" }, [
       _c("h5", { staticClass: "text-center" }, [
         _c("b", [_vm._v("Общая статистика")]),
         _vm._v(" \n                    "),
-        _c("i", { staticClass: "fas fa-chart-bar primary_color" })
+        _c("i", { staticClass: "fas fa-chart-bar primaryColor" })
       ])
     ])
   },
@@ -79983,7 +80048,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "row justify-content-center font_10pt fade_in_anim" },
+      { staticClass: "row justify-content-center fadeInAnim font10pt" },
       [
         _c("nav", { staticClass: "justify-content-center" }, [
           _c("ul", { staticClass: "breadcrumb text-center" }, [
@@ -80029,7 +80094,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-11 justify-content-center fade_in_anim" },
+    { staticClass: "col-12 justify-content-center fadeInAnim" },
     [
       _vm.uniqueArtists === -1
         ? _c("div", [_c("Loader")], 1)
@@ -80047,25 +80112,28 @@ var render = function() {
             1
           )
         : _vm.uniqueArtists != -1 && _vm.uniqueArtists != false
-        ? _c("div", { staticClass: "col-12 padding_10 margin_vertical" }, [
-            _c("div", {
-              staticClass: "image_card",
-              style: {
-                backgroundImage:
-                  "url('" + _vm.uniqueArtists["artistImageUrl"] + "')"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "image_card_front" }),
-            _vm._v(" "),
-            _c("h6", { staticClass: "text-center" }, [
-              _vm._v("В твою библиотеку добавлены треки от")
-            ]),
-            _vm._v(" "),
-            _c("h1", { staticClass: "text-center border_underline" }, [
-              _vm._v(_vm._s(_vm.uniqueArtists["countArtists"]))
-            ])
-          ])
+        ? _c(
+            "div",
+            { staticClass: "col-12 paddingSides marginVertical" },
+            [
+              _c("BackgroundImage", {
+                attrs: {
+                  backgroundImageUrl: _vm.uniqueArtists["artistImageUrl"]
+                }
+              }),
+              _vm._v(" "),
+              _c("BackgroundImageFront"),
+              _vm._v(" "),
+              _c("h6", { staticClass: "text-center" }, [
+                _vm._v("В твою библиотеку добавлены треки от")
+              ]),
+              _vm._v(" "),
+              _c("h1", { staticClass: "text-center borderUnderline" }, [
+                _vm._v(_vm._s(_vm.uniqueArtists["countArtists"]))
+              ])
+            ],
+            1
+          )
         : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
     ]
   )
@@ -80092,76 +80160,80 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-11 justify-content-center" }, [
-    _vm.favoriteGenres == -1
-      ? _c(
-          "div",
-          [
-            _c("Loader"),
-            _vm._v(" "),
-            _c("h6", { staticClass: "text-center blinking_anim" }, [
-              _vm._v("Анализирую треки...")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "font_10pt text-center" }, [
-              _vm._v("Это может занять некоторое время")
-            ])
-          ],
-          1
-        )
-      : _vm.favoriteGenres == false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось произвести анализ треков"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.favoriteGenres == "noTracks"
-      ? _c(
-          "div",
-          { staticClass: "grey_card padding_10" },
-          [
-            _c("Info", {
-              attrs: {
-                type: "small",
-                infoMessage:
-                  "Пока не достаточно данных для проведения анализа жанров."
-              }
-            })
-          ],
-          1
-        )
-      : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
-      ? _c(
-          "div",
-          { staticClass: "grey_card padding_10 margin_vertical" },
-          [
-            _c("h4", { staticClass: "text-center border_underline" }, [
-              _vm._v("Твои любимые жанры")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-center" }, [
-              _vm._v("На основе того что ты слушаешь последний месяц")
-            ]),
-            _vm._v(" "),
-            _c("BarChart", {
-              attrs: {
-                favoriteGenres: _vm.favoriteGenres,
-                backgroundColor: _vm.backgroundColor,
-                label: "Любимые жанры"
-              }
-            })
-          ],
-          1
-        )
-      : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-  ])
+  return _c(
+    "div",
+    { staticClass: "col-12 justify-content-center fadeInAnim" },
+    [
+      _vm.favoriteGenres == -1
+        ? _c(
+            "div",
+            [
+              _c("Loader"),
+              _vm._v(" "),
+              _c("h6", { staticClass: "text-center blinkingAnim" }, [
+                _vm._v("Анализирую треки...")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-center font10pt" }, [
+                _vm._v("Это может занять некоторое время")
+              ])
+            ],
+            1
+          )
+        : _vm.favoriteGenres == false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось произвести анализ треков"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.favoriteGenres == "noTracks"
+        ? _c(
+            "div",
+            { staticClass: "greyCard paddingSides" },
+            [
+              _c("Info", {
+                attrs: {
+                  type: "small",
+                  infoMessage:
+                    "Пока не достаточно данных для проведения анализа жанров."
+                }
+              })
+            ],
+            1
+          )
+        : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
+        ? _c(
+            "div",
+            { staticClass: "greyCard paddingSides marginVertical" },
+            [
+              _c("h4", { staticClass: "text-center borderUnderline" }, [
+                _vm._v("Твои любимые жанры")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-center" }, [
+                _vm._v("На основе того что ты слушаешь последний месяц")
+              ]),
+              _vm._v(" "),
+              _c("BarChart", {
+                attrs: {
+                  favoriteGenres: _vm.favoriteGenres,
+                  backgroundColor: _vm.backgroundColor,
+                  label: "Любимые жанры"
+                }
+              })
+            ],
+            1
+          )
+        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80185,111 +80257,109 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-11 justify-content-center" }, [
-    _vm.userLibraryTime === -1
-      ? _c("div", [_c("Loader")], 1)
-      : _vm.userLibraryTime === false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось загрузить треки"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.userLibraryTime != -1 && _vm.userLibraryTime != false
-      ? _c("div", [
-          _c("hr"),
-          _vm._v(" "),
-          _c(
+  return _c(
+    "div",
+    { staticClass: "col-12 justify-content-center fadeInAnim" },
+    [
+      _vm.userLibraryTime === -1
+        ? _c("div", [_c("Loader")], 1)
+        : _vm.userLibraryTime === false
+        ? _c(
             "div",
-            { staticClass: "col-sm-12 text-center padding_10 margin_vetical" },
             [
-              _c("div", {
-                staticClass: "image_card",
-                style: {
-                  backgroundImage:
-                    "url('" + _vm.userLibraryTime["coverImageUrl"] + "')"
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить треки"
                 }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "image_card_front" }),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v("Всего в твою библиотеку добавлено\n                "),
-                _c("b", { staticClass: "border_underline font_25pt" }, [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.userLibraryTime["overallMinutes"]) +
-                      "\n                "
-                  )
+              })
+            ],
+            1
+          )
+        : _vm.userLibraryTime != -1 && _vm.userLibraryTime != false
+        ? _c("div", [
+            _c(
+              "div",
+              { staticClass: "col-12 text-center paddingSides marginVertical" },
+              [
+                _c("BackgroundImage", {
+                  attrs: {
+                    backgroundImageUrl: _vm.userLibraryTime["coverImageUrl"]
+                  }
+                }),
+                _vm._v(" "),
+                _c("BackgroundImageFront"),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Всего в твою библиотеку добавлено\n                "),
+                  _c("b", { staticClass: "borderUnderline font25pt" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.userLibraryTime["overallMinutes"]) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" музыки.\n            ")
                 ]),
-                _vm._v(" музыки.\n            ")
-              ]),
-              _vm._v(" "),
-              _vm.userLibraryTime["overallHours"] != 0
-                ? _c("p", [
-                    _vm.userLibraryTime["overallDays"] == 0
-                      ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
-                      : _c("b", { staticClass: "unbold" }, [
-                          _vm._v("В других исчислениях это")
-                        ]),
-                    _vm._v(" "),
-                    _c("b", { staticClass: "border_underline" }, [
-                      _vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))
-                    ]),
-                    _vm._v(" "),
-                    _vm.userLibraryTime["overallDays"] == 0
-                      ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
-                      : _vm._e()
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.userLibraryTime["overallDays"] != 0
-                ? _c("p", [
-                    _vm.userLibraryTime["overallMonths"] == 0
-                      ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("b", { staticClass: "border_underline" }, [
-                      _vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))
-                    ]),
-                    _vm._v(" "),
-                    _vm.userLibraryTime["overallMonths"] == 0
-                      ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
-                      : _vm._e()
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.userLibraryTime["overallMonths"] != 0
-                ? _c("p", [
-                    _vm._v("или \n                "),
-                    _c(
-                      "b",
-                      {
-                        staticClass: "border_underline",
-                        staticStyle: { "font-size": "18pt" }
-                      },
-                      [
+                _vm._v(" "),
+                _vm.userLibraryTime["overallHours"] != 0
+                  ? _c("p", [
+                      _vm.userLibraryTime["overallDays"] == 0
+                        ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
+                        : _c("b", { staticClass: "unbold" }, [
+                            _vm._v("В других исчислениях это")
+                          ]),
+                      _vm._v(" "),
+                      _c("b", { staticClass: "borderUnderline" }, [
+                        _vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))
+                      ]),
+                      _vm._v(" "),
+                      _vm.userLibraryTime["overallDays"] == 0
+                        ? _c("b", { staticClass: "unbold" }, [
+                            _vm._v(" песен.")
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.userLibraryTime["overallDays"] != 0
+                  ? _c("p", [
+                      _vm.userLibraryTime["overallMonths"] == 0
+                        ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("b", { staticClass: "borderUnderline" }, [
+                        _vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))
+                      ]),
+                      _vm._v(" "),
+                      _vm.userLibraryTime["overallMonths"] == 0
+                        ? _c("b", { staticClass: "unbold" }, [
+                            _vm._v(" песен.")
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.userLibraryTime["overallMonths"] != 0
+                  ? _c("p", [
+                      _vm._v("или \n                "),
+                      _c("b", { staticClass: "font18pt borderUnderline" }, [
                         _vm._v(
                           "\n                    " +
                             _vm._s(_vm.userLibraryTime["overallMonths"]) +
                             "\n                "
                         )
-                      ]
-                    ),
-                    _vm._v(" песен.\n            ")
-                  ])
-                : _vm._e()
-            ]
-          )
-        ])
-      : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-  ])
+                      ]),
+                      _vm._v(" песен.\n            ")
+                    ])
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
+        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80313,7 +80383,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-4 padding_10" }, [
+  return _c("div", { staticClass: "col-12 col-md-4 paddingSidesSmall" }, [
     _vm.type === false
       ? _c(
           "div",
@@ -80368,17 +80438,14 @@ var render = function() {
                   : _vm.items != -1
                   ? _c(
                       "div",
-                      {
-                        staticClass:
-                          "grey_card_trans padding_10 fade_in_slow_anim"
-                      },
+                      { staticClass: "fadeInAnim greyCardTrans paddingSides" },
                       [
                         _vm.type === "tracks"
                           ? _c(
                               "h4",
-                              { staticClass: "text-center border_underline" },
+                              { staticClass: "text-center borderUnderline" },
                               [
-                                _vm._v("Треки - "),
+                                _vm._v("\n                    Треки - "),
                                 _c("b", [_vm._v(_vm._s(_vm.items["count"]))])
                               ]
                             )
@@ -80387,9 +80454,9 @@ var render = function() {
                         _vm.type === "albums"
                           ? _c(
                               "h4",
-                              { staticClass: "text-center border_underline" },
+                              { staticClass: "text-center borderUnderline" },
                               [
-                                _vm._v("Альбомы - "),
+                                _vm._v("\n                    Альбомы - "),
                                 _c("b", [_vm._v(_vm._s(_vm.items["count"]))])
                               ]
                             )
@@ -80398,9 +80465,9 @@ var render = function() {
                         _vm.type === "artists"
                           ? _c(
                               "h4",
-                              { staticClass: "text-center border_underline" },
+                              { staticClass: "text-center borderUnderline" },
                               [
-                                _vm._v("Подписки - "),
+                                _vm._v("\n                    Подписки - "),
                                 _c("b", [_vm._v(_vm._s(_vm.items["count"]))])
                               ]
                             )
@@ -80446,97 +80513,12 @@ var render = function() {
                           ? _c("div")
                           : _vm.items["lastFive"].length > 0 &&
                             _vm.items["lastFive"].length != false
-                          ? _c(
-                              "div",
-                              { staticClass: "col-md-12 fade_in_slow_anim" },
-                              [
-                                _c("div", { staticClass: "col-md-12" }, [
-                                  _vm.type === "tracks"
-                                    ? _c(
-                                        "p",
-                                        {
-                                          staticClass: "text-center",
-                                          staticStyle: { "font-size": "10pt" }
-                                        },
-                                        [_vm._v("Последние добавленные треки")]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.type === "albums"
-                                    ? _c(
-                                        "p",
-                                        {
-                                          staticClass: "text-center",
-                                          staticStyle: { "font-size": "10pt" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "Последние добавленные альбомы"
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.type === "artists"
-                                    ? _c(
-                                        "p",
-                                        {
-                                          staticClass: "text-center",
-                                          staticStyle: { "font-size": "10pt" }
-                                        },
-                                        [_vm._v("Некоторые из твоих подписок")]
-                                      )
-                                    : _vm._e()
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "row justify-content-center" },
-                                  _vm._l(_vm.items["lastFive"], function(item) {
-                                    return _c(
-                                      "div",
-                                      {
-                                        key: item.id,
-                                        staticClass: "col-2 fade_in_slow_anim",
-                                        attrs: {
-                                          "data-toggle": "tooltip",
-                                          "data-title": item.name,
-                                          "data-placement": "bottom"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "a",
-                                          {
-                                            attrs: {
-                                              href: item.url,
-                                              target: "_blank"
-                                            }
-                                          },
-                                          [
-                                            _c("img", {
-                                              staticClass:
-                                                "rounded-circle album_icon",
-                                              attrs: { src: item.cover }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  }),
-                                  0
-                                )
-                              ]
-                            )
-                          : _c("div", [
-                              _c("div", { staticClass: "col-md-12" }, [
+                          ? _c("div", { staticClass: "col-12 fadeInAnim" }, [
+                              _c("div", { staticClass: "col-12" }, [
                                 _vm.type === "tracks"
                                   ? _c(
                                       "p",
-                                      {
-                                        staticClass: "text-center",
-                                        staticStyle: { "font-size": "10pt" }
-                                      },
+                                      { staticClass: "text-center font10pt" },
                                       [_vm._v("Последние добавленные треки")]
                                     )
                                   : _vm._e(),
@@ -80544,10 +80526,7 @@ var render = function() {
                                 _vm.type === "albums"
                                   ? _c(
                                       "p",
-                                      {
-                                        staticClass: "text-center",
-                                        staticStyle: { "font-size": "10pt" }
-                                      },
+                                      { staticClass: "text-center font10pt" },
                                       [_vm._v("Последние добавленные альбомы")]
                                     )
                                   : _vm._e(),
@@ -80555,10 +80534,72 @@ var render = function() {
                                 _vm.type === "artists"
                                   ? _c(
                                       "p",
-                                      {
-                                        staticClass: "text-center",
-                                        staticStyle: { "font-size": "10pt" }
-                                      },
+                                      { staticClass: "text-center font10pt" },
+                                      [_vm._v("Некоторые из твоих подписок")]
+                                    )
+                                  : _vm._e()
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "row justify-content-center" },
+                                _vm._l(_vm.items["lastFive"], function(item) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: item.id,
+                                      staticClass: "col-2 fadeInAnim",
+                                      attrs: {
+                                        "data-toggle": "tooltip",
+                                        "data-title": item.name,
+                                        "data-placement": "bottom"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          attrs: {
+                                            href: item.url,
+                                            target: "_blank"
+                                          }
+                                        },
+                                        [
+                                          _c("img", {
+                                            staticClass:
+                                              "rounded-circle albumIconSmall",
+                                            attrs: { src: item.cover }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ])
+                          : _c("div", [
+                              _c("div", { staticClass: "col-md-12" }, [
+                                _vm.type === "tracks"
+                                  ? _c(
+                                      "p",
+                                      { staticClass: "text-center font10pt" },
+                                      [_vm._v("Последние добавленные треки")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.type === "albums"
+                                  ? _c(
+                                      "p",
+                                      { staticClass: "text-center font10pt" },
+                                      [_vm._v("Последние добавленные альбомы")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.type === "artists"
+                                  ? _c(
+                                      "p",
+                                      { staticClass: "text-center font10pt" },
                                       [_vm._v("Некоторые из твоих подписок")]
                                     )
                                   : _vm._e()
@@ -80581,7 +80622,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", [
-        _vm._v("\n                            -\n                        ")
+        _vm._v(
+          "\n                                -\n                            "
+        )
       ])
     ])
   }
@@ -80607,13 +80650,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
+  return _c("div", { staticClass: "row justify-content-center fadeInAnim" }, [
     _vm.fiveLongest === -1
-      ? _c("div", { staticClass: "col-md-6 padding_10" }, [_c("Loader")], 1)
+      ? _c(
+          "div",
+          { staticClass: "col-12 col-md-5 paddingSides fadeInAnim" },
+          [_c("Loader")],
+          1
+        )
       : _vm.fiveLongest === false
       ? _c(
           "div",
-          { staticClass: "col-md-6 padding_10" },
+          { staticClass: "col-12 col-md-5 paddingSides" },
           [
             _c("Error", {
               attrs: {
@@ -80627,46 +80675,41 @@ var render = function() {
       : _vm.fiveLongest != -1
       ? _c(
           "div",
-          { staticClass: "col-md-5 padding_10 grey_card margin_sides" },
+          {
+            staticClass:
+              "col-12 col-md-5 paddingSides marginSides greyCard fadeInAnim"
+          },
           [
             _vm._m(0),
             _vm._v(" "),
             _vm._l(_vm.fiveLongest, function(item) {
               return _c(
                 "div",
-                { key: item.id, staticClass: "row margin_top_8 fade_in_anim" },
+                { key: item.id, staticClass: "row marginTopSmall" },
                 [
                   _c("div", { staticClass: "col-2" }, [
-                    _c("div", { staticClass: "number_card" }, [
+                    _c("div", { staticClass: "numberCircle" }, [
                       _c("b", [_vm._v(_vm._s(item.count))])
                     ]),
                     _vm._v(" "),
                     _c("a", { attrs: { href: item.url, target: "_blank" } }, [
                       _c("img", {
-                        staticClass: "rounded-circle album_icon_big",
+                        staticClass: "rounded-circle albumIconBig",
                         attrs: { src: item.cover }
                       })
                     ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-10" }, [
-                    _c(
-                      "p",
-                      { staticClass: "font_13pt font_white margin_none" },
-                      [
-                        _c(
-                          "a",
-                          { attrs: { href: item.url, target: "_blank" } },
-                          [_c("b", [_vm._v(_vm._s(item.name))])]
-                        )
-                      ]
-                    ),
+                    _c("p", { staticClass: "font13pt whiteColor marginNone" }, [
+                      _c("a", { attrs: { href: item.url, target: "_blank" } }, [
+                        _c("b", [_vm._v(_vm._s(item.name))])
+                      ])
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "p",
-                      { staticClass: "font_13pt margin_none font_white" },
-                      [_c("b", [_vm._v(_vm._s(item.duration))])]
-                    )
+                    _c("p", { staticClass: "font13pt greyColor marginNone" }, [
+                      _c("b", [_vm._v(_vm._s(item.duration))])
+                    ])
                   ])
                 ]
               )
@@ -80677,11 +80720,16 @@ var render = function() {
       : _c("div", [_c("Error", { attrs: { type: "small" } })], 1),
     _vm._v(" "),
     _vm.fiveShortest === -1
-      ? _c("div", { staticClass: "col-md-6 padding_10" }, [_c("Loader")], 1)
+      ? _c(
+          "div",
+          { staticClass: "col-12 col-md-5 paddingSides fadeInAnim" },
+          [_c("Loader")],
+          1
+        )
       : _vm.fiveShortest === false && _vm.fiveLongest != -1
       ? _c(
           "div",
-          { staticClass: "col-md-6 padding_10" },
+          { staticClass: "col-12 col-md-5 paddingSides" },
           [
             _c("Error", {
               attrs: {
@@ -80695,46 +80743,41 @@ var render = function() {
       : _vm.fiveShortest != -1
       ? _c(
           "div",
-          { staticClass: "col-md-5 padding_10 grey_card margin_sides" },
+          {
+            staticClass:
+              "col-12 col-md-5 paddingSides marginSides greyCard fadeInAnim"
+          },
           [
             _vm._m(1),
             _vm._v(" "),
             _vm._l(_vm.fiveShortest, function(item) {
               return _c(
                 "div",
-                { key: item.id, staticClass: "row margin_top_8 fade_in_anim" },
+                { key: item.id, staticClass: "row marginTopSmall" },
                 [
                   _c("div", { staticClass: "col-2" }, [
-                    _c("div", { staticClass: "number_card" }, [
+                    _c("div", { staticClass: "numberCircle" }, [
                       _c("b", [_vm._v(_vm._s(item.count))])
                     ]),
                     _vm._v(" "),
                     _c("a", { attrs: { href: item.url, target: "_blank" } }, [
                       _c("img", {
-                        staticClass: "rounded-circle album_icon_big",
+                        staticClass: "rounded-circle albumIconBig",
                         attrs: { src: item.cover }
                       })
                     ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-10" }, [
-                    _c(
-                      "p",
-                      { staticClass: "font_13pt font_white margin_none" },
-                      [
-                        _c(
-                          "a",
-                          { attrs: { href: item.url, target: "_blank" } },
-                          [_c("b", [_vm._v(_vm._s(item.name))])]
-                        )
-                      ]
-                    ),
+                    _c("p", { staticClass: "font13pt whiteColor marginNone" }, [
+                      _c("a", { attrs: { href: item.url, target: "_blank" } }, [
+                        _c("b", [_vm._v(_vm._s(item.name))])
+                      ])
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "p",
-                      { staticClass: "font_13pt margin_none font_white" },
-                      [_c("b", [_vm._v(_vm._s(item.duration))])]
-                    )
+                    _c("p", { staticClass: "font13pt greyColor marginNone" }, [
+                      _c("b", [_vm._v(_vm._s(item.duration))])
+                    ])
                   ])
                 ]
               )
@@ -80745,11 +80788,16 @@ var render = function() {
       : _c("div", [_c("Error", { attrs: { type: "small" } })], 1),
     _vm._v(" "),
     _vm.tracksMode === -1
-      ? _c("div", { staticClass: "col-md-6 padding_10" }, [_c("Loader")], 1)
+      ? _c(
+          "div",
+          { staticClass: "col-12 col-md-6 paddingSides" },
+          [_c("Loader")],
+          1
+        )
       : _vm.tracksMode === false
       ? _c(
           "div",
-          { staticClass: "col-md-6 padding_10" },
+          { staticClass: "col-12 col-md-6 paddingSides" },
           [
             _c("Error", {
               attrs: {
@@ -80765,16 +80813,16 @@ var render = function() {
           "div",
           {
             staticClass:
-              "col-md-12 text-center fade_in_anim margin_vertical padding_10"
+              "col-12 text-center fadeInAnim marginVertical paddingSides"
           },
           [
             _c("hr"),
             _vm._v(" "),
-            _c("p", { staticClass: "padding_10" }, [
+            _c("p", { staticClass: "paddingSides" }, [
               _vm._v(
                 "\n            Средняя продолжительность трека в твоей библиотеке - \n            "
               ),
-              _c("b", { staticClass: "border_underline font_25pt" }, [
+              _c("b", { staticClass: "font25pt borderUnderline" }, [
                 _vm._v(_vm._s(_vm.tracksMode))
               ])
             ]),
@@ -80790,7 +80838,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "border_underline text-center" }, [
+    return _c("h4", { staticClass: "text-center borderUnderline" }, [
       _c("b", [_vm._v("Пять самых длинных песен")])
     ])
   },
@@ -80798,7 +80846,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "border_underline text-center" }, [
+    return _c("h4", { staticClass: "text-center borderUnderline" }, [
       _c("b", [_vm._v("Пять самых коротких песен")])
     ])
   }
@@ -80824,156 +80872,181 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-11 justify-content-center" }, [
-    _vm.yearsAndDecades === -1
-      ? _c("div", [_c("Loader")], 1)
-      : _vm.yearsAndDecades === false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось произвести анализ треков"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.yearsAndDecades != -1 && _vm.yearsAndDecades != false
-      ? _c(
-          "div",
-          { staticClass: "grey_card padding_10 margin_vertical" },
-          [
-            _vm.type == "alltime"
-              ? _c("div", [
-                  _c("p", { staticClass: "text-center" }, [
-                    _vm._v("Больше всего тебе нравится музыка "),
-                    _c(
-                      "b",
-                      { staticClass: "unbold border_underline font_16pt" },
-                      [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых")]
-                    ),
-                    _vm._v(". \n                В твоей библиотеке "),
-                    _c(
-                      "b",
-                      { staticClass: "unbold border_underline font_16pt" },
-                      [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))]
-                    ),
-                    _vm._v(" из этой эпохи.")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass: "text-center",
-                      attrs: { "v-if": _vm.type == "alltime" }
-                    },
-                    [
-                      _c(
-                        "b",
-                        { staticClass: "unbold border_underline font_16pt" },
-                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")]
-                      ),
+  return _c(
+    "div",
+    { staticClass: "col-11 justify-content-center fadeInAnim" },
+    [
+      _vm.yearsAndDecades === -1
+        ? _c("div", [_c("Loader")], 1)
+        : _vm.yearsAndDecades === false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось произвести анализ треков"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.yearsAndDecades != -1 && _vm.yearsAndDecades != false
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "col-12 \n    \n    greyCard paddingSides marginVertical"
+            },
+            [
+              _vm.type == "alltime"
+                ? _c("div", [
+                    _c("p", { staticClass: "text-center" }, [
                       _vm._v(
-                        " - твой любимый год. \n                Тебе нравятся "
+                        "\n                Больше всего тебе нравится музыка "
                       ),
                       _c(
                         "b",
-                        { staticClass: "unbold border_underline font_16pt" },
-                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
-                      ),
-                      _vm._v(" из этого года.")
-                    ]
-                  )
-                ])
-              : _c("div", [
-                  _c(
-                    "p",
-                    {
-                      staticClass: "text-center",
-                      attrs: { "v-else-if": _vm.type == "month" }
-                    },
-                    [
-                      _vm._v(
-                        "В последнее время ты больше всего слушаешь музыку "
-                      ),
-                      _c(
-                        "b",
-                        { staticClass: "unbold border_underline font_16pt" },
+                        { staticClass: "unbold borderUnderline font16pt" },
                         [
                           _vm._v(
                             _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых"
                           )
                         ]
                       ),
-                      _vm._v(
-                        ". \n                За последний месяц ты послушал "
-                      ),
+                      _vm._v(". \n                В твоей библиотеке "),
                       _c(
                         "b",
-                        { staticClass: "unbold border_underline font_16pt" },
+                        { staticClass: "unbold borderUnderline font16pt" },
                         [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))]
                       ),
-                      _vm._v(" из этой эпохи.")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass: "text-center",
-                      attrs: { "v-else-if": _vm.type == "month" }
-                    },
-                    [
-                      _c(
-                        "b",
-                        { staticClass: "unbold border_underline font_16pt" },
-                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")]
-                      ),
-                      _vm._v(
-                        " - твой любимый год. \n                Были прослушаны "
-                      ),
-                      _c(
-                        "b",
-                        { staticClass: "unbold border_underline font_16pt" },
-                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
-                      ),
-                      _vm._v(" из этого года.")
-                    ]
-                  )
-                ]),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _c("h5", { staticClass: "text-center border_underline" }, [
-              _vm._v("Песни по десятилетиям")
-            ]),
-            _vm._v(" "),
-            _c("BarChart", {
-              attrs: {
-                favoriteGenres: _vm.yearsAndDecades["countDecades"],
-                label: "Песни по десятилетиям",
-                backgroundColor: _vm.yearsAndDecades["decadeColors"]
-              }
-            }),
-            _vm._v(" "),
-            _c("h5", { staticClass: "text-center border_underline" }, [
-              _vm._v("Песни по годам")
-            ]),
-            _vm._v(" "),
-            _c("BarChart", {
-              attrs: {
-                favoriteGenres: _vm.yearsAndDecades["countYears"],
-                label: "Песни по годам",
-                backgroundColor: _vm.yearsAndDecades["yearColors"]
-              }
-            })
-          ],
-          1
-        )
-      : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-  ])
+                      _vm._v(" из этой эпохи.\n            ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        staticClass: "text-center",
+                        attrs: { "v-if": _vm.type == "alltime" }
+                      },
+                      [
+                        _c(
+                          "b",
+                          { staticClass: "unbold borderUnderline font16pt" },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый"
+                            )
+                          ]
+                        ),
+                        _vm._v(
+                          " - твой любимый год. \n                Тебе нравятся "
+                        ),
+                        _c(
+                          "b",
+                          { staticClass: "unbold borderUnderline font16pt" },
+                          [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
+                        ),
+                        _vm._v(" из этого года.\n            ")
+                      ]
+                    )
+                  ])
+                : _c("div", [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "text-center",
+                        attrs: { "v-else-if": _vm.type == "month" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                В последнее время ты больше всего слушаешь музыку "
+                        ),
+                        _c(
+                          "b",
+                          { staticClass: "unbold borderUnderline font16pt" },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых"
+                            )
+                          ]
+                        ),
+                        _vm._v(
+                          ". \n                За последний месяц ты послушал "
+                        ),
+                        _c(
+                          "b",
+                          { staticClass: "unbold borderUnderline font16pt" },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.yearsAndDecades["maxDecadeSongs"])
+                            )
+                          ]
+                        ),
+                        _vm._v(" из этой эпохи.\n            ")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        staticClass: "text-center",
+                        attrs: { "v-else-if": _vm.type == "month" }
+                      },
+                      [
+                        _c(
+                          "b",
+                          { staticClass: "unbold borderUnderline font16pt" },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый"
+                            )
+                          ]
+                        ),
+                        _vm._v(
+                          " - твой любимый год. \n               Ты прослушал "
+                        ),
+                        _c(
+                          "b",
+                          { staticClass: "unbold borderUnderline font16pt" },
+                          [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
+                        ),
+                        _vm._v(" из этого года.\n            ")
+                      ]
+                    )
+                  ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("h5", { staticClass: "text-center borderUnderline" }, [
+                _vm._v("Песни по десятилетиям")
+              ]),
+              _vm._v(" "),
+              _c("BarChart", {
+                attrs: {
+                  favoriteGenres: _vm.yearsAndDecades["countDecades"],
+                  label: "Песни по десятилетиям",
+                  backgroundColor: _vm.yearsAndDecades["decadeColors"]
+                }
+              }),
+              _vm._v(" "),
+              _c("h5", { staticClass: "text-center borderUnderline" }, [
+                _vm._v("Песни по годам")
+              ]),
+              _vm._v(" "),
+              _c("BarChart", {
+                attrs: {
+                  favoriteGenres: _vm.yearsAndDecades["countYears"],
+                  label: "Песни по годам",
+                  backgroundColor: _vm.yearsAndDecades["yearColors"]
+                }
+              })
+            ],
+            1
+          )
+        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -98311,18 +98384,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Misc_Loader_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Misc/Loader.vue */ "./resources/js/components/Misc/Loader.vue");
 /* harmony import */ var _components_Misc_Info_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Misc/Info.vue */ "./resources/js/components/Misc/Info.vue");
 /* harmony import */ var _components_Misc_BackgroundImage_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Misc/BackgroundImage.vue */ "./resources/js/components/Misc/BackgroundImage.vue");
-/* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
-/* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
-/* harmony import */ var _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Profile/BasicStats/LongestAndShortest.vue */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue");
-/* harmony import */ var _components_Profile_BasicStats_FavoriteGenres_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Profile/BasicStats/FavoriteGenres.vue */ "./resources/js/components/Profile/BasicStats/FavoriteGenres.vue");
-/* harmony import */ var _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Profile/BasicStats/ArtistsCount.vue */ "./resources/js/components/Profile/BasicStats/ArtistsCount.vue");
-/* harmony import */ var _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Profile/BasicStats/YearsAndDecades.vue */ "./resources/js/components/Profile/BasicStats/YearsAndDecades.vue");
-/* harmony import */ var _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Items.vue */ "./resources/js/components/Profile/Top10/Top10Items.vue");
-/* harmony import */ var _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Profile/Achievements/AchievementItem.vue */ "./resources/js/components/Profile/Achievements/AchievementItem.vue");
-/* harmony import */ var _components_Profile_Latest_List_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Profile/Latest/List.vue */ "./resources/js/components/Profile/Latest/List.vue");
-/* harmony import */ var _components_Profile_Latest_ListItem_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Profile/Latest/ListItem.vue */ "./resources/js/components/Profile/Latest/ListItem.vue");
-/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_Misc_BackgroundImageFront_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Misc/BackgroundImageFront.vue */ "./resources/js/components/Misc/BackgroundImageFront.vue");
+/* harmony import */ var _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile/BasicStats/LastFive.vue */ "./resources/js/components/Profile/BasicStats/LastFive.vue");
+/* harmony import */ var _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Profile/BasicStats/HoursAndMinutes.vue */ "./resources/js/components/Profile/BasicStats/HoursAndMinutes.vue");
+/* harmony import */ var _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Profile/BasicStats/LongestAndShortest.vue */ "./resources/js/components/Profile/BasicStats/LongestAndShortest.vue");
+/* harmony import */ var _components_Profile_BasicStats_FavoriteGenres_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Profile/BasicStats/FavoriteGenres.vue */ "./resources/js/components/Profile/BasicStats/FavoriteGenres.vue");
+/* harmony import */ var _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Profile/BasicStats/ArtistsCount.vue */ "./resources/js/components/Profile/BasicStats/ArtistsCount.vue");
+/* harmony import */ var _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Profile/BasicStats/YearsAndDecades.vue */ "./resources/js/components/Profile/BasicStats/YearsAndDecades.vue");
+/* harmony import */ var _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Profile/Top10/Top10Items.vue */ "./resources/js/components/Profile/Top10/Top10Items.vue");
+/* harmony import */ var _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Profile/Achievements/AchievementItem.vue */ "./resources/js/components/Profile/Achievements/AchievementItem.vue");
+/* harmony import */ var _components_Profile_Latest_List_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Profile/Latest/List.vue */ "./resources/js/components/Profile/Latest/List.vue");
+/* harmony import */ var _components_Profile_Latest_ListItem_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Profile/Latest/ListItem.vue */ "./resources/js/components/Profile/Latest/ListItem.vue");
+/* harmony import */ var _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Charts/BarChart.vue */ "./resources/js/components/Charts/BarChart.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -98343,28 +98417,30 @@ Vue.component('Info', _components_Misc_Info_vue__WEBPACK_IMPORTED_MODULE_5__["de
 
 Vue.component('BackgroundImage', _components_Misc_BackgroundImage_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
-Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
+Vue.component('BackgroundImageFront', _components_Misc_BackgroundImageFront_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 
-Vue.component('HoursAndMinutes', _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
+Vue.component('LastFive', _components_Profile_BasicStats_LastFive_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 
-Vue.component('LongestAndShortest', _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
+Vue.component('HoursAndMinutes', _components_Profile_BasicStats_HoursAndMinutes_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
-Vue.component('FavoriteGenres', _components_Profile_BasicStats_FavoriteGenres_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
+Vue.component('LongestAndShortest', _components_Profile_BasicStats_LongestAndShortest_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
-Vue.component('ArtistsCount', _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
+Vue.component('FavoriteGenres', _components_Profile_BasicStats_FavoriteGenres_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
 
-Vue.component('YearsAndDecades', _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
+Vue.component('ArtistsCount', _components_Profile_BasicStats_ArtistsCount_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
 
-Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
+Vue.component('YearsAndDecades', _components_Profile_BasicStats_YearsAndDecades_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
 
-Vue.component('AchievementItem', _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
+Vue.component('Top10Items', _components_Profile_Top10_Top10Items_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
 
-Vue.component('List', _components_Profile_Latest_List_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
+Vue.component('AchievementItem', _components_Profile_Achievements_AchievementItem_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
 
-Vue.component('ListItem', _components_Profile_Latest_ListItem_vue__WEBPACK_IMPORTED_MODULE_16__["default"]); //графики
+Vue.component('List', _components_Profile_Latest_List_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
+
+Vue.component('ListItem', _components_Profile_Latest_ListItem_vue__WEBPACK_IMPORTED_MODULE_17__["default"]); //графики
 
 
-Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_17__["default"]);
+Vue.component('BarChart', _components_Charts_BarChart_vue__WEBPACK_IMPORTED_MODULE_18__["default"]);
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /**
@@ -98376,7 +98452,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_18__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_19__["default"]
 });
 
 /***/ }),
@@ -98747,6 +98823,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImage_vue_vue_type_template_id_57944d75___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImage_vue_vue_type_template_id_57944d75___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Misc/BackgroundImageFront.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/Misc/BackgroundImageFront.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BackgroundImageFront_vue_vue_type_template_id_dddfc938___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BackgroundImageFront.vue?vue&type=template&id=dddfc938& */ "./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=template&id=dddfc938&");
+/* harmony import */ var _BackgroundImageFront_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BackgroundImageFront.vue?vue&type=script&lang=js& */ "./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BackgroundImageFront_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BackgroundImageFront_vue_vue_type_template_id_dddfc938___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BackgroundImageFront_vue_vue_type_template_id_dddfc938___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Misc/BackgroundImageFront.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImageFront_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BackgroundImageFront.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImageFront_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=template&id=dddfc938&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=template&id=dddfc938& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImageFront_vue_vue_type_template_id_dddfc938___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BackgroundImageFront.vue?vue&type=template&id=dddfc938& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Misc/BackgroundImageFront.vue?vue&type=template&id=dddfc938&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImageFront_vue_vue_type_template_id_dddfc938___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BackgroundImageFront_vue_vue_type_template_id_dddfc938___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

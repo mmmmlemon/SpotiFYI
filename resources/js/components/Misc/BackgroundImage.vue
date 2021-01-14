@@ -1,6 +1,6 @@
 //BackgroundImage
 <template>
-    <div class="background_image" :style="{backgroundImage: `url('${backgroundImageUrl}')`}">
+    <div class="backgroundImage" :style="{backgroundImage: `url('${backgroundImageUrl}')`}">
     </div>
 </template>
 <script>

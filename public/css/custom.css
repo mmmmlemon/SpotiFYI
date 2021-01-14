@@ -56,6 +56,10 @@
 .whiteColor{
     color: white;
 }
+
+.greyColor{
+    color: rgb(161, 161, 161);
+}
 /*  */
 
 .error_color{
@@ -95,12 +99,13 @@
 
 
 
-.album_icon{
+
+/* album icons */
+.albumIconSmall{
     width:80%; 
     margin:5px;
 }
 
-/* album icons */
 .albumIconBig{
     width:80%; 
     margin:5px;
@@ -143,7 +148,6 @@
     transform: scale(1.2);
 }
 
-
 .album_icon_achievement{
     width:50%; 
     margin:5px;
@@ -158,6 +162,10 @@
     padding:10px;
 }
 
+.paddingSidesSmall{
+    padding: 5px;
+}
+
 .marginVertical{
     margin-top: 15px;
     margin-bottom: 15px;
@@ -167,12 +175,21 @@
     margin-top: 20%;
 }
 
+.marginTopSmall{
+    margin-top: 8px;
+}
+
 .marginNone{
     margin: 0;
 }
 
 .marginBottomNone{
     margin-bottom: 0;
+}
+
+.marginSides{
+    margin-left: 15px;
+    margin-right:15px;
 }
 /*  */
 
@@ -199,6 +216,11 @@
     background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
     margin-top: 15px;
 }
+.greyCardTrans{
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #25282c00, #2325290e, #20232634, #1e20245e, #1c1e2154);
+    margin-top: 15px;
+}
 
 .profileAvatar{
     border-radius: 100%;
@@ -206,6 +228,43 @@
     border-width:9px;
     border-color:#1b77b9;
     width: 140pt;
+}
+
+.backgroundImage{
+    position: absolute;
+    opacity: 0.08;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.backgroundImageFront{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
+    opacity: 0.92;
+}
+
+.numberCircle{
+    border-radius: 20px;
+    border-color: white;
+    background-color:  #1b77b9c5;
+    width:25px;
+    height:25px;
+    position: absolute; 
+    text-align: center;
+    font-size: 12pt;
 }
 /*  */
 
@@ -228,20 +287,25 @@
     background-image: url('/img/times/galileo.jpg');
 }
 
+/* fonts */
 .unbold{
     font-weight: normal;
 }
 
-
-
-
-/* fonts */
 .font10pt{
     font-size:10pt;
 }
 
 .font13pt{
     font-size: 13pt;
+}
+
+.font16pt{
+    font-size: 16pt;
+}
+
+.font18pt{
+    font-size: 18pt;
 }
 
 .font22pt{
@@ -268,16 +332,8 @@
     font-size:8pt;
 }
 
-
-
-
-
 .font_35{
     font-size:2.5em;
-}
-
-.font_16pt{
-    font-size: 16pt;
 }
 
 /*  */
@@ -289,10 +345,7 @@
 
 
 
-.margin_sides{
-    margin-left: 15px;
-    margin-right:15px;
-}
+
 .margin_sides_5{
     margin-left: 5px;
     margin-right:5px;
@@ -300,9 +353,6 @@
 
 
 
-.margin_top_8{
-    margin-top: 8px;
-}
 
 .padding_vertical{
     padding-top: 10px;
@@ -326,12 +376,6 @@ a:hover{
     margin-top: 15px;
 }
 
-.grey_card_trans{
-    border-radius: 10px;
-    background-image: linear-gradient(to bottom, #25282c00, #2325290e, #20232634, #1e20245e, #1c1e2154);
-    margin-top: 15px;
-}
-
 .top10_image_card{
     position: absolute;
     opacity: 0.08;
@@ -345,18 +389,7 @@ a:hover{
     background-position: center;
 }
 
-.background_image{
-    position: absolute;
-    opacity: 0.08;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
+
 
 .top10_image_card_front{
     position: absolute;
@@ -382,28 +415,8 @@ a:hover{
     background-position: center;
 }
 
-.image_card_front{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -99;
-    border-radius: 10px;
-    background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
-    opacity: 0.92;
-}
 
-.number_card{
-    border-radius: 20px;
-    border-color: white;
-    background-color:  #1b77b9c5;
-    width:25px;
-    height:25px;
-    position: absolute; 
-    text-align: center;
-    font-size: 12pt;
-}
+
 
 .number_card_achievement{
     border-radius: 20px;

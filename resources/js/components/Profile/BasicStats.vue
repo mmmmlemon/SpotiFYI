@@ -1,22 +1,23 @@
+//BasicStats
 <template>
     <div>
         <div class="row justify-content-center">
             <div class="col-12" v-if="spotifyUserLibrary == -1">
                 <Loader />
-                <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
-                <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
-                <p class="font_10pt text-center">Это может занять около минуты</p>
+                <h6 class="text-center blinkingAnim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
+                <h6 class="text-center blinkingAnim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
+                <p class="text-center font10pt">Это может занять около минуты</p>
             </div>
             <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false 
                 && spotifyUserLibrary['result'] != 'libraryError'" class="row justify-content-center">
-                <div class="col-md-12 fade_in_slow_anim">
+                <div class="col-12 fadeInAnimSlow">
                     <h5 class="text-center">
                         <b>Общая статистика</b>&nbsp;
-                        <i class="fas fa-chart-bar primary_color"></i>
+                        <i class="fas fa-chart-bar primaryColor"></i>
                     </h5>
                 </div>
                 <!-- навигация -->
-                <div class="row justify-content-center font_10pt fade_in_anim">
+                <div class="row justify-content-center fadeInAnim font10pt">
                     <nav class="justify-content-center">
                         <ul class="breadcrumb text-center">
                             <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
@@ -26,7 +27,7 @@
                     </nav>
                 </div>
 
-                <div class="col-12 justify-content-center fade_in_anim">
+                <div class="col-12 justify-content-center fadeInAnim">
                 </div>
             
                 <div class="row justify-content-center" id="basic">
@@ -39,7 +40,7 @@
 
                     <!-- часы и время -->
                     <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 
-                                    class="fade_in_slow_anim" :userLibraryTime="userLibraryTime"/>
+                                     :userLibraryTime="userLibraryTime"/>
 
                     <!-- самые длинные и короткие треки -->
                     <LongestAndShortest v-if="userLibraryTime !== -1" id="tracks"
@@ -67,7 +68,7 @@
             </div>
         </div>
         <br>
-        <div class="row justify-content-center fade_in_anim" v-if="yearsAndDecadesMonth != -1">
+        <div class="row justify-content-center fadeInAnim" v-if="yearsAndDecadesMonth != -1">
             
             <router-link to="/profile/top10#top">
                 <button class="btn btn-primary">
