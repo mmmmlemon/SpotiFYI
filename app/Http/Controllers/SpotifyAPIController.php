@@ -88,7 +88,7 @@ class SpotifyAPIController extends Controller
             if(count($profile->images) > 0)
             { $avatarUrl = $profile->images[0]->url; }
             else
-            { $avatarUrl = config('settings')->user_img; }
+            { $avatarUrl = asset(config('settings')->user_img); }
 
             $response = ['spotifyUsername' => $profile->display_name, 'country' => "https://www.countryflags.io/" . $profile->country . "/flat/32.png", 
                         'profile_url' => $profile->external_urls->spotify, 'followers' => $profile->followers->total,

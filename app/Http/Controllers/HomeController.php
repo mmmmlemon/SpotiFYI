@@ -46,7 +46,7 @@ class HomeController extends Controller
             {   
                 //временная заглушка на случай если нет аватарки
                 //to do: добавить свою дефолтную аватарку
-                $avatarUrl = config('settings')->user_img;
+                $avatarUrl = asset(config('settings')->user_img);
             }
             
             $spotifyProfile = ['displayName' => $api->me()->display_name, 'avatar' => $avatarUrl];

@@ -1,12 +1,13 @@
 //BackgroundImage
 <template>
-    <div class="backgroundImage" :style="{backgroundImage: `url('${backgroundImageUrl}')`}">
+    <div :class="bgStyle" :style="{backgroundImage: `url('${backgroundImageUrl}')`}">
     </div>
 </template>
 <script>
 export default {
     props: {
         backgroundImageUrl: { default: -1 },
+        bgStyle: { default: 'backgroundImage' },
     }
 }
 </script>

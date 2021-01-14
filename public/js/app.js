@@ -2266,6 +2266,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     backgroundImageUrl: {
       "default": -1
+    },
+    bgStyle: {
+      "default": 'backgroundImage'
     }
   }
 });
@@ -3627,6 +3630,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -78880,7 +78884,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {
-    staticClass: "backgroundImage",
+    class: _vm.bgStyle,
     style: { backgroundImage: "url('" + _vm.backgroundImageUrl + "')" }
   })
 }
@@ -81227,12 +81231,12 @@ var render = function() {
                 _c("Loader"),
                 _vm._v(" "),
                 _vm.spotifyUserLibrary == -1
-                  ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+                  ? _c("h6", { staticClass: "text-center blinkingAnim" }, [
                       _vm._v("Загружаю библиотеку пользователя...")
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c("p", { staticClass: "font_10pt text-center" }, [
+                _c("p", { staticClass: "text-center font10pt" }, [
                   _vm._v("Это может занять около минуты")
                 ])
               ],
@@ -81416,7 +81420,7 @@ var render = function() {
     _vm.top10ArtistsByTime != -1
       ? _c(
           "div",
-          { staticClass: "row justify-content-center fade_in_anim" },
+          { staticClass: "row justify-content-center fadeInAnim" },
           [
             _c("router-link", { attrs: { to: "/profile/achievements#top" } }, [
               _c("button", { staticClass: "btn btn-primary" }, [
@@ -81440,11 +81444,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
+    return _c("div", { staticClass: "col-12 fadeInAnimSlow" }, [
       _c("h5", { staticClass: "text-center" }, [
         _c("b", [_vm._v("Топ 10")]),
         _vm._v(" \n                         "),
-        _c("i", { staticClass: "fas fa-list-ol primary_color" })
+        _c("i", { staticClass: "fas fa-list-ol primaryColor" })
       ])
     ])
   },
@@ -81454,7 +81458,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "row justify-content-center font_10pt fade_in_anim" },
+      { staticClass: "row justify-content-center fadeInAnim font10pt" },
       [
         _c("nav", { staticClass: "justify-content-center" }, [
           _c("ul", { staticClass: "breadcrumb text-center" }, [
@@ -81477,13 +81481,13 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "col-12 justify-content-center fade_in_anim",
+        staticClass: "col-12 justify-content-center fadeInAnim",
         attrs: { id: "tracks" }
       },
       [
         _c("h3", { staticClass: "text-center" }, [
           _vm._v("\n                         Треки\n                         "),
-          _c("i", { staticClass: "fas fa-compact-disc primary_color" })
+          _c("i", { staticClass: "fas fa-compact-disc primaryColor" })
         ])
       ]
     )
@@ -81496,7 +81500,7 @@ var staticRenderFns = [
       _vm._v(
         "\n                         Исполнители\n                         "
       ),
-      _c("i", { staticClass: "fas fa-users primary_color" })
+      _c("i", { staticClass: "fas fa-users primaryColor" })
     ])
   }
 ]
@@ -81521,209 +81525,213 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-5 margin_sides padding_10" }, [
-    _vm.items == -1
-      ? _c("div", [_c("Loader")], 1)
-      : _vm.items == false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось загрузить треки"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.items == "noTracks"
-      ? _c(
-          "div",
-          [
-            _c("Info", {
-              attrs: {
-                type: "small",
-                infoMessage: "Пока что мало данных для Топ-10"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.items != -1 || _vm.items != false
-      ? _c(
-          "div",
-          { staticClass: "col-md-12 padding_10 grey_card fade_in_anim" },
-          [
-            _c("div", {
-              staticClass: "top10_image_card",
-              style: {
-                backgroundImage: "url('" + _vm.items["backgroundImage"] + "')"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", [
-              _c("h4", { staticClass: "border_underline text-center" }, [
-                _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
-              ]),
+  return _c(
+    "div",
+    { staticClass: "col-12 col-md-5 marginSides paddingSides" },
+    [
+      _vm.items == -1
+        ? _c("div", [_c("Loader")], 1)
+        : _vm.items == false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить треки"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.items == "noTracks"
+        ? _c(
+            "div",
+            [
+              _c("Info", {
+                attrs: {
+                  type: "small",
+                  infoMessage: "Пока что мало данных для Топ-10"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.items != -1 || _vm.items != false
+        ? _c(
+            "div",
+            { staticClass: "col-12 fadeInAnim paddingSides greyCard" },
+            [
+              _c("BackgroundImage", {
+                attrs: {
+                  bgStyle: "top10ImageCard",
+                  backgroundImageUrl: _vm.items["backgroundImage"]
+                }
+              }),
               _vm._v(" "),
-              _vm.cardDesc != undefined
-                ? _c("p", { staticClass: "font_10pt text-center" }, [
-                    _vm._v(_vm._s(_vm.cardDesc))
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("div", { staticClass: "row fade_in_anim" }, [
-                _vm.items != undefined
-                  ? _c(
-                      "div",
-                      _vm._l(_vm.items["items"], function(item) {
-                        return _c(
-                          "div",
-                          { key: item.id, staticClass: "row fade_in_anim" },
-                          [
-                            _c("div", { staticClass: "col-2" }, [
-                              _c("div", { staticClass: "number_card" }, [
-                                _c("b", [_vm._v(_vm._s(item.count))])
+              _c("div", [
+                _c("h4", { staticClass: "text-center borderUnderline" }, [
+                  _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
+                ]),
+                _vm._v(" "),
+                _vm.cardDesc != undefined
+                  ? _c("p", { staticClass: "text-center font10pt" }, [
+                      _vm._v(_vm._s(_vm.cardDesc))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "row fadeInAnim" }, [
+                  _vm.items != undefined
+                    ? _c(
+                        "div",
+                        _vm._l(_vm.items["items"], function(item) {
+                          return _c(
+                            "div",
+                            { key: item.id, staticClass: "row fadeInAnim" },
+                            [
+                              _c("div", { staticClass: "col-2" }, [
+                                _c("div", { staticClass: "numberCircle" }, [
+                                  _c("b", [_vm._v(_vm._s(item.count))])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: item.url, target: "_blank" }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticClass:
+                                        "rounded-circle albumIconTop10",
+                                      attrs: { src: item.image }
+                                    })
+                                  ]
+                                )
                               ]),
                               _vm._v(" "),
-                              _c(
-                                "a",
-                                { attrs: { href: item.url, target: "_blank" } },
-                                [
-                                  _c("img", {
+                              _c("div", { staticClass: "col-10" }, [
+                                _c(
+                                  "p",
+                                  {
                                     staticClass:
-                                      "rounded-circle album_icon_top10",
-                                    attrs: { src: item.image }
-                                  })
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-10" }, [
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "font_13pt font_white margin_none"
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: {
-                                        href: item.url,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [_c("b", [_vm._v(_vm._s(item.name))])]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              item.album
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "font_10pt margin_none font_white",
-                                      staticStyle: { "margin-bottom": "7px" }
-                                    },
-                                    [
-                                      _c(
-                                        "a",
-                                        {
-                                          attrs: {
-                                            href: item.album_url,
-                                            target: "_blank"
-                                          }
-                                        },
-                                        [
-                                          item.duration
-                                            ? _c("b", [
-                                                _vm._v(
-                                                  _vm._s(item.duration) + "  "
-                                                )
-                                              ])
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          _c("b", { staticClass: "unbold" }, [
-                                            _vm._v(
-                                              _vm._s(item.album) +
-                                                " - " +
-                                                _vm._s(item.album_year)
-                                            )
-                                          ])
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              item.genres
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "font_10pt margin_none font_white",
-                                      staticStyle: { "margin-bottom": "7px" }
-                                    },
-                                    [
-                                      _c("b", { staticClass: "unbold" }, [
-                                        _vm._v(_vm._s(item.genres))
-                                      ])
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              item.info
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "font_10pt margin_none font_white",
-                                      staticStyle: { "margin-bottom": "7px" }
-                                    },
-                                    [
-                                      _c("b", { staticClass: "unbold" }, [
-                                        _vm._v(_vm._s(item.info))
-                                      ])
-                                    ]
-                                  )
-                                : _vm._e()
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  : _c(
-                      "div",
-                      [
-                        _c("Error", {
-                          attrs: {
-                            type: "x-small",
-                            errorMessage:
-                              "Нечего показывать. Параметр items пустой."
-                          }
-                        })
-                      ],
-                      1
-                    )
+                                      "font13pt whiteColor marginNone"
+                                  },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: item.url,
+                                          target: "_blank"
+                                        }
+                                      },
+                                      [_c("b", [_vm._v(_vm._s(item.name))])]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                item.album
+                                  ? _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "font10pt whiteColor marginNone marginBottomSmall"
+                                      },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: {
+                                              href: item.album_url,
+                                              target: "_blank"
+                                            }
+                                          },
+                                          [
+                                            item.duration
+                                              ? _c("b", [
+                                                  _vm._v(
+                                                    _vm._s(item.duration) + "  "
+                                                  )
+                                                ])
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _c("b", { staticClass: "unbold" }, [
+                                              _vm._v(
+                                                _vm._s(item.album) +
+                                                  " - " +
+                                                  _vm._s(item.album_year)
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item.genres
+                                  ? _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "font10pt marginNone whiteColor marginBottomSmall"
+                                      },
+                                      [
+                                        _c("b", { staticClass: "unbold" }, [
+                                          _vm._v(_vm._s(item.genres))
+                                        ])
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item.info
+                                  ? _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "font10pt marginNone whiteColor marginBottomSmall"
+                                      },
+                                      [
+                                        _c("b", { staticClass: "unbold" }, [
+                                          _vm._v(_vm._s(item.info))
+                                        ])
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    : _c(
+                        "div",
+                        [
+                          _c("Error", {
+                            attrs: {
+                              type: "x-small",
+                              errorMessage:
+                                "Нечего показывать. Параметр items пустой."
+                            }
+                          })
+                        ],
+                        1
+                      )
+                ])
               ])
-            ])
-          ]
-        )
-      : _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: { type: "x-small", errorMessage: "Неизвестная ошибка" }
-            })
-          ],
-          1
-        )
-  ])
+            ],
+            1
+          )
+        : _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: { type: "x-small", errorMessage: "Неизвестная ошибка" }
+              })
+            ],
+            1
+          )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
