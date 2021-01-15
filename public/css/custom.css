@@ -5,48 +5,9 @@
     background-image: linear-gradient(to bottom, #2e3136, #2c2f33, #292c31, #272a2e, #25282c) !important;
 }
 
-.spotify_green_bg{
-    background-color: #1DB954 !important;
-}
-
 .invisible{
     display: none;
 }
-
-.nav_item{
-    font-size: 13pt;
-    font-weight: bold;
-    margin-left: 20px;
-}
-
-.nav_item_login_spotify{
-    font-size: 15pt;
-    font-weight: bold;
-}
-
-.nav_item_username{
-    font-size: 13pt;
-    font-weight: bold;
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
-.nav_item_spotify_avatar{
-    width:45px;
-    height:45px;
-    margin-left: 10px;
-    border-style: solid;
-    border-width:2px;
-    border-color: #1b77b9;
-}
-
-.nav_item_logout{
-    font-size: 13pt;
-    font-weight: bold;
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
 
 /* colors */
 .primaryColor{
@@ -60,34 +21,17 @@
 .greyColor{
     color: rgb(161, 161, 161);
 }
-/*  */
 
-.error_color{
-    color: rgb(175, 55, 55);
-}
-
-.warning_color{
-    color: rgb(184, 164, 53);
-}
-
-.warning_icon{
-    font-size: 60pt;
-    color: rgb(184, 164, 53);
-    margin-top: 5%;
-}
-
-.info_icon{
+.infoIcon{
     font-size: 60pt;
     color: rgb(53, 136, 184);
     margin-top: 5%;
 }
 
-
-
-.error{
-    color: rgb(175, 55, 55);
-    font-weight: bold;
-    margin: 0;
+.warningIcon{
+    font-size: 60pt;
+    color: rgb(184, 164, 53);
+    margin-top: 5%;
 }
 
 .warning{
@@ -96,6 +40,13 @@
     margin: 0;
 }
 
+
+.error{
+    color: rgb(175, 55, 55);
+    font-weight: bold;
+    margin: 0;
+}
+/*  */
 
 /* album icons */
 .albumIconSmall{
@@ -109,7 +60,6 @@
     border-width: 2px;
     transform: scale(1.2);
 }
-
 
 .albumIconBig{
     width:80%; 
@@ -150,11 +100,6 @@
 }
 
 /*  */
-
-
-
-
-
 
 
 /* padding, margin etc. */
@@ -198,6 +143,15 @@
 /*  */
 
 /* design */
+.navSpotifyAvatar{
+    width:45px;
+    height:45px;
+    margin-left: 10px;
+    border-style: solid;
+    border-width:2px;
+    border-color: #1b77b9;
+}
+
 .borderUnderline{
     border-bottom-style:solid;
     border-bottom-width: 2px;
@@ -247,7 +201,6 @@
     background-position: center;
     z-index: -1;
 }
-
 
 .top10ImageCard{
     position: absolute;
@@ -303,24 +256,6 @@
 
 /*  */
 
-.border_underline_text{
-    text-decoration: underline;
-    text-decoration-color: #1b77b9;
-    transition: text-decoration-color 0.2s ease-in-out;
-}
-
-.border_underline_text:hover{
-    text-decoration-color: white;
-    cursor: pointer;
-}
-
-.time_fact{
-    background-color: black; 
-    margin-top:20px; 
-    border-radius: 10px; 
-    padding: 20px;
-    background-image: url('/img/times/galileo.jpg');
-}
 
 /* fonts */
 .unbold{
@@ -329,6 +264,10 @@
 
 .font10pt{
     font-size:10pt;
+}
+
+.font12pt{
+    font-size: 12pt;
 }
 
 .font13pt{
@@ -373,27 +312,7 @@
 
 /*  */
 
-.grey_bg{
-    background-color: #25282c;
-}
-
-
-
-
-
-.margin_sides_5{
-    margin-left: 5px;
-    margin-right:5px;
-}
-
-
-
-
-.padding_vertical{
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
+/* tags */
 a{
     color: rgb(233, 232, 232) !important;
     transition: color 0.2s ease-in-out;
@@ -404,79 +323,6 @@ a:hover{
     text-decoration: none !important;
 }
 
-
-.grey_card_light{
-    border-radius: 10px;
-    background-image: linear-gradient(to bottom, #41454a98, #42454abe, #42454abb, #43464ab7, #43464aa9);
-    margin-top: 15px;
-}
-
-.top10_image_card{
-    position: absolute;
-    opacity: 0.08;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-
-
-.top10_image_card_front{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background-image: linear-gradient(to bottom, #25282c, #232529, #202326, #1e2024, #1c1e21);
-    opacity: 0.92;
-}
-
-.image_card{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -100;
-    border-radius: 10px;
-    background-size: cover;
-    background-position: center;
-}
-
-
-
-
-.number_card_achievement{
-    border-radius: 20px;
-    border-color: white;
-    background-color:  #1b77b9c5;
-    width:35px;
-    height:35px;
-    position: absolute; 
-    text-align: center;
-    font-size: 12pt;
-}
-
-.zero_opacity{
-    opacity: 0;
-    cursor: default;
-}
-
-.hr_imitation{
-    border-color: grey;
-    border-width: 1px;
-    opacity: 0.5;
-    border-style: solid;
-    margin-bottom: 15px;
-}
-
 h3.text-center {
     margin-bottom: 0;
 }
@@ -484,5 +330,7 @@ h3.text-center {
 h4.text-center {
     margin-bottom: 0;
 }
+/*  */
+
 
 

@@ -78930,7 +78930,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _vm.type == "normal"
-      ? _c("div", { staticClass: "bounce_in_anim" }, [
+      ? _c("div", { staticClass: "bounceInAnim" }, [
           _vm._m(0),
           _vm._v(" "),
           _vm._m(1),
@@ -78948,7 +78948,7 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.type == "small"
-      ? _c("div", { staticClass: "fade_in_anim" }, [
+      ? _c("div", { staticClass: "fadeInAnim" }, [
           _vm._m(2),
           _vm._v(" "),
           _vm._m(3),
@@ -78960,13 +78960,11 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.type == "x-small"
-      ? _c("div", { staticClass: "fade_in_anim" }, [
+      ? _c("div", { staticClass: "fadeInAnim" }, [
           _c("div", { staticClass: "row" }, [
-            _c(
-              "p",
-              { staticClass: "error", staticStyle: { "font-size": "12pt" } },
-              [_vm._v("Ошибка: " + _vm._s(_vm.errorMessage))]
-            )
+            _c("p", { staticClass: "error font12pt" }, [
+              _vm._v("Ошибка: " + _vm._s(_vm.errorMessage))
+            ])
           ])
         ])
       : _vm._e()
@@ -78978,7 +78976,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("h1", { staticClass: "warning_icon" }, [
+      _c("h1", { staticClass: "warningIcon" }, [
         _c("i", { staticClass: "fas fa-exclamation-triangle" })
       ])
     ])
@@ -78996,7 +78994,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("h6", { staticClass: "warning_icon" }, [
+      _c("h6", { staticClass: "warningIcon" }, [
         _c("i", { staticClass: "fas fa-exclamation-triangle" })
       ])
     ])
@@ -79033,7 +79031,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _vm.type == "normal"
-      ? _c("div", { staticClass: "bounce_in_anim" }, [
+      ? _c("div", { staticClass: "bounceInAnim" }, [
           _vm._m(0),
           _vm._v(" "),
           _vm._m(1),
@@ -79047,7 +79045,7 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.type == "small"
-      ? _c("div", { staticClass: "fade_in_anim" }, [
+      ? _c("div", { staticClass: "fadeInAnim" }, [
           _vm._m(2),
           _vm._v(" "),
           _vm._m(3),
@@ -79059,13 +79057,11 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.type == "x-small"
-      ? _c("div", { staticClass: "fade_in_anim" }, [
+      ? _c("div", { staticClass: "fadeInAnim" }, [
           _c("div", { staticClass: "row" }, [
-            _c(
-              "p",
-              { staticClass: "warning", staticStyle: { "font-size": "12pt" } },
-              [_vm._v("Предупреждение: " + _vm._s(_vm.infoMessage))]
-            )
+            _c("p", { staticClass: "warning font12pt" }, [
+              _vm._v("Предупреждение: " + _vm._s(_vm.infoMessage))
+            ])
           ])
         ])
       : _vm._e()
@@ -79077,7 +79073,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("h1", { staticClass: "info_icon" }, [
+      _c("h1", { staticClass: "infoIcon" }, [
         _c("i", { staticClass: "fas fa-exclamation-circle" })
       ])
     ])
@@ -79095,7 +79091,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("h6", { staticClass: "info_icon" }, [
+      _c("h6", { staticClass: "infoIcon" }, [
         _c("i", { staticClass: "fas fa-exclamation-circle" })
       ])
     ])
