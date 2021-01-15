@@ -79580,7 +79580,7 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.topArtistByTime != -1 &&
-                  _vm.mostPopularArtist == "noArtists"
+                  _vm.mostPopularArtist != "noArtists"
                     ? _c("AchievementItem", {
                         attrs: {
                           cardTitle: "Самый популярный исполнитель",
@@ -79591,7 +79591,7 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.mostPopularArtist != -1 &&
-                  _vm.leastPopularArtist == "noArtists"
+                  _vm.leastPopularArtist != "noArtists"
                     ? _c("AchievementItem", {
                         attrs: {
                           cardTitle: "Самый непопулярный исполнитель",

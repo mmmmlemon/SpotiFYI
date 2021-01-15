@@ -21,11 +21,7 @@ class TestController extends Controller
     //пустая функция, можно написать что угодно и проверить
     public function test_custom(Request $request)
     {   
-
-        $checkToken = System::checkSpotifyAccessToken($request);
-        $api = config('spotify_api');
-
-        dd($api->getArtist('2YZyLoL8N0Wb9xBt1NhZWg'));
+        dd(Helpers::getDurationInHours(653542));
     }
 
     //тест работы PHP-wrapper'а для Spotify Web API

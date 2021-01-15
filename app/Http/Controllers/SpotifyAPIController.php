@@ -1273,7 +1273,7 @@ class SpotifyAPIController extends Controller
                     $artistInfo['name'] = $artist->name;
                     $artistInfo['image'] = $artist->images[count($artist->images)-1]->url;
                     $artistInfo['url'] = $artist->external_urls->spotify;
-                    $artistInfo['info'] = Helpers::trackDuration($artistsCount[$artistIds[$i]]);
+                    $artistInfo['info'] = Helpers::getDurationInHours($artistsCount[$artistIds[$i]]);
     
                     array_push($artists, $artistInfo);
                 }
@@ -1322,12 +1322,11 @@ class SpotifyAPIController extends Controller
                     $timeRange = "long_term";
             }
 
-            // $tracks = $api->getMyTop('tracks', ['limit' => 1, 'time_range' => $timeRange]);
-            $tracks = [];
-
+            $tracks = $api->getMyTop('tracks', ['limit' => 1, 'time_range' => $timeRange])->items;
+            
             if(count($tracks) > 0)
             { 
-                $topTrack =   $tracks->items[0]; 
+                $topTrack = $tracks[0]; 
                 
                 $response = [
                     'title' => Helpers::getFullNameOfItem($topTrack, "fullname"),
@@ -1597,7 +1596,7 @@ class SpotifyAPIController extends Controller
 
             $topArtistId = array_keys($artistIds)[0];
 
-            $time = Helpers::trackDuration($artistIds[$topArtistId]);
+            $time = Helpers::getDurationInHours($artistIds[$topArtistId]);
 
             //проверяем токен и получаем инфомацию об исполнителей
             $checkToken = System::checkSpotifyAccessToken($request);

@@ -148,7 +148,7 @@
             }
 
             
-            //trackDurationToMinutes
+            //trackDuration
             //перевести длительность трека из миллисекунд в минуты и секунды
             //возвращает строку с длиной трека в минутах и секундах
             //параметры: длина трека в миллисекундах
@@ -194,6 +194,35 @@
                 else
                 { return false;  }
 
+            }
+
+            //getDurationInHours
+            //получить длительность в часах
+            //возвращает строку с длительностью в часах
+            //параметры: длительность в милисекундах
+            public static function getDurationInHours($durationMs)
+            {
+                $durationS = $durationMs / 1000;
+                $durationMinutes = round($durationS / 60, 3);
+
+                $durationHours = round($durationMinutes / 60, 3);
+
+                $durationMinutes = 60 * ($durationHours - floor($durationHours));
+
+                $durationSeconds = floor(60 * ($durationMinutes - floor($durationMinutes)));
+
+                $hoursStr = "";
+                $minutesStr = "";
+                $secondsStr = "";
+                $durationStr = "";
+
+                $hoursStr = strval(floor($durationHours));
+                $minutesStr = strval(floor($durationMinutes));
+                $secondsStr = strval($durationSeconds);
+                
+                $durationStr = $hoursStr." ч. ".$minutesStr." мин. ".$secondsStr. " с.";
+               
+                return $durationStr;
             }
 
             //getItemReleaseDate
@@ -257,6 +286,8 @@
 
                 return $genres;
             }
+
+
 
     }
         

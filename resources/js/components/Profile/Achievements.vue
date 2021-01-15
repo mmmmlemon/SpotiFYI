@@ -89,11 +89,11 @@
                                 cardSubtitle="С наибольшим кол-вом времени треков" 
                                 :items="topArtistByTime"/>
 
-                <AchievementItem v-if="topArtistByTime != -1 && mostPopularArtist == 'noArtists'" 
+                <AchievementItem v-if="topArtistByTime != -1 && mostPopularArtist != 'noArtists'" 
                                 cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" 
                                 :items="mostPopularArtist"/>
 
-                <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist == 'noArtists'" 
+                <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist != 'noArtists'" 
                                 cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" 
                                 :items="leastPopularArtist"/>
             </div>
