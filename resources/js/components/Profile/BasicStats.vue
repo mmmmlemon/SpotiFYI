@@ -34,9 +34,9 @@
                     <!-- треки -->
                     <LastFive :items="spotifyTracks" type="tracks"/>  
                     <!-- альбомы -->
-                    <LastFive :items="spotifyAlbums" type="albums"/>  
+                    <LastFive :items="spotifyAlbums" type="albums" v-if="spotifyTracks != -1"/>  
                     <!-- исполнители -->
-                    <LastFive :items="spotifyArtists" type="artists"/>  
+                    <LastFive :items="spotifyArtists" type="artists" v-if="spotifyAlbums != -1"/>  
 
                     <!-- часы и время -->
                     <HoursAndMinutes v-if="spotifyArtists !== -1 && spotifyAlbums != -1 && spotifyTracks != -1" 

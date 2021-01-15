@@ -79915,13 +79915,17 @@ var render = function() {
                   attrs: { items: _vm.spotifyTracks, type: "tracks" }
                 }),
                 _vm._v(" "),
-                _c("LastFive", {
-                  attrs: { items: _vm.spotifyAlbums, type: "albums" }
-                }),
+                _vm.spotifyTracks != -1
+                  ? _c("LastFive", {
+                      attrs: { items: _vm.spotifyAlbums, type: "albums" }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("LastFive", {
-                  attrs: { items: _vm.spotifyArtists, type: "artists" }
-                }),
+                _vm.spotifyAlbums != -1
+                  ? _c("LastFive", {
+                      attrs: { items: _vm.spotifyArtists, type: "artists" }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
                 _vm.spotifyArtists !== -1 &&
                 _vm.spotifyAlbums != -1 &&

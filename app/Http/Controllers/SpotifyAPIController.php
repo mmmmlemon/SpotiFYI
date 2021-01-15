@@ -251,7 +251,12 @@ class SpotifyAPIController extends Controller
         {   
             //записываем в массив последние пять альбомов
             $lastFive = [];
-            for($i = 0; $i < count($albums); $i++)
+            $count = 5;
+
+            if(count($albums) < 5)
+            { $count = count($albums); }
+
+            for($i = 0; $i < $count; $i++)
             {
                 //получаем полное название альбома
                 $name = Helpers::getFullNameOfItem($albums[$i], "fullname");
@@ -260,7 +265,7 @@ class SpotifyAPIController extends Controller
                                         'name' => $name,
                                         'url' => $albums[$i]->external_urls->spotify]);
             }
-    
+            
             //записыаем кол-во альбомов и последние 5 альбомов
             $response = ['count' => count($albums), 'lastFive' => $lastFive];
             
