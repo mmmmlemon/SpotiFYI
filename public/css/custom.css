@@ -103,6 +103,14 @@
     margin:5px;
 }
 
+.albumIconSmall:hover{
+    border-style: solid;
+    border-color: #1b77b9;
+    border-width: 2px;
+    transform: scale(1.2);
+}
+
+
 .albumIconBig{
     width:80%; 
     margin:5px;
@@ -132,28 +140,21 @@
     border-width: 2px;
     transform: scale(1.2);
 }
-/*  */
 
-
-
-.album_icon:hover{
-    border-style: solid;
-    border-color: #1b77b9;
-    border-width: 2px;
-    transform: scale(1.2);
-}
-
-
-
-
-
-.album_icon_achievement{
+.albumIconAchievement{
     width:50%; 
     margin:5px;
     border-style: solid;
     border-color: #376485;
     border-width: 5px;
 }
+
+/*  */
+
+
+
+
+
 
 
 /* padding, margin etc. */
@@ -283,6 +284,23 @@
     text-align: center;
     font-size: 12pt;
 }
+
+.achievementTitle{
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.achievementSubtitle{
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 14pt;
+}
+
+.achievementAdditional{
+    margin-top:10px;
+    font-size: 14pt;
+}
+
 /*  */
 
 .border_underline_text{
@@ -468,18 +486,3 @@ h4.text-center {
 }
 
 
-.achievement_title{
-    font-weight: bold;
-    margin-bottom: 0;
-}
-
-.achievement_subtitle{
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 14pt;
-}
-
-.achievement_additional{
-    margin-top:10px;
-    font-size: 14pt;
-}

@@ -2668,8 +2668,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -2816,7 +2814,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -3751,8 +3748,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -3885,7 +3880,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -79437,18 +79431,18 @@ var render = function() {
             _c("Loader"),
             _vm._v(" "),
             _vm.spotifyUserLibrary == -1
-              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+              ? _c("h6", { staticClass: "text-center blinkingAnim" }, [
                   _vm._v("Загружаю библиотеку пользователя...")
                 ])
               : _vm._e(),
             _vm._v(" "),
             _vm.spotifyUserLibrary == true
-              ? _c("h6", { staticClass: "text-center blinking_anim" }, [
+              ? _c("h6", { staticClass: "text-center blinkingAnim" }, [
                   _vm._v("Анализирую треки...")
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("p", { staticClass: "font_10pt text-center" }, [
+            _c("p", { staticClass: "text-center font10pt" }, [
               _vm._v("Это может занять около минуты")
             ])
           ],
@@ -79535,7 +79529,7 @@ var render = function() {
             ? _c(
                 "div",
                 {
-                  staticClass: "col-12 justify-content-center fade_in_anim",
+                  staticClass: "col-12 justify-content-center fadeInAnim",
                   attrs: { id: "artists" }
                 },
                 [_vm._m(3)]
@@ -79620,7 +79614,7 @@ var render = function() {
           _vm.leastPopularArtist != -1
             ? _c(
                 "div",
-                { staticClass: "row justify-content-center fade_in_anim" },
+                { staticClass: "row justify-content-center fadeInAnim" },
                 [
                   _c("router-link", { attrs: { to: "/profile#top" } }, [
                     _c("button", { staticClass: "btn btn-primary" }, [
@@ -79666,11 +79660,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12 fade_in_slow_anim" }, [
+    return _c("div", { staticClass: "col-md-12 fadeInAnimSlow" }, [
       _c("h5", { staticClass: "text-center" }, [
         _c("b", [_vm._v("Особо отличившиеся")]),
         _vm._v(" \n                "),
-        _c("i", { staticClass: "fas fa-award primary_color" })
+        _c("i", { staticClass: "fas fa-award primaryColor" })
       ])
     ])
   },
@@ -79680,7 +79674,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "row justify-content-center font_10pt fade_in_anim" },
+      { staticClass: "row justify-content-center font10pt fadeInAnim" },
       [
         _c("nav", { staticClass: "justify-content-center" }, [
           _c("ul", { staticClass: "breadcrumb" }, [
@@ -79703,13 +79697,13 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "col-12 justify-content-center fade_in_anim",
+        staticClass: "col-12 justify-content-center fadeInAnim",
         attrs: { id: "tracks" }
       },
       [
         _c("h3", { staticClass: "text-center" }, [
           _vm._v("\n                Треки\n                "),
-          _c("i", { staticClass: "fas fa-compact-disc primary_color" })
+          _c("i", { staticClass: "fas fa-compact-disc primaryColor" })
         ])
       ]
     )
@@ -79720,7 +79714,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "text-center" }, [
       _vm._v("\n                Исполнители\n                "),
-      _c("i", { staticClass: "fas fa-users primary_color" })
+      _c("i", { staticClass: "fas fa-users primaryColor" })
     ])
   }
 ]
@@ -79747,7 +79741,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-md-5 margin_sides margin_vertical padding_10" },
+    { staticClass: "col-12 col-md-5 marginSides marginVertical paddingSides" },
     [
       _vm.items == -1
         ? _c("div", [_c("Loader")], 1)
@@ -79765,75 +79759,79 @@ var render = function() {
             1
           )
         : _vm.items != -1 || _vm.items != false
-        ? _c("div", {}, [
-            _c("div", {
-              staticClass: "top10_image_card",
-              style: { backgroundImage: "url('" + _vm.items["image"] + "')" }
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "row justify-content-center margin_sides fade_in_anim"
-              },
-              [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("h4", { staticClass: "text-center border_underline" }, [
-                    _vm._v(_vm._s(_vm.cardTitle))
+        ? _c(
+            "div",
+            {},
+            [
+              _c("BackgroundImage", {
+                attrs: { backgroundImageUrl: _vm.items["image"] }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "row justify-content-center fadeInAnim marginSides"
+                },
+                [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("h4", { staticClass: "text-center borderUnderline" }, [
+                      _vm._v(_vm._s(_vm.cardTitle))
+                    ]),
+                    _vm._v(" "),
+                    _vm.cardSubtitle != ""
+                      ? _c("h6", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(_vm.cardSubtitle))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _vm.cardSubtitle != ""
-                    ? _c("h6", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(_vm.cardSubtitle))
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "album_icon_achievement rounded-circle",
-                  attrs: { src: _vm.items["image"], alt: "" }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12" }, [
-                  _c("h5", { staticClass: "text-center achievement_title" }, [
-                    _c(
-                      "a",
-                      { attrs: { target: "_blank", href: _vm.items["url"] } },
-                      [_vm._v(_vm._s(_vm.items["title"]))]
-                    )
-                  ]),
+                  _c("img", {
+                    staticClass: "rounded-circle albumIconAchievement",
+                    attrs: { src: _vm.items["image"], alt: "" }
+                  }),
                   _vm._v(" "),
-                  _c(
-                    "h6",
-                    { staticClass: "text-center achievement_subtitle" },
-                    [
-                      _vm.items["album"]
-                        ? _c(
-                            "a",
-                            {
-                              attrs: {
-                                target: "_blank",
-                                href: _vm.items["url"]
-                              }
-                            },
-                            [_vm._v(_vm._s(_vm.items["album"]))]
-                          )
-                        : _vm._e()
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.items["additionalInfo"]
-                    ? _c(
-                        "p",
-                        { staticClass: "text-center achievement_additional" },
-                        [_vm._v(_vm._s(_vm.items["additionalInfo"]))]
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("h5", { staticClass: "text-center achievementTitle" }, [
+                      _c(
+                        "a",
+                        { attrs: { target: "_blank", href: _vm.items["url"] } },
+                        [_vm._v(_vm._s(_vm.items["title"]))]
                       )
-                    : _vm._e()
-                ])
-              ]
-            )
-          ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "h6",
+                      { staticClass: "text-center achievementSubtitle" },
+                      [
+                        _vm.items["album"]
+                          ? _c(
+                              "a",
+                              {
+                                attrs: {
+                                  target: "_blank",
+                                  href: _vm.items["url"]
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.items["album"]))]
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.items["additionalInfo"]
+                      ? _c(
+                          "p",
+                          { staticClass: "text-center achievementAdditional" },
+                          [_vm._v(_vm._s(_vm.items["additionalInfo"]))]
+                        )
+                      : _vm._e()
+                  ])
+                ]
+              )
+            ],
+            1
+          )
         : _c(
             "div",
             [
@@ -81221,198 +81219,195 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "top10" } }, [
-    _c("div", [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _vm.spotifyUserLibrary == -1
-          ? _c(
-              "div",
-              { staticClass: "col-12" },
-              [
-                _c("Loader"),
-                _vm._v(" "),
-                _vm.spotifyUserLibrary == -1
-                  ? _c("h6", { staticClass: "text-center blinkingAnim" }, [
-                      _vm._v("Загружаю библиотеку пользователя...")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-center font10pt" }, [
-                  _vm._v("Это может занять около минуты")
-                ])
-              ],
-              1
-            )
-          : _vm.spotifyUserLibrary != -1 &&
-            _vm.spotifyUserLibrary["result"] != false
-          ? _c(
-              "div",
-              { staticClass: "row justify-content-center" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _vm.top10TracksAllTime != "noTracks"
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 Треков за все время",
-                        cardDesc:
-                          "Десять твоих самых прослушиваемых треков за все время.",
-                        items: _vm.top10TracksAllTime,
-                        listType: "tracks"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10TracksAllTime != -1 &&
-                _vm.top10TracksMonth != "noTracks"
-                  ? _c("Top10Items", {
-                      attrs: {
-                        loaderMessage: "Загружаю Топ 10 треков за месяц...",
-                        cardTitle: "Топ 10 Треков за месяц",
-                        cardDesc:
-                          "Десять твоих самых прослушиваемых треков за последний месяц.",
-                        items: _vm.top10TracksMonth,
-                        listType: "tracks"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10TracksMonth != -1
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 самых длинных",
-                        cardDesc:
-                          "Десять твоих самых длинных треков в библиотеке.",
-                        items: _vm.top10TracksLong,
-                        listType: "tracks"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10TracksLong != -1
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 самых коротких",
-                        cardDesc:
-                          "Десять твоих самых коротких треков в библиотеке.",
-                        items: _vm.top10TracksShort,
-                        listType: "tracks"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10TracksShort != -1
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 самых популярных",
-                        cardDesc:
-                          "Десять самых популярных треков которые тебе нравятся.",
-                        items: _vm.top10PopularTracks,
-                        listType: "tracks"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10PopularTracks != -1
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 самых непопулярных",
-                        cardDesc:
-                          "Десять самых непопулярных треков которые тебе нравятся.",
-                        items: _vm.top10UnpopularTracks,
-                        listType: "tracks"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10UnpopularTracks != -1
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "col-12 justify-content-center",
-                        attrs: { id: "artists" }
-                      },
-                      [_vm._m(3)]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10UnpopularTracks != -1 &&
-                _vm.top10ArtistsAllTime != "noArtists"
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 артистов за все время",
-                        cardDesc:
-                          "Десять твоих самых прослушиваемых артистов за все время.",
-                        items: _vm.top10ArtistsAllTime,
-                        listType: "artists"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10ArtistsAllTime != -1 &&
-                _vm.top10ArtistsMonth != "noArtists"
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 артистов за месяц",
-                        cardDesc:
-                          "Десять твоих самых прослушиваемых артистов за последний месяц.",
-                        items: _vm.top10ArtistsMonth,
-                        listType: "artists"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10ArtistsMonth != -1
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 артистов по трекам",
-                        cardDesc:
-                          "Десять артистов с наибольшим кол-вом треков в твоей библиотеке.",
-                        items: _vm.top10ArtistsByTracks,
-                        listType: "artists"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.top10ArtistsByTracks != -1
-                  ? _c("Top10Items", {
-                      attrs: {
-                        cardTitle: "Топ 10 артистов по времени треков",
-                        cardDesc:
-                          "Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке.",
-                        items: _vm.top10ArtistsByTime,
-                        listType: "artists"
-                      }
-                    })
-                  : _vm._e()
-              ],
-              1
-            )
-          : _vm.spotifyUserLibrary == false
-          ? _c(
-              "div",
-              [
-                _c("Error", {
-                  attrs: {
-                    errorMessage: "Не удалось загрузить библиотеку пользователя"
-                  }
-                })
-              ],
-              1
-            )
-          : _c(
-              "div",
-              [
-                _c("Info", {
-                  attrs: { infoMessage: _vm.spotifyUserLibrary["errorMsg"] }
-                })
-              ],
-              1
-            )
-      ])
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _vm.spotifyUserLibrary == -1
+        ? _c(
+            "div",
+            { staticClass: "col-12" },
+            [
+              _c("Loader"),
+              _vm._v(" "),
+              _vm.spotifyUserLibrary == -1
+                ? _c("h6", { staticClass: "text-center blinkingAnim" }, [
+                    _vm._v("Загружаю библиотеку пользователя...")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-center font10pt" }, [
+                _vm._v("Это может занять около минуты")
+              ])
+            ],
+            1
+          )
+        : _vm.spotifyUserLibrary != -1 &&
+          _vm.spotifyUserLibrary["result"] != false
+        ? _c(
+            "div",
+            { staticClass: "row justify-content-center" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm.top10TracksAllTime != "noTracks"
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 Треков за все время",
+                      cardDesc:
+                        "Десять твоих самых прослушиваемых треков за все время.",
+                      items: _vm.top10TracksAllTime,
+                      listType: "tracks"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10TracksAllTime != -1 && _vm.top10TracksMonth != "noTracks"
+                ? _c("Top10Items", {
+                    attrs: {
+                      loaderMessage: "Загружаю Топ 10 треков за месяц...",
+                      cardTitle: "Топ 10 Треков за месяц",
+                      cardDesc:
+                        "Десять твоих самых прослушиваемых треков за последний месяц.",
+                      items: _vm.top10TracksMonth,
+                      listType: "tracks"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10TracksMonth != -1
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 самых длинных",
+                      cardDesc:
+                        "Десять твоих самых длинных треков в библиотеке.",
+                      items: _vm.top10TracksLong,
+                      listType: "tracks"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10TracksLong != -1
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 самых коротких",
+                      cardDesc:
+                        "Десять твоих самых коротких треков в библиотеке.",
+                      items: _vm.top10TracksShort,
+                      listType: "tracks"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10TracksShort != -1
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 самых популярных",
+                      cardDesc:
+                        "Десять самых популярных треков которые тебе нравятся.",
+                      items: _vm.top10PopularTracks,
+                      listType: "tracks"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10PopularTracks != -1
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 самых непопулярных",
+                      cardDesc:
+                        "Десять самых непопулярных треков которые тебе нравятся.",
+                      items: _vm.top10UnpopularTracks,
+                      listType: "tracks"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10UnpopularTracks != -1
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "col-12 justify-content-center",
+                      attrs: { id: "artists" }
+                    },
+                    [_vm._m(3)]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10UnpopularTracks != -1 &&
+              _vm.top10ArtistsAllTime != "noArtists"
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 артистов за все время",
+                      cardDesc:
+                        "Десять твоих самых прослушиваемых артистов за все время.",
+                      items: _vm.top10ArtistsAllTime,
+                      listType: "artists"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10ArtistsAllTime != -1 &&
+              _vm.top10ArtistsMonth != "noArtists"
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 артистов за месяц",
+                      cardDesc:
+                        "Десять твоих самых прослушиваемых артистов за последний месяц.",
+                      items: _vm.top10ArtistsMonth,
+                      listType: "artists"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10ArtistsMonth != -1
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 артистов по трекам",
+                      cardDesc:
+                        "Десять артистов с наибольшим кол-вом треков в твоей библиотеке.",
+                      items: _vm.top10ArtistsByTracks,
+                      listType: "artists"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.top10ArtistsByTracks != -1
+                ? _c("Top10Items", {
+                    attrs: {
+                      cardTitle: "Топ 10 артистов по времени треков",
+                      cardDesc:
+                        "Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке.",
+                      items: _vm.top10ArtistsByTime,
+                      listType: "artists"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        : _vm.spotifyUserLibrary == false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  errorMessage: "Не удалось загрузить библиотеку пользователя"
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "div",
+            [
+              _c("Info", {
+                attrs: { infoMessage: _vm.spotifyUserLibrary["errorMsg"] }
+              })
+            ],
+            1
+          )
     ]),
     _vm._v(" "),
     _c("br"),
@@ -81447,7 +81442,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-12 fadeInAnimSlow" }, [
       _c("h5", { staticClass: "text-center" }, [
         _c("b", [_vm._v("Топ 10")]),
-        _vm._v(" \n                         "),
+        _vm._v(" \n                     "),
         _c("i", { staticClass: "fas fa-list-ol primaryColor" })
       ])
     ])
@@ -81486,7 +81481,7 @@ var staticRenderFns = [
       },
       [
         _c("h3", { staticClass: "text-center" }, [
-          _vm._v("\n                         Треки\n                         "),
+          _vm._v("\n                     Треки\n                     "),
           _c("i", { staticClass: "fas fa-compact-disc primaryColor" })
         ])
       ]
@@ -81497,9 +81492,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "text-center" }, [
-      _vm._v(
-        "\n                         Исполнители\n                         "
-      ),
+      _vm._v("\n                     Исполнители\n                     "),
       _c("i", { staticClass: "fas fa-users primaryColor" })
     ])
   }

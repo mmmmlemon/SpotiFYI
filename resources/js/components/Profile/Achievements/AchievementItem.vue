@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-5 margin_sides margin_vertical padding_10">
+    <div class="col-12 col-md-5 marginSides marginVertical paddingSides">
         <div v-if="items == -1">
             <Loader />
         </div>
@@ -7,19 +7,18 @@
             <Error type="small" errorMessage="Не удалось загрузить данные"/>
         </div>
         <div v-else-if="items != -1 || items != false" class="">
-            <div class="top10_image_card" :style="{backgroundImage: `url('${items['image']}')`}">
-                    </div>
-            <div class="row justify-content-center margin_sides fade_in_anim">
+            <BackgroundImage :backgroundImageUrl="items['image']"/>
+            <div class="row justify-content-center fadeInAnim marginSides">
                 <div class="col-12">
-                    <h4 class="text-center border_underline">{{cardTitle}}</h4>
+                    <h4 class="text-center borderUnderline">{{cardTitle}}</h4>
                     <h6 class="text-center" v-if="cardSubtitle != ''">{{cardSubtitle}}</h6>
                 </div>
                 <img :src="items['image']" 
-                    class="album_icon_achievement rounded-circle" alt="">
+                    class="rounded-circle albumIconAchievement" alt="">
                 <div class="col-12">
-                    <h5 class="text-center achievement_title"><a target="_blank" :href="items['url']">{{items['title']}}</a></h5>
-                    <h6 class="text-center achievement_subtitle"><a target="_blank" :href="items['url']" v-if="items['album']">{{items['album']}}</a></h6>
-                    <p class="text-center achievement_additional" v-if="items['additionalInfo']">{{items['additionalInfo']}}</p>
+                    <h5 class="text-center achievementTitle"><a target="_blank" :href="items['url']">{{items['title']}}</a></h5>
+                    <h6 class="text-center achievementSubtitle"><a target="_blank" :href="items['url']" v-if="items['album']">{{items['album']}}</a></h6>
+                    <p class="text-center achievementAdditional" v-if="items['additionalInfo']">{{items['additionalInfo']}}</p>
                 </div>
             </div>
         </div>

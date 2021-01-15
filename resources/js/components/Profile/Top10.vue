@@ -1,112 +1,110 @@
 //Top10
 <template>
    <div id="top10">
-        <div>
-            <div class="row justify-content-center">
-                <div class="col-12" v-if="spotifyUserLibrary == -1">
-                    <Loader />
-                    <h6 class="text-center blinkingAnim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
-                    <p class="text-center font10pt">Это может занять около минуты</p>
-                </div>
-                <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false" class="row justify-content-center">
-                    <div class="col-12 fadeInAnimSlow">
-                        <h5 class="text-center">
-                            <b>Топ 10</b>&nbsp;
-                            <i class="fas fa-list-ol primaryColor"></i>
-                        </h5>
-                    </div>
-                    <!-- навигация -->
-                    <div class="row justify-content-center fadeInAnim font10pt">
-                        <nav class="justify-content-center">
-                            <ul class="breadcrumb text-center">
-                                <li class="breadcrumb-item"><a href="#tracks">Треки</a></li>
-                                <li class="breadcrumb-item"><a href="#artists">Исполнители</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-
-                    <!-- топ 10 треки -->
-                    <div class="col-12 justify-content-center fadeInAnim" id="tracks">
-                        <h3 class="text-center">
-                            Треки
-                            <i class="fas fa-compact-disc primaryColor"></i>
-                        </h3>
-                    </div>
-               
-                    <Top10Items v-if="top10TracksAllTime != 'noTracks'" 
-                                cardTitle="Топ 10 Треков за все время" 
-                                cardDesc="Десять твоих самых прослушиваемых треков за все время." 
-                                :items="top10TracksAllTime"
-                                listType="tracks"/>
-
-                    <Top10Items v-if="top10TracksAllTime != -1 && top10TracksMonth != 'noTracks'"
-                                loaderMessage="Загружаю Топ 10 треков за месяц..."
-                                cardTitle="Топ 10 Треков за месяц" 
-                                cardDesc="Десять твоих самых прослушиваемых треков за последний месяц." 
-                                :items="top10TracksMonth"
-                                listType="tracks"/>
-
-                    <Top10Items v-if="top10TracksMonth != -1"
-                                cardTitle="Топ 10 самых длинных" 
-                                cardDesc="Десять твоих самых длинных треков в библиотеке." 
-                                :items="top10TracksLong"
-                                listType="tracks"/> 
-
-                    <Top10Items v-if="top10TracksLong != -1"
-                                cardTitle="Топ 10 самых коротких" 
-                                cardDesc="Десять твоих самых коротких треков в библиотеке." 
-                                :items="top10TracksShort"
-                                listType="tracks"/>
-                    <Top10Items v-if="top10TracksShort != -1"
-                                cardTitle="Топ 10 самых популярных" 
-                                cardDesc="Десять самых популярных треков которые тебе нравятся." 
-                                :items="top10PopularTracks"
-                                listType="tracks"/>
-                    <Top10Items v-if="top10PopularTracks != -1"
-                                cardTitle="Топ 10 самых непопулярных" 
-                                cardDesc="Десять самых непопулярных треков которые тебе нравятся." 
-                                :items="top10UnpopularTracks"
-                                listType="tracks"/>
-
-                    <!-- топ 10 исполнители -->
-                    <div class="col-12 justify-content-center" id="artists" v-if="top10UnpopularTracks != -1">
-                        <h3 class="text-center">
-                            Исполнители
-                            <i class="fas fa-users primaryColor"></i>
-                        </h3>
-                    </div>
-
-                    <Top10Items v-if="top10UnpopularTracks != -1 && top10ArtistsAllTime != 'noArtists'"
-                                cardTitle="Топ 10 артистов за все время" 
-                                cardDesc="Десять твоих самых прослушиваемых артистов за все время." 
-                                :items="top10ArtistsAllTime"
-                                listType="artists"/>
-
-                    <Top10Items v-if="top10ArtistsAllTime != -1 && top10ArtistsMonth != 'noArtists'"
-                                cardTitle="Топ 10 артистов за месяц" 
-                                cardDesc="Десять твоих самых прослушиваемых артистов за последний месяц." 
-                                :items="top10ArtistsMonth"
-                                listType="artists"/>
-
-                    <Top10Items v-if="top10ArtistsMonth != -1"
-                                cardTitle="Топ 10 артистов по трекам" 
-                                cardDesc="Десять артистов с наибольшим кол-вом треков в твоей библиотеке." 
-                                :items="top10ArtistsByTracks"
-                                listType="artists"/>
-                    <Top10Items v-if="top10ArtistsByTracks != -1"
-                                cardTitle="Топ 10 артистов по времени треков" 
-                                cardDesc="Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке." 
-                                :items="top10ArtistsByTime"
-                                listType="artists"/>
-                </div>
-                <div v-else-if="spotifyUserLibrary == false">
-                    <Error errorMessage="Не удалось загрузить библиотеку пользователя"/>
-                </div>
-                <div v-else>
-                    <Info :infoMessage="spotifyUserLibrary['errorMsg']"/>
-                </div>
-             
+        <div class="row justify-content-center">
+            <div class="col-12" v-if="spotifyUserLibrary == -1">
+                <Loader />
+                <h6 class="text-center blinkingAnim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
+                <p class="text-center font10pt">Это может занять около минуты</p>
             </div>
+            <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false" class="row justify-content-center">
+                <div class="col-12 fadeInAnimSlow">
+                    <h5 class="text-center">
+                        <b>Топ 10</b>&nbsp;
+                        <i class="fas fa-list-ol primaryColor"></i>
+                    </h5>
+                </div>
+                <!-- навигация -->
+                <div class="row justify-content-center fadeInAnim font10pt">
+                    <nav class="justify-content-center">
+                        <ul class="breadcrumb text-center">
+                            <li class="breadcrumb-item"><a href="#tracks">Треки</a></li>
+                            <li class="breadcrumb-item"><a href="#artists">Исполнители</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- топ 10 треки -->
+                <div class="col-12 justify-content-center fadeInAnim" id="tracks">
+                    <h3 class="text-center">
+                        Треки
+                        <i class="fas fa-compact-disc primaryColor"></i>
+                    </h3>
+                </div>
+            
+                <Top10Items v-if="top10TracksAllTime != 'noTracks'" 
+                            cardTitle="Топ 10 Треков за все время" 
+                            cardDesc="Десять твоих самых прослушиваемых треков за все время." 
+                            :items="top10TracksAllTime"
+                            listType="tracks"/>
+
+                <Top10Items v-if="top10TracksAllTime != -1 && top10TracksMonth != 'noTracks'"
+                            loaderMessage="Загружаю Топ 10 треков за месяц..."
+                            cardTitle="Топ 10 Треков за месяц" 
+                            cardDesc="Десять твоих самых прослушиваемых треков за последний месяц." 
+                            :items="top10TracksMonth"
+                            listType="tracks"/>
+
+                <Top10Items v-if="top10TracksMonth != -1"
+                            cardTitle="Топ 10 самых длинных" 
+                            cardDesc="Десять твоих самых длинных треков в библиотеке." 
+                            :items="top10TracksLong"
+                            listType="tracks"/> 
+
+                <Top10Items v-if="top10TracksLong != -1"
+                            cardTitle="Топ 10 самых коротких" 
+                            cardDesc="Десять твоих самых коротких треков в библиотеке." 
+                            :items="top10TracksShort"
+                            listType="tracks"/>
+                <Top10Items v-if="top10TracksShort != -1"
+                            cardTitle="Топ 10 самых популярных" 
+                            cardDesc="Десять самых популярных треков которые тебе нравятся." 
+                            :items="top10PopularTracks"
+                            listType="tracks"/>
+                <Top10Items v-if="top10PopularTracks != -1"
+                            cardTitle="Топ 10 самых непопулярных" 
+                            cardDesc="Десять самых непопулярных треков которые тебе нравятся." 
+                            :items="top10UnpopularTracks"
+                            listType="tracks"/>
+
+                <!-- топ 10 исполнители -->
+                <div class="col-12 justify-content-center" id="artists" v-if="top10UnpopularTracks != -1">
+                    <h3 class="text-center">
+                        Исполнители
+                        <i class="fas fa-users primaryColor"></i>
+                    </h3>
+                </div>
+
+                <Top10Items v-if="top10UnpopularTracks != -1 && top10ArtistsAllTime != 'noArtists'"
+                            cardTitle="Топ 10 артистов за все время" 
+                            cardDesc="Десять твоих самых прослушиваемых артистов за все время." 
+                            :items="top10ArtistsAllTime"
+                            listType="artists"/>
+
+                <Top10Items v-if="top10ArtistsAllTime != -1 && top10ArtistsMonth != 'noArtists'"
+                            cardTitle="Топ 10 артистов за месяц" 
+                            cardDesc="Десять твоих самых прослушиваемых артистов за последний месяц." 
+                            :items="top10ArtistsMonth"
+                            listType="artists"/>
+
+                <Top10Items v-if="top10ArtistsMonth != -1"
+                            cardTitle="Топ 10 артистов по трекам" 
+                            cardDesc="Десять артистов с наибольшим кол-вом треков в твоей библиотеке." 
+                            :items="top10ArtistsByTracks"
+                            listType="artists"/>
+                <Top10Items v-if="top10ArtistsByTracks != -1"
+                            cardTitle="Топ 10 артистов по времени треков" 
+                            cardDesc="Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке." 
+                            :items="top10ArtistsByTime"
+                            listType="artists"/>
+            </div>
+            <div v-else-if="spotifyUserLibrary == false">
+                <Error errorMessage="Не удалось загрузить библиотеку пользователя"/>
+            </div>
+            <div v-else>
+                <Info :infoMessage="spotifyUserLibrary['errorMsg']"/>
+            </div>
+            
         </div>
         <br>
         <div class="row justify-content-center fadeInAnim" v-if="top10ArtistsByTime != -1">

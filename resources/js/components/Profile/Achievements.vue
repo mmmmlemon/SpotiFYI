@@ -2,19 +2,19 @@
     <div class="row justify-content-center">
         <div class="col-12" v-if="spotifyUserLibrary == -1">
             <Loader />
-            <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
-            <h6 class="text-center blinking_anim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
-            <p class="font_10pt text-center">Это может занять около минуты</p>
+            <h6 class="text-center blinkingAnim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>
+            <h6 class="text-center blinkingAnim" v-if="spotifyUserLibrary == true">Анализирую треки...</h6>
+            <p class="text-center font10pt">Это может занять около минуты</p>
         </div>
         <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false" class="col-12">
-            <div class="col-md-12 fade_in_slow_anim">
+            <div class="col-md-12 fadeInAnimSlow">
                 <h5 class="text-center">
                     <b>Особо отличившиеся</b>&nbsp;
-                    <i class="fas fa-award primary_color"></i>
+                    <i class="fas fa-award primaryColor"></i>
                 </h5>
             </div>
             <!-- навигация -->
-            <div class="row justify-content-center font_10pt fade_in_anim">
+            <div class="row justify-content-center font10pt fadeInAnim">
                 <nav class="justify-content-center">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#tracks">Треки</a></li>
@@ -23,10 +23,10 @@
                 </nav>
             </div>
             <!-- треки -->
-            <div class="col-12 justify-content-center fade_in_anim" id="tracks">
+            <div class="col-12 justify-content-center fadeInAnim" id="tracks">
                 <h3 class="text-center">
                     Треки
-                    <i class="fas fa-compact-disc primary_color"></i>
+                    <i class="fas fa-compact-disc primaryColor"></i>
                 </h3>
             </div>
 
@@ -63,10 +63,10 @@
             </div>
 
             <!-- исполнители -->
-            <div v-if="shortestTrack != -1" class="col-12 justify-content-center fade_in_anim" id="artists">
+            <div v-if="shortestTrack != -1" class="col-12 justify-content-center fadeInAnim" id="artists">
                 <h3 class="text-center">
                     Исполнители
-                    <i class="fas fa-users primary_color"></i>
+                    <i class="fas fa-users primaryColor"></i>
                 </h3>
             </div>
 
@@ -98,7 +98,7 @@
                                 :items="leastPopularArtist"/>
             </div>
                        <br>
-            <div class="row justify-content-center fade_in_anim" v-if="leastPopularArtist != -1">
+            <div class="row justify-content-center fadeInAnim" v-if="leastPopularArtist != -1">
                 
                 <router-link to="/profile#top">
                     <button class="btn btn-primary">
@@ -107,9 +107,7 @@
                     </button>
                 </router-link>
                 <br><br>
-                
             </div>
-
         </div>
         <div v-else-if="spotifyUserLibrary == false">
             <Error errorMessage="Не удалось загрузить библиотеку пользователя"/>

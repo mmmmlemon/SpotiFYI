@@ -44,7 +44,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div v-else>
                             <Error type="x-small" errorMessage="Нечего показывать. Параметр items пустой."/>
                         </div>
