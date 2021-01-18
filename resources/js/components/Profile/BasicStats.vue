@@ -90,9 +90,14 @@ export default {
     {
         //прокручиваем страницу к якорю, если в url есть якорь
         var anchor=this.$router.currentRoute.hash.replace("#", "");
-
+        
         if(anchor)
-        { this.$nextTick(()=> window.document.getElementById(anchor).scrollIntoView()); }
+        {
+            var el = document.getElementById(anchor);
+        
+            if(el != null)
+            { this.$nextTick(()=> window.document.getElementById(anchor).scrollIntoView()); }
+        }
 
         //устанавливаем текущий таб, для подсветки навигации
         this.$store.dispatch('setCurrentTab', 'basicStats');

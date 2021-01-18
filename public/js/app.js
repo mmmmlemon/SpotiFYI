@@ -2672,12 +2672,17 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    //прокручиваем страницу к якорю, если в url есть якорь
     var anchor = this.$router.currentRoute.hash.replace("#", "");
 
     if (anchor) {
-      this.$nextTick(function () {
-        return window.document.getElementById(anchor).scrollIntoView();
-      });
+      var el = document.getElementById(anchor);
+
+      if (el != null) {
+        this.$nextTick(function () {
+          return window.document.getElementById(anchor).scrollIntoView();
+        });
+      }
     } //смена текущего таба
 
 
@@ -2962,9 +2967,13 @@ __webpack_require__.r(__webpack_exports__);
     var anchor = this.$router.currentRoute.hash.replace("#", "");
 
     if (anchor) {
-      this.$nextTick(function () {
-        return window.document.getElementById(anchor).scrollIntoView();
-      });
+      var el = document.getElementById(anchor);
+
+      if (el != null) {
+        this.$nextTick(function () {
+          return window.document.getElementById(anchor).scrollIntoView();
+        });
+      }
     } //устанавливаем текущий таб, для подсветки навигации
 
 
@@ -3756,9 +3765,13 @@ __webpack_require__.r(__webpack_exports__);
     var anchor = this.$router.currentRoute.hash.replace("#", "");
 
     if (anchor) {
-      this.$nextTick(function () {
-        return window.document.getElementById(anchor).scrollIntoView();
-      });
+      var el = document.getElementById(anchor);
+
+      if (el != null) {
+        this.$nextTick(function () {
+          return window.document.getElementById(anchor).scrollIntoView();
+        });
+      }
     } //смена текущего таба
 
 
