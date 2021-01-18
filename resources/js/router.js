@@ -35,6 +35,7 @@ const routes = [
         ]
     },
     {
+        // профиль
         path:'/profile',
         component: Profile,
         children: [
@@ -52,6 +53,7 @@ const routes = [
             },
         ]
     },
+    //последние треки
     {
         path:'/recentTracks',
         component: RecentTracks

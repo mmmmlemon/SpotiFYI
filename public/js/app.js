@@ -100270,6 +100270,7 @@ var routes = [{
     component: _components_tests_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }]
 }, {
+  // профиль
   path: '/profile',
   component: _components_Profile_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
   children: [{
@@ -100282,7 +100283,8 @@ var routes = [{
     path: '/profile/achievements',
     component: _components_Profile_Achievements_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   }]
-}, {
+}, //последние треки
+{
   path: '/recentTracks',
   component: _components_RecentTracks_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
 }];

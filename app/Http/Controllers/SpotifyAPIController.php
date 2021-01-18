@@ -372,17 +372,17 @@ class SpotifyAPIController extends Controller
             $overallMonths = floor($overallDays / 30); //общее кол-во месяцев (кол-во дней / 30 дней)
 
             //вычисляем какое слово нужно подставить в конец (1 минуТА, 2 минуТЫ и т.п)
-            $overallMinutes .= Helpers::pickTheWord($overallMinutes, "минут", "минута", "минуты");
+            $overallMinutes .= " " . Helpers::pickTheWord($overallMinutes, "минут", "минута", "минуты");
             
             //анадлогично для остальных измерений, если они больше нуля
             if($overallHours > 0)
-            {  $overallHours .= Helpers::pickTheWord($overallHours, "часов", "час", "часа"); }
+            {  $overallHours .= " " . Helpers::pickTheWord($overallHours, "часов", "час", "часа"); }
             
             if($overallDays > 0)
-            {  $overallDays .= Helpers::pickTheWord($overallDays, "дней", "день", "дня"); }
+            {  $overallDays .= " " . Helpers::pickTheWord($overallDays, "дней", "день", "дня"); }
             
             if($overallMonths > 0)
-            {  $overallMonths .= Helpers::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
+            {  $overallMonths .= " " . Helpers::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
 
             //получить случайное изображение с обложкой альбома для фоновой картинки
             //получаем случайный трек из файла
@@ -427,7 +427,7 @@ class SpotifyAPIController extends Controller
             foreach($tracks as $track)
             {
                 $id = $track->id;
-                $duration = Helpers::trackDuration($track->duration_ms);
+                $duration = Helpers::getTrackDuration($track->duration_ms);
                 $cover = $track->album->images[count($track->album->images) - 1]->url;
                 $name = Helpers::getFullNameOfItem($track, "fullname");
                 $url = $track->external_urls->spotify;
@@ -486,7 +486,7 @@ class SpotifyAPIController extends Controller
    
             $mode = array_search(max($countDurations), $countDurations);
             
-            $response = $mode . Helpers::pickTheWord($mode, "минут", "минута", "минуты");
+            $response = $mode . " " . Helpers::pickTheWord($mode, "минут", "минута", "минуты");
 
             return response()->json($response);
         }
@@ -648,7 +648,7 @@ class SpotifyAPIController extends Controller
             $count = count(array_unique($artistsArray));
 
             //подставляем подходящее слово
-            $countArtists = $count . Helpers::pickTheWord($count, "различных исполнителей", "исполнителя", "разных исполнителей");
+            $countArtists = $count . " " . Helpers::pickTheWord($count, "различных исполнителей", "исполнителя", "разных исполнителей");
             
             //получаем случайное фото исполнителя для фоновой картинки
             $artistImageUrl = ""; //пустая строка для url картинки
@@ -798,7 +798,7 @@ class SpotifyAPIController extends Controller
             $offset = 0;
             for($i = 0; $i < 10; $i++)
             {   
-                array_push($decadeColors, Helpers::randomHslColor(['offset' => $offset]));
+                array_push($decadeColors, Helpers::randomHslColor($offset));
                 $offset += 60;
             }
 
@@ -834,8 +834,8 @@ class SpotifyAPIController extends Controller
             $response['maxYear'] = $maxYear;
             $response['maxDecade'] = $maxDecade;
 
-            $maxDecadeSongs = $countDecades[key($countDecades)] . Helpers::pickTheWord($countDecades[key($countDecades)], "песен", "песня", "песни");
-            $maxYearSongs = $countYears[key($countYears)] . Helpers::pickTheWord($countYears[key($countYears)], "песен", "песня", "песни");
+            $maxDecadeSongs = $countDecades[key($countDecades)] . " " . Helpers::pickTheWord($countDecades[key($countDecades)], "песен", "песня", "песни");
+            $maxYearSongs = $countYears[key($countYears)] . " " . Helpers::pickTheWord($countYears[key($countYears)], "песен", "песня", "песни");
 
             $response['maxDecadeSongs'] = $maxDecadeSongs;
             $response['maxYearSongs'] = $maxYearSongs;
@@ -1010,7 +1010,7 @@ class SpotifyAPIController extends Controller
             {   
                 $trackInfo = [];
                 $trackInfo['id'] = $track->id;
-                $trackInfo['duration'] = Helpers::trackDuration($track->duration_ms);
+                $trackInfo['duration'] = Helpers::getTrackDuration($track->duration_ms);
                 $trackInfo['image'] = $track->album->images[count($track->album->images) - 1]->url;
                 $trackInfo['name'] = Helpers::getFullNameOfItem($track, "fullname");
                 $trackInfo['url'] = $track->external_urls->spotify;
@@ -1200,7 +1200,7 @@ class SpotifyAPIController extends Controller
                     $artistInfo['name'] = $artist->name;
                     $artistInfo['image'] = $artist->images[count($artist->images)-1]->url;
                     $artistInfo['url'] = $artist->external_urls->spotify;
-                    $artistInfo['info'] = $artistsCount[$artistIds[$i]] . Helpers::pickTheWord($artistsCount[$artistIds[$i]], "треков", "трек", "трека");
+                    $artistInfo['info'] = $artistsCount[$artistIds[$i]] . " " . Helpers::pickTheWord($artistsCount[$artistIds[$i]], "треков", "трек", "трека");
     
                     array_push($artists, $artistInfo);
                 }
@@ -1431,7 +1431,7 @@ class SpotifyAPIController extends Controller
             foreach($tracks as $track)
             {
                 $id = $track->id;
-                $duration = Helpers::trackDuration($track->duration_ms);
+                $duration = Helpers::getTrackDuration($track->duration_ms);
                 $cover = $track->album->images[count($track->album->images) - 1]->url;
                 $name = Helpers::getFullNameOfItem($track, "fullname");
                 $url = $track->external_urls->spotify;
@@ -1462,7 +1462,7 @@ class SpotifyAPIController extends Controller
                     'album' => $track->album->name . " - ". Helpers::getItemReleaseDate($track, "track", "short"),
                     'url' => $track->external_urls->spotify,
                     'image' => $track->album->images[0]->url,
-                    'additionalInfo' => "Длина - " . Helpers::trackDuration($track->duration_ms),
+                    'additionalInfo' => "Длина - " . Helpers::getTrackDuration($track->duration_ms),
                 ];
 
                 return response()->json($response);
@@ -1561,7 +1561,7 @@ class SpotifyAPIController extends Controller
                     'title' => $topArtist->name,
                     'url' => $topArtist->external_urls->spotify,
                     'image' => $topArtist->images[0]->url,
-                    'additionalInfo' => $trackCount . Helpers::pickTheWord($trackCount, "треков", "трек", "трека") . " в библиотеке", 
+                    'additionalInfo' => $trackCount . " " . Helpers::pickTheWord($trackCount, "треков", "трек", "трека") . " в библиотеке", 
                 ];
 
                 return response()->json($response);
@@ -1706,7 +1706,7 @@ class SpotifyAPIController extends Controller
                 $trackInfo['albumName'] = $track->album->name . " - " . Helpers::getItemReleaseDate($track->album, "album", "short");
                 $trackInfo['trackUrl'] = $track->external_urls->spotify;
                 $trackInfo['albumUrl'] = $track->album->external_urls->spotify;
-                $trackInfo['duration'] = Helpers::trackDuration($track->duration_ms);
+                $trackInfo['duration'] = Helpers::getTrackDuration($track->duration_ms);
                 $trackInfo['cover'] = $track->album->images[0]->url;
 
                 array_push($tracks, $trackInfo);

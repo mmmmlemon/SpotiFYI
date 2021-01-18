@@ -11,13 +11,15 @@
     //глобальные функции для работы со Spotify API и файлами
     class System
     {
-           //checkSpotifyAccessToken
-           //проверка того что токен доступа к Spotify API существует и он не просрочен
-           //в параметре нужен реквест, из него берутся куки, в которых должен храниться токен
-           //возвращает true если токен есть и он не просрочен, либо если просрочен и он успешно обновился
-           //возвращает false если токена не существует
-            public static function checkSpotifyAccessToken($request)
-            {   
+        //checkSpotifyAccessToken
+        //проверка того что токен доступа к Spotify API существует и он не просрочен
+        //в параметре нужен реквест, из него берутся куки, в которых должен храниться токен
+        //возвращает true если токен есть и он не просрочен, либо если просрочен и он успешно обновился
+        //возвращает false если токена не существует
+        public static function checkSpotifyAccessToken($request)
+        {   
+            if(property_exists($request, "cookie"))
+            {
                 //берем Spotify access token из куки
                 $spotifyAccessToken = $request->cookie('spotify_access_token');
 
@@ -78,13 +80,18 @@
                 else
                 { return false; }
             }
+            else
+            { return false; }
+        }
 
-            //getUserLibraryJson
-            //получение JSON'а из файлов с треками\альбомами\подписками пользователя, 
-            //которые сохраняются в storage во время подсчета статистики
-            //в параметрах: имя файла и реквест, из которого берется имя папки в которую сохраняются эти файлы
-            //возвращает готовый к обработке JSON, либо false если файл не удалось открыть
-            public static function getUserLibraryJson($filename, $request)
+        //getUserLibraryJson
+        //получение JSON'а из файлов с треками\альбомами\подписками пользователя, 
+        //которые сохраняются в storage во время подсчета статистики
+        //в параметрах: имя файла и реквест, из которого берется имя папки в которую сохраняются эти файлы
+        //возвращает готовый к обработке JSON, либо false если файл не удалось открыть
+        public static function getUserLibraryJson($filename, $request)
+        {
+            if(property_exists($request, "cookie"))
             {
                 //открываем файл
                 $file = "";
@@ -101,6 +108,9 @@
 
                 return $json;
             }
+            else
+            { return false; } 
+        }
     }
 
 ?>
