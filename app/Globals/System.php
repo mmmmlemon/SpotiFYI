@@ -30,6 +30,19 @@
                 //если время действия токена истекло
                 if(Carbon::now() >= $spotifyAccessExpiration)
                 {
+                    //получаем имя папки с данными пользователя из Cookies
+                    $folderName = $request->cookie('rand_name');
+
+                    //проверяем что папка существует
+                    $check = File::exists(storage_path("app/public/user_libraries/".$folderName));
+
+                    if($check == true)
+                    {
+                        Storage::disk('public')->deleteDirectory("user_libraries/".$folderName);
+
+                        return response()->json(true);
+                    }
+
                     //создаем новую сессию Spotify API
                     $session = new SpotifyWebAPI\Session(
                         config('settings')->spotify_client_id,

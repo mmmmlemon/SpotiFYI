@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use SpotifyWebAPI;
 use Cookie;
 use Carbon\Carbon;
+use File;
+use Storage;
 
 //авторизация в Spotify API и выход
 class SpotifyAuthController extends Controller
@@ -88,5 +90,27 @@ class SpotifyAuthController extends Controller
         }
         else
         { echo "Error: spotify_access_token doesn't exist"; }
+    }
+
+    //cleanUserData
+    //очистить пользовательские файлы
+    public function cleanUserData(Request $request)
+    {   
+        //получаем имя папки с данными пользователя из Cookies
+        $folderName = $request->cookie('rand_name');
+
+        //проверяем что папка существует
+        $check = File::exists(storage_path("app/public/user_libraries/".$folderName));
+
+        if($check == true)
+        {
+            Storage::disk('public')->deleteDirectory("user_libraries/".$folderName);
+
+            return response()->json(true);
+        }
+        else
+        { return response()->json(false); }
+
+
     }
 }
