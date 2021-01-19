@@ -16,7 +16,6 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        //
         // $this->middleware('auth');
     }
 
@@ -24,37 +23,44 @@ class HomeController extends Controller
     //главная страница сайта, отображает меню на верхней панели и vue-router под меню
     public function index(Request $request)
     {   
-        //настройки сайта для app.blade
-        $settings = config('settings');
-        $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
+        $settings = config('settings'); 
 
-        //проверка токена
-        $checkToken = System::checkSpotifyAccessToken($request);
-
-        //если токен есть и он действительный
-        if($checkToken != false)
+        if($settings != null)
         {
-            //вызываем api, получаем профиль пользователя
-            $api = config('spotify_api');
+            //настройки сайта для app.blade
+            $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
 
-            //если у пользователя установлена аватарка, то записываем ссылку на неё
-            $avatarUrl = "";
+            //проверка токена
+            $checkToken = System::checkSpotifyAccessToken($request);
 
-            if(count($api->me()->images) > 0)
-            { $avatarUrl = $api->me()->images[0]->url; }
-            else
-            {   
-                //временная заглушка на случай если нет аватарки
-                //to do: добавить свою дефолтную аватарку
-                $avatarUrl = asset(config('settings')->user_img);
+            //если токен есть и он действительный
+            if($checkToken != false)
+            {
+                //вызываем api, получаем профиль пользователя
+                $api = config('spotify_api');
+
+                //если у пользователя установлена аватарка, то записываем ссылку на неё
+                $avatarUrl = "";
+
+                if(count($api->me()->images) > 0)
+                { $avatarUrl = $api->me()->images[0]->url; }
+                else
+                {   
+                    //заглушка на случай если нет аватарки
+                    $avatarUrl = asset(config('settings')->user_img);
+                }
+                
+                //пользователь
+                $spotifyProfile = ['displayName' => $api->me()->display_name, 'avatar' => $avatarUrl];
+
+                //возвращаем главную страницу с профилем пользователя
+                return view('index', compact('checkToken', 'spotifyProfile', 'siteInfo'));
             }
-            
-            $spotifyProfile = ['displayName' => $api->me()->display_name, 'avatar' => $avatarUrl];
-            //возвращаем главную страницу с профилем пользователя
-            return view('index', compact('checkToken', 'spotifyProfile', 'siteInfo'));
+            else //если токена нет или он не действительный
+            { return view('index', compact('checkToken', 'siteInfo')); }
         }
-        else //если токена нет или он не действительный
-        { return view('index', compact('checkToken', 'siteInfo')); }
+        else
+        { return response()->json(false); }
     }
 
     //getSiteInfo
@@ -63,36 +69,55 @@ class HomeController extends Controller
     {
         $settings = config('settings');
 
-        return response()->json(['siteTitle' => $settings->site_title, 
-                                 'version' => $settings->version, 
-                                 'poweredBy' => $settings->powered_by]);
+        if($settings != null)
+        {
+            return response()->json(['siteTitle' => $settings->site_title, 
+                                     'version' => $settings->version, 
+                                     'poweredBy' => $settings->powered_by]);
+        }
+        else
+        { return response()->json(false); }
     }
 
     //getSiteLogoUrl
     //получить логотип сайта
-    public function getSiteLogoUrl(){
-        
+    public function getSiteLogoUrl()
+    {   
         $settings = config('settings');
 
-        return response()->json(asset($settings->logo_img));
+        if($settings != null)
+        {
+            return response()->json(asset($settings->logo_img));
+        }
+        else
+        { return response()->json(false); }
     }
 
     //getHomePageImageUrl
     //получить фоновое изображение для домашней страницы
-    public function getHomePageImageUrl(){
-
+    public function getHomePageImageUrl()
+    {
         $settings = config('settings');
 
-        return response()->json(asset($settings->home_img));
+        if($settings != null)
+        {
+            return response()->json(asset($settings->home_img));
+        }
+        else
+        { return response()->json(false); } 
     }
 
     //getWelcomeImageUrl
     //получить изображение для приветствия
-    public function getWelcomeImageUrl(){
-
+    public function getWelcomeImageUrl()
+    {
         $settings = config('settings');
 
-        return response()->json(asset($settings->welcome_img));
+        if($settings != null)
+        {
+            return response()->json(asset($settings->welcome_img));
+        }
+        else
+        { return response()->json(false); }
     }
-
 }

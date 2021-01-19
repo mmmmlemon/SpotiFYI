@@ -50,7 +50,7 @@ class SpotifyAPIController extends Controller
            return response()->json($spotifyUserTracksCount);
         }
         else
-        { return false; }
+        { return response()->json(false); }
     }
 
     //getSpotifyUsername
@@ -83,27 +83,31 @@ class SpotifyAPIController extends Controller
         {
             $api = config('spotify_api');
             $profile = $api->me();
+
             $avatarUrl = "";
             
+            //если у пользователя есть установленный аватар, то берем его
             if(count($profile->images) > 0)
             { $avatarUrl = $profile->images[0]->url; }
+            //если нет, то берем заглушку из настроек
             else
             { $avatarUrl = asset(config('settings')->user_img); }
 
-            $response = ['spotifyUsername' => $profile->display_name, 'country' => "https://www.countryflags.io/" . $profile->country . "/flat/32.png", 
-                        'profile_url' => $profile->external_urls->spotify, 'followers' => $profile->followers->total,
-                        'avatar' => $avatarUrl, "subscription" => "$profile->product"];
+            $response = ['spotifyUsername' => $profile->display_name, 
+                         'country' => "https://www.countryflags.io/" . $profile->country . "/flat/32.png", 
+                         'profile_url' => $profile->external_urls->spotify, 'followers' => $profile->followers->total,
+                         'avatar' => $avatarUrl, 
+                         'subscription' => $profile->product];
            
             return response()->json($response);
         }
         else
-        { return false; }
+        { return response()->json(false); }
     }
 
     //getSpotifyUserLibrary
     //получить библиотеку пользователя целиком (треки, альбомы и подписки)
     //информация о библиотеке записывается в JSON файлы которые хранятся в storage
-    //TO-DO - файлы удаляются после окончания сессии пользователя 
     //возвращает true, если все файлы успешно были записаны, или false если нет
     //параметры: реквест
     public function getSpotifyUserLibrary(Request $request)
@@ -114,6 +118,7 @@ class SpotifyAPIController extends Controller
         if($checkToken != false)
         {
             $api = config('spotify_api');
+
             //опции для работы со Spotify API, лимит записей 50 (максимальный) и сдвиг
             $options = ['limit' => 50, 'offset' => 0];
 
@@ -139,14 +144,16 @@ class SpotifyAPIController extends Controller
                 $spotifyMyTracks = $api->getMySavedTracks($options)->items;
             }
 
-            //считаем треки
+            //считаем количество треков
             $countTracks = count($spotifyUserTracks);
 
+            //если треков меньше 50-ти, возвращаем ошибку
             if($countTracks < 50)
             { 
                 return response()->json(['result'=> 'libraryError', 
-                                        'errorMsg' => 'Слишком мало треков в библиотеке (треков: '.$countTracks.", нужно: 50). Добавь еще!"]);
+                                         'errorMsg' => 'Слишком мало треков в библиотеке (треков: '.$countTracks.", нужно: 50). Добавь еще!"]);
             }
+            //если треков 50 или больше
             else
             { 
                 //получаем все альбомы
@@ -159,7 +166,7 @@ class SpotifyAPIController extends Controller
                     $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
                 }
 
-                //получаем все подписки
+                //получаем все подписки на аритистов
                 while(count($spotifyMyArtists) > 0)
                 {
                     foreach($spotifyMyArtists as $item)
@@ -170,7 +177,7 @@ class SpotifyAPIController extends Controller
                 }
 
                 //сохраняем библиотку в JSON файлы
-                //проверяем что папка user_libraries существует
+                //проверяем что папка storage/../user_libraries существует
                 $check = File::exists(storage_path("app/public/user_libraries"));
 
                 //если папки нет, то создаем её
@@ -178,10 +185,10 @@ class SpotifyAPIController extends Controller
                 { Storage::disk('public')->makeDirectory("user_libraries"); }
                 else
                 {   
-                    //получаем из Cookies имя папки в которую будут сохраняться JSON'ы
+                    //получаем из Cookies рандомное имя папки в которую будут сохраняться JSON'ы
                     $folderName = $request->cookie('rand_name');
 
-                    //создаем эту папку, и если он создалась то записываем содержимое массивов в файлы
+                    //создаем эту папку, и если она создалась то записываем содержимое массивов в файлы
                     if(Storage::disk('public')->makeDirectory("user_libraries/" . $folderName))
                     {   
                         //сохраняем треки
@@ -194,6 +201,7 @@ class SpotifyAPIController extends Controller
                     else { return response()->json(false); }
                 }
 
+                //если все получилось, то возвращаем true
                 return response()->json(['result' => true]);
             } 
         }
@@ -209,7 +217,7 @@ class SpotifyAPIController extends Controller
     //параметры: реквест
     public function getSpotifyTracks(Request $request)
     {   
-        //открываем файл треков из storage
+        //открываем файл треков из storage/../user_libraries
         $tracks = System::getUserLibraryJson("tracks", $request);
 
         //если файл есть
@@ -217,15 +225,17 @@ class SpotifyAPIController extends Controller
         {
             //записываем в массив последние пять треков
             $lastFive = [];
+
             for($i = 0; $i < 5; $i++)
             {   
                 //получаем полное название трека
                 $name = Helpers::getFullNameOfItem($tracks[$i], "fullname");
 
+                //записываем в массив нужную информацию о треке
                 array_push($lastFive, ['id' => $tracks[$i]->id,
-                                        'cover' => $tracks[$i]->album->images[count($tracks[$i]->album->images) - 1]->url,
-                                        'name' => $name,
-                                        'url' => $tracks[$i]->external_urls->spotify]);
+                                       'cover' => $tracks[$i]->album->images[count($tracks[$i]->album->images) - 1]->url,
+                                       'name' => $name,
+                                       'url' => $tracks[$i]->external_urls->spotify]);
             }
     
             //записываем в массив кол-во треков и последние 5 треков
@@ -251,19 +261,22 @@ class SpotifyAPIController extends Controller
         {   
             //записываем в массив последние пять альбомов
             $lastFive = [];
+
+            //кол-во альбомов которое нужно вывести
             $count = 5;
 
+            //если альбомов в библиотеке меньше пяти, то приравнивем count к кол-ву альбомов
             if(count($albums) < 5)
             { $count = count($albums); }
-
+            
             for($i = 0; $i < $count; $i++)
             {
                 //получаем полное название альбома
                 $name = Helpers::getFullNameOfItem($albums[$i], "fullname");
                 array_push($lastFive, ['id' => $albums[$i]->id,
-                                        'cover' => $albums[$i]->images[count($albums[$i]->images) - 1]->url,
-                                        'name' => $name,
-                                        'url' => $albums[$i]->external_urls->spotify]);
+                                       'cover' => $albums[$i]->images[count($albums[$i]->images) - 1]->url,
+                                       'name' => $name,
+                                       'url' => $albums[$i]->external_urls->spotify]);
             }
             
             //записыаем кол-во альбомов и последние 5 альбомов
@@ -273,18 +286,10 @@ class SpotifyAPIController extends Controller
         }
         else
         { 
-            if(count($albums) == 0)
-            {
-                $response = ['count' => 0, 'lastFive' => false];
-                return response()->json($response);
-            }
-            else
-            {
-                return response()->json(false);  
-            }
+            $response = ['count' => 0, 'lastFive' => false];
+            return response()->json($response);
         }
     }
-
 
     //getSpotifyArtists
     //посчитать подписки на исполнителей в библиотеке пользователя и вывести случайные пять
@@ -304,13 +309,15 @@ class SpotifyAPIController extends Controller
             //использованные индексы элементов массива с подписками
             $usedNumbers = [];
             
-            $maxNumber = 4;
+            //кол-во артистов которых нужно показать
+            $count = 5;
 
-            if(count($artists) < 4)
-            { $maxNumber = count($artists); }
+            //если подписок меньше пяти, то приравниваем count к кол-ву подписок
+            if(count($artists) < 5)
+            { $count = count($artists); }
 
             //пока не наберется 5 исполнителей
-            while(count($randomFive) <= $maxNumber-1)
+            while(count($randomFive) < $count)
             {   
                 //генерим рандомное число, это будет индекс исполнителя в массиве с ними
                 $randomNumber = rand(0,count($artists) - 1);
@@ -319,10 +326,10 @@ class SpotifyAPIController extends Controller
                 {   
                     //добавляем индекс в массив и добавляем исполнителя
                     array_push($usedNumbers, $randomNumber);
-                    array_push($randomFive, ['name' => $artists[$randomNumber]->name,
-                                                'cover' => $artists[$randomNumber]->images[count($artists[$randomNumber]->images)-1]->url,
-                                                'url' => $artists[$randomNumber]->external_urls->spotify,
-                                                'id' => $artists[$randomNumber]->id]);
+                    array_push($randomFive, ['id' => $artists[$randomNumber]->id,
+                                             'cover' => $artists[$randomNumber]->images[count($artists[$randomNumber]->images)-1]->url,
+                                             'name' => $artists[$randomNumber]->name,
+                                             'url' => $artists[$randomNumber]->external_urls->spotify]);
                 }
             }   
     
@@ -333,17 +340,9 @@ class SpotifyAPIController extends Controller
         }
         else
         {    
-            if(count($artists) == 0)
-            {
-                $response = ['count' => 0, 'lastFive' => false];
-                return response()->json($response);
-            }
-            else
-            {
-                return response()->json(false);  
-            } 
+            $response = ['count' => 0, 'lastFive' => false];
+            return response()->json($response);
         }
-
     }
 
     //getUserLibraryTime
@@ -374,7 +373,7 @@ class SpotifyAPIController extends Controller
             //вычисляем какое слово нужно подставить в конец (1 минуТА, 2 минуТЫ и т.п)
             $overallMinutes .= " " . Helpers::pickTheWord($overallMinutes, "минут", "минута", "минуты");
             
-            //анадлогично для остальных измерений, если они больше нуля
+            //аналогично для остальных измерений, если они больше нуля
             if($overallHours > 0)
             {  $overallHours .= " " . Helpers::pickTheWord($overallHours, "часов", "час", "часа"); }
             
@@ -399,10 +398,11 @@ class SpotifyAPIController extends Controller
                 $coverImageUrl = $api->getTrack($randomTrackId)->album->images[0]->url;
             }   
 
-
-            $response = ['overallMinutes' => $overallMinutes, 'overallHours' => $overallHours,
-                        'overallDays' => $overallDays, 'overallMonths' => $overallMonths, 
-                        'coverImageUrl' => $coverImageUrl];
+            $response = ['overallMinutes' => $overallMinutes, 
+                         'overallHours' => $overallHours,
+                         'overallDays' => $overallDays, 
+                         'overallMonths' => $overallMonths, 
+                         'coverImageUrl' => $coverImageUrl];
 
             return response()->json($response);
         }
@@ -426,12 +426,13 @@ class SpotifyAPIController extends Controller
 
             foreach($tracks as $track)
             {
-                $id = $track->id;
-                $duration = Helpers::getTrackDuration($track->duration_ms);
-                $cover = $track->album->images[count($track->album->images) - 1]->url;
-                $name = Helpers::getFullNameOfItem($track, "fullname");
-                $url = $track->external_urls->spotify;
-                array_push($tracksClean, ['id' => $id, 'duration' => $duration, 'cover' => $cover, 'name' => $name, 'url' => $url]);
+                $trackInfo = [];
+                $trackInfo['id'] = $track->id;
+                $trackInfo['duration'] = Helpers::getTrackDuration($track->duration_ms);
+                $trackInfo['cover'] = $track->album->images[count($track->album->images) - 1]->url;
+                $trackInfo['name'] = Helpers::getFullNameOfItem($track, "fullname");
+                $trackInfo['url'] = $track->external_urls->spotify;
+                array_push($tracksClean, $trackInfo);
             }
             
             //сортируем треки по убыванию и возрастанию по ключу 'duration'
@@ -443,9 +444,10 @@ class SpotifyAPIController extends Controller
             $topFiveDesc = array_slice($tracksDesc, 0, 5, true);
             $topFiveAsc = array_slice($tracksAsc, 0, 5, true);
 
+            //порядковые номера для вывода
             $count = 1;
 
-            for($i = 0; $i <= 4; $i++)
+            for($i = 0; $i < 5; $i++)
             {
                 $topFiveDesc[$i]['count'] = $count;
                 $topFiveAsc[$i]['count'] = $count;
@@ -472,70 +474,19 @@ class SpotifyAPIController extends Controller
         //если он есть
         if($tracks != false)
         {   
-            $durationMs = []; //записываем массив с длиной треков в миллисекундах
-            
+            $durationMinutes = []; //записываем массив с длиной треков в минутах
+
+            //длина в милисекундах / 60000 округленная вниз
             foreach($tracks as $track)
-            { array_push($durationMs, $track->duration_ms); }
-    
-            $durationMn = [];   //получаем массив с длиной треков в минутах (округленной вниз)
-    
-            foreach($durationMs as $item)
-            { array_push($durationMn, intval(floor($item / 60000))); }
-            
-            $countDurations = array_count_values($durationMn);  //считаем моду
+            { array_push($durationMinutes, intval(floor($track->duration_ms / 60000))); }
+               
+            $countDurations = array_count_values($durationMinutes); //считаем моду
    
             $mode = array_search(max($countDurations), $countDurations);
             
             $response = $mode . " " . Helpers::pickTheWord($mode, "минут", "минута", "минуты");
 
             return response()->json($response);
-        }
-        else
-        { return response()->json(false); }
-
-    }
-
-    // НЕ ИСПОЛЬЗУЕТСЯ
-    //сгенерировать изображение для фона профиля (ВЫРЕЗАТЬ И ИСПОЛЬЗОВАТЬ В ДРУГОМ МЕСТЕ)
-    public function generateBackgroundImage(Request $request)
-    {
-        $tracks = System::getUserLibraryJson("tracks", $request);
-
-        if($tracks != false)
-        {
-            $lenOfTracks = count($tracks); //длина массива tracks
-
-            $canvas = Image::canvas(1792,512, "#174668"); //"холст" на который будут добавляться обложки
-            $x = 0; //смещение по оси x
-            $y = 0; //по оси y
-
-            //всего на холсте должно быть 14 обложек, поэтому цикл на 14 раз
-            for($i = 0; $i <= 14; $i++)
-            {   
-                //выбирает рандомную обложку из списка треков
-                $randNum = rand(0,$lenOfTracks - 1);
-                $coverUrl = $tracks[$randNum]->album->images[count($tracks[$i]->album->images) - 1]->url;
-
-                $cover = Image::make($coverUrl)->resize(256,256); //изменение размера на 256х256
-                
-                $canvas->insert($cover, "top-left", $x, $y); //вставкаи обложки на "холст"
-
-                $x += 256;
-
-                if($i === 7)
-                {
-                    $x = 0;
-                    $y += 256;
-                }
-            }
-
-            //сохранение 
-            $folderName = $request->cookie('rand_name');
-            $url = storage_path("app/public/user_libraries/" . $folderName . "/" . "bg_image.jpg");
-            $canvas->save($url);
-            $urlForImg = "storage/user_libraries/" . $folderName . "/" . "bg_image.jpg";
-
-            return response()->json($urlForImg);
         }
         else
         { return response()->json(false); }
@@ -555,12 +506,16 @@ class SpotifyAPIController extends Controller
             //получаем api
             $api = config('spotify_api');
 
-            //массив для подсчета жанров
-            $genresCount = [];
             //смещение для получения треков
             $offset = 0;
-            //пока смещение меньше 50, т.е мы получим только 98 последних треков (больше не позволяет Spotify API)
-            while($offset < 50)
+
+            $artistsArray = []; //массив для исполнителей 
+            $genresCount = []; //массив для подсчета жанров
+
+            //пока смещение меньше 49, будем добавлять в массив треки 
+            //(можно получить только 98 последних треков)
+            //(больше не позволяет Spotify API, хз почему именно 98)
+            while($offset <= 49)
             {
                 //получаем треки
                 $tracks = $api->getMyTop('tracks', ['limit' => 49, 'time_range' => 'short_term', 'offset' => $offset])->items;
@@ -568,7 +523,6 @@ class SpotifyAPIController extends Controller
                 //если треки есть
                 if($tracks != false)
                 {   
-                    $artistsArray = []; //массив для исполнителей
                     $genresArray = []; //массив для жанров
                     
                     //получаем id всех имеющихся исполнителей через треки
@@ -576,36 +530,37 @@ class SpotifyAPIController extends Controller
                     {
                         foreach($track->artists as $artist)
                         {
-                            if(array_search($artist->id, $artistsArray) == false)
+                            if(array_search($artist->id, $artistsArray) === false)
                             { array_push($artistsArray, $artist->id); }
                         }   
                     }
-
-                    //получаем список жанров через исполнителей
-                    //читаем массив с исполнителями и записываем жанры
-                    for($i = 0; $i < count($artistsArray); $i++)
-                    {
-                        $genres = $api->getArtist($artistsArray[$i]);
-
-                        foreach($genres->genres as $genre)
-                        { array_push($genresArray, $genre); }
-                    }
-                    
-                    //подсчитываем сколько раз встречается каждый из жанров
-                    foreach($genresArray as $item)
-                    {   
-                        $findItem = array_key_exists($item, $genresCount);
-                        
-                        if($findItem == false)
-                        { $genresCount[$item] = 1; }
-                        else
-                        { $genresCount[$item] += 1; }
-                    }
+                    //добавляем +49 к смещению
                     $offset += 49;
 
                 }
                 else
                 { return response()->json('noTracks'); }
+            }
+
+            //получаем список жанров через исполнителей
+            //читаем массив с исполнителями и записываем жанры
+            for($i = 0; $i <= count($artistsArray) - 1; $i++)
+            {
+                $genres = $api->getArtist($artistsArray[$i]);
+
+                foreach($genres->genres as $genre)
+                { array_push($genresArray, $genre); }
+            }
+           
+            //подсчитываем сколько раз встречается каждый из жанров
+            foreach($genresArray as $item)
+            {   
+                $findItem = array_key_exists($item, $genresCount);
+                
+                if($findItem == false)
+                { $genresCount[$item] = 1; }
+                else
+                { $genresCount[$item] += 1; }
             }
 
             //сортируем массив с подсчитанными жанрами по убыванию
@@ -617,7 +572,6 @@ class SpotifyAPIController extends Controller
         }
         else
         { return response()->json(false); }
-
     }
 
     //getUniqueArtists
@@ -634,18 +588,18 @@ class SpotifyAPIController extends Controller
         {
             $artistsArray = []; //массив для исполнителей
 
-            //записываем id всех исполнителей в массив
+            //записываем id всех уникальных исполнителей в массив
             foreach($tracks as $track)
             {
                 foreach($track->artists as $artist)
                 {
-                    if(array_search($artist->id, $artistsArray) == false)
+                    if(array_search($artist->id, $artistsArray) === false)
                     { array_push($artistsArray, $artist->id); }
                 }   
             }
 
             //cчитаем уникальных
-            $count = count(array_unique($artistsArray));
+            $count = count($artistsArray);
 
             //подставляем подходящее слово
             $countArtists = $count . " " . Helpers::pickTheWord($count, "различных исполнителей", "исполнителя", "разных исполнителей");
@@ -678,16 +632,19 @@ class SpotifyAPIController extends Controller
     //посчитать любимые года и десятилетия по всем трекам или по трекам за последний месяц
     //возращает JSON с годами и десятилетиями для графика
     //параметры: реквест, type - "alltime" и "month"
-    public function getYearsAndDecades(Request $request, $type)
+    public function getYearsAndDecades(Request $request, $type = "alltime")
     {
+        //массив в который будут записаны треки
         $tracks = [];
         
+        //получение всех треков из библиотеки
         if($type == "alltime")
         {
             //открываем файл с треками
             $tracks = System::getUserLibraryJson("tracks", $request);
         }
-        if($type == "month") 
+        //получение треков прослушанных за последний месяц
+        else if($type == "month") 
         {
             //проверяем токен
             $checkToken = System::checkSpotifyAccessToken($request);
@@ -699,8 +656,11 @@ class SpotifyAPIController extends Controller
 
                 //смещение для получения треков
                 $offset = 0;
-                //пока смещение меньше 50, т.е мы получим только 98 последних треков (больше не позволяет Spotify API)
-                while($offset < 50)
+                
+                //пока смещение меньше 49, будем добавлять в массив треки 
+                //(можно получить только 98 последних треков)
+                //(больше не позволяет Spotify API, хз почему именно 98)
+                while($offset < 49)
                 {
                     //получаем треки
                     $tracksApi = $api->getMyTop('tracks', ['limit' => 49, 'time_range' => 'short_term', 'offset' => $offset])->items;
@@ -709,27 +669,24 @@ class SpotifyAPIController extends Controller
                     if($tracksApi != null)
                     {   
                         foreach($tracksApi as $track)
-                        {
-                            array_push($tracks, $track);
-                        }
+                        { array_push($tracks, $track); }
                     }
 
-                    $offset += 49;
-                    
+                    $offset += 49;  
                 }
 
                 //если треков меньше десяти, то возвращаем false
                 if(count($tracks) < 10)
-                {
-                    return response()->json(false);
-                }
+                { return response()->json(false); }
             }
             else
             { return response()->json(false); }
         }
+        else
+        { return response()->json(false); }
  
         //если он есть
-        if($tracks != false)
+        if($tracks != false && $tracks != null)
         {       
             //массив для всех годов
             $allYears = [];
@@ -743,10 +700,9 @@ class SpotifyAPIController extends Controller
                 array_push($allYears, $year); 
             }
 
-            //подсчет кол-ва всех годов
+            //считаем сколько раз встречается каждый год
             $countYears = [];
 
-            //считаем сколько раз встречается каждый год
             foreach($allYears as $year)
             {   
                 $findYear = array_key_exists($year, $countYears);
@@ -878,9 +834,10 @@ class SpotifyAPIController extends Controller
             else
             { return response()->json(false); }
 
-            //получаем треки и запсиываем необходимую информацию о них
+            //получаем треки и записываем необходимую информацию о них
             $top10Tracks = $api->getMyTop('tracks', $options);
             
+            //если треков меньше десяти, то возвращаем ошибку
             if(count($top10Tracks->items) < 10)
             { return response()->json('noTracks'); }
             else
@@ -948,9 +905,10 @@ class SpotifyAPIController extends Controller
             else
             { return response()->json(false); }
 
-            //получаем треки и запсиываем необходимую информацию о них
+            //получаем треки и записываем необходимую информацию о них
             $top10Artists = $api->getMyTop('artists', $options);
 
+            //если треков меньше десяти, то возвращаем ошибку
             if(count($top10Artists->items) < 10)
             {
                 return response()->json('noArtists');
@@ -984,7 +942,6 @@ class SpotifyAPIController extends Controller
     
                 return response()->json($response);
             }
-
         }
         else
         { return response()->json(false); }
@@ -1003,7 +960,6 @@ class SpotifyAPIController extends Controller
           if($tracks != false)
           {  
             //получаем полный список треков с id трека, длиной, обложкой, названием и url
-
             $tracksClean = [];
 
             foreach($tracks as $track)
@@ -1531,7 +1487,7 @@ class SpotifyAPIController extends Controller
         if($tracks != false)
         {   
             //получаем все id артистов из треков и считаем сколько раз встречается каждый из них
-            $artistIds = ['3Mcii5XWf6E0lrY3Uky4cA' => 1];
+            $artistIds = [];
 
             foreach($tracks as $track)
             {   
@@ -1682,7 +1638,7 @@ class SpotifyAPIController extends Controller
     //getLatestTracks
     //получить последние прослушанные треки
     //возвращает JSON с последними прослушанными треками
-
+    //параметры: реквест
     public function getLatestTracks(Request $request)
     {   
         //проверка токена

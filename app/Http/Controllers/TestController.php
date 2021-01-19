@@ -156,4 +156,51 @@ class TestController extends Controller
             echo '<a href="' . $track->external_urls->spotify . '">' . $track->name . '</a> <br>';
         }
     }
+
+    
+    // НЕ ИСПОЛЬЗУЕТСЯ
+    //сгенерировать изображение для фона профиля
+    public function generateBackgroundImage(Request $request)
+    {
+        $tracks = System::getUserLibraryJson("tracks", $request);
+
+        if($tracks != false)
+        {
+            $lenOfTracks = count($tracks); //длина массива tracks
+
+            $canvas = Image::canvas(1792,512, "#174668"); //"холст" на который будут добавляться обложки
+            $x = 0; //смещение по оси x
+            $y = 0; //по оси y
+
+            //всего на холсте должно быть 14 обложек, поэтому цикл на 14 раз
+            for($i = 0; $i <= 14; $i++)
+            {   
+                //выбирает рандомную обложку из списка треков
+                $randNum = rand(0,$lenOfTracks - 1);
+                $coverUrl = $tracks[$randNum]->album->images[count($tracks[$i]->album->images) - 1]->url;
+
+                $cover = Image::make($coverUrl)->resize(256,256); //изменение размера на 256х256
+                
+                $canvas->insert($cover, "top-left", $x, $y); //вставкаи обложки на "холст"
+
+                $x += 256;
+
+                if($i === 7)
+                {
+                    $x = 0;
+                    $y += 256;
+                }
+            }
+
+            //сохранение 
+            $folderName = $request->cookie('rand_name');
+            $url = storage_path("app/public/user_libraries/" . $folderName . "/" . "bg_image.jpg");
+            $canvas->save($url);
+            $urlForImg = "storage/user_libraries/" . $folderName . "/" . "bg_image.jpg";
+
+            return response()->json($urlForImg);
+        }
+        else
+        { return response()->json(false); }
+    }
 }
