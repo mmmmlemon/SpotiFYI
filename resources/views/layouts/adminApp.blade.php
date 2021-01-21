@@ -37,12 +37,15 @@
                 <img src="{{asset($siteInfo['siteLogo'])}}" width="50px" style="margin-right:10px; padding:5px;" alt="">
             </div>
 
-            <a href="/" class="adminLink">
+            <a href="/superuser/control_panel" class="adminLink">
                 <b>Control Panel</b>
             </a>
 
             {{-- навигация для больших экранов --}}
             <ul class="navbar-nav d-none d-lg-flex">
+                <li class="nav-item active">
+                    <a href="/" class="nav-link adminLink">На сайт</a>
+                </li>
                 <li class="nav-item active">
                     <a href="/superuser/control_panel" class="nav-link adminLink">Общие настройки</a>
                 </li>
@@ -63,7 +66,7 @@
                         <div>
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                  <i class="fas fa-sign-out-alt adminLink"></i>
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -83,6 +86,7 @@
                     </button>
                     {{-- дропдаун --}}
                     <div class="dropdown-menu dropdown-menu-right w-200" aria-labelledby="navbar-dropdown-toggle-btn-1">
+                            <a href="/" class="dropdown-item adminLink">На сайт</a>
                             <a href="/superuser/control_panel" class="dropdown-item adminLink">Общие настройки</a>
                             <a href="/superuser/control_panel/logos_and_imgs" class="dropdown-item adminLink">Лого и изображения</a>
                             <a href="/superuser/control_panel/site_info" class="dropdown-item adminLink">Информация о сайте</a>
