@@ -71,7 +71,7 @@
                 @if($checkToken == false)
                     {{-- кнопка входа на сайт --}}
                     <div class="form-inline d-none d-lg-flex ml-auto"> 
-                        <a href="/login" class="btn btn-primary btn-rounded">Войти в Spotify</a>
+                        <a href="/spotify_login" class="btn btn-primary btn-rounded">Войти в Spotify</a>
                     </div>
                 @else
                     {{-- если залогинен --}}
@@ -85,7 +85,7 @@
                                 <img src="{{$spotifyProfile['avatar']}}" alt="Spotify avatar" class="navSpotifyAvatar rounded-circle">
                             </router-link>
                             {{-- кнопка выхода --}}
-                            <a class="nav-link" href="/logout">
+                            <a class="nav-link" href="/spotify_logout">
                                 <i class="fas fa-sign-out-alt"></i>
                             </a>
                     </div>
@@ -126,7 +126,7 @@
                             {{-- если пользователь незалогинен --}}
                             @if($checkToken == false)
                                 <div class="dropdown-content">
-                                    <a href="/login" class="btn btn-primary btn-block btn-rounded">Войти в Spotify</a>
+                                    <a href="/spotify_login" class="btn btn-primary btn-block btn-rounded">Войти в Spotify</a>
                                 </div>    
                             @else
                             <div class="dropdown-content">
@@ -135,7 +135,7 @@
                                     {{$spotifyProfile['displayName']}}
                                 </router-link>
                                 {{-- кнопка выхода --}}
-                                <a href="/logout" class="" style="margin-left:20px;">
+                                <a href="/spotify_logout" class="" style="margin-left:20px;">
                                     <i class="fas fa-sign-out-alt"></i>
                                 </a>
                             </div>  

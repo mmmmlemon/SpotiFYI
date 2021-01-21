@@ -78860,7 +78860,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "btn btn-primary btn-rounded btn-block",
-              attrs: { href: "/login" }
+              attrs: { href: "/spotify_login" }
             },
             [_vm._v("Войти в Spotify")]
           )

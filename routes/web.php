@@ -23,12 +23,25 @@ Route::get('/test_library', 'TestController@test_library'); //тест библ�
 
 
 
-//авторизация и логаут
-Auth::routes();
-Route::get('/login', 'SpotifyAuthController@spotifyAuth'); //авторизация через spotify
+//авторизация и логаут - Админ, админка
+// Auth::routes();
+Route::group(['prefix' => 'superuser'], function(){ 
+    Auth::routes(); 
+
+    Route::group(['middleware' => ['auth', 'admin']], function(){
+        Route::get('/control_panel', 'AdminController@viewControlPanel'); //показать админку
+    });
+});
+
+
+
+//авторизация и логаут - Spotify
+Route::get('/spotify_login', 'SpotifyAuthController@spotifyAuth'); //авторизация через spotify
 Route::get('/spotify_auth_callback', 'SpotifyAuthController@spotifyAuthCallback'); //callback для авторизации
-Route::get('/logout', 'SpotifyAuthController@spotifyLogout'); //выход из spotify
+Route::get('/spotify_logout', 'SpotifyAuthController@spotifyLogout'); //выход из spotify
 
 //вывод главной страницыы
 Route::get('/{any}', 'HomeController@index')->where('any', '.*');
+
+
 
