@@ -16,9 +16,17 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->id == 1)
+        if(Auth::check() == true)
         {
-            return $next($request);
+            if(Auth::user()->id == 1)
+            {
+                return $next($request);
+            }
+            else
+            { abort(404); }
+            
         }   
+        else
+        { abort(404); }
     }
 }

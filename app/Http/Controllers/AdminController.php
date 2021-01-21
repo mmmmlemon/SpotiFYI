@@ -14,14 +14,18 @@ class AdminController extends Controller
 
         if(Auth::check())
         {
-            $check = "user ". Auth::user()->name ." is logged in";
-        }
-        else
-        {
-            $check = "user is NOT logged in";
-        }
+            $settings = config('settings'); 
 
-
-        return view('/admin/controlPanel', compact('check'));
+            if($settings != null)
+            {
+                //настройки сайта
+                $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
+    
+                //возвращаем страницу админку
+                return view('/admin/controlPanel', compact('siteInfo')); 
+            }
+            else
+            { return response()->json(false); }
+        }
     }
 }
