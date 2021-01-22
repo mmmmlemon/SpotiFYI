@@ -30,6 +30,10 @@ Route::group(['prefix' => 'superuser'], function(){
 
     Route::group(['middleware' => ['auth', 'admin']], function(){
         Route::get('/control_panel', 'AdminController@viewControlPanel'); //показать админку
+        Route::get('/control_panel/logo_and_images', 'AdminController@viewLogoAndImages'); //редактирование изображений
+
+        Route::post('/control_panel/save_basic', 'AdminController@saveBasicSettings'); //сохранить общие настройки
+        Route::post('/control_panel/save_logo_and_images', 'AdminController@saveLogoAndImages'); //сохранить лого и изображения
     });
 });
 

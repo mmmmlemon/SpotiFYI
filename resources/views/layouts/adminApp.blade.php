@@ -50,7 +50,7 @@
                     <a href="/superuser/control_panel" class="nav-link adminLink">Общие настройки</a>
                 </li>
                 <li class="nav-item active">
-                    <a href="/superuser/control_panel/logos_and_images" class="nav-link adminLink">Лого и изображения</a>
+                    <a href="/superuser/control_panel/logo_and_images" class="nav-link adminLink">Лого и изображения</a>
                 </li>
                 <li class="nav-item active">
                     <a href="/superuser/control_panel/site_info" class="nav-link adminLink">Информация о сайте</a>
@@ -88,7 +88,7 @@
                     <div class="dropdown-menu dropdown-menu-right w-200" aria-labelledby="navbar-dropdown-toggle-btn-1">
                             <a href="/" class="dropdown-item adminLink">На сайт</a>
                             <a href="/superuser/control_panel" class="dropdown-item adminLink">Общие настройки</a>
-                            <a href="/superuser/control_panel/logos_and_imgs" class="dropdown-item adminLink">Лого и изображения</a>
+                            <a href="/superuser/control_panel/logo_and_images" class="dropdown-item adminLink">Лого и изображения</a>
                             <a href="/superuser/control_panel/site_info" class="dropdown-item adminLink">Информация о сайте</a>
 
                         <div class="dropdown-divider"></div>

@@ -16,7 +16,6 @@ class AddColumns extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->string('logo_img', 100)->default('storage/system/logo.png');
             $table->string('home_img', 100)->default('storage/system/home.png');
-            $table->string('profile_img', 100)->default('storage/system/profile.png');
         });
     }
 
@@ -30,7 +29,6 @@ class AddColumns extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('logo_img');
             $table->dropColumn('home_img');
-            $table->dropColumn('profile_img');
         });
     }
 }
