@@ -2082,12 +2082,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //получить логотип сайта
     this.$store.dispatch('getSiteLogoUrl'); //получить информацию о сайте
 
     this.$store.dispatch('getSiteInfo');
+    this.paragraph_workaround();
   },
   computed: {
     //текущая вкладка
@@ -78668,11 +78672,12 @@ var render = function() {
                         "row justify-content-center text-center fadeInAnimSlow"
                     },
                     [
-                      _c("p", [
-                        _c("b", [_vm._v("Powered by")]),
-                        _c("br"),
-                        _vm._v(_vm._s(_vm.siteInfo.poweredBy))
-                      ])
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("p", {
+                        staticClass: "text-center marginNone paddingNone p_fix",
+                        domProps: { innerHTML: _vm._s(_vm.siteInfo.poweredBy) }
+                      })
                     ]
                   )
                 : _vm._e(),
@@ -78692,7 +78697,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                    О проекте\n                                "
+                            "\n                                О проекте\n                            "
                           )
                         ]
                       )
@@ -78715,7 +78720,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                   FAQ\n                                "
+                            "\n                                FAQ\n                            "
                           )
                         ]
                       )
@@ -78749,7 +78754,16 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("b", [_vm._v("Powered by")])
+    ])
+  }
+]
 render._withStripped = true
 
 

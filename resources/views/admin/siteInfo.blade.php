@@ -11,6 +11,13 @@
                     {{$info['about']}}
                 </textarea>
             </div>
+
+            <div class="form-group">
+                <label for="poweredBy">Powered by</label>
+                <textarea width="100%" class="form-control" id="poweredBy" name="poweredBy" placeholder="Powered by">
+                    {{$info['poweredBy']}}
+                </textarea>
+            </div>
             <input class="btn btn-primary btn-block" type="submit" value="Сохранить">
         </form>
     </div>
@@ -19,6 +26,28 @@
 
 @push('scripts')
 <script>
+
+    $('#poweredBy').trumbowyg({
+            tagsToRemove:['script','img'],
+            autogrow: true,
+            imageWidthModalEdit: true,
+            urlProtocol: true,
+            btns: [
+                ['viewHTML'],
+                ['undo', 'redo'], // Only supported in Blink browsers
+                ['formatting'],
+                ['strong', 'em'],
+                ['superscript', 'subscript'],
+                ['link'],
+                ['insertImage'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ]
+    });
+
     $('#about').trumbowyg({
         tagsToRemove:['script','img'],
         autogrow: true,

@@ -26,27 +26,30 @@
 
                     <!-- powered by -->
                     <div v-if="siteInfo != false" class="row justify-content-center text-center fadeInAnimSlow">
-                        <p><b>Powered by</b><br>{{siteInfo.poweredBy}}</p>
+                        <div class="col-12">
+                            <b>Powered by</b>
+                        </div>
+                        <p v-html="siteInfo.poweredBy" class="text-center marginNone paddingNone p_fix">  
+                        </p>
                     </div>
+                    
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 paddingSides">
+                            <router-link to="/about">
+                                <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'about'}" type="button">
+                                    О проекте
+                                </button>
+                            </router-link>
+                        </div>
+                        <div class="col-md-4 paddingSides">
+                            <router-link to="/about/faq">
+                                <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'faq'}" type="button">
+                                    FAQ
+                                </button>
+                            </router-link>
+                        </div>
 
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-4 paddingSides">
-                                <router-link to="/about">
-                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'about'}" type="button">
-                                        О проекте
-                                    </button>
-                                </router-link>
-                            </div>
-                            <div class="col-md-4 paddingSides">
-                                <router-link to="/about/faq">
-                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'faq'}" type="button">
-                                       FAQ
-                                    </button>
-                                </router-link>
-                            </div>
-
-                           </div>
+                    </div>
  
                 </div>
                 <!-- информация о сайте -->
@@ -70,7 +73,10 @@
 
             //получить информацию о сайте
             this.$store.dispatch('getSiteInfo');
+
+            this.paragraph_workaround();
         },
+
         computed: {
              //текущая вкладка
             currentTab: function(){
@@ -85,5 +91,7 @@
                 return this.$store.state.homePage.siteLogoUrl;
             }
         },
+
+
     }
 </script>

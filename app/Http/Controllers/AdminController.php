@@ -56,7 +56,8 @@ class AdminController extends Controller
                 $images = ['logo' => asset($settings->logo_img),
                            'home_img' => asset($settings->home_img),
                            'welcome_img' => asset($settings->welcome_img),
-                           'user_img' => asset($settings->user_img)];    
+                           'user_img' => asset($settings->user_img)]; 
+
                 //возвращаем страницу админку
                 return view('/admin/logoAndImg', compact('siteInfo', 'images')); 
             }
@@ -78,7 +79,7 @@ class AdminController extends Controller
                 //настройки сайта
                 $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
 
-                $info = ['about' => $settings->about]; 
+                $info = ['about' => $settings->about, 'poweredBy' => $settings->powered_by]; 
 
                 //возвращаем страницу админку
                 return view('/admin/siteInfo', compact('siteInfo', 'info')); 
@@ -219,6 +220,7 @@ class AdminController extends Controller
         {
             //валидация
             $validated = Validator::make($request->all(),[
+                'poweredBy' => 'string',
                 'about' => 'string',
             ]);
 
@@ -231,6 +233,7 @@ class AdminController extends Controller
             {
                 $settings = App\Settings::all()[0];
 
+                $settings->powered_by = $request->poweredBy;
                 $settings->about = $request->about;
 
                 $settings->save();

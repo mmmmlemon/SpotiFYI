@@ -128,8 +128,17 @@
     margin-top: 8px;
 }
 
+.paddingNone{
+    padding: 0 !important;
+}
+
 .marginNone{
+    margin: 0 !important;
+}
+
+.p_fix p {
     margin: 0;
+    margin-bottom: 10px;
 }
 
 .marginBottomNone{
