@@ -28,12 +28,30 @@
                     <div v-if="siteInfo != false" class="row justify-content-center text-center fadeInAnimSlow">
                         <p><b>Powered by</b><br>{{siteInfo.poweredBy}}</p>
                     </div>
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 paddingSides">
+                                <router-link to="/about">
+                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'about'}" type="button">
+                                        О проекте
+                                    </button>
+                                </router-link>
+                            </div>
+                            <div class="col-md-4 paddingSides">
+                                <router-link to="/about/faq">
+                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'faq'}" type="button">
+                                       FAQ
+                                    </button>
+                                </router-link>
+                            </div>
+
+                           </div>
+ 
                 </div>
                 <!-- информация о сайте -->
                 <div class="col-12 col-md-8 paddingSides fadeInAnim">
-                    <p>Много текста про сайт. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores natus veniam voluptas cum provident voluptate possimus est itaque, laudantium eos quae tempora nobis optio eveniet, pariatur facilis dolor rem architecto.</p>
-                    <hr>
-                    <p>Еще много текста про сайт. Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore ducimus iure vitae, dolores soluta corrupti sit accusamus natus deleniti maiores reprehenderit numquam? Harum enim impedit neque natus sed molestias perferendis.Laudantium commodi dolorem accusamus eligendi aliquid adipisci illum possimus iusto vitae, ipsa libero. Saepe, nisi dolor facere eius tempore facilis illum voluptatibus labore, explicabo expedita et magnam cumque aut debitis?</p>
+                    <router-view></router-view>
                 </div>
             </div>
         </div>
@@ -54,6 +72,10 @@
             this.$store.dispatch('getSiteInfo');
         },
         computed: {
+             //текущая вкладка
+            currentTab: function(){
+                return this.$store.state.profilePage.currentTab;
+            },
             //информация о сайте
             siteInfo: function(){
                 return this.$store.state.homePage.siteInfo;

@@ -23,6 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/get_home_tracks_count', 'SpotifyAPIController@getHomePageUserTracksCount'); //получить кол-во треков в библиотеке
 Route::get('/get_spotify_username', 'SpotifyAPIController@getSpotifyUsername'); //получить имя пользователя
 Route::get('/get_site_info', 'HomeController@getSiteInfo'); //получить информацию о сайте
+Route::get('/get_about', 'HomeController@getAbout'); //получить информацию о сайте, about
+Route::get('/get_faq', 'HomeController@getFAQ'); //получить информацию о сайте, faq
 Route::get('/get_logo_img', 'HomeController@getSiteLogoUrl'); //получить логотип сайта
 Route::get('/get_home_page_img', 'HomeController@getHomePageImageUrl'); //получить фоновое изображение для дом. страницы
 Route::get('/get_welcome_img', 'HomeController@getWelcomeImageUrl'); //получить картинку для приветствия

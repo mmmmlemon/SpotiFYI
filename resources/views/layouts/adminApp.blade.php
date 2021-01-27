@@ -16,6 +16,10 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/halfmoon.min.js') }}" defer></script>
     <script src="{{ asset('js/fontawesome.min.js') }}" defer></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('{{ asset('js/jquery-3.4.1.min.js') }}')</script>
+    <script src="{{ asset('js/trumbowyg/trumbowyg.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('js/trumbowyg/ui/trumbowyg.min.css') }}">
 
     <!-- Шрифты -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,7 +34,7 @@
 </head>
 <body>
     {{-- #app --}}
-    <div id="app" class="page-wrapper with-navbar">
+    <div class="page-wrapper with-navbar">
         <nav class="navbar">
             {{-- логотип --}}
             <div class="navbar-content">
@@ -53,7 +57,10 @@
                     <a href="/superuser/control_panel/logo_and_images" class="nav-link adminLink">Лого и изображения</a>
                 </li>
                 <li class="nav-item active">
-                    <a href="/superuser/control_panel/site_info" class="nav-link adminLink">Информация о сайте</a>
+                    <a href="/superuser/control_panel/site_info" class="nav-link adminLink">О проекте</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/superuser/control_panel/faq" class="nav-link adminLink">FAQ</a>
                 </li>
             </ul>
 
@@ -89,8 +96,8 @@
                             <a href="/" class="dropdown-item adminLink">На сайт</a>
                             <a href="/superuser/control_panel" class="dropdown-item adminLink">Общие настройки</a>
                             <a href="/superuser/control_panel/logo_and_images" class="dropdown-item adminLink">Лого и изображения</a>
-                            <a href="/superuser/control_panel/site_info" class="dropdown-item adminLink">Информация о сайте</a>
-
+                            <a href="/superuser/control_panel/site_info" class="dropdown-item adminLink">О проект</a>
+                            <a href="/superuser/control_panel/faq" class="dropdown-item adminLink">FAQ</a>
                         <div class="dropdown-divider"></div>
 
                         <div class="dropdown-content adminLink">
@@ -108,15 +115,15 @@
     
         <!-- враппер -->
         <div class="content-wrapper" style="padding-left:2%; padding-right:2%;">
-        <div class="container" >
-            {{-- контент --}}
-            <main class="py-4">
-                @yield('content')
-            </main>
+            <div class="container" >
+                {{-- контент --}}
+                <main class="py-4">
+                    @yield('content')
+                </main>
+            </div>
         </div>
-        </div>
-
     </div>
-    
+    @stack('scripts')
 </body>
 </html>
+

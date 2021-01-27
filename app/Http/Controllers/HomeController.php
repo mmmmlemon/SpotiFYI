@@ -79,6 +79,34 @@ class HomeController extends Controller
         { return response()->json(false); }
     }
 
+    //getAbout
+    //получить информацию о сайте, About
+    public function getAbout()
+    {
+        $settings = config('settings');
+
+        if($settings != null)
+        {
+            return response()->json($settings->about);
+        }
+        else
+        { return response()->json(false); }
+    }
+
+    //getFAQ
+    //получить информацию о сайте, FAQ
+    public function getFAQ()
+    {
+        $settings = config('settings');
+
+        if($settings != null)
+        {
+            return response()->json($settings->faq);
+        }
+        else
+        { return response()->json(false); }
+    }
+
     //getSiteLogoUrl
     //получить логотип сайта
     public function getSiteLogoUrl()

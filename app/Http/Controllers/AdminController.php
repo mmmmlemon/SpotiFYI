@@ -67,6 +67,52 @@ class AdminController extends Controller
         { abort(403); }
     }
 
+    public function viewSiteInfo(Request $request)
+    {
+        if(Auth::check())
+        {
+            $settings = config('settings'); 
+
+            if($settings != null)
+            {
+                //настройки сайта
+                $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
+
+                $info = ['about' => $settings->about]; 
+
+                //возвращаем страницу админку
+                return view('/admin/siteInfo', compact('siteInfo', 'info')); 
+            }
+            else
+            { return response()->json(false); }
+        }
+        else
+        { abort(403); }
+    }
+
+    public function viewFAQ(Request $request)
+    {
+        if(Auth::check())
+        {
+            $settings = config('settings'); 
+
+            if($settings != null)
+            {
+                //настройки сайта
+                $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
+
+                $info = ['faq' => $settings->faq]; 
+
+                //возвращаем страницу админку
+                return view('/admin/faq', compact('siteInfo', 'info')); 
+            }
+            else
+            { return response()->json(false); }
+        }
+        else
+        { abort(403); } 
+    }
+
     //сохранить общие настройки сайта
     public function saveBasicSettings(Request $request)
     {
@@ -115,7 +161,9 @@ class AdminController extends Controller
         {
             //валидация
             $validated = Validator::make($request->all(),[
- 
+                'logo' => 'image',
+                'home_img' => 'image',
+                'welcome_img' => 'image'
             ]);
 
             if ($validated->fails()) {
@@ -164,5 +212,63 @@ class AdminController extends Controller
         { abort(403); }
     }
 
+    //сохранить информацию о сайте
+    public function saveSiteInfo(Request $request)
+    {
+        if(Auth::check())
+        {
+            //валидация
+            $validated = Validator::make($request->all(),[
+                'about' => 'string',
+            ]);
 
+            if ($validated->fails()) {
+                return redirect()->back()
+                            ->withErrors($validated)
+                            ->withInput();
+            }
+            else
+            {
+                $settings = App\Settings::all()[0];
+
+                $settings->about = $request->about;
+
+                $settings->save();
+
+                return redirect()->back();
+            }
+        }
+        else
+        { abort(403); }
+    }
+
+    //сохранить FAQ
+    public function saveFAQ(Request $request)
+    {
+        if(Auth::check())
+        {
+            //валидация
+            $validated = Validator::make($request->all(),[
+                'faq' => 'string',
+            ]);
+
+            if ($validated->fails()) {
+                return redirect()->back()
+                            ->withErrors($validated)
+                            ->withInput();
+            }
+            else
+            {
+                $settings = App\Settings::all()[0];
+
+                $settings->faq = $request->faq;
+
+                $settings->save();
+
+                return redirect()->back();
+            }
+        }
+        else
+        { abort(403); }
+    }
 }

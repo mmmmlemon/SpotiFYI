@@ -13,7 +13,9 @@ const HomePageStates = {
     state: {
         spotifyUsername: -1, //никнейм пользователя, array
         spotifyUserTracksCount: -1, //подсчет треков, int
-        siteInfo: -1, //информация о сайта для страницы About, array
+        siteInfo: -1, //общая информация о сайте, version, powered by и т.д
+        about: -1, //информация о cайте, about
+        faq: -1, //информация о сайте,  faq
         siteLogoUrl: -1, //ссылка на логотип сайта
         homePageImageUrl: -1, //ссылка на фоновую картинку для домашней страницы
         welcomeImageUrl: -1, //ссылка на картинку для приветствия
@@ -63,6 +65,26 @@ const HomePageStates = {
             { context.commit('setState', {state: 'siteInfo', value: response.data}); }
             else
             { context.commit('setState', {state: 'siteInfo', value: false}); }
+          });
+        },
+   
+        //получить информацию о сайте, About
+        getAbout(context){
+          axios.get('/api/get_about').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'about', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'about', value: false}); }
+          });
+        },
+      
+        //получить информацию о сайте, FAQ
+        getFAQ(context){
+          axios.get('/api/get_faq').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'faq', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'faq', value: false}); }
           });
         },
 
