@@ -2091,7 +2091,6 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getSiteLogoUrl'); //получить информацию о сайте
 
     this.$store.dispatch('getSiteInfo');
-    this.paragraph_workaround();
   },
   computed: {
     //текущая вкладка

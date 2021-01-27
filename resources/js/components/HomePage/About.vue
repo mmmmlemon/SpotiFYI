@@ -74,7 +74,6 @@
             //получить информацию о сайте
             this.$store.dispatch('getSiteInfo');
 
-            this.paragraph_workaround();
         },
 
         computed: {
