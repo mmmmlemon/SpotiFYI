@@ -19,6 +19,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('{{ asset('js/jquery-3.4.1.min.js') }}')</script>
     <script src="{{ asset('js/trumbowyg/trumbowyg.min.js') }}"></script>
+    <script src="{{ asset('js/trumbowyg/trumbowyg.noembed.js') }}"></script>
+    <script src="{{ asset('js/trumbowyg/trumbowyg.cleanpaste.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('js/trumbowyg/ui/trumbowyg.min.css') }}">
 
     <!-- Шрифты -->
@@ -27,7 +29,6 @@
 
     <!-- CSS Стили -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
     <link href="{{ asset('css/halfmoon-variables.css') }}" rel="stylesheet">
 

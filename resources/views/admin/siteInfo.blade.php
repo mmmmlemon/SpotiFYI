@@ -60,6 +60,7 @@
             ['strong', 'em'],
             ['superscript', 'subscript'],
             ['link'],
+            ['noembed'],
             ['insertImage'],
             ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
             ['unorderedList', 'orderedList'],

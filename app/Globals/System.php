@@ -6,6 +6,7 @@
     use SpotifyWebAPI;
     use Cookie;
     use File;
+    use Storage;
 
     //Globals
     //глобальные функции для работы со Spotify API и файлами
