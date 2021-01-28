@@ -21,6 +21,7 @@
     <script src="{{ asset('js/trumbowyg/trumbowyg.min.js') }}"></script>
     <script src="{{ asset('js/trumbowyg/trumbowyg.noembed.js') }}"></script>
     <script src="{{ asset('js/trumbowyg/trumbowyg.cleanpaste.js') }}"></script>
+    <script src="{{ asset('js/charCounter.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('js/trumbowyg/ui/trumbowyg.min.css') }}">
 
     <!-- Шрифты -->

@@ -70,6 +70,7 @@
                  
             <input class="btn btn-primary btn-block" type="submit" value="Сохранить">
           </form>
+          <br>
     </div>
 </div>
 @endsection

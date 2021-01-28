@@ -67,6 +67,20 @@
             </div>
             <input class="btn btn-primary btn-block" type="submit" value="Сохранить">
           </form>
+          <br>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+
+    $("#site_title").charCounter();
+    $("#version").charCounter();
+    $("#contact_email").charCounter();
+    $("#spotify_client_id").charCounter();
+    $("#spotify_client_secret").charCounter();
+    $("#spotify_redirect_uri").charCounter();
+
+</script>
+@endpush
