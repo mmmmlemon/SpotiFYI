@@ -33,11 +33,13 @@ Route::group(['prefix' => 'superuser'], function(){
         Route::get('/control_panel/logo_and_images', 'AdminController@viewLogoAndImages'); //редактирование изображений
         Route::get('/control_panel/site_info', 'AdminController@viewSiteInfo'); //редактирование информации о сайте
         Route::get('/control_panel/faq', 'AdminController@viewFAQ'); //редактирование FAQ
+        Route::get('/control_panel/contacts', 'AdminController@viewContacts'); //редактирование контактов
 
         Route::post('/control_panel/save_basic', 'AdminController@saveBasicSettings'); //сохранить общие настройки
         Route::post('/control_panel/save_logo_and_images', 'AdminController@saveLogoAndImages'); //сохранить лого и изображения
         Route::post('/control_panel/save_site_info', 'AdminController@saveSiteInfo'); //сохранить информацию о сайте
         Route::post('/control_panel/save_faq', 'AdminController@saveFAQ'); //сохранить FAQ
+        Route::post('/control_panel/save_contacts', 'AdminController@saveContacts'); //сохранить контакты
     });
 });
 

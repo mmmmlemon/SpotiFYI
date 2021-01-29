@@ -14,6 +14,7 @@ import Top10 from './components/Profile/Top10.vue';
 import Achievements from './components/Profile/Achievements.vue';
 import RecentTracks from './components/RecentTracks.vue';
 import Faq from './components/HomePage/About/FAQ.vue';
+import Contacts from './components/HomePage/About/Contacts.vue';
 import SiteInfo from './components/HomePage/About/SiteInfo.vue';
 
 const routes = [
@@ -36,6 +37,10 @@ const routes = [
                     {
                         path:'/about/faq',
                         component: Faq
+                    },
+                    {
+                        path:'/about/contacts',
+                        component: Contacts
                     },
                 ]
             },

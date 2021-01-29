@@ -20,7 +20,7 @@ class CreateTableSettings extends Migration
             $table->string('spotify_client_id', 32)->default('spotify_client_id');
             $table->string('spotify_client_secret', 32)->default('spotify_client_secret');
             $table->string('spotify_redirect_uri', 200)->default('http://localhost');
-            $table->string('contact_email',50)->default('myemail@mail.com');
+            $table->longText('contacts');
             $table->timestamps();
         });
 
@@ -31,7 +31,7 @@ class CreateTableSettings extends Migration
                 'spotify_client_id' => 'spotify_client_id',
                 'spotify_client_secret' => 'spotify_client_secret',
                 'spotify_redirect_uri' => 'http://localhost',
-                'contact_email' => 'myemail@mail.com',
+                'contacts' => 'myemail@mail.com',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             )

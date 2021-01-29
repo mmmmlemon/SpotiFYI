@@ -16,6 +16,7 @@ const HomePageStates = {
         siteInfo: -1, //общая информация о сайте, version, powered by и т.д
         about: -1, //информация о cайте, about
         faq: -1, //информация о сайте,  faq
+        contacts: -1, //информация о сайте, контакты
         siteLogoUrl: -1, //ссылка на логотип сайта
         homePageImageUrl: -1, //ссылка на фоновую картинку для домашней страницы
         welcomeImageUrl: -1, //ссылка на картинку для приветствия
@@ -85,6 +86,16 @@ const HomePageStates = {
             { context.commit('setState', {state: 'faq', value: response.data}); }
             else
             { context.commit('setState', {state: 'faq', value: false}); }
+          });
+        },
+
+        //получить информацию о сайте, Контакты
+        getContacts(context){
+          axios.get('/api/get_contacts').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'contacts', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'contacts', value: false}); }
           });
         },
 

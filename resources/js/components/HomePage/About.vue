@@ -48,6 +48,13 @@
                                 </button>
                             </router-link>
                         </div>
+                        <div class="col-md-4 paddingSides">
+                            <router-link to="/about/contacts">
+                                <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'contacts'}" type="button">
+                                   Контакты
+                                </button>
+                            </router-link>
+                        </div>
 
                     </div>
  

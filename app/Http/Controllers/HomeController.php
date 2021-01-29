@@ -107,6 +107,20 @@ class HomeController extends Controller
         { return response()->json(false); }
     }
 
+    //getContacts
+    //получить информацию о сайте, FAQ
+    public function getContacts()
+    {
+        $settings = config('settings');
+
+        if($settings != null)
+        {
+            return response()->json($settings->contacts);
+        }
+        else
+        { return response()->json(false); }
+    }
+
     //getSiteLogoUrl
     //получить логотип сайта
     public function getSiteLogoUrl()

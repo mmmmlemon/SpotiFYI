@@ -140,6 +140,36 @@ class AdminController extends Controller
         { abort(403); } 
     }
 
+    //viewContacts
+    //показать страницу редактирования контактов
+    //параметры: реквест
+    //возвращает страницу админки
+    public function viewContacts(Request $request)
+    {
+        //проверка авторизации
+        if(Auth::check())
+        {
+            $settings = config('settings'); 
+
+            if($settings != null)
+            {
+                //настройки сайта
+                $siteInfo = ['siteLogo' => $settings->logo_img, 
+                             'siteTitle' => $settings->site_title];
+
+                $info = ['contacts' => $settings->contacts]; 
+
+                //возвращаем админку
+                return view('/admin/contacts', compact('siteInfo', 'info')); 
+            }
+            else
+            { return response()->json(false); }
+        }
+        //если не авторизован, то 403
+        else
+        { abort(403); }
+    }
+
     //сохранить общие настройки сайта
     public function saveBasicSettings(Request $request)
     {
@@ -300,6 +330,38 @@ class AdminController extends Controller
 
                 //сохранение FAQ
                 $settings->faq = $request->faq;
+
+                $settings->save();
+
+                return redirect()->back();
+            }
+        }
+        else
+        { abort(403); }
+    }
+
+    //сохранить контакты
+    public function saveContacts(Request $request)
+    {
+        if(Auth::check())
+        {
+            //валидация
+            $validated = Validator::make($request->all(),[
+                'contacts' => 'string',
+            ]);
+
+            //если валидация не прошла, то редиректим назад с ошибкой
+            if($validated->fails()) {
+                return redirect()->back()
+                            ->withErrors($validated)
+                            ->withInput();
+            }
+            else
+            {
+                $settings = App\Settings::all()[0];
+
+                //сохранение FAQ
+                $settings->contacts = $request->contacts;
 
                 $settings->save();
 
