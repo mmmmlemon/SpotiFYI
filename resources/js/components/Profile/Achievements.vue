@@ -1,5 +1,7 @@
+//Achievements
 <template>
     <div class="row justify-content-center">
+        <!-- лоадер -->
         <div class="col-12" v-if="spotifyUserLibrary == -1">
             <Loader />
             <h6 class="text-center blinkingAnim" v-if="spotifyUserLibrary == -1">Загружаю библиотеку пользователя...</h6>

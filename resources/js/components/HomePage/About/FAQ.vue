@@ -1,12 +1,16 @@
+//FAQ
 <template>
     <div class="fadeInAnim">
+        <!-- лоадер -->
         <div v-if="faq == -1" class="fadeInAnim">
             <Loader />
         </div>
+        <!-- текст FAQ -->
         <div v-else-if="faq != -1 && faq != false" class="fadeInAnim">
             <p v-html="faq" class="fadeInAnim">
             </p>
         </div>
+        <!-- ошибка -->
         <div v-else class="fadeInAnim">
             <Error type="small" errorMessage="Не удалось загрузить FAQ"/>
         </div>
@@ -16,7 +20,6 @@
 <script>
 export default {
     mounted(){
-
         //смена текущего таба
         this.$store.dispatch('setCurrentTab','faq');
 

@@ -1,3 +1,4 @@
+//List
 <template>
     <div class="justify-content-center">
         <!-- лоадер -->

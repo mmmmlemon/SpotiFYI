@@ -1,3 +1,4 @@
+//BackgroundImageFront
 <template>
     <div class="backgroundImageFront"></div>
 </template>

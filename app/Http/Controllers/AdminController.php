@@ -9,12 +9,17 @@ use App;
 use Image;
 use Storage;
 
+//AdminController
 //админка и все что её касается
 class AdminController extends Controller
 {
+    //viewControlPanel
     //вывести главную страницу контрольной панели
+    //параметры: реквест
+    //возвращает главную страницу админки
     public function viewControlPanel(Request $request)
     {
+        //проверяем авторизован ли админ
         if(Auth::check())
         {
             $settings = config('settings'); 
@@ -31,19 +36,24 @@ class AdminController extends Controller
                                   'spotify_api_client_secret' => $settings->spotify_client_secret,
                                   'spotify_api_redirect_uri' => $settings->spotify_redirect_uri];
     
-                //возвращаем страницу админку
+                //возвращаем админку
                 return view('/admin/controlPanel', compact('siteInfo', 'basicSettings')); 
             }
             else
             { return response()->json(false); }
         }
+        //если нет, то 403
         else
         { abort(403); }
     }
 
+    //viewLogoAndImages
     //вывести страницу редактирования лого и изображений
+    //параметры: реквест
+    //возвращает страницу админки
     public function viewLogoAndImages(Request $request)
     {
+        //проверяем авторизацию
         if(Auth::check())
         {
             $settings = config('settings'); 
@@ -58,18 +68,24 @@ class AdminController extends Controller
                            'welcome_img' => asset($settings->welcome_img),
                            'user_img' => asset($settings->user_img)]; 
 
-                //возвращаем страницу админку
+                //возвращаем админку
                 return view('/admin/logoAndImg', compact('siteInfo', 'images')); 
             }
             else
             { return response()->json(false); }
         }
+        //если не авторизован, то 403
         else
         { abort(403); }
     }
 
+    //viewSiteInfo
+    //вывести страницу редактирования информации о сайте (about и powered_by)
+    //параметры: реквест
+    //возвращает страницу админки
     public function viewSiteInfo(Request $request)
-    {
+    {   
+        //проверяем авторизацию
         if(Auth::check())
         {
             $settings = config('settings'); 
@@ -77,22 +93,30 @@ class AdminController extends Controller
             if($settings != null)
             {
                 //настройки сайта
-                $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
+                $siteInfo = ['siteLogo' => $settings->logo_img, 
+                             'siteTitle' => $settings->site_title];
 
-                $info = ['about' => $settings->about, 'poweredBy' => $settings->powered_by]; 
+                $info = ['about' => $settings->about, 
+                         'poweredBy' => $settings->powered_by]; 
 
-                //возвращаем страницу админку
+                //возвращаем админку
                 return view('/admin/siteInfo', compact('siteInfo', 'info')); 
             }
             else
             { return response()->json(false); }
         }
+        //если не авторизован, то 403
         else
         { abort(403); }
     }
 
+    //viewFAQ
+    //показать страницу редактирования FAQ сайта
+    //параметры: реквест
+    //возвращает страницу админки
     public function viewFAQ(Request $request)
     {
+        //проверка авторизации
         if(Auth::check())
         {
             $settings = config('settings'); 
@@ -100,16 +124,18 @@ class AdminController extends Controller
             if($settings != null)
             {
                 //настройки сайта
-                $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
+                $siteInfo = ['siteLogo' => $settings->logo_img, 
+                             'siteTitle' => $settings->site_title];
 
                 $info = ['faq' => $settings->faq]; 
 
-                //возвращаем страницу админку
+                //возвращаем админку
                 return view('/admin/faq', compact('siteInfo', 'info')); 
             }
             else
             { return response()->json(false); }
         }
+        //если не авторизован, то 403
         else
         { abort(403); } 
     }
@@ -117,32 +143,32 @@ class AdminController extends Controller
     //сохранить общие настройки сайта
     public function saveBasicSettings(Request $request)
     {
+        //проверка авторизации
         if(Auth::check())
         {
             //валидация
             $validated = Validator::make($request->all(),[
                 'site_title' => 'string|max:10',
                 'version' => 'string|max:5',
-                'contact_email' => 'email|max:50',
                 'spotify_client_id' => 'string|max:32',
                 'spotify_client_secret' => 'string|max:32',
                 'spotify_redirect_uri' => 'string|max:200',
             ]);
 
-            if ($validated->fails()) {
+            //если валидация не прошла, то редиректим назад с ошибкой
+            if($validated->fails()) {
                 return redirect()->back()
                             ->withErrors($validated)
                             ->withInput();
             }
             else
             {
+                //сохраняем настройки
                 $settings = App\Settings::all()[0];
-
                 $settings->site_title = $request->site_title;
                 $settings->spotify_client_id = $request->spotify_client_id;
                 $settings->spotify_client_secret = $request->spotify_client_secret;
                 $settings->spotify_redirect_uri = $request->spotify_redirect_uri;
-                $settings->contact_email = $request->contact_email;
                 $settings->version = $request->version;
 
                 $settings->save();
@@ -167,7 +193,8 @@ class AdminController extends Controller
                 'welcome_img' => 'image'
             ]);
 
-            if ($validated->fails()) {
+            //если валидация не прошла, то редиректим назад с ошибкой
+            if($validated->fails()) {
                 return redirect()->back()
                             ->withErrors($validated)
                             ->withInput();
@@ -176,6 +203,7 @@ class AdminController extends Controller
             {
                 $settings = App\Settings::all()[0];
 
+                //сохранение лого
                 if($request->logo != null)
                 {
                     $logo = Image::make($request->logo);
@@ -183,6 +211,7 @@ class AdminController extends Controller
                     $logo->save(storage_path('app/public/system/logo.png'));
                 }
                 
+                //сохранение картинки для главной страницы
                 if($request->home_img != null)
                 {
                     $home = Image::make($request->home_img);
@@ -190,6 +219,7 @@ class AdminController extends Controller
                     $home->save(storage_path('app/public/system/home.png'));
                 }
 
+                //сохранение картинки для приветствия
                 if($request->welcome_img != null)
                 {
                     $welcome = Image::make($request->welcome_img);
@@ -197,6 +227,7 @@ class AdminController extends Controller
                     $welcome->save(storage_path('app/public/system/welcome.png'));
                 }
 
+                //сохранение стандартного юзерпика
                 if($request->user_img != null)
                 {
                     $user = Image::make($request->user_img);
@@ -224,7 +255,8 @@ class AdminController extends Controller
                 'about' => 'string',
             ]);
 
-            if ($validated->fails()) {
+            //если валидация не прошла, то редиректим назад с ошибкой
+            if($validated->fails()) {
                 return redirect()->back()
                             ->withErrors($validated)
                             ->withInput();
@@ -233,9 +265,10 @@ class AdminController extends Controller
             {
                 $settings = App\Settings::all()[0];
 
-                $settings->powered_by = $request->poweredBy;
+                //сохранение about и powered_by
                 $settings->about = $request->about;
-
+                $settings->powered_by = $request->poweredBy;
+            
                 $settings->save();
 
                 return redirect()->back();
@@ -255,7 +288,8 @@ class AdminController extends Controller
                 'faq' => 'string',
             ]);
 
-            if ($validated->fails()) {
+            //если валидация не прошла, то редиректим назад с ошибкой
+            if($validated->fails()) {
                 return redirect()->back()
                             ->withErrors($validated)
                             ->withInput();
@@ -264,6 +298,7 @@ class AdminController extends Controller
             {
                 $settings = App\Settings::all()[0];
 
+                //сохранение FAQ
                 $settings->faq = $request->faq;
 
                 $settings->save();

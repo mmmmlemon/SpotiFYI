@@ -5,6 +5,7 @@
     <div class="col-12 col-md-8 paddingSides text-center">
         <form action="/superuser/control_panel/save_site_info" method="POST" class="" enctype="multipart/form-data">
             @csrf
+            {{-- о проекте --}}
             <div class="form-group">
                 <label for="about">О проекте</label>
                 <textarea width="100%" class="form-control" id="about" name="about" placeholder="Информация о проекте">
@@ -12,6 +13,7 @@
                 </textarea>
             </div>
 
+            {{-- powered by --}}
             <div class="form-group">
                 <label for="poweredBy">Powered by</label>
                 <textarea width="100%" class="form-control" id="poweredBy" name="poweredBy" placeholder="Powered by">

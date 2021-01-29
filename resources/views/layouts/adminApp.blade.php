@@ -64,27 +64,28 @@
                 <li class="nav-item active">
                     <a href="/superuser/control_panel/faq" class="nav-link adminLink">FAQ</a>
                 </li>
+                <li class="nav-item active">
+                    <a href="/superuser/control_panel/contacts" class="nav-link adminLink">Контакты</a>
+                </li>
             </ul>
 
+            {{-- если залогинен --}}
+            <div class="form-inline d-none d-lg-flex ml-auto" style="margin-right:1%;"> 
+                    {{-- юзернейм --}}
+                    <a class="nav-link adminLink">Admin</a>
+                    {{-- кнопка выхода --}}
+                    <div>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt adminLink"></i>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+            </div>
 
-                {{-- если залогинен --}}
-                <div class="form-inline d-none d-lg-flex ml-auto" style="margin-right:1%;"> 
-                        {{-- юзернейм --}}
-                        <a class="nav-link adminLink">Admin</a>
-                        {{-- кнопка выхода --}}
-                        <div>
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                 <i class="fas fa-sign-out-alt adminLink"></i>
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                </div>
-
-        
             {{-- Меню для мобилок --}}
             <div class="navbar-content d-lg-none ml-auto"> 
                 <div class="dropdown with-arrow">
@@ -100,6 +101,7 @@
                             <a href="/superuser/control_panel/logo_and_images" class="dropdown-item adminLink">Лого и изображения</a>
                             <a href="/superuser/control_panel/site_info" class="dropdown-item adminLink">О проект</a>
                             <a href="/superuser/control_panel/faq" class="dropdown-item adminLink">FAQ</a>
+                            <a href="/superuser/control_panel/contacts" class="dropdown-item adminLink">Контакты</a>
                         <div class="dropdown-divider"></div>
 
                         <div class="dropdown-content adminLink">

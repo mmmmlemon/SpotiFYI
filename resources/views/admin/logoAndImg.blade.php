@@ -6,6 +6,7 @@
         <form action="/superuser/control_panel/save_logo_and_images" method="POST" class="w-400 mw-full " enctype="multipart/form-data">
             @csrf
             <div class="row">
+                {{-- логотип сайта --}}
                 <div class="col-md-6 form-group">
                     <label for="logo" class="required">Логотип сайта</label>
                     <div class="custom-file">
@@ -21,6 +22,7 @@
             </div>
 
             <div class="row">
+                {{-- фон для домашней страницы --}}
                 <div class="col-md-6 form-group">
                     <label for="home_img" class="required">Фон для домашней страницы</label>
                     <div class="custom-file">
@@ -37,6 +39,7 @@
             </div>
 
             <div class="row">
+                {{-- картинка для приветствия --}}
                 <div class="col-md-6 form-group">
                     <label for="welcome_img" class="required">Картинка для приветствия</label>
                     <div class="custom-file">
@@ -48,11 +51,11 @@
                     <a href="{{$images['welcome_img']}}">
                         <img src="{{$images['welcome_img']}}" width="50%" alt="">
                     </a>
-                   
                 </div>
             </div>
 
             <div class="row">
+                {{-- стандартный юзерпик --}}
                 <div class="col-md-6 form-group">
                     <label for="user_img" class="required">Картинка для пользователя</label>
                     <div class="custom-file">

@@ -1,21 +1,28 @@
+//FavoriteGenres
 <template>
     <div class="col-12 justify-content-center fadeInAnim">
+        <!-- лоадер -->
         <div v-if="favoriteGenres == -1">
             <Loader />
             <h6 class="text-center blinkingAnim">Анализирую треки...</h6>
             <p class="text-center font10pt">Это может занять некоторое время</p>
         </div>
+        <!-- ошибка -->
         <div v-else-if="favoriteGenres == false">
             <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
         </div>
+        <!-- предупреждение -->
         <div v-else-if="favoriteGenres == 'noTracks'" class="greyCard paddingSides">
             <Info type="small" infoMessage="Пока не достаточно данных для проведения анализа жанров."/>
         </div>
+        <!-- контент -->
         <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="greyCard paddingSides marginVertical">
             <h4 class="text-center borderUnderline">Твои любимые жанры</h4>
             <p class="text-center">На основе того что ты слушаешь последний месяц</p>
+            <!-- график с жанрами -->
             <BarChart :favoriteGenres="favoriteGenres" :backgroundColor="backgroundColor" label="Любимые жанры"/>
         </div>
+        <!-- ошибка -->
         <div v-else>
             <Error type="small"/>
         </div>

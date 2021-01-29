@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="row justify-content-center">
+    {{-- FAQ --}}
     <div class="col-12 col-md-8 paddingSides text-center">
         <form action="/superuser/control_panel/save_faq" method="POST" class="" enctype="multipart/form-data">
             @csrf

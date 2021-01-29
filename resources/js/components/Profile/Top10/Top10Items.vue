@@ -1,15 +1,19 @@
 //Top10Items
 <template>
         <div class="col-12 col-md-5 marginSides paddingSides">
+            <!-- лоадер -->
             <div v-if="items == -1">
                 <Loader />
             </div>
+            <!-- ошибка -->
             <div v-else-if="items == false">
                 <Error type="small" errorMessage="Не удалось загрузить треки"/>
             </div>
+            <!-- предупреждение -->
             <div v-else-if="items == 'noTracks'">
                 <Info type="small" infoMessage="Пока что мало данных для Топ-10"/>
             </div>
+            <!-- контент -->
             <div v-else-if="items != -1 || items != false" class="col-12 fadeInAnim paddingSides greyCard"> 
                  <BackgroundImage bgStyle="top10ImageCard" :backgroundImageUrl="items['backgroundImage']"/>
                  <div>

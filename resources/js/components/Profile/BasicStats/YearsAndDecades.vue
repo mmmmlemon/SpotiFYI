@@ -1,14 +1,17 @@
+//YearsDecades
 <template>
     <div class="col-11 justify-content-center fadeInAnim">
+        <!-- лоадер -->
         <div v-if="yearsAndDecades === -1">
             <Loader />
         </div>
+        <!-- ошибка -->
         <div v-else-if="yearsAndDecades === false">
             <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
         </div>
-        <div v-else-if="yearsAndDecades != -1 && yearsAndDecades != false" class="col-12 
-        
-        greyCard paddingSides marginVertical">
+        <!-- контент -->
+        <div v-else-if="yearsAndDecades != -1 && yearsAndDecades != false" class="col-12 greyCard paddingSides marginVertical">
+            <!-- за все время -->
             <div v-if="type == 'alltime'">
                 <p class="text-center">
                     Больше всего тебе нравится музыка <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
@@ -20,6 +23,7 @@
                 </p>   
             </div>
 
+            <!-- за месяц -->
             <div v-else>
                 <p :v-else-if="type == 'month'" class="text-center">
                     В последнее время ты больше всего слушаешь музыку <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 

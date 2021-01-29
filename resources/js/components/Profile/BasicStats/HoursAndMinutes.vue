@@ -38,6 +38,7 @@
                 </p>
             </div>
         </div>
+        <!-- ошибка -->
         <div v-else>
             <Error type="small"/>
         </div>
