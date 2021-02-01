@@ -2478,23 +2478,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      isInvisible: -1
-    };
-  },
   mounted: function mounted() {
     this.$store.dispatch('checkCookies');
   },
   computed: {
-    cookiesVisible: function cookiesVisible() {
-      return this.$store.state.homePage.cookiesVisible;
+    cookiesVisible: {
+      get: function get() {
+        return this.$store.state.homePage.cookiesVisible;
+      },
+      set: function set(newValue) {
+        this.$store.dispatch('setCookiesVisibleFalse');
+      }
     }
   },
   methods: {
     acceptCookie: function acceptCookie() {
-      this.$store.dispatch('setCookiesVisibleFalse');
+      this.cookiesVisible = false;
     }
   }
 });
@@ -79431,28 +79437,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return (_vm.cookiesVisible = -1)
+  return _vm.cookiesVisible != -1
     ? _c(
         "div",
         {
           staticClass:
             "row text-center cookiesCard justify-content-center fadeInAnimSlow",
-          class: {
-            invisible: (_vm.cookiesVisible = false),
-            fadeInAnimSlow: (_vm.cookiesVisible = true)
-          }
+          class: { invisible: _vm.cookiesVisible === false }
         },
         [
           _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-md-2 paddingSides" }, [
+          _c("div", { staticClass: "col-12 col-md-2" }, [
             _c(
               "button",
               {
                 staticClass: "btn btn-block btn-primary",
                 on: { click: _vm.acceptCookie }
               },
-              [_vm._v("Ладно")]
+              [
+                _vm._v("\n            Ладно\n            "),
+                _c("i", { staticClass: "fas fa-cookie-bite" })
+              ]
             )
           ])
         ]
@@ -79464,11 +79470,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h6", [
-      _c("b", [_vm._v("SpotiFYI")]),
-      _vm._v(
-        ' использует Cookies. Продолжая вы соглашаетесь, что этот сайт будет иметь доступ к вашим "печенькам" в браузере.'
-      )
+    return _c("div", { staticClass: "col-12" }, [
+      _c("h6", [
+        _c("b", [_vm._v("SpotiFYI")]),
+        _vm._v(
+          ' использует Cookies. Продолжая вы соглашаетесь, что этот сайт будет иметь доступ к вашим "печенькам" в браузере.'
+        )
+      ])
     ])
   }
 ]
