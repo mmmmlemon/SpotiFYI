@@ -1,6 +1,8 @@
 //Profile
 <template>
     <div class="col-12">
+        <!-- предупреждение о кукисах -->
+        <Cookies />
         <!-- лоадер -->
         <div class="container bounceInAnim marginTopBig" v-if="spotifyProfile == -1">
             <Loader/>

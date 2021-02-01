@@ -11,6 +11,7 @@ Vue.use(VueAxios, axios);
 const HomePageStates = {
 
     state: {
+        cookiesVisible: -1, //куки видны
         spotifyUsername: -1, //никнейм пользователя, array
         spotifyUserTracksCount: -1, //подсчет треков, int
         siteInfo: -1, //общая информация о сайте, version, powered by и т.д
@@ -24,6 +25,12 @@ const HomePageStates = {
       },
 
     mutations: {
+
+        //уставноить cookiesVisible = false
+        setCookiesVisibleFalse(state){
+          state.cookiesVisible = false;
+        },
+
         //получить ответ от API (универсальная mutation для всех стейтов)
         getAPIResponse(state, payload){
           axios.get(payload.uri).then((response) => {
@@ -38,6 +45,24 @@ const HomePageStates = {
     },
       
     actions: {
+
+        //уставноить cookiesVisible = false
+        setCookiesVisibleFalse(context)
+        {
+          context.commit('setCookiesVisibleFalse');
+        },
+
+        //установить cookiesAccepted
+        //получить имя пользователя из API
+        checkCookies(context){
+          axios.get('/api/check_cookies').then(response => {
+            // alert(response.data)
+            if(response.data != false)
+            { context.commit('setState', {state: 'cookiesVisible', value: true}); }
+            else
+            { context.commit('setState', {state: 'cookiesVisible', value: false}); }
+          });
+        },
 
         //получить имя пользователя из API
         getSpotifyUsername(context){

@@ -8,6 +8,7 @@ use Cookie;
 use Carbon\Carbon;
 use File;
 use Storage;
+use Illuminate\Http\Response;
 
 //авторизация в Spotify API и выход
 class SpotifyAuthController extends Controller
@@ -112,5 +113,24 @@ class SpotifyAuthController extends Controller
         { return response()->json(false); }
 
 
+    }
+
+    //checkCookie
+    //проверить cookies
+    public function checkCookies(Request $request)
+    {
+        //если куки есть, то возвращаем false, чтобы видимость сообщения о куках тоже была false
+        if($request->hasCookie('cookies_accepted') != false)
+        {
+            return response()->json(false);
+        }
+        else
+        {   
+            $response = new Response(true);
+
+            $response->withCookie(cookie()->forever('cookies_accepted', true));
+
+            return $response;
+        }
     }
 }

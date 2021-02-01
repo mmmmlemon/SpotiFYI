@@ -49,6 +49,9 @@ Vue.component('List', List);
 import ListItem from './components/Profile/Latest/ListItem.vue';
 Vue.component('ListItem', ListItem);
 
+import Cookies from './components/Misc/Cookies.vue';
+Vue.component('Cookies', Cookies);
+
 //графики
 import BarChart from './components/Charts/BarChart.vue';
 Vue.component('BarChart', BarChart);

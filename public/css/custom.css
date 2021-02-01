@@ -156,6 +156,17 @@
 /*  */
 
 /* design */
+.cookiesCard{
+    background-color: gray;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #3C4044;
+
+}
+
 .navSpotifyAvatar{
     width:45px;
     height:45px;

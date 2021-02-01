@@ -16,7 +16,7 @@ import RecentTracks from './components/RecentTracks.vue';
 import Faq from './components/HomePage/About/FAQ.vue';
 import Contacts from './components/HomePage/About/Contacts.vue';
 import SiteInfo from './components/HomePage/About/SiteInfo.vue';
-import NotFound from './components/NotFound.vue';
+import NotFound from './components/Misc/NotFound.vue';
 
 const routes = [
     {   //главная страница
