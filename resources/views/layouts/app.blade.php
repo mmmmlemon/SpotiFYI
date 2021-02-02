@@ -62,9 +62,9 @@
                         </li>
                     @endif
                     {{-- тесты --}}
-                    <li class="nav-item active">
+                    {{-- <li class="nav-item active">
                         <router-link to="/tests"><a class="nav-link">Dev: Tests</a></router-link>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 {{-- если пользователь незалогинен --}}
@@ -117,9 +117,9 @@
                                 </router-link>
                             @endif
                             {{-- тесты --}}
-                            <router-link to="/tests">
+                            {{-- <router-link to="/tests">
                                 <a class="dropdown-item">Dev:Tests</a>
-                            </router-link>
+                            </router-link> --}}
 
                             <div class="dropdown-divider"></div>
                             
