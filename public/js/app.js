@@ -2371,7 +2371,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    //получить юзернейм пользователя
+    this.$store.dispatch('getWelcomeMessage'); //получить юзернейм пользователя
+
     if (this.spotifyUsername == -1) {
       this.$store.dispatch('getSpotifyUsername');
     } //получить кол-во треков в библиотеке для сообщения на главной странице
@@ -2392,6 +2393,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    //welcome message
+    welcomeMessage: function welcomeMessage() {
+      return this.$store.state.homePage.welcomeMessage;
+    },
     //юзернейм пользователя
     spotifyUsername: function spotifyUsername() {
       return this.$store.state.homePage.spotifyUsername;
@@ -79163,15 +79168,10 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("h5", { staticClass: "text-center borderUnderline" }, [
-                    _vm._v("Какой-нибудь крутой слоган")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "Какое-нибудь крутое описание сайта. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis tenetur cum quaerat eveniet suscipit minus ipsum natus totam porro vero officiis odit est, rem alias minima sed, officia delectus quisquam.Sit nihil, dignissimos est aperiam molestias voluptatum perferendis ad quaerat laudantium odio sequi, vero eius. Doloribus quibusdam unde, enim voluptas assumenda, maxime id distinctio vero quo ullam neque necessitatibus aspernatur!"
-                    )
-                  ]),
+                  _c("p", {
+                    staticClass: "fadeInAnim text-center",
+                    domProps: { innerHTML: _vm._s(_vm.welcomeMessage) }
+                  }),
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
@@ -101295,7 +101295,7 @@ var routes = [{
   name: '404',
   component: _components_Misc_NotFound_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, {
-  path: '*',
+  path: '/',
   redirect: '/404'
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -101332,6 +101332,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
 var HomePageStates = {
   state: {
+    welcomeMessage: -1,
+    //welcome message
     cookiesVisible: -1,
     //куки видны
     spotifyUsername: -1,
@@ -101389,6 +101391,24 @@ var HomePageStates = {
         } else {
           context.commit('setState', {
             state: 'cookiesVisible',
+            value: false
+          });
+        }
+      });
+    },
+    //установить cookiesAccepted
+    //получить имя пользователя из API
+    getWelcomeMessage: function getWelcomeMessage(context) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_welcome_message').then(function (response) {
+        // alert(response.data)
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'welcomeMessage',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'welcomeMessage',
             value: false
           });
         }

@@ -81,7 +81,7 @@ const routes = [
         name: '404', 
         component: NotFound, 
       }, { 
-        path: '*', 
+        path: '/', 
         redirect: '/404' 
       }
 

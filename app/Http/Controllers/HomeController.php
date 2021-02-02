@@ -63,6 +63,20 @@ class HomeController extends Controller
         { return response()->json(false); }
     }
 
+    //getWelcomeMessage
+    //получить welcome msg
+    public function getWelcomeMessage()
+    {
+        $settings = config('settings');
+
+        if($settings != null)
+        {
+            return response()->json($settings->welcome);
+        }
+        else
+        { return response()->json(false); }
+    }
+
     //getSiteInfo
     //получить информацию о сайте из БД для страницы "О проекте"
     public function getSiteInfo()

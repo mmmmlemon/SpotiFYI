@@ -13,6 +13,14 @@
                 </textarea>
             </div>
 
+            {{-- о проекте, welcome  --}}
+            <div class="form-group">
+                <label for="welcome">Текст приветствия</label>
+                <textarea width="100%" class="form-control" id="welcome" name="welcome" placeholder="Текст приветствия">
+                    {{$info['welcome']}}
+                </textarea>
+            </div>
+
             {{-- powered by --}}
             <div class="form-group">
                 <label for="poweredBy">Powered by</label>
@@ -31,6 +39,27 @@
 <script>
 
     $('#poweredBy').trumbowyg({
+            tagsToRemove:['script','img'],
+            autogrow: true,
+            imageWidthModalEdit: true,
+            urlProtocol: true,
+            btns: [
+                ['viewHTML'],
+                ['undo', 'redo'], // Only supported in Blink browsers
+                ['formatting'],
+                ['strong', 'em'],
+                ['superscript', 'subscript'],
+                ['link'],
+                ['insertImage'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ]
+    });
+
+    $('#welcome').trumbowyg({
             tagsToRemove:['script','img'],
             autogrow: true,
             imageWidthModalEdit: true,

@@ -11,8 +11,8 @@
                     <div class="text-center ">
                         <img :src="siteLogoUrl" class="fadeInAnim" width="10%" alt="">
                     </div>
-                    <h5 class="text-center borderUnderline">Какой-нибудь крутой слоган</h5>
-                    <p>Какое-нибудь крутое описание сайта. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis tenetur cum quaerat eveniet suscipit minus ipsum natus totam porro vero officiis odit est, rem alias minima sed, officia delectus quisquam.Sit nihil, dignissimos est aperiam molestias voluptatum perferendis ad quaerat laudantium odio sequi, vero eius. Doloribus quibusdam unde, enim voluptas assumenda, maxime id distinctio vero quo ullam neque necessitatibus aspernatur!</p>
+                    <p v-html="welcomeMessage" class="fadeInAnim text-center">
+                    </p>
                     <hr>
                     <div class="row justify-content-center">
                         <div class="col-md-4 col-10 justify-content-center marginVertical">
@@ -105,6 +105,9 @@
         },
 
         mounted(){
+            
+            this.$store.dispatch('getWelcomeMessage'); 
+
             //получить юзернейм пользователя
             if(this.spotifyUsername == -1)
             { this.$store.dispatch('getSpotifyUsername'); }
@@ -127,6 +130,10 @@
         },
 
         computed: {
+            //welcome message
+            welcomeMessage: function(){
+                return this.$store.state.homePage.welcomeMessage;
+            },
             //юзернейм пользователя
             spotifyUsername: function(){
                 return this.$store.state.homePage.spotifyUsername;

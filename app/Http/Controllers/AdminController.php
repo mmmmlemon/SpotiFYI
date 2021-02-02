@@ -97,6 +97,7 @@ class AdminController extends Controller
                              'siteTitle' => $settings->site_title];
 
                 $info = ['about' => $settings->about, 
+                         'welcome' => $settings->welcome,
                          'poweredBy' => $settings->powered_by]; 
 
                 //возвращаем админку
@@ -281,6 +282,7 @@ class AdminController extends Controller
         {
             //валидация
             $validated = Validator::make($request->all(),[
+                'welcome' => 'string',
                 'poweredBy' => 'string',
                 'about' => 'string',
             ]);
@@ -296,6 +298,7 @@ class AdminController extends Controller
                 $settings = App\Settings::all()[0];
 
                 //сохранение about и powered_by
+                $settings->welcome = $request->welcome;
                 $settings->about = $request->about;
                 $settings->powered_by = $request->poweredBy;
             

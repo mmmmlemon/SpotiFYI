@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //HomePage
+Route::get('/get_welcome_message', 'HomeController@getWelcomeMessage'); //получить welcome msg
 Route::get('/check_cookies', 'SpotifyAuthController@checkCookies'); //проверить куки
 Route::get('/get_home_tracks_count', 'SpotifyAPIController@getHomePageUserTracksCount'); //получить кол-во треков в библиотеке
 Route::get('/get_spotify_username', 'SpotifyAPIController@getSpotifyUsername'); //получить имя пользователя

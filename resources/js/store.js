@@ -11,6 +11,7 @@ Vue.use(VueAxios, axios);
 const HomePageStates = {
 
     state: {
+        welcomeMessage: -1, //welcome message
         cookiesVisible: -1, //куки видны
         spotifyUsername: -1, //никнейм пользователя, array
         spotifyUserTracksCount: -1, //подсчет треков, int
@@ -61,6 +62,18 @@ const HomePageStates = {
             { context.commit('setState', {state: 'cookiesVisible', value: true}); }
             else
             { context.commit('setState', {state: 'cookiesVisible', value: false}); }
+          });
+        },
+        
+        //установить cookiesAccepted
+        //получить имя пользователя из API
+        getWelcomeMessage(context){
+          axios.get('/api/get_welcome_message').then(response => {
+            // alert(response.data)
+            if(response.data != false)
+            { context.commit('setState', {state: 'welcomeMessage', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'welcomeMessage', value: false}); }
           });
         },
 
