@@ -101296,7 +101296,7 @@ var routes = [{
   component: _components_Misc_NotFound_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, {
   path: '/',
-  redirect: '/404'
+  redirect: window.location.href
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',

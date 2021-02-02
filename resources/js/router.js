@@ -82,7 +82,7 @@ const routes = [
         component: NotFound, 
       }, { 
         path: '/', 
-        redirect: '/404' 
+        redirect: window.location.href, 
       }
 
 ]
