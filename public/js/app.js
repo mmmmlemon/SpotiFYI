@@ -78872,7 +78872,7 @@ var render = function() {
                         "row justify-content-center text-center fadeInAnimSlow"
                     },
                     [
-                      _vm.poweredBy != null
+                      _vm.poweredBy != -1 && _vm.poweredBy != false
                         ? _c("div", { staticClass: "col-12" }, [
                             _c("b", [_vm._v("Powered by")])
                           ])

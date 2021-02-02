@@ -183,26 +183,24 @@ class SpotifyAPIController extends Controller
                 //если папки нет, то создаем её
                 if($check != true)
                 { Storage::disk('public')->makeDirectory("user_libraries"); }
-                else
+                
+                //получаем из Cookies рандомное имя папки в которую будут сохраняться JSON'ы
+                $folderName = $request->cookie('rand_name');
+
+                //создаем эту папку, и если она создалась то записываем содержимое массивов в файлы
+                if(Storage::disk('public')->makeDirectory("user_libraries/" . $folderName))
                 {   
-                    //получаем из Cookies рандомное имя папки в которую будут сохраняться JSON'ы
-                    $folderName = $request->cookie('rand_name');
-
-                    //создаем эту папку, и если она создалась то записываем содержимое массивов в файлы
-                    if(Storage::disk('public')->makeDirectory("user_libraries/" . $folderName))
-                    {   
-                        //сохраняем треки
-                        File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "tracks.json"), json_encode($spotifyUserTracks));
-                        //сохраняем альбомы
-                        File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "albums.json"), json_encode($spotifyUserAlbums));
-                        //сохраняем подписки
-                        File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "artists.json"), json_encode($spotifyUserArtists));
-                    }
-                    else { return response()->json(false); }
+                    //сохраняем треки
+                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "tracks.json"), json_encode($spotifyUserTracks));
+                    //сохраняем альбомы
+                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "albums.json"), json_encode($spotifyUserAlbums));
+                    //сохраняем подписки
+                    File::put(storage_path("app/public/user_libraries/" . $folderName . "/" . "artists.json"), json_encode($spotifyUserArtists));
+                    
+                    //если все получилось, то возвращаем true
+                    return response()->json(['result' => true]);
                 }
-
-                //если все получилось, то возвращаем true
-                return response()->json(['result' => true]);
+                else { return response()->json(false); }    
             } 
         }
         else
