@@ -7,12 +7,13 @@
             <!-- если пользователь не залогинен -->
             <div class="col-12 col-sm-12 col-md-10 col-lg-10 paddingSides marginVertical" width="20%;" v-if="spotifyUsername == false">
                 <div class="col-12">
-                    <h2 class="text-center"><b>SpotiFYI</b></h2>
+                    <h2 class="text-center"><b>{{siteTitle}}</b></h2>
                     <div class="text-center ">
                         <img :src="siteLogoUrl" class="fadeInAnim" width="10%" alt="">
                     </div>
-                    <p v-html="welcomeMessage" class="fadeInAnim text-center">
+                    <p v-if="welcomeMessage != false" v-html="welcomeMessage" class="fadeInAnim text-center">
                     </p>
+                    <Error v-else type="small" errorMessage="Не удалось загрузить текст приветствия"/>
                     <hr>
                     <div class="row justify-content-center">
                         <div class="col-md-4 col-10 justify-content-center marginVertical">
@@ -105,7 +106,10 @@
         },
 
         mounted(){
-            
+            //получить информацию о сайте
+            this.$store.dispatch('getSiteInfo');
+
+            //получить приветственное сообщение
             this.$store.dispatch('getWelcomeMessage'); 
 
             //получить юзернейм пользователя
@@ -130,6 +134,10 @@
         },
 
         computed: {
+            //название сайта
+            siteTitle: function(){
+                return this.$store.state.homePage.siteInfo['siteTitle'];
+            },
             //welcome message
             welcomeMessage: function(){
                 return this.$store.state.homePage.welcomeMessage;

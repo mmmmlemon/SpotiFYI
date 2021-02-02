@@ -7,7 +7,7 @@
         </div>
         <!-- текст "О проекте" -->
         <div v-else-if="siteInfo != -1 && siteInfo != false" class="fadeInAnim">
-            <p v-html="siteInfo" class="fadeInAnim">
+            <p v-html="siteInfo" class="fadeInAnim text-center">
             </p>
         </div>
         <!-- ошибка -->

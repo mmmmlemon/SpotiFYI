@@ -50,8 +50,8 @@
             </div>
             {{-- Spotify Redirect URI --}}
             <div class="form-group">
-                <label for="spotify_redirect_uri" class="required">Spotify API: Redirect URI</label>
-                <input type="spotify_redirect_uri" class="form-control" id="spotify_redirect_uri" name="spotify_redirect_uri" placeholder="" required="required" 
+                <label for="spotify_redirect_uri" class="required">Spotify API: Redirect URI (Callback)</label>
+                <input type="spotify_redirect_uri" class="form-control" id="spotify_redirect_uri" name="spotify_redirect_uri" placeholder="http://192.168.0.105:8000/spotify_auth_callback" required="required" 
                     value="@if($errors->any()){{old('spotify_redirect_uri')}}@else{{$basicSettings['spotify_api_redirect_uri']}}@endif" maxlength="200">
                 @error('spotify_redirect_uri')
                     <span class="invalid-feedback" role="alert">

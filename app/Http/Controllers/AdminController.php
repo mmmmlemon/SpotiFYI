@@ -8,6 +8,7 @@ use Validator;
 use App;
 use Image;
 use Storage;
+use File;
 
 //AdminController
 //админка и все что её касается
@@ -98,7 +99,7 @@ class AdminController extends Controller
 
                 $info = ['about' => $settings->about, 
                          'welcome' => $settings->welcome,
-                         'poweredBy' => $settings->powered_by]; 
+                         'poweredBy' => $settings->poweredBy]; 
 
                 //возвращаем админку
                 return view('/admin/siteInfo', compact('siteInfo', 'info')); 
@@ -232,6 +233,14 @@ class AdminController extends Controller
             }
             else
             {
+                //проверяем что папка storage/../system существует
+                $check = File::exists(storage_path("app/public/system"));
+
+                //если папки нет, то создаем её
+                if($check != true)
+                { Storage::disk('public')->makeDirectory("system"); }
+
+
                 $settings = App\Settings::all()[0];
 
                 //сохранение лого
@@ -282,10 +291,11 @@ class AdminController extends Controller
         {
             //валидация
             $validated = Validator::make($request->all(),[
-                'welcome' => 'string',
-                'poweredBy' => 'string',
-                'about' => 'string',
+                'welcome' => 'string|nullable',
+                'poweredBy' => 'string|nullable',
+                'about' => 'string|nullable',
             ]);
+
 
             //если валидация не прошла, то редиректим назад с ошибкой
             if($validated->fails()) {
@@ -296,11 +306,15 @@ class AdminController extends Controller
             else
             {
                 $settings = App\Settings::all()[0];
-
                 //сохранение about и powered_by
-                $settings->welcome = $request->welcome;
-                $settings->about = $request->about;
-                $settings->powered_by = $request->poweredBy;
+                if($request->welcome != null)
+                { $settings->welcome = $request->welcome; }
+
+                if($request->about != null)
+                { $settings->about = $request->about; }
+
+                if($request->poweredBy != null)
+                { $settings->poweredBy = $request->poweredBy; }
             
                 $settings->save();
 

@@ -2353,6 +2353,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeMount: function beforeMount() {
     //получить фоновое изображение
@@ -2371,6 +2372,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    //получить информацию о сайте
+    this.$store.dispatch('getSiteInfo'); //получить приветственное сообщение
+
     this.$store.dispatch('getWelcomeMessage'); //получить юзернейм пользователя
 
     if (this.spotifyUsername == -1) {
@@ -2393,6 +2397,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    //название сайта
+    siteTitle: function siteTitle() {
+      return this.$store.state.homePage.siteInfo['siteTitle'];
+    },
     //welcome message
     welcomeMessage: function welcomeMessage() {
       return this.$store.state.homePage.welcomeMessage;
@@ -78864,7 +78872,11 @@ var render = function() {
                         "row justify-content-center text-center fadeInAnimSlow"
                     },
                     [
-                      _vm._m(0),
+                      _vm.poweredBy != null
+                        ? _c("div", { staticClass: "col-12" }, [
+                            _c("b", [_vm._v("Powered by")])
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c("p", {
                         staticClass: "text-center marginNone paddingNone p_fix",
@@ -78971,16 +78983,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("b", [_vm._v("Powered by")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -79008,7 +79011,7 @@ var render = function() {
       : _vm.contacts != -1 && _vm.contacts != false
       ? _c("div", { staticClass: "fadeInAnim" }, [
           _c("p", {
-            staticClass: "fadeInAnim",
+            staticClass: "fadeInAnim text-center",
             domProps: { innerHTML: _vm._s(_vm.contacts) }
           })
         ])
@@ -79055,7 +79058,7 @@ var render = function() {
       : _vm.faq != -1 && _vm.faq != false
       ? _c("div", { staticClass: "fadeInAnim" }, [
           _c("p", {
-            staticClass: "fadeInAnim",
+            staticClass: "fadeInAnim text-center",
             domProps: { innerHTML: _vm._s(_vm.faq) }
           })
         ])
@@ -79099,7 +79102,7 @@ var render = function() {
       : _vm.siteInfo != -1 && _vm.siteInfo != false
       ? _c("div", { staticClass: "fadeInAnim" }, [
           _c("p", {
-            staticClass: "fadeInAnim",
+            staticClass: "fadeInAnim text-center",
             domProps: { innerHTML: _vm._s(_vm.siteInfo) }
           })
         ])
@@ -79158,25 +79161,40 @@ var render = function() {
                 attrs: { width: "20%;" }
               },
               [
-                _c("div", { staticClass: "col-12" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "text-center " }, [
-                    _c("img", {
-                      staticClass: "fadeInAnim",
-                      attrs: { src: _vm.siteLogoUrl, width: "10%", alt: "" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("p", {
-                    staticClass: "fadeInAnim text-center",
-                    domProps: { innerHTML: _vm._s(_vm.welcomeMessage) }
-                  }),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _vm._m(1)
-                ])
+                _c(
+                  "div",
+                  { staticClass: "col-12" },
+                  [
+                    _c("h2", { staticClass: "text-center" }, [
+                      _c("b", [_vm._v(_vm._s(_vm.siteTitle))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text-center " }, [
+                      _c("img", {
+                        staticClass: "fadeInAnim",
+                        attrs: { src: _vm.siteLogoUrl, width: "10%", alt: "" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.welcomeMessage != false
+                      ? _c("p", {
+                          staticClass: "fadeInAnim text-center",
+                          domProps: { innerHTML: _vm._s(_vm.welcomeMessage) }
+                        })
+                      : _c("Error", {
+                          attrs: {
+                            type: "small",
+                            errorMessage:
+                              "Не удалось загрузить текст приветствия"
+                          }
+                        }),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ],
+                  1
+                )
               ]
             )
           : _vm._e(),
@@ -79333,14 +79351,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "text-center" }, [
-      _c("b", [_vm._v("SpotiFYI")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -102160,8 +102170,8 @@ var ProfilePageStates = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\dev\statify\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\dev\statify\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\dev\SpotiFYI\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\dev\SpotiFYI\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

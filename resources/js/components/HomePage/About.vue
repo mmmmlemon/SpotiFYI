@@ -26,7 +26,7 @@
 
                     <!-- powered by -->
                     <div v-if="siteInfo != false" class="row justify-content-center text-center fadeInAnimSlow">
-                        <div class="col-12">
+                        <div class="col-12" v-if="poweredBy != null">
                             <b>Powered by</b>
                         </div>
                         <p v-html="siteInfo.poweredBy" class="text-center marginNone paddingNone p_fix">  
