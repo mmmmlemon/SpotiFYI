@@ -79319,27 +79319,7 @@ var render = function() {
                               )
                             ],
                             1
-                          ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "row justify-content-center",
-                          class: {
-                            invisible: !_vm.welcomeImgLoaded,
-                            fadeInAnim: _vm.welcomeImgLoaded
-                          }
-                        },
-                        [
-                          _c("div", { staticClass: "col-8" }, [
-                            _c("img", {
-                              staticClass: "borderRadius40",
-                              attrs: { src: _vm.welcomeImageUrl, width: "90%" },
-                              on: { load: _vm.onWelcomeImgLoad }
-                            })
-                          ])
-                        ]
-                      )
+                          )
                     ])
                   : _vm._e()
               ])

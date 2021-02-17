@@ -263,7 +263,7 @@ class AdminController extends Controller
                 if($request->welcome_img != null)
                 {
                     $welcome = Image::make($request->welcome_img);
-                    $welcome->resize(730,365);
+                    // $welcome->resize(730,365);
                     $welcome->save(storage_path('app/public/system/welcome.png'));
                 }
 

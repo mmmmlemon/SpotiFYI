@@ -76,11 +76,11 @@
                             Перейди в <router-link to="/profile" class="borderUnderline">свой профиль</router-link> чтобы просмотреть статистику
                         </h5>
                         <!-- картинка с графиком -->
-                        <div class="row justify-content-center" v-bind:class="{ invisible: !welcomeImgLoaded, fadeInAnim: welcomeImgLoaded }">
-                            <div class="col-8">
-                                <img :src="welcomeImageUrl" width="90%" class="borderRadius40" @load="onWelcomeImgLoad">
+                        <!-- <div class="row justify-content-center" v-bind:class="{ invisible: !welcomeImgLoaded, fadeInAnim: welcomeImgLoaded }">
+                            <div class="col-2">
+                                <img :src="welcomeImageUrl" class="borderRadius40" @load="onWelcomeImgLoad">
                             </div>
-                        </div> 
+                        </div>  -->
                     </div>
 
                 </div>
