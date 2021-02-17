@@ -43,8 +43,6 @@ Route::group(['prefix' => 'superuser'], function(){
     });
 });
 
-
-
 //авторизация и логаут - Spotify
 Route::get('/spotify_login', 'SpotifyAuthController@spotifyAuth'); //авторизация через spotify
 Route::get('/spotify_auth_callback', 'SpotifyAuthController@spotifyAuthCallback'); //callback для авторизации
