@@ -14,8 +14,8 @@ class AddColumns extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('logo_img', 100)->default('storage/system/logo.png');
-            $table->string('home_img', 100)->default('storage/system/home.png');
+            $table->string('logo_img', 100)->default('storage/app/public/system/logo.png');
+            $table->string('home_img', 100)->default('storage/app/public/system/home.png');
         });
     }
 

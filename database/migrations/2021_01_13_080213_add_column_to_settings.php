@@ -14,7 +14,7 @@ class AddColumnToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('user_img', 100)->default('storage/system/user.png');
+            $table->string('user_img', 100)->default('storage/app/public/system/user.png');
         });
     }
 
