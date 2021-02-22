@@ -27,7 +27,7 @@ class CreateTableSettings extends Migration
         //настройки по умолчанию
         DB::table('settings')->insert(
             array(
-                'site_title' => 'StatiFYI',
+                'site_title' => 'SpotiFYI',
                 'spotify_client_id' => 'spotify_client_id',
                 'spotify_client_secret' => 'spotify_client_secret',
                 'spotify_redirect_uri' => 'http://localhost',
