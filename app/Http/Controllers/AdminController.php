@@ -179,8 +179,8 @@ class AdminController extends Controller
         {
             //валидация
             $validated = Validator::make($request->all(),[
-                'site_title' => 'string|max:10',
-                'version' => 'string|max:5',
+                'site_title' => 'string|max:50',
+                'version' => 'string|max:15',
                 'spotify_client_id' => 'string|max:32',
                 'spotify_client_secret' => 'string|max:32',
                 'spotify_redirect_uri' => 'string|max:200',

@@ -16,7 +16,7 @@ class CreateTableSettings extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('site_title', 50)->default('StatiFYI');
+            $table->string('site_title', 50)->default('SpotiFYI');
             $table->string('spotify_client_id', 32)->default('spotify_client_id');
             $table->string('spotify_client_secret', 32)->default('spotify_client_secret');
             $table->string('spotify_redirect_uri', 200)->default('http://localhost');
