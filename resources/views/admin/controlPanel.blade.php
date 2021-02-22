@@ -8,7 +8,7 @@
             <div class="form-group">
               <label for="site_title" class="required">Название сайта</label>
               <input type="text" class="form-control" id="site_title" name="site_title" placeholder="{{$basicSettings['siteTitle']}}" required="required" 
-                value="@if($errors->any()){{old('site_title')}}@else{{$basicSettings['siteTitle']}}@endif" maxlength="10">
+                value="@if($errors->any()){{old('site_title')}}@else{{$basicSettings['siteTitle']}}@endif" maxlength="50">
               @error('site_title')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="version" class="required">Версия</label>
                 <input type="text" class="form-control" id="version" name="version" placeholder="{{$basicSettings['version']}}" required="required" 
-                    value="@if($errors->any()){{old('version')}}@else{{$basicSettings['version']}}@endif" maxlength="5">
+                    value="@if($errors->any()){{old('version')}}@else{{$basicSettings['version']}}@endif" maxlength="15">
                 @error('version')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

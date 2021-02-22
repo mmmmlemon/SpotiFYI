@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Заголовок веб-сайта --}}
-    <title>{{ config('settings')->site_title }}</title>
+    <title>{{ config('settings')->site_title }} Beta</title>
 
     <!-- JS Скрипты -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -42,6 +42,7 @@
                 {{-- название сайта --}}
                 <router-link to="/"><a class="navbar-brand">
                     {{$siteInfo['siteTitle']}}
+                    <i class="font10pt">&nbsp;Beta</i>
                 </a></router-link>
 
                 {{-- навигация для больших экранов --}}

@@ -60,7 +60,7 @@ class HomeController extends Controller
             { return view('index', compact('checkToken', 'siteInfo')); }
         }
         else
-        { return response()->json(false); }
+        { return "Uncomment boot() in the AppServiceProvider.php"; }
     }
 
     //getWelcomeMessage
