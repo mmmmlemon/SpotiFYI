@@ -66,7 +66,6 @@ class AdminController extends Controller
 
                 $images = ['logo' => asset($settings->logo_img),
                            'home_img' => asset($settings->home_img),
-                           'welcome_img' => asset($settings->welcome_img),
                            'user_img' => asset($settings->user_img)]; 
 
                 //возвращаем админку
@@ -222,7 +221,6 @@ class AdminController extends Controller
             $validated = Validator::make($request->all(),[
                 'logo' => 'image',
                 'home_img' => 'image',
-                'welcome_img' => 'image'
             ]);
 
             //если валидация не прошла, то редиректим назад с ошибкой
@@ -257,14 +255,6 @@ class AdminController extends Controller
                     $home = Image::make($request->home_img);
                     $home->resize(1280,798);
                     $home->save(storage_path('app/public/system/home.png'));
-                }
-
-                //сохранение картинки для приветствия
-                if($request->welcome_img != null)
-                {
-                    $welcome = Image::make($request->welcome_img);
-                    // $welcome->resize(730,365);
-                    $welcome->save(storage_path('app/public/system/welcome.png'));
                 }
 
                 //сохранение стандартного юзерпика

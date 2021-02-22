@@ -14,7 +14,7 @@ class AddColumnsToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('version',5)->default('v1.0');
+            $table->string('version', 15)->default('v1.0');
             $table->string('poweredBy', 10000)->default('About this web-site');
         });
     }
