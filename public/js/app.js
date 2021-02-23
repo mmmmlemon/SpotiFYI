@@ -2348,12 +2348,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeMount: function beforeMount() {
     //получить фоновое изображение
@@ -79348,7 +79342,7 @@ var staticRenderFns = [
               staticClass: "btn btn-primary btn-rounded btn-block",
               attrs: { href: "/spotify_login" }
             },
-            [_vm._v("Войти в Spotify")]
+            [_c("b", [_vm._v("Войти через Spotify")])]
           )
         ]
       )
@@ -79433,7 +79427,8 @@ var render = function() {
         {
           staticClass:
             "row text-center cookiesCard justify-content-center fadeInAnimSlow",
-          class: { invisible: _vm.cookiesVisible === false }
+          class: { invisible: _vm.cookiesVisible === false },
+          staticStyle: { "z-index": "111" }
         },
         [
           _vm._m(0),
@@ -102150,8 +102145,8 @@ var ProfilePageStates = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\dev\SpotiFYI\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\dev\SpotiFYI\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\dev\SpotiFYI\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\dev\SpotiFYI\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

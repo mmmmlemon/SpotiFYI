@@ -17,7 +17,7 @@
                     <hr>
                     <div class="row justify-content-center">
                         <div class="col-md-4 col-10 justify-content-center marginVertical">
-                            <a href="/spotify_login" class="btn btn-primary btn-rounded btn-block">Войти в Spotify</a>
+                            <a href="/spotify_login" class="btn btn-primary btn-rounded btn-block"><b>Войти через Spotify</b></a>
                         </div>
                     </div>
                 </div>

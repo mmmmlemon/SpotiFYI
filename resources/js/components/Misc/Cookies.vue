@@ -1,6 +1,6 @@
 //Cookies
 <template>
-    <div v-if="cookiesVisible != -1" class="row text-center cookiesCard justify-content-center fadeInAnimSlow" v-bind:class="{invisible: cookiesVisible === false}">
+    <div v-if="cookiesVisible != -1" style="z-index: 111;" class="row text-center cookiesCard justify-content-center fadeInAnimSlow" v-bind:class="{invisible: cookiesVisible === false}">
         <div class="col-12">
             <h6><b>SpotiFYI</b> использует Cookies. Продолжая вы соглашаетесь, что этот сайт будет иметь доступ к вашим "печенькам" в браузере.</h6>
         </div>
