@@ -72,7 +72,7 @@
                 @if($checkToken == false)
                     {{-- кнопка входа на сайт --}}
                     <div class="form-inline d-none d-lg-flex ml-auto"> 
-                        <a href="/spotify_login" class="btn btn-primary btn-rounded">Войти в Spotify</a>
+                        <a href="/spotify_login" class="btn btn-primary btn-rounded">Войти через Spotify</a>
                     </div>
                 @else
                     {{-- если залогинен --}}

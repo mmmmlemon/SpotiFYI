@@ -1,6 +1,6 @@
 //FavoriteGenres
 <template>
-    <div class="col-11 fadeInAnim">
+    <div class="col-11 col-lg-11 fadeInAnim">
         <div class="row justify-content-center">
             <!-- лоадер -->
             <div v-if="favoriteGenres == -1">
@@ -13,11 +13,11 @@
                 <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
             </div>
             <!-- предупреждение -->
-            <div v-else-if="favoriteGenres == 'noTracks'" class="greyCard paddingSides">
+            <div v-else-if="favoriteGenres == 'noTracks'" class="col-12 greyCard paddingSides">
                 <Info type="small" infoMessage="Пока не достаточно данных для проведения анализа жанров."/>
             </div>
             <!-- контент -->
-            <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="greyCard paddingSides marginVertical">
+            <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="col-11 col-lg-11 greyCard paddingSides marginVertical">
                 <h4 class="text-center borderUnderline">Твои любимые жанры</h4>
                 <p class="text-center">На основе того что ты слушаешь последний месяц</p>
                 <!-- график с жанрами -->

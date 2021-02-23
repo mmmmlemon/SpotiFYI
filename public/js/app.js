@@ -80844,7 +80844,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-11 fadeInAnim" }, [
+  return _c("div", { staticClass: "col-11 col-lg-11 fadeInAnim" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _vm.favoriteGenres == -1
         ? _c(
@@ -80878,7 +80878,7 @@ var render = function() {
         : _vm.favoriteGenres == "noTracks"
         ? _c(
             "div",
-            { staticClass: "greyCard paddingSides" },
+            { staticClass: "col-12 greyCard paddingSides" },
             [
               _c("Info", {
                 attrs: {
@@ -80891,30 +80891,37 @@ var render = function() {
             1
           )
         : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
-        ? _c("div", { staticClass: "greyCard paddingSides marginVertical" }, [
-            _c("h4", { staticClass: "text-center borderUnderline" }, [
-              _vm._v("Твои любимые жанры")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-center" }, [
-              _vm._v("На основе того что ты слушаешь последний месяц")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-12" },
-              [
-                _c("BarChart", {
-                  attrs: {
-                    favoriteGenres: _vm.favoriteGenres,
-                    backgroundColor: _vm.backgroundColor,
-                    label: "Любимые жанры"
-                  }
-                })
-              ],
-              1
-            )
-          ])
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "col-11 col-lg-11 greyCard paddingSides marginVertical"
+            },
+            [
+              _c("h4", { staticClass: "text-center borderUnderline" }, [
+                _vm._v("Твои любимые жанры")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-center" }, [
+                _vm._v("На основе того что ты слушаешь последний месяц")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-12" },
+                [
+                  _c("BarChart", {
+                    attrs: {
+                      favoriteGenres: _vm.favoriteGenres,
+                      backgroundColor: _vm.backgroundColor,
+                      label: "Любимые жанры"
+                    }
+                  })
+                ],
+                1
+              )
+            ]
+          )
         : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
     ])
   ])
