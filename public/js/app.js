@@ -2491,6 +2491,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('checkCookies');
@@ -79447,7 +79448,7 @@ var render = function() {
           staticClass:
             "row text-center cookiesCard justify-content-center fadeInAnimSlow",
           class: { invisible: _vm.cookiesVisible === false },
-          staticStyle: { "z-index": "111" }
+          staticStyle: { "z-index": "1" }
         },
         [
           _vm._m(0),
@@ -79478,8 +79479,23 @@ var staticRenderFns = [
       _c("h6", [
         _c("b", [_vm._v("SpotiFYI")]),
         _vm._v(
-          ' использует Cookies. Продолжая вы соглашаетесь, что этот сайт будет иметь доступ к вашим "печенькам" в браузере.'
-        )
+          ' использует Cookies для авторизации. Продолжая вы соглашаетесь, что этот сайт будет иметь доступ к вашим "печенькам" в браузере. '
+        ),
+        _c("br"),
+        _c("br"),
+        _vm._v("\n        Что такое Cookies можно почитать, например, "),
+        _c(
+          "a",
+          {
+            staticClass: "borderUnderline",
+            attrs: {
+              target: "_blank",
+              href: "https://ru.wikipedia.org/wiki/Cookie"
+            }
+          },
+          [_vm._v("вот тут")]
+        ),
+        _vm._v(".")
       ])
     ])
   }
@@ -80886,7 +80902,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-11" },
+              { staticClass: "col-12" },
               [
                 _c("BarChart", {
                   attrs: {

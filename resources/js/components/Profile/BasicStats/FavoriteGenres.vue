@@ -21,7 +21,7 @@
                 <h4 class="text-center borderUnderline">Твои любимые жанры</h4>
                 <p class="text-center">На основе того что ты слушаешь последний месяц</p>
                 <!-- график с жанрами -->
-                <div class="col-11">
+                <div class="col-12">
                     <BarChart :favoriteGenres="favoriteGenres" :backgroundColor="backgroundColor" label="Любимые жанры"/>
                 </div>
 

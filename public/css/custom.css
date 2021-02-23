@@ -260,7 +260,7 @@
 .numberCircle{
     border-radius: 20px;
     border-color: white;
-    background-color:  #1b77b9c5;
+    background-color:  rgba(27, 119, 185, 0.773);
     width:25px;
     height:25px;
     position: absolute; 
