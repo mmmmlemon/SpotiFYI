@@ -103,7 +103,7 @@
             <div class="row justify-content-center fadeInAnim" v-if="leastPopularArtist != -1">
                 
                 <router-link to="/profile#top">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary marginBottomMedium">
                         Перейти к "Общее"
                         <i class="fas fas fa-chart-bar"></i>
                     </button>

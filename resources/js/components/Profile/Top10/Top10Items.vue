@@ -1,6 +1,6 @@
 //Top10Items
 <template>
-        <div class="col-12 col-md-5 marginSides paddingSides">
+        <div class="col-12 col-lg-5 marginSides paddingSides">
             <!-- лоадер -->
             <div v-if="items == -1">
                 <Loader />

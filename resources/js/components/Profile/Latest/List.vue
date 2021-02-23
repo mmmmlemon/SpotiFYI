@@ -1,6 +1,6 @@
 //List
 <template>
-    <div class="justify-content-center">
+    <div class="row justify-content-center">
         <!-- лоадер -->
         <div class="col-12" v-if="items == -1">
             <Loader />
@@ -9,10 +9,13 @@
         </div>
         <!-- список -->
         <div v-else-if="items != -1 && items != false" class="сol-12 fadeInAnim marginVertical">
-            <!-- вывод элементов списка в цикле -->
-            <div class="col-12 justify-content-center paddingSides marginVertical" v-for="item in items['tracks']" :key="item.id">
-                <ListItem :item="item"/>
+            <div class="row justify-content-center">
+                <!-- вывод элементов списка в цикле -->
+                <div class="col-11 justify-content-center paddingSides marginVertical" v-for="item in items['tracks']" :key="item.id">
+                    <ListItem :item="item"/>
+                </div>
             </div>
+
         </div>
         <!-- ошибка -->
         <div v-else>

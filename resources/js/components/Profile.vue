@@ -67,7 +67,7 @@
                             <div class="col-md-4 paddingSides">
                                 <router-link to="/profile/achievements">
                                     <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'achievements'}" type="button">
-                                        Особо отличившиеся
+                                        Отличники
                                     </button>
                                 </router-link>
                             </div>

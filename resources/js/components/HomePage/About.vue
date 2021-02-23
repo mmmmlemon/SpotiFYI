@@ -15,7 +15,7 @@
                     </div>
                     <!-- логотип -->
                     <div v-if="siteInfo != false" class="row justify-content-center bounceInAnim">
-                        <img :src="siteLogoUrl" width="90pt" alt="Site logo" >
+                        <img :src="siteLogoUrl" width="90pt" height="90pt" alt="Site logo" >
                     </div>
                     <!-- версия -->
                     <div v-if="siteInfo != false" class="row justify-content-center fadeInAnimSlow">

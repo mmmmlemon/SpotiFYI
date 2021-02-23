@@ -71,7 +71,7 @@
         <div class="row justify-content-center fadeInAnim" v-if="yearsAndDecadesMonth != -1">
             
             <router-link to="/profile/top10#top">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary marginBottomMedium">
                     Перейти к "Топ-10"
                     <i class="fas fa-list-ol"></i>
                 </button>

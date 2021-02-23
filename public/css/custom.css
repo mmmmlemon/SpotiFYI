@@ -97,6 +97,7 @@
 
 .albumIconAchievement{
     width:50%; 
+    height: 50%;
     margin:5px;
     border-style: solid;
     border-color: #376485;
@@ -147,6 +148,10 @@
 
 .marginBottomSmall{
     margin-bottom: 8px;
+}
+
+.marginBottomMedium{
+    margin-bottom: 16px;
 }
 
 .marginSides{
@@ -210,6 +215,7 @@
     border-width:9px;
     border-color:#1b77b9;
     width: 140pt;
+    height:140pt;
 }
 
 .backgroundImage{

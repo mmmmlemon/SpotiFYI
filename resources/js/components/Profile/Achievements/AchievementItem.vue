@@ -1,6 +1,6 @@
 //AchievementItem
 <template>
-    <div class="col-12 col-md-5 marginSides marginVertical paddingSides">
+    <div class="col-11 col-lg-5 marginSides marginVertical paddingSides">
         <!-- лоадер -->
         <div v-if="items == -1">
             <Loader />
