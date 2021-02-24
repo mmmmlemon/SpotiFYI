@@ -27,6 +27,21 @@
     <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
     <link href="{{ asset('css/halfmoon-variables.css') }}" rel="stylesheet">
 
+    <link rel="manifest" href="manifest.json">
+
+{{-- <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="SpotiFYI">
+<meta name="apple-mobile-web-app-title" content="SpotiFYI">
+<meta name="theme-color" content="#1b77b9">
+<meta name="msapplication-navbutton-color" content="#1b77b9">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="msapplication-starturl" content="/public_html/index.php">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="32x32" href="/icon.png"> --}}
+
 </head>
 
 {{-- BODY --}}

@@ -1,0 +1,22 @@
+{
+  "name": "SpotiFYI",
+  "short_name": "SpotiFYI",
+  "description": "SpotiFYI - Статистика для Spotify",
+  "lang": "ru-RU",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#1c1e2154",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "homescreen.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
