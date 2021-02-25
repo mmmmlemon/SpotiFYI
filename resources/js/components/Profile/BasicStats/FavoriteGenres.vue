@@ -19,7 +19,7 @@
             <!-- контент -->
             <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="col-11 col-lg-11 greyCard paddingSides marginVertical">
                 <h4 class="text-center borderUnderline">Твои любимые жанры</h4>
-                <p class="text-center">На основе того что ты слушаешь последний месяц</p>
+                <p class="text-center">За последний месяц</p>
                 <!-- график с жанрами -->
                 <div class="col-12">
                     <BarChart :favoriteGenres="favoriteGenres" :backgroundColor="backgroundColor" label="Любимые жанры"/>

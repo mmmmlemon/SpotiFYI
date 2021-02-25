@@ -80903,7 +80903,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "text-center" }, [
-                _vm._v("На основе того что ты слушаешь последний месяц")
+                _vm._v("За последний месяц")
               ]),
               _vm._v(" "),
               _c(
@@ -81666,15 +81666,13 @@ var render = function() {
               _vm.type == "alltime"
                 ? _c("div", [
                     _c("p", { staticClass: "text-center" }, [
-                      _vm._v(
-                        "\n                    Больше всего тебе нравится музыка "
-                      ),
+                      _vm._v("\n                    Больше всего ты любишь "),
                       _c(
                         "b",
                         { staticClass: "unbold borderUnderline font16pt" },
                         [
                           _vm._v(
-                            _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых"
+                            _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ые"
                           )
                         ]
                       ),
@@ -81704,14 +81702,14 @@ var render = function() {
                           ]
                         ),
                         _vm._v(
-                          " - твой любимый год. \n                    Тебе нравятся "
+                          " - твой самый любимый год. \n                    Тебе нравятся "
                         ),
                         _c(
                           "b",
                           { staticClass: "unbold borderUnderline font16pt" },
                           [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
                         ),
-                        _vm._v(" из этого года.\n                ")
+                        _vm._v(" вышедших в этом году.\n                ")
                       ]
                     )
                   ])
@@ -81736,7 +81734,7 @@ var render = function() {
                           ]
                         ),
                         _vm._v(
-                          ". \n                    За последний месяц ты послушал "
+                          ". \n                    За последний месяц было прослушано "
                         ),
                         _c(
                           "b",
@@ -81768,14 +81766,14 @@ var render = function() {
                           ]
                         ),
                         _vm._v(
-                          " - твой любимый год. \n                Ты прослушал "
+                          " - твой любимый год в последнее время. \n                    Было прослушано "
                         ),
                         _c(
                           "b",
                           { staticClass: "unbold borderUnderline font16pt" },
                           [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
                         ),
-                        _vm._v(" из этого года.\n                ")
+                        _vm._v(" вышедших в этом году.\n                ")
                       ]
                     )
                   ]),

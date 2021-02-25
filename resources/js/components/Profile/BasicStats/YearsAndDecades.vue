@@ -15,12 +15,12 @@
                 <!-- за все время -->
                 <div v-if="type == 'alltime'">
                     <p class="text-center">
-                        Больше всего тебе нравится музыка <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
+                        Больше всего ты любишь <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxDecade']}}-ые</b>. 
                         В твоей библиотеке <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.
                     </p>
                     <p :v-if="type == 'alltime'" class="text-center">
-                        <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 
-                        Тебе нравятся <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.
+                        <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой самый любимый год. 
+                        Тебе нравятся <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxYearSongs']}}</b> вышедших в этом году.
                     </p>   
                 </div>
 
@@ -28,11 +28,11 @@
                 <div v-else>
                     <p :v-else-if="type == 'month'" class="text-center">
                         В последнее время ты больше всего слушаешь музыку <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxDecade']}}-ых</b>. 
-                        За последний месяц ты послушал <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.
+                        За последний месяц было прослушано <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.
                     </p>
                     <p :v-else-if="type == 'month'" class="text-center">
-                        <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год. 
-                    Ты прослушал <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxYearSongs']}}</b> из этого года.
+                        <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год в последнее время. 
+                        Было прослушано <b class="unbold borderUnderline font16pt">{{yearsAndDecades['maxYearSongs']}}</b> вышедших в этом году.
                     </p>
                 </div>
 
