@@ -2454,6 +2454,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -79361,59 +79403,161 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "row justify-content-center" }, [
-        _vm.spotifyUsername == false
-          ? _c(
+        _c(
+          "div",
+          {
+            staticClass: "col-12 col-sm-12 col-md-10 col-lg-10",
+            attrs: { width: "20%;" }
+          },
+          [
+            _c(
               "div",
-              {
-                staticClass: "col-12 col-sm-12 col-md-10 col-lg-10",
-                attrs: { width: "20%;" }
-              },
+              { staticClass: "col-12" },
               [
+                _c("transition", { attrs: { name: "siteTitle" } }, [
+                  _vm.siteTitle && _vm.spotifyUsername == false
+                    ? _c("h2", { staticClass: "text-center siteTitleHome" }, [
+                        _vm._v(_vm._s(_vm.siteTitle))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("transition", { attrs: { name: "logo" } }, [
+                  _vm.siteTitle && _vm.spotifyUsername == false
+                    ? _c(
+                        "div",
+                        [
+                          _c("Logo", {
+                            attrs: { animation: _vm.animationForLogo }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("transition", { attrs: { name: "welcome" } }, [
+                  _vm.welcomeMessage != false && _vm.spotifyUsername == false
+                    ? _c("p", {
+                        staticClass: "pText text-center",
+                        domProps: { innerHTML: _vm._s(_vm.welcomeMessage) }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("transition", { attrs: { name: "welcome" } }, [
+                  _vm.welcomeMessage != false && _vm.spotifyUsername == false
+                    ? _c("hr")
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "col-12" },
+                  { staticClass: "row justify-content-center text-center" },
                   [
-                    _c(
-                      "h2",
-                      {
-                        staticClass: "text-center siteTitleHome fadeInAnimSlow"
-                      },
-                      [_vm._v(_vm._s(_vm.siteTitle))]
-                    ),
+                    _c("transition", { attrs: { name: "artist" } }, [
+                      _vm.welcomeMessage != false &&
+                      _vm.spotifyUsername == false
+                        ? _c("div", { staticClass: "col-4" }, [
+                            _c("h6", [
+                              _c("b", [_vm._v("Кто ваш любимый артист?")])
+                            ]),
+                            _vm._v(" "),
+                            _c("i", { staticClass: "fas fa-guitar homeIcon" })
+                          ])
+                        : _vm._e()
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "text-center" },
-                      [
-                        _c("Logo", {
-                          attrs: { animation: _vm.animationForLogo }
-                        })
-                      ],
-                      1
-                    ),
+                    _c("transition", { attrs: { name: "track" } }, [
+                      _vm.welcomeMessage != false &&
+                      _vm.spotifyUsername == false
+                        ? _c("div", { staticClass: "col-4" }, [
+                            _c("h6", [
+                              _c("b", [
+                                _vm._v("Какую песню вы слушаете больше других?")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("i", { staticClass: "fas fa-music homeIcon" })
+                          ])
+                        : _vm._e()
+                    ]),
                     _vm._v(" "),
-                    _vm.welcomeMessage != false
-                      ? _c("p", {
-                          staticClass: "fadeInAnimSlow pText text-center",
-                          domProps: { innerHTML: _vm._s(_vm.welcomeMessage) }
-                        })
-                      : _c("Error", {
-                          attrs: {
-                            type: "small",
-                            errorMessage:
-                              "Не удалось загрузить текст приветствия"
-                          }
-                        }),
+                    _c("transition", { attrs: { name: "decade" } }, [
+                      _vm.welcomeMessage != false &&
+                      _vm.spotifyUsername == false
+                        ? _c("div", { staticClass: "col-4" }, [
+                            _c("h6", [
+                              _c("b", [
+                                _vm._v("Какая ваша любимая эпоха в музыке?")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("i", {
+                              staticClass: "fas fa-record-vinyl homeIcon"
+                            })
+                          ])
+                        : _vm._e()
+                    ]),
                     _vm._v(" "),
-                    _c("hr"),
-                    _vm._v(" "),
-                    _vm._m(0)
+                    _c("transition", { attrs: { name: "yeahboi" } }, [
+                      _vm.welcomeMessage != false &&
+                      _vm.spotifyUsername == false
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-12",
+                              staticStyle: { "margin-top": "1.5rem" }
+                            },
+                            [
+                              _c("h5", [
+                                _vm._v(
+                                  "Все это, и не только, можно узнать тут!"
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
+                    ])
                   ],
                   1
-                )
-              ]
+                ),
+                _vm._v(" "),
+                _c("transition", { attrs: { name: "welcome" } }, [
+                  _vm.welcomeMessage != false && _vm.spotifyUsername == false
+                    ? _c("hr", { staticStyle: { "margin-bottom": "3rem" } })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("transition", { attrs: { name: "enterButton" } }, [
+                  _vm.welcomeMessage != false && _vm.spotifyUsername == false
+                    ? _c("div", { staticClass: "row justify-content-center" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col-md-4 col-10 justify-content-center marginVertical"
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-primary-n btn-rounded btn-block",
+                                attrs: { href: "/spotify_login" }
+                              },
+                              [_vm._v("Войти через Spotify")]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              1
             )
-          : _vm._e(),
+          ]
+        ),
         _vm._v(" "),
         _vm.spotifyUsername != -1 && _vm.spotifyUsername != false
           ? _c("div", { staticClass: "col-12 col-sm-12 col-md-10 col-lg-10" }, [
@@ -79546,31 +79690,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "div",
-        {
-          staticClass: "col-md-4 col-10 justify-content-center marginVertical"
-        },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary-n btn-rounded btn-block",
-              attrs: { href: "/spotify_login" }
-            },
-            [_vm._v("Войти через Spotify")]
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

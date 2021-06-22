@@ -2,25 +2,67 @@
 <template>
     <div class="container fadeInAnim">
         <!-- фоновая картинка -->
+
+        
         <BackgroundImage :backgroundImageUrl="homePageImageUrl"/>
         <div class="row justify-content-center">
             <!-- если пользователь не залогинен -->
-            <div class="col-12 col-sm-12 col-md-10 col-lg-10" width="20%;" v-if="spotifyUsername == false">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-10" width="20%;">
                 <div class="col-12">
-                    <h2 class="text-center siteTitleHome fadeInAnimSlow">{{siteTitle}}</h2>
-                    <div class="text-center">
-                        <!-- <img :src="siteLogoUrl" class="fadeInAnim" width="10%" alt=""> -->
-                        <Logo :animation="animationForLogo"/>
-                    </div>
-                    <p v-if="welcomeMessage != false" v-html="welcomeMessage" class="fadeInAnimSlow pText text-center">
-                    </p>
-                    <Error v-else type="small" errorMessage="Не удалось загрузить текст приветствия"/>
-                    <hr>
-                    <div class="row justify-content-center">
-                        <div class="col-md-4 col-10 justify-content-center marginVertical">
-                            <a href="/spotify_login" class="btn btn-primary-n btn-rounded btn-block">Войти через Spotify</a>
+                    <transition name="siteTitle">
+                        <h2 class="text-center siteTitleHome" v-if="siteTitle && spotifyUsername == false">{{siteTitle}}</h2>
+                    </transition>
+                     <transition name="logo">
+                        <div v-if="siteTitle && spotifyUsername == false">
+                            <Logo :animation="animationForLogo"/>
                         </div>
+                    </transition>
+                    <transition name="welcome">
+                        <p v-if="welcomeMessage != false && spotifyUsername == false" 
+                            v-html="welcomeMessage" class="pText text-center">
+                        </p>
+                    </transition>
+                    <transition name="welcome">
+                        <hr v-if="welcomeMessage != false && spotifyUsername == false">    
+                    </transition>
+
+  
+                    <div class="row justify-content-center text-center">
+                        <transition name="artist">
+                            <div class="col-4" v-if="welcomeMessage != false && spotifyUsername == false">
+                                <h6><b>Кто ваш любимый артист?</b></h6>
+                                <i class="fas fa-guitar homeIcon"></i>
+                            </div>
+                        </transition>
+                        <transition name="track">
+                            <div class="col-4" v-if="welcomeMessage != false && spotifyUsername == false">
+                                <h6><b>Какую песню вы слушаете больше других?</b></h6>
+                                <i class="fas fa-music homeIcon"></i>
+                            </div>
+                         </transition>
+                        <transition name="decade">
+                            <div class="col-4" v-if="welcomeMessage != false && spotifyUsername == false">
+                                <h6><b>Какая ваша любимая эпоха в музыке?</b></h6>
+                                <i class="fas fa-record-vinyl homeIcon"></i>
+                            </div>
+                        </transition>
+                        <transition name="yeahboi">
+                            <div class="col-12" v-if="welcomeMessage != false && spotifyUsername == false" style="margin-top:1.5rem;">
+                                   <h5 >Все это, и не только, можно узнать тут!</h5>
+                            </div>
+                         
+                        </transition>
                     </div>
+                    <transition name="welcome">
+                        <hr v-if="welcomeMessage != false && spotifyUsername == false" style="margin-bottom: 3rem;">    
+                    </transition>
+                    <transition name="enterButton">
+                        <div class="row justify-content-center" v-if="welcomeMessage != false && spotifyUsername == false">
+                            <div class="col-md-4 col-10 justify-content-center marginVertical">
+                                <a href="/spotify_login" class="btn btn-primary-n btn-rounded btn-block">Войти через Spotify</a>
+                            </div>
+                        </div>
+                    </transition>
                 </div>
             </div>
             <!-- если пользователь залогинен -->

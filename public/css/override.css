@@ -61,7 +61,8 @@ a:hover {
 
 /* App */
 .siteTitle{
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 800 !important;
     font-size: 1.5rem;
 }
 
@@ -252,9 +253,87 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
 
 /* HomePage */
 
+/* transitions */
+.siteTitle-enter-active {
+    transition: all 0.5s ease;
+    transition-delay: 0.5s;
+}
+.siteTitle-enter {
+  transform: translateY(17px);
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.logo-enter-active {
+    transition: all 0.5s ease;
+    transition-delay: 1s;
+}
+.logo-enter {
+  transform: translateY(37px);
+  opacity: 0;
+}
+
+.welcome-enter-active {
+    transition: all 0.5s ease;
+    transition-delay: 1.5s;
+}
+.welcome-enter {
+  transform: translateY(17px);
+  opacity: 0;
+}
+
+.artist-enter-active {
+    transition: all 0.3s ease;
+    transition-delay: 1.8s;
+}
+.artist-enter {
+  transform: translateY(17px);
+  opacity: 0;
+}
+
+.track-enter-active {
+    transition: all 0.3s ease;
+    transition-delay: 2.1s;
+}
+.track-enter {
+  transform: translateY(17px);
+  opacity: 0;
+}
+
+.decade-enter-active {
+    transition: all 0.3s ease;
+    transition-delay: 2.4s;
+}
+.decade-enter {
+  transform: translateY(17px);
+  opacity: 0;
+}
+
+.yeahboi-enter-active {
+    transition: all 0.3s ease;
+    transition-delay: 2.9s;
+}
+.yeahboi-enter {
+  transform: translateY(17px);
+  opacity: 0;
+}
+
+
+.enterButton-enter-active {
+    transition: all 0.5s ease;
+    transition-delay: 3.2s;
+}
+.enterButton-enter {
+  transform: translateY(17px);
+  opacity: 0;
+}
+
+/*  */
+
+
 .siteTitleHome{
-    font-family: 'Raleway', sans-serif !important;
-    font-weight: 900;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600;
     font-size: 4.2rem !important;
     text-shadow: 4px 3px 0px #105B2A;
 }
@@ -267,6 +346,11 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     width: 100%;
     padding: 10px;
     background-color: #3C4044;
+}
+
+.homeIcon{
+    font-size: 4rem;
+    color: var(--main-color-highlight);
 }
 
 /*  */
