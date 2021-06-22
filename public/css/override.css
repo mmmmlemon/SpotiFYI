@@ -100,6 +100,9 @@ a:hover {
    100%{
     opacity: 1;
     background-color: var(--main-color);
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
    }
 }
 
@@ -126,6 +129,9 @@ a:hover {
         opacity: 1;
         background-color: var(--dark-color-light);
         width: 63%;
+        -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+        -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+        box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     }
  }
 
@@ -152,6 +158,9 @@ a:hover {
         opacity: 1;
         background-color: var(--dark-color-light);
         width: 55%;
+        -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+        -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+        box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     }
  }
 
@@ -178,6 +187,9 @@ a:hover {
         opacity: 1;
         background-color: var(--dark-color-light);
         width: 48%;
+        -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+        -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+        box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     }
  }
 
@@ -195,7 +207,9 @@ a:hover {
     margin: 0 auto;
     border-radius: 100%;
     background-color: var(--main-color);
-    animation: logoBaseAnim 2.5s ease-in-out;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
 }
 
 .logoGraphOne{
@@ -205,7 +219,10 @@ a:hover {
     margin-left: 15%;
     margin-top:5%;
     z-index: inherit;
-    animation: logoGraphOneAnim 2.5s ease-in-out;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+
 }
 
 .logoGraphTwo{
@@ -215,7 +232,9 @@ a:hover {
     margin-left: 15%;
     margin-top:5%;
     z-index: inherit;
-    animation: logoGraphTwoAnim 2.6s ease-in-out;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+-moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
 }
 
 .logoGraphThree{
@@ -224,7 +243,9 @@ a:hover {
     width: 48%;
     margin-left: 15%;
     margin-top: 5%;
-    animation: logoGraphThreeAnim 2.7s ease-in-out;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+-moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
+box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
 }
 
 /*  */
@@ -232,8 +253,10 @@ a:hover {
 /* HomePage */
 
 .siteTitleHome{
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Raleway', sans-serif !important;
+    font-weight: 900;
     font-size: 4.2rem !important;
+    text-shadow: 4px 3px 0px #105B2A;
 }
 
 .cookiesCard{

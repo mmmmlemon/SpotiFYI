@@ -2054,7 +2054,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      animationForLogo: true
+    };
+  },
+  created: function created() {
+    //получить фоновое изображение
+    if (this.homePageImageUrl == -1) {
+      this.$store.dispatch('getHomePageImageUrl');
+    } //получить логотип сайта
+
+
+    if (this.siteLogoUrl == -1) {
+      this.$store.dispatch('getSiteLogoUrl');
+    } //получить изображение для приветствия
+
+
+    if (this.welcomeImageUrl == -1) {
+      this.$store.dispatch('getWelcomeImageUrl');
+    } //получить информацию о сайте
+
+
+    this.$store.dispatch('getSiteInfo'); //получить приветственное сообщение
+
+    this.$store.dispatch('getWelcomeMessage'); //получить юзернейм пользователя
+
+    if (this.spotifyUsername == -1) {
+      this.$store.dispatch('getSpotifyUsername');
+    } //получить кол-во треков в библиотеке для сообщения на главной странице
+
+
+    if (this.spotifyUserTracksCount == -1) {
+      this.$store.dispatch('getHomePageUserTracksCount');
+    }
+  },
+  computed: {
+    //фоновое изображение
+    homePageImageUrl: function homePageImageUrl() {
+      return this.$store.state.homePage.homePageImageUrl;
+    },
+    //ссылка на логотип сайта
+    siteLogoUrl: function siteLogoUrl() {
+      return this.$store.state.homePage.siteLogoUrl;
+    },
+    //изображение для приветствия
+    welcomeImageUrl: function welcomeImageUrl() {
+      return this.$store.state.homePage.welcomeImageUrl;
+    },
+    //юзернейм пользователя
+    spotifyUsername: function spotifyUsername() {
+      return this.$store.state.homePage.spotifyUsername;
+    },
+    //кол-во треков в библиотеке
+    spotifyUserTracksCount: function spotifyUserTracksCount() {
+      return this.$store.state.homePage.spotifyUserTracksCount;
+    }
+  }
+});
 
 /***/ }),
 
@@ -2397,37 +2455,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  beforeMount: function beforeMount() {
-    //получить фоновое изображение
-    if (this.homePageImageUrl == -1) {
-      this.$store.dispatch('getHomePageImageUrl');
-    } //получить логотип сайта
-
-
-    if (this.siteLogoUrl == -1) {
-      this.$store.dispatch('getSiteLogoUrl');
-    } //получить изображение для приветствия
-
-
-    if (this.welcomeImageUrl == -1) {
-      this.$store.dispatch('getWelcomeImageUrl');
-    }
-  },
-  mounted: function mounted() {
-    //получить информацию о сайте
-    this.$store.dispatch('getSiteInfo'); //получить приветственное сообщение
-
-    this.$store.dispatch('getWelcomeMessage'); //получить юзернейм пользователя
-
-    if (this.spotifyUsername == -1) {
-      this.$store.dispatch('getSpotifyUsername');
-    } //получить кол-во треков в библиотеке для сообщения на главной странице
-
-
-    if (this.spotifyUserTracksCount == -1) {
-      this.$store.dispatch('getHomePageUserTracksCount');
-    }
-  },
   data: function data() {
     return {
       welcomeImgLoaded: false
@@ -2466,6 +2493,10 @@ __webpack_require__.r(__webpack_exports__);
     //изображение для приветствия
     welcomeImageUrl: function welcomeImageUrl() {
       return this.$store.state.homePage.welcomeImageUrl;
+    },
+    //анимация для логотипа
+    animationForLogo: function animationForLogo() {
+      return this.$parent.animationForLogo;
     }
   }
 });
@@ -2702,7 +2733,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    animation: {
+      type: Boolean,
+      "default": true
+    }
+  },
+  computed: {
+    logoBaseAnim: function logoBaseAnim() {
+      if (this.animation == true) {
+        return 'animation: logoBaseAnim 2.5s ease-in-out;';
+      } else {
+        return '';
+      }
+    },
+    logoGraphOneAnim: function logoGraphOneAnim() {
+      if (this.animation == true) {
+        return 'animation: logoGraphOneAnim 2.5s ease-in-out;';
+      } else {
+        return '';
+      }
+    },
+    logoGraphTwoAnim: function logoGraphTwoAnim() {
+      if (this.animation == true) {
+        return 'animation: logoGraphTwoAnim 2.6s ease-in-out;';
+      } else {
+        return '';
+      }
+    },
+    logoGraphThreeAnim: function logoGraphThreeAnim() {
+      if (this.animation == true) {
+        return 'animation: logoGraphThreeAnim 2.7s ease-in-out;';
+      } else {
+        return '';
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -79305,15 +79373,28 @@ var render = function() {
                   "div",
                   { staticClass: "col-12" },
                   [
-                    _c("h2", { staticClass: "text-center siteTitleHome" }, [
-                      _vm._v(_vm._s(_vm.siteTitle))
-                    ]),
+                    _c(
+                      "h2",
+                      {
+                        staticClass: "text-center siteTitleHome fadeInAnimSlow"
+                      },
+                      [_vm._v(_vm._s(_vm.siteTitle))]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "text-center " }, [_c("Logo")], 1),
+                    _c(
+                      "div",
+                      { staticClass: "text-center" },
+                      [
+                        _c("Logo", {
+                          attrs: { animation: _vm.animationForLogo }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _vm.welcomeMessage != false
                       ? _c("p", {
-                          staticClass: "fadeInAnim pText text-center",
+                          staticClass: "fadeInAnimSlow pText text-center",
                           domProps: { innerHTML: _vm._s(_vm.welcomeMessage) }
                         })
                       : _c("Error", {
@@ -79881,31 +79962,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "logoDiv" }, [
-      _c("div", { staticClass: "logoBase" }, [
-        _vm._v("\r\n         \r\n        "),
-        _c("div", { staticClass: "logoGraphOne" }, [
-          _vm._v("\r\n             \r\n        ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "logoGraphTwo" }, [
-          _vm._v("\r\n             \r\n        ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "logoGraphThree" }, [
-          _vm._v("\r\n             \r\n        ")
-        ])
-      ])
+  return _c("div", { staticClass: "logoDiv" }, [
+    _c("div", { staticClass: "logoBase", style: _vm.logoBaseAnim }, [
+      _vm._v("\r\n         \r\n        "),
+      _c("div", { staticClass: "logoGraphOne", style: _vm.logoGraphOneAnim }, [
+        _vm._v("\r\n             \r\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "logoGraphTwo", style: _vm.logoGraphTwoAnim }, [
+        _vm._v("\r\n             \r\n        ")
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "logoGraphThree", style: _vm.logoGraphThreeAnim },
+        [_vm._v("\r\n             \r\n        ")]
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

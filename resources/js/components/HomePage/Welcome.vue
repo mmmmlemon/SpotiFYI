@@ -7,12 +7,12 @@
             <!-- если пользователь не залогинен -->
             <div class="col-12 col-sm-12 col-md-10 col-lg-10" width="20%;" v-if="spotifyUsername == false">
                 <div class="col-12">
-                    <h2 class="text-center siteTitleHome">{{siteTitle}}</h2>
-                    <div class="text-center ">
+                    <h2 class="text-center siteTitleHome fadeInAnimSlow">{{siteTitle}}</h2>
+                    <div class="text-center">
                         <!-- <img :src="siteLogoUrl" class="fadeInAnim" width="10%" alt=""> -->
-                        <Logo />
+                        <Logo :animation="animationForLogo"/>
                     </div>
-                    <p v-if="welcomeMessage != false" v-html="welcomeMessage" class="fadeInAnim pText text-center">
+                    <p v-if="welcomeMessage != false" v-html="welcomeMessage" class="fadeInAnimSlow pText text-center">
                     </p>
                     <Error v-else type="small" errorMessage="Не удалось загрузить текст приветствия"/>
                     <hr>
@@ -86,37 +86,7 @@
 
 <script>
     export default {
-        beforeMount(){
-            //получить фоновое изображение
-            if(this.homePageImageUrl == -1)
-            { this.$store.dispatch('getHomePageImageUrl'); }
 
-            //получить логотип сайта
-            if(this.siteLogoUrl == -1)
-            { this.$store.dispatch('getSiteLogoUrl'); }
-
-            //получить изображение для приветствия
-            if(this.welcomeImageUrl == -1)
-            { this.$store.dispatch('getWelcomeImageUrl'); } 
-        },
-
-        mounted(){
-            //получить информацию о сайте
-            this.$store.dispatch('getSiteInfo');
-
-            //получить приветственное сообщение
-            this.$store.dispatch('getWelcomeMessage'); 
-
-            //получить юзернейм пользователя
-            if(this.spotifyUsername == -1)
-            { this.$store.dispatch('getSpotifyUsername'); }
-          
-            //получить кол-во треков в библиотеке для сообщения на главной странице
-            if(this.spotifyUserTracksCount == -1)
-            { this.$store.dispatch('getHomePageUserTracksCount'); }    
-
-        },
-        
         data(){
             return {
                 welcomeImgLoaded: false,
@@ -156,7 +126,12 @@
             //изображение для приветствия
             welcomeImageUrl: function(){
                 return this.$store.state.homePage.welcomeImageUrl;
-            }
+            },
+
+            //анимация для логотипа
+            animationForLogo: function(){
+                return this.$parent.animationForLogo;  
+            },
         },
     }
 </script>
