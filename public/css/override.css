@@ -80,11 +80,160 @@ a:hover {
 
 /*  */
 
+/* Logo */
+
+@keyframes logoBaseAnim {
+   0%{
+    opacity: 0;
+    background-color: var(--dark-color-light);
+    transform: scale(0.4);
+   }
+
+   70%{
+    background-color: var(--main-color-highlight2);
+    -webkit-box-shadow: 4px 4px 66px 6px rgba(34, 219, 96, 1);
+    -moz-box-shadow: 4px 4px 66px 6px rgba(34, 219, 96, 1);
+    box-shadow: 4px 4px 66px 6px rgba(34, 219, 96, 1);
+    transform: scale(1);
+   }
+
+   100%{
+    opacity: 1;
+    background-color: var(--main-color);
+   }
+}
+
+@keyframes logoGraphOneAnim {
+    0%{
+        opacity: 0;
+        background-color: var(--dark-color-light);
+        width: 0%;
+    }
+ 
+    70%{
+        background-color: var(--main-color-highlight2);
+        width: 0%;
+    }
+
+    90%{
+        width: 70%;
+        -webkit-box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+        -moz-box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+        box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+    }
+ 
+    100%{
+        opacity: 1;
+        background-color: var(--dark-color-light);
+        width: 63%;
+    }
+ }
+
+ @keyframes logoGraphTwoAnim {
+    0%{
+        opacity: 0;
+        background-color: var(--dark-color-light);
+        width: 0%;
+    }
+ 
+    70%{
+        background-color: var(--main-color-highlight2);
+        width: 0%;
+    }
+
+    90%{
+        width: 70%;
+        -webkit-box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+        -moz-box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+        box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+    }
+ 
+    100%{
+        opacity: 1;
+        background-color: var(--dark-color-light);
+        width: 55%;
+    }
+ }
+
+ @keyframes logoGraphThreeAnim {
+    0%{
+        opacity: 0;
+        background-color: var(--dark-color-light);
+        width: 0%;
+    }
+ 
+    70%{
+        background-color: var(--main-color-highlight2);
+        width: 0%;
+    }
+
+    90%{
+        width: 70%;
+        -webkit-box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+        -moz-box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+        box-shadow: 0px 5px 40px 2px rgba(34, 219, 96, 0.95) inset;
+    }
+ 
+    100%{
+        opacity: 1;
+        background-color: var(--dark-color-light);
+        width: 48%;
+    }
+ }
+
+.logoDiv{
+    position: relative;
+    width: 15rem;
+    height: 15rem; 
+    margin: 0 auto;
+}
+
+.logoBase{
+    position: relative;
+    width: 15rem;
+    height: 15rem;
+    margin: 0 auto;
+    border-radius: 100%;
+    background-color: var(--main-color);
+    animation: logoBaseAnim 2.5s ease-in-out;
+}
+
+.logoGraphOne{
+    position: relative;
+    background-color: var(--dark-color-light);
+    width: 63%;
+    margin-left: 15%;
+    margin-top:5%;
+    z-index: inherit;
+    animation: logoGraphOneAnim 2.5s ease-in-out;
+}
+
+.logoGraphTwo{
+    position: relative;
+    background-color: var(--dark-color-light);
+    width: 55%;
+    margin-left: 15%;
+    margin-top:5%;
+    z-index: inherit;
+    animation: logoGraphTwoAnim 2.6s ease-in-out;
+}
+
+.logoGraphThree{
+    position: relative;
+    background-color: var(--dark-color-light);
+    width: 48%;
+    margin-left: 15%;
+    margin-top: 5%;
+    animation: logoGraphThreeAnim 2.7s ease-in-out;
+}
+
+/*  */
+
 /* HomePage */
 
 .siteTitleHome{
     font-family: 'Poppins', sans-serif !important;
-    font-size: 5.5rem !important;
+    font-size: 4.2rem !important;
 }
 
 .cookiesCard{

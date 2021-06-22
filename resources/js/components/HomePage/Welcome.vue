@@ -9,7 +9,8 @@
                 <div class="col-12">
                     <h2 class="text-center siteTitleHome">{{siteTitle}}</h2>
                     <div class="text-center ">
-                        <img :src="siteLogoUrl" class="fadeInAnim" width="10%" alt="">
+                        <!-- <img :src="siteLogoUrl" class="fadeInAnim" width="10%" alt=""> -->
+                        <Logo />
                     </div>
                     <p v-if="welcomeMessage != false" v-html="welcomeMessage" class="fadeInAnim pText text-center">
                     </p>

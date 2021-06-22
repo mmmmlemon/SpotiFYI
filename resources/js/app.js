@@ -23,6 +23,8 @@ import BackgroundImage from './components/Misc/BackgroundImage.vue';
 Vue.component('BackgroundImage', BackgroundImage);
 import BackgroundImageFront from './components/Misc/BackgroundImageFront.vue';
 Vue.component('BackgroundImageFront', BackgroundImageFront);
+import Logo from './components/Misc/Logo.vue';
+Vue.component('Logo', Logo);
 
 import LastFive from './components/Profile/BasicStats/LastFive.vue';
 Vue.component('LastFive', LastFive);
@@ -60,6 +62,7 @@ Vue.component('BarChart', BarChart);
 Vue.use(VueAxios, axios);
 
 import router from './router';
+import Vue from 'vue';
 
 //перед перезагрузкой страницы, или перед выходом с сайта
 //отправляем api-запрос на удаление папки с файлами пользователя
