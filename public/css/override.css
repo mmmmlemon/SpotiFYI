@@ -1,0 +1,100 @@
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat-Regular.ttf");
+   }
+
+
+* {
+    font-family: 'Raleway', sans-serif !important;
+    --main-color: #1ea74c;
+    --main-color-highlight: #1ace56;
+    --main-color-highlight2: #7dfca7;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Open%20Sans');
+
+/* all */
+
+a {
+    color: rgb(233, 232, 232) !important;
+    transition: color 0.2s ease-in-out !important;
+}
+
+a:hover {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.btn-primary-n{
+    transition: background-color 0.2s ease-in-out !important;
+    background-color: #1ea74c !important;
+    color: white !important;
+    border-style: none !important;
+    font-weight: bold;
+}
+
+
+.btn-primary-n:hover{
+    background-color: var(--main-color-highlight) !important;
+}
+
+.borderUnderline{
+    border-bottom-style:solid;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--main-color);
+    padding-bottom: 3px;
+    transition: border-color 10.2s ease-in-out;
+}
+
+.borderUnderline:hover{
+    border-color: var(--main-color-highlight2);
+    cursor: pointer;
+}
+
+.pText{
+ font-size: 1.8rem;
+}
+/*  */
+
+/* App */
+.siteTitle{
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 1.5rem;
+}
+
+.beta{
+    font-size: 0.8rem;
+}
+
+.navSpotifyAvatar{
+    width:45px;
+    height:45px;
+    margin-left: 10px;
+    border-style: solid;
+    border-width:2px;
+    border-color: #1ea74c;
+}
+
+/*  */
+
+/* HomePage */
+
+.siteTitleHome{
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 5.5rem !important;
+}
+
+.cookiesCard{
+    background-color: gray;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #3C4044;
+}
+
+/*  */

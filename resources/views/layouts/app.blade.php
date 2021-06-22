@@ -18,14 +18,16 @@
     <script src="{{ asset('js/fontawesome.min.js') }}" defer></script>
 
     <!-- Шрифты -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 
     <!-- CSS Стили -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
     <link href="{{ asset('css/halfmoon-variables.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/override.css') }}" rel="stylesheet">
 
     <link rel="manifest" href="manifest.json">
 
@@ -55,9 +57,9 @@
                 </div>
 
                 {{-- название сайта --}}
-                <router-link to="/"><a class="navbar-brand">
+                <router-link to="/"><a class="navbar-brand siteTitle">
                     {{$siteInfo['siteTitle']}}
-                    <i class="font10pt">&nbsp;Beta</i>
+                    <b class="beta">&nbsp;Beta</b>
                 </a></router-link>
 
                 {{-- навигация для больших экранов --}}
@@ -87,7 +89,7 @@
                 @if($checkToken == false)
                     {{-- кнопка входа на сайт --}}
                     <div class="form-inline d-none d-lg-flex ml-auto"> 
-                        <a href="/spotify_login" class="btn btn-primary btn-rounded">Войти через Spotify</a>
+                        <a href="/spotify_login" class="btn btn-primary-n btn-rounded">Войти через Spotify</a>
                     </div>
                 @else
                     {{-- если залогинен --}}
@@ -142,7 +144,7 @@
                             {{-- если пользователь незалогинен --}}
                             @if($checkToken == false)
                                 <div class="dropdown-content">
-                                    <a href="/spotify_login" class="btn btn-primary btn-block btn-rounded">Войти в Spotify</a>
+                                    <a href="/spotify_login" class="btn btn-primary-n btn-block btn-rounded">Войти через Spotify</a>
                                 </div>    
                             @else
                             <div class="dropdown-content">
