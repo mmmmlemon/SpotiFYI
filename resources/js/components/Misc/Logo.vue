@@ -26,31 +26,31 @@ export default {
    computed: {
         logoBaseAnim: function(){
             if(this.animation == true){
-                return 'animation: logoBaseAnim 2.5s ease-in-out;';
+                return `animation: logoBaseAnim 2.5s ease-in-out;`;
             }
             else
-            { return ''; }
+            { return ``; }
         },
         logoGraphOneAnim: function(){
            if(this.animation == true){
-               return 'animation: logoGraphOneAnim 2.5s ease-in-out;';
+               return `animation: logoGraphOneAnim 2.5s ease-in-out;`;
            }
            else
-           { return ''; }
+           { return ``; }
        },
         logoGraphTwoAnim: function(){
            if(this.animation == true){
-               return 'animation: logoGraphTwoAnim 2.6s ease-in-out;';
+               return `animation: logoGraphTwoAnim 2.6s ease-in-out;;`;
            }
            else
-           { return ''; }
+           { return ``; }
        },
         logoGraphThreeAnim: function(){
            if(this.animation == true){
-               return 'animation: logoGraphThreeAnim 2.7s ease-in-out;';
+               return `animation: logoGraphThreeAnim 2.7s ease-in-out;`;
            }
            else
-           { return ''; }
+           { return ``; }
        },
    }
 }

@@ -7,16 +7,23 @@
 
 * {
     font-family: 'Raleway', sans-serif !important;
+    /* --main-color: #1ea74c;
+    --main-color-highlight: #1ace56;
+    --main-color-highlight2: #7dfca7; */
     --main-color: #1ea74c;
     --main-color-highlight: #1ace56;
     --main-color-highlight2: #7dfca7;
-}
+    --warning-color:rgb(184, 164, 53);
+    --error-color: rgb(175, 55, 55);
+    scroll-behavior: smooth !important;
 
+}
 
 
 @import url('https://fonts.googleapis.com/css?family=Open%20Sans');
 
 /* all */
+
 
 a {
     color: rgb(233, 232, 232) !important;
@@ -30,7 +37,7 @@ a:hover {
 
 .btn-primary-n{
     transition: background-color 0.2s ease-in-out !important;
-    background-color: #1ea74c !important;
+    background-color: var(--main-color) !important;
     color: white !important;
     border-style: none !important;
     font-weight: bold;
@@ -57,6 +64,55 @@ a:hover {
 .pText{
  font-size: 1.8rem;
 }
+
+.paddingSides{
+    padding:10px;
+}
+
+.backgroundImage{
+    position: absolute;
+    opacity: 0.08;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+
+.p_fix p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+/* Errors */
+.warningIcon{
+    font-size: 60pt;
+    color: var(--warning-color);
+    margin-top: 5%;
+}
+
+.warning{
+    color: rgb(193, 216, 230);
+    font-weight: bold;
+    margin: 0;
+}
+
+
+.error{
+    color: var(--error-color);
+    font-weight: bold;
+    margin: 0;
+}
+/*  */
+
+
+
+
 /*  */
 
 /* App */
@@ -70,6 +126,11 @@ a:hover {
     font-size: 0.8rem;
 }
 
+.betaAbout{
+    font-size: 1.8rem;
+}
+
+
 .navSpotifyAvatar{
     width:45px;
     height:45px;
@@ -77,6 +138,10 @@ a:hover {
     border-style: solid;
     border-width:2px;
     border-color: #1ea74c;
+}
+
+.marginTopBig{
+    margin-top: 20%;
 }
 
 /*  */

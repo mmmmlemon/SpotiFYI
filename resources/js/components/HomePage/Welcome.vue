@@ -2,19 +2,16 @@
 <template>
     <div class="container fadeInAnim">
         <!-- фоновая картинка -->
-
-        
-        <BackgroundImage :backgroundImageUrl="homePageImageUrl"/>
         <div class="row justify-content-center">
             <!-- если пользователь не залогинен -->
             <div class="col-12 col-sm-12 col-md-10 col-lg-10" width="20%;">
                 <div class="col-12">
-                    <transition name="siteTitle">
+                    <transition name="siteTitle" v-on:before-enter="setLogoAnimation(true)">
                         <h2 class="text-center siteTitleHome" v-if="siteTitle && spotifyUsername == false">{{siteTitle}}</h2>
                     </transition>
                      <transition name="logo">
                         <div v-if="siteTitle && spotifyUsername == false">
-                            <Logo :animation="animationForLogo"/>
+                            <Logo :animation="logoAnimation"/>
                         </div>
                     </transition>
                     <transition name="welcome">
@@ -40,7 +37,7 @@
                                 <i class="fas fa-music homeIcon"></i>
                             </div>
                          </transition>
-                        <transition name="decade">
+                        <transition name="decade" v-on:after-enter="setBgStyle">
                             <div class="col-4" v-if="welcomeMessage != false && spotifyUsername == false">
                                 <h6><b>Какая ваша любимая эпоха в музыке?</b></h6>
                                 <i class="fas fa-record-vinyl homeIcon"></i>
@@ -56,7 +53,7 @@
                     <transition name="welcome">
                         <hr v-if="welcomeMessage != false && spotifyUsername == false" style="margin-bottom: 3rem;">    
                     </transition>
-                    <transition name="enterButton">
+                    <transition name="enterButton" v-on:after-enter="setLogoAnimation(false)">
                         <div class="row justify-content-center" v-if="welcomeMessage != false && spotifyUsername == false">
                             <div class="col-md-4 col-10 justify-content-center marginVertical">
                                 <a href="/spotify_login" class="btn btn-primary-n btn-rounded btn-block">Войти через Spotify</a>
@@ -132,12 +129,20 @@
         data(){
             return {
                 welcomeImgLoaded: false,
+                logoAnimation: false,
+                bgStyle: 'backgroundImage invisible',
             }
         },
         methods: {
             onWelcomeImgLoad(){
                 this.welcomeImgLoaded = true;
-            }
+            },
+            setLogoAnimation(value){
+                this.logoAnimation = value;
+            },
+            setBgStyle(){
+                this.bgStyle = 'backgroundImage fadeInAnimBg';
+            },
         },
 
         computed: {

@@ -8,49 +8,47 @@
         <!-- если информация загрузилась -->
         <div class="container fadeInAnim" v-if="siteInfo != false && siteInfo != -1">
             <div class="row justify-content-center">
-                <div class="greyCard col-12 padding_10">
+                <div class="col-12">
                     <!-- название сайта -->
-                    <div class="row justify-content-center fadeInAnimSlow">
-                        <h1 v-if="siteInfo != false"><b>{{siteInfo.siteTitle}}</b></h1>
+                    <div class="row justify-content-center fadeInAnim">
+                        <h2 class="text-center siteTitleHome" v-if="siteInfo != false">{{siteInfo.siteTitle}} <b class="betaAbout">{{siteInfo.version}}</b></h2>
                     </div>
                     <!-- логотип -->
-                    <div v-if="siteInfo != false" class="row justify-content-center bounceInAnim">
-                        <img :src="siteLogoUrl" width="90pt" height="90pt" alt="Site logo" >
+                    <div v-if="siteInfo != false" class="row justify-content-center fadeInAnim">
+                        <Logo :animation="false"/>
                     </div>
                     <!-- версия -->
-                    <div v-if="siteInfo != false" class="row justify-content-center fadeInAnimSlow">
-                        <h5>{{siteInfo.version}}</h5>
+                    <div v-if="siteInfo != false" class="row justify-content-center fadeInAnim">
+                        <h5></h5>
                     </div>
 
-                    <hr v-if="siteInfo != false" class="fadeInAnim">
-
                     <!-- powered by -->
-                    <div v-if="siteInfo != false" class="row justify-content-center text-center fadeInAnimSlow">
-                        <div class="col-12" v-if="poweredBy != -1 && poweredBy != false">
+                    <div v-if="siteInfo != false" class="row justify-content-center text-center borderUnderline fadeInAnim" style="margin-bottom: 1rem;">
+                        <div class="col-12" v-if="siteInfo.poweredBy != -1 && siteInfo.poweredBy != false">
                             <b>Powered by</b>
                         </div>
-                        <p v-html="siteInfo.poweredBy" class="text-center marginNone paddingNone p_fix">  
+                        <p v-html="siteInfo.poweredBy" class="text-center p_fix">  
                         </p>
                     </div>
                     
                     <div class="row justify-content-center">
                         <div class="col-md-4 paddingSides">
                             <router-link to="/about">
-                                <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'about'}" type="button">
+                                <button class="btn btn-block" v-bind:class="{ 'btn-primary-n': currentTab === 'about'}" type="button">
                                     О проекте
                                 </button>
                             </router-link>
                         </div>
                         <div class="col-md-4 paddingSides">
                             <router-link to="/about/faq">
-                                <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'faq'}" type="button">
+                                <button class="btn btn-block" v-bind:class="{ 'btn-primary-n': currentTab === 'faq'}" type="button">
                                     FAQ
                                 </button>
                             </router-link>
                         </div>
                         <div class="col-md-4 paddingSides">
                             <router-link to="/about/contacts">
-                                <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'contacts'}" type="button">
+                                <button class="btn btn-block" v-bind:class="{ 'btn-primary-n': currentTab === 'contacts'}" type="button">
                                    Контакты
                                 </button>
                             </router-link>
@@ -60,7 +58,7 @@
  
                 </div>
                 <!-- информация о сайте -->
-                <div class="col-12 col-md-8 paddingSides fadeInAnim">
+                <div class="col-12 col-md-8 fadeInAnim">
                     <router-view></router-view>
                 </div>
             </div>
@@ -74,13 +72,18 @@
 
 <script>
     export default {
-        mounted() {
-            //получить логотип сайта
-            this.$store.dispatch('getSiteLogoUrl');
 
+        created(){
             //получить информацию о сайте
-            this.$store.dispatch('getSiteInfo');
+            if(this.contacts === -1)
+            { this.$store.dispatch('getContacts'); }
 
+            if(this.faq === -1)
+            { this.$store.dispatch('getFAQ'); }
+
+            if(this.about === -1)
+            { this.$store.dispatch('getAbout'); }
+            
         },
 
         computed: {
@@ -95,7 +98,19 @@
             //ссылка на логотип сайта
             siteLogoUrl: function(){
                 return this.$store.state.homePage.siteLogoUrl;
-            }
+            },
+            //информация о сайте
+            contacts: function(){
+                return this.$store.state.homePage.contacts;
+            },
+            //информация о сайте
+            faq: function(){
+                return this.$store.state.homePage.faq;
+            },
+            //информация о сайте
+            about: function(){
+                return this.$store.state.homePage.about;
+            },
         },
 
 

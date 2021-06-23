@@ -7,7 +7,7 @@
 export default {
     props: {
         backgroundImageUrl: { default: -1 },
-        bgStyle: { default: 'backgroundImage' },
+        bgStyle: { default: 'backgroundImage invisible' },
     }
 }
 </script>

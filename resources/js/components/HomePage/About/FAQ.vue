@@ -23,8 +23,6 @@ export default {
         //смена текущего таба
         this.$store.dispatch('setCurrentTab','faq');
 
-        //получить информацию о сайте
-        this.$store.dispatch('getFAQ');
     },
 
     computed: {
