@@ -108,6 +108,11 @@ a:hover {
     font-weight: bold;
     margin: 0;
 }
+
+.primaryColor{
+    color: var(--main-color);
+}
+
 /*  */
 
 
@@ -391,6 +396,10 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
 .enterButton-enter {
   transform: translateY(17px);
   opacity: 0;
+}
+
+.homeImage{
+    transform:translateX(-30px);
 }
 
 /*  */

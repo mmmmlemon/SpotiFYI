@@ -67,11 +67,11 @@
                 <div class="row justify-content-center">
                     <!-- приветствие для больших экранов -->
                     <div class="col-11 text-center d-none d-md-block fadeInAnim">
-                        <h2 v-if="spotifyUsername != false" class="font4vw">Привет, <b>{{spotifyUsername}}</b>!</h2>
+                        <h2 v-if="spotifyUsername != false" class="font4vw">Привет, <b style="color: var(--main-color);">{{spotifyUsername}}</b>!</h2>
                     </div>
                     <!-- для мобилок -->
-                    <div class="col-11 text-center d-sm-block d-md-none fadeInAnim">
-                        <h2 v-if="spotifyUsername != false" class="font6vw">Привет, <b>{{spotifyUsername}}</b>!</h2>
+                    <div class="col-11 text-center d-sm-block d-md-none fadeInAnim" v-if="spotifyUsername != false">
+                        <h2 class="font6vw">Привет, <b>{{spotifyUsername}}</b>!</h2>
                     </div>
                     
                     <!-- лоадер -->
@@ -80,10 +80,10 @@
                     </div>
 
                     <!-- когда загрузится кол-во треков, показываем сообщение -->
-                    <div v-if="spotifyUserTracksCount != -1" class="col-10 fadeInAnim">
+                    <div v-if="spotifyUserTracksCount != -1" class="col-10 text-center fadeInAnim">
                         <!-- если треков больше 150 -->
-                        <h3 v-if="spotifyUserTracksCount >= 150">
-                            В твоей библиотеке более чем достаточно треков для анализа <i class="fas fa-heart primaryColor heartbeatAnim"></i>
+                        <h3 v-if="spotifyUserTracksCount.trackCount >= 150">
+                            В твоей библиотеке более чем достаточно треков для анализа <i class="fas fa-heart heartbeatAnim" style="color: var(--main-color-highlight);"></i>
                         </h3>
                         <!-- если треков больше или равно 50 -->
                         <h4 v-else-if="spotifyUserTracksCount >= 50">
@@ -103,6 +103,7 @@
                         </h4>
                         <h3 v-else></h3>
                         
+                 
                         <!-- сообщение если кол-во треков больше нуля, но меньше 50 -->
                         <h5 v-if="spotifyUserTracksCount < 50 && spotifyUserTracksCount > 0">
                             Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: {{spotifyUserTracksCount}}, нужно: 50).
@@ -115,6 +116,14 @@
                         <h5 v-else class="fadeInAnimSlow">
                             Перейди в <router-link to="/profile" class="borderUnderline">свой профиль</router-link> чтобы просмотреть статистику
                         </h5>
+                    </div>
+
+                    <div class="text-center" style="margin-top: 6rem;">
+                        <div class="row justify-content-center" style="margin-left: 5%;">
+                            <div v-for="(img, index) in spotifyUserTracksCount.trackCovers" :key="index" class="col-2">
+                                <img :src="img" class="img-fluid rounded-circle" :style="`transform: scale(1.2);`">
+                            </div>
+                        </div>
                     </div>
 
                 </div>

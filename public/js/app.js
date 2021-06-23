@@ -2505,6 +2505,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -79594,29 +79603,33 @@ var render = function() {
                   _vm.spotifyUsername != false
                     ? _c("h2", { staticClass: "font4vw" }, [
                         _vm._v("Привет, "),
-                        _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
+                        _c(
+                          "b",
+                          { staticStyle: { color: "var(--main-color)" } },
+                          [_vm._v(_vm._s(_vm.spotifyUsername))]
+                        ),
                         _vm._v("!")
                       ])
                     : _vm._e()
                 ]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "col-11 text-center d-sm-block d-md-none fadeInAnim"
-                },
-                [
-                  _vm.spotifyUsername != false
-                    ? _c("h2", { staticClass: "font6vw" }, [
+              _vm.spotifyUsername != false
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-11 text-center d-sm-block d-md-none fadeInAnim"
+                    },
+                    [
+                      _c("h2", { staticClass: "font6vw" }, [
                         _vm._v("Привет, "),
                         _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
                         _vm._v("!")
                       ])
-                    : _vm._e()
-                ]
-              ),
+                    ]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _vm.spotifyUserTracksCount == -1 && _vm.spotifyUsername != false
                 ? _c(
@@ -79628,15 +79641,17 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.spotifyUserTracksCount != -1
-                ? _c("div", { staticClass: "col-10 fadeInAnim" }, [
-                    _vm.spotifyUserTracksCount >= 150
+                ? _c("div", { staticClass: "col-10 text-center fadeInAnim" }, [
+                    _vm.spotifyUserTracksCount.trackCount >= 150
                       ? _c("h3", [
                           _vm._v(
                             "\n                        В твоей библиотеке более чем достаточно треков для анализа "
                           ),
                           _c("i", {
-                            staticClass:
-                              "fas fa-heart primaryColor heartbeatAnim"
+                            staticClass: "fas fa-heart heartbeatAnim",
+                            staticStyle: {
+                              color: "var(--main-color-highlight)"
+                            }
                           })
                         ])
                       : _vm.spotifyUserTracksCount >= 50
@@ -79703,7 +79718,37 @@ var render = function() {
                           1
                         )
                   ])
-                : _vm._e()
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "text-center",
+                  staticStyle: { "margin-top": "6rem" }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "row justify-content-center",
+                      staticStyle: { "margin-left": "5%" }
+                    },
+                    _vm._l(_vm.spotifyUserTracksCount.trackCovers, function(
+                      img,
+                      index
+                    ) {
+                      return _c("div", { key: index, staticClass: "col-2" }, [
+                        _c("img", {
+                          staticClass: "img-fluid rounded-circle",
+                          style: "transform: scale(1.2);",
+                          attrs: { src: img }
+                        })
+                      ])
+                    }),
+                    0
+                  )
+                ]
+              )
             ])
           ])
         : _vm._e()

@@ -47,7 +47,20 @@ class SpotifyAPIController extends Controller
                 $spotifyUserTracks = $api->getMySavedTracks(['limit' => 50, 'offset' => $offset]);
            }
 
-           return response()->json($spotifyUserTracksCount);
+           $tracks = [];
+
+           if($spotifyUserTracksCount >= 50)
+           {
+               for($i = 0; $i <= 4; $i++){
+
+                   $len = count($spotifyUserTracks->items);
+                   $rand = rand(0, $len-1);
+
+                   array_push($tracks, $spotifyUserTracks->items[$rand]->track->album->images[0]->url);
+               }
+           }
+
+           return response()->json(['trackCount'=>$spotifyUserTracksCount,'trackCovers'=>$tracks]);
         }
         else
         { return response()->json(false); }
