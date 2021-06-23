@@ -1,4 +1,4 @@
-<h1>SpotiFYI</h1>
+<h1>ShowMySpotify</h1>
 <hr>
 <h6>Statistics and music habits for Spotify</h6>
 
