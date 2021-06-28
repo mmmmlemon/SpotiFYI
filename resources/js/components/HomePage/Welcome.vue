@@ -71,7 +71,7 @@
                     </div>
                     <!-- для мобилок -->
                     <div class="col-11 text-center d-sm-block d-md-none fadeInAnim" v-if="spotifyUsername != false">
-                        <h2 class="font6vw">Привет, <b>{{spotifyUsername}}</b>!</h2>
+                        <h2 class="font6vw">Привет, <b style="color: var(--main-color);">{{spotifyUsername}}</b>!</h2>
                     </div>
                     
                     <!-- лоадер -->

@@ -2986,7 +2986,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeMount: function beforeMount() {
     //получить фоновое изображение профиля
@@ -79640,7 +79639,11 @@ var render = function() {
                     [
                       _c("h2", { staticClass: "font6vw" }, [
                         _vm._v("Привет, "),
-                        _c("b", [_vm._v(_vm._s(_vm.spotifyUsername))]),
+                        _c(
+                          "b",
+                          { staticStyle: { color: "var(--main-color)" } },
+                          [_vm._v(_vm._s(_vm.spotifyUsername))]
+                        ),
                         _vm._v("!")
                       ])
                     ]
@@ -80327,7 +80330,7 @@ var render = function() {
       _vm._v(" "),
       _vm.spotifyProfile != -1 && _vm.spotifyProfile != false
         ? _c("div", { staticClass: "container", attrs: { id: "top" } }, [
-            _c("div", { staticClass: "col-12 greyCard" }, [
+            _c("div", { staticClass: "col-12" }, [
               _c(
                 "div",
                 { staticClass: "row justify-content-center fadeInAnim" },
@@ -80352,7 +80355,7 @@ var render = function() {
                               "b",
                               {
                                 staticClass:
-                                  "font3vw d-none d-md-block borderUnderline"
+                                  "d-none d-md-block borderUnderline mainColorHighlight2"
                               },
                               [
                                 _vm._v(
@@ -80365,7 +80368,7 @@ var render = function() {
                               "b",
                               {
                                 staticClass:
-                                  "font6vw d-sm-block d-md-none borderUnderline"
+                                  "d-sm-block d-md-none borderUnderline mainColorHighlight2"
                               },
                               [
                                 _vm._v(
@@ -80401,28 +80404,38 @@ var render = function() {
                 { staticClass: "row justify-content-center fadeInAnimSlow" },
                 [
                   _vm.spotifyProfile.subscription == "premium"
-                    ? _c("h6", { staticClass: "marginBottomNone" }, [
-                        _vm._v("Premium "),
-                        _c("i", { staticClass: "fas fa-crown" })
-                      ])
+                    ? _c(
+                        "h6",
+                        {
+                          staticClass: "marginBottomNone font1-8rem",
+                          staticStyle: { margin: "10px 0 0 0" }
+                        },
+                        [
+                          _vm._v("\n                    Premium "),
+                          _c("i", {
+                            staticClass: "fas fa-crown mainColorHighlight"
+                          })
+                        ]
+                      )
                     : _vm._e()
                 ]
               ),
               _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass:
-                    "row justify-content-center fadeInAnimSlow marginVertical "
-                },
+                { staticClass: "row justify-content-center fadeInAnimSlow" },
                 [
                   _c("div", [
                     _vm._v(
-                      " Подписчики: " + _vm._s(_vm.spotifyProfile.followers)
+                      "\n                    Подписчики: " +
+                        _vm._s(_vm.spotifyProfile.followers) +
+                        "\n                "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "primaryColor" }, [_vm._v(" | ")]),
+                  _c("div", { staticClass: "primaryColor" }, [
+                    _vm._v("\n                     | \n                ")
+                  ]),
                   _vm._v(" "),
                   _c("div", [
                     _c("img", { attrs: { src: _vm.spotifyProfile.country } })
@@ -80440,7 +80453,7 @@ var render = function() {
                     _c("div", { staticClass: "row justify-content-center" }, [
                       _c(
                         "div",
-                        { staticClass: "col-md-4 paddingSides" },
+                        { staticClass: "col-md-5 paddingSides" },
                         [
                           _c("router-link", { attrs: { to: "/profile" } }, [
                             _c(
@@ -80448,7 +80461,8 @@ var render = function() {
                               {
                                 staticClass: "btn btn-block",
                                 class: {
-                                  "btn-primary": _vm.currentTab === "basicStats"
+                                  "btn-primary-n":
+                                    _vm.currentTab === "basicStats"
                                 },
                                 attrs: { type: "button" }
                               },
@@ -80465,7 +80479,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "col-md-4 paddingSides" },
+                        { staticClass: "col-md-5 paddingSides" },
                         [
                           _c(
                             "router-link",
@@ -80476,43 +80490,13 @@ var render = function() {
                                 {
                                   staticClass: "btn btn-block",
                                   class: {
-                                    "btn-primary": _vm.currentTab === "top10"
+                                    "btn-primary-n": _vm.currentTab === "top10"
                                   },
                                   attrs: { type: "button" }
                                 },
                                 [
                                   _vm._v(
                                     "\n                                    Топ-10\n                                "
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "col-md-4 paddingSides" },
-                        [
-                          _c(
-                            "router-link",
-                            { attrs: { to: "/profile/achievements" } },
-                            [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-block",
-                                  class: {
-                                    "btn-primary":
-                                      _vm.currentTab === "achievements"
-                                  },
-                                  attrs: { type: "button" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    Отличники\n                                "
                                   )
                                 ]
                               )

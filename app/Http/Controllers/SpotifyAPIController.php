@@ -35,43 +35,45 @@ class SpotifyAPIController extends Controller
            $offset = 0; //смещение
            //получаем первые 50 треков из библиотеки, со смещением 0
            $spotifyUserTracks = $api->getMySavedTracks(['limit'=> 50, 'offset' => $offset]); 
-
+            
            //пока смещение меньше 100, прибавляем кол-во полученные треков 
            //и получаем следующие 50 с новым смещением
            //итого максимум будет 150 треков, в зависимости от кол-ва треков
            //будет выводиться разное сообщение на главной странице
-           while($offset <= 100)
+           while($offset <= 100 && $spotifyUserTracks->next != null)
            {
                 $spotifyUserTracksCount += count($spotifyUserTracks->items);
                 $offset += 50;
-                $spotifyUserTracks = $api->getMySavedTracks(['limit' => 50, 'offset' => $offset]);
+                $result = $api->getMySavedTracks(['limit' => 50, 'offset' => $offset]);
+                if(count($result->items) >= 20){
+                    $spotifyUserTracks = $result;
+                }
            }
 
            $tracks = [];
 
            if($spotifyUserTracksCount >= 50)
            {    
+                function randomGen($min, $max, $quantity) {
+                        $numbers = range($min, $max);
+                        shuffle($numbers);
+                        return array_slice($numbers, 0, $quantity);
+                }
 
-							function randomGen($min, $max, $quantity) {
-									$numbers = range($min, $max);
-									shuffle($numbers);
-									return array_slice($numbers, 0, $quantity);
-							}
-
-							//убираем дупликаты обложек (в залайканых песнях обложки могут повторяться)
-							$spotifyCovers = [];
-							foreach($spotifyUserTracks->items as $track){
-									array_push($spotifyCovers, $track->track->album->images[0]->url);
-							}
+                //убираем дупликаты обложек (в залайканых песнях обложки могут повторяться)
+                $spotifyCovers = [];
+                foreach($spotifyUserTracks->items as $track){
+                        array_push($spotifyCovers, $track->track->album->images[0]->url);
+                }
 
 
-							$spotifyCoversUnique = array_values(array_unique($spotifyCovers));
-					
-							$len = count($spotifyCoversUnique);
-							$randomNumbers =  randomGen(0, $len-1, 5);
-							for($i = 0; $i <= 4; $i++){
-									array_push($tracks, $spotifyCoversUnique[$randomNumbers[$i]]);
-							}
+                $spotifyCoversUnique = array_values(array_unique($spotifyCovers));
+        
+                $len = count($spotifyCoversUnique);
+                $randomNumbers =  randomGen(0, $len-1, 5);
+                for($i = 0; $i <= 4; $i++){
+                        array_push($tracks, $spotifyCoversUnique[$randomNumbers[$i]]);
+                }
            }
 
            return response()->json(['trackCount'=>$spotifyUserTracksCount,'trackCovers'=> $tracks]);
@@ -139,6 +141,9 @@ class SpotifyAPIController extends Controller
     //параметры: реквест
     public function getSpotifyUserLibrary(Request $request)
     {   
+
+
+        return false;
         //проверяем токен
         $checkToken = System::checkSpotifyAccessToken($request);
 

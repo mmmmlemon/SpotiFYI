@@ -13,16 +13,16 @@
         </div>
         <!-- профиль -->
         <div class="container" id="top" v-if="spotifyProfile != -1 && spotifyProfile != false">
-            <div class="col-12 greyCard">   
+            <div class="col-12">   
                 <!-- юзернейм и ссылка на профиль -->
                 <div class="row justify-content-center fadeInAnim">
                     <div class="col-12 col-md-8">
                         <h1 class="text-center fadeInAnimSlow paddingSides">
                             <a :href="spotifyProfile.profile_url" target="_blank"> 
                                 <!-- юзернейм для десктопа -->
-                                <b class="font3vw d-none d-md-block borderUnderline">{{spotifyProfile.spotifyUsername}}</b>
+                                <b class="d-none d-md-block borderUnderline mainColorHighlight2">{{spotifyProfile.spotifyUsername}}</b>
                                 <!-- юзернейм для мобилок -->
-                                <b class="font6vw d-sm-block d-md-none borderUnderline">{{spotifyProfile.spotifyUsername}}</b>
+                                <b class="d-sm-block d-md-none borderUnderline mainColorHighlight2">{{spotifyProfile.spotifyUsername}}</b>
                             </a>
                         </h1>
                     </div>
@@ -34,12 +34,18 @@
                 </div>
                 <!-- вид подписки -->
                 <div class="row justify-content-center fadeInAnimSlow">
-                <h6 v-if="spotifyProfile.subscription == 'premium'" class="marginBottomNone">Premium <i class="fas fa-crown"></i></h6>
+                    <h6 v-if="spotifyProfile.subscription == 'premium'" class="marginBottomNone font1-8rem"  style="margin: 10px 0 0 0;">
+                        Premium <i class="fas fa-crown mainColorHighlight"></i>
+                    </h6>
                 </div>
                 <!-- кол-во подписчиков и страна -->
-                <div class="row justify-content-center fadeInAnimSlow marginVertical ">
-                    <div> Подписчики: {{spotifyProfile.followers}}</div>
-                    <div class="primaryColor">&nbsp;|&nbsp;</div>
+                <div class="row justify-content-center fadeInAnimSlow">
+                    <div>
+                        Подписчики: {{spotifyProfile.followers}}
+                    </div>
+                    <div class="primaryColor">
+                        &nbsp;|&nbsp;
+                    </div>
                     <div>
                         <img :src="spotifyProfile.country">
                     </div>
@@ -50,28 +56,21 @@
                 <div class="row justify-content-center fadeInAnim">
                     <div class="col-12 col-md-9">
                         <div class="row justify-content-center">
-                            <div class="col-md-4 paddingSides">
+                            <div class="col-md-5 paddingSides">
                                 <router-link to="/profile">
-                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'basicStats'}" type="button">
+                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary-n': currentTab === 'basicStats'}" type="button">
                                         Общее
                                     </button>
                                 </router-link>
                             </div>
-                            <div class="col-md-4 paddingSides">
+                            <div class="col-md-5 paddingSides">
                                 <router-link to="/profile/top10">
-                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'top10'}" type="button">
+                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary-n': currentTab === 'top10'}" type="button">
                                         Топ-10
                                     </button>
                                 </router-link>
                             </div>
-                            <div class="col-md-4 paddingSides">
-                                <router-link to="/profile/achievements">
-                                    <button class="btn btn-block" v-bind:class="{ 'btn-primary': currentTab === 'achievements'}" type="button">
-                                        Отличники
-                                    </button>
-                                </router-link>
-                            </div>
-                           </div>
+                        </div>
                     </div>
                 </div>
             </div>
