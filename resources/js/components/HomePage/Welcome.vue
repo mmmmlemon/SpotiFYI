@@ -118,14 +118,26 @@
                         </h5>
                     </div>
 
-                    <div class="text-center" style="margin-top: 6rem;">
-                        <div class="row justify-content-center" style="margin-left: 5%;">
-                            <div v-for="(img, index) in spotifyUserTracksCount.trackCovers" :key="index" class="col-2">
-                                <img :src="img" class="img-fluid rounded-circle" :style="`transform: scale(1.2);`">
-                            </div>
+                </div>
+
+                <div class="text-center" style="margin-top: 6rem;" v-if="spotifyUserTracksCount !== -1">
+                    <div class="row justify-content-center" style="margin-left: 5%;">
+                        <div class="col-2">
+                            <img :src="spotifyUserTracksCount.trackCovers[0]" class="img-fluid rounded-circle albumCoverHome fadeInCover1">
+                        </div>
+                        <div class="col-2">
+                            <img :src="spotifyUserTracksCount.trackCovers[1]" class="img-fluid rounded-circle albumCoverHome fadeInCover2">
+                        </div>
+                        <div class="col-2">
+                            <img :src="spotifyUserTracksCount.trackCovers[2]" class="img-fluid rounded-circle albumCoverHome fadeInCover3">
+                        </div>
+                        <div class="col-2">
+                            <img :src="spotifyUserTracksCount.trackCovers[3]" class="img-fluid rounded-circle albumCoverHome fadeInCover4">
+                        </div>
+                        <div class="col-2">
+                            <img :src="spotifyUserTracksCount.trackCovers[4]" class="img-fluid rounded-circle albumCoverHome fadeInCover5">
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -135,11 +147,16 @@
 <script>
     export default {
 
+        mounted(){
+            this.visible = true;
+        },
+
         data(){
             return {
                 welcomeImgLoaded: false,
                 logoAnimation: false,
                 bgStyle: 'backgroundImage invisible',
+                visible: false,
             }
         },
         methods: {

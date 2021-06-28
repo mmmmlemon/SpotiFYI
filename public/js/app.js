@@ -2514,12 +2514,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.visible = true;
+  },
   data: function data() {
     return {
       welcomeImgLoaded: false,
       logoAnimation: false,
-      bgStyle: 'backgroundImage invisible'
+      bgStyle: 'backgroundImage invisible',
+      visible: false
     };
   },
   methods: {
@@ -79718,38 +79734,78 @@ var render = function() {
                           1
                         )
                   ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "text-center",
-                  staticStyle: { "margin-top": "6rem" }
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "row justify-content-center",
-                      staticStyle: { "margin-left": "5%" }
-                    },
-                    _vm._l(_vm.spotifyUserTracksCount.trackCovers, function(
-                      img,
-                      index
-                    ) {
-                      return _c("div", { key: index, staticClass: "col-2" }, [
-                        _c("img", {
-                          staticClass: "img-fluid rounded-circle",
-                          style: "transform: scale(1.2);",
-                          attrs: { src: img }
-                        })
-                      ])
-                    }),
-                    0
-                  )
-                ]
-              )
-            ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm.spotifyUserTracksCount !== -1
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "text-center",
+                    staticStyle: { "margin-top": "6rem" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "row justify-content-center",
+                        staticStyle: { "margin-left": "5%" }
+                      },
+                      [
+                        _c("div", { staticClass: "col-2" }, [
+                          _c("img", {
+                            staticClass:
+                              "img-fluid rounded-circle albumCoverHome fadeInCover1",
+                            attrs: {
+                              src: _vm.spotifyUserTracksCount.trackCovers[0]
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-2" }, [
+                          _c("img", {
+                            staticClass:
+                              "img-fluid rounded-circle albumCoverHome fadeInCover2",
+                            attrs: {
+                              src: _vm.spotifyUserTracksCount.trackCovers[1]
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-2" }, [
+                          _c("img", {
+                            staticClass:
+                              "img-fluid rounded-circle albumCoverHome fadeInCover3",
+                            attrs: {
+                              src: _vm.spotifyUserTracksCount.trackCovers[2]
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-2" }, [
+                          _c("img", {
+                            staticClass:
+                              "img-fluid rounded-circle albumCoverHome fadeInCover4",
+                            attrs: {
+                              src: _vm.spotifyUserTracksCount.trackCovers[3]
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-2" }, [
+                          _c("img", {
+                            staticClass:
+                              "img-fluid rounded-circle albumCoverHome fadeInCover5",
+                            attrs: {
+                              src: _vm.spotifyUserTracksCount.trackCovers[4]
+                            }
+                          })
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              : _vm._e()
           ])
         : _vm._e()
     ])
@@ -102779,8 +102835,8 @@ var ProfilePageStates = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! e:\dev\SpotiFYI\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! e:\dev\SpotiFYI\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! e:\dev\ShowMySpotify\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! e:\dev\ShowMySpotify\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

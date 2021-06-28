@@ -25,6 +25,10 @@
 /* all */
 
 
+.zeroOpacity{
+    opacity: 0;
+}
+
 a {
     color: rgb(233, 232, 232) !important;
     transition: color 0.2s ease-in-out !important;
@@ -293,7 +297,6 @@ a:hover {
     -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
-
 }
 
 .logoGraphTwo{
@@ -402,6 +405,13 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     transform:translateX(-30px);
 }
 
+.albumCoverHome{
+    transform: scale(1.3);
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+}
+
 /*  */
 
 
@@ -425,6 +435,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
 .homeIcon{
     font-size: 4rem;
     color: var(--main-color-highlight);
+    
 }
 
 /*  */

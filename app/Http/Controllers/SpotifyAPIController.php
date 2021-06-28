@@ -50,17 +50,31 @@ class SpotifyAPIController extends Controller
            $tracks = [];
 
            if($spotifyUserTracksCount >= 50)
-           {
-               for($i = 0; $i <= 4; $i++){
+           {    
 
-                   $len = count($spotifyUserTracks->items);
-                   $rand = rand(0, $len-1);
+							function randomGen($min, $max, $quantity) {
+									$numbers = range($min, $max);
+									shuffle($numbers);
+									return array_slice($numbers, 0, $quantity);
+							}
 
-                   array_push($tracks, $spotifyUserTracks->items[$rand]->track->album->images[0]->url);
-               }
+							//убираем дупликаты обложек (в залайканых песнях обложки могут повторяться)
+							$spotifyCovers = [];
+							foreach($spotifyUserTracks->items as $track){
+									array_push($spotifyCovers, $track->track->album->images[0]->url);
+							}
+
+
+							$spotifyCoversUnique = array_values(array_unique($spotifyCovers));
+					
+							$len = count($spotifyCoversUnique);
+							$randomNumbers =  randomGen(0, $len-1, 5);
+							for($i = 0; $i <= 4; $i++){
+									array_push($tracks, $spotifyCoversUnique[$randomNumbers[$i]]);
+							}
            }
 
-           return response()->json(['trackCount'=>$spotifyUserTracksCount,'trackCovers'=>$tracks]);
+           return response()->json(['trackCount'=>$spotifyUserTracksCount,'trackCovers'=> $tracks]);
         }
         else
         { return response()->json(false); }
