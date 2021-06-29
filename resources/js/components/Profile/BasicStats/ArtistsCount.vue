@@ -11,15 +11,14 @@
                 <Error type="small" errorMessage="Не удалось загрузить треки" />
             </div>
             <!-- контент -->
-            <div v-else-if="uniqueArtists != -1 && uniqueArtists != false" class="col-11 paddingSides marginVertical">
-            
-                    <!-- фоновое изображение -->
-                    <BackgroundImage :backgroundImageUrl="uniqueArtists['artistImageUrl']"/>
-                    <!-- затемнение для фона -->
-                    <BackgroundImageFront />
-                    <h6 class="text-center">В твою библиотеку добавлены треки от</h6>
-                    <h1 class="text-center borderUnderline">{{uniqueArtists['countArtists']}}</h1>
-        
+            <div v-else-if="uniqueArtists != -1 && uniqueArtists != false" class="col-12 paddingSides marginVertical">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h3 class="text-center">В твоей библиотеке есть треки от</h3>
+                        <h1 class="text-center borderUnderline mainColorHighlight2">{{uniqueArtists['countArtists']}}</h1>
+                    </div>
+                </div>
+
             </div>
             <!-- ошибка -->
             <div v-else>

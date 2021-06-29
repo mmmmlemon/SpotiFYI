@@ -50,19 +50,19 @@
   60% {
     transform: scale(1.2);
     opacity: 1;
-    border-width: 15px;
+    border-width: 20px;
     -webkit-box-shadow: 4px 4px 66px 6px rgba(34, 219, 96, 1);
     -moz-box-shadow: 4px 4px 66px 6px rgba(34, 219, 96, 1);
     box-shadow: 4px 4px 66px 6px rgba(34, 219, 96, 1);
   }
   80% {
     transform: scale(0.95);
-    border-width: 5px;
+    border-width: 10px;
     
   }
   100% {
     transform: scale(1);
-    border-width: 9px;
+    border-width: 15px;
   }
 }
 /*  */
@@ -207,6 +207,24 @@
 .fadeInCover5{
   animation: fadeInCover 1.5s ease-in-out;
 }
+
+@keyframes goUp {
+  0% { 
+      opacity: 0;
+      transform: translateY(10px);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translateY(0px);
+  }
+}
+
+.goUpAnim {
+  animation-name: goUp;
+  animation-duration: 0.5s;
+}
+
 
 
 

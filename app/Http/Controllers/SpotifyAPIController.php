@@ -141,9 +141,6 @@ class SpotifyAPIController extends Controller
     //параметры: реквест
     public function getSpotifyUserLibrary(Request $request)
     {   
-
-
-        return false;
         //проверяем токен
         $checkToken = System::checkSpotifyAccessToken($request);
 
@@ -174,6 +171,18 @@ class SpotifyAPIController extends Controller
 
                 $options['offset'] += 50;
                 $spotifyMyTracks = $api->getMySavedTracks($options)->items;
+            }
+
+            $options['offset'] = 0;
+
+            //получаем все альбомы
+            while(count($spotifyMyAlbums) > 0)
+            {
+                foreach($spotifyMyAlbums as $item)
+                { array_push($spotifyUserAlbums, $item->album); }
+
+                $options['offset'] += 50;
+                $spotifyMyAlbums = $api->getMySavedAlbums($options)->items;
             }
 
             //считаем количество треков
@@ -419,20 +428,21 @@ class SpotifyAPIController extends Controller
             $randomTrackId = $tracks[$randNum]->id;
 
             //проверяем токен
-            $checkToken = System::checkSpotifyAccessToken($request);
-            //если токен действительный
-            if($checkToken != false)
-            {
-                //делаем запрос к Spotify API и получаем обложку трека
-                $api = config('spotify_api');
-                $coverImageUrl = $api->getTrack($randomTrackId)->album->images[0]->url;
-            }   
+            // $checkToken = System::checkSpotifyAccessToken($request);
+            // //если токен действительный
+            // if($checkToken != false)
+            // {
+            //     //делаем запрос к Spotify API и получаем обложку трека
+            //     $api = config('spotify_api');
+            //     $coverImageUrl = $api->getTrack($randomTrackId)->album->images[0]->url;
+            // }   
 
             $response = ['overallMinutes' => $overallMinutes, 
                          'overallHours' => $overallHours,
                          'overallDays' => $overallDays, 
-                         'overallMonths' => $overallMonths, 
-                         'coverImageUrl' => $coverImageUrl];
+                         'overallMonths' => $overallMonths
+                        //  'coverImageUrl' => $coverImageUrl
+                        ];
 
             return response()->json($response);
         }
@@ -444,6 +454,7 @@ class SpotifyAPIController extends Controller
     //получить пять самых длинных и коротких треков из библиотеки
     //возвращает JSON с треками
     //параметры: реквест
+    //ВЫРЕЗАНО
     public function getFiveLongestAndShortestTracks(Request $request)
     {
         //получаем все треки
@@ -634,23 +645,25 @@ class SpotifyAPIController extends Controller
             //подставляем подходящее слово
             $countArtists = $count . " " . Helpers::pickTheWord($count, "различных исполнителей", "исполнителя", "разных исполнителей");
             
-            //получаем случайное фото исполнителя для фоновой картинки
-            $artistImageUrl = ""; //пустая строка для url картинки
+            // //получаем случайное фото исполнителя для фоновой картинки
+            // $artistImageUrl = ""; //пустая строка для url картинки
 
-            //проверяем токен
-            $checkToken = System::checkSpotifyAccessToken($request);
+            // //проверяем токен
+            // $checkToken = System::checkSpotifyAccessToken($request);
 
-            if($checkToken != false)
-            {   
-                //случайный id исполнителя из массива
-                $randArtistId = $artistsArray[rand(0, $count - 1)];
+            // if($checkToken != false)
+            // {   
+            //     //случайный id исполнителя из массива
+            //     $randArtistId = $artistsArray[rand(0, $count - 1)];
 
-                //получаем api
-                $api = config('spotify_api');
-                $artistImageUrl = $api->getArtist($randArtistId)->images[0]->url;
-            }
+            //     //получаем api
+            //     $api = config('spotify_api');
+            //     $artistImageUrl = $api->getArtist($randArtistId)->images[0]->url;
+            // }
 
-            $response = ['countArtists' => $countArtists, 'artistImageUrl' => $artistImageUrl];
+            $response = ['countArtists' => $countArtists, 
+                            // 'artistImageUrl' => $artistImageUrl
+                        ];
 
             return response()->json($response);
         }

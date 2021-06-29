@@ -10,18 +10,11 @@
             </div>
             <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false 
                 && spotifyUserLibrary['result'] != 'libraryError'" class="row justify-content-center">
-                <div class="col-12 fadeInAnimSlow">
-                    <h5 class="text-center">
-                        <b>Общая статистика</b>&nbsp;
-                        <i class="fas fa-chart-bar primaryColor"></i>
-                    </h5>
-                </div>
                 <!-- навигация -->
-                <div class="row justify-content-center fadeInAnim font10pt">
+                <div class="row justify-content-center fadeInAnim" style="margin-top:5%;">
                     <nav class="justify-content-center">
                         <ul class="breadcrumb text-center">
                             <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
-                            <li class="breadcrumb-item"><a href="#tracks">Самые длинные и короткие треки</a></li>
                             <li class="breadcrumb-item"><a href="#genres">Жанры и годы</a></li>
                         </ul>
                     </nav>
@@ -43,14 +36,16 @@
                                      :userLibraryTime="userLibraryTime"/>
 
                     <!-- самые длинные и короткие треки -->
-                    <LongestAndShortest v-if="userLibraryTime !== -1" id="tracks"
+                    <AverageTrackLength v-if="userLibraryTime !== -1" id="tracks"
                                         :fiveLongest="fiveTracks['fiveLongest']" 
                                         :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
+                    
+                    <!-- кол-во исполнителей -->
+                    <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
+
                     <!-- любимые жанры -->
                     <FavoriteGenres v-if="fiveTracks !== -1" :favoriteGenres="favoriteGenres" id="genres"/>
 
-                    <!-- кол-во исполнителей -->
-                    <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
 
                     <!-- года и десятилетия -->
                     <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades" type="alltime"/>
@@ -71,7 +66,7 @@
         <div class="row justify-content-center fadeInAnim" v-if="yearsAndDecadesMonth != -1">
             
             <router-link to="/profile/top10#top">
-                <button class="btn btn-primary marginBottomMedium">
+                <button class="btn btn-primary">
                     Перейти к "Топ-10"
                     <i class="fas fa-list-ol"></i>
                 </button>
@@ -140,21 +135,18 @@ export default {
             if(this.userLibraryTime == -1)
             { this.$store.dispatch('getUserLibraryTime'); }
 
-            //пять самых длинных и коротких треков
-            if(this.fiveTracks == -1)
-            { this.$store.dispatch('getFiveLongestAndShortestTracks'); }
-
             //средняя длина трека
             if(this.tracksMode == -1)
             { this.$store.dispatch('getAverageLengthOfTrack'); }
+
+            //кол-во исполнителей
+            if(this.uniqueArtists == -1)
+            { this.$store.dispatch('getUniqueArtists'); }
 
             //любимые жанры
             if(this.favoriteGenres == -1)
             { this.$store.dispatch('getFavoriteGenres') };
 
-            //кол-во исполнителей
-            if(this.uniqueArtists == -1)
-            { this.$store.dispatch('getUniqueArtists'); }
 
             //года и десятилетия
             if(this.yearsAndDecades == -1)

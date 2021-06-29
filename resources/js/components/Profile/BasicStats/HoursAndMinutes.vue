@@ -9,34 +9,35 @@
                 <Error type="small" errorMessage="Не удалось загрузить треки"/>
             </div>
             <div v-else-if="userLibraryTime != -1 && userLibraryTime != false" class="row justify-content-center">
-                <div class="col-12 text-center marginVertical">
-                    <BackgroundImage :backgroundImageUrl="userLibraryTime['coverImageUrl']"/>
-                    <BackgroundImageFront />
+                <div class="col-12 col-md-8 text-left marginVertical">
                     <!-- минуты -->
-                    <p>Всего в твою библиотеку добавлено
-                        <b class="borderUnderline font25pt">
+                    <h3>Всего в твою библиотеку добавлено
+                        <b class="borderUnderline mainColorHighlight2">
                             {{userLibraryTime['overallMinutes']}}
                         </b> музыки.
-                    </p>
+                    </h3>
                     <!-- часы -->
-                    <p v-if="userLibraryTime['overallHours'] != 0">
+                    <h5 v-if="userLibraryTime['overallHours'] != 0">
                         <b v-if="userLibraryTime['overallDays'] == 0" class="unbold">Или </b> 
                         <b v-else class="unbold">В других исчислениях это</b> 
-                        <b class="borderUnderline">{{userLibraryTime['overallHours']}}</b>
+                        <b class="borderUnderline  mainColorHighlight2">{{userLibraryTime['overallHours']}}</b>
                         <b v-if="userLibraryTime['overallDays'] == 0" class="unbold"> песен.</b>
-                    </p>
+                    </h5>
                     <!-- дни -->
-                    <p v-if="userLibraryTime['overallDays'] != 0">
+                    <h5 v-if="userLibraryTime['overallDays'] != 0">
                         <b v-if="userLibraryTime['overallMonths'] == 0" class="unbold">или </b>
-                        <b class="borderUnderline">{{userLibraryTime['overallDays']}}</b>
+                        <b class="borderUnderline  mainColorHighlight2">{{userLibraryTime['overallDays']}}</b>
                         <b v-if="userLibraryTime['overallMonths'] == 0" class="unbold"> песен.</b>
-                    </p>
+                    </h5>
                     <!-- месяцы -->
-                    <p v-if="userLibraryTime['overallMonths'] != 0">или 
+                    <h5 v-if="userLibraryTime['overallMonths'] != 0">или 
                         <b class="font18pt borderUnderline">
                             {{userLibraryTime['overallMonths']}}
                         </b> песен.
-                    </p>
+                    </h5>
+                </div>
+                <div class="d-none d-md-block col-md-4 text-center">
+                    <i class="far fa-clock mainColor" style="font-size: 16rem;"></i>
                 </div>
             </div>
             <!-- ошибка -->
