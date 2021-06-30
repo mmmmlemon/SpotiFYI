@@ -1,6 +1,6 @@
 //HoursAndMinutes
 <template>
-    <div class="col-11 fadeInAnim">
+    <div class="col-11 fadeInAnim marginVertical">
         <div class="justify-content-center">
             <div v-if="userLibraryTime === -1">
                 <Loader />
@@ -9,7 +9,7 @@
                 <Error type="small" errorMessage="Не удалось загрузить треки"/>
             </div>
             <div v-else-if="userLibraryTime != -1 && userLibraryTime != false" class="row justify-content-center">
-                <div class="col-12 col-md-8 text-left marginVertical">
+                <div class="col-12 col-md-8 text-left">
                     <!-- минуты -->
                     <h3>Всего в твою библиотеку добавлено
                         <b class="borderUnderline mainColorHighlight2">

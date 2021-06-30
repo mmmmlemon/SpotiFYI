@@ -66,11 +66,11 @@ import Vue from 'vue';
 
 //перед перезагрузкой страницы, или перед выходом с сайта
 //отправляем api-запрос на удаление папки с файлами пользователя
-window.addEventListener("beforeunload", function(evt) {
-    axios.get('/api/clean_user_data').then(response => {
-        console.log("%cTemporary user data has been removed.", 'font-weight: bold;')
-    });
-});
+// window.addEventListener("beforeunload", function(evt) {
+//     axios.get('/api/clean_user_data').then(response => {
+//         console.log("%cTemporary user data has been removed.", 'font-weight: bold;')
+//     });
+// });
 
 const app = new Vue({
     store,

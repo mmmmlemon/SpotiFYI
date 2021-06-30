@@ -1,6 +1,6 @@
 //AverageTrackLength
 <template>
-    <div class="row justify-content-center fadeInAnim">
+    <div class="row justify-content-center fadeInAnim marginVertical">
         <!-- пять самых длинных -->
         <div v-if="fiveLongest === -1" class="col-11 col-md-5 paddingSides fadeInAnim">
             <Loader />

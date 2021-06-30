@@ -1978,7 +1978,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_1__["Bar"],
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_1__["HorizontalBar"],
   data: function data() {
     return {
       chartData: null,
@@ -3456,8 +3456,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -3524,29 +3522,25 @@ __webpack_require__.r(__webpack_exports__);
       if (this.uniqueArtists == -1) {
         this.$store.dispatch('getUniqueArtists');
       } //любимые жанры
+      // if(this.favoriteGenres == -1)
+      // { this.$store.dispatch('getFavoriteGenres') };
+      //года и десятилетия
 
-
-      if (this.favoriteGenres == -1) {
-        this.$store.dispatch('getFavoriteGenres');
-      }
-
-      ; //года и десятилетия
 
       if (this.yearsAndDecades == -1) {
-        this.$store.dispatch('getYearsAndDecades', 'alltime');
-      } //года и десятилетия - месяц
+        this.$store.dispatch('getYearsAndDecades');
+      } // //года и десятилетия - месяц
+      // if(this.yearsAndDecadesMonth == -1)
+      // { this.$store.dispatch('getYearsAndDecades', 'month'); }
 
-
-      if (this.yearsAndDecadesMonth == -1) {
-        this.$store.dispatch('getYearsAndDecades', 'month');
-      }
     }
   },
   computed: {
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      return this.$store.state.profilePage.spotifyUserLibrary;
+      // return this.$store.state.profilePage.spotifyUserLibrary;
+      return true;
     },
     //кол-во треков и последние пять
     spotifyTracks: function spotifyTracks() {
@@ -3563,10 +3557,6 @@ __webpack_require__.r(__webpack_exports__);
     //время
     userLibraryTime: function userLibraryTime() {
       return this.$store.state.profilePage.userLibraryTime;
-    },
-    //пять самых длинных
-    fiveTracks: function fiveTracks() {
-      return this.$store.state.profilePage.fiveTracks;
     },
     //средняя длина трека
     tracksMode: function tracksMode() {
@@ -3745,7 +3735,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       //цвета для графика
-      backgroundColor: ['#1b77b9', '#1bb98a', '#48b91b', '#b9941b', '#b91b1b', '#b91bb1', '#4a1bb9', '#223586', '#228638', '#864f22']
+      backgroundColor: ['#1b77b9', '#1bb98a', '#48b91b', '#b9941b', '#b91b1b', '#b91bb1', '#4a1bb9', '#223586', '#228638', '#864f22'],
+      style: {
+        color: 'red'
+      }
     };
   },
   props: {
@@ -3946,6 +3939,40 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81018,47 +81045,22 @@ var render = function() {
                 _vm._v(" "),
                 _vm.userLibraryTime !== -1
                   ? _c("AverageTrackLength", {
-                      attrs: {
-                        id: "tracks",
-                        fiveLongest: _vm.fiveTracks["fiveLongest"],
-                        fiveShortest: _vm.fiveTracks["fiveShortest"],
-                        tracksMode: _vm.tracksMode
-                      }
+                      attrs: { id: "tracks", tracksMode: _vm.tracksMode }
                     })
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.favoriteGenres != -1
+                _vm.tracksMode != -1
                   ? _c("ArtistsCount", {
                       attrs: { uniqueArtists: _vm.uniqueArtists }
                     })
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.fiveTracks !== -1
-                  ? _c("FavoriteGenres", {
-                      attrs: {
-                        favoriteGenres: _vm.favoriteGenres,
-                        id: "genres"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.uniqueArtists != -1
-                  ? _c("YearsAndDecades", {
-                      attrs: {
-                        yearsAndDecades: _vm.yearsAndDecades,
-                        type: "alltime"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.yearsAndDecades != -1 && _vm.yearsAndDecadesMonth != false
-                  ? _c("YearsAndDecades", {
-                      attrs: {
-                        yearsAndDecades: _vm.yearsAndDecadesMonth,
-                        type: "month"
-                      }
-                    })
-                  : _vm._e()
+                _c("YearsAndDecades", {
+                  attrs: {
+                    yearsAndDecades: _vm.yearsAndDecades,
+                    type: "alltime"
+                  }
+                })
               ],
               1
             )
@@ -81162,7 +81164,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-11 justify-content-center fadeInAnim" },
+    { staticClass: "col-11 justify-content-center fadeInAnim marginVertical" },
     [
       _c("div", { staticClass: "row justify-content-center" }, [
         _vm.uniqueArtists === -1
@@ -81181,7 +81183,7 @@ var render = function() {
               1
             )
           : _vm.uniqueArtists != -1 && _vm.uniqueArtists != false
-          ? _c("div", { staticClass: "col-12 paddingSides marginVertical" }, [
+          ? _c("div", { staticClass: "col-12 paddingSides" }, [
               _c("div", { staticClass: "row justify-content-center" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c("h3", { staticClass: "text-center" }, [
@@ -81226,76 +81228,80 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center fadeInAnim" }, [
-    _vm.fiveLongest === -1
-      ? _c(
-          "div",
-          { staticClass: "col-11 col-md-5 paddingSides fadeInAnim" },
-          [_c("Loader")],
-          1
-        )
-      : _vm.fiveLongest === false
-      ? _c(
-          "div",
-          { staticClass: "col-11 col-md-5 paddingSides" },
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось загрузить треки"
-              }
-            })
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.tracksMode === -1
-      ? _c(
-          "div",
-          { staticClass: "col-11 col-md-6 paddingSides" },
-          [_c("Loader")],
-          1
-        )
-      : _vm.tracksMode === false
-      ? _c(
-          "div",
-          { staticClass: "col-11 col-md-6 paddingSides" },
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось загрузить треки"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.tracksMode != -1 && _vm.fiveShortest != -1
-      ? _c(
-          "div",
-          { staticClass: "col-12 text-center fadeInAnim paddingSides" },
-          [
-            _c("div", { staticClass: "row justify-content-center" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-12 col-md-8" }, [
-                _c("h3", { staticClass: "text-right paddingSides" }, [
-                  _vm._v(
-                    "\n                    Средняя продолжительность трека - \n                    "
-                  ),
-                  _c(
-                    "b",
-                    { staticClass: "mainColorHighlight2 borderUnderline" },
-                    [_vm._v(_vm._s(_vm.tracksMode))]
-                  )
+  return _c(
+    "div",
+    { staticClass: "row justify-content-center fadeInAnim marginVertical" },
+    [
+      _vm.fiveLongest === -1
+        ? _c(
+            "div",
+            { staticClass: "col-11 col-md-5 paddingSides fadeInAnim" },
+            [_c("Loader")],
+            1
+          )
+        : _vm.fiveLongest === false
+        ? _c(
+            "div",
+            { staticClass: "col-11 col-md-5 paddingSides" },
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить треки"
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.tracksMode === -1
+        ? _c(
+            "div",
+            { staticClass: "col-11 col-md-6 paddingSides" },
+            [_c("Loader")],
+            1
+          )
+        : _vm.tracksMode === false
+        ? _c(
+            "div",
+            { staticClass: "col-11 col-md-6 paddingSides" },
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить треки"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.tracksMode != -1 && _vm.fiveShortest != -1
+        ? _c(
+            "div",
+            { staticClass: "col-12 text-center fadeInAnim paddingSides" },
+            [
+              _c("div", { staticClass: "row justify-content-center" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-8" }, [
+                  _c("h3", { staticClass: "text-right paddingSides" }, [
+                    _vm._v(
+                      "\n                    Средняя продолжительность трека - \n                    "
+                    ),
+                    _c(
+                      "b",
+                      { staticClass: "mainColorHighlight2 borderUnderline" },
+                      [_vm._v(_vm._s(_vm.tracksMode))]
+                    )
+                  ])
                 ])
               ])
-            ])
-          ]
-        )
-      : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-  ])
+            ]
+          )
+        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -81331,87 +81337,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-11 col-lg-11 fadeInAnim" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _vm.favoriteGenres == -1
-        ? _c(
-            "div",
-            [
-              _c("Loader"),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-center blinkingAnim" }, [
-                _vm._v("Анализирую треки...")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-center font10pt" }, [
-                _vm._v("Это может занять некоторое время")
-              ])
-            ],
-            1
-          )
-        : _vm.favoriteGenres == false
-        ? _c(
-            "div",
-            [
-              _c("Error", {
-                attrs: {
-                  type: "small",
-                  errorMessage: "Не удалось произвести анализ треков"
-                }
-              })
-            ],
-            1
-          )
-        : _vm.favoriteGenres == "noTracks"
-        ? _c(
-            "div",
-            { staticClass: "col-12 greyCard paddingSides" },
-            [
-              _c("Info", {
-                attrs: {
-                  type: "small",
-                  infoMessage:
-                    "Пока не достаточно данных для проведения анализа жанров."
-                }
-              })
-            ],
-            1
-          )
-        : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "col-11 col-lg-11 greyCard paddingSides marginVertical"
-            },
-            [
-              _c("h4", { staticClass: "text-center borderUnderline" }, [
+  return _c(
+    "div",
+    { staticClass: "col-12 col-md-12 fadeInAnim marginVertical" },
+    [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _vm.favoriteGenres == -1
+          ? _c(
+              "div",
+              [
+                _c("Loader"),
+                _vm._v(" "),
+                _c("h6", { staticClass: "text-center blinkingAnim" }, [
+                  _vm._v("Анализирую треки...")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-center" }, [
+                  _vm._v("Это может занять некоторое время")
+                ])
+              ],
+              1
+            )
+          : _vm.favoriteGenres == false
+          ? _c(
+              "div",
+              [
+                _c("Error", {
+                  attrs: {
+                    type: "small",
+                    errorMessage: "Не удалось произвести анализ треков"
+                  }
+                })
+              ],
+              1
+            )
+          : _vm.favoriteGenres == "noTracks"
+          ? _c(
+              "div",
+              { staticClass: "col-12" },
+              [
+                _c("Info", {
+                  attrs: {
+                    type: "small",
+                    infoMessage:
+                      "Пока не достаточно данных для проведения анализа жанров."
+                  }
+                })
+              ],
+              1
+            )
+          : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
+          ? _c("div", { staticClass: "col-11 col-md-11" }, [
+              _c("h3", { staticClass: "text-center borderUnderline" }, [
                 _vm._v("Твои любимые жанры")
               ]),
               _vm._v(" "),
-              _c("p", { staticClass: "text-center" }, [
+              _c("h5", { staticClass: "text-center" }, [
                 _vm._v("За последний месяц")
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-12" },
-                [
-                  _c("BarChart", {
-                    attrs: {
-                      favoriteGenres: _vm.favoriteGenres,
-                      backgroundColor: _vm.backgroundColor,
-                      label: "Любимые жанры"
-                    }
-                  })
-                ],
-                1
-              )
-            ]
-          )
-        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-    ])
-  ])
+              _vm.favoriteGenres !== -1 && _vm.favoriteGenres != false
+                ? _c(
+                    "div",
+                    { staticClass: "col-12" },
+                    [
+                      _c("BarChart", {
+                        attrs: {
+                          favoriteGenres: _vm.favoriteGenres,
+                          backgroundColor: _vm.backgroundColor,
+                          styles: _vm.style,
+                          label: "Любимые жанры"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ])
+          : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -81435,7 +81441,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-11 fadeInAnim" }, [
+  return _c("div", { staticClass: "col-11 fadeInAnim marginVertical" }, [
     _c("div", { staticClass: "justify-content-center" }, [
       _vm.userLibraryTime === -1
         ? _c("div", [_c("Loader")], 1)
@@ -81454,85 +81460,77 @@ var render = function() {
           )
         : _vm.userLibraryTime != -1 && _vm.userLibraryTime != false
         ? _c("div", { staticClass: "row justify-content-center" }, [
-            _c(
-              "div",
-              { staticClass: "col-12 col-md-8 text-left marginVertical" },
-              [
-                _c("h3", [
-                  _vm._v(
-                    "Всего в твою библиотеку добавлено\n                    "
-                  ),
-                  _c(
-                    "b",
-                    { staticClass: "borderUnderline mainColorHighlight2" },
-                    [
+            _c("div", { staticClass: "col-12 col-md-8 text-left" }, [
+              _c("h3", [
+                _vm._v(
+                  "Всего в твою библиотеку добавлено\n                    "
+                ),
+                _c(
+                  "b",
+                  { staticClass: "borderUnderline mainColorHighlight2" },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.userLibraryTime["overallMinutes"]) +
+                        "\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" музыки.\n                ")
+              ]),
+              _vm._v(" "),
+              _vm.userLibraryTime["overallHours"] != 0
+                ? _c("h5", [
+                    _vm.userLibraryTime["overallDays"] == 0
+                      ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
+                      : _c("b", { staticClass: "unbold" }, [
+                          _vm._v("В других исчислениях это")
+                        ]),
+                    _vm._v(" "),
+                    _c(
+                      "b",
+                      { staticClass: "borderUnderline  mainColorHighlight2" },
+                      [_vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))]
+                    ),
+                    _vm._v(" "),
+                    _vm.userLibraryTime["overallDays"] == 0
+                      ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.userLibraryTime["overallDays"] != 0
+                ? _c("h5", [
+                    _vm.userLibraryTime["overallMonths"] == 0
+                      ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "b",
+                      { staticClass: "borderUnderline  mainColorHighlight2" },
+                      [_vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))]
+                    ),
+                    _vm._v(" "),
+                    _vm.userLibraryTime["overallMonths"] == 0
+                      ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.userLibraryTime["overallMonths"] != 0
+                ? _c("h5", [
+                    _vm._v("или \n                    "),
+                    _c("b", { staticClass: "font18pt borderUnderline" }, [
                       _vm._v(
                         "\n                        " +
-                          _vm._s(_vm.userLibraryTime["overallMinutes"]) +
+                          _vm._s(_vm.userLibraryTime["overallMonths"]) +
                           "\n                    "
                       )
-                    ]
-                  ),
-                  _vm._v(" музыки.\n                ")
-                ]),
-                _vm._v(" "),
-                _vm.userLibraryTime["overallHours"] != 0
-                  ? _c("h5", [
-                      _vm.userLibraryTime["overallDays"] == 0
-                        ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
-                        : _c("b", { staticClass: "unbold" }, [
-                            _vm._v("В других исчислениях это")
-                          ]),
-                      _vm._v(" "),
-                      _c(
-                        "b",
-                        { staticClass: "borderUnderline  mainColorHighlight2" },
-                        [_vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))]
-                      ),
-                      _vm._v(" "),
-                      _vm.userLibraryTime["overallDays"] == 0
-                        ? _c("b", { staticClass: "unbold" }, [
-                            _vm._v(" песен.")
-                          ])
-                        : _vm._e()
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.userLibraryTime["overallDays"] != 0
-                  ? _c("h5", [
-                      _vm.userLibraryTime["overallMonths"] == 0
-                        ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "b",
-                        { staticClass: "borderUnderline  mainColorHighlight2" },
-                        [_vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))]
-                      ),
-                      _vm._v(" "),
-                      _vm.userLibraryTime["overallMonths"] == 0
-                        ? _c("b", { staticClass: "unbold" }, [
-                            _vm._v(" песен.")
-                          ])
-                        : _vm._e()
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.userLibraryTime["overallMonths"] != 0
-                  ? _c("h5", [
-                      _vm._v("или \n                    "),
-                      _c("b", { staticClass: "font18pt borderUnderline" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm.userLibraryTime["overallMonths"]) +
-                            "\n                    "
-                        )
-                      ]),
-                      _vm._v(" песен.\n                ")
-                    ])
-                  : _vm._e()
-              ]
-            ),
+                    ]),
+                    _vm._v(" песен.\n                ")
+                  ])
+                : _vm._e()
+            ]),
             _vm._v(" "),
             _vm._m(0)
           ])
@@ -81868,7 +81866,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-11 fadeInAnim" }, [
+  return _c("div", { staticClass: "col-12 fadeInAnim" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _vm.yearsAndDecades === -1
         ? _c("div", [_c("Loader")], 1)
@@ -81891,54 +81889,221 @@ var render = function() {
             { staticClass: "col-11 greyCard paddingSides marginVertical" },
             [
               _vm.type == "alltime"
-                ? _c("div", [
-                    _c("p", { staticClass: "text-center" }, [
-                      _vm._v("\n                    Больше всего ты любишь "),
-                      _c(
-                        "b",
-                        { staticClass: "unbold borderUnderline font16pt" },
-                        [
+                ? _c("div", { staticClass: "col-12 col-md-12" }, [
+                    _c("div", { staticClass: "row justify-content-center" }, [
+                      _c("div", { staticClass: "col-12 col-md-8" }, [
+                        _c("h3", { staticClass: "text-left" }, [
                           _vm._v(
-                            _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ые"
+                            "\n                            Твоя любимая эпоха "
+                          ),
+                          _c(
+                            "b",
+                            {
+                              staticClass: "borderUnderline mainColorHighlight2"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ые"
+                              )
+                            ]
+                          ),
+                          _vm._v(
+                            ". \n                            В твоей библиотеке "
+                          ),
+                          _c(
+                            "b",
+                            {
+                              staticClass: "borderUnderline mainColorHighlight2"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.yearsAndDecades["maxDecadeSongs"])
+                              )
+                            ]
+                          ),
+                          _vm._v(
+                            " из этого десятилетия.\n                        "
                           )
-                        ]
-                      ),
-                      _vm._v(". \n                    В твоей библиотеке "),
-                      _c(
-                        "b",
-                        { staticClass: "unbold borderUnderline font16pt" },
-                        [_vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))]
-                      ),
-                      _vm._v(" из этой эпохи.\n                ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "text-center",
-                        attrs: { "v-if": _vm.type == "alltime" }
-                      },
-                      [
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", [
+                          _vm._v("А это "),
+                          _c(
+                            "b",
+                            {
+                              staticClass: "borderUnderline mainColorHighlight2"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.yearsAndDecades["percent"]) + "%"
+                              )
+                            ]
+                          ),
+                          _vm._v(" твоей библиотеки!")
+                        ]),
+                        _vm._v(" "),
                         _c(
-                          "b",
-                          { staticClass: "unbold borderUnderline font16pt" },
+                          "h5",
+                          {
+                            staticClass: "text-left",
+                            attrs: { "v-if": _vm.type == "alltime" }
+                          },
                           [
+                            _c(
+                              "b",
+                              {
+                                staticClass:
+                                  "borderUnderline mainColorHighlight2"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый"
+                                )
+                              ]
+                            ),
                             _vm._v(
-                              _vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый"
-                            )
+                              " - твой самый любимый год. \n                            Тебе нравятся "
+                            ),
+                            _c(
+                              "b",
+                              {
+                                staticClass:
+                                  "borderUnderline mainColorHighlight2"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.yearsAndDecades["maxYearSongs"])
+                                )
+                              ]
+                            ),
+                            _vm._v(
+                              " вышедших в этом году.\n                            "
+                            ),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v("Например, "),
+                            _c("b", { staticClass: "textShadow" }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href:
+                                      _vm.yearsAndDecades["songOfYear"]["url"],
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.yearsAndDecades["songOfYear"][
+                                        "trackName"
+                                      ]
+                                    )
+                                  )
+                                ]
+                              )
+                            ])
                           ]
-                        ),
-                        _vm._v(
-                          " - твой самый любимый год. \n                    Тебе нравятся "
-                        ),
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "d-none d-md-block col-3" }, [
                         _c(
-                          "b",
-                          { staticClass: "unbold borderUnderline font16pt" },
-                          [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
-                        ),
-                        _vm._v(" вышедших в этом году.\n                ")
-                      ]
-                    )
+                          "div",
+                          { staticClass: "row justify-content-center" },
+                          [
+                            _c("div", { staticClass: "col-1" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBig greenShadow",
+                                attrs: {
+                                  src:
+                                    _vm.yearsAndDecades["songOfYear"]["cover"],
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBig2 greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["covers"][0],
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBig3 greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["covers"][1],
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBig4 greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["covers"][2],
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBig5 greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["covers"][3],
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBig6 greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["covers"][4],
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBig7 greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["covers"][5],
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBig8 greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["covers"][6],
+                                  alt: ""
+                                }
+                              })
+                            ])
+                          ]
+                        )
+                      ])
+                    ])
                   ])
                 : _c("div", [
                     _c(
@@ -81951,27 +82116,17 @@ var render = function() {
                         _vm._v(
                           "\n                    В последнее время ты больше всего слушаешь музыку "
                         ),
-                        _c(
-                          "b",
-                          { staticClass: "unbold borderUnderline font16pt" },
-                          [
-                            _vm._v(
-                              _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых"
-                            )
-                          ]
-                        ),
+                        _c("b", { staticClass: "borderUnderline" }, [
+                          _vm._v(
+                            _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ых"
+                          )
+                        ]),
                         _vm._v(
                           ". \n                    За последний месяц было прослушано "
                         ),
-                        _c(
-                          "b",
-                          { staticClass: "unbold borderUnderline font16pt" },
-                          [
-                            _vm._v(
-                              _vm._s(_vm.yearsAndDecades["maxDecadeSongs"])
-                            )
-                          ]
-                        ),
+                        _c("b", { staticClass: "borderUnderline" }, [
+                          _vm._v(_vm._s(_vm.yearsAndDecades["maxDecadeSongs"]))
+                        ]),
                         _vm._v(" из этой эпохи.\n                ")
                       ]
                     ),
@@ -81983,29 +82138,25 @@ var render = function() {
                         attrs: { "v-else-if": _vm.type == "month" }
                       },
                       [
-                        _c(
-                          "b",
-                          { staticClass: "unbold borderUnderline font16pt" },
-                          [
-                            _vm._v(
-                              _vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый"
-                            )
-                          ]
-                        ),
+                        _c("b", { staticClass: "borderUnderline" }, [
+                          _vm._v(_vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый")
+                        ]),
                         _vm._v(
                           " - твой любимый год в последнее время. \n                    Было прослушано "
                         ),
-                        _c(
-                          "b",
-                          { staticClass: "unbold borderUnderline font16pt" },
-                          [_vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))]
-                        ),
+                        _c("b", { staticClass: "borderUnderline" }, [
+                          _vm._v(_vm._s(_vm.yearsAndDecades["maxYearSongs"]))
+                        ]),
                         _vm._v(" вышедших в этом году.\n                ")
                       ]
                     )
                   ]),
               _vm._v(" "),
               _c("br"),
+              _vm._v(" "),
+              _c("h5", { staticClass: "text-center" }, [
+                _vm._v("А вот так это выглядит на графиках")
+              ]),
               _vm._v(" "),
               _c("h5", { staticClass: "text-center borderUnderline" }, [
                 _vm._v("Песни по десятилетиям")
@@ -99447,12 +99598,12 @@ vue__WEBPACK_IMPORTED_MODULE_22___default.a.use(vue_axios__WEBPACK_IMPORTED_MODU
 
  //перед перезагрузкой страницы, или перед выходом с сайта
 //отправляем api-запрос на удаление папки с файлами пользователя
+// window.addEventListener("beforeunload", function(evt) {
+//     axios.get('/api/clean_user_data').then(response => {
+//         console.log("%cTemporary user data has been removed.", 'font-weight: bold;')
+//     });
+// });
 
-window.addEventListener("beforeunload", function (evt) {
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/clean_user_data').then(function (response) {
-    console.log("%cTemporary user data has been removed.", 'font-weight: bold;');
-  });
-});
 var app = new vue__WEBPACK_IMPORTED_MODULE_22___default.a({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
@@ -102255,15 +102406,9 @@ var ProfilePageStates = {
       });
     },
     //посчитать года и десятилетия за все время или месяц
-    getYearsAndDecades: function getYearsAndDecades(context, type) {
+    getYearsAndDecades: function getYearsAndDecades(context) {
       var stateName = "yearsAndDecades";
-
-      if (type === "month") {
-        stateName = "yearsAndDecadesMonth";
-      }
-
-      ;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades/' + type).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_years_and_decades').then(function (response) {
         if (response.data != false) {
           context.commit('setState', {
             state: stateName,

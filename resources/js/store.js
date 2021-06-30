@@ -352,12 +352,9 @@ const ProfilePageStates = {
       },
 
       //посчитать года и десятилетия за все время или месяц
-      getYearsAndDecades(context, type){
+      getYearsAndDecades(context){
         var stateName = "yearsAndDecades";
-        if(type === "month")
-        { stateName = "yearsAndDecadesMonth" };
-
-        axios.get('/api/get_years_and_decades/'+ type).then(response => {
+        axios.get('/api/get_years_and_decades').then(response => {
           if(response.data != false)
           { context.commit('setState', {state: stateName, value: response.data}); }
           else

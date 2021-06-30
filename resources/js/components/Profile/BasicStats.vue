@@ -37,21 +37,19 @@
 
                     <!-- самые длинные и короткие треки -->
                     <AverageTrackLength v-if="userLibraryTime !== -1" id="tracks"
-                                        :fiveLongest="fiveTracks['fiveLongest']" 
-                                        :fiveShortest="fiveTracks['fiveShortest']" :tracksMode="tracksMode"/>
+                                        :tracksMode="tracksMode"/>
                     
                     <!-- кол-во исполнителей -->
-                    <ArtistsCount v-if="favoriteGenres != -1" :uniqueArtists="uniqueArtists"/>
+                    <ArtistsCount v-if="tracksMode != -1" :uniqueArtists="uniqueArtists"/>
 
                     <!-- любимые жанры -->
-                    <FavoriteGenres v-if="fiveTracks !== -1" :favoriteGenres="favoriteGenres" id="genres"/>
-
+                    <!-- <FavoriteGenres :favoriteGenres="favoriteGenres" id="genres" v-if="uniqueArtists != -1"/> -->
 
                     <!-- года и десятилетия -->
-                    <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="yearsAndDecades" type="alltime"/>
+                    <YearsAndDecades :yearsAndDecades="yearsAndDecades" type="alltime"/>
 
                     <!-- года и десятилетия за месяц-->
-                    <YearsAndDecades v-if="yearsAndDecades != -1 && yearsAndDecadesMonth != false" :yearsAndDecades="yearsAndDecadesMonth" type="month"/>
+                    <!-- <YearsAndDecades v-if="yearsAndDecades != -1 && yearsAndDecadesMonth != false" :yearsAndDecades="yearsAndDecadesMonth" type="month"/> -->
 
                 </div>     
             </div>
@@ -144,17 +142,16 @@ export default {
             { this.$store.dispatch('getUniqueArtists'); }
 
             //любимые жанры
-            if(this.favoriteGenres == -1)
-            { this.$store.dispatch('getFavoriteGenres') };
-
+            // if(this.favoriteGenres == -1)
+            // { this.$store.dispatch('getFavoriteGenres') };
 
             //года и десятилетия
             if(this.yearsAndDecades == -1)
-            { this.$store.dispatch('getYearsAndDecades', 'alltime'); }
+            { this.$store.dispatch('getYearsAndDecades'); }
 
-            //года и десятилетия - месяц
-            if(this.yearsAndDecadesMonth == -1)
-            { this.$store.dispatch('getYearsAndDecades', 'month'); }
+            // //года и десятилетия - месяц
+            // if(this.yearsAndDecadesMonth == -1)
+            // { this.$store.dispatch('getYearsAndDecades', 'month'); }
         },
     },
     
@@ -162,7 +159,9 @@ export default {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
         spotifyUserLibrary: function() {
-            return this.$store.state.profilePage.spotifyUserLibrary;
+            // return this.$store.state.profilePage.spotifyUserLibrary;
+            return true;
+            
         },
         //кол-во треков и последние пять
         spotifyTracks: function() {
@@ -179,10 +178,6 @@ export default {
         //время
         userLibraryTime: function(){
             return this.$store.state.profilePage.userLibraryTime;
-        },
-        //пять самых длинных
-        fiveTracks: function(){
-            return this.$store.state.profilePage.fiveTracks;
         },
         //средняя длина трека
         tracksMode: function() {

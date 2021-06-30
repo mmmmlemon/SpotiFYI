@@ -321,5 +321,15 @@
             else
             { return false; }
         }
+
+        //randomNumbers
+        //сгенерировать последовательность из N случайных неповторяющихся чисел
+        //возвращает массив из чисел
+        //параметры: мин. знач., макс. знач., кол-во значений
+        public static function randomNumbers($min, $max, $quantity) {
+            $numbers = range($min, $max);
+            shuffle($numbers);
+            return array_slice($numbers, 0, $quantity);
+        }
     }
         

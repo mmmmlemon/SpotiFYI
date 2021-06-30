@@ -99,6 +99,7 @@ export default {
         if(this.spotifyProfile == -1)
         { this.$store.dispatch('getSpotifyProfile'); }
     },
+    
     data(){
         return {
             avatarLoaded: false,

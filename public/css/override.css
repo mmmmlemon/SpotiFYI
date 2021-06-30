@@ -53,6 +53,12 @@ button {
     color: var(--main-color-highlight2);
 }
 
+.greenShadow{
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+}
+
 
 a {
     color: rgb(233, 232, 232) !important;
@@ -95,6 +101,11 @@ a:hover {
 
 .paddingSides{
     padding:10px;
+}
+
+.marginVertical{
+    margin-top:3rem;
+    margin-bottom: 3rem;
 }
 
 .backgroundImage{
@@ -179,6 +190,11 @@ a:hover {
 
 .textShadow{
     text-shadow: 4px 3px 0px #105B2A;
+}
+
+.textShadow:hover{
+    text-shadow: 4px 3px 0px #16a147;
+    cursor: pointer;
 }
 
 /*  */
@@ -507,6 +523,82 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
 .lastFiveTitle{
     font-size: 1rem;
 }
+
+.albumIconBig{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(3rem, -3rem) scale(1.2);
+    
+}
+
+.albumIconBig2{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(10rem, -3rem) scale(1);
+}
+
+.albumIconBig3{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(1rem, 7rem) scale(0.8);
+}
+
+.albumIconBig4{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(9rem, 8rem) scale(1);
+}
+
+.albumIconBig5{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(-5rem, 14rem) scale(0.7);
+}
+
+.albumIconBig6{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(-1rem, 18rem) scale(0.6);
+}
+
+.albumIconBig7{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(1rem, 15rem) scale(0.5);
+}
+
+.albumIconBig8{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(-10rem, 21rem) scale(0.6);
+}
+
+
+
 
 
 /*  */

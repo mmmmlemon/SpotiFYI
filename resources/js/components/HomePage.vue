@@ -35,7 +35,6 @@
             //получить приветственное сообщение
             this.$store.dispatch('getWelcomeMessage'); 
 
-            
             //получить юзернейм пользователя
             if(this.spotifyUsername == -1)
             { this.$store.dispatch('getSpotifyUsername'); }
