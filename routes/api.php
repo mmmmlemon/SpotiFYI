@@ -46,6 +46,7 @@ Route::get('/generate_bg_image', 'SpotifyAPIController@generateBackgroundImage')
 Route::get('/get_favorite_genres', 'SpotifyAPIController@getFavoriteGenres'); //получить любимые жанры пользователя (10 шт.)
 Route::get('/get_unique_artists', 'SpotifyAPIController@getUniqueArtists'); //посчитать исполнителей
 Route::get('/get_years_and_decades', 'SpotifyAPIController@getYearsAndDecades'); //посчитать годы и десятилетия
+Route::get('/get_decade_month', 'SpotifyAPIController@getDecadeMonth'); //посчитать десятилетия за месяц
 //Top10
 Route::get('/get_top10_tracks/{top10Type}', 'SpotifyAPIController@getTop10Tracks'); //получить топ 10 треков
 Route::get('/get_top10_artists/{top10Artists}', 'SpotifyAPIController@getTop10Artists'); //получить топ 10 треков

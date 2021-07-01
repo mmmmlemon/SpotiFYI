@@ -56,35 +56,46 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <h5 class="text-center">А вот так это выглядит на графике</h5>
+                    
+                    <div class="col-12">
+                        <!-- <h5 class="text-center borderUnderline">Песни по десятилетиям</h5> -->
+                        <BarChart :favoriteGenres="yearsAndDecades['countDecades']" label="Песен из этой эпохи" :backgroundColor="yearsAndDecades['decadeColors']"
+                                    :height="600"/>
+                    </div>
+                    <h5 class="text-center" style="margin-top: 6rem;">А вот твоя карта песен по годам <i class="far fa-chart-bar mainColor"></i></h5>
+                    <div class="col-12 marginVertical">
+                        <!-- <h5 class="text-center borderUnderline">Песни по годам</h5> -->
+                        <BarChart :favoriteGenres="yearsAndDecades['countYears']" label="Песен в году" :backgroundColor="yearsAndDecades['yearColors']"
+                                    :height="950"/>
+                    </div>
                 </div>
                 <!-- за месяц -->
-                <div v-else>
-                    <p :v-else-if="type == 'month'" class="text-center">
-                        В последнее время ты больше всего слушаешь музыку <b class="borderUnderline">{{yearsAndDecades['maxDecade']}}-ых</b>. 
-                        За последний месяц было прослушано <b class="borderUnderline">{{yearsAndDecades['maxDecadeSongs']}}</b> из этой эпохи.
-                    </p>
-                    <p :v-else-if="type == 'month'" class="text-center">
-                        <b class="borderUnderline">{{yearsAndDecades['maxYear']}}-ый</b> - твой любимый год в последнее время. 
-                        Было прослушано <b class="borderUnderline">{{yearsAndDecades['maxYearSongs']}}</b> вышедших в этом году.
-                    </p>
+                <div v-else class="row justify-content-center">
+                    <div :v-else-if="type == 'month'" class="col-12 col-md-9">
+                        <h3 class="text-left">
+                            В последнее время ты больше всего слушаешь музыку <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['max']}}-ых</b>. 
+                        </h3>
+                        <h5 class="text-left">
+                            <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['maxSongs']}}</b> из этой эпохи {{yearsAndDecades['word']}} через тебя за последний месяц.
+                        </h5>
+                        <h5>Например, <b class="textShadow"><a :href="yearsAndDecades['maxSong']['url']" target="_blank">{{yearsAndDecades['maxSong']['trackName']}}</a></b>, 
+                        вышедшая в <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['maxSong']['year']}}-ом</b> году.</h5>
+                    </div>
+                    <div class="d-none d-md-block col-md-3">
+                        <div class="col-6">
+                            <i v-if="yearsAndDecades['max'] < 1950" class="fas fa-music iconMonth"></i>
+                            <i v-if="yearsAndDecades['max'] >= 1950 && yearsAndDecades['max'] <= 1970" class="fas fa-record-vinyl iconMonth"></i>
+                            <i v-if="yearsAndDecades['max'] === 1980 || yearsAndDecades['max'] === 1990" class="fas fa-compact-disc iconMonth"></i>
+                            <i v-if="yearsAndDecades['max'] === 2000" class="fas fa-play-circle iconMonth"></i>
+                            <i v-if="yearsAndDecades['max'] >= 2010" class="fas fa-cloud iconMonth"></i>
+                        </div>
+                        <div class="col-6">
+                            <img :src="yearsAndDecades['maxSong']['cover']" class="rounded-circle albumIconBigMonth greenShadow" alt="">
+                        </div>
+                    </div>
                 </div>
-
-                <br>
-                <h5 class="text-center">А вот так это выглядит на графике</h5>
-                
-                <div class="col-12">
-                    <!-- <h5 class="text-center borderUnderline">Песни по десятилетиям</h5> -->
-                    <BarChart :favoriteGenres="yearsAndDecades['countDecades']" label="Песен из этой эпохи" :backgroundColor="yearsAndDecades['decadeColors']"
-                                :height="600"/>
-                </div>
-                <h5 class="text-center" style="margin-top: 6rem;">А вот твоя карта песен по годам <i class="far fa-chart-bar mainColor"></i></h5>
-                <div class="col-12 marginVertical">
-                    <!-- <h5 class="text-center borderUnderline">Песни по годам</h5> -->
-                    <BarChart :favoriteGenres="yearsAndDecades['countYears']" label="Песен в году" :backgroundColor="yearsAndDecades['yearColors']"
-                                :height="950"/>
-                </div>
-
-             
             </div>
             <div v-else>
                 <Error type="small"/>

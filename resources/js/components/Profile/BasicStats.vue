@@ -42,14 +42,16 @@
                     <!-- кол-во исполнителей -->
                     <ArtistsCount v-if="tracksMode != -1" :uniqueArtists="uniqueArtists"/>
 
-                    <!-- любимые жанры -->
-                    <!-- <FavoriteGenres :favoriteGenres="favoriteGenres" id="genres" v-if="uniqueArtists != -1"/> -->
-
                     <!-- года и десятилетия -->
                     <YearsAndDecades :yearsAndDecades="yearsAndDecades" type="alltime"/>
 
                     <!-- года и десятилетия за месяц-->
-                    <!-- <YearsAndDecades v-if="yearsAndDecades != -1 && yearsAndDecadesMonth != false" :yearsAndDecades="yearsAndDecadesMonth" type="month"/> -->
+                    <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="decadeMonth" type="month"/>
+
+                    <!-- любимые жанры -->
+                    <!-- <FavoriteGenres :favoriteGenres="favoriteGenres" id="genres" v-if="uniqueArtists != -1"/> -->
+
+       
 
                 </div>     
             </div>
@@ -61,7 +63,7 @@
             </div>
         </div>
         <br>
-        <div class="row justify-content-center fadeInAnim" v-if="yearsAndDecadesMonth != -1">
+        <div class="row justify-content-center fadeInAnim">
             
             <router-link to="/profile/top10#top">
                 <button class="btn btn-primary">
@@ -141,17 +143,17 @@ export default {
             if(this.uniqueArtists == -1)
             { this.$store.dispatch('getUniqueArtists'); }
 
-            //любимые жанры
-            // if(this.favoriteGenres == -1)
-            // { this.$store.dispatch('getFavoriteGenres') };
-
             //года и десятилетия
             if(this.yearsAndDecades == -1)
             { this.$store.dispatch('getYearsAndDecades'); }
 
-            // //года и десятилетия - месяц
-            // if(this.yearsAndDecadesMonth == -1)
-            // { this.$store.dispatch('getYearsAndDecades', 'month'); }
+            //года и десятилетия - месяц
+            if(this.decadeMonth == -1)
+            { this.$store.dispatch('getDecadeMonth'); }
+
+            //любимые жанры
+            // if(this.favoriteGenres == -1)
+            // { this.$store.dispatch('getFavoriteGenres') };
         },
     },
     
@@ -196,8 +198,8 @@ export default {
             return this.$store.state.profilePage.yearsAndDecades;
         },
         //года и десятилетия
-        yearsAndDecadesMonth: function(){
-            return this.$store.state.profilePage.yearsAndDecadesMonth;
+        decadeMonth: function(){
+            return this.$store.state.profilePage.decadeMonth;
         },
     }
 }

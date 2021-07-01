@@ -668,7 +668,7 @@ class SpotifyAPIController extends Controller
     //getYearsAndDecades
     //посчитать любимые года и десятилетия по всем трекам или по трекам за последний месяц
     //возращает JSON с годами и десятилетиями для графика
-    //параметры: реквест, type - "alltime" и "month"
+    //параметры: реквест
     public function getYearsAndDecades(Request $request)
     {
         //массив в который будут записаны треки
@@ -896,6 +896,119 @@ class SpotifyAPIController extends Controller
         }   
         else
         { return response()->json(false); }
+    }
+
+    //getDecadeMonth
+    //посчитать любимую эпоху за месяц
+    //возвращает json с эпохой
+    //параметр: реквест
+    public function getDecadeMonth(Request $request){
+        //массив в который будут записаны треки
+        $tracks = [];
+    
+        // получение треков прослушанных за последний месяц
+     
+        //проверяем токен
+        $checkToken = System::checkSpotifyAccessToken($request);
+
+        if($checkToken != false)
+        {
+            //получаем api
+            $api = config('spotify_api');
+
+            //смещение для получения треков
+            $offset = 0;
+            
+            //пока смещение меньше 49, будем добавлять в массив треки 
+            //(можно получить только 98 последних треков)
+            //(больше не позволяет Spotify API, хз почему именно 98)
+            while($offset < 98)
+            {
+                //получаем треки
+                $tracksApi = $api->getMyTop('tracks', ['limit' => 49, 'time_range' => 'short_term', 'offset' => $offset])->items;
+
+                //если треки есть
+                if($tracksApi != null)
+                {   
+                    foreach($tracksApi as $track)
+                    { array_push($tracks, $track); }
+                }
+
+                $offset += 49;  
+            }
+
+            //если треков меньше десяти, то возвращаем false
+            if(count($tracks) < 10)
+            { return response()->json(false); }
+        }
+        else
+        { return response()->json(false); }
+
+        //если он есть
+        if($tracks != false && $tracks != null)
+        {  
+             //массив для всех десятилетий
+             $allDecades = [];
+              
+             //запись всех десятилетий в массив
+             foreach($tracks as $track)
+             {
+                 //получить год из даты выхода трека
+                 $year = Helpers::getItemReleaseDate($track, "track", "short");
+                 $decade = intval(substr($year, 0, 3) . "0");
+                 array_push($allDecades, $decade); 
+             }
+
+            //подсчет кол-ва всех десятилетий
+            $countDecades = [];
+
+             foreach($allDecades as $decade)
+             {   
+                 $findDecade = array_key_exists($decade , $countDecades);
+                 if($findDecade == false)
+                 { $countDecades[$decade ] = 1; }
+                 else
+                 { $countDecades[$decade ] += 1; }
+             }
+
+             arsort($countDecades);
+
+             if(count($countDecades) >= 3){
+            
+                $maxDecade = key($countDecades);
+                $maxDecadeSongs = $countDecades[$maxDecade] . " " . Helpers::pickTheWord($countDecades[key($countDecades)], "песен", "песня", "песни");
+                $word = Helpers::pickTheWord($countDecades[key($countDecades)], "прошло", "прошла", "прошло");
+                //случайная песня
+                $sortedTracks = [];
+                foreach($tracks as $track){
+                    $year = Helpers::getItemReleaseDate($track, "track", "short");
+                    $decade = intval(substr($year, 0, 3) . "0");
+                    if($decade == $maxDecade){
+                        array_push($sortedTracks, [
+                            'trackName' => Helpers::getFullNameOfItem($track, "fullname"),
+                            'cover' => $track->album->images[0]->url,
+                            'year' => $year,
+                            'url' => $track->external_urls->spotify,
+                        ]);
+                    }
+                }
+
+                $top10Tracks = array_slice($sortedTracks, 0, 15);
+
+                $randTrack = $top10Tracks[rand(0, 9)];
+                
+                $response = ['max' => $maxDecade, 'maxSongs'=> $maxDecadeSongs, 
+                            'word'=>$word, 'maxSong'=>$randTrack];
+
+                return response()->json($response);
+
+
+             }
+
+             
+ 
+        }
+
     }
 
     // ТОП 10

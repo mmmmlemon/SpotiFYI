@@ -597,6 +597,23 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     transform: translate(-10rem, 21rem) scale(0.6);
 }
 
+.albumIconBigMonth{
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translate(5rem, 3rem) scale(1.5);
+    z-index: -1;
+    
+}
+.iconMonth{
+    color: var(--main-color-highlight);
+    font-size: 4rem;
+    transform: translate(1rem, 18rem) scale(1.5);
+    z-index: 0;
+}
+
 
 
 
