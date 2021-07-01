@@ -136,14 +136,14 @@
         //сгенерировать случайный цвет в формате HSL
         //параметр: сдвиг по оси цветов
         //возвращает строку с цветом в формате HSL
-        public static function randomHslColor($offset = 0)
+        public static function randomHslColor($min, $max)
         {   
             //генерируем цвет в RGB, добавляем offset в начало
-            $randNum = rand($offset,360);
+            $randNum = rand($min, $max);
 
             //записываем в строку, параметры saturation, brightness и opacity 
             //это параметры будут всегда одинаковые чтобы цвет был яркий
-            $hslColor = "hsla(".$randNum.",100%,39%,1)";
+            $hslColor = "hsla(".$randNum.",100%,34%,1)";
 
             return $hslColor;
         }

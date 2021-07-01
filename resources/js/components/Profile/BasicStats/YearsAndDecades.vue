@@ -70,11 +70,21 @@
                 </div>
 
                 <br>
-                <h5 class="text-center">А вот так это выглядит на графиках</h5>
-                <h5 class="text-center borderUnderline">Песни по десятилетиям</h5>
-                <BarChart :favoriteGenres="yearsAndDecades['countDecades']" label="Песни по десятилетиям" :backgroundColor="yearsAndDecades['decadeColors']"/>
-                <h5 class="text-center borderUnderline">Песни по годам</h5>
-                <BarChart :favoriteGenres="yearsAndDecades['countYears']" label="Песни по годам" :backgroundColor="yearsAndDecades['yearColors']"/>
+                <h5 class="text-center">А вот так это выглядит на графике</h5>
+                
+                <div class="col-12">
+                    <!-- <h5 class="text-center borderUnderline">Песни по десятилетиям</h5> -->
+                    <BarChart :favoriteGenres="yearsAndDecades['countDecades']" label="Песен из этой эпохи" :backgroundColor="yearsAndDecades['decadeColors']"
+                                :height="600"/>
+                </div>
+                <h5 class="text-center" style="margin-top: 6rem;">А вот твоя карта песен по годам <i class="far fa-chart-bar mainColor"></i></h5>
+                <div class="col-12 marginVertical">
+                    <!-- <h5 class="text-center borderUnderline">Песни по годам</h5> -->
+                    <BarChart :favoriteGenres="yearsAndDecades['countYears']" label="Песен в году" :backgroundColor="yearsAndDecades['yearColors']"
+                                :height="950"/>
+                </div>
+
+             
             </div>
             <div v-else>
                 <Error type="small"/>

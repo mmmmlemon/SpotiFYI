@@ -778,7 +778,7 @@ class SpotifyAPIController extends Controller
             }
             
             //сортируем десятилетия по возрастанию
-            ksort($countDecades);
+            arsort($countDecades);
 
             $response = ['countYears' => $countYears, 'countDecades' => $countDecades];
 
@@ -786,10 +786,15 @@ class SpotifyAPIController extends Controller
             //цвета для графика десятилетий
             $decadeColors = [];
             $offset = 0;
+            $min = 330;
+            $max = 360;
             for($i = 0; $i < 10; $i++)
             {   
-                array_push($decadeColors, Helpers::randomHslColor($offset));
+                array_push($decadeColors, Helpers::randomHslColor($min, $max));
                 $offset += 60;
+
+                $min -= 30;
+                $max -= 30;
             }
 
             $response['decadeColors'] = $decadeColors;
@@ -870,17 +875,18 @@ class SpotifyAPIController extends Controller
             unset($sortedTrackCovers[$key]);
             $sortedTrackCovers =  array_values($sortedTrackCovers);
             
-            // TODO: проверка есть ли семь треков в sorted
             //получаем семь случайных чисел
             $randNums = Helpers::randomNumbers(0, count($sortedTrackCovers) - 1, 7);
 
             $covers = [];
             
-            //записываем пять случайных обложек
-            for($i = 0; $i <= 6; $i++){
-                array_push($covers, $sortedTrackCovers[$randNums[$i]]);
+            if(count($sortedTrackCovers) >= 10){
+                for($i = 0; $i <= 6; $i++){
+                    array_push($covers, $sortedTrackCovers[$randNums[$i]]);
+                }
             }
-
+            //записываем пять случайных обложек
+          
             $response['covers'] = $covers;
             $response['percent'] = $percent;
 

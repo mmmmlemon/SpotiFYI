@@ -1,14 +1,6 @@
 //AverageTrackLength
 <template>
     <div class="row justify-content-center fadeInAnim marginVertical">
-        <!-- пять самых длинных -->
-        <div v-if="fiveLongest === -1" class="col-11 col-md-5 paddingSides fadeInAnim">
-            <Loader />
-        </div>
-        <div v-else-if="fiveLongest === false" class="col-11 col-md-5 paddingSides">
-            <Error type="small" errorMessage="Не удалось загрузить треки" />
-        </div>
-
         <!-- средняя длина трека -->
         <div v-if="tracksMode === -1" class="col-11 col-md-6 paddingSides">
             <Loader />
@@ -16,7 +8,7 @@
         <div v-else-if="tracksMode === false" class="col-11 col-md-6 paddingSides">
             <Error type="small" errorMessage="Не удалось загрузить треки" />
         </div>
-        <div v-else-if="tracksMode != -1 && fiveShortest != -1" class="col-12 text-center fadeInAnim paddingSides">
+        <div v-else-if="tracksMode != -1" class="col-12 text-center fadeInAnim paddingSides">
             <div class="row justify-content-center">
                 <div class="col-4 d-none d-md-block">
                     <i class="fas fa-ruler-horizontal mainColor" style="font-size: 16rem;"></i>

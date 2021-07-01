@@ -1984,7 +1984,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       chartData: null,
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            ticks: {
+              fontFamily: 'Montserrat',
+              fontColor: '#e8e6e6',
+              fontSize: 16
+            }
+          }],
+          xAxes: [{
+            gridLines: {
+              width: 2
+            },
+            ticks: {
+              fontFamily: 'Montserrat',
+              fontColor: '#1ea74c',
+              fontSize: 14
+            }
+          }]
+        }
       }
     };
   },
@@ -3668,14 +3693,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     tracksMode: {
@@ -3939,6 +3956,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81232,29 +81259,6 @@ var render = function() {
     "div",
     { staticClass: "row justify-content-center fadeInAnim marginVertical" },
     [
-      _vm.fiveLongest === -1
-        ? _c(
-            "div",
-            { staticClass: "col-11 col-md-5 paddingSides fadeInAnim" },
-            [_c("Loader")],
-            1
-          )
-        : _vm.fiveLongest === false
-        ? _c(
-            "div",
-            { staticClass: "col-11 col-md-5 paddingSides" },
-            [
-              _c("Error", {
-                attrs: {
-                  type: "small",
-                  errorMessage: "Не удалось загрузить треки"
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
       _vm.tracksMode === -1
         ? _c(
             "div",
@@ -81276,7 +81280,7 @@ var render = function() {
             ],
             1
           )
-        : _vm.tracksMode != -1 && _vm.fiveShortest != -1
+        : _vm.tracksMode != -1
         ? _c(
             "div",
             { staticClass: "col-12 text-center fadeInAnim paddingSides" },
@@ -82155,40 +82159,63 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("h5", { staticClass: "text-center" }, [
-                _vm._v("А вот так это выглядит на графиках")
+                _vm._v("А вот так это выглядит на графике")
               ]),
               _vm._v(" "),
-              _c("h5", { staticClass: "text-center borderUnderline" }, [
-                _vm._v("Песни по десятилетиям")
-              ]),
+              _c(
+                "div",
+                { staticClass: "col-12" },
+                [
+                  _c("BarChart", {
+                    attrs: {
+                      favoriteGenres: _vm.yearsAndDecades["countDecades"],
+                      label: "Песен из этой эпохи",
+                      backgroundColor: _vm.yearsAndDecades["decadeColors"],
+                      height: 600
+                    }
+                  })
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("BarChart", {
-                attrs: {
-                  favoriteGenres: _vm.yearsAndDecades["countDecades"],
-                  label: "Песни по десятилетиям",
-                  backgroundColor: _vm.yearsAndDecades["decadeColors"]
-                }
-              }),
+              _vm._m(0),
               _vm._v(" "),
-              _c("h5", { staticClass: "text-center borderUnderline" }, [
-                _vm._v("Песни по годам")
-              ]),
-              _vm._v(" "),
-              _c("BarChart", {
-                attrs: {
-                  favoriteGenres: _vm.yearsAndDecades["countYears"],
-                  label: "Песни по годам",
-                  backgroundColor: _vm.yearsAndDecades["yearColors"]
-                }
-              })
-            ],
-            1
+              _c(
+                "div",
+                { staticClass: "col-12 marginVertical" },
+                [
+                  _c("BarChart", {
+                    attrs: {
+                      favoriteGenres: _vm.yearsAndDecades["countYears"],
+                      label: "Песен в году",
+                      backgroundColor: _vm.yearsAndDecades["yearColors"],
+                      height: 950
+                    }
+                  })
+                ],
+                1
+              )
+            ]
           )
         : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h5",
+      { staticClass: "text-center", staticStyle: { "margin-top": "6rem" } },
+      [
+        _vm._v("А вот твоя карта песен по годам "),
+        _c("i", { staticClass: "far fa-chart-bar mainColor" })
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
