@@ -1830,11 +1830,36 @@ class SpotifyAPIController extends Controller
 
             $topArtist = $artistsSorted[0];
 
+            //находим треки исполнителя
+            $tracks = System::getUserLibraryJson("tracks", $request);
+
+            $allArtists = [];
+            foreach($tracks as $track){
+                array_push($allArtists, ['artist' => $track->artists[0]->name, 
+                                            'track' => $track->name,
+                                            'url' => $track->external_urls->spotify]);
+            }
+
+            $selectedTracks = [];
+
+            foreach($allArtists as $artist){
+                if($artist['artist'] === $topArtist['name']){
+                    array_push($selectedTracks, $artist);
+                }
+            }
+
+            $trackCount = count($selectedTracks) . " " . Helpers::pickTheWord(count($selectedTracks), "треков", "трек", "трека");
+
+            $selectedTrack = $selectedTracks[rand(0, count($selectedTracks) - 1)];
+
             $response = [
                 'title' => $topArtist['name'],
                 'url' => $topArtist['url'],
                 'image' => $topArtist['image'],
-                'additionalInfo' => $topArtist['genres']
+                'additionalInfo' => $topArtist['genres'],
+                'trackCount' => $trackCount,
+                'selectedTrack' => $selectedTrack['track'],
+                'trackUrl' => $selectedTrack['url'],
             ];
 
             return response()->json($response);

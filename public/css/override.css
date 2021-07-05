@@ -531,6 +531,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     top: 0;
     right: 0;
     transform: translate(3rem, -3rem) scale(1.2);
+    z-index: 0;
     
 }
 
@@ -541,6 +542,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     top: 0;
     right: 0;
     transform: translate(10rem, -3rem) scale(1);
+    z-index: -1;
 }
 
 .albumIconBig3{
@@ -550,6 +552,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     top: 0;
     right: 0;
     transform: translate(1rem, 7rem) scale(0.8);
+    z-index: -2;
 }
 
 .albumIconBig4{
@@ -559,6 +562,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     top: 0;
     right: 0;
     transform: translate(9rem, 8rem) scale(1);
+    z-index: -1;
 }
 
 .albumIconBig5{
@@ -568,6 +572,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     top: 0;
     right: 0;
     transform: translate(-5rem, 14rem) scale(0.7);
+    z-index: 0;
 }
 
 .albumIconBig6{
@@ -577,6 +582,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     top: 0;
     right: 0;
     transform: translate(-1rem, 18rem) scale(0.6);
+    z-index: -2;
 }
 
 .albumIconBig7{
@@ -586,6 +592,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     top: 0;
     right: 0;
     transform: translate(1rem, 15rem) scale(0.5);
+    z-index: -1;
 }
 
 .albumIconBig8{
@@ -595,6 +602,7 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     top: 0;
     right: 0;
     transform: translate(-10rem, 21rem) scale(0.6);
+    z-index: 0;
 }
 
 .albumIconBigMonth{
@@ -612,6 +620,23 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     font-size: 4rem;
     transform: translate(1rem, 18rem) scale(1.5);
     z-index: 0;
+}
+
+.achievementIcon{
+    border-radius: 65%;
+    border-style: solid;
+    border-width:15px;
+    border-color: var(--main-color);
+    width: 22rem;
+    height:22rem;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    
+}
+
+.achievementItemTitle{
+    font-size: 4rem;
 }
 
 

@@ -51,6 +51,17 @@
                     <!-- любимые жанры -->
                     <FavoriteGenres v-if="decadeMonth != -1" :favoriteGenres="favoriteGenres" id="genres"/>
 
+                    <!-- Самый популярный\непопулярный артист -->
+                    <AchievementItem v-if="favoriteGenres != -1 && mostPopularArtist != 'noArtists'" 
+                                cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" 
+                                :items="mostPopularArtist"/>
+
+                    <br><br>
+                    <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist != 'noArtists'" 
+                                    cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" 
+                                    :items="leastPopularArtist" orientation="right"/>
+                    
+
        
 
                 </div>     
@@ -154,6 +165,14 @@ export default {
             //любимые жанры
             if(this.favoriteGenres == -1)
             { this.$store.dispatch('getFavoriteGenres') };
+
+            //cамый популярный артист, из подписок
+            if(this.mostPopularArtist == -1)
+            { this.$store.dispatch('getArtistByPopularity', 'popular'); }
+
+            //cамый непопулярный артист, из подписок
+            if(this.mostPopularArtist == -1)
+            { this.$store.dispatch('getArtistByPopularity', 'unpopular'); }
         },
     },
     
@@ -161,8 +180,8 @@ export default {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
         spotifyUserLibrary: function() {
-            // return this.$store.state.profilePage.spotifyUserLibrary;
-            return true; 
+            return this.$store.state.profilePage.spotifyUserLibrary;
+            // return true; 
         },
         //кол-во треков и последние пять
         spotifyTracks: function() {
@@ -199,6 +218,14 @@ export default {
         //года и десятилетия
         decadeMonth: function(){
             return this.$store.state.profilePage.decadeMonth;
+        },
+        //самый популярный артист
+        mostPopularArtist: function(){
+            return this.$store.state.profilePage.mostPopularArtist;
+        },
+        //самый непопулярный артист
+        leastPopularArtist: function(){
+            return this.$store.state.profilePage.leastPopularArtist;
         },
     }
 }

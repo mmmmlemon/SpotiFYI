@@ -3388,8 +3388,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    orientation: {
+      "default": 'left'
+    },
     cardTitle: {
       "default": ''
     },
@@ -3413,6 +3467,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3575,15 +3640,23 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.dispatch('getFavoriteGenres');
       }
 
-      ;
+      ; //cамый популярный артист, из подписок
+
+      if (this.mostPopularArtist == -1) {
+        this.$store.dispatch('getArtistByPopularity', 'popular');
+      } //cамый непопулярный артист, из подписок
+
+
+      if (this.mostPopularArtist == -1) {
+        this.$store.dispatch('getArtistByPopularity', 'unpopular');
+      }
     }
   },
   computed: {
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      // return this.$store.state.profilePage.spotifyUserLibrary;
-      return true;
+      return this.$store.state.profilePage.spotifyUserLibrary; // return true; 
     },
     //кол-во треков и последние пять
     spotifyTracks: function spotifyTracks() {
@@ -3620,6 +3693,14 @@ __webpack_require__.r(__webpack_exports__);
     //года и десятилетия
     decadeMonth: function decadeMonth() {
       return this.$store.state.profilePage.decadeMonth;
+    },
+    //самый популярный артист
+    mostPopularArtist: function mostPopularArtist() {
+      return this.$store.state.profilePage.mostPopularArtist;
+    },
+    //самый непопулярный артист
+    leastPopularArtist: function leastPopularArtist() {
+      return this.$store.state.profilePage.leastPopularArtist;
     }
   }
 });
@@ -4432,7 +4513,8 @@ __webpack_require__.r(__webpack_exports__);
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      return this.$store.state.profilePage.spotifyUserLibrary;
+      // return this.$store.state.profilePage.spotifyUserLibrary;
+      return true;
     },
     top10TracksAllTime: function top10TracksAllTime() {
       return this.$store.state.profilePage.top10TracksAllTime;
@@ -80923,7 +81005,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-11 col-lg-5 marginSides marginVertical paddingSides" },
+    { staticClass: "col-12", staticStyle: { "margin-top": "3rem" } },
     [
       _vm.items == -1
         ? _c("div", [_c("Loader")], 1)
@@ -80941,51 +81023,74 @@ var render = function() {
             1
           )
         : _vm.items != -1 || _vm.items != false
-        ? _c(
-            "div",
-            {},
-            [
-              _c("BackgroundImage", {
-                attrs: { backgroundImageUrl: _vm.items["image"] }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "row justify-content-center fadeInAnim marginSides"
-                },
-                [
-                  _c("div", { staticClass: "col-12" }, [
-                    _c("h4", { staticClass: "text-center borderUnderline" }, [
-                      _vm._v(_vm._s(_vm.cardTitle))
+        ? _c("div", {}, [
+            _vm.orientation === "left"
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "d-none d-md-flex row justify-content-center fadeInAnim"
+                  },
+                  [
+                    _c("div", { staticClass: "col-9" }, [
+                      _c("h4", { staticClass: "text-left borderUnderline" }, [
+                        _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
+                      ]),
+                      _vm._v(" "),
+                      _vm.cardSubtitle != ""
+                        ? _c("h6", { staticClass: "text-right" }, [
+                            _vm._v(_vm._s(_vm.cardSubtitle))
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _vm.cardSubtitle != ""
-                      ? _c("h6", { staticClass: "text-center" }, [
-                          _vm._v(_vm._s(_vm.cardSubtitle))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "rounded-circle albumIconAchievement",
-                    attrs: { src: _vm.items["image"], alt: "" }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12" }, [
-                    _c("h5", { staticClass: "text-center achievementTitle" }, [
+                    _c("div", { staticClass: "col-11 col-md-4 text-left" }, [
+                      _c("img", {
+                        staticClass: "rounded-circle achievementIcon",
+                        attrs: { src: _vm.items["image"], alt: "" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-11 col-md-6" }, [
                       _c(
-                        "a",
-                        { attrs: { target: "_blank", href: _vm.items["url"] } },
-                        [_vm._v(_vm._s(_vm.items["title"]))]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "h6",
-                      { staticClass: "text-center achievementSubtitle" },
-                      [
+                        "h5",
+                        {
+                          staticClass:
+                            "text-left achievementItemTitle textShadow",
+                          staticStyle: { "margin-bottom": "0" }
+                        },
+                        [
+                          _c("b", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  target: "_blank",
+                                  href: _vm.items["url"]
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.items["title"]))]
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.items["additionalInfo"]
+                        ? _c(
+                            "p",
+                            {
+                              staticClass: "text-center",
+                              staticStyle: { "margin-top": "0" }
+                            },
+                            [
+                              _c("b", [
+                                _vm._v(_vm._s(_vm.items["additionalInfo"]))
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("h6", {}, [
                         _vm.items["album"]
                           ? _c(
                               "a",
@@ -80998,22 +81103,252 @@ var render = function() {
                               [_vm._v(_vm._s(_vm.items["album"]))]
                             )
                           : _vm._e()
-                      ]
-                    ),
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", [
+                        _vm._v("Тебе нравятся "),
+                        _c(
+                          "b",
+                          {
+                            staticClass: "borderUnderline mainColorHighlight2"
+                          },
+                          [_vm._v(_vm._s(_vm.items["trackCount"]))]
+                        ),
+                        _vm._v(" этого исполнителя.")
+                      ]),
+                      _vm._v(" "),
+                      _c("h6", [
+                        _vm._v("Например, "),
+                        _c("b", { staticClass: "textShadow" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                target: "_blank",
+                                href: _vm.items["trackUrl"]
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.items["selectedTrack"]))]
+                          )
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.orientation === "right"
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "d-none d-md-flex row justify-content-center fadeInAnim"
+                  },
+                  [
+                    _c("div", { staticClass: "col-9" }, [
+                      _c("h4", { staticClass: "text-right borderUnderline" }, [
+                        _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
+                      ]),
+                      _vm._v(" "),
+                      _vm.cardSubtitle != ""
+                        ? _c("h6", { staticClass: "text-left" }, [
+                            _vm._v(_vm._s(_vm.cardSubtitle))
+                          ])
+                        : _vm._e()
+                    ]),
                     _vm._v(" "),
-                    _vm.items["additionalInfo"]
+                    _c("div", { staticClass: "col-11 col-md-6" }, [
+                      _c(
+                        "h5",
+                        {
+                          staticClass:
+                            "text-left achievementItemTitle textShadow",
+                          staticStyle: { "margin-bottom": "0" }
+                        },
+                        [
+                          _c("b", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  target: "_blank",
+                                  href: _vm.items["url"]
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.items["title"]))]
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.items["additionalInfo"]
+                        ? _c(
+                            "p",
+                            {
+                              staticClass: "text-center",
+                              staticStyle: { "margin-top": "0" }
+                            },
+                            [
+                              _c("b", [
+                                _vm._v(_vm._s(_vm.items["additionalInfo"]))
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("h6", {}, [
+                        _vm.items["album"]
+                          ? _c(
+                              "a",
+                              {
+                                attrs: {
+                                  target: "_blank",
+                                  href: _vm.items["url"]
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.items["album"]))]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", [
+                        _vm._v("Тебе нравятся "),
+                        _c(
+                          "b",
+                          {
+                            staticClass: "borderUnderline mainColorHighlight2"
+                          },
+                          [_vm._v(_vm._s(_vm.items["trackCount"]))]
+                        ),
+                        _vm._v(" этого исполнителя.")
+                      ]),
+                      _vm._v(" "),
+                      _c("h6", [
+                        _vm._v("Например, "),
+                        _c("b", { staticClass: "textShadow" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                target: "_blank",
+                                href: _vm.items["trackUrl"]
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.items["selectedTrack"]))]
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-11 col-md-4 text-right" }, [
+                      _c("img", {
+                        staticClass: "rounded-circle achievementIcon",
+                        attrs: { src: _vm.items["image"], alt: "" }
+                      })
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex d-md-none row justify-content-center fadeInAnim"
+              },
+              [
+                _c("div", { staticClass: "col-9" }, [
+                  _c("h4", { staticClass: "text-center borderUnderline" }, [
+                    _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
+                  ]),
+                  _vm._v(" "),
+                  _vm.cardSubtitle != ""
+                    ? _c("h6", { staticClass: "text-center" }, [
+                        _vm._v(_vm._s(_vm.cardSubtitle))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-11 text-center" }, [
+                  _c("img", {
+                    staticClass: "rounded-circle achievementIcon",
+                    attrs: { src: _vm.items["image"], alt: "" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-11" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass:
+                        "text-center achievementItemTitle textShadow",
+                      staticStyle: { "margin-bottom": "0" }
+                    },
+                    [
+                      _c("b", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { target: "_blank", href: _vm.items["url"] }
+                          },
+                          [_vm._v(_vm._s(_vm.items["title"]))]
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.items["additionalInfo"]
+                    ? _c(
+                        "p",
+                        {
+                          staticClass: "text-center",
+                          staticStyle: { "margin-top": "0" }
+                        },
+                        [_c("b", [_vm._v(_vm._s(_vm.items["additionalInfo"]))])]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "text-center" }, [
+                    _vm.items["album"]
                       ? _c(
-                          "p",
-                          { staticClass: "text-center achievementAdditional" },
-                          [_vm._v(_vm._s(_vm.items["additionalInfo"]))]
+                          "a",
+                          {
+                            attrs: { target: "_blank", href: _vm.items["url"] }
+                          },
+                          [_vm._v(_vm._s(_vm.items["album"]))]
                         )
                       : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "text-center" }, [
+                    _vm._v("Тебе нравятся "),
+                    _c(
+                      "b",
+                      { staticClass: "borderUnderline mainColorHighlight2" },
+                      [_vm._v(_vm._s(_vm.items["trackCount"]))]
+                    ),
+                    _vm._v(" этого исполнителя.")
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "text-center" }, [
+                    _vm._v("Например, "),
+                    _c("b", { staticClass: "textShadow" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            target: "_blank",
+                            href: _vm.items["trackUrl"]
+                          }
+                        },
+                        [_vm._v(_vm._s(_vm.items["selectedTrack"]))]
+                      )
+                    ])
                   ])
-                ]
-              )
-            ],
-            1
-          )
+                ])
+              ]
+            )
+          ])
         : _c(
             "div",
             [
@@ -81149,6 +81484,31 @@ var render = function() {
                       attrs: {
                         favoriteGenres: _vm.favoriteGenres,
                         id: "genres"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.favoriteGenres != -1 && _vm.mostPopularArtist != "noArtists"
+                  ? _c("AchievementItem", {
+                      attrs: {
+                        cardTitle: "Самый популярный исполнитель",
+                        cardSubtitle: "На которого ты подписан",
+                        items: _vm.mostPopularArtist
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm.mostPopularArtist != -1 &&
+                _vm.leastPopularArtist != "noArtists"
+                  ? _c("AchievementItem", {
+                      attrs: {
+                        cardTitle: "Самый непопулярный исполнитель",
+                        cardSubtitle: "На которого ты подписан",
+                        items: _vm.leastPopularArtist,
+                        orientation: "right"
                       }
                     })
                   : _vm._e()
