@@ -1993,15 +1993,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             gridLines: {
               display: false
             },
+            scaleLabel: {
+              display: true
+            },
             ticks: {
               fontFamily: 'Montserrat',
               fontColor: '#e8e6e6',
-              fontSize: 16
+              fontSize: 16,
+              padding: 0
             }
           }],
           xAxes: [{
             gridLines: {
               width: 2
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Кол-во',
+              fontColor: '#1ea74c',
+              fontSize: 12
             },
             ticks: {
               fontFamily: 'Montserrat',
@@ -3559,9 +3569,13 @@ __webpack_require__.r(__webpack_exports__);
       if (this.decadeMonth == -1) {
         this.$store.dispatch('getDecadeMonth');
       } //любимые жанры
-      // if(this.favoriteGenres == -1)
-      // { this.$store.dispatch('getFavoriteGenres') };
 
+
+      if (this.favoriteGenres == -1) {
+        this.$store.dispatch('getFavoriteGenres');
+      }
+
+      ;
     }
   },
   computed: {
@@ -3716,6 +3730,26 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81108,6 +81142,15 @@ var render = function() {
                   ? _c("YearsAndDecades", {
                       attrs: { yearsAndDecades: _vm.decadeMonth, type: "month" }
                     })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.decadeMonth != -1
+                  ? _c("FavoriteGenres", {
+                      attrs: {
+                        favoriteGenres: _vm.favoriteGenres,
+                        id: "genres"
+                      }
+                    })
                   : _vm._e()
               ],
               1
@@ -81408,39 +81451,97 @@ var render = function() {
               1
             )
           : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
-          ? _c("div", { staticClass: "col-11 col-md-11" }, [
-              _c("h3", { staticClass: "text-center borderUnderline" }, [
-                _vm._v("Твои любимые жанры")
-              ]),
-              _vm._v(" "),
-              _c("h5", { staticClass: "text-center" }, [
-                _vm._v("За последний месяц")
-              ]),
-              _vm._v(" "),
-              _vm.favoriteGenres !== -1 && _vm.favoriteGenres != false
-                ? _c(
-                    "div",
-                    { staticClass: "col-12" },
+          ? _c("div", { staticClass: "col-12 col-md-12" }, [
+              _c("div", { staticClass: "row justify-content-center" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-3 paddingSides" }, [
+                  _c(
+                    "h3",
+                    {
+                      staticClass:
+                        "text-center borderUnderline mainColorHighlight2"
+                    },
                     [
-                      _c("BarChart", {
-                        attrs: {
-                          favoriteGenres: _vm.favoriteGenres,
-                          backgroundColor: _vm.backgroundColor,
-                          styles: _vm.style,
-                          label: "Любимые жанры"
-                        }
-                      })
-                    ],
-                    1
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(Object.keys(_vm.favoriteGenres)[0]) +
+                          "\n                    "
+                      )
+                    ]
                   )
-                : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-3 paddingSides" }, [
+                  _c(
+                    "h3",
+                    {
+                      staticClass:
+                        "text-center borderUnderline mainColorHighlight2"
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(Object.keys(_vm.favoriteGenres)[1]) +
+                          "\n                    "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-3 paddingSides" }, [
+                  _c(
+                    "h3",
+                    {
+                      staticClass:
+                        "text-center borderUnderline mainColorHighlight2"
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(Object.keys(_vm.favoriteGenres)[2]) +
+                          "\n                    "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("h5", [_vm._v("А вот так выглядит весь список")]),
+                _vm._v(" "),
+                _vm.favoriteGenres !== -1 && _vm.favoriteGenres != false
+                  ? _c(
+                      "div",
+                      { staticClass: "col-11" },
+                      [
+                        _c("BarChart", {
+                          attrs: {
+                            favoriteGenres: _vm.favoriteGenres,
+                            backgroundColor: _vm.backgroundColor,
+                            styles: _vm.style,
+                            label: "Песен этого жанра за месяц"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
             ])
           : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
       ])
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 text-center" }, [
+      _c("h5", [_vm._v("А еще в последний месяц ты больше всего слушаешь")])
+    ])
+  }
+]
 render._withStripped = true
 
 

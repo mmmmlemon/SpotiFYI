@@ -17,13 +17,33 @@
                 <Info type="small" infoMessage="Пока не достаточно данных для проведения анализа жанров."/>
             </div>
             <!-- контент -->
-            <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="col-11 col-md-11">
-                <h3 class="text-center borderUnderline">Твои любимые жанры</h3>
-                <h5 class="text-center">За последний месяц</h5>
-                <!-- график с жанрами -->
-                <div class="col-12" v-if="favoriteGenres !== -1 && favoriteGenres != false">
-                    <BarChart :favoriteGenres="favoriteGenres" :backgroundColor="backgroundColor" :styles="style" label="Любимые жанры"/>
+            <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="col-12 col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                        <h5>А еще в последний месяц ты больше всего слушаешь</h5>
+                    </div>
+                    <div class="col-12 col-md-3 paddingSides">
+                        <h3 class="text-center borderUnderline mainColorHighlight2">
+                            {{Object.keys(favoriteGenres)[0]}}
+                        </h3>
+                    </div>
+                    <div class="col-12 col-md-3 paddingSides">
+                         <h3 class="text-center borderUnderline mainColorHighlight2">
+                            {{Object.keys(favoriteGenres)[1]}}
+                        </h3>
+                    </div>
+                    <div class="col-12 col-md-3 paddingSides">
+                         <h3 class="text-center borderUnderline mainColorHighlight2">
+                            {{Object.keys(favoriteGenres)[2]}}
+                        </h3>
+                    </div>
+                    <h5>А вот так выглядит весь список</h5>
+                    <!-- график с жанрами -->
+                    <div class="col-11" v-if="favoriteGenres !== -1 && favoriteGenres != false">
+                        <BarChart :favoriteGenres="favoriteGenres" :backgroundColor="backgroundColor" :styles="style" label="Песен этого жанра за месяц"/>
+                    </div>
                 </div>
+              
 
             </div>
             <!-- ошибка -->

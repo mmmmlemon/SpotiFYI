@@ -49,7 +49,7 @@
                     <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="decadeMonth" type="month"/>
 
                     <!-- любимые жанры -->
-                    <!-- <FavoriteGenres :favoriteGenres="favoriteGenres" id="genres" v-if="uniqueArtists != -1"/> -->
+                    <FavoriteGenres v-if="decadeMonth != -1" :favoriteGenres="favoriteGenres" id="genres"/>
 
        
 
@@ -152,8 +152,8 @@ export default {
             { this.$store.dispatch('getDecadeMonth'); }
 
             //любимые жанры
-            // if(this.favoriteGenres == -1)
-            // { this.$store.dispatch('getFavoriteGenres') };
+            if(this.favoriteGenres == -1)
+            { this.$store.dispatch('getFavoriteGenres') };
         },
     },
     
@@ -162,8 +162,7 @@ export default {
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
         spotifyUserLibrary: function() {
             // return this.$store.state.profilePage.spotifyUserLibrary;
-            return true;
-            
+            return true; 
         },
         //кол-во треков и последние пять
         spotifyTracks: function() {

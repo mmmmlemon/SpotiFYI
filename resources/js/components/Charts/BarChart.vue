@@ -4,7 +4,7 @@ import { HorizontalBar } from 'vue-chartjs'
 export default {
   extends: HorizontalBar,
   data: () => ({
-    chartData: null,
+  chartData: null,
    options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -14,15 +14,25 @@ export default {
             gridLines: {
               display: false,
             },
+            scaleLabel: {
+              display: true,
+            },
             ticks: {
               fontFamily: 'Montserrat',
               fontColor: '#e8e6e6',
               fontSize: 16,
+              padding: 0,
             },
           }],
           xAxes: [{
-             gridLines: {
+            gridLines: {
               width: 2,
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Кол-во',
+              fontColor: '#1ea74c',
+              fontSize: 12,
             },
             ticks: {
               fontFamily: 'Montserrat',
@@ -40,7 +50,6 @@ export default {
   },
 
   async mounted () {
-    
     //получаем заголовки и значения
     var keys = Object.keys(this.favoriteGenres);
     var values = Object.values(this.favoriteGenres);
