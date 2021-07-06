@@ -3634,13 +3634,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.decadeMonth == -1) {
         this.$store.dispatch('getDecadeMonth');
       } //любимые жанры
+      // if(this.favoriteGenres == -1)
+      // { this.$store.dispatch('getFavoriteGenres') };
+      //cамый популярный артист, из подписок
 
-
-      if (this.favoriteGenres == -1) {
-        this.$store.dispatch('getFavoriteGenres');
-      }
-
-      ; //cамый популярный артист, из подписок
 
       if (this.mostPopularArtist == -1) {
         this.$store.dispatch('getArtistByPopularity', 'popular');
@@ -3656,7 +3653,8 @@ __webpack_require__.r(__webpack_exports__);
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      return this.$store.state.profilePage.spotifyUserLibrary; // return true; 
+      // return this.$store.state.profilePage.spotifyUserLibrary;
+      return true;
     },
     //кол-во треков и последние пять
     spotifyTracks: function spotifyTracks() {
@@ -3679,9 +3677,9 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.profilePage.tracksMode;
     },
     //любимые жанры
-    favoriteGenres: function favoriteGenres() {
-      return this.$store.state.profilePage.favoriteGenres;
-    },
+    // favoriteGenres: function(){
+    //     return this.$store.state.profilePage.favoriteGenres;
+    // },
     //кол-во исполнителей
     uniqueArtists: function uniqueArtists() {
       return this.$store.state.profilePage.uniqueArtists;
@@ -81479,16 +81477,7 @@ var render = function() {
                     })
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.decadeMonth != -1
-                  ? _c("FavoriteGenres", {
-                      attrs: {
-                        favoriteGenres: _vm.favoriteGenres,
-                        id: "genres"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.favoriteGenres != -1 && _vm.mostPopularArtist != "noArtists"
+                _vm.mostPopularArtist != "noArtists"
                   ? _c("AchievementItem", {
                       attrs: {
                         cardTitle: "Самый популярный исполнитель",
