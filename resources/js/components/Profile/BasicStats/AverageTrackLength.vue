@@ -1,6 +1,6 @@
 //AverageTrackLength
 <template>
-    <div class="row justify-content-center marginVertical" v-wheel="handleWheel" v-bind:class="{'zeroOpacity': visible === false}">
+    <div class="row justify-content-center marginVertical" v-scroll="handleScroll" v-bind:class="{'zeroOpacity': visible === false}">
         <!-- средняя длина трека -->
         <div v-if="tracksMode === -1" class="col-11 col-md-6 paddingSides">
             <Loader />
@@ -54,7 +54,7 @@ export default {
 
         //при скролле страницы показать карточку когда она будет 
         //в поле видимости
-        handleWheel: function (evt, el){
+        handleScroll: function (evt, el){
             if (el.getBoundingClientRect().top < 700) {
                 this.setVisible = true;
             }

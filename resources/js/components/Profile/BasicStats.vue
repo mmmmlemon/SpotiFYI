@@ -46,20 +46,19 @@
                     <YearsAndDecades :yearsAndDecades="yearsAndDecades" type="alltime"/>
 
                     <!-- года и десятилетия за месяц-->
-                    <!-- <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="decadeMonth" type="month"/> -->
+                    <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="decadeMonth" type="month"/>
 
                     <!-- любимые жанры -->
                     <!-- <FavoriteGenres v-if="decadeMonth != -1" :favoriteGenres="favoriteGenres" id="genres"/> -->
 
                     <!-- Самый популярный\непопулярный артист -->
-                    <!-- <AchievementItem v-if="mostPopularArtist != 'noArtists'" 
+                    <AchievementItem v-if="mostPopularArtist != 'noArtists'" 
                                 cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" 
-                                :items="mostPopularArtist"/> -->
+                                :items="mostPopularArtist"/>
 
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>    
-                    <!-- <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist != 'noArtists'" 
+                    <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist != 'noArtists'" 
                                     cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" 
-                                    :items="leastPopularArtist" orientation="right"/> -->
+                                    :items="leastPopularArtist" orientation="right"/>
                     
 
        
@@ -74,15 +73,13 @@
             </div>
         </div>
         <br>
-        <div class="row justify-content-center fadeInAnim zeroOpacity">
-            
+        <div class="row justify-content-center" style="margin-top: 2rem;" v-scroll="handleScroll" v-bind:class="{'zeroOpacity': visibleButton === false}">
             <router-link to="/profile/top10#top">
-                <button class="btn btn-primary">
-                    Перейти к "Топ-10"
-                    <i class="fas fa-list-ol"></i>
+                <button class="btn btn-lg btn-primary-n goUpAnimSlow" v-if="visibleButton">
+                    Перейти к <b>Топ-10</b>
                 </button>
             </router-link>
-            <br><br>
+            <br><br><br><br><br><br>
             
         </div>
     </div>
@@ -174,6 +171,21 @@ export default {
             if(this.mostPopularArtist == -1)
             { this.$store.dispatch('getArtistByPopularity', 'unpopular'); }
         },
+
+        //при скролле страницы показать карточку когда она будет 
+        //в поле видимости
+        handleScroll: function (evt, el){
+            if (el.getBoundingClientRect().top < 900) {
+                this.setVisible = true;
+            }
+            return el.getBoundingClientRect().top < 900;   
+        }
+    },
+
+    data: ()=> {
+        return {
+            visibleButton: false,
+        }
     },
     
     computed: {
@@ -226,6 +238,16 @@ export default {
         //самый непопулярный артист
         leastPopularArtist: function(){
             return this.$store.state.profilePage.leastPopularArtist;
+        },
+
+        //видимость карточки
+        setVisible: {
+            get() {
+                this.visibleButton = false;
+            },
+            set(value){
+                this.visibleButton = value;
+            }
         },
     }
 }

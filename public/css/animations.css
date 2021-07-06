@@ -453,9 +453,9 @@
   50%{
     opacity: 1;
     transform: translate(3rem, -4rem) scale(1.35);
-    -webkit-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    -moz-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
+    -webkit-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    -moz-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
   }
   100%{
     opacity: 1;
@@ -475,9 +475,9 @@
   50%{
     opacity: 1;
     transform: translate(10rem, -4rem) scale(1.1);
-    -webkit-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    -moz-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
+    -webkit-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    -moz-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
   }
   100%{
     opacity: 1;
@@ -500,9 +500,9 @@
   50%{
     opacity: 1;
     transform: translate(1rem, 5rem) scale(0.9);
-    -webkit-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    -moz-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
+    -webkit-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    -moz-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
   }
   100%{
     opacity: 1;
@@ -526,9 +526,9 @@
   50%{
     opacity: 1;
     transform: translate(9rem, 7rem) scale(1.1);
-    -webkit-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    -moz-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
+    -webkit-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    -moz-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
   }
   100%{
     opacity: 1;
@@ -552,9 +552,9 @@
   60%{
     opacity: 1;
     transform: translate(-5rem, 12rem) scale(0.85);
-    -webkit-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    -moz-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
+    -webkit-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    -moz-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
   }
   100%{
     opacity: 1;
@@ -577,9 +577,9 @@
   60%{
     opacity: 1;
     transform: translate(-1rem, 14rem) scale(0.75);
-    -webkit-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    -moz-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
+    -webkit-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    -moz-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
   }
   100%{
     opacity: 1;
@@ -602,9 +602,9 @@
   60%{
     opacity: 1;
     transform: translate(1rem, 13rem) scale(0.65);
-    -webkit-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    -moz-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
+    -webkit-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    -moz-box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
+    box-shadow: 5px 5px 0px 17px rgba(18, 201, 82, 1);
   }
   100%{
     opacity: 1;
@@ -627,9 +627,9 @@
   60%{
     opacity: 1;
     transform: translate(-10rem, 19rem) scale(0.75);
-    -webkit-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    -moz-box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
-    box-shadow: 6px 7px 0px 2px rgb(18, 201, 82);
+    -webkit-box-shadow: 5px 5px 0px 8px rgba(18, 201, 82, 1);
+    -moz-box-shadow: 5px 5px 0px 8px rgba(18, 201, 82, 1);
+    box-shadow: 5px 5px 0px 8px rgba(18, 201, 82, 1);
   }
   100%{
     opacity: 1;
@@ -639,6 +639,44 @@
     box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
   }
 }
+
+@keyframes slideLeft{
+  0%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+}
+}
+
+.slideLeft{
+  animation: slideLeft;
+  animation-duration: 1.2s;
+  animation-timing-function: ease;
+}
+
+@keyframes slideRight{
+  0%{
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+}
+}
+
+.slideRight{
+  animation: slideRight;
+  animation-duration: 1.2s;
+  animation-timing-function: ease;
+}
+
+
 
 
 

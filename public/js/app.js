@@ -3440,6 +3440,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      visible: false
+    };
+  },
   props: {
     orientation: {
       "default": 'left'
@@ -3452,6 +3457,28 @@ __webpack_require__.r(__webpack_exports__);
     },
     items: {
       "default": -1
+    }
+  },
+  computed: {
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visible = false;
+      },
+      set: function set(value) {
+        this.visible = value;
+      }
+    }
+  },
+  methods: {
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleScroll: function handleScroll(evt, el) {
+      if (el.getBoundingClientRect().top < 900) {
+        this.setVisible = true;
+      }
+
+      return el.getBoundingClientRect().top < 900;
     }
   }
 });
@@ -3467,9 +3494,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -3647,7 +3671,21 @@ __webpack_require__.r(__webpack_exports__);
       if (this.mostPopularArtist == -1) {
         this.$store.dispatch('getArtistByPopularity', 'unpopular');
       }
+    },
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleScroll: function handleScroll(evt, el) {
+      if (el.getBoundingClientRect().top < 900) {
+        this.setVisible = true;
+      }
+
+      return el.getBoundingClientRect().top < 900;
     }
+  },
+  data: function data() {
+    return {
+      visibleButton: false
+    };
   },
   computed: {
     //библиотека пользователя
@@ -3699,6 +3737,15 @@ __webpack_require__.r(__webpack_exports__);
     //самый непопулярный артист
     leastPopularArtist: function leastPopularArtist() {
       return this.$store.state.profilePage.leastPopularArtist;
+    },
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visibleButton = false;
+      },
+      set: function set(value) {
+        this.visibleButton = value;
+      }
     }
   }
 });
@@ -3768,7 +3815,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     //при скролле страницы показать карточку когда она будет 
     //в поле видимости
-    handleWheel: function handleWheel(evt, el) {
+    handleScroll: function handleScroll(evt, el) {
       if (el.getBoundingClientRect().top < 700) {
         this.setVisible = true;
       }
@@ -3842,7 +3889,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     //при скролле страницы показать карточку когда она будет 
     //в поле видимости
-    handleWheel: function handleWheel(evt, el) {
+    handleScroll: function handleScroll(evt, el) {
       if (el.getBoundingClientRect().top < 700) {
         this.setVisible = true;
       }
@@ -3926,13 +3973,36 @@ __webpack_require__.r(__webpack_exports__);
       backgroundColor: ['#1b77b9', '#1bb98a', '#48b91b', '#b9941b', '#b91b1b', '#b91bb1', '#4a1bb9', '#223586', '#228638', '#864f22'],
       style: {
         color: 'red'
-      }
+      },
+      visible: false
     };
   },
   props: {
     //любимые жанры
     favoriteGenres: {
       "default": -1
+    }
+  },
+  computed: {
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visible = false;
+      },
+      set: function set(value) {
+        this.visible = value;
+      }
+    }
+  },
+  methods: {
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleScroll: function handleScroll(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setVisible = true;
+      }
+
+      return el.getBoundingClientRect().top < 700;
     }
   }
 });
@@ -4099,7 +4169,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   methods: {
     //при скролле страницы показать карточку когда она будет 
     //в поле видимости
-    handleWheel: function handleWheel(evt, el) {
+    handleScroll: function handleScroll(evt, el) {
       if (el.getBoundingClientRect().top < 700) {
         this.setVisible = true;
         this.overallMinutes = [this.userLibraryTime.overallMinutes, this.userLibraryTime.overallMinutes / 1300];
@@ -4350,7 +4420,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       visible: false,
       chart: false,
-      chartYears: false
+      chartYears: false,
+      month: false
     };
   },
   props: {
@@ -4387,28 +4458,43 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         this.chartYears = value;
       }
+    },
+    setMonth: {
+      get: function get() {
+        this.month = false;
+      },
+      set: function set(value) {
+        this.month = value;
+      }
     }
   },
   methods: {
     //при скролле страницы показать карточку когда она будет 
     //в поле видимости
-    handleWheel: function handleWheel(evt, el) {
+    handleScroll: function handleScroll(evt, el) {
       if (el.getBoundingClientRect().top < 700) {
         this.setVisible = true;
       }
 
       return el.getBoundingClientRect().top < 700;
     },
-    handleWheelChart: function handleWheelChart(evt, el) {
+    handleScrollChart: function handleScrollChart(evt, el) {
       if (el.getBoundingClientRect().top < 700) {
         this.setChart = true;
       }
 
       return el.getBoundingClientRect().top < 700;
     },
-    handleWheelChartYears: function handleWheelChartYears(evt, el) {
-      if (el.getBoundingClientRect().top < 700) {
+    handleScrollChartYears: function handleScrollChartYears(evt, el) {
+      if (el.getBoundingClientRect().top < 800) {
         this.setChartYears = true;
+      }
+
+      return el.getBoundingClientRect().top < 800;
+    },
+    handleScrollMonth: function handleScrollMonth(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setMonth = true;
       }
 
       return el.getBoundingClientRect().top < 700;
@@ -81229,7 +81315,19 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-12", staticStyle: { "margin-top": "3rem" } },
+    {
+      directives: [
+        {
+          name: "scroll",
+          rawName: "v-scroll",
+          value: _vm.handleScroll,
+          expression: "handleScroll"
+        }
+      ],
+      staticClass: "col-12",
+      class: { zeroOpacity: _vm.visible === false },
+      staticStyle: { "margin-top": "3rem" }
+    },
     [
       _vm.items == -1
         ? _c("div", [_c("Loader")], 1)
@@ -81248,7 +81346,7 @@ var render = function() {
           )
         : _vm.items != -1 || _vm.items != false
         ? _c("div", {}, [
-            _vm.orientation === "left"
+            _vm.orientation === "left" && _vm.visible === true
               ? _c(
                   "div",
                   {
@@ -81256,7 +81354,7 @@ var render = function() {
                       "d-none d-md-flex row justify-content-center fadeInAnim"
                   },
                   [
-                    _c("div", { staticClass: "col-9" }, [
+                    _c("div", { staticClass: "col-9 goUpAnimSlow" }, [
                       _c("h4", { staticClass: "text-left borderUnderline" }, [
                         _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
                       ]),
@@ -81268,14 +81366,18 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-11 col-md-4 text-left" }, [
-                      _c("img", {
-                        staticClass: "rounded-circle achievementIcon",
-                        attrs: { src: _vm.items["image"], alt: "" }
-                      })
-                    ]),
+                    _c(
+                      "div",
+                      { staticClass: "col-11 col-md-4 text-left slideLeft" },
+                      [
+                        _c("img", {
+                          staticClass: "rounded-circle achievementIcon",
+                          attrs: { src: _vm.items["image"], alt: "" }
+                        })
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-11 col-md-6" }, [
+                    _c("div", { staticClass: "col-11 col-md-6 slideRight" }, [
                       _c(
                         "h5",
                         {
@@ -81361,7 +81463,7 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm.orientation === "right"
+            _vm.orientation === "right" && _vm.visible === true
               ? _c(
                   "div",
                   {
@@ -81369,7 +81471,7 @@ var render = function() {
                       "d-none d-md-flex row justify-content-center fadeInAnim"
                   },
                   [
-                    _c("div", { staticClass: "col-9" }, [
+                    _c("div", { staticClass: "col-9 goUpAnimSlow" }, [
                       _c("h4", { staticClass: "text-right borderUnderline" }, [
                         _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
                       ]),
@@ -81381,7 +81483,7 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-11 col-md-6" }, [
+                    _c("div", { staticClass: "col-11 col-md-6 slideLeft" }, [
                       _c(
                         "h5",
                         {
@@ -81464,114 +81566,136 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-11 col-md-4 text-right" }, [
-                      _c("img", {
-                        staticClass: "rounded-circle achievementIcon",
-                        attrs: { src: _vm.items["image"], alt: "" }
-                      })
-                    ])
+                    _c(
+                      "div",
+                      { staticClass: "col-11 col-md-4 text-right slideRight" },
+                      [
+                        _c("img", {
+                          staticClass: "rounded-circle achievementIcon",
+                          attrs: { src: _vm.items["image"], alt: "" }
+                        })
+                      ]
+                    )
                   ]
                 )
               : _vm._e(),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "d-flex d-md-none row justify-content-center fadeInAnim"
-              },
-              [
-                _c("div", { staticClass: "col-9" }, [
-                  _c("h4", { staticClass: "text-center borderUnderline" }, [
-                    _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
-                  ]),
-                  _vm._v(" "),
-                  _vm.cardSubtitle != ""
-                    ? _c("h6", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(_vm.cardSubtitle))
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-11 text-center" }, [
-                  _c("img", {
-                    staticClass: "rounded-circle achievementIcon",
-                    attrs: { src: _vm.items["image"], alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-11" }, [
-                  _c(
-                    "h5",
-                    {
-                      staticClass:
-                        "text-center achievementItemTitle textShadow",
-                      staticStyle: { "margin-bottom": "0" }
-                    },
-                    [
-                      _c("b", [
-                        _c(
-                          "a",
-                          {
-                            attrs: { target: "_blank", href: _vm.items["url"] }
-                          },
-                          [_vm._v(_vm._s(_vm.items["title"]))]
-                        )
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.items["additionalInfo"]
-                    ? _c(
-                        "p",
-                        {
-                          staticClass: "text-center",
-                          staticStyle: { "margin-top": "0" }
-                        },
-                        [_c("b", [_vm._v(_vm._s(_vm.items["additionalInfo"]))])]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("h6", { staticClass: "text-center" }, [
-                    _vm.items["album"]
-                      ? _c(
-                          "a",
-                          {
-                            attrs: { target: "_blank", href: _vm.items["url"] }
-                          },
-                          [_vm._v(_vm._s(_vm.items["album"]))]
-                        )
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", { staticClass: "text-center" }, [
-                    _vm._v("Тебе нравятся "),
+            _vm.visible === true
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "d-flex d-md-none row justify-content-center goUpAnimSlow"
+                  },
+                  [
+                    _c("div", { staticClass: "col-9 goUpAnimSlow" }, [
+                      _c("h4", { staticClass: "text-center borderUnderline" }, [
+                        _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
+                      ]),
+                      _vm._v(" "),
+                      _vm.cardSubtitle != ""
+                        ? _c("h6", { staticClass: "text-center" }, [
+                            _vm._v(_vm._s(_vm.cardSubtitle))
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
                     _c(
-                      "b",
-                      { staticClass: "borderUnderline mainColorHighlight2" },
-                      [_vm._v(_vm._s(_vm.items["trackCount"]))]
+                      "div",
+                      { staticClass: "col-11 text-center goUpAnimSlow" },
+                      [
+                        _c("img", {
+                          staticClass: "rounded-circle achievementIcon",
+                          attrs: { src: _vm.items["image"], alt: "" }
+                        })
+                      ]
                     ),
-                    _vm._v(" этого исполнителя.")
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", { staticClass: "text-center" }, [
-                    _vm._v("Например, "),
-                    _c("b", { staticClass: "textShadow" }, [
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-11 goUpAnimSlow" }, [
                       _c(
-                        "a",
+                        "h5",
                         {
-                          attrs: {
-                            target: "_blank",
-                            href: _vm.items["trackUrl"]
-                          }
+                          staticClass:
+                            "text-center achievementItemTitle textShadow",
+                          staticStyle: { "margin-bottom": "0" }
                         },
-                        [_vm._v(_vm._s(_vm.items["selectedTrack"]))]
-                      )
+                        [
+                          _c("b", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  target: "_blank",
+                                  href: _vm.items["url"]
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.items["title"]))]
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.items["additionalInfo"]
+                        ? _c(
+                            "p",
+                            {
+                              staticClass: "text-center",
+                              staticStyle: { "margin-top": "0" }
+                            },
+                            [
+                              _c("b", [
+                                _vm._v(_vm._s(_vm.items["additionalInfo"]))
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("h6", { staticClass: "text-center" }, [
+                        _vm.items["album"]
+                          ? _c(
+                              "a",
+                              {
+                                attrs: {
+                                  target: "_blank",
+                                  href: _vm.items["url"]
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.items["album"]))]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", { staticClass: "text-center" }, [
+                        _vm._v("Тебе нравятся "),
+                        _c(
+                          "b",
+                          {
+                            staticClass: "borderUnderline mainColorHighlight2"
+                          },
+                          [_vm._v(_vm._s(_vm.items["trackCount"]))]
+                        ),
+                        _vm._v(" этого исполнителя.")
+                      ]),
+                      _vm._v(" "),
+                      _c("h6", { staticClass: "text-center" }, [
+                        _vm._v("Например, "),
+                        _c("b", { staticClass: "textShadow" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                target: "_blank",
+                                href: _vm.items["trackUrl"]
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.items["selectedTrack"]))]
+                          )
+                        ])
+                      ])
                     ])
-                  ])
-                ])
-              ]
-            )
+                  ]
+                )
+              : _vm._e()
           ])
         : _c(
             "div",
@@ -81697,32 +81821,33 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br"),
-                _c("br")
+                _vm.yearsAndDecades != -1
+                  ? _c("YearsAndDecades", {
+                      attrs: { yearsAndDecades: _vm.decadeMonth, type: "month" }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.mostPopularArtist != "noArtists"
+                  ? _c("AchievementItem", {
+                      attrs: {
+                        cardTitle: "Самый популярный исполнитель",
+                        cardSubtitle: "На которого ты подписан",
+                        items: _vm.mostPopularArtist
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.mostPopularArtist != -1 &&
+                _vm.leastPopularArtist != "noArtists"
+                  ? _c("AchievementItem", {
+                      attrs: {
+                        cardTitle: "Самый непопулярный исполнитель",
+                        cardSubtitle: "На которого ты подписан",
+                        items: _vm.leastPopularArtist,
+                        orientation: "right"
+                      }
+                    })
+                  : _vm._e()
               ],
               1
             )
@@ -81756,15 +81881,37 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row justify-content-center fadeInAnim zeroOpacity" },
+      {
+        directives: [
+          {
+            name: "scroll",
+            rawName: "v-scroll",
+            value: _vm.handleScroll,
+            expression: "handleScroll"
+          }
+        ],
+        staticClass: "row justify-content-center",
+        class: { zeroOpacity: _vm.visibleButton === false },
+        staticStyle: { "margin-top": "2rem" }
+      },
       [
         _c("router-link", { attrs: { to: "/profile/top10#top" } }, [
-          _c("button", { staticClass: "btn btn-primary" }, [
-            _vm._v('\n                Перейти к "Топ-10"\n                '),
-            _c("i", { staticClass: "fas fa-list-ol" })
-          ])
+          _vm.visibleButton
+            ? _c(
+                "button",
+                { staticClass: "btn btn-lg btn-primary-n goUpAnimSlow" },
+                [
+                  _vm._v("\n                Перейти к "),
+                  _c("b", [_vm._v("Топ-10")])
+                ]
+              )
+            : _vm._e()
         ]),
         _vm._v(" "),
+        _c("br"),
+        _c("br"),
+        _c("br"),
+        _c("br"),
         _c("br"),
         _c("br")
       ],
@@ -81825,10 +81972,10 @@ var render = function() {
     {
       directives: [
         {
-          name: "wheel",
-          rawName: "v-wheel",
-          value: _vm.handleWheel,
-          expression: "handleWheel"
+          name: "scroll",
+          rawName: "v-scroll",
+          value: _vm.handleScroll,
+          expression: "handleScroll"
         }
       ],
       staticClass: "col-11 justify-content-center marginVertical",
@@ -81904,10 +82051,10 @@ var render = function() {
     {
       directives: [
         {
-          name: "wheel",
-          rawName: "v-wheel",
-          value: _vm.handleWheel,
-          expression: "handleWheel"
+          name: "scroll",
+          rawName: "v-scroll",
+          value: _vm.handleScroll,
+          expression: "handleScroll"
         }
       ],
       staticClass: "row justify-content-center marginVertical",
@@ -81997,7 +82144,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-12 col-md-12 fadeInAnim marginVertical" },
+    {
+      directives: [
+        {
+          name: "scroll",
+          rawName: "v-scroll",
+          value: _vm.handleScroll,
+          expression: "handleScroll"
+        }
+      ],
+      staticClass: "col-12 col-md-12 fadeInAnim marginVertical",
+      class: { zeroOpacity: _vm.visible === false }
+    },
     [
       _c("div", { staticClass: "row justify-content-center" }, [
         _vm.favoriteGenres == -1
@@ -82044,8 +82202,10 @@ var render = function() {
               ],
               1
             )
-          : _vm.favoriteGenres != -1 && _vm.favoriteGenres != false
-          ? _c("div", { staticClass: "col-12 col-md-12" }, [
+          : _vm.favoriteGenres != -1 &&
+            _vm.favoriteGenres != false &&
+            _vm.visible === true
+          ? _c("div", { staticClass: "col-12 col-md-12 goUpAnimSlow" }, [
               _c("div", { staticClass: "row justify-content-center" }, [
                 _vm._m(0),
                 _vm._v(" "),
@@ -82162,10 +82322,10 @@ var render = function() {
     {
       directives: [
         {
-          name: "wheel",
-          rawName: "v-wheel",
-          value: _vm.handleWheel,
-          expression: "handleWheel"
+          name: "scroll",
+          rawName: "v-scroll",
+          value: _vm.handleScroll,
+          expression: "handleScroll"
         }
       ],
       staticClass: "col-11 fadeInAnim marginVertical",
@@ -82618,10 +82778,10 @@ var render = function() {
     {
       directives: [
         {
-          name: "wheel",
-          rawName: "v-wheel",
-          value: _vm.handleWheel,
-          expression: "handleWheel"
+          name: "scroll",
+          rawName: "v-scroll",
+          value: _vm.handleScroll,
+          expression: "handleScroll"
         }
       ],
       staticClass: "col-12 fadeInAnim",
@@ -82892,10 +83052,10 @@ var render = function() {
                         {
                           directives: [
                             {
-                              name: "wheel",
-                              rawName: "v-wheel",
-                              value: _vm.handleWheelChart,
-                              expression: "handleWheelChart"
+                              name: "scroll",
+                              rawName: "v-scroll",
+                              value: _vm.handleScrollChart,
+                              expression: "handleScrollChart"
                             }
                           ],
                           staticClass: "col-12"
@@ -82944,10 +83104,10 @@ var render = function() {
                         {
                           directives: [
                             {
-                              name: "wheel",
-                              rawName: "v-wheel",
-                              value: _vm.handleWheelChartYears,
-                              expression: "handleWheelChartYears"
+                              name: "scroll",
+                              rawName: "v-scroll",
+                              value: _vm.handleScrollChartYears,
+                              expression: "handleScrollChartYears"
                             }
                           ],
                           staticClass: "col-12 marginVertical"
@@ -82975,134 +83135,173 @@ var render = function() {
                         ]
                       )
                     ])
-                  : _c("div", { staticClass: "row justify-content-center" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "col-12 col-md-9",
-                          attrs: { "v-else-if": _vm.type == "month" }
-                        },
-                        [
-                          _c("h3", { staticClass: "text-left" }, [
-                            _vm._v(
-                              "\n                        В последнее время ты больше всего слушаешь музыку "
-                            ),
+                  : _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "scroll",
+                            rawName: "v-scroll",
+                            value: _vm.handleScrollMonth,
+                            expression: "handleScrollMonth"
+                          }
+                        ],
+                        staticClass: "row justify-content-center"
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "col-12 col-md-9",
+                            attrs: { "v-else-if": _vm.type == "month" }
+                          },
+                          [
                             _c(
-                              "b",
-                              {
-                                staticClass:
-                                  "borderUnderline mainColorHighlight2"
-                              },
+                              "h3",
+                              { staticClass: "text-left slideLeftHours1" },
                               [
                                 _vm._v(
-                                  _vm._s(_vm.yearsAndDecades["max"]) + "-ых"
+                                  "\n                        В последнее время ты больше всего слушаешь музыку "
+                                ),
+                                _c(
+                                  "b",
+                                  {
+                                    staticClass:
+                                      "borderUnderline mainColorHighlight2 colorFadeIn"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.yearsAndDecades["max"]) + "-ых"
+                                    )
+                                  ]
+                                ),
+                                _vm._v(". \n                    ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "h5",
+                              { staticClass: "text-left slideLeftHours1" },
+                              [
+                                _c(
+                                  "b",
+                                  {
+                                    staticClass:
+                                      "borderUnderline mainColorHighlight2 colorFadeIn"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.yearsAndDecades["maxSongs"])
+                                    )
+                                  ]
+                                ),
+                                _vm._v(
+                                  " из этой эпохи " +
+                                    _vm._s(_vm.yearsAndDecades["word"]) +
+                                    " через тебя за последний месяц.\n                    "
                                 )
                               ]
                             ),
-                            _vm._v(". \n                    ")
-                          ]),
-                          _vm._v(" "),
-                          _c("h5", { staticClass: "text-left" }, [
-                            _c(
-                              "b",
-                              {
-                                staticClass:
-                                  "borderUnderline mainColorHighlight2"
-                              },
-                              [_vm._v(_vm._s(_vm.yearsAndDecades["maxSongs"]))]
-                            ),
-                            _vm._v(
-                              " из этой эпохи " +
-                                _vm._s(_vm.yearsAndDecades["word"]) +
-                                " через тебя за последний месяц.\n                    "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("h5", [
-                            _vm._v("Например, "),
-                            _c("b", { staticClass: "textShadow" }, [
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "slideLeftHours1" }, [
+                              _vm._v("Например, "),
+                              _c("b", { staticClass: "textShadow" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        _vm.yearsAndDecades["maxSong"]["url"],
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.yearsAndDecades["maxSong"][
+                                          "trackName"
+                                        ]
+                                      )
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(", \n                    вышедшая в "),
                               _c(
-                                "a",
+                                "b",
                                 {
-                                  attrs: {
-                                    href: _vm.yearsAndDecades["maxSong"]["url"],
-                                    target: "_blank"
-                                  }
+                                  staticClass:
+                                    "borderUnderline mainColorHighlight2 colorFadeIn"
                                 },
                                 [
                                   _vm._v(
                                     _vm._s(
-                                      _vm.yearsAndDecades["maxSong"][
-                                        "trackName"
-                                      ]
-                                    )
+                                      _vm.yearsAndDecades["maxSong"]["year"]
+                                    ) + "-ом"
                                   )
                                 ]
-                              )
-                            ]),
-                            _vm._v(", \n                    вышедшая в "),
-                            _c(
-                              "b",
-                              {
-                                staticClass:
-                                  "borderUnderline mainColorHighlight2"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.yearsAndDecades["maxSong"]["year"]
-                                  ) + "-ом"
-                                )
-                              ]
-                            ),
-                            _vm._v(" году.")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "d-none d-md-block col-md-3" }, [
-                        _c("div", { staticClass: "col-6" }, [
-                          _vm.yearsAndDecades["max"] < 1950
-                            ? _c("i", { staticClass: "fas fa-music iconMonth" })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.yearsAndDecades["max"] >= 1950 &&
-                          _vm.yearsAndDecades["max"] <= 1970
-                            ? _c("i", {
-                                staticClass: "fas fa-record-vinyl iconMonth"
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.yearsAndDecades["max"] === 1980 ||
-                          _vm.yearsAndDecades["max"] === 1990
-                            ? _c("i", {
-                                staticClass: "fas fa-compact-disc iconMonth"
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.yearsAndDecades["max"] === 2000
-                            ? _c("i", {
-                                staticClass: "fas fa-play-circle iconMonth"
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.yearsAndDecades["max"] >= 2010
-                            ? _c("i", { staticClass: "fas fa-cloud iconMonth" })
-                            : _vm._e()
-                        ]),
+                              ),
+                              _vm._v(" году.")
+                            ])
+                          ]
+                        ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-6" }, [
-                          _c("img", {
+                        _c(
+                          "div",
+                          {
                             staticClass:
-                              "rounded-circle albumIconBigMonth greenShadow",
-                            attrs: {
-                              src: _vm.yearsAndDecades["maxSong"]["cover"],
-                              alt: ""
-                            }
-                          })
-                        ])
-                      ])
-                    ])
+                              "d-none d-md-block col-md-3 slideRightIcon"
+                          },
+                          [
+                            _c("div", { staticClass: "col-6" }, [
+                              _vm.yearsAndDecades["max"] < 1950
+                                ? _c("i", {
+                                    staticClass:
+                                      "fas fa-music iconMonth colorFadeIn"
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.yearsAndDecades["max"] >= 1950 &&
+                              _vm.yearsAndDecades["max"] <= 1970
+                                ? _c("i", {
+                                    staticClass: "fas fa-record-vinyl iconMonth"
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.yearsAndDecades["max"] === 1980 ||
+                              _vm.yearsAndDecades["max"] === 1990
+                                ? _c("i", {
+                                    staticClass: "fas fa-compact-disc iconMonth"
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.yearsAndDecades["max"] === 2000
+                                ? _c("i", {
+                                    staticClass: "fas fa-play-circle iconMonth"
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.yearsAndDecades["max"] >= 2010
+                                ? _c("i", {
+                                    staticClass: "fas fa-cloud iconMonth"
+                                  })
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBigMonth greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["maxSong"]["cover"],
+                                  alt: ""
+                                }
+                              })
+                            ])
+                          ]
+                        )
+                      ]
+                    )
               ]
             )
           : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
@@ -100526,15 +100725,15 @@ vue__WEBPACK_IMPORTED_MODULE_22___default.a.use(vue_axios__WEBPACK_IMPORTED_MODU
 //     });
 // });
 
-vue__WEBPACK_IMPORTED_MODULE_22___default.a.directive('wheel', {
+vue__WEBPACK_IMPORTED_MODULE_22___default.a.directive('scroll', {
   inserted: function inserted(el, binding) {
     var f = function f(evt) {
       if (binding.value(evt, el)) {
-        window.removeEventListener('wheel', f);
+        window.removeEventListener('scroll', f);
       }
     };
 
-    window.addEventListener('wheel', f);
+    window.addEventListener('scroll', f);
   }
 });
 var app = new vue__WEBPACK_IMPORTED_MODULE_22___default.a({

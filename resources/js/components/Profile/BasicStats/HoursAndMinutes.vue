@@ -1,6 +1,6 @@
 //HoursAndMinutes
 <template>
-    <div class="col-11 fadeInAnim marginVertical" v-wheel="handleWheel" v-bind:class="{'zeroOpacity': visible === false}">
+    <div class="col-11 fadeInAnim marginVertical" v-scroll="handleScroll" v-bind:class="{'zeroOpacity': visible === false}">
         <div class="justify-content-center" v-if="visible === true">
             <div v-if="userLibraryTime === -1">
                 <Loader />
@@ -112,7 +112,7 @@ export default {
     methods: {
         //при скролле страницы показать карточку когда она будет 
         //в поле видимости
-        handleWheel: function (evt, el){
+        handleScroll: function (evt, el){
             if (el.getBoundingClientRect().top < 700) {
                 this.setVisible = true;
                 this.overallMinutes = [this.userLibraryTime.overallMinutes, this.userLibraryTime.overallMinutes / 1300];

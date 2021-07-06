@@ -1,6 +1,6 @@
 //FavoriteGenres
 <template>
-    <div class="col-12 col-md-12 fadeInAnim marginVertical">
+    <div class="col-12 col-md-12 fadeInAnim marginVertical" v-scroll="handleScroll" v-bind:class="{'zeroOpacity': visible === false}">
         <div class="row justify-content-center">
             <!-- лоадер -->
             <div v-if="favoriteGenres == -1">
@@ -17,7 +17,7 @@
                 <Info type="small" infoMessage="Пока не достаточно данных для проведения анализа жанров."/>
             </div>
             <!-- контент -->
-            <div v-else-if="favoriteGenres != -1 && favoriteGenres != false" class="col-12 col-md-12">
+            <div v-else-if="favoriteGenres != -1 && favoriteGenres != false && visible === true" class="col-12 col-md-12 goUpAnimSlow">
                 <div class="row justify-content-center">
                     <div class="col-12 text-center">
                         <h5>А еще в последний месяц ты больше всего слушаешь</h5>
@@ -62,13 +62,38 @@ export default {
             backgroundColor: ['#1b77b9','#1bb98a','#48b91b','#b9941b','#b91b1b','#b91bb1','#4a1bb9','#223586','#228638','#864f22'],
             style: {
                 color: 'red',
-            }
+            },
+            visible: false,
         }
     },
     props: {
         //любимые жанры
         favoriteGenres: { default: -1 },
     },
+
+    computed: {
+        //видимость карточки
+        setVisible: {
+            get() {
+                this.visible = false;
+            },
+            set(value){
+                this.visible = value;
+            }
+        },
+    },
+
+    methods: {
+        //при скролле страницы показать карточку когда она будет 
+        //в поле видимости
+        handleScroll: function (evt, el){
+            if (el.getBoundingClientRect().top < 700) {
+                this.setVisible = true;
+            }
+            return el.getBoundingClientRect().top < 700;   
+        }
+    }
+
 }
 
 </script>

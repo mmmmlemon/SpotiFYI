@@ -1,6 +1,6 @@
 //YearsDecades
 <template>
-    <div class="col-12 fadeInAnim" v-wheel="handleWheel" v-bind:class="{'zeroOpacity': visible === false}">
+    <div class="col-12 fadeInAnim" v-scroll="handleScroll" v-bind:class="{'zeroOpacity': visible === false}">
         <div class="row justify-content-center">
             <!-- лоадер -->
             <div v-if="yearsAndDecades === -1">
@@ -59,7 +59,7 @@
                     <br>
                     <h5 class="text-center goUpAnimSlow" v-if="chart === true">А вот так это выглядит на графике</h5>
                     
-                    <div class="col-12" v-wheel="handleWheelChart">
+                    <div class="col-12" v-scroll="handleScrollChart">
                         <!-- <h5 class="text-center borderUnderline">Песни по десятилетиям</h5> -->
                         <div class="col-12 goUpAnimSlow" v-if="chart === true">
                             <BarChart :favoriteGenres="yearsAndDecades['countDecades']" label="Песен из этой эпохи" :backgroundColor="yearsAndDecades['decadeColors']"
@@ -68,7 +68,7 @@
                  
                     </div>
                     <h5 class="text-center goUpAnimSlow" style="margin-top: 6rem;" v-if="chartYears === true">А вот твоя карта песен по годам <i class="far fa-chart-bar mainColor"></i></h5>
-                    <div class="col-12 marginVertical" v-wheel="handleWheelChartYears">
+                    <div class="col-12 marginVertical" v-scroll="handleScrollChartYears">
                         <div class="col-12 goUpAnimSlow" v-if="chartYears === true">
                             <!-- <h5 class="text-center borderUnderline">Песни по годам</h5> -->
                             <BarChart :favoriteGenres="yearsAndDecades['countYears']" label="Песен в году" :backgroundColor="yearsAndDecades['yearColors']"
@@ -78,20 +78,20 @@
                     </div>
                 </div>
                 <!-- за месяц -->
-                <div v-else class="row justify-content-center">
+                <div v-else class="row justify-content-center" v-scroll="handleScrollMonth">
                     <div :v-else-if="type == 'month'" class="col-12 col-md-9">
-                        <h3 class="text-left">
-                            В последнее время ты больше всего слушаешь музыку <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['max']}}-ых</b>. 
+                        <h3 class="text-left slideLeftHours1">
+                            В последнее время ты больше всего слушаешь музыку <b class="borderUnderline mainColorHighlight2 colorFadeIn">{{yearsAndDecades['max']}}-ых</b>. 
                         </h3>
-                        <h5 class="text-left">
-                            <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['maxSongs']}}</b> из этой эпохи {{yearsAndDecades['word']}} через тебя за последний месяц.
+                        <h5 class="text-left slideLeftHours1">
+                            <b class="borderUnderline mainColorHighlight2 colorFadeIn">{{yearsAndDecades['maxSongs']}}</b> из этой эпохи {{yearsAndDecades['word']}} через тебя за последний месяц.
                         </h5>
-                        <h5>Например, <b class="textShadow"><a :href="yearsAndDecades['maxSong']['url']" target="_blank">{{yearsAndDecades['maxSong']['trackName']}}</a></b>, 
-                        вышедшая в <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['maxSong']['year']}}-ом</b> году.</h5>
+                        <h5 class="slideLeftHours1">Например, <b class="textShadow"><a :href="yearsAndDecades['maxSong']['url']" target="_blank">{{yearsAndDecades['maxSong']['trackName']}}</a></b>, 
+                        вышедшая в <b class="borderUnderline mainColorHighlight2 colorFadeIn">{{yearsAndDecades['maxSong']['year']}}-ом</b> году.</h5>
                     </div>
-                    <div class="d-none d-md-block col-md-3">
+                    <div class="d-none d-md-block col-md-3 slideRightIcon">
                         <div class="col-6">
-                            <i v-if="yearsAndDecades['max'] < 1950" class="fas fa-music iconMonth"></i>
+                            <i v-if="yearsAndDecades['max'] < 1950" class="fas fa-music iconMonth colorFadeIn"></i>
                             <i v-if="yearsAndDecades['max'] >= 1950 && yearsAndDecades['max'] <= 1970" class="fas fa-record-vinyl iconMonth"></i>
                             <i v-if="yearsAndDecades['max'] === 1980 || yearsAndDecades['max'] === 1990" class="fas fa-compact-disc iconMonth"></i>
                             <i v-if="yearsAndDecades['max'] === 2000" class="fas fa-play-circle iconMonth"></i>
@@ -116,6 +116,7 @@ export default {
             visible: false,
             chart: false,
             chartYears: false,
+            month: false,
         }
     },
 
@@ -151,26 +152,40 @@ export default {
                 this.chartYears = value;
             }
         },
+        setMonth: {
+            get() {
+                this.month = false;
+            },
+            set(value){
+                this.month = value;
+            }
+        },
     },
 
     methods: {
         //при скролле страницы показать карточку когда она будет 
         //в поле видимости
-        handleWheel: function (evt, el){
+        handleScroll: function (evt, el){
             if (el.getBoundingClientRect().top < 700) {
                 this.setVisible = true;
             }
             return el.getBoundingClientRect().top < 700;   
         },
-        handleWheelChart: function (evt, el){
+        handleScrollChart: function (evt, el){
             if (el.getBoundingClientRect().top < 700) {
                 this.setChart = true;
             }
             return el.getBoundingClientRect().top < 700;   
         },
-        handleWheelChartYears: function (evt, el){
-            if (el.getBoundingClientRect().top < 700) {
+        handleScrollChartYears: function (evt, el){
+            if (el.getBoundingClientRect().top < 800) {
                 this.setChartYears = true;
+            }
+            return el.getBoundingClientRect().top < 800;   
+        },
+        handleScrollMonth: function (evt, el){
+            if (el.getBoundingClientRect().top < 700) {
+                this.setMonth = true;
             }
             return el.getBoundingClientRect().top < 700;   
         },

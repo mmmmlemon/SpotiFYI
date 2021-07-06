@@ -1,6 +1,6 @@
 //ArtistsCounr
 <template>
-    <div class="col-11 justify-content-center marginVertical" v-wheel="handleWheel" v-bind:class="{'zeroOpacity': visible === false}">
+    <div class="col-11 justify-content-center marginVertical" v-scroll="handleScroll" v-bind:class="{'zeroOpacity': visible === false}">
         <div class="row justify-content-center">
             <!-- лоадер -->
             <div v-if="uniqueArtists === -1">
@@ -54,7 +54,7 @@ export default {
     methods: {
         //при скролле страницы показать карточку когда она будет 
         //в поле видимости
-        handleWheel: function (evt, el){
+        handleScroll: function (evt, el){
             if (el.getBoundingClientRect().top < 700) {
                 this.setVisible = true;
             }
