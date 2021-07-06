@@ -1,6 +1,6 @@
 //YearsDecades
 <template>
-    <div class="col-12 fadeInAnim">
+    <div class="col-12 fadeInAnim" v-wheel="handleWheel" v-bind:class="{'zeroOpacity': visible === false}">
         <div class="row justify-content-center">
             <!-- лоадер -->
             <div v-if="yearsAndDecades === -1">
@@ -11,64 +11,70 @@
                 <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
             </div>
             <!-- контент -->
-            <div v-else-if="yearsAndDecades != -1 && yearsAndDecades != false" class="col-11 greyCard paddingSides marginVertical">
+            <div v-else-if="yearsAndDecades != -1 && yearsAndDecades != false && visible === true" class="col-11 paddingSides marginVertical fadeInAnimSlow">
                 <!-- за все время -->
                 <div v-if="type == 'alltime'" class="col-12 col-md-12">
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-8">
-                            <h3 class="text-left">
-                                Твоя любимая эпоха <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['maxDecade']}}-ые</b>. 
-                                В твоей библиотеке <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['maxDecadeSongs']}}</b> из этого десятилетия.
+                            <h3 class="text-left slideLeftHours1">
+                                Твоя любимая эпоха <b class="borderUnderline mainColorHighlight2 colorFadeIn">{{yearsAndDecades['maxDecade']}}-ые</b>. 
+                                В твоей библиотеке <b class="borderUnderline mainColorHighlight2 colorFadeIn">{{yearsAndDecades['maxDecadeSongs']}}</b> из этого десятилетия.
                             </h3>
-                            <h6>А это <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['percent']}}%</b> твоей библиотеки!</h6>
-                            <h5 :v-if="type == 'alltime'" class="text-left">
-                                <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['maxYear']}}-ый</b> - твой самый любимый год. 
-                                Тебе нравятся <b class="borderUnderline mainColorHighlight2">{{yearsAndDecades['maxYearSongs']}}</b> вышедших в этом году.
+                            <h6 class="slideLeftHours1">А это <b class="borderUnderline mainColorHighlight2 colorFadeIn">{{yearsAndDecades['percent']}}%</b> твоей библиотеки!</h6>
+                            <h5 :v-if="type == 'alltime'" class="text-left slideLeftHours1">
+                                <b class="borderUnderline mainColorHighlight2 colorFadeIn">{{yearsAndDecades['maxYear']}}-ый</b> - твой самый любимый год. 
+                                Тебе нравятся <b class="borderUnderline mainColorHighlight2 colorFadeIn">{{yearsAndDecades['maxYearSongs']}}</b> вышедших в этом году.
                                 <br><br>Например, <b class="textShadow"><a :href="yearsAndDecades['songOfYear']['url']" target="_blank">{{yearsAndDecades['songOfYear']['trackName']}}</a></b>
                             </h5> 
                         </div>
                         <div class="d-none d-md-block col-3">
                             <div class="row justify-content-center">
                                 <div class="col-1">
-                                    <img :src="yearsAndDecades['songOfYear']['cover']" class="rounded-circle albumIconBig greenShadow" alt="">
+                                    <img :src="yearsAndDecades['songOfYear']['cover']" class="rounded-circle albumIconBig" alt="">
                                 </div>
                                 <div class="col-1">
-                                    <img :src="yearsAndDecades['covers'][0]" class="rounded-circle albumIconBig2 greenShadow" alt="">
+                                    <img :src="yearsAndDecades['covers'][0]" class="rounded-circle albumIconBig2" alt="">
                                 </div>
                                 <div class="col-1">
-                                    <img :src="yearsAndDecades['covers'][1]" class="rounded-circle albumIconBig3 greenShadow" alt="">
+                                    <img :src="yearsAndDecades['covers'][1]" class="rounded-circle albumIconBig3" alt="">
                                 </div>
                                 <div class="col-1">
-                                    <img :src="yearsAndDecades['covers'][2]" class="rounded-circle albumIconBig4 greenShadow" alt="">
+                                    <img :src="yearsAndDecades['covers'][2]" class="rounded-circle albumIconBig4" alt="">
                                 </div>
                                 <div class="col-1">
-                                    <img :src="yearsAndDecades['covers'][3]" class="rounded-circle albumIconBig5 greenShadow" alt="">
+                                    <img :src="yearsAndDecades['covers'][3]" class="rounded-circle albumIconBig5" alt="">
                                 </div>
                                 <div class="col-1">
-                                    <img :src="yearsAndDecades['covers'][4]" class="rounded-circle albumIconBig6 greenShadow" alt="">
+                                    <img :src="yearsAndDecades['covers'][4]" class="rounded-circle albumIconBig6" alt="">
                                 </div>
                                 <div class="col-1">
-                                    <img :src="yearsAndDecades['covers'][5]" class="rounded-circle albumIconBig7 greenShadow" alt="">
+                                    <img :src="yearsAndDecades['covers'][5]" class="rounded-circle albumIconBig7" alt="">
                                 </div>
                                 <div class="col-1">
-                                    <img :src="yearsAndDecades['covers'][6]" class="rounded-circle albumIconBig8 greenShadow" alt="">
+                                    <img :src="yearsAndDecades['covers'][6]" class="rounded-circle albumIconBig8" alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <br>
-                    <h5 class="text-center">А вот так это выглядит на графике</h5>
+                    <h5 class="text-center goUpAnimSlow" v-if="chart === true">А вот так это выглядит на графике</h5>
                     
-                    <div class="col-12">
+                    <div class="col-12" v-wheel="handleWheelChart">
                         <!-- <h5 class="text-center borderUnderline">Песни по десятилетиям</h5> -->
-                        <BarChart :favoriteGenres="yearsAndDecades['countDecades']" label="Песен из этой эпохи" :backgroundColor="yearsAndDecades['decadeColors']"
-                                    :height="600"/>
+                        <div class="col-12 goUpAnimSlow" v-if="chart === true">
+                            <BarChart :favoriteGenres="yearsAndDecades['countDecades']" label="Песен из этой эпохи" :backgroundColor="yearsAndDecades['decadeColors']"
+                                :height="600"/>
+                        </div>
+                 
                     </div>
-                    <h5 class="text-center" style="margin-top: 6rem;">А вот твоя карта песен по годам <i class="far fa-chart-bar mainColor"></i></h5>
-                    <div class="col-12 marginVertical">
-                        <!-- <h5 class="text-center borderUnderline">Песни по годам</h5> -->
-                        <BarChart :favoriteGenres="yearsAndDecades['countYears']" label="Песен в году" :backgroundColor="yearsAndDecades['yearColors']"
+                    <h5 class="text-center goUpAnimSlow" style="margin-top: 6rem;" v-if="chartYears === true">А вот твоя карта песен по годам <i class="far fa-chart-bar mainColor"></i></h5>
+                    <div class="col-12 marginVertical" v-wheel="handleWheelChartYears">
+                        <div class="col-12 goUpAnimSlow" v-if="chartYears === true">
+                            <!-- <h5 class="text-center borderUnderline">Песни по годам</h5> -->
+                            <BarChart :favoriteGenres="yearsAndDecades['countYears']" label="Песен в году" :backgroundColor="yearsAndDecades['yearColors']"
                                     :height="950"/>
+                        </div>
+                
                     </div>
                 </div>
                 <!-- за месяц -->
@@ -105,10 +111,69 @@
 </template>
 <script>
 export default {
+    data: () => {
+        return {
+            visible: false,
+            chart: false,
+            chartYears: false,
+        }
+    },
+
     props: {
         //любимые жанры
         yearsAndDecades: { default: -1 },
         type: { default: 'alltime' },
     },
+
+    computed: {
+        //видимость карточки
+        setVisible: {
+            get() {
+                this.visible = false;
+            },
+            set(value){
+                this.visible = value;
+            }
+        },
+        setChart: {
+            get() {
+                this.chart = false;
+            },
+            set(value){
+                this.chart = value;
+            }
+        },
+        setChartYears: {
+            get() {
+                this.chartYears = false;
+            },
+            set(value){
+                this.chartYears = value;
+            }
+        },
+    },
+
+    methods: {
+        //при скролле страницы показать карточку когда она будет 
+        //в поле видимости
+        handleWheel: function (evt, el){
+            if (el.getBoundingClientRect().top < 700) {
+                this.setVisible = true;
+            }
+            return el.getBoundingClientRect().top < 700;   
+        },
+        handleWheelChart: function (evt, el){
+            if (el.getBoundingClientRect().top < 700) {
+                this.setChart = true;
+            }
+            return el.getBoundingClientRect().top < 700;   
+        },
+        handleWheelChartYears: function (evt, el){
+            if (el.getBoundingClientRect().top < 700) {
+                this.setChartYears = true;
+            }
+            return el.getBoundingClientRect().top < 700;   
+        },
+    }
 }
 </script>

@@ -3744,9 +3744,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      visible: false
+    };
+  },
   props: {
     uniqueArtists: {
       "default": -1
+    }
+  },
+  computed: {
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visible = false;
+      },
+      set: function set(value) {
+        this.visible = value;
+      }
+    }
+  },
+  methods: {
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleWheel: function handleWheel(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setVisible = true;
+      }
+
+      return el.getBoundingClientRect().top < 700;
     }
   }
 });
@@ -3791,9 +3818,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      visible: false
+    };
+  },
   props: {
     tracksMode: {
       "default": -1
+    }
+  },
+  computed: {
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visible = false;
+      },
+      set: function set(value) {
+        this.visible = value;
+      }
+    }
+  },
+  methods: {
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleWheel: function handleWheel(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setVisible = true;
+      }
+
+      return el.getBoundingClientRect().top < 700;
     }
   }
 });
@@ -4285,7 +4339,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      visible: false,
+      chart: false,
+      chartYears: false
+    };
+  },
   props: {
     //любимые жанры
     yearsAndDecades: {
@@ -4293,6 +4360,58 @@ __webpack_require__.r(__webpack_exports__);
     },
     type: {
       "default": 'alltime'
+    }
+  },
+  computed: {
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visible = false;
+      },
+      set: function set(value) {
+        this.visible = value;
+      }
+    },
+    setChart: {
+      get: function get() {
+        this.chart = false;
+      },
+      set: function set(value) {
+        this.chart = value;
+      }
+    },
+    setChartYears: {
+      get: function get() {
+        this.chartYears = false;
+      },
+      set: function set(value) {
+        this.chartYears = value;
+      }
+    }
+  },
+  methods: {
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleWheel: function handleWheel(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setVisible = true;
+      }
+
+      return el.getBoundingClientRect().top < 700;
+    },
+    handleWheelChart: function handleWheelChart(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setChart = true;
+      }
+
+      return el.getBoundingClientRect().top < 700;
+    },
+    handleWheelChartYears: function handleWheelChartYears(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setChartYears = true;
+      }
+
+      return el.getBoundingClientRect().top < 700;
     }
   }
 });
@@ -81559,6 +81678,25 @@ var render = function() {
                     })
                   : _vm._e(),
                 _vm._v(" "),
+                _vm.userLibraryTime !== -1
+                  ? _c("AverageTrackLength", {
+                      attrs: { id: "tracks", tracksMode: _vm.tracksMode }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tracksMode != -1
+                  ? _c("ArtistsCount", {
+                      attrs: { uniqueArtists: _vm.uniqueArtists }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("YearsAndDecades", {
+                  attrs: {
+                    yearsAndDecades: _vm.yearsAndDecades,
+                    type: "alltime"
+                  }
+                }),
+                _vm._v(" "),
                 _c("br"),
                 _c("br"),
                 _c("br"),
@@ -81618,7 +81756,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row justify-content-center fadeInAnim" },
+      { staticClass: "row justify-content-center fadeInAnim zeroOpacity" },
       [
         _c("router-link", { attrs: { to: "/profile/top10#top" } }, [
           _c("button", { staticClass: "btn btn-primary" }, [
@@ -81684,7 +81822,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-11 justify-content-center fadeInAnim marginVertical" },
+    {
+      directives: [
+        {
+          name: "wheel",
+          rawName: "v-wheel",
+          value: _vm.handleWheel,
+          expression: "handleWheel"
+        }
+      ],
+      staticClass: "col-11 justify-content-center marginVertical",
+      class: { zeroOpacity: _vm.visible === false }
+    },
     [
       _c("div", { staticClass: "row justify-content-center" }, [
         _vm.uniqueArtists === -1
@@ -81702,8 +81851,10 @@ var render = function() {
               ],
               1
             )
-          : _vm.uniqueArtists != -1 && _vm.uniqueArtists != false
-          ? _c("div", { staticClass: "col-12 paddingSides" }, [
+          : _vm.uniqueArtists != -1 &&
+            _vm.uniqueArtists != false &&
+            _vm.visible === true
+          ? _c("div", { staticClass: "col-12 paddingSides goUpAnimSlow" }, [
               _c("div", { staticClass: "row justify-content-center" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c("h3", { staticClass: "text-center" }, [
@@ -81714,7 +81865,7 @@ var render = function() {
                     "h1",
                     {
                       staticClass:
-                        "text-center borderUnderline mainColorHighlight2"
+                        "text-center borderUnderline mainColorHighlight2 colorFadeIn"
                     },
                     [_vm._v(_vm._s(_vm.uniqueArtists["countArtists"]))]
                   )
@@ -81750,7 +81901,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row justify-content-center fadeInAnim marginVertical" },
+    {
+      directives: [
+        {
+          name: "wheel",
+          rawName: "v-wheel",
+          value: _vm.handleWheel,
+          expression: "handleWheel"
+        }
+      ],
+      staticClass: "row justify-content-center marginVertical",
+      class: { zeroOpacity: _vm.visible === false }
+    },
     [
       _vm.tracksMode === -1
         ? _c(
@@ -81773,29 +81935,28 @@ var render = function() {
             ],
             1
           )
-        : _vm.tracksMode != -1
-        ? _c(
-            "div",
-            { staticClass: "col-12 text-center fadeInAnim paddingSides" },
-            [
-              _c("div", { staticClass: "row justify-content-center" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-md-8" }, [
-                  _c("h3", { staticClass: "text-right paddingSides" }, [
-                    _vm._v(
-                      "\n                    Средняя продолжительность трека - \n                    "
-                    ),
-                    _c(
-                      "b",
-                      { staticClass: "mainColorHighlight2 borderUnderline" },
-                      [_vm._v(_vm._s(_vm.tracksMode))]
-                    )
-                  ])
+        : _vm.tracksMode != -1 && _vm.visible === true
+        ? _c("div", { staticClass: "col-12 text-center paddingSides" }, [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 col-md-8 slideRight" }, [
+                _c("h3", { staticClass: "text-right paddingSides" }, [
+                  _vm._v(
+                    "\n                    Средняя продолжительность трека - \n                    "
+                  ),
+                  _c(
+                    "b",
+                    {
+                      staticClass:
+                        "mainColorHighlight2 borderUnderline colorFadeIn"
+                    },
+                    [_vm._v(_vm._s(_vm.tracksMode))]
+                  )
                 ])
               ])
-            ]
-          )
+            ])
+          ])
         : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
     ]
   )
@@ -81807,7 +81968,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-4 d-none d-md-block" }, [
       _c("i", {
-        staticClass: "fas fa-ruler-horizontal mainColor",
+        staticClass: "fas fa-ruler-horizontal mainColor slideLeftIcon ",
         staticStyle: { "font-size": "16rem" }
       })
     ])
@@ -82452,89 +82613,380 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-12 fadeInAnim" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _vm.yearsAndDecades === -1
-        ? _c("div", [_c("Loader")], 1)
-        : _vm.yearsAndDecades === false
-        ? _c(
-            "div",
-            [
-              _c("Error", {
-                attrs: {
-                  type: "small",
-                  errorMessage: "Не удалось произвести анализ треков"
-                }
-              })
-            ],
-            1
-          )
-        : _vm.yearsAndDecades != -1 && _vm.yearsAndDecades != false
-        ? _c(
-            "div",
-            { staticClass: "col-11 greyCard paddingSides marginVertical" },
-            [
-              _vm.type == "alltime"
-                ? _c("div", { staticClass: "col-12 col-md-12" }, [
-                    _c("div", { staticClass: "row justify-content-center" }, [
-                      _c("div", { staticClass: "col-12 col-md-8" }, [
-                        _c("h3", { staticClass: "text-left" }, [
-                          _vm._v(
-                            "\n                            Твоя любимая эпоха "
-                          ),
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "wheel",
+          rawName: "v-wheel",
+          value: _vm.handleWheel,
+          expression: "handleWheel"
+        }
+      ],
+      staticClass: "col-12 fadeInAnim",
+      class: { zeroOpacity: _vm.visible === false }
+    },
+    [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _vm.yearsAndDecades === -1
+          ? _c("div", [_c("Loader")], 1)
+          : _vm.yearsAndDecades === false
+          ? _c(
+              "div",
+              [
+                _c("Error", {
+                  attrs: {
+                    type: "small",
+                    errorMessage: "Не удалось произвести анализ треков"
+                  }
+                })
+              ],
+              1
+            )
+          : _vm.yearsAndDecades != -1 &&
+            _vm.yearsAndDecades != false &&
+            _vm.visible === true
+          ? _c(
+              "div",
+              {
+                staticClass: "col-11 paddingSides marginVertical fadeInAnimSlow"
+              },
+              [
+                _vm.type == "alltime"
+                  ? _c("div", { staticClass: "col-12 col-md-12" }, [
+                      _c("div", { staticClass: "row justify-content-center" }, [
+                        _c("div", { staticClass: "col-12 col-md-8" }, [
                           _c(
-                            "b",
-                            {
-                              staticClass: "borderUnderline mainColorHighlight2"
-                            },
+                            "h3",
+                            { staticClass: "text-left slideLeftHours1" },
                             [
                               _vm._v(
-                                _vm._s(_vm.yearsAndDecades["maxDecade"]) + "-ые"
+                                "\n                            Твоя любимая эпоха "
+                              ),
+                              _c(
+                                "b",
+                                {
+                                  staticClass:
+                                    "borderUnderline mainColorHighlight2 colorFadeIn"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.yearsAndDecades["maxDecade"]) +
+                                      "-ые"
+                                  )
+                                ]
+                              ),
+                              _vm._v(
+                                ". \n                            В твоей библиотеке "
+                              ),
+                              _c(
+                                "b",
+                                {
+                                  staticClass:
+                                    "borderUnderline mainColorHighlight2 colorFadeIn"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.yearsAndDecades["maxDecadeSongs"]
+                                    )
+                                  )
+                                ]
+                              ),
+                              _vm._v(
+                                " из этого десятилетия.\n                        "
                               )
                             ]
                           ),
-                          _vm._v(
-                            ". \n                            В твоей библиотеке "
-                          ),
+                          _vm._v(" "),
+                          _c("h6", { staticClass: "slideLeftHours1" }, [
+                            _vm._v("А это "),
+                            _c(
+                              "b",
+                              {
+                                staticClass:
+                                  "borderUnderline mainColorHighlight2 colorFadeIn"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.yearsAndDecades["percent"]) + "%"
+                                )
+                              ]
+                            ),
+                            _vm._v(" твоей библиотеки!")
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "b",
+                            "h5",
                             {
-                              staticClass: "borderUnderline mainColorHighlight2"
+                              staticClass: "text-left slideLeftHours1",
+                              attrs: { "v-if": _vm.type == "alltime" }
                             },
                             [
+                              _c(
+                                "b",
+                                {
+                                  staticClass:
+                                    "borderUnderline mainColorHighlight2 colorFadeIn"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.yearsAndDecades["maxYear"]) +
+                                      "-ый"
+                                  )
+                                ]
+                              ),
                               _vm._v(
-                                _vm._s(_vm.yearsAndDecades["maxDecadeSongs"])
-                              )
+                                " - твой самый любимый год. \n                            Тебе нравятся "
+                              ),
+                              _c(
+                                "b",
+                                {
+                                  staticClass:
+                                    "borderUnderline mainColorHighlight2 colorFadeIn"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.yearsAndDecades["maxYearSongs"])
+                                  )
+                                ]
+                              ),
+                              _vm._v(
+                                " вышедших в этом году.\n                            "
+                              ),
+                              _c("br"),
+                              _c("br"),
+                              _vm._v("Например, "),
+                              _c("b", { staticClass: "textShadow" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        _vm.yearsAndDecades["songOfYear"][
+                                          "url"
+                                        ],
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.yearsAndDecades["songOfYear"][
+                                          "trackName"
+                                        ]
+                                      )
+                                    )
+                                  ]
+                                )
+                              ])
                             ]
-                          ),
-                          _vm._v(
-                            " из этого десятилетия.\n                        "
                           )
                         ]),
                         _vm._v(" "),
-                        _c("h6", [
-                          _vm._v("А это "),
+                        _c("div", { staticClass: "d-none d-md-block col-3" }, [
                           _c(
-                            "b",
+                            "div",
+                            { staticClass: "row justify-content-center" },
+                            [
+                              _c("div", { staticClass: "col-1" }, [
+                                _c("img", {
+                                  staticClass: "rounded-circle albumIconBig",
+                                  attrs: {
+                                    src:
+                                      _vm.yearsAndDecades["songOfYear"][
+                                        "cover"
+                                      ],
+                                    alt: ""
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-1" }, [
+                                _c("img", {
+                                  staticClass: "rounded-circle albumIconBig2",
+                                  attrs: {
+                                    src: _vm.yearsAndDecades["covers"][0],
+                                    alt: ""
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-1" }, [
+                                _c("img", {
+                                  staticClass: "rounded-circle albumIconBig3",
+                                  attrs: {
+                                    src: _vm.yearsAndDecades["covers"][1],
+                                    alt: ""
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-1" }, [
+                                _c("img", {
+                                  staticClass: "rounded-circle albumIconBig4",
+                                  attrs: {
+                                    src: _vm.yearsAndDecades["covers"][2],
+                                    alt: ""
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-1" }, [
+                                _c("img", {
+                                  staticClass: "rounded-circle albumIconBig5",
+                                  attrs: {
+                                    src: _vm.yearsAndDecades["covers"][3],
+                                    alt: ""
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-1" }, [
+                                _c("img", {
+                                  staticClass: "rounded-circle albumIconBig6",
+                                  attrs: {
+                                    src: _vm.yearsAndDecades["covers"][4],
+                                    alt: ""
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-1" }, [
+                                _c("img", {
+                                  staticClass: "rounded-circle albumIconBig7",
+                                  attrs: {
+                                    src: _vm.yearsAndDecades["covers"][5],
+                                    alt: ""
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-1" }, [
+                                _c("img", {
+                                  staticClass: "rounded-circle albumIconBig8",
+                                  attrs: {
+                                    src: _vm.yearsAndDecades["covers"][6],
+                                    alt: ""
+                                  }
+                                })
+                              ])
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _vm.chart === true
+                        ? _c(
+                            "h5",
+                            { staticClass: "text-center goUpAnimSlow" },
+                            [_vm._v("А вот так это выглядит на графике")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          directives: [
                             {
-                              staticClass: "borderUnderline mainColorHighlight2"
+                              name: "wheel",
+                              rawName: "v-wheel",
+                              value: _vm.handleWheelChart,
+                              expression: "handleWheelChart"
+                            }
+                          ],
+                          staticClass: "col-12"
+                        },
+                        [
+                          _vm.chart === true
+                            ? _c(
+                                "div",
+                                { staticClass: "col-12 goUpAnimSlow" },
+                                [
+                                  _c("BarChart", {
+                                    attrs: {
+                                      favoriteGenres:
+                                        _vm.yearsAndDecades["countDecades"],
+                                      label: "Песен из этой эпохи",
+                                      backgroundColor:
+                                        _vm.yearsAndDecades["decadeColors"],
+                                      height: 600
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.chartYears === true
+                        ? _c(
+                            "h5",
+                            {
+                              staticClass: "text-center goUpAnimSlow",
+                              staticStyle: { "margin-top": "6rem" }
                             },
                             [
-                              _vm._v(
-                                _vm._s(_vm.yearsAndDecades["percent"]) + "%"
-                              )
+                              _vm._v("А вот твоя карта песен по годам "),
+                              _c("i", {
+                                staticClass: "far fa-chart-bar mainColor"
+                              })
                             ]
-                          ),
-                          _vm._v(" твоей библиотеки!")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "h5",
-                          {
-                            staticClass: "text-left",
-                            attrs: { "v-if": _vm.type == "alltime" }
-                          },
-                          [
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "wheel",
+                              rawName: "v-wheel",
+                              value: _vm.handleWheelChartYears,
+                              expression: "handleWheelChartYears"
+                            }
+                          ],
+                          staticClass: "col-12 marginVertical"
+                        },
+                        [
+                          _vm.chartYears === true
+                            ? _c(
+                                "div",
+                                { staticClass: "col-12 goUpAnimSlow" },
+                                [
+                                  _c("BarChart", {
+                                    attrs: {
+                                      favoriteGenres:
+                                        _vm.yearsAndDecades["countYears"],
+                                      label: "Песен в году",
+                                      backgroundColor:
+                                        _vm.yearsAndDecades["yearColors"],
+                                      height: 950
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    ])
+                  : _c("div", { staticClass: "row justify-content-center" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "col-12 col-md-9",
+                          attrs: { "v-else-if": _vm.type == "month" }
+                        },
+                        [
+                          _c("h3", { staticClass: "text-left" }, [
+                            _vm._v(
+                              "\n                        В последнее время ты больше всего слушаешь музыку "
+                            ),
                             _c(
                               "b",
                               {
@@ -82543,334 +82995,122 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  _vm._s(_vm.yearsAndDecades["maxYear"]) + "-ый"
+                                  _vm._s(_vm.yearsAndDecades["max"]) + "-ых"
                                 )
                               ]
                             ),
-                            _vm._v(
-                              " - твой самый любимый год. \n                            Тебе нравятся "
-                            ),
+                            _vm._v(". \n                    ")
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "text-left" }, [
                             _c(
                               "b",
                               {
                                 staticClass:
                                   "borderUnderline mainColorHighlight2"
                               },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.yearsAndDecades["maxYearSongs"])
-                                )
-                              ]
+                              [_vm._v(_vm._s(_vm.yearsAndDecades["maxSongs"]))]
                             ),
                             _vm._v(
-                              " вышедших в этом году.\n                            "
-                            ),
-                            _c("br"),
-                            _c("br"),
+                              " из этой эпохи " +
+                                _vm._s(_vm.yearsAndDecades["word"]) +
+                                " через тебя за последний месяц.\n                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", [
                             _vm._v("Например, "),
                             _c("b", { staticClass: "textShadow" }, [
                               _c(
                                 "a",
                                 {
                                   attrs: {
-                                    href:
-                                      _vm.yearsAndDecades["songOfYear"]["url"],
+                                    href: _vm.yearsAndDecades["maxSong"]["url"],
                                     target: "_blank"
                                   }
                                 },
                                 [
                                   _vm._v(
                                     _vm._s(
-                                      _vm.yearsAndDecades["songOfYear"][
+                                      _vm.yearsAndDecades["maxSong"][
                                         "trackName"
                                       ]
                                     )
                                   )
                                 ]
                               )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "d-none d-md-block col-3" }, [
-                        _c(
-                          "div",
-                          { staticClass: "row justify-content-center" },
-                          [
-                            _c("div", { staticClass: "col-1" }, [
-                              _c("img", {
-                                staticClass:
-                                  "rounded-circle albumIconBig greenShadow",
-                                attrs: {
-                                  src:
-                                    _vm.yearsAndDecades["songOfYear"]["cover"],
-                                  alt: ""
-                                }
-                              })
                             ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-1" }, [
-                              _c("img", {
-                                staticClass:
-                                  "rounded-circle albumIconBig2 greenShadow",
-                                attrs: {
-                                  src: _vm.yearsAndDecades["covers"][0],
-                                  alt: ""
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-1" }, [
-                              _c("img", {
-                                staticClass:
-                                  "rounded-circle albumIconBig3 greenShadow",
-                                attrs: {
-                                  src: _vm.yearsAndDecades["covers"][1],
-                                  alt: ""
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-1" }, [
-                              _c("img", {
-                                staticClass:
-                                  "rounded-circle albumIconBig4 greenShadow",
-                                attrs: {
-                                  src: _vm.yearsAndDecades["covers"][2],
-                                  alt: ""
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-1" }, [
-                              _c("img", {
-                                staticClass:
-                                  "rounded-circle albumIconBig5 greenShadow",
-                                attrs: {
-                                  src: _vm.yearsAndDecades["covers"][3],
-                                  alt: ""
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-1" }, [
-                              _c("img", {
-                                staticClass:
-                                  "rounded-circle albumIconBig6 greenShadow",
-                                attrs: {
-                                  src: _vm.yearsAndDecades["covers"][4],
-                                  alt: ""
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-1" }, [
-                              _c("img", {
-                                staticClass:
-                                  "rounded-circle albumIconBig7 greenShadow",
-                                attrs: {
-                                  src: _vm.yearsAndDecades["covers"][5],
-                                  alt: ""
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-1" }, [
-                              _c("img", {
-                                staticClass:
-                                  "rounded-circle albumIconBig8 greenShadow",
-                                attrs: {
-                                  src: _vm.yearsAndDecades["covers"][6],
-                                  alt: ""
-                                }
-                              })
-                            ])
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "text-center" }, [
-                      _vm._v("А вот так это выглядит на графике")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-12" },
-                      [
-                        _c("BarChart", {
-                          attrs: {
-                            favoriteGenres: _vm.yearsAndDecades["countDecades"],
-                            label: "Песен из этой эпохи",
-                            backgroundColor:
-                              _vm.yearsAndDecades["decadeColors"],
-                            height: 600
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-12 marginVertical" },
-                      [
-                        _c("BarChart", {
-                          attrs: {
-                            favoriteGenres: _vm.yearsAndDecades["countYears"],
-                            label: "Песен в году",
-                            backgroundColor: _vm.yearsAndDecades["yearColors"],
-                            height: 950
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ])
-                : _c("div", { staticClass: "row justify-content-center" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "col-12 col-md-9",
-                        attrs: { "v-else-if": _vm.type == "month" }
-                      },
-                      [
-                        _c("h3", { staticClass: "text-left" }, [
-                          _vm._v(
-                            "\n                        В последнее время ты больше всего слушаешь музыку "
-                          ),
-                          _c(
-                            "b",
-                            {
-                              staticClass: "borderUnderline mainColorHighlight2"
-                            },
-                            [_vm._v(_vm._s(_vm.yearsAndDecades["max"]) + "-ых")]
-                          ),
-                          _vm._v(". \n                    ")
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "text-left" }, [
-                          _c(
-                            "b",
-                            {
-                              staticClass: "borderUnderline mainColorHighlight2"
-                            },
-                            [_vm._v(_vm._s(_vm.yearsAndDecades["maxSongs"]))]
-                          ),
-                          _vm._v(
-                            " из этой эпохи " +
-                              _vm._s(_vm.yearsAndDecades["word"]) +
-                              " через тебя за последний месяц.\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", [
-                          _vm._v("Например, "),
-                          _c("b", { staticClass: "textShadow" }, [
+                            _vm._v(", \n                    вышедшая в "),
                             _c(
-                              "a",
+                              "b",
                               {
-                                attrs: {
-                                  href: _vm.yearsAndDecades["maxSong"]["url"],
-                                  target: "_blank"
-                                }
+                                staticClass:
+                                  "borderUnderline mainColorHighlight2"
                               },
                               [
                                 _vm._v(
                                   _vm._s(
-                                    _vm.yearsAndDecades["maxSong"]["trackName"]
-                                  )
+                                    _vm.yearsAndDecades["maxSong"]["year"]
+                                  ) + "-ом"
                                 )
                               ]
-                            )
-                          ]),
-                          _vm._v(", \n                    вышедшая в "),
-                          _c(
-                            "b",
-                            {
-                              staticClass: "borderUnderline mainColorHighlight2"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.yearsAndDecades["maxSong"]["year"]) +
-                                  "-ом"
-                              )
-                            ]
-                          ),
-                          _vm._v(" году.")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "d-none d-md-block col-md-3" }, [
-                      _c("div", { staticClass: "col-6" }, [
-                        _vm.yearsAndDecades["max"] < 1950
-                          ? _c("i", { staticClass: "fas fa-music iconMonth" })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.yearsAndDecades["max"] >= 1950 &&
-                        _vm.yearsAndDecades["max"] <= 1970
-                          ? _c("i", {
-                              staticClass: "fas fa-record-vinyl iconMonth"
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.yearsAndDecades["max"] === 1980 ||
-                        _vm.yearsAndDecades["max"] === 1990
-                          ? _c("i", {
-                              staticClass: "fas fa-compact-disc iconMonth"
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.yearsAndDecades["max"] === 2000
-                          ? _c("i", {
-                              staticClass: "fas fa-play-circle iconMonth"
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.yearsAndDecades["max"] >= 2010
-                          ? _c("i", { staticClass: "fas fa-cloud iconMonth" })
-                          : _vm._e()
-                      ]),
+                            ),
+                            _vm._v(" году.")
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        _c("img", {
-                          staticClass:
-                            "rounded-circle albumIconBigMonth greenShadow",
-                          attrs: {
-                            src: _vm.yearsAndDecades["maxSong"]["cover"],
-                            alt: ""
-                          }
-                        })
+                      _c("div", { staticClass: "d-none d-md-block col-md-3" }, [
+                        _c("div", { staticClass: "col-6" }, [
+                          _vm.yearsAndDecades["max"] < 1950
+                            ? _c("i", { staticClass: "fas fa-music iconMonth" })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.yearsAndDecades["max"] >= 1950 &&
+                          _vm.yearsAndDecades["max"] <= 1970
+                            ? _c("i", {
+                                staticClass: "fas fa-record-vinyl iconMonth"
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.yearsAndDecades["max"] === 1980 ||
+                          _vm.yearsAndDecades["max"] === 1990
+                            ? _c("i", {
+                                staticClass: "fas fa-compact-disc iconMonth"
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.yearsAndDecades["max"] === 2000
+                            ? _c("i", {
+                                staticClass: "fas fa-play-circle iconMonth"
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.yearsAndDecades["max"] >= 2010
+                            ? _c("i", { staticClass: "fas fa-cloud iconMonth" })
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-6" }, [
+                          _c("img", {
+                            staticClass:
+                              "rounded-circle albumIconBigMonth greenShadow",
+                            attrs: {
+                              src: _vm.yearsAndDecades["maxSong"]["cover"],
+                              alt: ""
+                            }
+                          })
+                        ])
                       ])
                     ])
-                  ])
-            ]
-          )
-        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-    ])
-  ])
+              ]
+            )
+          : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
+      ])
+    ]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h5",
-      { staticClass: "text-center", staticStyle: { "margin-top": "6rem" } },
-      [
-        _vm._v("А вот твоя карта песен по годам "),
-        _c("i", { staticClass: "far fa-chart-bar mainColor" })
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

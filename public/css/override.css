@@ -532,6 +532,12 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     right: 0;
     transform: translate(3rem, -3rem) scale(1.2);
     z-index: 0;
+    animation: albumIconBig;
+    animation-duration: 1.2s;
+    animation-timing-function: ease;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
     
 }
 
@@ -543,6 +549,12 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     right: 0;
     transform: translate(10rem, -3rem) scale(1);
     z-index: -1;
+    animation: albumIconBig2;
+    animation-duration: 1.5s;
+    animation-timing-function: ease;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
 }
 
 .albumIconBig3{
@@ -553,6 +565,12 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     right: 0;
     transform: translate(1rem, 7rem) scale(0.8);
     z-index: -2;
+    animation: albumIconBig3;
+    animation-duration: 2.2s;
+    animation-timing-function: ease;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
 }
 
 .albumIconBig4{
@@ -563,6 +581,11 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     right: 0;
     transform: translate(9rem, 8rem) scale(1);
     z-index: -1;
+    animation: albumIconBig4;
+    animation-duration: 1.8s;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
 }
 
 .albumIconBig5{
@@ -573,6 +596,11 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     right: 0;
     transform: translate(-5rem, 14rem) scale(0.7);
     z-index: 0;
+    animation: albumIconBig5;
+    animation-duration: 2s;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
 }
 
 .albumIconBig6{
@@ -583,6 +611,11 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     right: 0;
     transform: translate(-1rem, 18rem) scale(0.6);
     z-index: -2;
+    animation: albumIconBig6;
+    animation-duration: 2s;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
 }
 
 .albumIconBig7{
@@ -593,6 +626,11 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     right: 0;
     transform: translate(1rem, 15rem) scale(0.5);
     z-index: -1;
+    animation: albumIconBig7;
+    animation-duration: 2.2s;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
 }
 
 .albumIconBig8{
@@ -603,6 +641,11 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     right: 0;
     transform: translate(-10rem, 21rem) scale(0.6);
     z-index: 0;
+    animation: albumIconBig8;
+    animation-duration: 2.6s;
+    -webkit-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1);
 }
 
 .albumIconBigMonth{

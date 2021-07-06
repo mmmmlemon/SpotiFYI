@@ -1,6 +1,6 @@
 //HoursAndMinutes
 <template>
-    <div class="col-11 fadeInAnim marginVertical" v-wheel="handleWheel" v-bind:class="{'zeroOpacity': visible === false}" >
+    <div class="col-11 fadeInAnim marginVertical" v-wheel="handleWheel" v-bind:class="{'zeroOpacity': visible === false}">
         <div class="justify-content-center" v-if="visible === true">
             <div v-if="userLibraryTime === -1">
                 <Loader />
@@ -120,8 +120,7 @@ export default {
                 this.overallDays = [this.userLibraryTime.overallDays, this.userLibraryTime.overallMinutes / 1300];
                 this.overallMonths = [this.userLibraryTime.overallMonths, this.userLibraryTime.overallMinutes / 1300];
             }
-            return el.getBoundingClientRect().top < 700;
-            
+            return el.getBoundingClientRect().top < 700;   
         }
     }
 }
