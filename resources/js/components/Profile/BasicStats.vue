@@ -36,30 +36,30 @@
                                      :userLibraryTime="userLibraryTime"/>
 
                     <!-- самые длинные и короткие треки -->
-                    <AverageTrackLength v-if="userLibraryTime !== -1" id="tracks"
-                                        :tracksMode="tracksMode"/>
+                    <!-- <AverageTrackLength v-if="userLibraryTime !== -1" id="tracks"
+                                        :tracksMode="tracksMode"/> -->
                     
                     <!-- кол-во исполнителей -->
-                    <ArtistsCount v-if="tracksMode != -1" :uniqueArtists="uniqueArtists"/>
+                    <!-- <ArtistsCount v-if="tracksMode != -1" :uniqueArtists="uniqueArtists"/> -->
 
                     <!-- года и десятилетия -->
-                    <YearsAndDecades :yearsAndDecades="yearsAndDecades" type="alltime"/>
+                    <!-- <YearsAndDecades :yearsAndDecades="yearsAndDecades" type="alltime"/> -->
 
                     <!-- года и десятилетия за месяц-->
-                    <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="decadeMonth" type="month"/>
+                    <!-- <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="decadeMonth" type="month"/> -->
 
                     <!-- любимые жанры -->
                     <!-- <FavoriteGenres v-if="decadeMonth != -1" :favoriteGenres="favoriteGenres" id="genres"/> -->
 
                     <!-- Самый популярный\непопулярный артист -->
-                    <AchievementItem v-if="mostPopularArtist != 'noArtists'" 
+                    <!-- <AchievementItem v-if="mostPopularArtist != 'noArtists'" 
                                 cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" 
-                                :items="mostPopularArtist"/>
+                                :items="mostPopularArtist"/> -->
 
-                    <br><br>
-                    <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist != 'noArtists'" 
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>    
+                    <!-- <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist != 'noArtists'" 
                                     cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" 
-                                    :items="leastPopularArtist" orientation="right"/>
+                                    :items="leastPopularArtist" orientation="right"/> -->
                     
 
        

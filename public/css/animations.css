@@ -226,6 +226,178 @@
 }
 
 
+@keyframes goUpSlow {
+  0% { 
+      opacity: 0;
+      transform: translateY(80px);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translateY(0px);
+  }
+}
+
+.goUpAnimSlow {
+  animation-name: goUpSlow;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slideRightIcon{
+  0%{
+    opacity: 0;
+    transform: translateX(100px);
+    color: grey;
+  }
+
+  65%{
+    opacity: 1;
+    transform: translateX(0px);
+    color: var(--main-color-highlight2);
+  }
+
+  100%{
+    color:var(--main-color);
+  }
+}
+.slideRightIcon{
+  animation-name: slideRightIcon;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+}
+
+
+@keyframes slideLeftHours1{
+  0%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes colorHours{
+  0%{
+    color:grey;
+  }
+
+  100%{
+    color:var(--main-color-highlight2);
+  }
+
+}
+
+@keyframes slideLeftHours2{
+  0%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  50%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes slideLeftHours3{
+  0%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  50%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes slideLeftHours4{
+  0%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  50%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+
+.slideLeftHours1{
+  animation-name: slideLeftHours1;
+  animation-duration: 1.2s;
+  animation-timing-function: ease;
+}
+
+.colorHours{
+  animation-name: colorHours;
+  animation-duration: 4s;
+  animation-timing-function: ease;
+}
+
+.slideLeftHours2{
+  animation-name: slideLeftHours2;
+  animation-duration: 1.8s;
+  animation-timing-function: ease;
+}
+
+
+.colorHours2{
+  animation-name: colorHours;
+  animation-duration: 6s;
+  animation-timing-function: ease;
+}
+
+
+.slideLeftHours3{
+  animation-name: slideLeftHours3;
+  animation-duration: 2.4s;
+  animation-timing-function: ease;
+}
+
+.colorHours3{
+  animation-name: colorHours;
+  animation-duration: 8s;
+  animation-timing-function: ease;
+}
+
+
+.slideLeftHours4{
+  animation-name: slideLeftHours4;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+}
+
+.colorHours4{
+  animation-name: colorHours;
+  animation-duration: 10s;
+  animation-timing-function: ease;
+}
+
+
+
+
+
 
 
 

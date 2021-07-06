@@ -72,6 +72,19 @@ import Vue from 'vue';
 //     });
 // });
 
+Vue.directive('wheel', {
+    inserted: function (el, binding) {
+      let f = function (evt) {
+        if (binding.value(evt, el)) {
+          window.removeEventListener('wheel', f)
+        }
+      }
+      window.addEventListener('wheel', f)
+    }
+  })
+
+
+
 const app = new Vue({
     store,
     el: '#app',

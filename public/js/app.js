@@ -3894,6 +3894,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+//
 //
 //
 //
@@ -3945,9 +3958,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      visible: false,
+      overallMinutes: 0,
+      overallMinutesTweened: 0,
+      overallHours: 0,
+      overallHoursTweened: 0,
+      overallDays: 0,
+      overallDaysTweened: 0,
+      overallMonths: 0,
+      overallMonthsTweened: 0
+    };
+  },
   props: {
     userLibraryTime: {
       "default": false
+    }
+  },
+  computed: {
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visible = false;
+      },
+      set: function set(value) {
+        this.visible = value;
+      }
+    },
+    overallMinutesAnimated: function overallMinutesAnimated() {
+      return "".concat(this.overallMinutesTweened.toFixed(0)).concat(this.userLibraryTime.overallMinutesWord);
+    },
+    overallHoursAnimated: function overallHoursAnimated() {
+      return "".concat(this.overallHoursTweened.toFixed(0)).concat(this.userLibraryTime.overallHoursWord);
+    },
+    overallDaysAnimated: function overallDaysAnimated() {
+      return "".concat(this.overallDaysTweened.toFixed(0)).concat(this.userLibraryTime.overallDaysWord);
+    },
+    overallMonthsAnimated: function overallMonthsAnimated() {
+      return "".concat(this.overallMonthsTweened.toFixed(0)).concat(this.userLibraryTime.overallMonthsWord);
+    }
+  },
+  watch: {
+    overallMinutes: function overallMinutes(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          newValue = _ref2[0],
+          dur = _ref2[1];
+
+      gsap.to(this.$data, {
+        duration: dur,
+        overallMinutesTweened: newValue
+      });
+    },
+    overallHours: function overallHours(_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+          newValue = _ref4[0],
+          dur = _ref4[1];
+
+      gsap.to(this.$data, {
+        duration: dur,
+        overallHoursTweened: newValue
+      });
+    },
+    overallDays: function overallDays(_ref5) {
+      var _ref6 = _slicedToArray(_ref5, 2),
+          newValue = _ref6[0],
+          dur = _ref6[1];
+
+      gsap.to(this.$data, {
+        duration: dur,
+        overallDaysTweened: newValue
+      });
+    },
+    overallMonths: function overallMonths(_ref7) {
+      var _ref8 = _slicedToArray(_ref7, 2),
+          newValue = _ref8[0],
+          dur = _ref8[1];
+
+      gsap.to(this.$data, {
+        duration: dur,
+        overallMonthsTweened: newValue
+      });
+    }
+  },
+  //методы
+  methods: {
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleWheel: function handleWheel(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setVisible = true;
+        this.overallMinutes = [this.userLibraryTime.overallMinutes, this.userLibraryTime.overallMinutes / 1300];
+        this.overallHours = [this.userLibraryTime.overallHours, this.userLibraryTime.overallMinutes / 1300];
+        this.overallDays = [this.userLibraryTime.overallDays, this.userLibraryTime.overallMinutes / 1300];
+        this.overallMonths = [this.userLibraryTime.overallMonths, this.userLibraryTime.overallMinutes / 1300];
+      }
+
+      return el.getBoundingClientRect().top < 700;
     }
   }
 });
@@ -81452,55 +81559,32 @@ var render = function() {
                     })
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.userLibraryTime !== -1
-                  ? _c("AverageTrackLength", {
-                      attrs: { id: "tracks", tracksMode: _vm.tracksMode }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.tracksMode != -1
-                  ? _c("ArtistsCount", {
-                      attrs: { uniqueArtists: _vm.uniqueArtists }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("YearsAndDecades", {
-                  attrs: {
-                    yearsAndDecades: _vm.yearsAndDecades,
-                    type: "alltime"
-                  }
-                }),
-                _vm._v(" "),
-                _vm.yearsAndDecades != -1
-                  ? _c("YearsAndDecades", {
-                      attrs: { yearsAndDecades: _vm.decadeMonth, type: "month" }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.mostPopularArtist != "noArtists"
-                  ? _c("AchievementItem", {
-                      attrs: {
-                        cardTitle: "Самый популярный исполнитель",
-                        cardSubtitle: "На которого ты подписан",
-                        items: _vm.mostPopularArtist
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
                 _c("br"),
                 _c("br"),
-                _vm._v(" "),
-                _vm.mostPopularArtist != -1 &&
-                _vm.leastPopularArtist != "noArtists"
-                  ? _c("AchievementItem", {
-                      attrs: {
-                        cardTitle: "Самый непопулярный исполнитель",
-                        cardSubtitle: "На которого ты подписан",
-                        items: _vm.leastPopularArtist,
-                        orientation: "right"
-                      }
-                    })
-                  : _vm._e()
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br")
               ],
               1
             )
@@ -81912,102 +81996,133 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-11 fadeInAnim marginVertical" }, [
-    _c("div", { staticClass: "justify-content-center" }, [
-      _vm.userLibraryTime === -1
-        ? _c("div", [_c("Loader")], 1)
-        : _vm.userLibraryTime === false
-        ? _c(
-            "div",
-            [
-              _c("Error", {
-                attrs: {
-                  type: "small",
-                  errorMessage: "Не удалось загрузить треки"
-                }
-              })
-            ],
-            1
-          )
-        : _vm.userLibraryTime != -1 && _vm.userLibraryTime != false
-        ? _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "col-12 col-md-8 text-left" }, [
-              _c("h3", [
-                _vm._v(
-                  "Всего в твою библиотеку добавлено\n                    "
-                ),
-                _c(
-                  "b",
-                  { staticClass: "borderUnderline mainColorHighlight2" },
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "wheel",
+          rawName: "v-wheel",
+          value: _vm.handleWheel,
+          expression: "handleWheel"
+        }
+      ],
+      staticClass: "col-11 fadeInAnim marginVertical",
+      class: { zeroOpacity: _vm.visible === false }
+    },
+    [
+      _vm.visible === true
+        ? _c("div", { staticClass: "justify-content-center" }, [
+            _vm.userLibraryTime === -1
+              ? _c("div", [_c("Loader")], 1)
+              : _vm.userLibraryTime === false
+              ? _c(
+                  "div",
                   [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.userLibraryTime["overallMinutes"]) +
-                        "\n                    "
-                    )
-                  ]
-                ),
-                _vm._v(" музыки.\n                ")
-              ]),
-              _vm._v(" "),
-              _vm.userLibraryTime["overallHours"] != 0
-                ? _c("h5", [
-                    _vm.userLibraryTime["overallDays"] == 0
-                      ? _c("b", { staticClass: "unbold" }, [_vm._v("Или ")])
-                      : _c("b", { staticClass: "unbold" }, [
-                          _vm._v("В других исчислениях это")
-                        ]),
+                    _c("Error", {
+                      attrs: {
+                        type: "small",
+                        errorMessage: "Не удалось загрузить треки"
+                      }
+                    })
+                  ],
+                  1
+                )
+              : _vm.userLibraryTime != -1 && _vm.userLibraryTime != false
+              ? _c("div", { staticClass: "row justify-content-center" }, [
+                  _c("div", { staticClass: "col-12 col-md-8 text-left" }, [
+                    _c("h3", { staticClass: "slideLeftHours1" }, [
+                      _vm._v(
+                        "Всего в твою библиотеку добавлено\n                    "
+                      ),
+                      _c(
+                        "b",
+                        {
+                          staticClass:
+                            "borderUnderline mainColorHighlight2 colorHours1"
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm.overallMinutesAnimated) +
+                              "\n                    "
+                          )
+                        ]
+                      ),
+                      _vm._v(" музыки.\n                ")
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "b",
-                      { staticClass: "borderUnderline  mainColorHighlight2" },
-                      [_vm._v(_vm._s(_vm.userLibraryTime["overallHours"]))]
-                    ),
-                    _vm._v(" "),
-                    _vm.userLibraryTime["overallDays"] == 0
-                      ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
-                      : _vm._e()
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.userLibraryTime["overallDays"] != 0
-                ? _c("h5", [
-                    _vm.userLibraryTime["overallMonths"] == 0
-                      ? _c("b", { staticClass: "unbold" }, [_vm._v("или ")])
+                    _vm.userLibraryTime["overallHours"] != 0
+                      ? _c("h5", { staticClass: "slideLeftHours2" }, [
+                          _vm.userLibraryTime["overallDays"] == 0
+                            ? _c("b", {}, [_vm._v("Или ")])
+                            : _c("b", [_vm._v("В других исчислениях это")]),
+                          _vm._v(" "),
+                          _c(
+                            "b",
+                            {
+                              staticClass:
+                                "borderUnderline mainColorHighlight2 colorHours2"
+                            },
+                            [_vm._v(_vm._s(_vm.overallHoursAnimated))]
+                          ),
+                          _vm._v(" "),
+                          _vm.userLibraryTime["overallDays"] == 0
+                            ? _c("b", [_vm._v(" песен.")])
+                            : _vm._e()
+                        ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "b",
-                      { staticClass: "borderUnderline  mainColorHighlight2" },
-                      [_vm._v(_vm._s(_vm.userLibraryTime["overallDays"]))]
-                    ),
+                    _vm.userLibraryTime["overallDays"] != 0
+                      ? _c("h5", { staticClass: "slideLeftHours3" }, [
+                          _vm.userLibraryTime["overallMonths"] == 0
+                            ? _c("b", {}, [_vm._v("или ")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "b",
+                            {
+                              staticClass:
+                                "borderUnderline mainColorHighlight2 colorHours3"
+                            },
+                            [_vm._v(_vm._s(_vm.overallDaysAnimated))]
+                          ),
+                          _vm._v(" "),
+                          _vm.userLibraryTime["overallMonths"] == 0
+                            ? _c("b", {}, [_vm._v(" песен.")])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
-                    _vm.userLibraryTime["overallMonths"] == 0
-                      ? _c("b", { staticClass: "unbold" }, [_vm._v(" песен.")])
+                    _vm.userLibraryTime["overallMonths"] != 0
+                      ? _c("h5", { staticClass: "slideLeftHours4" }, [
+                          _vm._v("или \n                    "),
+                          _c(
+                            "b",
+                            {
+                              staticClass:
+                                "borderUnderline mainColorHighlight2 colorHours4"
+                            },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(_vm.overallMonthsAnimated) +
+                                  "\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" песен.\n                ")
+                        ])
                       : _vm._e()
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.userLibraryTime["overallMonths"] != 0
-                ? _c("h5", [
-                    _vm._v("или \n                    "),
-                    _c("b", { staticClass: "font18pt borderUnderline" }, [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(_vm.userLibraryTime["overallMonths"]) +
-                          "\n                    "
-                      )
-                    ]),
-                    _vm._v(" песен.\n                ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ])
+              : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
           ])
-        : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
-    ])
-  ])
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -82019,7 +82134,7 @@ var staticRenderFns = [
       { staticClass: "d-none d-md-block col-md-4 text-center" },
       [
         _c("i", {
-          staticClass: "far fa-clock mainColor",
+          staticClass: "far fa-clock mainColor slideRightIcon",
           staticStyle: { "font-size": "16rem" }
         })
       ]
@@ -82105,7 +82220,7 @@ var render = function() {
                   _vm.items == -1
                     ? _c("div", [_c("Loader")], 1)
                     : _vm.items != -1
-                    ? _c("div", { staticClass: "goUpAnim paddingSides" }, [
+                    ? _c("div", { staticClass: "goUpAnimSlow paddingSides" }, [
                         _vm.type === "tracks"
                           ? _c(
                               "h4",
@@ -100171,6 +100286,17 @@ vue__WEBPACK_IMPORTED_MODULE_22___default.a.use(vue_axios__WEBPACK_IMPORTED_MODU
 //     });
 // });
 
+vue__WEBPACK_IMPORTED_MODULE_22___default.a.directive('wheel', {
+  inserted: function inserted(el, binding) {
+    var f = function f(evt) {
+      if (binding.value(evt, el)) {
+        window.removeEventListener('wheel', f);
+      }
+    };
+
+    window.addEventListener('wheel', f);
+  }
+});
 var app = new vue__WEBPACK_IMPORTED_MODULE_22___default.a({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',

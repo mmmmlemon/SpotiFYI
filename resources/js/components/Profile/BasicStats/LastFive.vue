@@ -19,7 +19,7 @@
                     <div v-if="items == -1">
                         <Loader />
                     </div>
-                    <div v-else-if="items != -1" class="goUpAnim paddingSides">
+                    <div v-else-if="items != -1" class="goUpAnimSlow paddingSides">
                         <h4 v-if="type === 'tracks'" class="text-center borderUnderline">
                             Треки - <b>{{items['count']}}</b>
                         </h4>

@@ -404,17 +404,21 @@ class SpotifyAPIController extends Controller
             $overallMonths = floor($overallDays / 30); //общее кол-во месяцев (кол-во дней / 30 дней)
 
             //вычисляем какое слово нужно подставить в конец (1 минуТА, 2 минуТЫ и т.п)
-            $overallMinutes .= " " . Helpers::pickTheWord($overallMinutes, "минут", "минута", "минуты");
+            $overallMinutesWord = " " . Helpers::pickTheWord($overallMinutes, "минут", "минута", "минуты");
             
             //аналогично для остальных измерений, если они больше нуля
+            $overallHoursWord = null;
+            $overallDaysWord = null;
+            $overallMonthsWord = null;
+
             if($overallHours > 0)
-            {  $overallHours .= " " . Helpers::pickTheWord($overallHours, "часов", "час", "часа"); }
+            {  $overallHoursWord .= " " . Helpers::pickTheWord($overallHours, "часов", "час", "часа"); }
             
             if($overallDays > 0)
-            {  $overallDays .= " " . Helpers::pickTheWord($overallDays, "дней", "день", "дня"); }
+            {  $overallDaysWord .= " " . Helpers::pickTheWord($overallDays, "дней", "день", "дня"); }
             
             if($overallMonths > 0)
-            {  $overallMonths .= " " . Helpers::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
+            {  $overallMonthsWord .= " " . Helpers::pickTheWord($overallMonths, "месяцев", "месяц", "месяца"); }
 
             //получить случайное изображение с обложкой альбома для фоновой картинки
             //получаем случайный трек из файла
@@ -434,7 +438,11 @@ class SpotifyAPIController extends Controller
             $response = ['overallMinutes' => $overallMinutes, 
                          'overallHours' => $overallHours,
                          'overallDays' => $overallDays, 
-                         'overallMonths' => $overallMonths
+                         'overallMonths' => $overallMonths,
+                         'overallMinutesWord' => $overallMinutesWord,
+                         'overallHoursWord' => $overallHoursWord,
+                         'overallDaysWord' => $overallDaysWord,
+                         'overallMonthsWord' => '$overallMonthsWord',
                         //  'coverImageUrl' => $coverImageUrl
                         ];
 
