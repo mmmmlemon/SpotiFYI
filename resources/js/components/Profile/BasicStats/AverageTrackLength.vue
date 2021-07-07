@@ -13,6 +13,9 @@
                 <div class="col-4 d-none d-md-block">
                     <i class="fas fa-ruler-horizontal mainColor slideLeftIcon " style="font-size: 16rem;"></i>
                 </div>
+                <div class="col-4 d-block d-md-none iconRightLengthMobile">
+                    <i class="fas fa-ruler-horizontal mainColor slideLeftIcon " style="font-size: 16rem;"></i>
+                </div>
                 <div class="col-12 col-md-8 slideRight">
                     <h3 class="text-right paddingSides">
                         Средняя продолжительность трека - 

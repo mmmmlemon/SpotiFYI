@@ -55,6 +55,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="d-md-block d-md-none col-12 albumCoversMobile">
+                            <div class="row justify-content-center">
+                                <div class="col-1">
+                                    <img :src="yearsAndDecades['songOfYear']['cover']" class="rounded-circle albumIconBig" alt="">
+                                </div>
+                                <div class="col-1">
+                                    <img :src="yearsAndDecades['covers'][0]" class="rounded-circle albumIconBig2" alt="">
+                                </div>
+                                <div class="col-1">
+                                    <img :src="yearsAndDecades['covers'][1]" class="rounded-circle albumIconBig3" alt="">
+                                </div>
+                                <div class="col-1">
+                                    <img :src="yearsAndDecades['covers'][2]" class="rounded-circle albumIconBig4" alt="">
+                                </div>
+                                <div class="col-1">
+                                    <img :src="yearsAndDecades['covers'][3]" class="rounded-circle albumIconBig5" alt="">
+                                </div>
+                                <div class="col-1">
+                                    <img :src="yearsAndDecades['covers'][4]" class="rounded-circle albumIconBig6" alt="">
+                                </div>
+                                <div class="col-1">
+                                    <img :src="yearsAndDecades['covers'][5]" class="rounded-circle albumIconBig7" alt="">
+                                </div>
+                                <div class="col-1">
+                                    <img :src="yearsAndDecades['covers'][6]" class="rounded-circle albumIconBig8" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <br>
                     <h5 class="text-center goUpAnimSlow" v-if="chart === true">А вот так это выглядит на графике</h5>
@@ -98,6 +126,18 @@
                             <i v-if="yearsAndDecades['max'] >= 2010" class="fas fa-cloud iconMonth"></i>
                         </div>
                         <div class="col-6">
+                            <img :src="yearsAndDecades['maxSong']['cover']" class="rounded-circle albumIconBigMonth greenShadow" alt="">
+                        </div>
+                    </div>
+                    <div class="d-block d-md-none col-md-3 text-right albumCoverMonthMobile">
+                        <div class="col-6 slideRight">
+                            <i v-if="yearsAndDecades['max'] < 1950" class="fas fa-music iconMonth colorFadeIn"></i>
+                            <i v-if="yearsAndDecades['max'] >= 1950 && yearsAndDecades['max'] <= 1970" class="fas fa-record-vinyl iconMonth"></i>
+                            <i v-if="yearsAndDecades['max'] === 1980 || yearsAndDecades['max'] === 1990" class="fas fa-compact-disc iconMonth"></i>
+                            <i v-if="yearsAndDecades['max'] === 2000" class="fas fa-play-circle iconMonth"></i>
+                            <i v-if="yearsAndDecades['max'] >= 2010" class="fas fa-cloud iconMonth"></i>
+                        </div>
+                        <div class="col-6 slideRight">
                             <img :src="yearsAndDecades['maxSong']['cover']" class="rounded-circle albumIconBigMonth greenShadow" alt="">
                         </div>
                     </div>

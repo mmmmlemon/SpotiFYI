@@ -59,10 +59,7 @@
                     <AchievementItem v-if="mostPopularArtist != -1 && leastPopularArtist != 'noArtists'" 
                                     cardTitle="Самый непопулярный исполнитель" cardSubtitle="На которого ты подписан" 
                                     :items="leastPopularArtist" orientation="right"/>
-                    
-
-       
-
+                                    
                 </div>     
             </div>
             <div v-else-if="spotifyUserLibrary['result'] == false">
@@ -75,13 +72,15 @@
         <br>
         <div class="row justify-content-center" style="margin-top: 2rem;" v-scroll="handleScroll" v-bind:class="{'zeroOpacity': visibleButton === false}">
             <router-link to="/profile/top10#top">
-                <button class="btn btn-lg btn-primary-n goUpAnimSlow" v-if="visibleButton">
+                <button class="btn btn-lg btn-primary-n goUpAnimSlow" v-if="visibleButton && leastPopularArtist != -1">
                     Перейти к <b>Топ-10</b>
                 </button>
             </router-link>
             <br><br><br><br><br><br>
             
         </div>
+        <div class="col-12">&nbsp;&nbsp;&nbsp;</div>
+        <div class="col-12">&nbsp;&nbsp;&nbsp;</div>
     </div>
 
 </template>

@@ -3581,7 +3581,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -3864,6 +3863,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4030,6 +4032,9 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+//
+//
+//
 //
 //
 //
@@ -4304,6 +4309,46 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81896,7 +81941,7 @@ var render = function() {
       },
       [
         _c("router-link", { attrs: { to: "/profile/top10#top" } }, [
-          _vm.visibleButton
+          _vm.visibleButton && _vm.leastPopularArtist != -1
             ? _c(
                 "button",
                 { staticClass: "btn btn-lg btn-primary-n goUpAnimSlow" },
@@ -81916,7 +81961,11 @@ var render = function() {
         _c("br")
       ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [_vm._v("   ")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [_vm._v("   ")])
   ])
 }
 var staticRenderFns = [
@@ -82087,6 +82136,8 @@ var render = function() {
             _c("div", { staticClass: "row justify-content-center" }, [
               _vm._m(0),
               _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
               _c("div", { staticClass: "col-12 col-md-8 slideRight" }, [
                 _c("h3", { staticClass: "text-right paddingSides" }, [
                   _vm._v(
@@ -82119,6 +82170,21 @@ var staticRenderFns = [
         staticStyle: { "font-size": "16rem" }
       })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-4 d-block d-md-none iconRightLengthMobile" },
+      [
+        _c("i", {
+          staticClass: "fas fa-ruler-horizontal mainColor slideLeftIcon ",
+          staticStyle: { "font-size": "16rem" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -82437,7 +82503,9 @@ var render = function() {
                       : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._m(1)
                 ])
               : _c("div", [_c("Error", { attrs: { type: "small" } })], 1)
           ])
@@ -82453,6 +82521,21 @@ var staticRenderFns = [
     return _c(
       "div",
       { staticClass: "d-none d-md-block col-md-4 text-center" },
+      [
+        _c("i", {
+          staticClass: "far fa-clock mainColor slideRightIcon",
+          staticStyle: { "font-size": "16rem" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "d-block d-md-none col-md-4 text-center iconRightMobile" },
       [
         _c("i", {
           staticClass: "far fa-clock mainColor slideRightIcon",
@@ -83034,7 +83117,105 @@ var render = function() {
                               ])
                             ]
                           )
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "d-md-block d-md-none col-12 albumCoversMobile"
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "row justify-content-center" },
+                              [
+                                _c("div", { staticClass: "col-1" }, [
+                                  _c("img", {
+                                    staticClass: "rounded-circle albumIconBig",
+                                    attrs: {
+                                      src:
+                                        _vm.yearsAndDecades["songOfYear"][
+                                          "cover"
+                                        ],
+                                      alt: ""
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-1" }, [
+                                  _c("img", {
+                                    staticClass: "rounded-circle albumIconBig2",
+                                    attrs: {
+                                      src: _vm.yearsAndDecades["covers"][0],
+                                      alt: ""
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-1" }, [
+                                  _c("img", {
+                                    staticClass: "rounded-circle albumIconBig3",
+                                    attrs: {
+                                      src: _vm.yearsAndDecades["covers"][1],
+                                      alt: ""
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-1" }, [
+                                  _c("img", {
+                                    staticClass: "rounded-circle albumIconBig4",
+                                    attrs: {
+                                      src: _vm.yearsAndDecades["covers"][2],
+                                      alt: ""
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-1" }, [
+                                  _c("img", {
+                                    staticClass: "rounded-circle albumIconBig5",
+                                    attrs: {
+                                      src: _vm.yearsAndDecades["covers"][3],
+                                      alt: ""
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-1" }, [
+                                  _c("img", {
+                                    staticClass: "rounded-circle albumIconBig6",
+                                    attrs: {
+                                      src: _vm.yearsAndDecades["covers"][4],
+                                      alt: ""
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-1" }, [
+                                  _c("img", {
+                                    staticClass: "rounded-circle albumIconBig7",
+                                    attrs: {
+                                      src: _vm.yearsAndDecades["covers"][5],
+                                      alt: ""
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-1" }, [
+                                  _c("img", {
+                                    staticClass: "rounded-circle albumIconBig8",
+                                    attrs: {
+                                      src: _vm.yearsAndDecades["covers"][6],
+                                      alt: ""
+                                    }
+                                  })
+                                ])
+                              ]
+                            )
+                          ]
+                        )
                       ]),
                       _vm._v(" "),
                       _c("br"),
@@ -83289,6 +83470,61 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-6" }, [
+                              _c("img", {
+                                staticClass:
+                                  "rounded-circle albumIconBigMonth greenShadow",
+                                attrs: {
+                                  src: _vm.yearsAndDecades["maxSong"]["cover"],
+                                  alt: ""
+                                }
+                              })
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "d-block d-md-none col-md-3 text-right albumCoverMonthMobile"
+                          },
+                          [
+                            _c("div", { staticClass: "col-6 slideRight" }, [
+                              _vm.yearsAndDecades["max"] < 1950
+                                ? _c("i", {
+                                    staticClass:
+                                      "fas fa-music iconMonth colorFadeIn"
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.yearsAndDecades["max"] >= 1950 &&
+                              _vm.yearsAndDecades["max"] <= 1970
+                                ? _c("i", {
+                                    staticClass: "fas fa-record-vinyl iconMonth"
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.yearsAndDecades["max"] === 1980 ||
+                              _vm.yearsAndDecades["max"] === 1990
+                                ? _c("i", {
+                                    staticClass: "fas fa-compact-disc iconMonth"
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.yearsAndDecades["max"] === 2000
+                                ? _c("i", {
+                                    staticClass: "fas fa-play-circle iconMonth"
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.yearsAndDecades["max"] >= 2010
+                                ? _c("i", {
+                                    staticClass: "fas fa-cloud iconMonth"
+                                  })
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 slideRight" }, [
                               _c("img", {
                                 staticClass:
                                   "rounded-circle albumIconBigMonth greenShadow",

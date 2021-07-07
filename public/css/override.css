@@ -682,8 +682,36 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     font-size: 4rem;
 }
 
+.albumCoversMobile {
+    opacity: 0.15;
+    z-index: -1;
+    height: 0% !important;
+    position: absolute;
+    transform: translate(-4rem, 9rem);
+}
 
+.albumCoverMonthMobile{
+    opacity: 0.15;
+    z-index: -1;
+    height: 0% !important;
+    position: absolute;
+    transform: translateX(0rem);
+}
 
+.iconRightMobile{
+    opacity: 0.15;
+    z-index: -1;
+    height: 0% !important;
+    position: absolute;
+    transform: translate(1rem, 4rem);
+}
 
+.iconRightLengthMobile{
+    opacity: 0.15;
+    z-index: -1;
+    height: 0% !important;
+    position: absolute;
+    transform: translate(-9rem, 0rem);
+}
 
 /*  */

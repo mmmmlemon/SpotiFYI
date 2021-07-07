@@ -37,7 +37,10 @@
                         </b> песен.
                     </h5>
                 </div>
-                <div class="d-none d-md-block col-md-4 text-center" >
+                <div class="d-none d-md-block col-md-4 text-center">
+                    <i class="far fa-clock mainColor slideRightIcon" style="font-size: 16rem;"></i>
+                </div>
+                <div class="d-block d-md-none col-md-4 text-center iconRightMobile">
                     <i class="far fa-clock mainColor slideRightIcon" style="font-size: 16rem;"></i>
                 </div>
             </div>
