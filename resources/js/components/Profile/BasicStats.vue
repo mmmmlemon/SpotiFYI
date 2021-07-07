@@ -49,7 +49,7 @@
                     <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="decadeMonth" type="month"/>
 
                     <!-- любимые жанры -->
-                    <!-- <FavoriteGenres v-if="decadeMonth != -1" :favoriteGenres="favoriteGenres" id="genres"/> -->
+                    <FavoriteGenres v-if="decadeMonth != -1" :favoriteGenres="favoriteGenres" id="genres"/>
 
                     <!-- Самый популярный\непопулярный артист -->
                     <AchievementItem v-if="mostPopularArtist != 'noArtists'" 
@@ -159,8 +159,8 @@ export default {
             { this.$store.dispatch('getDecadeMonth'); }
 
             //любимые жанры
-            // if(this.favoriteGenres == -1)
-            // { this.$store.dispatch('getFavoriteGenres') };
+            if(this.favoriteGenres == -1)
+            { this.$store.dispatch('getFavoriteGenres') };
 
             //cамый популярный артист, из подписок
             if(this.mostPopularArtist == -1)
@@ -191,8 +191,8 @@ export default {
         //библиотека пользователя
         //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
         spotifyUserLibrary: function() {
-            // return this.$store.state.profilePage.spotifyUserLibrary;
-            return true; 
+            return this.$store.state.profilePage.spotifyUserLibrary;
+            // return true; 
         },
         //кол-во треков и последние пять
         spotifyTracks: function() {
@@ -215,9 +215,9 @@ export default {
             return this.$store.state.profilePage.tracksMode;
         },
         //любимые жанры
-        // favoriteGenres: function(){
-        //     return this.$store.state.profilePage.favoriteGenres;
-        // },
+        favoriteGenres: function(){
+            return this.$store.state.profilePage.favoriteGenres;
+        },
         //кол-во исполнителей
         uniqueArtists: function(){
             return this.$store.state.profilePage.uniqueArtists;

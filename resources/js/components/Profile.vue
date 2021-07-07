@@ -17,14 +17,14 @@
                 <!-- юзернейм и ссылка на профиль -->
                 <div class="row justify-content-center fadeInAnim">
                     <div class="col-12 col-md-8">
-                        <h1 class="text-center fadeInAnimSlow paddingSides">
+                        <h2 class="text-center fadeInAnimSlow paddingSides">
                             <a :href="spotifyProfile.profile_url" target="_blank"> 
                                 <!-- юзернейм для десктопа -->
                                 <b class="d-none d-md-block borderUnderline mainColorHighlight2">{{spotifyProfile.spotifyUsername}}</b>
                                 <!-- юзернейм для мобилок -->
-                                <b class="d-sm-block d-md-none borderUnderline mainColorHighlight2">{{spotifyProfile.spotifyUsername}}</b>
+                                <b class="d-sm-block d-md-none borderUnderline mainColorHighlight2" style="word-break: break-all;">{{spotifyProfile.spotifyUsername}}</b>
                             </a>
-                        </h1>
+                        </h2>
                     </div>
                 </div>
                 <!-- аватарка -->
@@ -38,6 +38,7 @@
                         Premium <i class="fas fa-crown mainColorHighlight"></i>
                     </h6>
                 </div>
+                <br>
                 <!-- кол-во подписчиков и страна -->
                 <div class="row justify-content-center fadeInAnimSlow">
                     <div>

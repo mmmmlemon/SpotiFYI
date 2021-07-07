@@ -82,34 +82,33 @@
                     <!-- когда загрузится кол-во треков, показываем сообщение -->
                     <div v-if="spotifyUserTracksCount != -1" class="col-10 text-center fadeInAnim">
                         <!-- если треков больше 150 -->
-                        <h3 v-if="spotifyUserTracksCount.trackCount >= 150">
+                        <h3 v-if="spotifyUserTracksCount['trackCount'] >= 150">
                             В твоей библиотеке более чем достаточно треков для анализа <i class="fas fa-heart heartbeatAnim" style="color: var(--main-color-highlight);"></i>
                         </h3>
                         <!-- если треков больше или равно 50 -->
-                        <h4 v-else-if="spotifyUserTracksCount >= 50">
+                        <h4 v-else-if="spotifyUserTracksCount['trackCount'] >= 50">
                             В твоей библиотеке достаточно треков для анализа! 😉
                         </h4>
                         <!-- если треков больше или равно 10 -->
-                        <h4 v-else-if="spotifyUserTracksCount >= 10">
+                        <h4 v-else-if="spotifyUserTracksCount['trackCount'] >= 10">
                             Ай! Маловато будет! 🤔
                         </h4>  
                         <!-- если треков меньше 10 -->
-                        <h4 v-else-if="spotifyUserTracksCount < 10 && spotifyUserTracksCount > 0">
+                        <h4 v-else-if="spotifyUserTracksCount['trackCount'] < 10 && spotifyUserTracksCount['trackCount'] > 0">
                             Ой, что-то у тебя пусто...😳
                         </h4>              
                         <!-- если треков 0 -->
-                        <h4 v-else-if="spotifyUserTracksCount == 0">
-                            {{spotifyUserTracksCount}} песен? bruh... 💩
+                        <h4 v-else-if="spotifyUserTracksCount['trackCount'] == 0">
+                            Ни одной песни? bruh... 💩
                         </h4>
                         <h3 v-else></h3>
                         
-                 
                         <!-- сообщение если кол-во треков больше нуля, но меньше 50 -->
-                        <h5 v-if="spotifyUserTracksCount < 50 && spotifyUserTracksCount > 0">
-                            Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: {{spotifyUserTracksCount}}, нужно: 50).
+                        <h5 v-if="spotifyUserTracksCount['trackCount'] < 50 && spotifyUserTracksCount['trackCount'] > 0">
+                            Слишком мало треков чтобы составить статистику. Добавь побольше песен в свою библиотеку (в библиотеке: {{spotifyUserTracksCount['trackCount']}}, нужно: 50).
                         </h5>
                         <!-- сообщение если треков - ноль -->
-                        <h5 v-else-if="spotifyUserTracksCount == 0">
+                        <h5 v-else-if="spotifyUserTracksCount['trackCount'] == 0">
                             Ни одной песни в библиотеке. Добавь их побольше (нужно: 50).
                         </h5>
                         <!-- ссылка на профиль -->
@@ -120,7 +119,7 @@
 
                 </div>
 
-                <div class="text-center" style="margin-top: 6rem;" v-if="spotifyUserTracksCount !== -1">
+                <div class="text-center" style="margin-top: 6rem;" v-if="spotifyUserTracksCount !== -1 && spotifyUserTracksCount['trackCount'] >= 50">
                     <div class="row justify-content-center" style="margin-left: 5%;">
                         <div class="col-2">
                             <img :src="spotifyUserTracksCount.trackCovers[0]" class="img-fluid rounded-circle albumCoverHome fadeInCover1">

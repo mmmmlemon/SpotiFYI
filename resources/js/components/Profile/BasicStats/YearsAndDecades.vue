@@ -7,8 +7,8 @@
                 <Loader />
             </div>
             <!-- ошибка -->
-            <div v-else-if="yearsAndDecades === false">
-                <Error type="small" errorMessage="Не удалось произвести анализ треков"/>
+            <div v-else-if="yearsAndDecades === 'noTracks'">
+                <br>
             </div>
             <!-- контент -->
             <div v-else-if="yearsAndDecades != -1 && yearsAndDecades != false && visible === true" class="col-11 paddingSides marginVertical fadeInAnimSlow">
@@ -32,53 +32,53 @@
                                 <div class="col-1">
                                     <img :src="yearsAndDecades['songOfYear']['cover']" class="rounded-circle albumIconBig" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][0]" class="rounded-circle albumIconBig2" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][1]" class="rounded-circle albumIconBig3" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][2]" class="rounded-circle albumIconBig4" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][3]" class="rounded-circle albumIconBig5" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][4]" class="rounded-circle albumIconBig6" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][5]" class="rounded-circle albumIconBig7" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][6]" class="rounded-circle albumIconBig8" alt="">
                                 </div>
                             </div>
                         </div>
-                        <div class="d-md-block d-md-none col-12 albumCoversMobile">
+                        <div class="d-block d-md-none col-12 albumCoversMobile">
                             <div class="row justify-content-center">
-                                <div class="col-1">
+                                <div class="col-1" >
                                     <img :src="yearsAndDecades['songOfYear']['cover']" class="rounded-circle albumIconBig" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][0]" class="rounded-circle albumIconBig2" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][1]" class="rounded-circle albumIconBig3" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null"> 
                                     <img :src="yearsAndDecades['covers'][2]" class="rounded-circle albumIconBig4" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][3]" class="rounded-circle albumIconBig5" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][4]" class="rounded-circle albumIconBig6" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][5]" class="rounded-circle albumIconBig7" alt="">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-1" v-if="yearsAndDecades['covers'] !== null">
                                     <img :src="yearsAndDecades['covers'][6]" class="rounded-circle albumIconBig8" alt="">
                                 </div>
                             </div>

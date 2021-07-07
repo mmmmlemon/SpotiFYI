@@ -1,6 +1,6 @@
 //LastFive
 <template>
-    <div class="col-11 col-md-11 col-lg-4">
+    <div class="col-11 col-md-11 col-lg-4" style="margin-bottom: 1.5rem;">
         <div class="row justify-content-center">
             <!-- если не указан type -->
             <div v-if="type === false">
@@ -36,7 +36,7 @@
                         </div>
                         <div v-else-if="items == -1">
                         </div>
-                        <div v-else-if="items['lastFive'].length > 0 && items['lastFive'].length != false" class="col-11 fadeInAnim">  
+                        <div v-else-if="items['lastFive'].length >= 0 && items['lastFive'].length != false" class="col-11 fadeInAnim">  
                                 <div class="col-12">
                                     <p v-if="type === 'tracks'" class="text-center font10pt">Последние треки</p>
                                     <p v-if="type === 'albums'" class="text-center font10pt">Последние альбомы</p>
@@ -50,10 +50,12 @@
                                                 @mouseover="showTitle(item.name, true)" @mouseleave="showTitle('<p>Artist - Song Title <br> Artist - Song Title</p>', false)">
                                         </a>
                                     </div>
+                                </div>
+                                <div class="row justify-content-center">
                                     <div class="col-12 text-center lastFiveTitle" v-html="title"
                                         v-bind:class="{'zeroOpacity': !visible}">
                                     </div>
-                                    </div>
+                                </div>
                         </div> 
                         <div v-else>
                                 <div class="col-md-11">

@@ -14,7 +14,7 @@
             </div>
             <!-- предупреждение -->
             <div v-else-if="favoriteGenres == 'noTracks'" class="col-12">
-                <Info type="small" infoMessage="Пока не достаточно данных для проведения анализа жанров."/>
+                <br>
             </div>
             <!-- контент -->
             <div v-else-if="favoriteGenres != -1 && favoriteGenres != false && visible === true" class="col-12 col-md-12 goUpAnimSlow">

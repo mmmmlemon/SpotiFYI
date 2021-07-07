@@ -35,7 +35,7 @@ class SpotifyAPIController extends Controller
            $offset = 0; //смещение
            //получаем первые 50 треков из библиотеки, со смещением 0
            $spotifyUserTracks = $api->getMySavedTracks(['limit'=> 50, 'offset' => $offset]); 
-            
+           $spotifyUserTracksCount += count($spotifyUserTracks->items);
            //пока смещение меньше 100, прибавляем кол-во полученные треков 
            //и получаем следующие 50 с новым смещением
            //итого максимум будет 150 треков, в зависимости от кол-ва треков
@@ -51,7 +51,6 @@ class SpotifyAPIController extends Controller
            }
 
            $tracks = [];
-
            if($spotifyUserTracksCount >= 50)
            {    
                 //убираем дупликаты обложек (в залайканых песнях обложки могут повторяться)
@@ -893,6 +892,9 @@ class SpotifyAPIController extends Controller
                     array_push($covers, $sortedTrackCovers[$randNums[$i]]);
                 }
             }
+            else{
+                $covers = null;
+            }
             //записываем пять случайных обложек
           
             $response['covers'] = $covers;
@@ -947,7 +949,7 @@ class SpotifyAPIController extends Controller
 
             //если треков меньше десяти, то возвращаем false
             if(count($tracks) < 10)
-            { return response()->json(false); }
+            { return response()->json("noTracks"); }
         }
         else
         { return response()->json(false); }
@@ -1009,12 +1011,7 @@ class SpotifyAPIController extends Controller
                             'word'=>$word, 'maxSong'=>$randTrack];
 
                 return response()->json($response);
-
-
              }
-
-             
- 
         }
 
     }
@@ -1857,8 +1854,13 @@ class SpotifyAPIController extends Controller
             }
 
             $trackCount = count($selectedTracks) . " " . Helpers::pickTheWord(count($selectedTracks), "треков", "трек", "трека");
-
-            $selectedTrack = $selectedTracks[rand(0, count($selectedTracks) - 1)];
+            if(count($selectedTracks) > 0){
+                $selectedTrack = $selectedTracks[rand(0, count($selectedTracks) - 1)];
+            }
+            else{
+                $selectedTrack = null;
+            }
+            
 
             $response = [
                 'title' => $topArtist['name'],

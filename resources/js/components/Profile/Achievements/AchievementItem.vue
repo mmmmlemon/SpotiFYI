@@ -29,7 +29,8 @@
                     <p class="text-center" style="margin-top: 0;" v-if="items['additionalInfo']"><b>{{items['additionalInfo']}}</b></p>
                     <h6 class=""><a target="_blank" :href="items['url']" v-if="items['album']">{{items['album']}}</a></h6>
                     <h5>Тебе нравятся <b class="borderUnderline mainColorHighlight2">{{items['trackCount']}}</b> этого исполнителя.</h5>
-                    <h6>Например, <b class="textShadow"><a target="_blank" :href="items['trackUrl']">{{items['selectedTrack']}}</a></b></h6>
+                    <h6 v-if="items['selectedTrack'] != null">Например, <b class="textShadow"><a target="_blank" :href="items['trackUrl']">{{items['selectedTrack']}}</a></b></h6>
+                    <h6 v-else>Может добавишь чего-нибудь? 🤔</h6>
                 </div>
             </div>
 
