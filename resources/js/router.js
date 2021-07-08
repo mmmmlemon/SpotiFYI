@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter)
 
 import tests from './components/tests.vue';
+import App from './components/App.vue';
 import HomePage from './components/HomePage.vue';
 import Welcome from './components/HomePage/Welcome.vue';
 import About from './components/HomePage/About.vue';
@@ -21,69 +22,76 @@ import NotFound from './components/Misc/NotFound.vue';
 const routes = [
     {   //главная страница
         path:'/',
-        component: HomePage,
+        component: App,
         children: [
             {
                 path:'/',
-                component: Welcome
-            },
-            {
-                path:'about',
-                component: About,
+                component: HomePage,
                 children: [
                     {
-                        path: '/about',
-                        component: SiteInfo
+                        path: '/',
+                        component: Welcome,    
                     },
                     {
-                        path:'/about/faq',
-                        component: Faq
+                        path:'about',
+                        component: About,
+                        children: [
+                            {
+                                path: '/about',
+                                component: SiteInfo
+                            },
+                            {
+                                path:'/about/faq',
+                                component: Faq
+                            },
+                            {
+                                path:'/about/contacts',
+                                component: Contacts
+                            },
+                        ]
                     },
                     {
-                        path:'/about/contacts',
-                        component: Contacts
-                    },
+                        path:'tests',
+                        component: tests
+                    }
                 ]
             },
             {
-                path:'tests',
-                component: tests
-            }
-
-        ]
-    },
-    {
-        // профиль
-        path:'/profile',
-        component: Profile,
-        children: [
-            {
+                // профиль
                 path:'/profile',
-                component: BasicStats
+                component: Profile,
+                children: [
+                    {
+                        path:'/profile',
+                        component: BasicStats
+                    },
+                    {
+                        path:'/profile/top10',
+                        component: Top10
+                    },
+                    {
+                        path:'/profile/achievements',
+                        component: Achievements
+                    },
+                ]
             },
+            //последние треки
             {
-                path:'/profile/top10',
-                component: Top10
+                path:'/recentTracks',
+                component: RecentTracks
             },
-            {
-                path:'/profile/achievements',
-                component: Achievements
-            },
+            { 
+                path: '/404', 
+                name: '404', 
+                component: NotFound, 
+            }, 
+            { 
+            path: '/', 
+            redirect: window.location.href, 
+            }
         ]
     },
-    //последние треки
-    {
-        path:'/recentTracks',
-        component: RecentTracks
-    },
-    { 
-        path: '/404', 
-        name: '404', 
-        component: NotFound, 
-      }, { 
-        path: '/', 
-        redirect: window.location.href, 
-      }
+   
 
 ]
 

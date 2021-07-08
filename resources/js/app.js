@@ -58,6 +58,10 @@ Vue.component('Cookies', Cookies);
 import BarChart from './components/Charts/BarChart.vue';
 Vue.component('BarChart', BarChart);
 
+//Навигация
+import Navigation from './components/Nav/Navigation.vue';
+Vue.component('Navigation', Navigation);
+
 
 Vue.use(VueAxios, axios);
 

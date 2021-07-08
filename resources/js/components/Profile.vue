@@ -89,7 +89,9 @@
 </template>
 
 <script>
+import Navigation from './Nav/Navigation.vue';
 export default {
+  components: { Navigation },
     beforeMount(){
         //получить фоновое изображение профиля
         if(this.profileImageUrl == -1)
