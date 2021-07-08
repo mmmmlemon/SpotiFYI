@@ -10,6 +10,7 @@ use Cookie;
 use URL;
 use App\Globals\System;
 
+
 // HomeController
 //ф-ции главной страницы, а так же ф-ции сайта не связанные с профилем пользователя и статистикой
 class HomeController extends Controller
@@ -17,6 +18,46 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
+    }
+
+
+    
+    //getNavigationSettings
+    //получить настройки для навигации
+    public function getNavigationSettings(Request $request){
+        $settings = config('settings');
+        //проверка токена
+        $checkToken = System::checkSpotifyAccessToken($request);
+
+        $spotifyProfile = null;
+ 
+        if($checkToken != false){
+            //вызываем api, получаем профиль пользователя
+            $api = config('spotify_api');
+
+            //если у пользователя установлена аватарка, то записываем ссылку на неё
+            $avatarUrl = "";
+
+            if(count($api->me()->images) > 0)
+            { $avatarUrl = $api->me()->images[0]->url; }
+            else
+            {   
+                //заглушка на случай если нет аватарки
+                $avatarUrl = asset(config('settings')->user_img);
+            }
+            
+            //пользователь
+            $spotifyProfile = ['displayName' => $api->me()->display_name, 'avatar' => $avatarUrl];
+
+ 
+        }
+
+        $response = ['site_title' => $settings->site_title,
+        'checkToken' => $checkToken,
+        'spotifyProfile' => $spotifyProfile];
+
+        return response()->json($response);
+
     }
 
     //index

@@ -36,6 +36,9 @@ button {
 
 /* all */
 
+.siteNavigation{
+    width: 100%;
+}
 
 .zeroOpacity{
     opacity: 0;

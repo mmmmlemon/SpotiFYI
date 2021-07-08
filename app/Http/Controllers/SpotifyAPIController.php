@@ -18,6 +18,7 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 //возвращает число - количество треков
 class SpotifyAPIController extends Controller
 {
+
     //getHomePageUserTracksCount
     //посчитать кол-во треков для вывода на главной странице сайта
     //параметры: реквест

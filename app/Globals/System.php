@@ -21,7 +21,7 @@
         {   
             //берем Spotify access token из куки
             $spotifyAccessToken = $request->cookie('spotify_access_token');
-
+            
             //если токен существует
             if($spotifyAccessToken != null)
             {

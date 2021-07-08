@@ -1,7 +1,7 @@
 //App
 //корневой компонент
 <template>
-    <div class="container">
+    <div>
         <Navigation />
         <router-view></router-view>
     </div>

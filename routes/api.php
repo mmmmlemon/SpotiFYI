@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Navigation
+Route::get('/get_nav_settings', 'HomeController@getNavigationSettings'); //настройки навигации
+
 //HomePage
 Route::get('/get_welcome_message', 'HomeController@getWelcomeMessage'); //получить welcome msg
 Route::get('/check_cookies', 'SpotifyAuthController@checkCookies'); //проверить куки

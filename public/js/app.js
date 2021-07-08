@@ -2991,7 +2991,91 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    var _this = this;
+
+    //получить настройки для навигации
+    axios.get('/api/get_nav_settings').then(function (response) {
+      _this.settings = response.data;
+    })["catch"](function (error) {});
+  },
+  data: function data() {
+    return {
+      settings: null
+    };
+  }
+});
 
 /***/ }),
 
@@ -3772,8 +3856,7 @@ __webpack_require__.r(__webpack_exports__);
     //библиотека пользователя
     //принимает либо true, либо false, если true - то библиотека загружена, false - ошибка, -1 - загружается
     spotifyUserLibrary: function spotifyUserLibrary() {
-      // return this.$store.state.profilePage.spotifyUserLibrary;
-      return true;
+      return this.$store.state.profilePage.spotifyUserLibrary; // return true; 
     },
     //кол-во треков и последние пять
     spotifyTracks: function spotifyTracks() {
@@ -79634,12 +79717,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [_c("Navigation"), _vm._v(" "), _c("router-view")],
-    1
-  )
+  return _c("div", [_c("Navigation"), _vm._v(" "), _c("router-view")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80891,14 +80969,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "nav siteNavigation" }, [
+  return _c("div", { staticClass: "nav fadeInAnimSlow siteNavigation" }, [
     _c(
       "nav",
       { staticClass: "navbar" },
       [
         _c("router-link", { attrs: { to: "/" } }, [
           _c("a", { staticClass: "navbar-brand siteTitle" }, [
-            _vm._v("\n                ShowMySpotify\n                "),
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.settings["site_title"]) +
+                "\n                "
+            ),
             _c("b", { staticClass: "beta" }, [_vm._v(" Beta")])
           ])
         ]),
@@ -80926,36 +81008,205 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item active" },
-            [
-              _c("router-link", { attrs: { to: "/profile" } }, [
-                _c("a", { staticClass: "nav-link" }, [_vm._v("Мой профиль")])
-              ])
-            ],
-            1
-          ),
+          _vm.settings["checkToken"] === true
+            ? _c(
+                "li",
+                { staticClass: "nav-item active" },
+                [
+                  _c("router-link", { attrs: { to: "/profile" } }, [
+                    _c("a", { staticClass: "nav-link" }, [
+                      _vm._v("Мой профиль")
+                    ])
+                  ])
+                ],
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item active" },
-            [
-              _c("router-link", { attrs: { to: "/recentTracks" } }, [
-                _c("a", { staticClass: "nav-link" }, [
-                  _vm._v("Последние треки")
-                ])
-              ])
-            ],
-            1
-          )
+          _vm.settings["checkToken"] === true
+            ? _c(
+                "li",
+                { staticClass: "nav-item active" },
+                [
+                  _c("router-link", { attrs: { to: "/recentTracks" } }, [
+                    _c("a", { staticClass: "nav-link" }, [
+                      _vm._v("Последние треки")
+                    ])
+                  ])
+                ],
+                1
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm.settings["checkToken"] === false
+          ? _c("div", { staticClass: "form-inline d-none d-lg-flex ml-auto" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary-n btn-rounded",
+                  attrs: { href: "/spotify_login" }
+                },
+                [_vm._v("Войти через Spotify")]
+              )
+            ])
+          : _c(
+              "div",
+              {
+                staticClass: "form-inline d-none d-lg-flex ml-auto",
+                staticStyle: { "margin-right": "1%" }
+              },
+              [
+                _c("router-link", { attrs: { to: "/profile" } }, [
+                  _c("a", { staticClass: "nav-link" }, [
+                    _vm._v(
+                      _vm._s(_vm.settings["spotifyProfile"]["displayName"])
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "/profile" } }, [
+                  _c("img", {
+                    staticClass: "navSpotifyAvatar rounded-circle",
+                    attrs: {
+                      src: _vm.settings["spotifyProfile"]["avatar"],
+                      alt: "Spotify avatar"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ],
+              1
+            ),
+        _vm._v(" "),
+        _c("div", { staticClass: "navbar-content d-lg-none ml-auto" }, [
+          _c("div", { staticClass: "dropdown with-arrow" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu dropdown-menu-right w-200",
+                attrs: { "aria-labelledby": "navbar-dropdown-toggle-btn-1" }
+              },
+              [
+                _c("router-link", { attrs: { to: "/" } }, [
+                  _c("a", { staticClass: "dropdown-item" }, [_vm._v("Главная")])
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "/about" } }, [
+                  _c("a", { staticClass: "dropdown-item" }, [
+                    _vm._v("О проекте")
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.settings["checkToken"] != false
+                  ? _c("router-link", { attrs: { to: "/profile" } }, [
+                      _c("a", { staticClass: "dropdown-item" }, [
+                        _vm._v("Мой профиль")
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.settings["checkToken"] != false
+                  ? _c("router-link", { attrs: { to: "/recentTracks" } }, [
+                      _c("a", { staticClass: "dropdown-item" }, [
+                        _vm._v("Последние треки")
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "dropdown-divider" }),
+                _vm._v(" "),
+                _vm.settings["checkToken"] == false
+                  ? _c("div", { staticClass: "dropdown-content" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "btn btn-primary-n btn-block btn-rounded",
+                          attrs: { href: "/spotify_login" }
+                        },
+                        [_vm._v("Войти через Spotify")]
+                      )
+                    ])
+                  : _c(
+                      "div",
+                      { staticClass: "dropdown-content" },
+                      [
+                        _c("router-link", { attrs: { to: "/profile" } }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                _vm.settings["spotifyProfile"]["displayName"]
+                              ) +
+                              "\n                        "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(2)
+                      ],
+                      1
+                    )
+              ],
+              1
+            )
+          ])
         ])
       ],
       1
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "/spotify_logout" } },
+      [_c("i", { staticClass: "fas fa-sign-out-alt" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn",
+        attrs: {
+          "data-toggle": "dropdown",
+          type: "button",
+          id: "navbar-dropdown-toggle-btn-1"
+        }
+      },
+      [
+        _vm._v("\n                    Меню\n                    "),
+        _c("i", {
+          staticClass: "fa fa-angle-down",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticStyle: { "margin-left": "20px" },
+        attrs: { href: "/spotify_logout" }
+      },
+      [_c("i", { staticClass: "fas fa-sign-out-alt" })]
+    )
+  }
+]
 render._withStripped = true
 
 
