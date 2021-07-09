@@ -8,12 +8,6 @@
                 <p class="text-center font10pt">Это может занять около минуты</p>
             </div>
             <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false" class="row justify-content-center">
-                <div class="col-12 fadeInAnimSlow">
-                    <h5 class="text-center">
-                        <b>Топ 10</b>&nbsp;
-                        <i class="fas fa-list-ol primaryColor"></i>
-                    </h5>
-                </div>
                 <!-- навигация -->
                 <div class="row justify-content-center fadeInAnim font10pt">
                     <nav class="justify-content-center">
@@ -34,9 +28,9 @@
             
                 <Top10Items v-if="top10TracksAllTime != 'noTracks'" 
                             cardTitle="Топ 10 Треков за все время" 
-                            cardDesc="Десять твоих самых прослушиваемых треков за все время." 
+                            cardDesc="Десять твоих самых прослушиваемых треков за все время" 
                             :items="top10TracksAllTime"
-                            listType="tracks"/>
+                            listType="tracks" orientation="left"/>
 
                 <Top10Items v-if="top10TracksAllTime != -1 && top10TracksMonth != 'noTracks'"
                             loaderMessage="Загружаю Топ 10 треков за месяц..."

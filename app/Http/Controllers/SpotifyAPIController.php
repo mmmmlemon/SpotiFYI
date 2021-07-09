@@ -1065,7 +1065,7 @@ class SpotifyAPIController extends Controller
                     $trackInfo['count'] = $count;
                     $trackInfo['id'] = $track->id;
                     $trackInfo['name'] = Helpers::getFullNameOfItem($track, "fullname");
-                    $trackInfo['image'] = $track->album->images[count($track->album->images)-1]->url;
+                    $trackInfo['image'] = $track->album->images[0]->url;
                     $trackInfo['url'] = $track->external_urls->spotify;
                     $trackInfo['album'] = $track->album->name;
                     $trackInfo['album_url'] = $track->album->external_urls->spotify;
@@ -1076,13 +1076,12 @@ class SpotifyAPIController extends Controller
                 }
 
                 //случайная обложка
-                $randTrackId = $tracks[rand(0, count($tracks) - 1)]['id'];
-
-                $albumCover = $api->getTrack($randTrackId)->album->images[0]->url;
+                // $randTrackId = $tracks[rand(0, count($tracks) - 1)]['id'];
+                // $albumCover = $api->getTrack($randTrackId)->album->images[0]->url;
 
                 $response = [];
                 $response['items'] = $tracks;
-                $response['backgroundImage'] = $albumCover;
+                // $response['backgroundImage'] = $albumCover;
     
                 return response()->json($response);
             }

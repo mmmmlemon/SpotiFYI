@@ -4939,12 +4939,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -5143,6 +5137,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     cardTitle: {
@@ -5156,6 +5229,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     listType: {
       "default": "tracks"
+    },
+    orientation: {
+      "default": 'left'
     }
   }
 });
@@ -84307,16 +84383,15 @@ var render = function() {
               _vm._v(" "),
               _vm._m(1),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
               _vm.top10TracksAllTime != "noTracks"
                 ? _c("Top10Items", {
                     attrs: {
                       cardTitle: "Топ 10 Треков за все время",
                       cardDesc:
-                        "Десять твоих самых прослушиваемых треков за все время.",
+                        "Десять твоих самых прослушиваемых треков за все время",
                       items: _vm.top10TracksAllTime,
-                      listType: "tracks"
+                      listType: "tracks",
+                      orientation: "left"
                     }
                   })
                 : _vm._e(),
@@ -84389,7 +84464,7 @@ var render = function() {
                       staticClass: "col-12 justify-content-center",
                       attrs: { id: "artists" }
                     },
-                    [_vm._m(3)]
+                    [_vm._m(2)]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -84501,18 +84576,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 fadeInAnimSlow" }, [
-      _c("h5", { staticClass: "text-center" }, [
-        _c("b", [_vm._v("Топ 10")]),
-        _vm._v(" \n                     "),
-        _c("i", { staticClass: "fas fa-list-ol primaryColor" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "div",
       { staticClass: "row justify-content-center fadeInAnim font10pt" },
@@ -84580,213 +84643,527 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col-12 col-lg-5 marginSides paddingSides" },
-    [
-      _vm.items == -1
-        ? _c("div", [_c("Loader")], 1)
-        : _vm.items == false
-        ? _c(
-            "div",
-            [
-              _c("Error", {
-                attrs: {
-                  type: "small",
-                  errorMessage: "Не удалось загрузить треки"
+  return _c("div", { staticClass: "col-12 paddingSides" }, [
+    _vm.items == -1
+      ? _c("div", [_c("Loader")], 1)
+      : _vm.items == false
+      ? _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: {
+                type: "small",
+                errorMessage: "Не удалось загрузить треки"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.items == "noTracks"
+      ? _c(
+          "div",
+          [
+            _c("Info", {
+              attrs: {
+                type: "small",
+                infoMessage: "Пока что мало данных для Топ-10"
+              }
+            })
+          ],
+          1
+        )
+      : _vm.items != -1 || _vm.items != false
+      ? _c("div", { staticClass: "col-12 fadeInAnim paddingSides" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c(
+              "h3",
+              {
+                staticClass: "borderUnderline",
+                class: {
+                  "text-left": _vm.orientation === "left",
+                  "text-right": _vm.orientation === "right"
                 }
-              })
-            ],
-            1
-          )
-        : _vm.items == "noTracks"
-        ? _c(
-            "div",
-            [
-              _c("Info", {
-                attrs: {
-                  type: "small",
-                  infoMessage: "Пока что мало данных для Топ-10"
-                }
-              })
-            ],
-            1
-          )
-        : _vm.items != -1 || _vm.items != false
-        ? _c(
-            "div",
-            { staticClass: "col-12 fadeInAnim paddingSides greyCard" },
-            [
-              _c("BackgroundImage", {
-                attrs: {
-                  bgStyle: "top10ImageCard",
-                  backgroundImageUrl: _vm.items["backgroundImage"]
-                }
-              }),
-              _vm._v(" "),
-              _c("div", [
-                _c("h4", { staticClass: "text-center borderUnderline" }, [
-                  _c("b", [_vm._v(_vm._s(_vm.cardTitle))])
-                ]),
-                _vm._v(" "),
-                _vm.cardDesc != undefined
-                  ? _c("p", { staticClass: "text-center font10pt" }, [
-                      _vm._v(_vm._s(_vm.cardDesc))
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "row fadeInAnim" }, [
-                  _vm.items != undefined
-                    ? _c(
-                        "div",
-                        _vm._l(_vm.items["items"], function(item) {
-                          return _c(
-                            "div",
-                            { key: item.id, staticClass: "row fadeInAnim" },
+              },
+              [_c("b", [_vm._v(_vm._s(_vm.cardTitle))])]
+            ),
+            _vm._v(" "),
+            _vm.cardDesc != undefined
+              ? _c(
+                  "p",
+                  {
+                    class: {
+                      "text-right": _vm.orientation === "left",
+                      "text-left": _vm.orientation === "right"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.cardDesc))]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.items != undefined
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "row fadeInAnim justify-content-center fadeInAnim"
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-8 col-md-4 text-left",
+                        staticStyle: { "margin-top": "2rem" }
+                      },
+                      [
+                        _c("div", { staticClass: "col-12" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][0].url,
+                                target: "_blank"
+                              }
+                            },
                             [
-                              _c("div", { staticClass: "col-2" }, [
-                                _c("div", { staticClass: "numberCircle" }, [
-                                  _c("b", [_vm._v(_vm._s(item.count))])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: item.url, target: "_blank" }
-                                  },
-                                  [
-                                    _c("img", {
-                                      staticClass:
-                                        "rounded-circle albumIconTop10",
-                                      attrs: { src: item.image }
-                                    })
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-10" }, [
-                                _c(
-                                  "p",
-                                  {
-                                    staticClass:
-                                      "font13pt whiteColor marginNone"
-                                  },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: {
-                                          href: item.url,
-                                          target: "_blank"
-                                        }
-                                      },
-                                      [_c("b", [_vm._v(_vm._s(item.name))])]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                item.album
-                                  ? _c(
-                                      "p",
-                                      {
-                                        staticClass:
-                                          "font10pt whiteColor marginNone marginBottomSmall"
-                                      },
-                                      [
-                                        _c(
-                                          "a",
-                                          {
-                                            attrs: {
-                                              href: item.album_url,
-                                              target: "_blank"
-                                            }
-                                          },
-                                          [
-                                            item.duration
-                                              ? _c("b", [
-                                                  _vm._v(
-                                                    _vm._s(item.duration) + "  "
-                                                  )
-                                                ])
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            _c("b", { staticClass: "unbold" }, [
-                                              _vm._v(
-                                                _vm._s(item.album) +
-                                                  " - " +
-                                                  _vm._s(item.album_year)
-                                              )
-                                            ])
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                item.genres
-                                  ? _c(
-                                      "p",
-                                      {
-                                        staticClass:
-                                          "font10pt marginNone whiteColor marginBottomSmall"
-                                      },
-                                      [
-                                        _c("b", { staticClass: "unbold" }, [
-                                          _vm._v(_vm._s(item.genres))
-                                        ])
-                                      ]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                item.info
-                                  ? _c(
-                                      "p",
-                                      {
-                                        staticClass:
-                                          "font10pt marginNone whiteColor marginBottomSmall"
-                                      },
-                                      [
-                                        _c("b", { staticClass: "unbold" }, [
-                                          _vm._v(_vm._s(item.info))
-                                        ])
-                                      ]
-                                    )
-                                  : _vm._e()
-                              ])
+                              _c("img", {
+                                staticClass: "rounded-circle top10One",
+                                attrs: { src: _vm.items["items"][0].image }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "btn btn-square rounded-circle top10OneNumber"
+                            },
+                            [_vm._v("1")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 text-center" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][0].url,
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _c(
+                                "h5",
+                                { staticClass: "top10Name textShadow" },
+                                [
+                                  _c("b", [
+                                    _vm._v(_vm._s(_vm.items["items"][0].name))
+                                  ])
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][0].album_url,
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _c(
+                                "h6",
+                                { staticClass: "top10Name textShadow" },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_vm.items["items"][0].album) +
+                                      " (" +
+                                      _vm._s(_vm.items["items"][0].album_year) +
+                                      ")\n                            "
+                                  )
+                                ]
+                              )
                             ]
                           )
-                        }),
-                        0
-                      )
-                    : _c(
-                        "div",
-                        [
-                          _c("Error", {
-                            attrs: {
-                              type: "x-small",
-                              errorMessage:
-                                "Нечего показывать. Параметр items пустой."
-                            }
-                          })
-                        ],
-                        1
-                      )
-                ])
-              ])
-            ],
-            1
-          )
-        : _c(
-            "div",
-            [
-              _c("Error", {
-                attrs: { type: "x-small", errorMessage: "Неизвестная ошибка" }
-              })
-            ],
-            1
-          )
-    ]
-  )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-8 col-md-4 text-center",
+                        staticStyle: { "margin-top": "2rem" }
+                      },
+                      [
+                        _c("div", { staticClass: "col-12" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][1].url,
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "rounded-circle top10Two",
+                                attrs: { src: _vm.items["items"][1].image }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "btn btn-square rounded-circle top10TwoNumber"
+                            },
+                            [_vm._v("2")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 text-center" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][1].url,
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _c(
+                                "h5",
+                                { staticClass: "top10Name textShadow" },
+                                [
+                                  _c("b", [
+                                    _vm._v(_vm._s(_vm.items["items"][1].name))
+                                  ])
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][1].album_url,
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _c(
+                                "h6",
+                                { staticClass: "top10Name textShadow" },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_vm.items["items"][1].album) +
+                                      " (" +
+                                      _vm._s(_vm.items["items"][0].album_year) +
+                                      ")\n                            "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-8 col-md-4 text-center",
+                        staticStyle: { "margin-top": "2rem" }
+                      },
+                      [
+                        _c("div", { staticClass: "col-12" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][2].url,
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "rounded-circle top10Three",
+                                attrs: { src: _vm.items["items"][2].image }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "btn btn-square rounded-circle top10ThreeNumber"
+                            },
+                            [_vm._v("3")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 text-center" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][2].url,
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _c(
+                                "h5",
+                                { staticClass: "top10Name textShadow" },
+                                [
+                                  _c("b", [
+                                    _vm._v(_vm._s(_vm.items["items"][2].name))
+                                  ])
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.items["items"][2].album_url,
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _c(
+                                "h6",
+                                { staticClass: "top10Name textShadow" },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_vm.items["items"][2].album) +
+                                      " (" +
+                                      _vm._s(_vm.items["items"][0].album_year) +
+                                      ")\n                            "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-12",
+                        staticStyle: { "margin-top": "2.5rem" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "row justify-content-center text-center"
+                          },
+                          [
+                            _c("div", { staticClass: "col-6" }, [
+                              _c(
+                                "div",
+                                { staticClass: "row justify-content-center" },
+                                _vm._l(_vm.items["items"], function(
+                                  item,
+                                  index
+                                ) {
+                                  return _c(
+                                    "div",
+                                    { key: index, staticClass: "col-12" },
+                                    [
+                                      item.count > 3 && item.count <= 7
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "row jusitify-content-center"
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-4 text-right"
+                                                },
+                                                [
+                                                  _c("b", [
+                                                    _vm._v(_vm._s(item.count))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      attrs: {
+                                                        href: item.url,
+                                                        target: "_blank"
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("img", {
+                                                        staticClass:
+                                                          "rounded-circle",
+                                                        staticStyle: {
+                                                          width: "50%"
+                                                        },
+                                                        attrs: {
+                                                          src: item.image
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-8 t" },
+                                                [
+                                                  _c("h6", [
+                                                    _c("b", [
+                                                      _vm._v(_vm._s(item.name))
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("h6", [
+                                                    _vm._v(_vm._s(item.album))
+                                                  ])
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6" }, [
+                              _c(
+                                "div",
+                                { staticClass: "row justify-content-center" },
+                                _vm._l(_vm.items["items"], function(
+                                  item,
+                                  index
+                                ) {
+                                  return _c(
+                                    "div",
+                                    { key: index, staticClass: "col-12" },
+                                    [
+                                      item.count > 7 && item.count <= 10
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "row jusitify-content-center"
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-4 text-right"
+                                                },
+                                                [
+                                                  _c("b", [
+                                                    _vm._v(_vm._s(item.count))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      attrs: {
+                                                        href: item.url,
+                                                        target: "_blank"
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("img", {
+                                                        staticClass:
+                                                          "rounded-circle",
+                                                        staticStyle: {
+                                                          width: "50%"
+                                                        },
+                                                        attrs: {
+                                                          src: item.image
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-8 t" },
+                                                [
+                                                  _c("h6", [
+                                                    _c("b", [
+                                                      _vm._v(_vm._s(item.name))
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("h6", [
+                                                    _vm._v(_vm._s(item.album))
+                                                  ])
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              : _c(
+                  "div",
+                  [
+                    _c("Error", {
+                      attrs: {
+                        type: "x-small",
+                        errorMessage:
+                          "Нечего показывать. Параметр items пустой."
+                      }
+                    })
+                  ],
+                  1
+                )
+          ])
+        ])
+      : _c(
+          "div",
+          [
+            _c("Error", {
+              attrs: { type: "x-small", errorMessage: "Неизвестная ошибка" }
+            })
+          ],
+          1
+        )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
