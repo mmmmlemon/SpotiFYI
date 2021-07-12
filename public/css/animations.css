@@ -676,6 +676,33 @@
   animation-timing-function: ease;
 }
 
+@keyframes goldShine{
+  0%{
+    -webkit-box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+    -moz-box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+    box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+  }
+
+  50%{
+    -webkit-box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 0.68);
+    -moz-box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 0.68);
+    box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 0.68);
+  }
+
+  100%{
+    -webkit-box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+    -moz-box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+    box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+  }
+}
+
+.goldShineAnim{
+  animation: goldShine;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
 
 
 

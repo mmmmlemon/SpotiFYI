@@ -795,6 +795,99 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     margin: 0;
 }
 
+.top10Cover{
+    border-style: solid;
+    border-width:5px;
+    border-color: var(--main-color);
+    -webkit-box-shadow: 3px 2px 0px 2px rgba(16, 91, 42, 1);
+    -moz-box-shadow: 3px 2px 0px 2px rgba(16, 91, 42, 1);
+    box-shadow: 3px 2px 0px 2px rgba(16, 91, 42, 1);
+}
+
+.top10Cover.gold{
+    border-color: gold !important;
+    -webkit-box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+    -moz-box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+    box-shadow: 4px 4px 48px -19px rgba(255, 140, 0, 0.61);
+}
+
+.top10Cover.silver{
+    border-color: silver !important;
+    -webkit-box-shadow: 3px 2px 0px 2px gray;
+    -moz-box-shadow: 3px 2px 0px 2px gray;
+    box-shadow: 3px 2px 0px 2px gray;
+}
+
+.top10Cover.bronze{
+    border-color: #cd7f32 !important;
+    -webkit-box-shadow: 3px 2px 0px 2px #754b22;
+    -moz-box-shadow: 3px 2px 0px 2px #754b22;
+    box-shadow: 3px 2px 0px 2px #754b22
+}
+
+
+.top10Number{
+    background-image: linear-gradient(to left bottom, #1ea74c, #1a9343, #16803b, #136d32, #105b2a) !important;
+    transform: scale(0.8) translateX(3rem);
+    bottom: 0;
+    font-size: 1.5rem;
+}
+
+.top10Number.gold{
+    background-image: linear-gradient(to left bottom, #ffd700, #ffc500, #ffb200, #ff9f00, #ff8c00) !important;
+}
+
+.top10Number.silver{
+    background-image: linear-gradient(to left bottom, #c0c0c0, #b0b0b0, #9f9f9f, #909090, #808080) !important;
+}
+
+.top10Number.bronze{
+    background-image: linear-gradient(to left bottom, #cd7f32, #b6722e, #a0642a, #8a5826, #754b22) !important;
+}
+
+.top10Item{
+    /* transform: scale(1.14); */
+}
+
+.top10Name{
+    margin: 0;
+    font-size: 1.7rem
+}
+
+.top10Album{
+    margin: 0 0 1.3rem 0;
+    font-size: 1.2rem;
+}
+
+.textShadow.gold{
+    text-shadow: 4px 3px 0px #695a00;
+}
+
+.textShadow.gold:hover{
+    text-shadow: 4px 3px 0px #ffd700;
+}
+
+
+.textShadow.silver{
+    text-shadow: 4px 3px 0px #5a5a5a;
+}
+
+.textShadow.silver:hover{
+    text-shadow: 4px 3px 0px #c0c0c0;
+}
+
+.textShadow.bronze{
+    text-shadow: 4px 3px 0px #754b22;
+}
+
+.textShadow.bronze:hover{
+    text-shadow: 4px 3px 0px #cd7f32;
+}
+
+
+
+
+
 
 
 
