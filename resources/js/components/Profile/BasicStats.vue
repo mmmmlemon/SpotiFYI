@@ -43,16 +43,16 @@
                     <ArtistsCount v-if="tracksMode != -1" :uniqueArtists="uniqueArtists"/>
 
                     <!-- года и десятилетия -->
-                    <YearsAndDecades :yearsAndDecades="yearsAndDecades" type="alltime"/>
+                    <YearsAndDecades :yearsAndDecades="yearsAndDecades" type="alltime" v-if="uniqueArtists != -1"/>
 
                     <!-- года и десятилетия за месяц-->
-                    <YearsAndDecades v-if="yearsAndDecades != -1" :yearsAndDecades="decadeMonth" type="month"/>
+                    <YearsAndDecades v-if="uniqueArtists != -1" :yearsAndDecades="decadeMonth" type="month"/>
 
                     <!-- любимые жанры -->
                     <FavoriteGenres v-if="decadeMonth != -1" :favoriteGenres="favoriteGenres" id="genres"/>
 
                     <!-- Самый популярный\непопулярный артист -->
-                    <AchievementItem v-if="mostPopularArtist != 'noArtists'" 
+                    <AchievementItem v-if="mostPopularArtist != 'noArtists' && favoriteGenres != -1" 
                                 cardTitle="Самый популярный исполнитель" cardSubtitle="На которого ты подписан" 
                                 :items="mostPopularArtist"/>
 

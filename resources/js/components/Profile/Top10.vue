@@ -33,7 +33,7 @@
                             listType="tracks" orientation="left" :visibleProp="true"
                             desc="К этим песням ты возвращаешься чаще всего"/>
 
-                <Top10Items v-if="top10TracksMonth != 'noTracks'"
+                <Top10Items v-if="top10TracksMonth != 'noTracks' && top10TracksAllTime != -1"
                             loaderMessage="Загружаю Топ 10 треков за месяц..."
                             cardTitle="Топ 10 Треков за месяц" 
                             cardDesc="Десять самых прослушиваемых треков за последний месяц" 

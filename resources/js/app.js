@@ -21,8 +21,6 @@ import Info from './components/Misc/Info.vue';
 Vue.component('Info', Info);
 import BackgroundImage from './components/Misc/BackgroundImage.vue';
 Vue.component('BackgroundImage', BackgroundImage);
-import BackgroundImageFront from './components/Misc/BackgroundImageFront.vue';
-Vue.component('BackgroundImageFront', BackgroundImageFront);
 import Logo from './components/Misc/Logo.vue';
 Vue.component('Logo', Logo);
 
