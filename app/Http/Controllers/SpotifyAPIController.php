@@ -1075,13 +1075,13 @@ class SpotifyAPIController extends Controller
                     $count++;
                 }
 
-                //случайная обложка
-                // $randTrackId = $tracks[rand(0, count($tracks) - 1)]['id'];
-                // $albumCover = $api->getTrack($randTrackId)->album->images[0]->url;
+                // случайная обложка
+                $randTrackId = $tracks[rand(0, count($tracks) - 1)]['id'];
+                $albumCover = $api->getTrack($randTrackId)->album->images[0]->url;
 
                 $response = [];
                 $response['items'] = $tracks;
-                // $response['backgroundImage'] = $albumCover;
+                $response['backgroundImage'] = $albumCover;
     
                 return response()->json($response);
             }

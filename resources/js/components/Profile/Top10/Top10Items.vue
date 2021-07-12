@@ -14,7 +14,8 @@
                 <Info type="small" infoMessage="Пока что мало данных для Топ-10"/>
             </div>
             <!-- контент -->
-            <div v-else-if="items != -1 || items != false" class="col-12 fadeInAnim paddingSides"> 
+            <div v-else-if="items != -1 || items != false" class="col-12 fadeInAnim paddingSides" style="margin-bottom: 3rem;">
+                 <BackgroundImage bgStyle="top10ImageCard" :backgroundImageUrl="items['backgroundImage']"/>
                  <div class="col-12">
                     <h3 v-bind:class="{'text-left': orientation === 'left', 'text-right': orientation === 'right',}" class="borderUnderline"><b>{{cardTitle}}</b></h3>
                     <p v-bind:class="{'text-right': orientation === 'left', 'text-left': orientation === 'right',}" v-if="cardDesc != undefined">{{cardDesc}}</p>
@@ -42,10 +43,19 @@
                                                             <b>{{item.name}}</b>
                                                         </a>  
                                                     </h6>
-                                                    <h6 class="top10Album">
+                                                    <h6 class="top10Album" v-if="item.album">
                                                         <a :href="item.album_url" target="_blank">
                                                             {{item.album}} ({{item.album_year}})
                                                         </a>
+                                                    </h6>
+                                                    <h5 class="top10Name textShadow" v-if="item.duration" v-bind:class="{'gold': item.count === 1, 'silver': item.count === 2, 'bronze': item.count === 3}">
+                                                        <b>{{item.duration}}</b>
+                                                    </h5>
+                                                    <h5 class="top10Name textShadow" v-if="item.info" v-bind:class="{'gold': item.count === 1, 'silver': item.count === 2, 'bronze': item.count === 3}">
+                                                        <b>{{item.info}}</b>
+                                                    </h5>
+                                                    <h6 class="top10Album" v-if="item.genres">
+                                                            {{item.genres}}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -73,10 +83,19 @@
                                                                 <b>{{item.name}}</b>
                                                             </a>  
                                                         </h6>
-                                                        <h6 class="top10Album">
+                                                        <h6 class="top10Album" v-if="item.album">
                                                             <a :href="item.album_url" target="_blank">
                                                                 {{item.album}} ({{item.album_year}})
                                                             </a>
+                                                        </h6>
+                                                        <h5 class="top10Name textShadow" v-if="item.duration" v-bind:class="{'gold': item.count === 1, 'silver': item.count === 2, 'bronze': item.count === 3}">
+                                                            <b>{{item.duration}}</b>
+                                                        </h5>
+                                                        <h5 class="top10Name textShadow" v-if="item.info" v-bind:class="{'gold': item.count === 1, 'silver': item.count === 2, 'bronze': item.count === 3}">
+                                                            <b>{{item.info}}</b>
+                                                        </h5>
+                                                        <h6 class="top10Album" v-if="item.genres">
+                                                            {{item.genres}}
                                                         </h6>
                                                     </div>
                                                 </div>
