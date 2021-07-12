@@ -1902,7 +1902,7 @@ class SpotifyAPIController extends Controller
                 $trackInfo['id'] = rand(0,999).rand(0,9999);
                 $trackInfo['artists'] = Helpers::getFullNameOfItem($track, "artist");
                 $trackInfo['trackName'] = $track->name;
-                $trackInfo['albumName'] = $track->album->name . " - " . Helpers::getItemReleaseDate($track->album, "album", "short");
+                $trackInfo['albumName'] = $track->album->name . " (" . Helpers::getItemReleaseDate($track->album, "album", "short") . ")";
                 $trackInfo['trackUrl'] = $track->external_urls->spotify;
                 $trackInfo['albumUrl'] = $track->album->external_urls->spotify;
                 $trackInfo['duration'] = Helpers::getTrackDuration($track->duration_ms);

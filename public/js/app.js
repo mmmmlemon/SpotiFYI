@@ -4782,8 +4782,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -84267,58 +84265,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("BackgroundImage", {
-        attrs: { backgroundImageUrl: _vm.item["cover"] }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "row fadeInAnim" }, [
-        _c("div", { staticClass: "col-2" }, [
-          _c("a", { attrs: { href: _vm.item["trackUrl"], target: "_blank" } }, [
-            _c("img", {
-              staticClass: "rounded-circle albumIconBig",
-              attrs: { src: _vm.item["cover"] }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("h5", { staticClass: "whiteColor marginNone" }, [
-            _c("b", [_vm._v(_vm._s(_vm.item["artists"]))])
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "whiteColor marginNone" }, [
+  return _c("div", { staticClass: "col-12" }, [
+    _c("div", { staticClass: "row justify-content-center fadeInAnim" }, [
+      _c("div", { staticClass: "col-8" }, [
+        _c("div", { staticClass: "row jusitify-content-center" }, [
+          _c("div", { staticClass: "col-2 text-center" }, [
             _c(
               "a",
               { attrs: { href: _vm.item["trackUrl"], target: "_blank" } },
-              [_c("b", [_vm._v(_vm._s(_vm.item["trackName"]))])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("p", { staticClass: "whiteColor marginNone" }, [
-            _c(
-              "a",
-              { attrs: { href: _vm.item["albumUrl"], target: "_blank" } },
               [
-                _c("b", { staticClass: "unbold" }, [
-                  _vm._v(_vm._s(_vm.item["albumName"]))
-                ])
+                _c("img", {
+                  staticClass: "rounded-circle top10Cover",
+                  staticStyle: { width: "100%", transform: "scale(1.2)" },
+                  attrs: { src: _vm.item["cover"] }
+                })
               ]
             )
           ]),
           _vm._v(" "),
-          _c("b", { staticClass: "font13pt" }, [
-            _vm._v(_vm._s(_vm.item["duration"]))
+          _c("div", { staticClass: "col-10 text-right" }, [
+            _c("h5", { staticClass: "textShadow" }, [
+              _c("b", [
+                _vm._v(
+                  _vm._s(_vm.item["artists"]) +
+                    " - " +
+                    _vm._s(_vm.item["trackName"])
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c(
+                "a",
+                { attrs: { href: _vm.item["albumUrl"], target: "_blank" } },
+                [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.item["albumName"]) +
+                      "\n                        "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("h6", {}, [_c("b", [_vm._v(_vm._s(_vm.item["duration"]))])])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c("hr")
       ])
-    ],
-    1
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

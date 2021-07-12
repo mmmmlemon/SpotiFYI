@@ -845,10 +845,6 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     background-image: linear-gradient(to left bottom, #cd7f32, #b6722e, #a0642a, #8a5826, #754b22) !important;
 }
 
-.top10Item{
-    /* transform: scale(1.14); */
-}
-
 .top10Name{
     margin: 0;
     font-size: 1.7rem
@@ -897,14 +893,4 @@ box-shadow: 6px 7px 0px 2px rgba(16, 91, 42, 1) inset;
     background-size: cover;
     background-position: center;
 }
-
-
-
-
-
-
-
-
-
-
 /*  */
