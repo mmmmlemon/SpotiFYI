@@ -2662,7 +2662,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": -1
     },
     bgStyle: {
-      "default": 'backgroundImage invisible'
+      "default": 'backgroundImage invisible fadeInAnimBg'
     }
   }
 });
@@ -4939,6 +4939,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -4971,6 +4981,12 @@ __webpack_require__.r(__webpack_exports__);
     } else {
       this.getAllData();
     }
+  },
+  data: function data() {
+    return {
+      visibleButton: false,
+      visibleArtists: false
+    };
   },
   methods: {
     getAllData: function getAllData() {
@@ -5023,6 +5039,22 @@ __webpack_require__.r(__webpack_exports__);
       if (this.top10ArtistsByTime == -1) {
         this.$store.dispatch('getTop10ArtistsByTime');
       }
+    },
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleScroll: function handleScroll(evt, el) {
+      if (el.getBoundingClientRect().top < 900) {
+        this.setVisible = true;
+      }
+
+      return el.getBoundingClientRect().top < 900;
+    },
+    handleScrollArtists: function handleScrollArtists(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setVisibleArtists = true;
+      }
+
+      return el.getBoundingClientRect().top < 700;
     }
   },
   computed: {
@@ -5060,6 +5092,24 @@ __webpack_require__.r(__webpack_exports__);
     },
     top10ArtistsByTime: function top10ArtistsByTime() {
       return this.$store.state.profilePage.top10ArtistsByTime;
+    },
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visibleButton = false;
+      },
+      set: function set(value) {
+        this.visibleButton = value;
+      }
+    },
+    //видимость карточки
+    setVisibleArtists: {
+      get: function get() {
+        this.visibleArtists = false;
+      },
+      set: function set(value) {
+        this.visibleArtists = value;
+      }
     }
   }
 });
@@ -5193,7 +5243,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      visible: false
+    };
+  },
   props: {
     cardTitle: {
       "default": 'Топ 10'
@@ -5209,6 +5265,34 @@ __webpack_require__.r(__webpack_exports__);
     },
     orientation: {
       "default": 'left'
+    },
+    visibleProp: {
+      "default": false
+    },
+    desc: {
+      "default": null
+    }
+  },
+  computed: {
+    //видимость карточки
+    setVisible: {
+      get: function get() {
+        this.visible = this.visibleProp;
+      },
+      set: function set(value) {
+        this.visible = value;
+      }
+    }
+  },
+  methods: {
+    //при скролле страницы показать карточку когда она будет 
+    //в поле видимости
+    handleScroll: function handleScroll(evt, el) {
+      if (el.getBoundingClientRect().top < 700) {
+        this.setVisible = true;
+      }
+
+      return el.getBoundingClientRect().top < 700;
     }
   }
 });
@@ -82317,8 +82401,6 @@ var render = function() {
           _vm.spotifyUserLibrary["result"] != false &&
           _vm.spotifyUserLibrary["result"] != "libraryError"
         ? _c("div", { staticClass: "row justify-content-center" }, [
-            _vm._m(0),
-            _vm._v(" "),
             _c("div", {
               staticClass: "col-12 justify-content-center fadeInAnim"
             }),
@@ -82484,33 +82566,7 @@ var render = function() {
     _c("div", { staticClass: "col-12" }, [_vm._v("   ")])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "row justify-content-center fadeInAnim",
-        staticStyle: { "margin-top": "5%" }
-      },
-      [
-        _c("nav", { staticClass: "justify-content-center" }, [
-          _c("ul", { staticClass: "breadcrumb text-center" }, [
-            _c("li", { staticClass: "breadcrumb-item" }, [
-              _c("a", { attrs: { href: "#basic" } }, [_vm._v("Общее")])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "breadcrumb-item" }, [
-              _c("a", { attrs: { href: "#genres" } }, [_vm._v("Жанры и годы")])
-            ])
-          ])
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -84344,7 +84400,7 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _c("p", { staticClass: "text-center font10pt" }, [
+              _c("p", { staticClass: "text-center" }, [
                 _vm._v("Это может занять около минуты")
               ])
             ],
@@ -84358,30 +84414,31 @@ var render = function() {
             [
               _vm._m(0),
               _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
               _vm.top10TracksAllTime != "noTracks"
                 ? _c("Top10Items", {
                     attrs: {
                       cardTitle: "Топ 10 Треков за все время",
                       cardDesc:
-                        "Десять твоих самых прослушиваемых треков за все время",
+                        "Десять самых прослушиваемых треков за все время",
                       items: _vm.top10TracksAllTime,
                       listType: "tracks",
-                      orientation: "left"
+                      orientation: "left",
+                      visibleProp: true,
+                      desc: "К этим песням ты возвращаешься чаще всего"
                     }
                   })
                 : _vm._e(),
               _vm._v(" "),
-              _vm.top10TracksAllTime != -1 && _vm.top10TracksMonth != "noTracks"
+              _vm.top10TracksMonth != "noTracks"
                 ? _c("Top10Items", {
                     attrs: {
                       loaderMessage: "Загружаю Топ 10 треков за месяц...",
                       cardTitle: "Топ 10 Треков за месяц",
                       cardDesc:
-                        "Десять твоих самых прослушиваемых треков за последний месяц.",
+                        "Десять самых прослушиваемых треков за последний месяц",
                       items: _vm.top10TracksMonth,
-                      listType: "tracks"
+                      listType: "tracks",
+                      desc: "Эти песни не покидают тебя весь последний месяц"
                     }
                   })
                 : _vm._e(),
@@ -84390,10 +84447,11 @@ var render = function() {
                 ? _c("Top10Items", {
                     attrs: {
                       cardTitle: "Топ 10 самых длинных",
-                      cardDesc:
-                        "Десять твоих самых длинных треков в библиотеке.",
+                      cardDesc: "Десять самых длинных треков в библиотеке",
                       items: _vm.top10TracksLong,
-                      listType: "tracks"
+                      listType: "tracks",
+                      desc:
+                        "Самые длиииииииииииииинные песни которые тебе нравятся"
                     }
                   })
                 : _vm._e(),
@@ -84403,9 +84461,10 @@ var render = function() {
                     attrs: {
                       cardTitle: "Топ 10 самых коротких",
                       cardDesc:
-                        "Десять твоих самых коротких треков в библиотеке.",
+                        "Десять твоих самых коротких треков в библиотеке",
                       items: _vm.top10TracksShort,
-                      listType: "tracks"
+                      listType: "tracks",
+                      desc: "Тви лбмые крткие псни"
                     }
                   })
                 : _vm._e(),
@@ -84415,9 +84474,10 @@ var render = function() {
                     attrs: {
                       cardTitle: "Топ 10 самых популярных",
                       cardDesc:
-                        "Десять самых популярных треков которые тебе нравятся.",
+                        "Десять самых популярных треков которые тебе нравятся",
                       items: _vm.top10PopularTracks,
-                      listType: "tracks"
+                      listType: "tracks",
+                      desc: "Кроме тебя эти песни нравятся еще много кому"
                     }
                   })
                 : _vm._e(),
@@ -84427,9 +84487,11 @@ var render = function() {
                     attrs: {
                       cardTitle: "Топ 10 самых непопулярных",
                       cardDesc:
-                        "Десять самых непопулярных треков которые тебе нравятся.",
+                        "Десять самых непопулярных треков которые тебе нравятся",
                       items: _vm.top10UnpopularTracks,
-                      listType: "tracks"
+                      listType: "tracks",
+                      desc:
+                        "Кроме тебя, похоже, эти песни больше никто не слушает"
                     }
                   })
                 : _vm._e(),
@@ -84438,10 +84500,34 @@ var render = function() {
                 ? _c(
                     "div",
                     {
+                      directives: [
+                        {
+                          name: "scroll",
+                          rawName: "v-scroll",
+                          value: _vm.handleScrollArtists,
+                          expression: "handleScrollArtists"
+                        }
+                      ],
                       staticClass: "col-12 justify-content-center",
+                      class: { zeroOpacity: _vm.visibleArtists === false },
                       attrs: { id: "artists" }
                     },
-                    [_vm._m(2)]
+                    [
+                      _vm.visibleArtists
+                        ? _c(
+                            "h3",
+                            { staticClass: "text-center goUpAnimSlow" },
+                            [
+                              _vm._v(
+                                "\n                     Исполнители\n                     "
+                              ),
+                              _c("i", {
+                                staticClass: "fas fa-users primaryColor"
+                              })
+                            ]
+                          )
+                        : _vm._e()
+                    ]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -84451,9 +84537,10 @@ var render = function() {
                     attrs: {
                       cardTitle: "Топ 10 артистов за все время",
                       cardDesc:
-                        "Десять твоих самых прослушиваемых артистов за все время.",
+                        "Десять твоих самых прослушиваемых артистов за все время",
                       items: _vm.top10ArtistsAllTime,
-                      listType: "artists"
+                      listType: "artists",
+                      desc: "Эти группы и артисты никогда тебя не покидают"
                     }
                   })
                 : _vm._e(),
@@ -84464,9 +84551,10 @@ var render = function() {
                     attrs: {
                       cardTitle: "Топ 10 артистов за месяц",
                       cardDesc:
-                        "Десять твоих самых прослушиваемых артистов за последний месяц.",
+                        "Десять твоих самых прослушиваемых артистов за последний месяц",
                       items: _vm.top10ArtistsMonth,
-                      listType: "artists"
+                      listType: "artists",
+                      desc: "Эти группы и артисты были с тобой последний месяц"
                     }
                   })
                 : _vm._e(),
@@ -84476,9 +84564,10 @@ var render = function() {
                     attrs: {
                       cardTitle: "Топ 10 артистов по трекам",
                       cardDesc:
-                        "Десять артистов с наибольшим кол-вом треков в твоей библиотеке.",
+                        "Десять артистов с наибольшим кол-вом треков в твоей библиотеке",
                       items: _vm.top10ArtistsByTracks,
-                      listType: "artists"
+                      listType: "artists",
+                      desc: "Твои любимчики по количеству добавленных треков"
                     }
                   })
                 : _vm._e(),
@@ -84488,9 +84577,10 @@ var render = function() {
                     attrs: {
                       cardTitle: "Топ 10 артистов по времени треков",
                       cardDesc:
-                        "Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке.",
+                        "Десять артистов с наибольшим кол-вом часов музыки в твоей библиотеке",
                       items: _vm.top10ArtistsByTime,
-                      listType: "artists"
+                      listType: "artists",
+                      desc: "Твои любимчики по количеству часов музыки"
                     }
                   })
                 : _vm._e()
@@ -84522,30 +84612,44 @@ var render = function() {
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _vm.top10ArtistsByTime != -1
-      ? _c(
-          "div",
-          { staticClass: "row justify-content-center fadeInAnim" },
-          [
-            _c("router-link", { attrs: { to: "/profile/achievements#top" } }, [
-              _c(
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "scroll",
+            rawName: "v-scroll",
+            value: _vm.handleScroll,
+            expression: "handleScroll"
+          }
+        ],
+        staticClass: "row justify-content-center",
+        class: { zeroOpacity: _vm.visibleButton === false },
+        staticStyle: { "margin-top": "2rem" }
+      },
+      [
+        _c("router-link", { attrs: { to: "/profile#basic" } }, [
+          _vm.visibleButton === true && _vm.top10ArtistsByTime != -1
+            ? _c(
                 "button",
-                { staticClass: "btn btn-primary marginBottomMedium" },
+                { staticClass: "btn btn-lg btn-primary-n goUpAnimSlow" },
                 [
-                  _vm._v(
-                    '\n                 Перейти к "Особо отличившиеся"\n                 '
-                  ),
-                  _c("i", { staticClass: "fas fa-award" })
+                  _vm._v("\n                 Перейти к "),
+                  _c("b", [_vm._v("Общее")])
                 ]
               )
-            ]),
-            _vm._v(" "),
-            _c("br"),
-            _c("br")
-          ],
-          1
-        )
-      : _vm._e()
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _c("br"),
+        _c("br"),
+        _c("br"),
+        _c("br"),
+        _c("br")
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -84555,30 +84659,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "row justify-content-center fadeInAnim font10pt" },
-      [
-        _c("nav", { staticClass: "justify-content-center" }, [
-          _c("ul", { staticClass: "breadcrumb text-center" }, [
-            _c("li", { staticClass: "breadcrumb-item" }, [
-              _c("a", { attrs: { href: "#tracks" } }, [_vm._v("Треки")])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "breadcrumb-item" }, [
-              _c("a", { attrs: { href: "#artists" } }, [_vm._v("Исполнители")])
-            ])
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
       {
-        staticClass: "col-12 justify-content-center fadeInAnim",
+        staticClass: "col-12 justify-content-center goUpAnimSlow",
         attrs: { id: "tracks" }
       },
       [
@@ -84588,15 +84670,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "text-center" }, [
-      _vm._v("\n                     Исполнители\n                     "),
-      _c("i", { staticClass: "fas fa-users primaryColor" })
-    ])
   }
 ]
 render._withStripped = true
@@ -84620,636 +84693,760 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-12 paddingSides" }, [
-    _vm.items == -1
-      ? _c("div", [_c("Loader")], 1)
-      : _vm.items == false
-      ? _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: {
-                type: "small",
-                errorMessage: "Не удалось загрузить треки"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.items == "noTracks"
-      ? _c(
-          "div",
-          [
-            _c("Info", {
-              attrs: {
-                type: "small",
-                infoMessage: "Пока что мало данных для Топ-10"
-              }
-            })
-          ],
-          1
-        )
-      : _vm.items != -1 || _vm.items != false
-      ? _c(
-          "div",
-          {
-            staticClass: "col-12 fadeInAnim paddingSides",
-            staticStyle: { "margin-bottom": "3rem" }
-          },
-          [
-            _c("BackgroundImage", {
-              attrs: {
-                bgStyle: "top10ImageCard",
-                backgroundImageUrl: _vm.items["backgroundImage"]
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c(
-                "h3",
-                {
-                  staticClass: "borderUnderline",
-                  class: {
-                    "text-left": _vm.orientation === "left",
-                    "text-right": _vm.orientation === "right"
-                  }
-                },
-                [_c("b", [_vm._v(_vm._s(_vm.cardTitle))])]
-              ),
-              _vm._v(" "),
-              _vm.cardDesc != undefined
-                ? _c(
-                    "p",
-                    {
-                      class: {
-                        "text-right": _vm.orientation === "left",
-                        "text-left": _vm.orientation === "right"
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.cardDesc))]
-                  )
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "scroll",
+          rawName: "v-scroll",
+          value: _vm.handleScroll,
+          expression: "handleScroll"
+        }
+      ],
+      staticClass: "col-12 paddingSides",
+      class: { zeroOpacity: _vm.visible === false }
+    },
+    [
+      _vm.items == -1
+        ? _c("div", [_c("Loader")], 1)
+        : _vm.items == false
+        ? _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: {
+                  type: "small",
+                  errorMessage: "Не удалось загрузить треки"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.items == "noTracks"
+        ? _c(
+            "div",
+            [
+              _c("Info", {
+                attrs: {
+                  type: "small",
+                  infoMessage: "Пока что мало данных для Топ-10"
+                }
+              })
+            ],
+            1
+          )
+        : _vm.items != -1 || _vm.items != false
+        ? _c(
+            "div",
+            {
+              staticClass: "col-12 fadeInAnim paddingSides",
+              staticStyle: { "margin-bottom": "3rem" }
+            },
+            [
+              _vm.visible === true
+                ? _c("BackgroundImage", {
+                    attrs: {
+                      bgStyle: "top10ImageCard fadeInAnimBg",
+                      backgroundImageUrl: _vm.items["backgroundImage"]
+                    }
+                  })
                 : _vm._e(),
               _vm._v(" "),
-              _vm.items != undefined
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "row fadeInAnim justify-content-center fadeInAnim"
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "col-12",
-                          staticStyle: { "margin-top": "2.5rem" }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "row justify-content-center text-center"
-                            },
-                            [
-                              _c("div", { staticClass: "col-12 col-md-6" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "row justify-content-center" },
-                                  _vm._l(_vm.items["items"], function(
-                                    item,
-                                    index
-                                  ) {
-                                    return _c(
-                                      "div",
-                                      { key: index, staticClass: "col-12" },
-                                      [
-                                        item.count > 0 && item.count <= 5
-                                          ? _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "row jusitify-content-center"
-                                              },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "col-4 text-left top10Item"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "b",
-                                                      {
-                                                        staticClass:
-                                                          "btn btn-square rounded-circle top10Number",
-                                                        class: {
-                                                          gold:
-                                                            item.count === 1,
-                                                          silver:
-                                                            item.count === 2,
-                                                          bronze:
-                                                            item.count === 3
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                " +
-                                                            _vm._s(item.count) +
-                                                            "\n                                             "
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "a",
-                                                      {
-                                                        attrs: {
-                                                          href: item.url,
-                                                          target: "_blank"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("img", {
-                                                          staticClass:
-                                                            "rounded-circle top10Cover",
-                                                          class: {
-                                                            "gold goldShineAnim":
-                                                              item.count === 1,
-                                                            silver:
-                                                              item.count === 2,
-                                                            bronze:
-                                                              item.count === 3
-                                                          },
-                                                          staticStyle: {
-                                                            width: "50%"
-                                                          },
-                                                          attrs: {
-                                                            src: item.image
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "col-8 text-right"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "h6",
-                                                      {
-                                                        staticClass:
-                                                          "textShadow top10Name",
-                                                        class: {
-                                                          gold:
-                                                            item.count === 1,
-                                                          silver:
-                                                            item.count === 2,
-                                                          bronze:
-                                                            item.count === 3
-                                                        }
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "a",
-                                                          {
-                                                            attrs: {
-                                                              href: item.url,
-                                                              target: "_blank"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("b", [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  item.name
-                                                                )
-                                                              )
-                                                            ])
-                                                          ]
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    item.album
-                                                      ? _c(
-                                                          "h6",
-                                                          {
-                                                            staticClass:
-                                                              "top10Album"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "a",
-                                                              {
-                                                                attrs: {
-                                                                  href:
-                                                                    item.album_url,
-                                                                  target:
-                                                                    "_blank"
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                                                    " +
-                                                                    _vm._s(
-                                                                      item.album
-                                                                    ) +
-                                                                    " (" +
-                                                                    _vm._s(
-                                                                      item.album_year
-                                                                    ) +
-                                                                    ")\n                                                "
-                                                                )
-                                                              ]
-                                                            )
-                                                          ]
-                                                        )
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    item.duration
-                                                      ? _c(
-                                                          "h5",
-                                                          {
-                                                            staticClass:
-                                                              "top10Name textShadow",
-                                                            class: {
-                                                              gold:
-                                                                item.count ===
-                                                                1,
-                                                              silver:
-                                                                item.count ===
-                                                                2,
-                                                              bronze:
-                                                                item.count === 3
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("b", [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  item.duration
-                                                                )
-                                                              )
-                                                            ])
-                                                          ]
-                                                        )
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    item.info
-                                                      ? _c(
-                                                          "h5",
-                                                          {
-                                                            staticClass:
-                                                              "top10Name textShadow",
-                                                            class: {
-                                                              gold:
-                                                                item.count ===
-                                                                1,
-                                                              silver:
-                                                                item.count ===
-                                                                2,
-                                                              bronze:
-                                                                item.count === 3
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("b", [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  item.info
-                                                                )
-                                                              )
-                                                            ])
-                                                          ]
-                                                        )
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    item.genres
-                                                      ? _c(
-                                                          "h6",
-                                                          {
-                                                            staticClass:
-                                                              "top10Album"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "\n                                                    " +
-                                                                _vm._s(
-                                                                  item.genres
-                                                                ) +
-                                                                "\n                                            "
-                                                            )
-                                                          ]
-                                                        )
-                                                      : _vm._e()
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        item.count > 0 && item.count <= 5
-                                          ? _c("hr")
-                                          : _vm._e()
-                                      ]
-                                    )
-                                  }),
-                                  0
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-12 col-md-6" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "row justify-content-center" },
-                                  _vm._l(_vm.items["items"], function(
-                                    item,
-                                    index
-                                  ) {
-                                    return _c(
-                                      "div",
-                                      { key: index, staticClass: "col-12" },
-                                      [
-                                        item.count > 5 && item.count <= 10
-                                          ? _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "row jusitify-content-center"
-                                              },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "col-4 text-left top10Item"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "b",
-                                                      {
-                                                        staticClass:
-                                                          "btn btn-square rounded-circle top10Number",
-                                                        class: {
-                                                          gold:
-                                                            item.count === 1,
-                                                          silver:
-                                                            item.count === 2,
-                                                          bronze:
-                                                            item.count === 3
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                    " +
-                                                            _vm._s(item.count) +
-                                                            "\n                                                "
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "a",
-                                                      {
-                                                        attrs: {
-                                                          href: item.url,
-                                                          target: "_blank"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("img", {
-                                                          staticClass:
-                                                            "rounded-circle top10Cover",
-                                                          class: {
-                                                            gold:
-                                                              item.count === 1,
-                                                            silver:
-                                                              item.count === 2,
-                                                            bronze:
-                                                              item.count === 3
-                                                          },
-                                                          staticStyle: {
-                                                            width: "50%"
-                                                          },
-                                                          attrs: {
-                                                            src: item.image
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "col-8 text-right"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "h6",
-                                                      {
-                                                        staticClass:
-                                                          "textShadow top10Name",
-                                                        class: {
-                                                          gold:
-                                                            item.count === 1,
-                                                          silver:
-                                                            item.count === 2,
-                                                          bronze:
-                                                            item.count === 3
-                                                        }
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "a",
-                                                          {
-                                                            attrs: {
-                                                              href: item.url,
-                                                              target: "_blank"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("b", [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  item.name
-                                                                )
-                                                              )
-                                                            ])
-                                                          ]
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    item.album
-                                                      ? _c(
-                                                          "h6",
-                                                          {
-                                                            staticClass:
-                                                              "top10Album"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "a",
-                                                              {
-                                                                attrs: {
-                                                                  href:
-                                                                    item.album_url,
-                                                                  target:
-                                                                    "_blank"
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                                                        " +
-                                                                    _vm._s(
-                                                                      item.album
-                                                                    ) +
-                                                                    " (" +
-                                                                    _vm._s(
-                                                                      item.album_year
-                                                                    ) +
-                                                                    ")\n                                                    "
-                                                                )
-                                                              ]
-                                                            )
-                                                          ]
-                                                        )
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    item.duration
-                                                      ? _c(
-                                                          "h5",
-                                                          {
-                                                            staticClass:
-                                                              "top10Name textShadow",
-                                                            class: {
-                                                              gold:
-                                                                item.count ===
-                                                                1,
-                                                              silver:
-                                                                item.count ===
-                                                                2,
-                                                              bronze:
-                                                                item.count === 3
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("b", [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  item.duration
-                                                                )
-                                                              )
-                                                            ])
-                                                          ]
-                                                        )
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    item.info
-                                                      ? _c(
-                                                          "h5",
-                                                          {
-                                                            staticClass:
-                                                              "top10Name textShadow",
-                                                            class: {
-                                                              gold:
-                                                                item.count ===
-                                                                1,
-                                                              silver:
-                                                                item.count ===
-                                                                2,
-                                                              bronze:
-                                                                item.count === 3
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("b", [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  item.info
-                                                                )
-                                                              )
-                                                            ])
-                                                          ]
-                                                        )
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    item.genres
-                                                      ? _c(
-                                                          "h6",
-                                                          {
-                                                            staticClass:
-                                                              "top10Album"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "\n                                                    " +
-                                                                _vm._s(
-                                                                  item.genres
-                                                                ) +
-                                                                "\n                                                "
-                                                            )
-                                                          ]
-                                                        )
-                                                      : _vm._e()
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        item.count > 5 && item.count <= 10
-                                          ? _c("hr")
-                                          : _vm._e()
-                                      ]
-                                    )
-                                  }),
-                                  0
-                                )
-                              ])
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                : _c(
-                    "div",
-                    [
-                      _c("Error", {
-                        attrs: {
-                          type: "x-small",
-                          errorMessage:
-                            "Нечего показывать. Параметр items пустой."
+              _vm.visible === true
+                ? _c("div", { staticClass: "col-12 fadeInAnimSlow" }, [
+                    _c(
+                      "h3",
+                      {
+                        staticClass: "borderUnderline goUpAnimSlow",
+                        class: {
+                          "text-left": _vm.orientation === "left",
+                          "text-right": _vm.orientation === "right"
                         }
-                      })
-                    ],
-                    1
-                  )
-            ])
-          ],
-          1
-        )
-      : _c(
-          "div",
-          [
-            _c("Error", {
-              attrs: { type: "x-small", errorMessage: "Неизвестная ошибка" }
-            })
-          ],
-          1
-        )
-  ])
+                      },
+                      [_c("b", [_vm._v(_vm._s(_vm.cardTitle))])]
+                    ),
+                    _vm._v(" "),
+                    _vm.cardDesc != undefined
+                      ? _c(
+                          "p",
+                          {
+                            staticClass: "goUpAnimSlow",
+                            class: {
+                              "text-right": _vm.orientation === "left",
+                              "text-left": _vm.orientation === "right"
+                            }
+                          },
+                          [_vm._v(_vm._s(_vm.cardDesc))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("hr", { staticClass: "goUpAnimSlow" }),
+                    _vm._v(" "),
+                    _vm.desc != null
+                      ? _c("p", { staticClass: "goUpAnimSlow text-center" }, [
+                          _vm._v(_vm._s(_vm.desc))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.items != undefined
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "row fadeInAnim justify-content-center fadeInAnim"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-12",
+                                staticStyle: { "margin-top": "2.5rem" }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "row justify-content-center text-center"
+                                  },
+                                  [
+                                    _vm.visible === true
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "col-12 col-md-6" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "row justify-content-center"
+                                              },
+                                              _vm._l(
+                                                _vm.items["items"],
+                                                function(item, index) {
+                                                  return _c(
+                                                    "div",
+                                                    {
+                                                      key: index,
+                                                      staticClass: "col-12"
+                                                    },
+                                                    [
+                                                      item.count > 0 &&
+                                                      item.count <= 5
+                                                        ? _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "row jusitify-content-center goUpAnimSlow"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "col-4 text-left top10Item"
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "b",
+                                                                    {
+                                                                      staticClass:
+                                                                        "btn btn-square rounded-circle top10Number",
+                                                                      class: {
+                                                                        gold:
+                                                                          item.count ===
+                                                                          1,
+                                                                        silver:
+                                                                          item.count ===
+                                                                          2,
+                                                                        bronze:
+                                                                          item.count ===
+                                                                          3
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                " +
+                                                                          _vm._s(
+                                                                            item.count
+                                                                          ) +
+                                                                          "\n                                             "
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "a",
+                                                                    {
+                                                                      attrs: {
+                                                                        href:
+                                                                          item.url,
+                                                                        target:
+                                                                          "_blank"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "img",
+                                                                        {
+                                                                          staticClass:
+                                                                            "rounded-circle top10Cover",
+                                                                          class: {
+                                                                            "gold goldShineAnim":
+                                                                              item.count ===
+                                                                              1,
+                                                                            silver:
+                                                                              item.count ===
+                                                                              2,
+                                                                            bronze:
+                                                                              item.count ===
+                                                                              3
+                                                                          },
+                                                                          staticStyle: {
+                                                                            width:
+                                                                              "50%"
+                                                                          },
+                                                                          attrs: {
+                                                                            src:
+                                                                              item.image
+                                                                          }
+                                                                        }
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "col-8 text-right"
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "h6",
+                                                                    {
+                                                                      staticClass:
+                                                                        "textShadow top10Name",
+                                                                      class: {
+                                                                        gold:
+                                                                          item.count ===
+                                                                          1,
+                                                                        silver:
+                                                                          item.count ===
+                                                                          2,
+                                                                        bronze:
+                                                                          item.count ===
+                                                                          3
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "a",
+                                                                        {
+                                                                          attrs: {
+                                                                            href:
+                                                                              item.url,
+                                                                            target:
+                                                                              "_blank"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "b",
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  item.name
+                                                                                )
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  item.album
+                                                                    ? _c(
+                                                                        "h6",
+                                                                        {
+                                                                          staticClass:
+                                                                            "top10Album"
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "a",
+                                                                            {
+                                                                              attrs: {
+                                                                                href:
+                                                                                  item.album_url,
+                                                                                target:
+                                                                                  "_blank"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                "\n                                                    " +
+                                                                                  _vm._s(
+                                                                                    item.album
+                                                                                  ) +
+                                                                                  " (" +
+                                                                                  _vm._s(
+                                                                                    item.album_year
+                                                                                  ) +
+                                                                                  ")\n                                                "
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e(),
+                                                                  _vm._v(" "),
+                                                                  item.duration
+                                                                    ? _c(
+                                                                        "h5",
+                                                                        {
+                                                                          staticClass:
+                                                                            "top10Name textShadow",
+                                                                          class: {
+                                                                            gold:
+                                                                              item.count ===
+                                                                              1,
+                                                                            silver:
+                                                                              item.count ===
+                                                                              2,
+                                                                            bronze:
+                                                                              item.count ===
+                                                                              3
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "b",
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  item.duration
+                                                                                )
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e(),
+                                                                  _vm._v(" "),
+                                                                  item.info
+                                                                    ? _c(
+                                                                        "h5",
+                                                                        {
+                                                                          staticClass:
+                                                                            "top10Name textShadow",
+                                                                          class: {
+                                                                            gold:
+                                                                              item.count ===
+                                                                              1,
+                                                                            silver:
+                                                                              item.count ===
+                                                                              2,
+                                                                            bronze:
+                                                                              item.count ===
+                                                                              3
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "b",
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  item.info
+                                                                                )
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e(),
+                                                                  _vm._v(" "),
+                                                                  item.genres
+                                                                    ? _c(
+                                                                        "h6",
+                                                                        {
+                                                                          staticClass:
+                                                                            "top10Album"
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            "\n                                                    " +
+                                                                              _vm._s(
+                                                                                item.genres
+                                                                              ) +
+                                                                              "\n                                            "
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e()
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      item.count > 0 &&
+                                                      item.count <= 5
+                                                        ? _c("hr", {
+                                                            staticClass:
+                                                              "goUpAnimSlow"
+                                                          })
+                                                        : _vm._e()
+                                                    ]
+                                                  )
+                                                }
+                                              ),
+                                              0
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.visible === true
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "col-12 col-md-6" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "row justify-content-center"
+                                              },
+                                              _vm._l(
+                                                _vm.items["items"],
+                                                function(item, index) {
+                                                  return _c(
+                                                    "div",
+                                                    {
+                                                      key: index,
+                                                      staticClass: "col-12"
+                                                    },
+                                                    [
+                                                      item.count > 5 &&
+                                                      item.count <= 10
+                                                        ? _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "row jusitify-content-center goUpAnimSlow"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "col-4 text-left top10Item"
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "b",
+                                                                    {
+                                                                      staticClass:
+                                                                        "btn btn-square rounded-circle top10Number",
+                                                                      class: {
+                                                                        gold:
+                                                                          item.count ===
+                                                                          1,
+                                                                        silver:
+                                                                          item.count ===
+                                                                          2,
+                                                                        bronze:
+                                                                          item.count ===
+                                                                          3
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                    " +
+                                                                          _vm._s(
+                                                                            item.count
+                                                                          ) +
+                                                                          "\n                                                "
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "a",
+                                                                    {
+                                                                      attrs: {
+                                                                        href:
+                                                                          item.url,
+                                                                        target:
+                                                                          "_blank"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "img",
+                                                                        {
+                                                                          staticClass:
+                                                                            "rounded-circle top10Cover",
+                                                                          class: {
+                                                                            gold:
+                                                                              item.count ===
+                                                                              1,
+                                                                            silver:
+                                                                              item.count ===
+                                                                              2,
+                                                                            bronze:
+                                                                              item.count ===
+                                                                              3
+                                                                          },
+                                                                          staticStyle: {
+                                                                            width:
+                                                                              "50%"
+                                                                          },
+                                                                          attrs: {
+                                                                            src:
+                                                                              item.image
+                                                                          }
+                                                                        }
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "col-8 text-right"
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "h6",
+                                                                    {
+                                                                      staticClass:
+                                                                        "textShadow top10Name",
+                                                                      class: {
+                                                                        gold:
+                                                                          item.count ===
+                                                                          1,
+                                                                        silver:
+                                                                          item.count ===
+                                                                          2,
+                                                                        bronze:
+                                                                          item.count ===
+                                                                          3
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "a",
+                                                                        {
+                                                                          attrs: {
+                                                                            href:
+                                                                              item.url,
+                                                                            target:
+                                                                              "_blank"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "b",
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  item.name
+                                                                                )
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  item.album
+                                                                    ? _c(
+                                                                        "h6",
+                                                                        {
+                                                                          staticClass:
+                                                                            "top10Album"
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "a",
+                                                                            {
+                                                                              attrs: {
+                                                                                href:
+                                                                                  item.album_url,
+                                                                                target:
+                                                                                  "_blank"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                "\n                                                        " +
+                                                                                  _vm._s(
+                                                                                    item.album
+                                                                                  ) +
+                                                                                  " (" +
+                                                                                  _vm._s(
+                                                                                    item.album_year
+                                                                                  ) +
+                                                                                  ")\n                                                    "
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e(),
+                                                                  _vm._v(" "),
+                                                                  item.duration
+                                                                    ? _c(
+                                                                        "h5",
+                                                                        {
+                                                                          staticClass:
+                                                                            "top10Name textShadow",
+                                                                          class: {
+                                                                            gold:
+                                                                              item.count ===
+                                                                              1,
+                                                                            silver:
+                                                                              item.count ===
+                                                                              2,
+                                                                            bronze:
+                                                                              item.count ===
+                                                                              3
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "b",
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  item.duration
+                                                                                )
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e(),
+                                                                  _vm._v(" "),
+                                                                  item.info
+                                                                    ? _c(
+                                                                        "h5",
+                                                                        {
+                                                                          staticClass:
+                                                                            "top10Name textShadow",
+                                                                          class: {
+                                                                            gold:
+                                                                              item.count ===
+                                                                              1,
+                                                                            silver:
+                                                                              item.count ===
+                                                                              2,
+                                                                            bronze:
+                                                                              item.count ===
+                                                                              3
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "b",
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  item.info
+                                                                                )
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e(),
+                                                                  _vm._v(" "),
+                                                                  item.genres
+                                                                    ? _c(
+                                                                        "h6",
+                                                                        {
+                                                                          staticClass:
+                                                                            "top10Album"
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            "\n                                                    " +
+                                                                              _vm._s(
+                                                                                item.genres
+                                                                              ) +
+                                                                              "\n                                                "
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e()
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      item.count > 5 &&
+                                                      item.count <= 10
+                                                        ? _c("hr", {
+                                                            staticClass:
+                                                              "goUpAnimSlow"
+                                                          })
+                                                        : _vm._e()
+                                                    ]
+                                                  )
+                                                }
+                                              ),
+                                              0
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      : _c(
+                          "div",
+                          [
+                            _c("Error", {
+                              attrs: {
+                                type: "x-small",
+                                errorMessage:
+                                  "Нечего показывать. Параметр items пустой."
+                              }
+                            })
+                          ],
+                          1
+                        )
+                  ])
+                : _vm._e()
+            ],
+            1
+          )
+        : _c(
+            "div",
+            [
+              _c("Error", {
+                attrs: { type: "x-small", errorMessage: "Неизвестная ошибка" }
+              })
+            ],
+            1
+          )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

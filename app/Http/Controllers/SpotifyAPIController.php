@@ -1065,7 +1065,7 @@ class SpotifyAPIController extends Controller
                     $trackInfo['count'] = $count;
                     $trackInfo['id'] = $track->id;
                     $trackInfo['name'] = Helpers::getFullNameOfItem($track, "fullname");
-                    $trackInfo['image'] = $track->album->images[0]->url;
+                    $trackInfo['image'] = $track->album->images[2]->url;
                     $trackInfo['url'] = $track->external_urls->spotify;
                     $trackInfo['album'] = $track->album->name;
                     $trackInfo['album_url'] = $track->album->external_urls->spotify;

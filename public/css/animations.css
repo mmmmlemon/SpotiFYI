@@ -7,9 +7,20 @@
   animation: fadeIn 1s ease-in-out;
 }
 
+.fadeInAnimBg{
+  animation: fadeInBg 2s ease-in-out;
+}
+
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+
+@keyframes fadeInBg {
+  from { opacity: 0; }
+  to   {  opacity: 0.05; }
 }
 
 /*  */
@@ -684,9 +695,9 @@
   }
 
   50%{
-    -webkit-box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 0.68);
-    -moz-box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 0.68);
-    box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 0.68);
+    -webkit-box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 1);
+    -moz-box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 1);
+    box-shadow: 4px 4px 100px -6px rgba(255, 140, 0, 1);
   }
 
   100%{

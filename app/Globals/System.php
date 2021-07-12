@@ -85,6 +85,7 @@
                 {
                     //если не истекло, то устанавливаем токен и возвращаем true
                     config('spotify_api')->setAccessToken($spotifyAccessToken);
+
                     return true;
                 }
             }

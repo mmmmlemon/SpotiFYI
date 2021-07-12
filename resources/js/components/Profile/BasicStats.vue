@@ -11,14 +11,14 @@
             <div v-else-if="spotifyUserLibrary != -1 && spotifyUserLibrary['result'] != false 
                 && spotifyUserLibrary['result'] != 'libraryError'" class="row justify-content-center">
                 <!-- навигация -->
-                <div class="row justify-content-center fadeInAnim" style="margin-top:5%;">
+                <!-- <div class="row justify-content-center fadeInAnim" style="margin-top:5%;">
                     <nav class="justify-content-center">
                         <ul class="breadcrumb text-center">
                             <li class="breadcrumb-item"><a href="#basic">Общее</a></li>
                             <li class="breadcrumb-item"><a href="#genres">Жанры и годы</a></li>
                         </ul>
                     </nav>
-                </div>
+                </div> -->
 
                 <div class="col-12 justify-content-center fadeInAnim">
                 </div>
