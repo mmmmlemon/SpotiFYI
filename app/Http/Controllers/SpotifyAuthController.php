@@ -56,7 +56,7 @@ class SpotifyAuthController extends Controller
         //получаем access и refresh токены
         $accessToken = $session->getAccessToken();
         $refreshToken = $session->getRefreshToken();
-        $accessExpiration = Carbon::now()->addMinutes(50);
+        $accessExpiration = Carbon::now()->addMinutes(3);
         $chars = "ABCDEFG";
         $randName = $chars[rand(0, 6)] . rand(0,9) . $chars[rand(0, 6)] . rand(0,9) . $chars[rand(0, 6)] . rand(0,9); //рандомное имя папки в которую будут сохраняться результаты
 

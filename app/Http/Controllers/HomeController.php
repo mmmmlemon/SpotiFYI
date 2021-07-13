@@ -62,46 +62,10 @@ class HomeController extends Controller
 
     //index
     //главная страница сайта, отображает меню на верхней панели и vue-router под меню
-    public function index(Request $request)
+    public function index()
     {   
-        $settings = config('settings'); 
-
-        if($settings != null)
-        {
-            //настройки сайта для app.blade
-            $siteInfo = ['siteLogo' => $settings->logo_img, 'siteTitle' => $settings->site_title];
-
-            //проверка токена
-            $checkToken = System::checkSpotifyAccessToken($request);
-
-            //если токен есть и он действительный
-            if($checkToken != false)
-            {
-                //вызываем api, получаем профиль пользователя
-                $api = config('spotify_api');
-
-                //если у пользователя установлена аватарка, то записываем ссылку на неё
-                $avatarUrl = "";
-
-                if(count($api->me()->images) > 0)
-                { $avatarUrl = $api->me()->images[0]->url; }
-                else
-                {   
-                    //заглушка на случай если нет аватарки
-                    $avatarUrl = asset(config('settings')->user_img);
-                }
-                
-                //пользователь
-                $spotifyProfile = ['displayName' => $api->me()->display_name, 'avatar' => $avatarUrl];
-
-                //возвращаем главную страницу с профилем пользователя
-                return view('index', compact('checkToken', 'spotifyProfile', 'siteInfo'));
-            }
-            else //если токена нет или он не действительный
-            { return view('index', compact('checkToken', 'siteInfo')); }
-        }
-        else
-        { return "Uncomment boot() in the AppServiceProvider.php"; }
+        //возвращаем главную страницу с профилем пользователя
+        return view('index');
     }
 
     //getWelcomeMessage
