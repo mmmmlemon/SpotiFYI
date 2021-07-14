@@ -83,7 +83,29 @@ Vue.directive('scroll', {
       }
       window.addEventListener('scroll', f)
     }
-  })
+  });
+
+//плагин для проверки токена
+const CheckTokenPlugin = {
+    install(Vue, options) {
+      Vue.prototype.checkToken = () => {
+        
+        //проверяем есть ли токен вообще
+        return axios.get('/api/check_token').then(response => {
+           if(response.data == 'yesToken'){
+             return true;
+           } else if(response.data == 'refreshToken'){
+              return 'refresh';
+           } else{
+             //if 'noToken'
+             return false;
+           }
+        });
+
+      }
+    },
+  }
+  Vue.use(CheckTokenPlugin)
 
 
 

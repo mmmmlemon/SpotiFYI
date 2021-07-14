@@ -126,6 +126,40 @@
 <script>
 export default {
 
+    created(){
+        this.checkToken().then(response => {
+            if(response === 'refresh'){
+                alert('refresh')
+                var url = window.location.href;
+                axios.get('/refresh_token').then(response => {
+                    if(response.data = true){
+                        
+                        window.location.replace(url);
+                    }
+                });
+
+            } else{
+                alert(response);
+                //получаем библиотеку пользователя, если она еще не загружена
+                //получаем библиотеку пользователя и статистику
+                if(this.spotifyUserLibrary == -1)
+                {
+                    //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
+                    this.$store.dispatch('getSpotifyUserLibrary').then(response => {
+                        if(this.spotifyUserLibrary['result'] == true)
+                        {
+                            this.getAllData();
+                        }
+                    }, error => {
+                        console.log("Error: Couldn't load user's Spotify library.");
+                    });
+                }
+                else
+                { this.getAllData(); }
+            }
+        });
+    },
+
     mounted(){
         //прокручиваем страницу к якорю, если в url есть якорь
         var anchor=this.$router.currentRoute.hash.replace("#", "");
@@ -141,21 +175,7 @@ export default {
         //смена текущего таба
         this.$store.dispatch('setCurrentTab','top10');
 
-         //получаем библиотеку пользователя и статистику
-        if(this.spotifyUserLibrary == -1)
-        {
-            //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
-            this.$store.dispatch('getSpotifyUserLibrary').then(response => {
-                if(this.spotifyUserLibrary['result'] == true)
-                {
-                    this.getAllData();
-                }
-            }, error => {
-                console.log("Error: Couldn't load user's Spotify library.");
-            });
-        }
-        else
-        { this.getAllData(); }
+   
   
     },
 

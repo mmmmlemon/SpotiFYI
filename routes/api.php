@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Spotify Token Check
+Route::get('/check_token', 'SpotifyAuthController@checkSpotifyToken');
+
 //Navigation
 Route::get('/get_nav_settings', 'HomeController@getNavigationSettings'); //настройки навигации
 

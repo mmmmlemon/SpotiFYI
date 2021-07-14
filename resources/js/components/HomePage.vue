@@ -18,35 +18,52 @@
 
         created(){
 
+            this.checkToken ().then(response => {
+                if(response === 'refresh'){
+                    alert('refresh')
+                    var url = window.location.href;
+                    axios.get('/refresh_token').then(response => {
+                        if(response.data = true){
+                            
+                            window.location.replace(url);
+                        }
+                    })
 
-            if(this.navSettings == -1)
-            { this.$store.dispatch('getNavSettings'); }
+                } else {
+                    alert(response);
 
-            //получить фоновое изображение
-            if(this.homePageImageUrl == -1)
-            { this.$store.dispatch('getHomePageImageUrl'); }
+                    if(this.navSettings == -1)
+                    { this.$store.dispatch('getNavSettings'); }
 
-            //получить логотип сайта
-            if(this.siteLogoUrl == -1)
-            { this.$store.dispatch('getSiteLogoUrl'); }
+                    //получить фоновое изображение
+                    if(this.homePageImageUrl == -1)
+                    { this.$store.dispatch('getHomePageImageUrl'); }
 
-            //получить изображение для приветствия
-            if(this.welcomeImageUrl == -1)
-            { this.$store.dispatch('getWelcomeImageUrl'); } 
+                    //получить логотип сайта
+                    if(this.siteLogoUrl == -1)
+                    { this.$store.dispatch('getSiteLogoUrl'); }
 
-            //получить информацию о сайте
-            this.$store.dispatch('getSiteInfo');
+                    //получить изображение для приветствия
+                    if(this.welcomeImageUrl == -1)
+                    { this.$store.dispatch('getWelcomeImageUrl'); } 
 
-            //получить приветственное сообщение
-            this.$store.dispatch('getWelcomeMessage'); 
+                    //получить информацию о сайте
+                    this.$store.dispatch('getSiteInfo');
 
-            //получить юзернейм пользователя
-            if(this.spotifyUsername == -1)
-            { this.$store.dispatch('getSpotifyUsername'); }
-          
-            //получить кол-во треков в библиотеке для сообщения на главной странице
-            if(this.spotifyUserTracksCount == -1)
-            { this.$store.dispatch('getHomePageUserTracksCount'); }    
+                    //получить приветственное сообщение
+                    this.$store.dispatch('getWelcomeMessage'); 
+
+                    //получить юзернейм пользователя
+                    if(this.spotifyUsername == -1)
+                    { this.$store.dispatch('getSpotifyUsername'); }
+                
+                    //получить кол-во треков в библиотеке для сообщения на главной странице
+                    if(this.spotifyUserTracksCount == -1)
+                    { this.$store.dispatch('getHomePageUserTracksCount'); }    
+                        }
+            })
+
+            
 
         },
 

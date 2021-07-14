@@ -2117,38 +2117,56 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    if (this.navSettings == -1) {
-      this.$store.dispatch('getNavSettings');
-    } //получить фоновое изображение
+    var _this = this;
+
+    this.checkToken().then(function (response) {
+      if (response === 'refresh') {
+        alert('refresh');
+        var url = window.location.href;
+        axios.get('/refresh_token').then(function (response) {
+          if (response.data = true) {
+            window.location.replace(url);
+          }
+        });
+      } else {
+        alert(response);
+
+        if (_this.navSettings == -1) {
+          _this.$store.dispatch('getNavSettings');
+        } //получить фоновое изображение
 
 
-    if (this.homePageImageUrl == -1) {
-      this.$store.dispatch('getHomePageImageUrl');
-    } //получить логотип сайта
+        if (_this.homePageImageUrl == -1) {
+          _this.$store.dispatch('getHomePageImageUrl');
+        } //получить логотип сайта
 
 
-    if (this.siteLogoUrl == -1) {
-      this.$store.dispatch('getSiteLogoUrl');
-    } //получить изображение для приветствия
+        if (_this.siteLogoUrl == -1) {
+          _this.$store.dispatch('getSiteLogoUrl');
+        } //получить изображение для приветствия
 
 
-    if (this.welcomeImageUrl == -1) {
-      this.$store.dispatch('getWelcomeImageUrl');
-    } //получить информацию о сайте
+        if (_this.welcomeImageUrl == -1) {
+          _this.$store.dispatch('getWelcomeImageUrl');
+        } //получить информацию о сайте
 
 
-    this.$store.dispatch('getSiteInfo'); //получить приветственное сообщение
-
-    this.$store.dispatch('getWelcomeMessage'); //получить юзернейм пользователя
-
-    if (this.spotifyUsername == -1) {
-      this.$store.dispatch('getSpotifyUsername');
-    } //получить кол-во треков в библиотеке для сообщения на главной странице
+        _this.$store.dispatch('getSiteInfo'); //получить приветственное сообщение
 
 
-    if (this.spotifyUserTracksCount == -1) {
-      this.$store.dispatch('getHomePageUserTracksCount');
-    }
+        _this.$store.dispatch('getWelcomeMessage'); //получить юзернейм пользователя
+
+
+        if (_this.spotifyUsername == -1) {
+          _this.$store.dispatch('getSpotifyUsername');
+        } //получить кол-во треков в библиотеке для сообщения на главной странице
+
+
+        if (_this.spotifyUserTracksCount == -1) {
+          _this.$store.dispatch('getHomePageUserTracksCount');
+        }
+      }
+    });
   },
   computed: {
     //настройки навигации
@@ -3727,9 +3745,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
+    this.checkToken().then(function (response) {
+      if (response === 'refresh') {
+        alert('refresh');
+        var url = window.location.href;
+        axios.get('/refresh_token').then(function (response) {
+          if (response.data = true) {
+            window.location.replace(url);
+          }
+        });
+      } else {
+        alert(response); //получаем библиотеку пользователя, если она еще не загружена
+
+        if (_this.spotifyUserLibrary == -1) {
+          //если запрос выполнился, то выполняем загружаем остальные данные, если нет, то не делаем ничего
+          _this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
+            if (_this.spotifyUserLibrary['result'] == true) {
+              _this.getAllData();
+            }
+          }, function (error) {
+            console.log("Error: Couldn't load user's Spotify library.");
+          });
+        } //загружаем остальные данные
+        else {
+            _this.getAllData();
+          }
+      }
+    });
+  },
+  mounted: function mounted() {
     //прокручиваем страницу к якорю, если в url есть якорь
     var anchor = this.$router.currentRoute.hash.replace("#", "");
 
@@ -3744,21 +3791,7 @@ __webpack_require__.r(__webpack_exports__);
     } //устанавливаем текущий таб, для подсветки навигации
 
 
-    this.$store.dispatch('setCurrentTab', 'basicStats'); //получаем библиотеку пользователя, если она еще не загружена
-
-    if (this.spotifyUserLibrary == -1) {
-      //если запрос выполнился, то выполняем загружаем остальные данные, если нет, то не делаем ничего
-      this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
-        if (_this.spotifyUserLibrary['result'] == true) {
-          _this.getAllData();
-        }
-      }, function (error) {
-        console.log("Error: Couldn't load user's Spotify library.");
-      });
-    } //загружаем остальные данные
-    else {
-        this.getAllData();
-      }
+    this.$store.dispatch('setCurrentTab', 'basicStats');
   },
   methods: {
     //получить все необходимые данные для этой страницы
@@ -4930,9 +4963,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
+    this.checkToken().then(function (response) {
+      if (response === 'refresh') {
+        alert('refresh');
+        var url = window.location.href;
+        axios.get('/refresh_token').then(function (response) {
+          if (response.data = true) {
+            window.location.replace(url);
+          }
+        });
+      } else {
+        alert(response); //получаем библиотеку пользователя, если она еще не загружена
+        //получаем библиотеку пользователя и статистику
+
+        if (_this.spotifyUserLibrary == -1) {
+          //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
+          _this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
+            if (_this.spotifyUserLibrary['result'] == true) {
+              _this.getAllData();
+            }
+          }, function (error) {
+            console.log("Error: Couldn't load user's Spotify library.");
+          });
+        } else {
+          _this.getAllData();
+        }
+      }
+    });
+  },
+  mounted: function mounted() {
     //прокручиваем страницу к якорю, если в url есть якорь
     var anchor = this.$router.currentRoute.hash.replace("#", "");
 
@@ -4947,20 +5009,7 @@ __webpack_require__.r(__webpack_exports__);
     } //смена текущего таба
 
 
-    this.$store.dispatch('setCurrentTab', 'top10'); //получаем библиотеку пользователя и статистику
-
-    if (this.spotifyUserLibrary == -1) {
-      //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
-      this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
-        if (_this.spotifyUserLibrary['result'] == true) {
-          _this.getAllData();
-        }
-      }, function (error) {
-        console.log("Error: Couldn't load user's Spotify library.");
-      });
-    } else {
-      this.getAllData();
-    }
+    this.$store.dispatch('setCurrentTab', 'top10');
   },
   data: function data() {
     return {
@@ -102150,7 +102199,26 @@ vue__WEBPACK_IMPORTED_MODULE_22___default.a.directive('scroll', {
 
     window.addEventListener('scroll', f);
   }
-});
+}); //плагин для проверки токена
+
+var CheckTokenPlugin = {
+  install: function install(Vue, options) {
+    Vue.prototype.checkToken = function () {
+      //проверяем есть ли токен вообще
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/check_token').then(function (response) {
+        if (response.data == 'yesToken') {
+          return true;
+        } else if (response.data == 'refreshToken') {
+          return 'refresh';
+        } else {
+          //if 'noToken'
+          return false;
+        }
+      });
+    };
+  }
+};
+vue__WEBPACK_IMPORTED_MODULE_22___default.a.use(CheckTokenPlugin);
 var app = new vue__WEBPACK_IMPORTED_MODULE_22___default.a({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   el: '#app',
