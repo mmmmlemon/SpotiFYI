@@ -2117,7 +2117,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    //получить фоновое изображение
+    if (this.navSettings == -1) {
+      this.$store.dispatch('getNavSettings');
+    } //получить фоновое изображение
+
+
     if (this.homePageImageUrl == -1) {
       this.$store.dispatch('getHomePageImageUrl');
     } //получить логотип сайта
@@ -2147,6 +2151,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    //настройки навигации
+    navSettings: function navSettings() {
+      return this.$store.state.homePage.navSettings;
+    },
     //фоновое изображение
     homePageImageUrl: function homePageImageUrl() {
       return this.$store.state.homePage.homePageImageUrl;
@@ -3045,18 +3053,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    var _this = this;
-
-    //получить настройки для навигации
-    axios.get('/api/get_nav_settings').then(function (response) {
-      _this.settings = response.data;
-    })["catch"](function (error) {});
-  },
-  data: function data() {
-    return {
-      settings: null
-    };
+  computed: {
+    settings: function settings() {
+      return this.$store.state.homePage.navSettings;
+    }
   }
 });
 
@@ -3071,7 +3071,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Nav_Navigation_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav/Navigation.vue */ "./resources/js/components/Nav/Navigation.vue");
 //
 //
 //
@@ -3162,10 +3161,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    Navigation: _Nav_Navigation_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  created: function created() {
+    if (this.navSettings == -1) {
+      this.$store.dispatch('getNavSettings');
+    }
   },
   beforeMount: function beforeMount() {
     //получить фоновое изображение профиля
@@ -3190,6 +3190,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    navSettings: function navSettings() {
+      return this.$store.state.homePage.navSettings;
+    },
     //фоновое изображение для профиля
     profileImageUrl: function profileImageUrl() {
       return this.$store.state.homePage.homePageImageUrl;
@@ -104521,6 +104524,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
 var HomePageStates = {
   state: {
+    navSettings: -1,
+    //настройки для навигации
     welcomeMessage: -1,
     //welcome message
     cookiesVisible: -1,
@@ -104563,6 +104568,22 @@ var HomePageStates = {
     }
   },
   actions: {
+    //получить настройки навигации
+    getNavSettings: function getNavSettings(context) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get_nav_settings').then(function (response) {
+        if (response.data != false) {
+          context.commit('setState', {
+            state: 'navSettings',
+            value: response.data
+          });
+        } else {
+          context.commit('setState', {
+            state: 'navSettings',
+            value: false
+          });
+        }
+      });
+    },
     //уставноить cookiesVisible = false
     setCookiesVisibleFalse: function setCookiesVisibleFalse(context) {
       context.commit('setCookiesVisibleFalse');

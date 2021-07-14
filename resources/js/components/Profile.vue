@@ -89,9 +89,15 @@
 </template>
 
 <script>
-import Navigation from './Nav/Navigation.vue';
 export default {
-  components: { Navigation },
+
+
+    created(){
+        if(this.navSettings == -1){
+            this.$store.dispatch('getNavSettings');
+        }
+    },
+
     beforeMount(){
         //получить фоновое изображение профиля
         if(this.profileImageUrl == -1)
@@ -114,6 +120,11 @@ export default {
         },
     },
     computed: {
+
+        navSettings: function(){
+            return this.$store.state.homePage.navSettings;
+        },
+
         //фоновое изображение для профиля
         profileImageUrl: function(){
             return this.$store.state.homePage.homePageImageUrl;

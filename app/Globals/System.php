@@ -27,7 +27,7 @@
             {
                 //получаем дату просрочки токена
                 $spotifyAccessExpiration = $request->cookie('spotify_access_expiration');
-
+                
                 //если время действия токена истекло
                 if(Carbon::now() >= $spotifyAccessExpiration)
                 {

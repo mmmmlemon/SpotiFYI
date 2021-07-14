@@ -17,6 +17,11 @@
         },
 
         created(){
+
+
+            if(this.navSettings == -1)
+            { this.$store.dispatch('getNavSettings'); }
+
             //получить фоновое изображение
             if(this.homePageImageUrl == -1)
             { this.$store.dispatch('getHomePageImageUrl'); }
@@ -46,6 +51,12 @@
         },
 
         computed: {
+
+            //настройки навигации
+            navSettings: function(){
+                return this.$store.state.homePage.navSettings;
+            },
+
             //фоновое изображение
             homePageImageUrl: function(){
                 return this.$store.state.homePage.homePageImageUrl;

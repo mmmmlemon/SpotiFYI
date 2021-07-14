@@ -109,19 +109,13 @@
 </template>
 <script>
  export default {
-     created(){
-         //получить настройки для навигации
-         axios.get('/api/get_nav_settings').then(response => {
-             this.settings = response.data;
-         }).catch(error => {
 
-         });
-     },
 
-     data: () => {
-         return {
-             settings: null,
+
+     computed: {
+         settings: function(){
+             return this.$store.state.homePage.navSettings;
          }
-     },
+     }
  }
 </script>

@@ -11,6 +11,7 @@ Vue.use(VueAxios, axios);
 const HomePageStates = {
 
     state: {
+        navSettings: -1, //настройки для навигации
         welcomeMessage: -1, //welcome message
         cookiesVisible: -1, //куки видны
         spotifyUsername: -1, //никнейм пользователя, array
@@ -46,6 +47,18 @@ const HomePageStates = {
     },
       
     actions: {
+
+        //получить настройки навигации
+        getNavSettings(context){
+  
+          axios.get('/api/get_nav_settings').then(response => {
+            if(response.data != false)
+            { context.commit('setState', {state: 'navSettings', value: response.data}); }
+            else
+            { context.commit('setState', {state: 'navSettings', value: false}); }
+          });
+
+        },
 
         //уставноить cookiesVisible = false
         setCookiesVisibleFalse(context)
