@@ -89,17 +89,24 @@
 export default {
    
     created(){
+
+        var url = window.location.href;
+
         this.checkToken().then(response => {
             if(response === 'refresh'){
-                alert('refresh')
-               var url = window.location.href;
-               
-                    axios.get('/refresh_token').then(response => {
-                        if(response.data = true){
-                            
-                            window.location.replace(url);
-                        }
-                    });
+            alert('refresh')
+
+            var url = window.location.href;
+            var indexOfAnchor = url.indexOf('#');
+            if(indexOfAnchor != -1)
+            {var url = url.slice(0, indexOfAnchor);}
+
+            axios.get('/refresh_token').then(response => {
+                if(response.data = true){
+                    
+                    window.location.replace(url);
+                }
+            });
 
             } else{
                 alert(response);
