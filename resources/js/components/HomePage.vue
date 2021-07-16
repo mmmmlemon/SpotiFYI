@@ -19,7 +19,6 @@
         created(){
             this.checkToken ().then(response => {
                 if(response === 'refresh'){
-                    alert('refresh')
                     var url = window.location.href;
                     var indexOfAnchor = url.indexOf('#');
                     if(indexOfAnchor != -1)
@@ -32,8 +31,7 @@
                     })
 
                 } else {
-                    alert(response);
-
+     
                     if(this.navSettings == -1)
                     { this.$store.dispatch('getNavSettings'); }
 
@@ -63,7 +61,7 @@
                     if(this.spotifyUserTracksCount == -1)
                     { this.$store.dispatch('getHomePageUserTracksCount'); }    
                         }
-            })
+            });
 
             
 

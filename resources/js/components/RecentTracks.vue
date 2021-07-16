@@ -19,10 +19,28 @@
 </template>
 <script>
 export default {
-    mounted(){
-        //загружаем последние треки
-        if(this.recentTracks == -1)
-        { this.$store.dispatch('getLatestTracks'); }
+
+    created(){
+        this.checkToken ().then(response => {
+            if(response === 'refresh'){
+                var url = window.location.href;
+                var indexOfAnchor = url.indexOf('#');
+                if(indexOfAnchor != -1)
+                {var url = url.slice(0, indexOfAnchor);}
+                axios.get('/refresh_token').then(response => {
+                    if(response.data = true){
+                        
+                        window.location.replace(url);
+                    }
+                })
+
+            } else {             
+                //загружаем последние треки
+                if(this.recentTracks == -1)
+                { this.$store.dispatch('getLatestTracks'); }
+            }
+        });
+
     },
 
     computed: {

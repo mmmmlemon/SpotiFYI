@@ -129,7 +129,6 @@ export default {
     created(){
         this.checkToken().then(response => {
             if(response === 'refresh'){
-                alert('refresh')
                 var url = window.location.href;
                 var indexOfAnchor = url.indexOf('#');
                 if(indexOfAnchor != -1)
@@ -142,7 +141,6 @@ export default {
                 });
 
             } else{
-                alert(response);
                 //получаем библиотеку пользователя, если она еще не загружена
                 //получаем библиотеку пользователя и статистику
                 if(this.spotifyUserLibrary == -1)

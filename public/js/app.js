@@ -2121,7 +2121,6 @@ __webpack_require__.r(__webpack_exports__);
 
     this.checkToken().then(function (response) {
       if (response === 'refresh') {
-        alert('refresh');
         var url = window.location.href;
         var indexOfAnchor = url.indexOf('#');
 
@@ -2135,8 +2134,6 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       } else {
-        alert(response);
-
         if (_this.navSettings == -1) {
           _this.$store.dispatch('getNavSettings');
         } //получить фоновое изображение
@@ -3757,7 +3754,6 @@ __webpack_require__.r(__webpack_exports__);
     var url = window.location.href;
     this.checkToken().then(function (response) {
       if (response === 'refresh') {
-        alert('refresh');
         var url = window.location.href;
         var indexOfAnchor = url.indexOf('#');
 
@@ -3771,8 +3767,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       } else {
-        alert(response); //получаем библиотеку пользователя, если она еще не загружена
-
+        //получаем библиотеку пользователя, если она еще не загружена
         if (_this.spotifyUserLibrary == -1) {
           //если запрос выполнился, то выполняем загружаем остальные данные, если нет, то не делаем ничего
           _this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
@@ -4981,7 +4976,6 @@ __webpack_require__.r(__webpack_exports__);
 
     this.checkToken().then(function (response) {
       if (response === 'refresh') {
-        alert('refresh');
         var url = window.location.href;
         var indexOfAnchor = url.indexOf('#');
 
@@ -4995,9 +4989,8 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       } else {
-        alert(response); //получаем библиотеку пользователя, если она еще не загружена
+        //получаем библиотеку пользователя, если она еще не загружена
         //получаем библиотеку пользователя и статистику
-
         if (_this.spotifyUserLibrary == -1) {
           //если запрос выполнился, то выполняем все остальные, если нет, то не делаем ничего
           _this.$store.dispatch('getSpotifyUserLibrary').then(function (response) {
@@ -5376,11 +5369,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    //загружаем последние треки
-    if (this.recentTracks == -1) {
-      this.$store.dispatch('getLatestTracks');
-    }
+  created: function created() {
+    var _this = this;
+
+    this.checkToken().then(function (response) {
+      if (response === 'refresh') {
+        var url = window.location.href;
+        var indexOfAnchor = url.indexOf('#');
+
+        if (indexOfAnchor != -1) {
+          var url = url.slice(0, indexOfAnchor);
+        }
+
+        axios.get('/refresh_token').then(function (response) {
+          if (response.data = true) {
+            window.location.replace(url);
+          }
+        });
+      } else {
+        //загружаем последние треки
+        if (_this.recentTracks == -1) {
+          _this.$store.dispatch('getLatestTracks');
+        }
+      }
+    });
   },
   computed: {
     //последние треки
